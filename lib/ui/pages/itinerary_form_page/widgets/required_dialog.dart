@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/required_indicator.dart';
 
 class RequiredDialog {
   final BuildContext context;
@@ -18,9 +18,7 @@ class RequiredDialog {
         vertical: MediaQuery.of(context).size.height * 0.3,
       ),
       color: AppColors.background,
-      child: const ErrorIndicator(
-        message: 'Please fill the given fields.',
-      ),
+      child: const RequiredIndicator(),
     );
   }
 
