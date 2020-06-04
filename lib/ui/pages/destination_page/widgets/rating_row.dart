@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
+
+class RatingRow extends StatelessWidget {
+  const RatingRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        children: [
+          _buildRating(context),
+          Spacer(),
+          _buildDownloadButton(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRating(BuildContext context) {
+    final rating = context.bloc<DestinationBloc>().destination.rating;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        StarRatingBar(
+          rating: rating,
+          size: 20.0,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          rating.toString(),
+          style: AppTextStyles.large.bold,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDownloadButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () async => await _downloadAndNavigate(context),
+      child: ScaleAnimator(
+        child: Container(
+          child: Column(
+            children: [
+              Icon(
+                CommunityMaterialIcons.cloud_download_outline,
+                size: 24.0,
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'Download',
+                style: AppTextStyles.small,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _downloadAndNavigate(BuildContext context) async {
+    if (!context.bloc<DestinationBloc>().state.destination.isDownloaded) {
+      context.bloc<DestinationBloc>().add(DestinationDownloaded());
+      DownloadDialog(
+        context: context,
+        title: context.bloc<DestinationBloc>().destination.name,
+      ).show();
+      await Future.delayed(const Duration(seconds: 1));
+      Navigator.of(context).pop();
+    }
+
+    Navigator.of(context).pushNamed(
+      Routes.kDestinationDetailPageRoute,
+      arguments: context.bloc<DestinationBloc>(),
+    );
+  }
+}
