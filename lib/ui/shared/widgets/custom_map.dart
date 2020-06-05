@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
+import 'package:latlong/latlong.dart';
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,10 +18,12 @@ class CustomMap extends StatefulWidget {
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
+  final Function(LatLng) onTap;
   final MarkerLayerOptions markerLayerOptions;
 
   const CustomMap({
     @required this.center,
+    this.onTap,
     this.swPanBoundary,
     this.nePanBoundary,
     this.markerLayerOptions,
@@ -47,6 +50,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         zoom: 12.0,
         minZoom: 10.0,
         maxZoom: 16.0,
+        onTap: widget.onTap,
         interactive: true,
         center: widget.center.toLatLng(),
         swPanBoundary: widget.swPanBoundary?.toLatLng() ??

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/place_marker.dart';
+import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_marker.dart';
 
-class ItineraryMap extends StatelessWidget {
+class ItineraryMap extends StatefulWidget {
   const ItineraryMap();
+
+  @override
+  _ItineraryMapState createState() => _ItineraryMapState();
+}
+
+class _ItineraryMapState extends State<ItineraryMap> {
+  Checkpoint tappedCheckpoint;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +31,38 @@ class ItineraryMap extends StatelessWidget {
       tag: itinerary.hashCode,
       child: CustomMap(
         center: center,
-        markerLayerOptions: _buildMarkers(context, places),
+        markerLayerOptions: _buildMarkers(context),
+        onTap: (_) => setState(() {
+          tappedCheckpoint = null;
+        }),
       ),
     );
   }
 
-  MarkerLayerOptions _buildMarkers(BuildContext context, List<Place> places) {
+  MarkerLayerOptions _buildMarkers(BuildContext context) {
+    final checkpoints = Provider.of<Itinerary>(context).checkpoints;
+
     return MarkerLayerOptions(
       markers: [
-        for (int i = 0; i < places.length; ++i)
+        for (int i = 0; i < checkpoints.length; ++i)
           PlaceMarker(
-            point: places[i].coord.toLatLng(),
-            color: AppColors.accentColors[i % AppColors.accentColors.length],
+            point: checkpoints[i].place.coord.toLatLng(),
+            color: checkpoints[i] == tappedCheckpoint
+                ? AppColors.background
+                : AppColors.accentColors[i % AppColors.accentColors.length],
             onTap: () {
-              // TODO: Custom pop up
-              context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPlacePageRoute,
-                    arguments: places[i],
-                  );
+              setState(() {
+                tappedCheckpoint = checkpoints[i];
+              });
             },
+          ),
+        if (tappedCheckpoint != null)
+          Marker(
+            width: 200,
+            height: 64,
+            anchorPos: AnchorPos.align(AnchorAlign.top),
+            point: tappedCheckpoint.place.coord.toLatLng(),
+            builder: (_) => ItineraryMarker(checkpoint: tappedCheckpoint),
           ),
       ],
     );
