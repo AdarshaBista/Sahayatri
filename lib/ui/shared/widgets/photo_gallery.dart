@@ -22,7 +22,7 @@ class PhotoGallery extends StatelessWidget {
       shrinkWrap: true,
       maxCrossAxisExtent: 120.0,
       padding: const EdgeInsets.all(12.0),
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: imageUrls.map(
         (url) {
           return GestureDetector(

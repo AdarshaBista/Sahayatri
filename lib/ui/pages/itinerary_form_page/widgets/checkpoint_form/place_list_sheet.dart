@@ -34,7 +34,7 @@ class PlaceListSheet {
             const Divider(height: 16.0),
             Expanded(
               child: ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount:
                     context.bloc<DestinationBloc>().destination.places.length,
                 itemBuilder: (context, index) {

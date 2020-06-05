@@ -14,7 +14,7 @@ class PlacesGrid extends StatelessWidget {
     final places = context.bloc<DestinationBloc>().destination.places;
 
     return ListView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       children: [
         Header(title: 'Places'),
         GridView.builder(
@@ -25,7 +25,7 @@ class PlacesGrid extends StatelessWidget {
             mainAxisSpacing: 12.0,
           ),
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.only(
             top: 20.0,
             left: 20.0,

@@ -33,7 +33,7 @@ class DestinationPage extends StatelessWidget {
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           Hero(
             tag: destination.id,

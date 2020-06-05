@@ -6,6 +6,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 class SlidingPanel extends StatelessWidget {
   final Widget body;
   final double minHeight;
+  final double maxHeight;
+  final double borderRadius;
   final Function(double) onPanelSlide;
   final Widget Function(ScrollController) panelBuilder;
 
@@ -14,9 +16,12 @@ class SlidingPanel extends StatelessWidget {
     @required this.minHeight,
     @required this.onPanelSlide,
     @required this.panelBuilder,
+    this.maxHeight,
+    this.borderRadius = 16.0,
   })  : assert(body != null),
         assert(minHeight != null),
-        assert(panelBuilder != null);
+        assert(panelBuilder != null),
+        assert(borderRadius != null);
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +36,11 @@ class SlidingPanel extends StatelessWidget {
       backdropTapClosesPanel: true,
       slideDirection: SlideDirection.UP,
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16.0),
-        topRight: Radius.circular(16.0),
+        topLeft: Radius.circular(borderRadius),
+        topRight: Radius.circular(borderRadius),
       ),
       minHeight: minHeight,
-      maxHeight: MediaQuery.of(context).size.height * 0.7,
+      maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.8,
       onPanelSlide: onPanelSlide,
       body: body,
       panelBuilder: panelBuilder,

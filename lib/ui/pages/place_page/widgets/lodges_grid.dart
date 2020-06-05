@@ -21,7 +21,7 @@ class LodgesGrid extends StatelessWidget {
         mainAxisSpacing: 12.0,
       ),
       shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       itemCount: lodges.length,
       itemBuilder: (context, index) {

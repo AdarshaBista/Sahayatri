@@ -18,7 +18,7 @@ class ItinerariesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       children: [
         Header(
@@ -48,7 +48,7 @@ class ItinerariesList extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: suggestedItineraries.length,
           itemBuilder: (context, index) {
             return ItineraryCard(itinerary: suggestedItineraries[index]);

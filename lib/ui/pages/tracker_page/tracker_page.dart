@@ -92,7 +92,7 @@ class _TrackerPageState extends State<TrackerPage> {
   Widget _buildPanel(ScrollController controller, TrackerSuccess state) {
     return SingleChildScrollView(
       controller: controller,
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           const SizedBox(height: 4.0),

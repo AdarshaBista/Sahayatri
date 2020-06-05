@@ -13,17 +13,22 @@ class ItineraryHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final itinerary = Provider.of<Itinerary>(context);
 
-    return ListTile(
-      dense: true,
-      title: Text(
-        itinerary.name,
-        textAlign: TextAlign.center,
-        style: AppTextStyles.large.bold,
-      ),
-      subtitle: Text(
-        '${itinerary.days} days ${itinerary.nights} nights',
-        textAlign: TextAlign.center,
-        style: AppTextStyles.small.bold,
+    return Hero(
+      tag: itinerary.hashCode,
+      child: Material(
+        child: ListTile(
+          dense: true,
+          title: Text(
+            itinerary.name,
+            textAlign: TextAlign.center,
+            style: AppTextStyles.large.bold,
+          ),
+          subtitle: Text(
+            '${itinerary.days} days ${itinerary.nights} nights',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.small.bold,
+          ),
+        ),
       ),
     );
   }

@@ -27,15 +27,12 @@ class _ItineraryMapState extends State<ItineraryMap> {
     final places = itinerary.checkpoints.map((c) => c.place).toList();
     final center = places[places.length ~/ 2].coord;
 
-    return Hero(
-      tag: itinerary.hashCode,
-      child: CustomMap(
-        center: center,
-        markerLayerOptions: _buildMarkers(context),
-        onTap: (_) => setState(() {
-          tappedCheckpoint = null;
-        }),
-      ),
+    return CustomMap(
+      center: center,
+      markerLayerOptions: _buildMarkers(context),
+      onTap: (_) => setState(() {
+        tappedCheckpoint = null;
+      }),
     );
   }
 

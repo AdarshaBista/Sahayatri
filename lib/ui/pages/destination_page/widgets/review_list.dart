@@ -30,7 +30,7 @@ class ReviewList extends StatelessWidget {
           ),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               return ReviewCard(review: reviews[index]);

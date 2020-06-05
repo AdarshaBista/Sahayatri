@@ -24,9 +24,9 @@ class ItineraryTimeline extends StatelessWidget {
 
   const ItineraryTimeline({
     @required this.checkpoints,
+    this.controller,
     this.isNested = false,
     this.isEditable = false,
-    this.controller,
   })  : assert(isEditable != null),
         assert(checkpoints != null);
 
@@ -36,8 +36,9 @@ class ItineraryTimeline extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         controller: controller,
-        physics:
-            isNested ? NeverScrollableScrollPhysics() : BouncingScrollPhysics(),
+        physics: isNested
+            ? const NeverScrollableScrollPhysics()
+            : const BouncingScrollPhysics(),
         itemCount: checkpoints.length,
         itemBuilder: (context, index) {
           final bool isFirst = index == 0;
@@ -57,7 +58,7 @@ class ItineraryTimeline extends StatelessWidget {
                       indicatorWidth: indicatorWidth,
                     ),
                   ),
-                  SizedBox(width: 4.0),
+                  const SizedBox(width: 4.0),
                   Expanded(child: _buildPlace(context, checkpoint)),
                 ],
               ),

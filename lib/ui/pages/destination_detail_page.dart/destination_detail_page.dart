@@ -118,7 +118,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   Widget _buildTabViews() {
     return TabBarView(
       controller: _tabController,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         const ItinerariesList(),
         const PlacesGrid(),

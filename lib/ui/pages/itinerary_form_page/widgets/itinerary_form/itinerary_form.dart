@@ -14,7 +14,7 @@ class ItineraryForm extends StatelessWidget {
     return BlocBuilder<ItineraryFormBloc, ItineraryFormState>(
       builder: (context, state) {
         return ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(bottom: 64.0),
           children: [
             _buildNameField(state.name, context),

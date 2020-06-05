@@ -35,7 +35,7 @@ class CheckpointForm {
         builder: (context, state) {
           return ListView(
             shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.all(20.0),
             children: [
               Text(

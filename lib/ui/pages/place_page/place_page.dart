@@ -22,7 +22,7 @@ class PlacePage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppbar(title: place.name),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           Hero(
             tag: place.id,
