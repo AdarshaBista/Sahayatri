@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/place.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
@@ -10,15 +13,12 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/p
 
 class PlacePicker extends StatefulWidget {
   final Place initialPlace;
-  final List<Place> places;
   final Function(Place) onSelect;
 
   const PlacePicker({
-    @required this.places,
     @required this.onSelect,
     @required this.initialPlace,
-  })  : assert(places != null),
-        assert(onSelect != null);
+  }) : assert(onSelect != null);
 
   @override
   _PlacePickerState createState() => _PlacePickerState();
@@ -70,10 +70,10 @@ class _PlacePickerState extends State<PlacePicker> {
 
   GestureDetector _buildViewButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(
-        Routes.kPlacePageRoute,
-        arguments: selectedPlace,
-      ),
+      onTap: () => context.repository<DestinationNavService>().pushNamed(
+            Routes.kPlacePageRoute,
+            arguments: selectedPlace,
+          ),
       child: Text(
         'View',
         style: AppTextStyles.small.primary,
@@ -84,7 +84,6 @@ class _PlacePickerState extends State<PlacePicker> {
   void _selectPlace(BuildContext context) {
     return PlaceListSheet(
       context: context,
-      places: widget.places,
       onSelect: (place) {
         setState(() {
           selectedPlace = place;

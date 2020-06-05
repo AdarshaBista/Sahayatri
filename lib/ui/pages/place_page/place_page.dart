@@ -13,6 +13,8 @@ import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
 
 class PlacePage extends StatelessWidget {
+  const PlacePage();
+
   @override
   Widget build(BuildContext context) {
     final place = Provider.of<Place>(context);

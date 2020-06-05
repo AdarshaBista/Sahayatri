@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -25,10 +28,10 @@ class DestinationCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
-            Navigator.of(context).pushNamed(
-              Routes.kDestinationPageRoute,
-              arguments: destination,
-            );
+            context.repository<RootNavService>().pushNamed(
+                  Routes.kDestinationPageRoute,
+                  arguments: destination,
+                );
           },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),

@@ -8,8 +8,10 @@ class CustomAppbar extends AppBar {
   CustomAppbar({
     @required String title,
     double elevation: 8.0,
+    Widget leading,
   }) : super(
           centerTitle: true,
+          leading: leading,
           elevation: elevation,
           title: SlideAnimator(
             begin: const Offset(0.0, -100.0),

@@ -16,6 +16,8 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';
 
 class TrackerPage extends StatefulWidget {
+  const TrackerPage();
+
   @override
   _TrackerPageState createState() => _TrackerPageState();
 }

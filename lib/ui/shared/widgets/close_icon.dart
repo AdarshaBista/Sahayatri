@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
@@ -13,7 +17,7 @@ class CloseIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pop(),
+      onTap: () => context.repository<DestinationNavService>().pop(),
       child: ScaleAnimator(
         child: Container(
           padding: const EdgeInsets.all(8.0),

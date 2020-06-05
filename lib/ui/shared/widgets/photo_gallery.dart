@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 
@@ -25,13 +28,13 @@ class PhotoGallery extends StatelessWidget {
           return GestureDetector(
             child: ImageCard(imageUrl: url),
             onTap: () {
-              Navigator.of(context).pushNamed(
-                Routes.kPhotoViewPageRoute,
-                arguments: PhotoViewPageArgs(
-                  initialPageIndex: imageUrls.indexOf(url),
-                  imageUrls: imageUrls,
-                ),
-              );
+              context.repository<RootNavService>().pushNamed(
+                    Routes.kPhotoViewPageRoute,
+                    arguments: PhotoViewPageArgs(
+                      initialPageIndex: imageUrls.indexOf(url),
+                      imageUrls: imageUrls,
+                    ),
+                  );
             },
           );
         },

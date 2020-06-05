@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
@@ -51,10 +52,9 @@ class DestinationInfo extends StatelessWidget {
       child: CustomButton(
         label: 'View Route',
         iconData: CommunityMaterialIcons.chart_line_variant,
-        onTap: () => Navigator.of(context).pushNamed(
-          Routes.kRoutePageRoute,
-          arguments: context.bloc<DestinationBloc>(),
-        ),
+        onTap: () => context
+            .repository<DestinationNavService>()
+            .pushNamed(Routes.kRoutePageRoute),
       ),
     );
   }

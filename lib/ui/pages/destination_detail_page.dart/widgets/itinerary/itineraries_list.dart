@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -78,10 +79,13 @@ class ItinerariesList extends StatelessWidget {
                   ? 'Create an itinerary'
                   : 'Edit this itinerary',
               onTap: () {
-                Navigator.of(context).pushNamed(
-                  Routes.kItineraryFormPageRoute,
-                  arguments: context.bloc<DestinationBloc>(),
-                );
+                context.repository<DestinationNavService>().pushNamed(
+                      Routes.kItineraryFormPageRoute,
+                      arguments: context
+                          .bloc<DestinationBloc>()
+                          .destination
+                          .createdItinerary,
+                    );
               },
             ),
             const SizedBox(height: 8.0),

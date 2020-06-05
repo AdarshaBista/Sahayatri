@@ -22,7 +22,10 @@ class ItineraryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => ItineraryDetails.show(context, itinerary),
+      onTap: () => ItineraryDetails(
+        context: context,
+        itinerary: itinerary,
+      ).show(),
       child: FadeAnimator(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 6.0),

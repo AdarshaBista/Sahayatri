@@ -4,12 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/required_dialog.dart';
 
 class ItineraryFormPage extends StatelessWidget {
+  const ItineraryFormPage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,7 @@ class ItineraryFormPage extends StatelessWidget {
             context
                 .bloc<DestinationBloc>()
                 .add(ItineraryCreated(itinerary: state.itinerary));
-            Navigator.of(context).pop();
+            context.repository<DestinationNavService>().pop();
           },
         );
       },

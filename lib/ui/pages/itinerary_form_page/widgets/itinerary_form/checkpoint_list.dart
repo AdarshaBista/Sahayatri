@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -51,7 +50,6 @@ class CheckpointList extends StatelessWidget {
         CheckpointForm(
           context: context,
           checkpoint: null,
-          places: context.bloc<DestinationBloc>().destination.places,
           onSubmit: (checkpoint) => context.bloc<ItineraryFormBloc>().add(
                 CheckpointAdded(checkpoint: checkpoint),
               ),

@@ -6,6 +6,8 @@ import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
 class BottomNavPage extends StatefulWidget {
+  const BottomNavPage();
+
   @override
   _BottomNavPageState createState() => _BottomNavPageState();
 }

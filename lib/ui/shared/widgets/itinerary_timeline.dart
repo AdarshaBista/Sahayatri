@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -116,7 +116,6 @@ class ItineraryTimeline extends StatelessWidget {
       CheckpointForm(
         context: context,
         checkpoint: checkpoint,
-        places: context.bloc<DestinationBloc>().destination.places,
         onSubmit: (updatedCheckpoint) => context.bloc<ItineraryFormBloc>().add(
               CheckpointUpdated(
                 newCheckpoint: updatedCheckpoint,
@@ -125,10 +124,10 @@ class ItineraryTimeline extends StatelessWidget {
             ),
       ).show();
     } else {
-      Navigator.of(context).pushNamed(
-        Routes.kPlacePageRoute,
-        arguments: checkpoint.place,
-      );
+      context.repository<DestinationNavService>().pushNamed(
+            Routes.kPlacePageRoute,
+            arguments: checkpoint.place,
+          );
     }
   }
 

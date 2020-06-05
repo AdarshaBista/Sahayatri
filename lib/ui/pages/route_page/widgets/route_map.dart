@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
@@ -61,10 +62,10 @@ class RouteMap extends StatelessWidget {
             point: places[i].coord.toLatLng(),
             color: AppColors.accentColors[i % AppColors.accentColors.length],
             onTap: () {
-              Navigator.of(context).pushNamed(
-                Routes.kPlacePageRoute,
-                arguments: places[i],
-              );
+              context.repository<DestinationNavService>().pushNamed(
+                    Routes.kPlacePageRoute,
+                    arguments: places[i],
+                  );
             },
           ),
       ],

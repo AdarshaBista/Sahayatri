@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 
@@ -20,10 +23,10 @@ class PlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(
-          Routes.kPlacePageRoute,
-          arguments: place,
-        );
+        context.repository<DestinationNavService>().pushNamed(
+              Routes.kPlacePageRoute,
+              arguments: place,
+            );
       },
       child: FadeAnimator(
         child: CustomCard(

@@ -5,15 +5,17 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
 
-class ItineraryDetails extends StatelessWidget {
+class ItineraryDetails {
+  final BuildContext context;
   final Itinerary itinerary;
 
   const ItineraryDetails({
+    @required this.context,
     @required this.itinerary,
-  }) : assert(itinerary != null);
+  })  : assert(context != null),
+        assert(itinerary != null);
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
@@ -38,7 +40,7 @@ class ItineraryDetails extends StatelessWidget {
     );
   }
 
-  static void show(BuildContext context, Itinerary itinerary) {
+  void show() {
     showModalBottomSheet(
       context: context,
       enableDrag: true,
@@ -47,7 +49,7 @@ class ItineraryDetails extends StatelessWidget {
       isScrollControlled: true,
       backgroundColor: AppColors.background,
       barrierColor: AppColors.dark.withOpacity(0.4),
-      builder: (_) => ItineraryDetails(itinerary: itinerary),
+      builder: (_) => _build(),
     );
   }
 }

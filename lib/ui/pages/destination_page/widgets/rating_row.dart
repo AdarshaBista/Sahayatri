@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -78,12 +79,11 @@ class RatingRow extends StatelessWidget {
         title: context.bloc<DestinationBloc>().destination.name,
       ).show();
       await Future.delayed(const Duration(seconds: 1));
-      Navigator.of(context).pop();
+      context.repository<DestinationNavService>().pop();
     }
 
-    Navigator.of(context).pushNamed(
-      Routes.kDestinationDetailPageRoute,
-      arguments: context.bloc<DestinationBloc>(),
-    );
+    context
+        .repository<DestinationNavService>()
+        .pushNamed(Routes.kDestinationDetailPageRoute);
   }
 }

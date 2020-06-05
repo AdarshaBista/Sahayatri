@@ -4,6 +4,8 @@ import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/route_map.dart';
 
 class RoutePage extends StatelessWidget {
+  const RoutePage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

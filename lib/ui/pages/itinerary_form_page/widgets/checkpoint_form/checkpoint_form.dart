@@ -6,6 +6,8 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/custom_text_field.dart';
@@ -14,17 +16,14 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/d
 
 class CheckpointForm {
   final BuildContext context;
-  final List<Place> places;
   final Checkpoint checkpoint;
   final Function(Checkpoint) onSubmit;
 
   CheckpointForm({
     @required this.context,
-    @required this.places,
     @required this.onSubmit,
     @required this.checkpoint,
   })  : assert(context != null),
-        assert(places != null),
         assert(onSubmit != null);
 
   Widget _build() {
@@ -72,7 +71,6 @@ class CheckpointForm {
 
   Widget _buildPlaceField(Place place, BuildContext context) {
     return PlacePicker(
-      places: places,
       initialPlace: place,
       onSelect: (selectedPlace) => context.bloc<CheckpointFormBloc>().add(
             PlaceChanged(place: selectedPlace),
@@ -104,7 +102,7 @@ class CheckpointForm {
           return;
         }
         onSubmit(state.checkpoint);
-        Navigator.of(context).pop();
+        context.repository<DestinationNavService>().pop();
       },
     );
   }

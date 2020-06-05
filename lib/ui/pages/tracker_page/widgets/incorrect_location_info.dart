@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:sahayatri/ui/shared/indicators/location_error_indicator.dart';
@@ -44,7 +46,7 @@ class IncorrectLocationInfo extends StatelessWidget {
             iconData: Icons.close,
             color: AppColors.dark,
             backgroundColor: AppColors.dark,
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => context.repository<DestinationNavService>().pop(),
           ),
         ],
       ),

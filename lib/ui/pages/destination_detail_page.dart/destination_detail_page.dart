@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -13,6 +14,8 @@ import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/pl
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
 
 class DestinationDetailPage extends StatefulWidget {
+  const DestinationDetailPage();
+
   @override
   _DestinationDetailPageState createState() => _DestinationDetailPageState();
 }
@@ -71,10 +74,9 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   FloatingActionButton _buildFab(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: AppColors.dark,
-      onPressed: () => Navigator.of(context).pushNamed(
-        Routes.kTrackerPageRoute,
-        arguments: context.bloc<DestinationBloc>(),
-      ),
+      onPressed: () => context
+          .repository<DestinationNavService>()
+          .pushNamed(Routes.kTrackerPageRoute),
       child: Icon(
         Icons.directions_walk,
         size: 24.0,

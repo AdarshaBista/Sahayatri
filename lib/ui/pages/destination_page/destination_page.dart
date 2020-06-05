@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
@@ -15,12 +17,20 @@ import 'package:sahayatri/ui/pages/destination_page/widgets/best_months_chips.da
 import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
 
 class DestinationPage extends StatelessWidget {
+  const DestinationPage();
+
   @override
   Widget build(BuildContext context) {
     final destination = context.bloc<DestinationBloc>().destination;
 
     return Scaffold(
-      appBar: CustomAppbar(title: destination.name),
+      appBar: CustomAppbar(
+        title: destination.name,
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () => context.repository<RootNavService>().pop(),
+        ),
+      ),
       body: ListView(
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
