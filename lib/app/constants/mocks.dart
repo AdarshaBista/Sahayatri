@@ -10,6 +10,8 @@ import 'package:sahayatri/core/models/destination.dart';
 final List<Destination> mockDestinations = [
   _destination,
   _destination.copyWith(id: 2),
+  _destination.copyWith(id: 3),
+  _destination.copyWith(id: 4),
 ];
 
 final Destination _destination = Destination(
@@ -277,27 +279,37 @@ final List<Checkpoint> checkpoints = [
   Checkpoint(
     place: places[0],
     description: '',
-    dateTime: DateTime.now(),
+    dateTime: DateTime(2020, 1, 1, 8, 0),
+    day: 1,
+    isTemplate: true,
   ),
   Checkpoint(
     place: places[2],
     description: '',
-    dateTime: DateTime.now(),
+    dateTime: DateTime(2020, 1, 1, 16, 30),
+    day: 2,
+    isTemplate: true,
   ),
   Checkpoint(
     place: places[5],
     description: '',
-    dateTime: DateTime.now(),
+    dateTime: DateTime(2020, 1, 1, 14, 0),
+    day: 3,
+    isTemplate: true,
   ),
   Checkpoint(
     place: places[7],
     description: '',
-    dateTime: DateTime.now(),
+    dateTime: DateTime(2020, 1, 1, 18, 30),
+    day: 4,
+    isTemplate: true,
   ),
   Checkpoint(
     place: places[9],
     description: '',
-    dateTime: DateTime.now(),
+    dateTime: DateTime(2020, 1, 1, 12, 30),
+    day: 4,
+    isTemplate: true,
   ),
 ];
 
