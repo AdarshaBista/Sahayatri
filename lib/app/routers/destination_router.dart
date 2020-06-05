@@ -20,6 +20,7 @@ import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/route_page/route_page.dart';
 import 'package:sahayatri/ui/pages/place_page/place_page.dart';
 import 'package:sahayatri/ui/pages/tracker_page/tracker_page.dart';
+import 'package:sahayatri/ui/pages/itinerary_page/itinerary_page.dart';
 import 'package:sahayatri/ui/pages/destination_page/destination_page.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/itinerary_form_page.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/destination_detail_page.dart';
@@ -38,13 +39,20 @@ class DestRouter {
         break;
 
       case Routes.kRoutePageRoute:
-        _page = RoutePage(places: settings.arguments as List<Place>);
+        _page = const RoutePage();
         break;
 
       case Routes.kPlacePageRoute:
         _page = Provider<Place>.value(
           value: settings.arguments as Place,
           child: const PlacePage(),
+        );
+        break;
+
+      case Routes.kItineraryPageRoute:
+        _page = Provider<Itinerary>.value(
+          value: settings.arguments as Itinerary,
+          child: const ItineraryPage(),
         );
         break;
 

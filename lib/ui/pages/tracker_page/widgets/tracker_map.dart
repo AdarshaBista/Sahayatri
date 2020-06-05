@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 
 class TrackerMap extends StatelessWidget {
@@ -22,8 +21,6 @@ class TrackerMap extends StatelessWidget {
 
     return CustomMap(
       center: center,
-      swPanBoundary: Coord(lat: center.lat - 1.0, lng: center.lng - 1.0),
-      nePanBoundary: Coord(lat: center.lat + 1.0, lng: center.lng + 1.0),
       markerLayerOptions: _buildMarker(context, center),
     );
   }
@@ -35,9 +32,9 @@ class TrackerMap extends StatelessWidget {
           width: 40.0,
           height: 40.0,
           point: center.toLatLng(),
-          builder: (context) => Image.asset(
-            Values.kMarkerImage,
-            color: AppColors.secondary,
+          builder: (context) => Icon(
+            CommunityMaterialIcons.map_marker_outline,
+            color: AppColors.dark,
           ),
         ),
       ],

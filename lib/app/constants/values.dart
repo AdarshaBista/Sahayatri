@@ -4,6 +4,11 @@ class Values {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
 
+  // Map
+  static const String kMapStyle = 'mapbox/outdoors-v11';
+  static const String kMapUrl =
+      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
+
   // Images
   static const String kMarkerImage = 'assets/images/indicators/marker.png';
   static const String kErrorImage = 'assets/images/indicators/error.png';

@@ -17,6 +17,7 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/c
 class ItineraryTimeline extends StatelessWidget {
   final bool isNested;
   final bool isEditable;
+  final ScrollController controller;
   final List<Checkpoint> checkpoints;
 
   double get indicatorWidth => 72.0;
@@ -25,6 +26,7 @@ class ItineraryTimeline extends StatelessWidget {
     @required this.checkpoints,
     this.isNested = false,
     this.isEditable = false,
+    this.controller,
   })  : assert(isEditable != null),
         assert(checkpoints != null);
 
@@ -33,6 +35,7 @@ class ItineraryTimeline extends StatelessWidget {
     return FadeAnimator(
       child: ListView.builder(
         shrinkWrap: true,
+        controller: controller,
         physics:
             isNested ? NeverScrollableScrollPhysics() : BouncingScrollPhysics(),
         itemCount: checkpoints.length,

@@ -52,10 +52,9 @@ class DestinationInfo extends StatelessWidget {
       child: CustomButton(
         label: 'View Route',
         iconData: CommunityMaterialIcons.chart_line_variant,
-        onTap: () => context.repository<DestinationNavService>().pushNamed(
-              Routes.kRoutePageRoute,
-              arguments: context.bloc<DestinationBloc>().destination.places,
-            ),
+        onTap: () => context
+            .repository<DestinationNavService>()
+            .pushNamed(Routes.kRoutePageRoute),
       ),
     );
   }

@@ -2,9 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -14,14 +18,12 @@ class CustomMap extends StatefulWidget {
   final Coord swPanBoundary;
   final Coord nePanBoundary;
   final MarkerLayerOptions markerLayerOptions;
-  final PolylineLayerOptions polylineLayerOptions;
 
   const CustomMap({
     @required this.center,
     this.swPanBoundary,
     this.nePanBoundary,
     this.markerLayerOptions,
-    this.polylineLayerOptions,
   }) : assert(center != null);
 
   @override
@@ -47,12 +49,20 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         maxZoom: 16.0,
         interactive: true,
         center: widget.center.toLatLng(),
-        swPanBoundary: widget.swPanBoundary.toLatLng(),
-        nePanBoundary: widget.nePanBoundary.toLatLng(),
+        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
+            Coord(
+              lat: widget.center.lat - 1.0,
+              lng: widget.center.lng - 1.0,
+            ).toLatLng(),
+        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
+            Coord(
+              lat: widget.center.lat + 1.0,
+              lng: widget.center.lng + 1.0,
+            ).toLatLng(),
       ),
       layers: [
         _buildTiles(),
-        if (widget.polylineLayerOptions != null) widget.polylineLayerOptions,
+        _buildRoute(context),
         if (widget.markerLayerOptions != null) widget.markerLayerOptions,
       ],
     );
@@ -67,12 +77,25 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       keepBuffer: 8,
       tileSize: 512,
       zoomOffset: -1,
-      urlTemplate:
-          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}",
+      urlTemplate: Values.kMapUrl,
       additionalOptions: {
         'accessToken': kMapBoxAccessToken,
-        'id': 'mapbox/outdoors-v11',
+        'id': Values.kMapStyle,
       },
+    );
+  }
+
+  PolylineLayerOptions _buildRoute(BuildContext context) {
+    final routePoints = context.bloc<DestinationBloc>().destination.routePoints;
+
+    return PolylineLayerOptions(
+      polylines: [
+        Polyline(
+          strokeWidth: 3.0,
+          points: routePoints.map((p) => p.toLatLng()).toList(),
+          gradientColors: AppColors.accentColors.getRange(4, 7).toList(),
+        ),
+      ],
     );
   }
 }

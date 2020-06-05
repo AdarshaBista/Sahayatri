@@ -8,6 +8,7 @@ class Routes {
   static const String kRoutePageRoute = '/destination/route';
   static const String kPlacePageRoute = '/destination/place';
   static const String kTrackerPageRoute = '/destination/tracker';
+  static const String kItineraryPageRoute = '/destination/itinerary';
   static const String kDestinationDetailPageRoute = '/destination/detail';
   static const String kItineraryFormPageRoute = '/destination/itinerary_form';
 }

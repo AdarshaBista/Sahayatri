@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/user_location.dart';
@@ -5,10 +7,9 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
@@ -52,27 +53,13 @@ class _TrackerPageState extends State<TrackerPage> {
   }
 
   Widget _buildBody(TrackerSuccess state) {
-    return SlidingUpPanel(
-      color: AppColors.background,
-      parallaxOffset: 0.1,
-      backdropOpacity: 0.6,
-      isDraggable: true,
-      parallaxEnabled: true,
-      backdropEnabled: true,
-      renderPanelSheet: true,
-      backdropTapClosesPanel: true,
-      slideDirection: SlideDirection.UP,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16.0),
-        topRight: Radius.circular(16.0),
-      ),
+    return SlidingPanel(
       minHeight: kCollapsedHeight,
-      maxHeight: MediaQuery.of(context).size.height * 0.7,
+      body: _buildMap(state),
+      panelBuilder: (sc) => _buildPanel(sc, state),
       onPanelSlide: (value) => setState(() {
         panelOpenPercent = value;
       }),
-      body: _buildMap(state),
-      panelBuilder: (sc) => _buildPanel(sc, state),
     );
   }
 
@@ -91,7 +78,7 @@ class _TrackerPageState extends State<TrackerPage> {
           top: 16.0,
           right: 16.0,
           child: Transform.rotate(
-            angle: panelOpenPercent * 2 * 3.1415,
+            angle: panelOpenPercent * 2 * math.pi,
             child: Transform.scale(
               scale: 1.0 - panelOpenPercent,
               child: SafeArea(child: const CloseIcon()),
