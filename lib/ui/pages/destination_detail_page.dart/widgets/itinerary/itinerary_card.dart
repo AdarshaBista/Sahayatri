@@ -58,7 +58,7 @@ class ItineraryCard extends StatelessWidget {
 
   IconButton _buildDeleteIcon(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.close, color: Colors.red),
+      icon: Icon(Icons.close, color: Colors.redAccent),
       onPressed: () => context.bloc<DestinationBloc>().add(
             ItineraryCreated(itinerary: null),
           ),

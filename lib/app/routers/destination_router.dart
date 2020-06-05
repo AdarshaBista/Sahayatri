@@ -38,7 +38,7 @@ class DestRouter {
         break;
 
       case Routes.kRoutePageRoute:
-        _page = const RoutePage();
+        _page = RoutePage(places: settings.arguments as List<Place>);
         break;
 
       case Routes.kPlacePageRoute:

@@ -12,7 +12,6 @@ class Destination {
   final int id;
   final String name;
   final String description;
-  final String displayImageUrl;
   final String permit;
   final String length;
   final String maxAltitude;
@@ -41,7 +40,6 @@ class Destination {
       {@required this.id,
       @required this.name,
       @required this.description,
-      @required this.displayImageUrl,
       @required this.permit,
       @required this.length,
       @required this.maxAltitude,
@@ -57,7 +55,6 @@ class Destination {
       : assert(id != null),
         assert(name != null),
         assert(description != null),
-        assert(displayImageUrl != null),
         assert(permit != null),
         assert(length != null),
         assert(maxAltitude != null),
@@ -92,7 +89,6 @@ class Destination {
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
-      displayImageUrl: displayImageUrl ?? this.displayImageUrl,
       permit: permit ?? this.permit,
       length: length ?? this.length,
       maxAltitude: maxAltitude ?? this.maxAltitude,
@@ -113,7 +109,6 @@ class Destination {
       'id': id,
       'name': name,
       'description': description,
-      'displayImageUrl': displayImageUrl,
       'permit': permit,
       'length': length,
       'maxAltitude': maxAltitude,
@@ -137,7 +132,6 @@ class Destination {
       id: map['id'],
       name: map['name'],
       description: map['description'],
-      displayImageUrl: map['displayImageUrl'],
       permit: map['permit'],
       length: map['length'],
       maxAltitude: map['maxAltitude'],
@@ -161,7 +155,7 @@ class Destination {
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, description: $description, displayImageUrl: $displayImageUrl, permit: $permit, length: $length, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, reviews: $reviews, routePoints: $routePoints, suggestedItineraries: $suggestedItineraries, createdItinerary: $createdItinerary, isDownloaded: $isDownloaded)';
+    return 'Destination(id: $id, name: $name, description: $description, permit: $permit, length: $length, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, reviews: $reviews, routePoints: $routePoints, suggestedItineraries: $suggestedItineraries, createdItinerary: $createdItinerary, isDownloaded: $isDownloaded)';
   }
 
   @override
@@ -172,7 +166,6 @@ class Destination {
         o.id == id &&
         o.name == name &&
         o.description == description &&
-        o.displayImageUrl == displayImageUrl &&
         o.permit == permit &&
         o.length == length &&
         o.maxAltitude == maxAltitude &&
@@ -192,7 +185,6 @@ class Destination {
     return id.hashCode ^
         name.hashCode ^
         description.hashCode ^
-        displayImageUrl.hashCode ^
         permit.hashCode ^
         length.hashCode ^
         maxAltitude.hashCode ^

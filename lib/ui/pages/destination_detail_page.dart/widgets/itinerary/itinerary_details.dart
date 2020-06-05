@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
 
 class ItineraryDetails {
@@ -21,21 +27,38 @@ class ItineraryDetails {
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Column(
         children: [
-          Text(
-            itinerary.name,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.large,
-          ),
-          Text(
-            '${itinerary.days} days ${itinerary.nights} nights',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.small.bold,
-          ),
+          _buildHeader(),
           const Divider(height: 20.0),
           Expanded(
             child: ItineraryTimeline(checkpoints: itinerary.checkpoints),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return ListTile(
+      dense: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+      title: Text(
+        itinerary.name,
+        style: AppTextStyles.large.bold,
+      ),
+      subtitle: Text(
+        '${itinerary.days} days ${itinerary.nights} nights',
+        style: AppTextStyles.small.bold,
+      ),
+      trailing: IconButton(
+        icon: Icon(
+          CommunityMaterialIcons.map_search_outline,
+          size: 24.0,
+          color: AppColors.primary,
+        ),
+        onPressed: () => context.repository<DestinationNavService>().pushNamed(
+              Routes.kRoutePageRoute,
+              arguments: itinerary.checkpoints.map((c) => c.place).toList(),
+            ),
       ),
     );
   }

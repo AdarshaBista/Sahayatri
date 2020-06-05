@@ -20,7 +20,6 @@ final Destination _destination = Destination(
   length: '40',
   maxAltitude: '4500',
   estimatedDuration: '5',
-  displayImageUrl: 'assets/images/mardi/5.png',
   permit: 'TIMS Card and Annapurna Sanctuary Permit',
   bestMonths: [
     'March',

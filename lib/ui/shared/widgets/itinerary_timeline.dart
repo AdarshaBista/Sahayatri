@@ -100,7 +100,10 @@ class ItineraryTimeline extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
-                  backgroundImage: AssetImage(checkpoint.place.imageUrls[0])),
+                backgroundImage: AssetImage(
+                  checkpoint.place.imageUrls[0],
+                ),
+              ),
               const SizedBox(width: 10.0),
               Expanded(child: _buildCheckpointText(checkpoint)),
               if (isEditable) _buildDeleteIcon(context, checkpoint),
@@ -159,7 +162,7 @@ class ItineraryTimeline extends StatelessWidget {
         child: Icon(
           Icons.close,
           size: 22.0,
-          color: AppColors.disabled,
+          color: Colors.redAccent,
         ),
       ),
     );

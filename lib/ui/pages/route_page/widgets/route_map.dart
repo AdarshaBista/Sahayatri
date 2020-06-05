@@ -4,6 +4,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/place.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -14,7 +15,11 @@ import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/place_marker.dart';
 
 class RouteMap extends StatelessWidget {
-  const RouteMap();
+  final List<Place> places;
+
+  const RouteMap({
+    @required this.places,
+  }) : assert(places != null);
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +58,6 @@ class RouteMap extends StatelessWidget {
   }
 
   MarkerLayerOptions _buildMarkers(BuildContext context) {
-    final places = context.bloc<DestinationBloc>().destination.places;
-
     return MarkerLayerOptions(
       markers: [
         for (int i = 0; i < places.length; ++i)
