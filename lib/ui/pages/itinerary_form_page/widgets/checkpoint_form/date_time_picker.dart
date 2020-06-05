@@ -45,7 +45,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
             dense: true,
             title: Text(
               selectedDateTime == null
-                  ? 'No date selected'
+                  ? 'No date & time selected'
                   : _formattedDate(selectedDateTime),
               style: AppTextStyles.small,
             ),

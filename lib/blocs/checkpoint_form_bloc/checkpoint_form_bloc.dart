@@ -21,7 +21,9 @@ class CheckpointFormBloc
   CheckpointFormState get initialState => CheckpointFormState(
         place: checkpoint?.place ?? null,
         description: checkpoint?.description ?? '',
-        dateTime: checkpoint?.dateTime ?? null,
+        dateTime: checkpoint == null
+            ? null
+            : checkpoint.isTemplate ? null : checkpoint.dateTime,
       );
 
   @override

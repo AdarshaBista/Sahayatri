@@ -6,10 +6,13 @@ import 'package:sahayatri/ui/shared/indicators/required_indicator.dart';
 
 class RequiredDialog {
   final BuildContext context;
+  final String message;
 
   const RequiredDialog({
     @required this.context,
-  }) : assert(context != null);
+    this.message = 'Please fill in the given fields.',
+  })  : assert(context != null),
+        assert(message != null);
 
   Widget _build() {
     return CustomCard(
@@ -18,7 +21,7 @@ class RequiredDialog {
         vertical: MediaQuery.of(context).size.height * 0.3,
       ),
       color: AppColors.background,
-      child: const RequiredIndicator(),
+      child: RequiredIndicator(message: message),
     );
   }
 

@@ -10,6 +10,8 @@ class Itinerary {
   final String nights;
   final List<Checkpoint> checkpoints;
 
+  bool get isTemplate => checkpoints.any((c) => c.isTemplate);
+
   const Itinerary({
     @required this.name,
     @required this.days,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/routes.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -45,17 +48,30 @@ class ItineraryCard extends StatelessWidget {
               '${itinerary.days} days ${itinerary.nights} nights',
               style: AppTextStyles.small,
             ),
-            trailing: deletable
-                ? IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () => context.bloc<DestinationBloc>().add(
-                          ItineraryCreated(itinerary: null),
-                        ),
-                  )
-                : Offstage(),
+            trailing:
+                deletable ? _buildDeleteIcon(context) : _buildEditIcon(context),
           ),
         ),
       ),
+    );
+  }
+
+  IconButton _buildDeleteIcon(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.close, color: Colors.red),
+      onPressed: () => context.bloc<DestinationBloc>().add(
+            ItineraryCreated(itinerary: null),
+          ),
+    );
+  }
+
+  IconButton _buildEditIcon(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.edit, color: AppColors.primary),
+      onPressed: () => context.repository<DestinationNavService>().pushNamed(
+            Routes.kItineraryFormPageRoute,
+            arguments: itinerary,
+          ),
     );
   }
 }

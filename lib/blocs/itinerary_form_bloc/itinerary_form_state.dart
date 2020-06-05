@@ -12,6 +12,8 @@ class ItineraryFormState {
       nights.isNotEmpty &&
       name.isNotEmpty;
 
+  bool get isTemplate => checkpoints.any((c) => c.isTemplate);
+
   Itinerary get itinerary => Itinerary(
         name: name,
         days: days,

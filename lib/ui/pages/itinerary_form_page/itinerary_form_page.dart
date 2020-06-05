@@ -8,8 +8,8 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/required_dialog.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {
   const ItineraryFormPage();
@@ -47,6 +47,14 @@ class ItineraryFormPage extends StatelessWidget {
           onPressed: () {
             if (!state.isValid) {
               RequiredDialog(context: context).show();
+              return;
+            }
+
+            if (state.isTemplate) {
+              RequiredDialog(
+                context: context,
+                message: 'Please select appropriate date for checkpoints.',
+              ).show();
               return;
             }
 

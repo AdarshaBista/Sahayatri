@@ -6,14 +6,18 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
 class RequiredIndicator extends StatelessWidget {
-  const RequiredIndicator();
+  final String message;
+
+  const RequiredIndicator({
+    @required this.message,
+  }) : assert(message != null);
 
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
       imageUrl: Values.kRequiredImage,
       title: Text(
-        'Please fill in the given fields',
+        message,
         textAlign: TextAlign.center,
         style: AppTextStyles.medium,
       ),
