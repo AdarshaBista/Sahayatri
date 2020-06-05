@@ -13,6 +13,7 @@ class DestinationNavPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       key: context.repository<DestinationNavService>().navigatorKey,
+      observers: [HeroController()],
       onGenerateRoute: DestRouter.onGenerateRoute,
     );
   }
