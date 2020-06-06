@@ -44,6 +44,7 @@ const String desc =
     'The trail goes along small winding paths, through magical rhododendron forests until you climb out of the forest at an elevation around 3,300 m.';
 
 const List<String> imgUrls = [
+  'assets/images/mardi/0.png',
   'assets/images/mardi/1.png',
   'assets/images/mardi/2.png',
   'assets/images/mardi/3.png',
@@ -51,6 +52,14 @@ const List<String> imgUrls = [
   'assets/images/mardi/5.png',
   'assets/images/mardi/6.png',
   'assets/images/mardi/7.png',
+  'assets/images/mardi/8.png',
+  'assets/images/mardi/9.png',
+  'assets/images/mardi/10.png',
+  'assets/images/mardi/11.png',
+  'assets/images/mardi/12.png',
+  'assets/images/mardi/13.png',
+  'assets/images/mardi/14.png',
+  'assets/images/mardi/15.png',
 ];
 
 final List<Place> places = [
@@ -63,10 +72,7 @@ final List<Place> places = [
     altitude: 2000.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.29403, lng: 83.823),
-    imageUrls: [
-      'assets/images/mardi/1.png',
-      'assets/images/mardi/2.png',
-    ],
+    imageUrls: imgUrls.getRange(1, 3),
   ),
   Place(
     id: 2,
@@ -77,11 +83,7 @@ final List<Place> places = [
     altitude: 2200.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.304456, lng: 83.828140),
-    imageUrls: [
-      'assets/images/mardi/6.png',
-      'assets/images/mardi/3.png',
-      'assets/images/mardi/2.png',
-    ],
+    imageUrls: imgUrls.getRange(2, 5),
   ),
   Place(
     id: 3,
@@ -92,10 +94,7 @@ final List<Place> places = [
     altitude: 2100.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.313995, lng: 83.8298),
-    imageUrls: [
-      'assets/images/mardi/6.png',
-      'assets/images/mardi/7.png',
-    ],
+    imageUrls: imgUrls.getRange(5, 9),
   ),
   Place(
     id: 4,
@@ -106,11 +105,7 @@ final List<Place> places = [
     altitude: 2300.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.331164, lng: 83.829761),
-    imageUrls: [
-      'assets/images/mardi/6.png',
-      'assets/images/mardi/3.png',
-      'assets/images/mardi/2.png',
-    ],
+    imageUrls: imgUrls.getRange(8, 14),
   ),
   Place(
     id: 5,
@@ -120,10 +115,7 @@ final List<Place> places = [
     altitude: 2550.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.384609, lng: 83.84285),
-    imageUrls: [
-      'assets/images/mardi/5.png',
-      'assets/images/mardi/4.png',
-    ],
+    imageUrls: imgUrls.getRange(12, 15),
   ),
   Place(
     id: 6,
@@ -133,12 +125,7 @@ final List<Place> places = [
     altitude: 2990.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.404295, lng: 83.856344),
-    imageUrls: [
-      'assets/images/mardi/1.png',
-      'assets/images/mardi/2.png',
-      'assets/images/mardi/3.png',
-      'assets/images/mardi/4.png',
-    ],
+    imageUrls: imgUrls.getRange(5, 10),
   ),
   Place(
     id: 7,
@@ -148,12 +135,7 @@ final List<Place> places = [
     altitude: 3200.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.415843, lng: 83.854565),
-    imageUrls: [
-      'assets/images/mardi/1.png',
-      'assets/images/mardi/2.png',
-      'assets/images/mardi/3.png',
-      'assets/images/mardi/4.png',
-    ],
+    imageUrls: imgUrls.getRange(7, 13),
   ),
   Place(
     id: 8,
@@ -164,10 +146,7 @@ final List<Place> places = [
     altitude: 3580.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.434116, lng: 83.867221),
-    imageUrls: [
-      'assets/images/mardi/4.png',
-      'assets/images/mardi/6.png',
-    ],
+    imageUrls: imgUrls.getRange(12, 15),
   ),
   Place(
     id: 9,
@@ -177,11 +156,7 @@ final List<Place> places = [
     altitude: 4000.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.457575, lng: 83.884979),
-    imageUrls: [
-      'assets/images/mardi/3.png',
-      'assets/images/mardi/5.png',
-      'assets/images/mardi/7.png',
-    ],
+    imageUrls: imgUrls.getRange(6, 9),
   ),
   Place(
     id: 10,
@@ -191,11 +166,7 @@ final List<Place> places = [
     altitude: 4500.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.464424, lng: 83.900838),
-    imageUrls: [
-      'assets/images/mardi/2.png',
-      'assets/images/mardi/4.png',
-      'assets/images/mardi/6.png',
-    ],
+    imageUrls: imgUrls.getRange(1, 7),
   ),
 ];
 
