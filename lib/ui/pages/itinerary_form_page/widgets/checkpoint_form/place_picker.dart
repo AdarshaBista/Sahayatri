@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/place.dart';
@@ -83,13 +84,12 @@ class _PlacePickerState extends State<PlacePicker> {
 
   void _selectPlace(BuildContext context) {
     return PlaceListSheet(
-      context: context,
       onSelect: (place) {
         setState(() {
           selectedPlace = place;
           widget.onSelect(selectedPlace);
         });
       },
-    ).show();
+    ).openDialog(context);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/checkpoint.dart';
@@ -121,7 +122,6 @@ class ItineraryTimeline extends StatelessWidget {
   void _handlePlaceTap(BuildContext context, Checkpoint checkpoint) {
     if (isEditable) {
       CheckpointForm(
-        context: context,
         checkpoint: checkpoint,
         onSubmit: (updatedCheckpoint) => context.bloc<ItineraryFormBloc>().add(
               CheckpointUpdated(
@@ -129,7 +129,7 @@ class ItineraryTimeline extends StatelessWidget {
                 prevCheckpoint: checkpoint,
               ),
             ),
-      ).show();
+      ).openModalBottomSheet(context);
     } else {
       context.repository<DestinationNavService>().pushNamed(
             Routes.kPlacePageRoute,

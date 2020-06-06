@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/extensions/widget_x.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,12 +50,11 @@ class CheckpointList extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
         CheckpointForm(
-          context: context,
           checkpoint: null,
           onSubmit: (checkpoint) => context.bloc<ItineraryFormBloc>().add(
                 CheckpointAdded(checkpoint: checkpoint),
               ),
-        ).show();
+        ).openModalBottomSheet(context);
       },
     );
   }

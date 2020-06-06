@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/extensions/widget_x.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
@@ -46,15 +48,14 @@ class ItineraryFormPage extends StatelessWidget {
           ),
           onPressed: () {
             if (!state.isValid) {
-              RequiredDialog(context: context).show();
+              RequiredDialog().openDialog(context);
               return;
             }
 
             if (state.isTemplate) {
               RequiredDialog(
-                context: context,
                 message: 'Please select appropriate date for checkpoints.',
-              ).show();
+              ).openDialog(context);
               return;
             }
 

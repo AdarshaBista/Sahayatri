@@ -28,6 +28,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 20.0),
         _buildSuggestedItineraries(context),
         _buildCreateditinerary(context),
+        const SizedBox(height: 32.0),
       ],
     );
   }

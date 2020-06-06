@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,9 +76,9 @@ class RatingRow extends StatelessWidget {
     if (!context.bloc<DestinationBloc>().state.destination.isDownloaded) {
       context.bloc<DestinationBloc>().add(DestinationDownloaded());
       DownloadDialog(
-        context: context,
         title: context.bloc<DestinationBloc>().destination.name,
-      ).show();
+      ).openDialog(context);
+
       await Future.delayed(const Duration(seconds: 1));
       context.repository<DestinationNavService>().pop();
     }

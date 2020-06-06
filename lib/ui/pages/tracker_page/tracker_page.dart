@@ -32,8 +32,11 @@ class _TrackerPageState extends State<TrackerPage> {
     return Scaffold(
       body: BlocBuilder<TrackerBloc, TrackerState>(
         builder: (context, state) {
-          if (state is TrackerLocationError) {
-            return const IncorrectLocationInfo();
+          if (state is TrackerLoading) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: const LoadingIndicator(),
+            );
           } else if (state is TrackerSuccess) {
             return _buildBody(state);
           } else if (state is TrackerError) {
@@ -42,10 +45,7 @@ class _TrackerPageState extends State<TrackerPage> {
               body: ErrorIndicator(message: state.message),
             );
           } else {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const LoadingIndicator(),
-            );
+            return const IncorrectLocationInfo();
           }
         },
       ),

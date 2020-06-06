@@ -10,17 +10,15 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
-class PlaceListSheet {
-  final BuildContext context;
+class PlaceListSheet extends StatelessWidget {
   final Function(Place) onSelect;
 
   const PlaceListSheet({
-    @required this.context,
     @required this.onSelect,
-  })  : assert(context != null),
-        assert(onSelect != null);
+  }) : assert(onSelect != null);
 
-  Widget _build() {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
       child: Padding(
@@ -69,19 +67,6 @@ class PlaceListSheet {
           style: AppTextStyles.small.primary,
         ),
       ),
-    );
-  }
-
-  void show() {
-    showModalBottomSheet(
-      context: context,
-      enableDrag: true,
-      isDismissible: true,
-      useRootNavigator: false,
-      isScrollControlled: true,
-      barrierColor: AppColors.barrier,
-      backgroundColor: AppColors.background,
-      builder: (_) => _build(),
     );
   }
 }
