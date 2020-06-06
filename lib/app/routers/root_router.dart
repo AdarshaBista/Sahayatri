@@ -16,7 +16,6 @@ import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 
 import 'package:sahayatri/ui/pages/bottom_nav_page/bottom_nav_page.dart';
-import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 import 'package:sahayatri/ui/pages/destination_page/destination_nav_page.dart';
 
 class RootRouter {
@@ -49,10 +48,6 @@ class RootRouter {
           ],
           child: const DestinationNavPage(),
         );
-        break;
-
-      case Routes.kPhotoViewPageRoute:
-        _page = PhotoViewPage(args: settings.arguments as PhotoViewPageArgs);
         break;
 
       default:

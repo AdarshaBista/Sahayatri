@@ -72,7 +72,7 @@ final List<Place> places = [
     altitude: 2000.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.29403, lng: 83.823),
-    imageUrls: imgUrls.getRange(1, 3),
+    imageUrls: imgUrls.getRange(1, 3).toList(),
   ),
   Place(
     id: 2,
@@ -83,7 +83,7 @@ final List<Place> places = [
     altitude: 2200.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.304456, lng: 83.828140),
-    imageUrls: imgUrls.getRange(2, 5),
+    imageUrls: imgUrls.getRange(2, 5).toList(),
   ),
   Place(
     id: 3,
@@ -94,7 +94,7 @@ final List<Place> places = [
     altitude: 2100.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.313995, lng: 83.8298),
-    imageUrls: imgUrls.getRange(5, 9),
+    imageUrls: imgUrls.getRange(5, 9).toList(),
   ),
   Place(
     id: 4,
@@ -105,7 +105,7 @@ final List<Place> places = [
     altitude: 2300.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.331164, lng: 83.829761),
-    imageUrls: imgUrls.getRange(8, 14),
+    imageUrls: imgUrls.getRange(8, 14).toList(),
   ),
   Place(
     id: 5,
@@ -115,7 +115,7 @@ final List<Place> places = [
     altitude: 2550.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.384609, lng: 83.84285),
-    imageUrls: imgUrls.getRange(12, 15),
+    imageUrls: imgUrls.getRange(12, 15).toList(),
   ),
   Place(
     id: 6,
@@ -125,7 +125,7 @@ final List<Place> places = [
     altitude: 2990.0,
     isNetworkAvailable: true,
     coord: Coord(lat: 28.404295, lng: 83.856344),
-    imageUrls: imgUrls.getRange(5, 10),
+    imageUrls: imgUrls.getRange(5, 10).toList(),
   ),
   Place(
     id: 7,
@@ -135,7 +135,7 @@ final List<Place> places = [
     altitude: 3200.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.415843, lng: 83.854565),
-    imageUrls: imgUrls.getRange(7, 13),
+    imageUrls: imgUrls.getRange(7, 13).toList(),
   ),
   Place(
     id: 8,
@@ -146,7 +146,7 @@ final List<Place> places = [
     altitude: 3580.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.434116, lng: 83.867221),
-    imageUrls: imgUrls.getRange(12, 15),
+    imageUrls: imgUrls.getRange(12, 15).toList(),
   ),
   Place(
     id: 9,
@@ -156,7 +156,7 @@ final List<Place> places = [
     altitude: 4000.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.457575, lng: 83.884979),
-    imageUrls: imgUrls.getRange(6, 9),
+    imageUrls: imgUrls.getRange(6, 9).toList(),
   ),
   Place(
     id: 10,
@@ -166,7 +166,7 @@ final List<Place> places = [
     altitude: 4500.0,
     isNetworkAvailable: false,
     coord: Coord(lat: 28.464424, lng: 83.900838),
-    imageUrls: imgUrls.getRange(1, 7),
+    imageUrls: imgUrls.getRange(1, 7).toList(),
   ),
 ];
 
