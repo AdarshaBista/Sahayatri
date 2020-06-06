@@ -86,11 +86,13 @@ class DestinationCard extends StatelessWidget {
             size: 16.0,
           ),
           const SizedBox(height: 6.0),
-          Text(
-            destination.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.large.light,
+          FadeAnimator(
+            child: Text(
+              destination.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.large.light,
+            ),
           ),
           Divider(
             color: AppColors.light.withOpacity(0.5),
@@ -99,11 +101,13 @@ class DestinationCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 32.0),
-            child: Text(
-              destination.description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.extraSmall.light,
+            child: FadeAnimator(
+              child: Text(
+                destination.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.extraSmall.light,
+              ),
             ),
           ),
         ],

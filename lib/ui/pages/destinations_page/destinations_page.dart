@@ -75,7 +75,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
   Widget _buildBody() {
     return ListView(
       controller: scrollController,
-      physics: const BouncingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       children: [
         Header(title: 'Choose your', boldTitle: 'Destination'),
         const SizedBox(height: 8.0),
@@ -92,6 +92,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
             }
           },
         ),
+        const SizedBox(height: 16.0),
       ],
     );
   }

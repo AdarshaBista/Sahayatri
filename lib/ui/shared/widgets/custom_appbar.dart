@@ -14,7 +14,7 @@ class CustomAppbar extends AppBar {
           leading: leading,
           elevation: elevation,
           title: SlideAnimator(
-            begin: const Offset(0.0, -100.0),
+            begin: const Offset(0.0, -0.2),
             child: FadeAnimator(
               child: Text(
                 title,

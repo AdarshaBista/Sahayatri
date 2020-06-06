@@ -53,9 +53,11 @@ class LodgeCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            lodge.name,
-            style: AppTextStyles.medium.light,
+          FadeAnimator(
+            child: Text(
+              lodge.name,
+              style: AppTextStyles.medium.light,
+            ),
           ),
           Divider(height: 16.0, color: AppColors.light.withOpacity(0.5)),
           _buildContact(),

@@ -18,7 +18,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final double boldTitleTopPadding = title == null ? 16.0 : 0.0;
     return SlideAnimator(
-      begin: const Offset(-200.0, 0.0),
+      begin: const Offset(-0.4, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

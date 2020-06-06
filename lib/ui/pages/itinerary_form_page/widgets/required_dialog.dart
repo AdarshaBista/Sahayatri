@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/required_indicator.dart';
 
 class RequiredDialog extends StatelessWidget {
@@ -13,13 +14,16 @@ class RequiredDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      margin: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width * 0.2,
-        vertical: MediaQuery.of(context).size.height * 0.3,
+    return ScaleAnimator(
+      duration: 300,
+      child: CustomCard(
+        margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.2,
+          vertical: MediaQuery.of(context).size.height * 0.3,
+        ),
+        color: AppColors.background,
+        child: RequiredIndicator(message: message),
       ),
-      color: AppColors.background,
-      child: RequiredIndicator(message: message),
     );
   }
 }

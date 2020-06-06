@@ -23,10 +23,12 @@ class DestinationInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              context.bloc<DestinationBloc>().destination.description,
-              textAlign: TextAlign.left,
-              style: AppTextStyles.small.serif,
+            FadeAnimator(
+              child: Text(
+                context.bloc<DestinationBloc>().destination.description,
+                textAlign: TextAlign.left,
+                style: AppTextStyles.small.serif,
+              ),
             ),
             const SizedBox(height: 12.0),
             Row(

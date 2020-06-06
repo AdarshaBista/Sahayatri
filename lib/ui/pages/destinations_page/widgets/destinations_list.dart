@@ -16,10 +16,10 @@ class DestinationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: destinations.length,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => SlideAnimator(
-        begin: Offset(0.0, 10.0 + index * 20.0),
+        begin: Offset(0.0, 0.2 + index * 0.2),
         child: DestinationCard(
           destination: destinations[index],
         ),

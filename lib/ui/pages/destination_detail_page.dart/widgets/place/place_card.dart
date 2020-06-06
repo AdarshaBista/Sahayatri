@@ -68,11 +68,13 @@ class PlaceCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            place.name,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium.light,
+          FadeAnimator(
+            child: Text(
+              place.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.medium.light,
+            ),
           ),
           Divider(
             height: 8.0,

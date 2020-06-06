@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class NestedTabView extends StatefulWidget {
   final List<Widget> children;
@@ -115,22 +116,24 @@ class NestedTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tab(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            tab.icon,
-            size: 20.0,
-            color: color,
-          ),
-          const SizedBox(width: 8.0),
-          AnimatedDefaultTextStyle(
-            child: Text(tab.label),
-            style: AppTextStyles.small.bold.copyWith(color: color),
-            duration: const Duration(milliseconds: 200),
-          )
-        ],
+    return ScaleAnimator(
+      child: Tab(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              tab.icon,
+              size: 20.0,
+              color: color,
+            ),
+            const SizedBox(width: 8.0),
+            AnimatedDefaultTextStyle(
+              child: Text(tab.label),
+              style: AppTextStyles.small.bold.copyWith(color: color),
+              duration: const Duration(milliseconds: 200),
+            )
+          ],
+        ),
       ),
     );
   }

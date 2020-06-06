@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/review_card.dart';
 
@@ -33,7 +34,10 @@ class ReviewList extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: reviews.length,
             itemBuilder: (context, index) {
-              return ReviewCard(review: reviews[index]);
+              return SlideAnimator(
+                begin: Offset(0.0, 0.2 + index * 0.2),
+                child: ReviewCard(review: reviews[index]),
+              );
             },
           ),
         ],

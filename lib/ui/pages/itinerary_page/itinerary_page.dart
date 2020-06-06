@@ -57,7 +57,7 @@ class _ItineraryPageState extends State<ItineraryPage> {
     final itinerary = Provider.of<Itinerary>(context);
 
     return SlideAnimator(
-      begin: const Offset(0.0, 100.0),
+      begin: const Offset(0.0, 0.2),
       child: Padding(
         padding: const EdgeInsets.only(
           left: 20.0,

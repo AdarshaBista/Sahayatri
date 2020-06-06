@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
 class SearchBox extends StatelessWidget {
@@ -21,7 +22,7 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SlideAnimator(
-      begin: const Offset(100.0, 0.0),
+      begin: const Offset(0.0, -0.2),
       child: FadeAnimator(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -37,9 +38,11 @@ class SearchBox extends StatelessWidget {
                 fillColor: AppColors.light,
                 border: InputBorder.none,
                 hintText: hintText,
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 20.0,
+                prefixIcon: ScaleAnimator(
+                  child: Icon(
+                    Icons.search,
+                    size: 20.0,
+                  ),
                 ),
               ),
             ),

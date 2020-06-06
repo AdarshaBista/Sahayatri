@@ -20,12 +20,13 @@ class SlideAnimator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Animator<Offset>(
-      tween: Tween<Offset>(begin: begin, end: Offset.zero),
+      child: child,
       curve: Curves.linearToEaseOut,
       duration: Duration(milliseconds: duration),
-      builder: (context, animatorState, _) => Transform.translate(
-        offset: animatorState.value,
-        child: child,
+      tween: Tween<Offset>(begin: begin, end: Offset.zero),
+      builder: (context, animatorState, widget) => SlideTransition(
+        position: animatorState.animation,
+        child: widget,
       ),
     );
   }

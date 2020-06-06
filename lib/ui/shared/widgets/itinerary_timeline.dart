@@ -48,7 +48,7 @@ class ItineraryTimeline extends StatelessWidget {
 
           return IntrinsicHeight(
             child: SlideAnimator(
-              begin: Offset(0.0, index * 100.0),
+              begin: Offset(0.0, 0.2 + index * 0.4),
               child: Row(
                 children: [
                   CustomPaint(

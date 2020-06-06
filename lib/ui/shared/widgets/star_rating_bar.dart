@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
 class StarRatingBar extends StatelessWidget {
   final double size;
@@ -34,9 +35,12 @@ class StarRatingBar extends StatelessWidget {
         itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,
-        itemBuilder: (_, __) => Icon(
-          Icons.star,
-          color: color,
+        itemBuilder: (_, index) => SlideAnimator(
+          begin: Offset(0.2 + index * 0.2, 0.0),
+          child: Icon(
+            Icons.star,
+            color: color,
+          ),
         ),
       ),
     );

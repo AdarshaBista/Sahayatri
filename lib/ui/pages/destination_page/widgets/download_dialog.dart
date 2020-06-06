@@ -15,6 +15,7 @@ class DownloadDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaleAnimator(
+      duration: 300,
       child: CustomCard(
         margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.1,

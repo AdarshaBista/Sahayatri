@@ -38,7 +38,7 @@ class BottomNavBar extends StatelessWidget {
                   color: Colors.transparent,
                   child: FadeAnimator(
                     child: SlideAnimator(
-                      begin: Offset(0.0, 100.0 + index * 30.0),
+                      begin: Offset(0.0, 0.2 + index * 0.2),
                       child: _buildNavItem(icon, isSelected),
                     ),
                   ),

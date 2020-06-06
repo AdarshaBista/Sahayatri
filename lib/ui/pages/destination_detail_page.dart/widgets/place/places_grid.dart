@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
+import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/place_card.dart';
 
 class PlacesGrid extends StatelessWidget {
@@ -33,7 +34,14 @@ class PlacesGrid extends StatelessWidget {
             bottom: 40.0,
           ),
           itemCount: places.length,
-          itemBuilder: (context, index) => PlaceCard(place: places[index]),
+          itemBuilder: (context, index) {
+            return SlideAnimator(
+              begin: Offset(0.0, 0.2 + index * 0.2),
+              child: PlaceCard(
+                place: places[index],
+              ),
+            );
+          },
         ),
       ],
     );

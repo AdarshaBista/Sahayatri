@@ -28,16 +28,16 @@ class _BottomNavPageState extends State<BottomNavPage> {
           });
         },
         icons: [
-          CommunityMaterialIcons.home_outline,
           CommunityMaterialIcons.map_marker_outline,
+          CommunityMaterialIcons.home_outline,
           CommunityMaterialIcons.account_outline,
         ],
       ),
       body: IndexedStack(
         index: _selectedIndex,
         children: <Widget>[
-          Container(),
           DestinationsPage(),
+          Container(),
           Container(),
         ],
       ),

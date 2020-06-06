@@ -16,11 +16,12 @@ class ScaleAnimator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Animator<double>(
+      child: child,
       curve: Curves.linearToEaseOut,
       duration: Duration(milliseconds: duration),
-      builder: (context, animatorState, _) => Transform.scale(
-        scale: animatorState.value,
-        child: child,
+      builder: (context, animatorState, widget) => ScaleTransition(
+        scale: animatorState.animation,
+        child: widget,
       ),
     );
   }

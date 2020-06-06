@@ -16,11 +16,12 @@ class FadeAnimator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Animator<double>(
+      child: child,
       curve: Curves.linearToEaseOut,
       duration: Duration(milliseconds: duration),
-      builder: (context, animatorState, _) => Opacity(
-        opacity: animatorState.value,
-        child: child,
+      builder: (context, animatorState, widget) => FadeTransition(
+        opacity: animatorState.animation,
+        child: widget,
       ),
     );
   }

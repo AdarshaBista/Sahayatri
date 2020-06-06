@@ -11,6 +11,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class ItineraryCard extends StatelessWidget {
   final Itinerary itinerary;
@@ -56,22 +57,26 @@ class ItineraryCard extends StatelessWidget {
     );
   }
 
-  IconButton _buildDeleteIcon(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.close, color: Colors.redAccent),
-      onPressed: () => context.bloc<DestinationBloc>().add(
-            ItineraryCreated(itinerary: null),
-          ),
+  Widget _buildDeleteIcon(BuildContext context) {
+    return ScaleAnimator(
+      child: IconButton(
+        icon: Icon(Icons.close, color: Colors.redAccent),
+        onPressed: () => context.bloc<DestinationBloc>().add(
+              ItineraryCreated(itinerary: null),
+            ),
+      ),
     );
   }
 
-  IconButton _buildEditIcon(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.edit, color: AppColors.primary),
-      onPressed: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kItineraryFormPageRoute,
-            arguments: itinerary,
-          ),
+  Widget _buildEditIcon(BuildContext context) {
+    return ScaleAnimator(
+      child: IconButton(
+        icon: Icon(Icons.edit, color: AppColors.primary),
+        onPressed: () => context.repository<DestinationNavService>().pushNamed(
+              Routes.kItineraryFormPageRoute,
+              arguments: itinerary,
+            ),
+      ),
     );
   }
 }

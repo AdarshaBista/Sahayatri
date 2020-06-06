@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 
 import 'package:sahayatri/ui/shared/widgets/image_card.dart';
+import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
 class PhotoGallery extends StatelessWidget {
   final List<String> imageUrls;
@@ -18,27 +19,29 @@ class PhotoGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.extent(
-      shrinkWrap: true,
-      maxCrossAxisExtent: 120.0,
-      padding: const EdgeInsets.all(12.0),
-      physics: const NeverScrollableScrollPhysics(),
-      children: imageUrls.map(
-        (url) {
+    return FadeAnimator(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 120.0,
+          childAspectRatio: 1,
+        ),
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(12.0),
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: imageUrls.length,
+        itemBuilder: (context, index) {
           return GestureDetector(
-            child: ImageCard(imageUrl: url),
-            onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPhotoViewPageRoute,
-                    arguments: PhotoViewPageArgs(
-                      initialPageIndex: imageUrls.indexOf(url),
-                      imageUrls: imageUrls,
-                    ),
-                  );
-            },
+            child: ImageCard(imageUrl: imageUrls[index]),
+            onTap: () => context.repository<DestinationNavService>().pushNamed(
+                  Routes.kPhotoViewPageRoute,
+                  arguments: PhotoViewPageArgs(
+                    initialPageIndex: imageUrls.indexOf(imageUrls[index]),
+                    imageUrls: imageUrls,
+                  ),
+                ),
           );
         },
-      ).toList(),
+      ),
     );
   }
 }

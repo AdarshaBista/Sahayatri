@@ -5,6 +5,7 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:latlong/latlong.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class PlaceMarker extends Marker {
   PlaceMarker({
@@ -15,11 +16,13 @@ class PlaceMarker extends Marker {
           point: point,
           builder: (context) => GestureDetector(
             onTap: onTap,
-            child: Image.asset(
-              Values.kMarkerImage,
-              width: 24.0,
-              height: 24.0,
-              color: color,
+            child: ScaleAnimator(
+              child: Image.asset(
+                Values.kMarkerImage,
+                width: 24.0,
+                height: 24.0,
+                color: color,
+              ),
             ),
           ),
         );
