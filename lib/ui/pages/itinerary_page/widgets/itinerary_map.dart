@@ -9,7 +9,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/place_marker.dart';
-import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_marker.dart';
+import 'package:sahayatri/ui/pages/itinerary_page/widgets/checkpoint_marker.dart';
 
 class ItineraryMap extends StatefulWidget {
   const ItineraryMap();
@@ -59,7 +59,7 @@ class _ItineraryMapState extends State<ItineraryMap> {
             height: 64,
             anchorPos: AnchorPos.align(AnchorAlign.top),
             point: tappedCheckpoint.place.coord.toLatLng(),
-            builder: (_) => ItineraryMarker(checkpoint: tappedCheckpoint),
+            builder: (_) => CheckpointMarker(checkpoint: tappedCheckpoint),
           ),
       ],
     );

@@ -17,8 +17,6 @@ class ImageCard extends StatelessWidget {
     return FadeAnimator(
       child: CustomCard(
         margin: margin,
-        elevation: 0.0,
-        borderRadius: 8.0,
         child: Image.asset(
           imageUrl,
           fit: BoxFit.cover,

@@ -51,6 +51,7 @@ class RatingRow extends StatelessWidget {
 
   Widget _buildDownloadButton(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () async => await _downloadAndNavigate(context),
       child: ScaleAnimator(
         child: Container(

@@ -39,8 +39,6 @@ class _DateTimePickerState extends State<DateTimePicker> {
         ),
         const SizedBox(height: 8.0),
         CustomCard(
-          elevation: 0.0,
-          borderRadius: 8.0,
           child: ListTile(
             dense: true,
             title: Text(

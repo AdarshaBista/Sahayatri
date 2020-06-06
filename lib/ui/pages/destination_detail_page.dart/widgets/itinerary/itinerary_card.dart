@@ -33,7 +33,6 @@ class ItineraryCard extends StatelessWidget {
         child: Hero(
           tag: itinerary.hashCode,
           child: CustomCard(
-            elevation: 0.0,
             margin: const EdgeInsets.symmetric(vertical: 6.0),
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: ListTile(

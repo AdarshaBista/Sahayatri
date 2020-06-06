@@ -17,6 +17,7 @@ class RequiredDialog extends StatelessWidget {
     return ScaleAnimator(
       duration: 300,
       child: CustomCard(
+        elevation: 12.0,
         margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.2,
           vertical: MediaQuery.of(context).size.height * 0.3,

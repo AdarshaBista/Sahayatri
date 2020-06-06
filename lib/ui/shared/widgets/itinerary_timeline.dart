@@ -94,7 +94,6 @@ class ItineraryTimeline extends StatelessWidget {
 
   Widget _buildPlace(BuildContext context, Checkpoint checkpoint) {
     return CustomCard(
-      elevation: 0.0,
       color: AppColors.light,
       margin: const EdgeInsets.all(6.0),
       child: InkWell(

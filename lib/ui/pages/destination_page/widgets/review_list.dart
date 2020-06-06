@@ -24,8 +24,9 @@ class ReviewList extends StatelessWidget {
         children: [
           CustomButton(
             label: 'Write a review',
+            outlineOnly: true,
             color: AppColors.dark,
-            backgroundColor: AppColors.light,
+            backgroundColor: AppColors.barrier,
             iconData: CommunityMaterialIcons.pencil_outline,
             onTap: () {},
           ),

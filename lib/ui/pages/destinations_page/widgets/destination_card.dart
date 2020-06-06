@@ -52,7 +52,6 @@ class DestinationCard extends StatelessWidget {
     return Hero(
       tag: destination.id,
       child: CustomCard(
-        borderRadius: 8.0,
         child: GradientContainer(
           gradientBegin: Alignment.bottomLeft,
           gradientEnd: Alignment.topRight,

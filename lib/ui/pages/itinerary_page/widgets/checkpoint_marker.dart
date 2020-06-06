@@ -10,16 +10,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 
-class ItineraryMarker extends StatelessWidget {
+class CheckpointMarker extends StatelessWidget {
   final Checkpoint checkpoint;
 
-  const ItineraryMarker({
+  const CheckpointMarker({
     @required this.checkpoint,
   }) : assert(checkpoint != null);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      elevation: 8.0,
       color: AppColors.background,
       child: Row(
         mainAxisSize: MainAxisSize.min,
