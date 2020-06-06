@@ -12,6 +12,10 @@ abstract class NavigationService {
   void pop() {
     navigatorKey.currentState.pop();
   }
+
+  bool canPop() {
+    return navigatorKey.currentState.canPop();
+  }
 }
 
 class RootNavService extends NavigationService {

@@ -11,10 +11,17 @@ class DestinationNavPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navigator(
-      key: context.repository<DestinationNavService>().navigatorKey,
-      observers: [HeroController()],
-      onGenerateRoute: DestRouter.onGenerateRoute,
+    return WillPopScope(
+      onWillPop: () async {
+        if (!context.repository<DestinationNavService>().canPop()) return true;
+        context.repository<DestinationNavService>().pop();
+        return false;
+      },
+      child: Navigator(
+        key: context.repository<DestinationNavService>().navigatorKey,
+        observers: [HeroController()],
+        onGenerateRoute: DestRouter.onGenerateRoute,
+      ),
     );
   }
 }
