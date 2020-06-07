@@ -249,37 +249,32 @@ final List<Checkpoint> checkpoints = [
   Checkpoint(
     place: places[0],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 8),
+    dateTime: null,
     day: 1,
-    isTemplate: true,
   ),
   Checkpoint(
     place: places[2],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 16, 30),
+    dateTime: null,
     day: 2,
-    isTemplate: true,
   ),
   Checkpoint(
     place: places[5],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 14),
+    dateTime: null,
     day: 3,
-    isTemplate: true,
   ),
   Checkpoint(
     place: places[7],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 18, 30),
+    dateTime: null,
     day: 4,
-    isTemplate: true,
   ),
   Checkpoint(
     place: places[9],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 12, 30),
+    dateTime: null,
     day: 4,
-    isTemplate: true,
   ),
 ];
 
