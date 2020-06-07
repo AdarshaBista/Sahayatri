@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
 class ImageCard extends StatelessWidget {
   final String imageUrl;
@@ -14,16 +13,14 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimator(
-      child: CustomCard(
-        margin: margin,
-        child: Image.asset(
-          imageUrl,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-          alignment: Alignment.center,
-        ),
+    return CustomCard(
+      margin: margin,
+      child: Image.asset(
+        imageUrl,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+        alignment: Alignment.center,
       ),
     );
   }

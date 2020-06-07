@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/place_card.dart';
 
 class PlacesGrid extends StatelessWidget {
@@ -18,30 +18,27 @@ class PlacesGrid extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: [
         Header(title: 'Places'),
-        GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 10 / 13,
-            crossAxisSpacing: 12.0,
-            mainAxisSpacing: 12.0,
+        FadeAnimator(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 10 / 13,
+              crossAxisSpacing: 12.0,
+              mainAxisSpacing: 12.0,
+            ),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(
+              top: 20.0,
+              left: 20.0,
+              right: 20.0,
+              bottom: 40.0,
+            ),
+            itemCount: places.length,
+            itemBuilder: (context, index) {
+              return PlaceCard(place: places[index]);
+            },
           ),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.only(
-            top: 20.0,
-            left: 20.0,
-            right: 20.0,
-            bottom: 40.0,
-          ),
-          itemCount: places.length,
-          itemBuilder: (context, index) {
-            return SlideAnimator(
-              begin: Offset(0.0, 0.2 + index * 0.2),
-              child: PlaceCard(
-                place: places[index],
-              ),
-            );
-          },
         ),
       ],
     );

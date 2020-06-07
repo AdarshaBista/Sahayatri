@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodge_card.dart';
 
 class LodgesGrid extends StatelessWidget {
@@ -14,23 +14,22 @@ class LodgesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final lodges = Provider.of<Place>(context).lodges;
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 10 / 13,
-        crossAxisSpacing: 12.0,
-        mainAxisSpacing: 12.0,
+    return FadeAnimator(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 10 / 13,
+          crossAxisSpacing: 12.0,
+          mainAxisSpacing: 12.0,
+        ),
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        itemCount: lodges.length,
+        itemBuilder: (context, index) {
+          return LodgeCard(lodge: lodges[index]);
+        },
       ),
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      itemCount: lodges.length,
-      itemBuilder: (context, index) {
-        return SlideAnimator(
-          begin: Offset(0.0, 0.2 + index * 0.2),
-          child: LodgeCard(lodge: lodges[index]),
-        );
-      },
     );
   }
 }

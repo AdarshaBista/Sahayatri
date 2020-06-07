@@ -33,38 +33,36 @@ class ItineraryFormPage extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    return BlocBuilder<ItineraryFormBloc, ItineraryFormState>(
-      builder: (context, state) {
-        return FloatingActionButton.extended(
-          backgroundColor: AppColors.dark,
-          icon: Icon(
-            Icons.save,
-            size: 20.0,
-            color: AppColors.primary,
-          ),
-          label: Text(
-            'Save Itinerary',
-            style: AppTextStyles.small.primary,
-          ),
-          onPressed: () {
-            if (!state.isValid) {
-              RequiredDialog().openDialog(context);
-              return;
-            }
+    final formState = context.bloc<ItineraryFormBloc>().state;
 
-            if (state.isTemplate) {
-              RequiredDialog(
-                message: 'Please select appropriate date for checkpoints.',
-              ).openDialog(context);
-              return;
-            }
+    return FloatingActionButton.extended(
+      backgroundColor: AppColors.dark,
+      icon: Icon(
+        Icons.save,
+        size: 20.0,
+        color: AppColors.primary,
+      ),
+      label: Text(
+        'Save Itinerary',
+        style: AppTextStyles.small.primary,
+      ),
+      onPressed: () {
+        if (!formState.isValid) {
+          RequiredDialog().openDialog(context);
+          return;
+        }
 
-            context
-                .bloc<DestinationBloc>()
-                .add(ItineraryCreated(itinerary: state.itinerary));
-            context.repository<DestinationNavService>().pop();
-          },
-        );
+        if (formState.isTemplate) {
+          RequiredDialog(
+            message: 'Please select appropriate date for checkpoints.',
+          ).openDialog(context);
+          return;
+        }
+
+        context
+            .bloc<DestinationBloc>()
+            .add(ItineraryCreated(itinerary: formState.itinerary));
+        context.repository<DestinationNavService>().pop();
       },
     );
   }
