@@ -49,7 +49,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(64.0),
+          preferredSize: const Size.fromHeight(64.0),
           child: _buildSearchBox(context),
         ),
         body: _buildBody(),
@@ -77,7 +77,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
       controller: scrollController,
       physics: const BouncingScrollPhysics(),
       children: [
-        Header(title: 'Choose your', boldTitle: 'Destination'),
+        const Header(title: 'Choose your', boldTitle: 'Destination'),
         const SizedBox(height: 8.0),
         BlocBuilder<DestinationsBloc, DestinationsState>(
           builder: (context, state) {

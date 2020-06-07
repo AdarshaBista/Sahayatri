@@ -23,7 +23,6 @@ class StatCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Flexible(
             child: AutoSizeText(

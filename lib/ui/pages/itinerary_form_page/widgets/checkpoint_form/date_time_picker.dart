@@ -47,7 +47,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                   : _formattedDate(selectedDateTime),
               style: AppTextStyles.small,
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.date_range,
               size: 22.0,
             ),
@@ -83,8 +83,6 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Future<DateTime> _showDatePicker(BuildContext context) {
     return DatePicker.showDatePicker(
       context,
-      locale: LocaleType.en,
-      showTitleActions: true,
       theme: _dateTimePickerTheme,
       currentTime: selectedDateTime ?? DateTime.now(),
       minTime: DateTime.now(),
@@ -95,8 +93,6 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Future<DateTime> _showTimePicker(BuildContext context) {
     return DatePicker.showTime12hPicker(
       context,
-      locale: LocaleType.en,
-      showTitleActions: true,
       theme: _dateTimePickerTheme,
       currentTime: selectedDateTime ?? DateTime.now(),
     );

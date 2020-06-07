@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 
 import 'package:sahayatri/core/models/place.dart';
@@ -50,21 +49,17 @@ class Checkpoint {
     };
   }
 
-  static Checkpoint fromMap(Map<String, dynamic> map) {
+  factory Checkpoint.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Checkpoint(
-      place: Place.fromMap(map['place']),
-      day: map['day'],
-      isTemplate: map['isTemplate'],
-      description: map['description'],
-      dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
+      place: Place.fromMap(map['place'] as Map<String, dynamic>),
+      day: map['day'] as int,
+      isTemplate: map['isTemplate'] as bool,
+      description: map['description'] as String,
+      dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Checkpoint fromJson(String source) => fromMap(json.decode(source));
 
   @override
   bool operator ==(Object o) {

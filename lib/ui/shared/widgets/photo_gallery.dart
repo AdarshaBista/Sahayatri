@@ -21,9 +21,8 @@ class PhotoGallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 120.0,
-          childAspectRatio: 1,
         ),
         shrinkWrap: true,
         padding: const EdgeInsets.all(12.0),

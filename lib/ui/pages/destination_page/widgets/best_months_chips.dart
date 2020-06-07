@@ -24,9 +24,7 @@ class BestMonthsChips extends StatelessWidget {
           ),
           const SizedBox(height: 8.0),
           Wrap(
-            alignment: WrapAlignment.start,
             spacing: 8.0,
-            runSpacing: 0.0,
             children: bestMonths
                 .map(
                   (m) => ScaleAnimator(

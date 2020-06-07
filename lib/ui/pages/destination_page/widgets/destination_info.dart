@@ -64,8 +64,9 @@ class DestinationInfo extends StatelessWidget {
   Widget _buildGetDirectionsButton(BuildContext context) {
     return BlocListener<DirectionsBloc, DirectionsState>(
       listener: (context, state) {
-        if (state is DirectionsError)
+        if (state is DirectionsError) {
           _showErrorSnackBar(context, state.message);
+        }
         if (state is DirectionsLoading) _showLoadingSnackBar(context);
       },
       child: CustomButton(

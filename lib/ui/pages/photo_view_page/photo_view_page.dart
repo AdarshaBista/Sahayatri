@@ -22,10 +22,7 @@ class PhotoViewPage extends StatelessWidget {
         children: [
           PhotoViewGallery.builder(
             scrollPhysics: const ClampingScrollPhysics(),
-            pageController: PageController(
-              keepPage: true,
-              initialPage: args.initialPageIndex,
-            ),
+            pageController: PageController(initialPage: args.initialPageIndex),
             loadingBuilder: (context, event) => const LoadingIndicator(),
             loadFailedChild: const ErrorIndicator(
               message: "Couldn't load photo",
@@ -45,7 +42,7 @@ class PhotoViewPage extends StatelessWidget {
           const Positioned(
             top: 16.0,
             right: 16.0,
-            child: SafeArea(child: const CloseIcon()),
+            child: SafeArea(child: CloseIcon()),
           ),
         ],
       ),

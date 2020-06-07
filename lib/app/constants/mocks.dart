@@ -71,7 +71,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 2000.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.29403, lng: 83.823),
+    coord: const Coord(lat: 28.29403, lng: 83.823),
     imageUrls: imgUrls.getRange(1, 3).toList(),
   ),
   Place(
@@ -82,7 +82,7 @@ final List<Place> places = [
     lodges: [...lodges, ...lodges],
     altitude: 2200.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.304456, lng: 83.828140),
+    coord: const Coord(lat: 28.304456, lng: 83.828140),
     imageUrls: imgUrls.getRange(2, 5).toList(),
   ),
   Place(
@@ -93,7 +93,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 2100.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.313995, lng: 83.8298),
+    coord: const Coord(lat: 28.313995, lng: 83.8298),
     imageUrls: imgUrls.getRange(5, 9).toList(),
   ),
   Place(
@@ -104,7 +104,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 2300.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.331164, lng: 83.829761),
+    coord: const Coord(lat: 28.331164, lng: 83.829761),
     imageUrls: imgUrls.getRange(8, 14).toList(),
   ),
   Place(
@@ -114,7 +114,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 2550.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.384609, lng: 83.84285),
+    coord: const Coord(lat: 28.384609, lng: 83.84285),
     imageUrls: imgUrls.getRange(12, 15).toList(),
   ),
   Place(
@@ -124,7 +124,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 2990.0,
     isNetworkAvailable: true,
-    coord: Coord(lat: 28.404295, lng: 83.856344),
+    coord: const Coord(lat: 28.404295, lng: 83.856344),
     imageUrls: imgUrls.getRange(5, 10).toList(),
   ),
   Place(
@@ -134,7 +134,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 3200.0,
     isNetworkAvailable: false,
-    coord: Coord(lat: 28.415843, lng: 83.854565),
+    coord: const Coord(lat: 28.415843, lng: 83.854565),
     imageUrls: imgUrls.getRange(7, 13).toList(),
   ),
   Place(
@@ -145,7 +145,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 3580.0,
     isNetworkAvailable: false,
-    coord: Coord(lat: 28.434116, lng: 83.867221),
+    coord: const Coord(lat: 28.434116, lng: 83.867221),
     imageUrls: imgUrls.getRange(12, 15).toList(),
   ),
   Place(
@@ -155,7 +155,7 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 4000.0,
     isNetworkAvailable: false,
-    coord: Coord(lat: 28.457575, lng: 83.884979),
+    coord: const Coord(lat: 28.457575, lng: 83.884979),
     imageUrls: imgUrls.getRange(6, 9).toList(),
   ),
   Place(
@@ -165,13 +165,13 @@ final List<Place> places = [
     lodges: lodges,
     altitude: 4500.0,
     isNetworkAvailable: false,
-    coord: Coord(lat: 28.464424, lng: 83.900838),
+    coord: const Coord(lat: 28.464424, lng: 83.900838),
     imageUrls: imgUrls.getRange(1, 7).toList(),
   ),
 ];
 
 final List<Lodge> lodges = [
-  Lodge(
+  const Lodge(
     id: 1,
     name: 'Lekali Lodge',
     contactNumber: '9841123456',
@@ -179,7 +179,7 @@ final List<Lodge> lodges = [
     rating: 3.5,
     imageUrls: imgUrls,
   ),
-  Lodge(
+  const Lodge(
     id: 2,
     name: 'Thakali Lodge',
     contactNumber: '9841127836',
@@ -187,7 +187,7 @@ final List<Lodge> lodges = [
     rating: 4.5,
     imageUrls: imgUrls,
   ),
-  Lodge(
+  const Lodge(
     id: 3,
     name: 'Muktinath Lodge',
     contactNumber: '9841462456',
@@ -195,7 +195,7 @@ final List<Lodge> lodges = [
     rating: 2.0,
     imageUrls: imgUrls,
   ),
-  Lodge(
+  const Lodge(
     id: 4,
     name: 'Atithi Lodge',
     contactNumber: '9861987575',
@@ -249,7 +249,7 @@ final List<Checkpoint> checkpoints = [
   Checkpoint(
     place: places[0],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 8, 0),
+    dateTime: DateTime(2020, 1, 1, 8),
     day: 1,
     isTemplate: true,
   ),
@@ -263,7 +263,7 @@ final List<Checkpoint> checkpoints = [
   Checkpoint(
     place: places[5],
     description: '',
-    dateTime: DateTime(2020, 1, 1, 14, 0),
+    dateTime: DateTime(2020, 1, 1, 14),
     day: 3,
     isTemplate: true,
   ),

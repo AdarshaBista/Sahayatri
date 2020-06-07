@@ -30,13 +30,13 @@ class DirectionsService {
       if (arrived) await _directions.finishNavigation();
     });
 
-    Location _origin = Location(
+    final Location _origin = Location(
       name: 'Your location',
       latitude: currentLocation.coord.lat,
       longitude: currentLocation.coord.lng,
     );
 
-    Location _destination = Location(
+    final Location _destination = Location(
       name: trailHead.name,
       latitude: trailHead.coord.lat,
       longitude: trailHead.coord.lng,
@@ -48,7 +48,6 @@ class DirectionsService {
       language: 'en',
       units: VoiceUnits.metric,
       mode: NavigationMode.driving,
-      simulateRoute: false,
     );
   }
 }

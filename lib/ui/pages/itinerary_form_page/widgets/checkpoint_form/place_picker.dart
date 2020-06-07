@@ -51,12 +51,13 @@ class _PlacePickerState extends State<PlacePicker> {
               selectedPlace?.name ?? 'No place selected',
               style: AppTextStyles.small,
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.place,
               size: 22.0,
             ),
-            trailing:
-                selectedPlace == null ? Offstage() : _buildViewButton(context),
+            trailing: selectedPlace == null
+                ? const Offstage()
+                : _buildViewButton(context),
             onTap: () {
               FocusScope.of(context).unfocus();
               _selectPlace(context);

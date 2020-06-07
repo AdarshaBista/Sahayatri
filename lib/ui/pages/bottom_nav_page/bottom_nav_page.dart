@@ -27,7 +27,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
             _selectedIndex = index;
           });
         },
-        icons: [
+        icons: const [
           CommunityMaterialIcons.map_marker_outline,
           CommunityMaterialIcons.home_outline,
           CommunityMaterialIcons.account_outline,

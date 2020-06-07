@@ -23,10 +23,7 @@ class DurationField extends StatelessWidget {
       initialValue: initialValue,
       labelStyle: AppTextStyles.small,
       onChanged: onChanged,
-      keyboardType: TextInputType.numberWithOptions(
-        signed: false,
-        decimal: false,
-      ),
+      keyboardType: const TextInputType.numberWithOptions(),
     );
   }
 }

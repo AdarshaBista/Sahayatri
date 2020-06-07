@@ -15,7 +15,7 @@ import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 class PlaceCard extends StatelessWidget {
   final Place place;
 
-  PlaceCard({
+  const PlaceCard({
     @required this.place,
   }) : assert(place != null);
 

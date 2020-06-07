@@ -31,14 +31,13 @@ class SearchBox extends StatelessWidget {
           child: CustomCard(
             elevation: elevation,
             child: TextField(
-              maxLines: 1,
               onChanged: onChanged,
               style: AppTextStyles.small,
               decoration: InputDecoration(
                 fillColor: AppColors.light,
                 border: InputBorder.none,
                 hintText: hintText,
-                prefixIcon: ScaleAnimator(
+                prefixIcon: const ScaleAnimator(
                   child: Icon(
                     Icons.search,
                     size: 20.0,

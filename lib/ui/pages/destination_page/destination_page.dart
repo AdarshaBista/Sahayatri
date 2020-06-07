@@ -27,7 +27,7 @@ class DestinationPage extends StatelessWidget {
       appBar: CustomAppbar(
         title: destination.name,
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
           onPressed: () => context.repository<RootNavService>().pop(),
         ),
       ),

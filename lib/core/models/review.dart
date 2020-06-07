@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/user.dart';
@@ -43,20 +41,16 @@ class Review {
     };
   }
 
-  static Review fromMap(Map<String, dynamic> map) {
+  factory Review.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Review(
-      id: map['id'],
-      user: User.fromMap(map['user']),
-      text: map['text'],
-      rating: map['rating'],
+      id: map['id'] as int,
+      user: User.fromMap(map['user'] as Map<String, dynamic>),
+      text: map['text'] as String,
+      rating: map['rating'] as double,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Review fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

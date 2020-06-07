@@ -9,7 +9,7 @@ class BottomNavBar extends StatelessWidget {
   final List<IconData> icons;
   final ValueChanged<int> onItemSelected;
 
-  BottomNavBar({
+  const BottomNavBar({
     this.selectedIndex = 0,
     @required this.icons,
     @required this.onItemSelected,
@@ -27,8 +27,8 @@ class BottomNavBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         child: Row(
           children: icons.map((icon) {
-            int index = icons.indexOf(icon);
-            bool isSelected = index == selectedIndex;
+            final int index = icons.indexOf(icon);
+            final bool isSelected = index == selectedIndex;
 
             return Flexible(
               child: GestureDetector(
@@ -65,7 +65,7 @@ class BottomNavBar extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           width: isSelected ? 6 : 0,
           height: isSelected ? 6 : 0,
-          margin: EdgeInsets.all(6),
+          margin: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(3),

@@ -16,11 +16,9 @@ class Carousel extends StatelessWidget {
     return Container(
       height: 240.0,
       child: Swiper(
-        loop: true,
         autoplay: true,
         autoplayDelay: 2000,
-        layout: SwiperLayout.DEFAULT,
-        pagination: showPagination ? SwiperPagination() : null,
+        pagination: showPagination ? const SwiperPagination() : null,
         itemWidth: double.infinity,
         itemHeight: double.infinity,
         itemCount: imageUrls.length,

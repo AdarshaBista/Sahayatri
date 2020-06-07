@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -125,33 +124,33 @@ class Destination {
     };
   }
 
-  static Destination fromMap(Map<String, dynamic> map) {
+  factory Destination.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Destination(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      permit: map['permit'],
-      length: map['length'],
-      maxAltitude: map['maxAltitude'],
-      estimatedDuration: map['estimatedDuration'],
-      imageUrls: List<String>.from(map['imageUrls']),
-      bestMonths: List<String>.from(map['bestMonths']),
-      places: List<Place>.from(map['places']?.map((x) => Place.fromMap(x))),
-      reviews: List<Review>.from(map['reviews']?.map((x) => Review.fromMap(x))),
-      routePoints:
-          List<Coord>.from(map['routePoints']?.map((x) => Coord.fromMap(x))),
+      id: map['id'] as int,
+      name: map['name'] as String,
+      description: map['description'] as String,
+      permit: map['permit'] as String,
+      length: map['length'] as String,
+      maxAltitude: map['maxAltitude'] as String,
+      estimatedDuration: map['estimatedDuration'] as String,
+      imageUrls: List<String>.from(map['imageUrls'] as List<String>),
+      bestMonths: List<String>.from(map['bestMonths'] as List<String>),
+      places: List<Place>.from((map['places'] as List<Place>)
+          ?.map((x) => Place.fromMap(x as Map<String, dynamic>))),
+      reviews: List<Review>.from((map['reviews'] as List<Review>)
+          ?.map((x) => Review.fromMap(x as Map<String, dynamic>))),
+      routePoints: List<Coord>.from((map['routePoints'] as List<Coord>)
+          ?.map((x) => Coord.fromMap(x as Map<String, dynamic>))),
       suggestedItineraries: List<Itinerary>.from(
-          map['suggestedItineraries']?.map((x) => Itinerary.fromMap(x))),
-      createdItinerary: Itinerary.fromMap(map['createdItinerary']),
-      isDownloaded: map['isDownloaded'],
+          (map['suggestedItineraries'] as List<Itinerary>)
+              ?.map((x) => Itinerary.fromMap(x as Map<String, dynamic>))),
+      createdItinerary:
+          Itinerary.fromMap(map['createdItinerary'] as Map<String, dynamic>),
+      isDownloaded: map['isDownloaded'] as bool,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Destination fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

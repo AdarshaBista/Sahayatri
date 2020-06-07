@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:meta/meta.dart';
 
 class User {
@@ -41,20 +39,16 @@ class User {
     };
   }
 
-  static User fromMap(Map<String, dynamic> map) {
+  factory User.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return User(
-      id: map['id'],
-      name: map['name'],
-      email: map['email'],
-      imageUrl: map['imageUrl'],
+      id: map['id'] as int,
+      name: map['name'] as String,
+      email: map['email'] as String,
+      imageUrl: map['imageUrl'] as String,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static User fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 extension WidgetX on Widget {
   void openDialog(BuildContext context) {
-    showDialog(
+    showDialog<void>(
       context: context,
       useSafeArea: true,
       useRootNavigator: false,
@@ -15,7 +15,7 @@ extension WidgetX on Widget {
   }
 
   void openModalBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       enableDrag: true,
       isDismissible: true,

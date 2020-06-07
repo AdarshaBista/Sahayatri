@@ -74,7 +74,7 @@ class LodgeCard extends StatelessWidget {
   Widget _buildContact() {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.phone,
           size: 14.0,
           color: AppColors.light,

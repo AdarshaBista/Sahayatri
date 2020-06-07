@@ -10,7 +10,7 @@ abstract class DestinationEvent extends Equatable {
 class ItineraryCreated extends DestinationEvent {
   final Itinerary itinerary;
 
-  ItineraryCreated({
+  const ItineraryCreated({
     @required this.itinerary,
   });
 

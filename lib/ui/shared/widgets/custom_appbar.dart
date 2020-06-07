@@ -7,7 +7,7 @@ import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 class CustomAppbar extends AppBar {
   CustomAppbar({
     @required String title,
-    double elevation: 8.0,
+    double elevation = 8.0,
     Widget leading,
   }) : super(
           centerTitle: true,

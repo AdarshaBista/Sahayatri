@@ -7,7 +7,7 @@ abstract class CheckpointFormEvent extends Equatable {
 class PlaceChanged extends CheckpointFormEvent {
   final Place place;
 
-  PlaceChanged({
+  const PlaceChanged({
     @required this.place,
   }) : assert(place != null);
 
@@ -18,7 +18,7 @@ class PlaceChanged extends CheckpointFormEvent {
 class DescriptionChanged extends CheckpointFormEvent {
   final String description;
 
-  DescriptionChanged({
+  const DescriptionChanged({
     @required this.description,
   }) : assert(description != null);
 
@@ -29,7 +29,7 @@ class DescriptionChanged extends CheckpointFormEvent {
 class DateTimeChanged extends CheckpointFormEvent {
   final DateTime dateTime;
 
-  DateTimeChanged({
+  const DateTimeChanged({
     @required this.dateTime,
   }) : assert(dateTime != null);
 

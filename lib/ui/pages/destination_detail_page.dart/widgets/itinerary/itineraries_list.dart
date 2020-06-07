@@ -21,7 +21,7 @@ class ItinerariesList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       children: [
-        Header(
+        const Header(
           title: 'Itinerary',
           leftPadding: 0.0,
         ),

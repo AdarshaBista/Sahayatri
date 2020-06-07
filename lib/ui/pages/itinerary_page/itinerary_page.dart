@@ -46,7 +46,7 @@ class _ItineraryPageState extends State<ItineraryPage> {
           right: 16.0,
           child: Transform.scale(
             scale: 1.0 - panelOpenPercent,
-            child: SafeArea(child: const CloseIcon()),
+            child: const SafeArea(child: CloseIcon()),
           ),
         ),
       ],

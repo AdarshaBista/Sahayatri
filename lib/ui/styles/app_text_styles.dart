@@ -5,6 +5,8 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/ui/styles/app_colors.dart';
 
 class AppTextStyles {
+  AppTextStyles._();
+
   static const TextStyle _base = TextStyle(
     color: AppColors.dark,
     fontFamily: Values.kFontFamily,
@@ -46,10 +48,11 @@ class AppTextStyles {
 }
 
 extension TextStyleX on TextStyle {
-  TextStyle get serif => this.copyWith(fontFamily: Values.kFontFamilySerif);
-  TextStyle get bold => this.copyWith(fontWeight: FontWeight.bold);
-  TextStyle get primary => this.copyWith(color: AppColors.primary);
-  TextStyle get light => this.copyWith(color: AppColors.background);
-  TextStyle get extraLight =>
-      this.copyWith(color: AppColors.background.withOpacity(0.7));
+  TextStyle get serif => copyWith(fontFamily: Values.kFontFamilySerif);
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
+  TextStyle get primary => copyWith(color: AppColors.primary);
+  TextStyle get light => copyWith(color: AppColors.background);
+  TextStyle get extraLight => copyWith(
+        color: AppColors.background.withOpacity(0.7),
+      );
 }

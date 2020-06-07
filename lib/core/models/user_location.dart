@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import 'package:location/location.dart';
@@ -34,7 +32,7 @@ class UserLocation {
     double accuracy,
     double altitude,
     double speed,
-    double bearingDegree,
+    double bearing,
     DateTime timestamp,
   }) {
     return UserLocation(
@@ -42,12 +40,12 @@ class UserLocation {
       accuracy: accuracy ?? this.accuracy,
       altitude: altitude ?? this.altitude,
       speed: speed ?? this.speed,
-      bearing: bearingDegree ?? this.bearing,
+      bearing: bearing ?? this.bearing,
       timestamp: timestamp ?? this.timestamp,
     );
   }
 
-  static UserLocation fromLocationData(LocationData userLocation) {
+  factory UserLocation.fromLocationData(LocationData userLocation) {
     if (userLocation == null) return null;
 
     return UserLocation(
@@ -71,22 +69,18 @@ class UserLocation {
     };
   }
 
-  static UserLocation fromMap(Map<String, dynamic> map) {
+  factory UserLocation.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return UserLocation(
-      coord: map['coord'],
-      accuracy: map['accuracy'],
-      altitude: map['altitude'],
-      speed: map['speed'],
-      bearing: map['bearingDegree'],
-      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp']),
+      coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
+      accuracy: map['accuracy'] as double,
+      altitude: map['altitude'] as double,
+      speed: map['speed'] as double,
+      bearing: map['bearingDegree'] as double,
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static UserLocation fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

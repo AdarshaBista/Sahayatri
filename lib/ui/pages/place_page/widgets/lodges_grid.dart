@@ -16,7 +16,7 @@ class LodgesGrid extends StatelessWidget {
 
     return FadeAnimator(
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 10 / 13,
           crossAxisSpacing: 12.0,
@@ -24,7 +24,7 @@ class LodgesGrid extends StatelessWidget {
         ),
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         itemCount: lodges.length,
         itemBuilder: (context, index) {
           return LodgeCard(lodge: lodges[index]);

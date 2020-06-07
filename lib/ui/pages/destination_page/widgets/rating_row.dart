@@ -23,7 +23,7 @@ class RatingRow extends StatelessWidget {
       child: Row(
         children: [
           _buildRating(context),
-          Spacer(),
+          const Spacer(),
           _buildDownloadButton(context),
         ],
       ),
@@ -52,22 +52,20 @@ class RatingRow extends StatelessWidget {
   Widget _buildDownloadButton(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () async => await _downloadAndNavigate(context),
+      onTap: () => _downloadAndNavigate(context),
       child: ScaleAnimator(
-        child: Container(
-          child: Column(
-            children: [
-              Icon(
-                CommunityMaterialIcons.cloud_download_outline,
-                size: 24.0,
-              ),
-              const SizedBox(height: 4.0),
-              Text(
-                'Download',
-                style: AppTextStyles.small,
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            const Icon(
+              CommunityMaterialIcons.cloud_download_outline,
+              size: 24.0,
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              'Download',
+              style: AppTextStyles.small,
+            ),
+          ],
         ),
       ),
     );

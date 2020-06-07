@@ -20,7 +20,6 @@ class TrackerStats extends StatelessWidget {
       height: height - 28.0,
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           StatCard(

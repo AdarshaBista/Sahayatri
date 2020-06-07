@@ -14,7 +14,7 @@ class DestinationsEmpty extends DestinationsState {}
 class DestinationsSuccess extends DestinationsState {
   final List<Destination> destinations;
 
-  DestinationsSuccess({
+  const DestinationsSuccess({
     @required this.destinations,
   }) : assert(destinations != null);
 
@@ -25,7 +25,7 @@ class DestinationsSuccess extends DestinationsState {
 class DestinationsError extends DestinationsState {
   final String message;
 
-  DestinationsError({
+  const DestinationsError({
     @required this.message,
   }) : assert(message != null);
 

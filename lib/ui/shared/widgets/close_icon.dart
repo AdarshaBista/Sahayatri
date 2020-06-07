@@ -21,7 +21,7 @@ class CloseIcon extends StatelessWidget {
       child: ScaleAnimator(
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.dark,
             shape: BoxShape.circle,
           ),

@@ -7,7 +7,7 @@ abstract class ItineraryFormEvent extends Equatable {
 class NameChanged extends ItineraryFormEvent {
   final String name;
 
-  NameChanged({
+  const NameChanged({
     @required this.name,
   }) : assert(name != null);
 
@@ -18,7 +18,7 @@ class NameChanged extends ItineraryFormEvent {
 class DaysChanged extends ItineraryFormEvent {
   final String days;
 
-  DaysChanged({
+  const DaysChanged({
     @required this.days,
   }) : assert(days != null);
 
@@ -29,7 +29,7 @@ class DaysChanged extends ItineraryFormEvent {
 class NightsChanged extends ItineraryFormEvent {
   final String nights;
 
-  NightsChanged({
+  const NightsChanged({
     @required this.nights,
   }) : assert(nights != null);
 
@@ -40,7 +40,7 @@ class NightsChanged extends ItineraryFormEvent {
 class CheckpointAdded extends ItineraryFormEvent {
   final Checkpoint checkpoint;
 
-  CheckpointAdded({
+  const CheckpointAdded({
     @required this.checkpoint,
   }) : assert(checkpoint != null);
 
@@ -52,7 +52,7 @@ class CheckpointUpdated extends ItineraryFormEvent {
   final Checkpoint newCheckpoint;
   final Checkpoint prevCheckpoint;
 
-  CheckpointUpdated({
+  const CheckpointUpdated({
     @required this.newCheckpoint,
     @required this.prevCheckpoint,
   })  : assert(newCheckpoint != null),
@@ -65,7 +65,7 @@ class CheckpointUpdated extends ItineraryFormEvent {
 class CheckpointRemoved extends ItineraryFormEvent {
   final Checkpoint checkpoint;
 
-  CheckpointRemoved({
+  const CheckpointRemoved({
     @required this.checkpoint,
   }) : assert(checkpoint != null);
 

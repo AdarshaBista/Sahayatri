@@ -32,7 +32,7 @@ class TrackerMap extends StatelessWidget {
           width: 40.0,
           height: 40.0,
           point: center.toLatLng(),
-          builder: (context) => Icon(
+          builder: (context) => const Icon(
             CommunityMaterialIcons.map_marker_outline,
             color: AppColors.dark,
           ),

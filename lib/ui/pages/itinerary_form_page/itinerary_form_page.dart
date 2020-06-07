@@ -37,7 +37,7 @@ class ItineraryFormPage extends StatelessWidget {
 
     return FloatingActionButton.extended(
       backgroundColor: AppColors.dark,
-      icon: Icon(
+      icon: const Icon(
         Icons.save,
         size: 20.0,
         color: AppColors.primary,
@@ -48,12 +48,12 @@ class ItineraryFormPage extends StatelessWidget {
       ),
       onPressed: () {
         if (!formState.isValid) {
-          RequiredDialog().openDialog(context);
+          const RequiredDialog().openDialog(context);
           return;
         }
 
         if (formState.isTemplate) {
-          RequiredDialog(
+          const RequiredDialog(
             message: 'Please select appropriate date for checkpoints.',
           ).openDialog(context);
           return;

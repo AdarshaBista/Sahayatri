@@ -20,7 +20,6 @@ class ImageCard extends StatelessWidget {
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,
-        alignment: Alignment.center,
       ),
     );
   }

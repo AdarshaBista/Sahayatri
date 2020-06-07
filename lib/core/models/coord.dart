@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:meta/meta.dart';
 
 import 'package:latlong/latlong.dart';
@@ -28,7 +26,7 @@ class Coord {
     return LatLng(lat, lng);
   }
 
-  static Coord fromLatLng(LatLng latLng) {
+  factory Coord.fromLatLng(LatLng latLng) {
     if (latLng == null) return null;
 
     return Coord(
@@ -44,18 +42,14 @@ class Coord {
     };
   }
 
-  static Coord fromMap(Map<String, dynamic> map) {
+  factory Coord.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Coord(
-      lat: map['lat'],
-      lng: map['lng'],
+      lat: map['lat'] as double,
+      lng: map['lng'] as double,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Coord fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() => 'Coord(lat: $lat, lng: $lng)';

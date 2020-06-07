@@ -17,10 +17,10 @@ class PlacesGrid extends StatelessWidget {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: [
-        Header(title: 'Places'),
+        const Header(title: 'Places'),
         FadeAnimator(
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 10 / 13,
               crossAxisSpacing: 12.0,
@@ -28,7 +28,7 @@ class PlacesGrid extends StatelessWidget {
             ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 20.0,
               left: 20.0,
               right: 20.0,

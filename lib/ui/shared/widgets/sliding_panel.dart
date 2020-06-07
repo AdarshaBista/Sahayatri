@@ -27,14 +27,9 @@ class SlidingPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       color: AppColors.background,
-      parallaxOffset: 0.1,
       backdropOpacity: 0.6,
-      isDraggable: true,
       parallaxEnabled: true,
       backdropEnabled: true,
-      renderPanelSheet: true,
-      backdropTapClosesPanel: true,
-      slideDirection: SlideDirection.UP,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(borderRadius),
         topRight: Radius.circular(borderRadius),

@@ -12,7 +12,7 @@ class DestinationsFetched extends DestinationsEvent {}
 class DestinationsSearched extends DestinationsEvent {
   final String query;
 
-  DestinationsSearched({
+  const DestinationsSearched({
     @required this.query,
   }) : assert(query != null);
 

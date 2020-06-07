@@ -62,7 +62,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         elevation: 8.0,
         notchMargin: 6.0,
         color: AppColors.background,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: _buildBottomNavBar(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -77,7 +77,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       onPressed: () => context
           .repository<DestinationNavService>()
           .pushNamed(Routes.kTrackerPageRoute),
-      child: Icon(
+      child: const Icon(
         Icons.directions_walk,
         size: 24.0,
         color: AppColors.primary,
@@ -95,9 +95,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
           hoverColor: Colors.transparent,
         ),
         child: TabBar(
-          isScrollable: false,
           controller: _tabController,
-          indicator: BoxDecoration(color: Colors.transparent),
+          indicator: const BoxDecoration(color: Colors.transparent),
           tabs: [
             for (int i = 0; i < _tabs.length; ++i)
               Padding(
@@ -119,9 +118,9 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     return TabBarView(
       controller: _tabController,
       physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        const ItinerariesList(),
-        const PlacesGrid(),
+      children: const [
+        ItinerariesList(),
+        PlacesGrid(),
       ],
     );
   }

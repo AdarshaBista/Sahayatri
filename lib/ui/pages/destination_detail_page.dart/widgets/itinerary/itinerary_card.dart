@@ -59,9 +59,9 @@ class ItineraryCard extends StatelessWidget {
   Widget _buildDeleteIcon(BuildContext context) {
     return ScaleAnimator(
       child: IconButton(
-        icon: Icon(Icons.close, color: Colors.redAccent),
+        icon: const Icon(Icons.close, color: Colors.redAccent),
         onPressed: () => context.bloc<DestinationBloc>().add(
-              ItineraryCreated(itinerary: null),
+              const ItineraryCreated(itinerary: null),
             ),
       ),
     );
@@ -70,7 +70,7 @@ class ItineraryCard extends StatelessWidget {
   Widget _buildEditIcon(BuildContext context) {
     return ScaleAnimator(
       child: IconButton(
-        icon: Icon(Icons.edit, color: AppColors.primary),
+        icon: const Icon(Icons.edit, color: AppColors.primary),
         onPressed: () => context.repository<DestinationNavService>().pushNamed(
               Routes.kItineraryFormPageRoute,
               arguments: itinerary,

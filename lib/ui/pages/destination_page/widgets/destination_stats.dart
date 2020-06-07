@@ -15,7 +15,6 @@ class DestinationStats extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           StatCard(

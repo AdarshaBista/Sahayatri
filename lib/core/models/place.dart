@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -68,24 +66,21 @@ class Place {
     };
   }
 
-  static Place fromMap(Map<String, dynamic> map) {
+  factory Place.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Place(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      coord: Coord.fromMap(map['coord']),
-      altitude: map['altitude'],
-      isNetworkAvailable: map['isNetworkAvailable'],
-      lodges: List<Lodge>.from(map['lodges']?.map((x) => Lodge.fromMap(x))),
-      imageUrls: List<String>.from(map['imageUrls']),
+      id: map['id'] as int,
+      name: map['name'] as String,
+      description: map['description'] as String,
+      coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
+      altitude: map['altitude'] as double,
+      isNetworkAvailable: map['isNetworkAvailable'] as bool,
+      lodges: List<Lodge>.from((map['lodges'] as List<Lodge>)
+          ?.map((x) => Lodge.fromMap(x as Map<String, dynamic>))),
+      imageUrls: List<String>.from(map['imageUrls'] as List<String>),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Place fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

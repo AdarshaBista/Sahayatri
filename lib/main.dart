@@ -20,7 +20,7 @@ import 'package:device_preview/device_preview.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
@@ -30,14 +30,13 @@ void main() {
   runApp(
     DevicePreview(
       enabled: Platform.isWindows,
-      isToolBarVisible: true,
       style: DevicePreviewStyle(
-        background: BoxDecoration(color: Color(0xFF24292E)),
+        background: const BoxDecoration(color: Color(0xFF24292E)),
         toolBar: DevicePreviewToolBarStyle.dark().copyWith(
           position: DevicePreviewToolBarPosition.left,
         ),
       ),
-      data: DevicePreviewData(
+      data: const DevicePreviewData(
         deviceIndex: 11,
         isFrameVisible: true,
       ),

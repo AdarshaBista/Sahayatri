@@ -13,7 +13,6 @@ class LocationService {
 
   LocationService() {
     location.changeSettings(
-      accuracy: LocationAccuracy.high,
       interval: 2000,
     );
 
@@ -29,11 +28,12 @@ class LocationService {
   }
 
   Future<UserLocation> getLocation() async {
-    if (!hasPermission)
-      throw Failure(
+    if (!hasPermission) {
+      throw const Failure(
         error: 'Location permission denied.',
         message: 'Location permission denied.',
       );
+    }
 
     try {
       final locationData = await location.getLocation();

@@ -6,6 +6,8 @@ import 'package:sahayatri/ui/styles/app_colors.dart';
 import 'package:sahayatri/ui/styles/app_text_styles.dart';
 
 class AppThemes {
+  AppThemes._();
+
   static final ThemeData light = ThemeData(
     fontFamily: Values.kFontFamily,
     brightness: Brightness.light,
@@ -67,7 +69,6 @@ class AppThemes {
       InputDecorationTheme(
     filled: true,
     isDense: true,
-    isCollapsed: false,
     alignLabelWithHint: true,
     errorMaxLines: 2,
     helperMaxLines: 2,
@@ -87,7 +88,6 @@ class AppThemes {
     disabledBorder: _inputBorder,
     focusedBorder: _inputBorder,
     focusedErrorBorder: _inputBorder,
-    floatingLabelBehavior: FloatingLabelBehavior.auto,
   );
 
   static const FloatingActionButtonThemeData _floatingActionButtonTheme =
@@ -110,7 +110,7 @@ class AppThemes {
   static const BottomAppBarTheme _bottomAppBarTheme = BottomAppBarTheme(
     elevation: 0.0,
     color: AppColors.background,
-    shape: const CircularNotchedRectangle(),
+    shape: CircularNotchedRectangle(),
   );
 
   static final TabBarTheme _tabBarTheme = TabBarTheme(
@@ -156,10 +156,10 @@ class AppThemes {
     backgroundColor: AppColors.light,
     modalElevation: 12.0,
     modalBackgroundColor: AppColors.light,
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: const Radius.circular(12.0),
-        topRight: const Radius.circular(12.0),
+        topLeft: Radius.circular(12.0),
+        topRight: Radius.circular(12.0),
       ),
     ),
   );

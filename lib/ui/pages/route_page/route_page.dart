@@ -12,9 +12,9 @@ class RoutePage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: Stack(
         alignment: Alignment.topCenter,
-        children: [
-          const RouteMap(),
-          const Positioned(
+        children: const [
+          RouteMap(),
+          Positioned(
             top: 16.0,
             right: 16.0,
             child: SafeArea(child: CloseIcon()),

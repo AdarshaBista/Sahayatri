@@ -20,7 +20,7 @@ class CheckpointForm extends StatelessWidget {
   final Checkpoint checkpoint;
   final Function(Checkpoint) onSubmit;
 
-  CheckpointForm({
+  const CheckpointForm({
     @required this.onSubmit,
     @required this.checkpoint,
   }) : assert(onSubmit != null);
@@ -94,14 +94,14 @@ class CheckpointForm extends StatelessWidget {
     return FloatingActionButton(
       mini: true,
       backgroundColor: AppColors.dark,
-      child: Icon(
+      child: const Icon(
         Icons.check,
-        color: AppColors.primary,
         size: 24.0,
+        color: AppColors.primary,
       ),
       onPressed: () {
         if (!state.isValid) {
-          RequiredDialog().openDialog(context);
+          const RequiredDialog().openDialog(context);
           return;
         }
         onSubmit(state.checkpoint);

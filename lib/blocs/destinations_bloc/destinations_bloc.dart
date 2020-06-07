@@ -27,7 +27,7 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
     TransitionFunction<DestinationsEvent, DestinationsState> transitionFn,
   ) {
     return super.transformEvents(
-      events.debounceTime(Duration(milliseconds: 300)),
+      events.debounceTime(const Duration(milliseconds: 300)),
       transitionFn,
     );
   }
@@ -37,9 +37,12 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
 
   @override
   Stream<DestinationsState> mapEventToState(DestinationsEvent event) async* {
-    if (event is DestinationsFetched) yield* _mapDestinationsFetchedToState();
-    if (event is DestinationsSearched)
+    if (event is DestinationsFetched) {
+      yield* _mapDestinationsFetchedToState();
+    }
+    if (event is DestinationsSearched) {
       yield* _mapDestinationsSearchedToState(event.query);
+    }
   }
 
   Stream<DestinationsState> _mapDestinationsFetchedToState() async* {

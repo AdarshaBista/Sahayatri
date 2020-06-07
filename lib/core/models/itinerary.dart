@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/checkpoint.dart';
@@ -45,21 +43,17 @@ class Itinerary {
     };
   }
 
-  static Itinerary fromMap(Map<String, dynamic> map) {
+  factory Itinerary.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Itinerary(
-      name: map['name'],
-      days: map['days'],
-      nights: map['nights'],
-      checkpoints: List<Checkpoint>.from(
-          map['checkpoints']?.map((x) => Checkpoint.fromMap(x))),
-    );
+        name: map['name'] as String,
+        days: map['days'] as String,
+        nights: map['nights'] as String,
+        checkpoints: List<Checkpoint>.from(
+            (map['checkpoints'] as List<Checkpoint>)
+                ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>))));
   }
-
-  String toJson() => json.encode(toMap());
-
-  static Itinerary fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {

@@ -94,7 +94,6 @@ class ItineraryTimeline extends StatelessWidget {
 
   Widget _buildPlace(BuildContext context, Checkpoint checkpoint) {
     return CustomCard(
-      color: AppColors.light,
       margin: const EdgeInsets.all(6.0),
       child: InkWell(
         onTap: () => _handlePlaceTap(context, checkpoint),
@@ -162,7 +161,7 @@ class ItineraryTimeline extends StatelessWidget {
           .add(CheckpointRemoved(checkpoint: checkpoint)),
       child: Container(
         padding: const EdgeInsets.all(8.0),
-        child: Icon(
+        child: const Icon(
           Icons.close,
           size: 22.0,
           color: Colors.redAccent,

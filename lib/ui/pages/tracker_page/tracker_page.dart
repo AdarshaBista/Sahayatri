@@ -81,7 +81,7 @@ class _TrackerPageState extends State<TrackerPage> {
             angle: panelOpenPercent * 2 * math.pi,
             child: Transform.scale(
               scale: 1.0 - panelOpenPercent,
-              child: SafeArea(child: const CloseIcon()),
+              child: const SafeArea(child: CloseIcon()),
             ),
           ),
         ),

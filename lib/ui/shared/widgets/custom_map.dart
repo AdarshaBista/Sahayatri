@@ -51,7 +51,6 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         minZoom: 10.0,
         maxZoom: 16.0,
         onTap: widget.onTap,
-        interactive: true,
         center: widget.center.toLatLng(),
         swPanBoundary: widget.swPanBoundary?.toLatLng() ??
             Coord(

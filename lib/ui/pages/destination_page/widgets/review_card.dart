@@ -18,7 +18,6 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: CustomCard(
-        color: AppColors.light,
         margin: const EdgeInsets.symmetric(vertical: 6.0),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),

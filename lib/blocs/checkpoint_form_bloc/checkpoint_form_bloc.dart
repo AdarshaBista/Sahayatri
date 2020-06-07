@@ -19,7 +19,7 @@ class CheckpointFormBloc
 
   @override
   CheckpointFormState get initialState => CheckpointFormState(
-        place: checkpoint?.place ?? null,
+        place: checkpoint?.place,
         description: checkpoint?.description ?? '',
         dateTime: checkpoint == null
             ? null
