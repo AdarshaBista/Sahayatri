@@ -23,7 +23,7 @@ class DownloadingIndicator extends StatelessWidget {
           BallRotateIndicator(
             color: AppColors.primary,
           ),
-          const SizedBox(height: 24.0),
+          const SizedBox(height: 32.0),
           Text(
             'Downloading $title',
             textAlign: TextAlign.center,
