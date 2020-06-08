@@ -10,6 +10,7 @@ import 'package:sahayatri/app/routers/root_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
@@ -43,6 +44,7 @@ void main() {
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
+          RepositoryProvider(create: (_) => WeatherService()),
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
@@ -59,12 +61,12 @@ class Sahayatri extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (_) => TrackerService(
-              locationService: context.repository<LocationService>()),
+          create: (_) =>
+              TrackerService(locationService: context.repository<LocationService>()),
         ),
         RepositoryProvider(
-          create: (_) => DirectionsService(
-              locationService: context.repository<LocationService>()),
+          create: (_) =>
+              DirectionsService(locationService: context.repository<LocationService>()),
         ),
       ],
       child: MaterialApp(

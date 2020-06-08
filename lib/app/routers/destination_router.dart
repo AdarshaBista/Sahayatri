@@ -4,6 +4,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/weather/weather_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 
+import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 
@@ -20,6 +22,7 @@ import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 
 import 'package:sahayatri/ui/pages/route_page/route_page.dart';
 import 'package:sahayatri/ui/pages/place_page/place_page.dart';
+import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 import 'package:sahayatri/ui/pages/tracker_page/tracker_page.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/itinerary_page.dart';
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
@@ -71,12 +74,11 @@ class DestRouter {
         _page = MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => TrackerBloc(
-                trackerService: context.repository<TrackerService>(),
-              )..add(
-                  TrackingStarted(trailHeadCoord: settings.arguments as Coord),
-                ),
-            ),
+                create: (context) => TrackerBloc(
+                      trackerService: context.repository<TrackerService>(),
+                    )..add(
+                        TrackingStarted(trailHeadCoord: settings.arguments as Coord),
+                      )),
             BlocProvider<DirectionsBloc>(
               create: (context) => DirectionsBloc(
                 directionsService: context.repository<DirectionsService>(),
@@ -84,6 +86,17 @@ class DestRouter {
             ),
           ],
           child: const TrackerPage(),
+        );
+        break;
+
+      case Routes.kWeatherPageRoute:
+        _page = BlocProvider(
+          create: (context) => WeatherBloc(
+            weatherService: context.repository<WeatherService>(),
+          )..add(WeatherFetched(
+              coord: settings.arguments as Coord,
+            )),
+          child: WeatherPage(),
         );
         break;
 
