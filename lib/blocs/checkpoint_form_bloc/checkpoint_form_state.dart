@@ -9,7 +9,7 @@ class CheckpointFormState extends Equatable {
 
   Checkpoint get checkpoint => Checkpoint(
         place: place,
-        description: description,
+        description: description.trim(),
         dateTime: dateTime,
       );
 

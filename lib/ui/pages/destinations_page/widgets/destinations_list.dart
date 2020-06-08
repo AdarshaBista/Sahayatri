@@ -19,7 +19,7 @@ class DestinationsList extends StatelessWidget {
       itemCount: destinations.length,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => SlideAnimator(
-        begin: Offset(0.0, 0.2 + index * 0.2),
+        begin: Offset(0.0, 0.2 + index * 0.4),
         child: DestinationCard(
           destination: destinations[index],
         ),

@@ -15,7 +15,7 @@ class AppThemes {
     primaryColor: AppColors.primary,
     accentColor: AppColors.secondary,
     disabledColor: AppColors.disabled,
-    splashColor: AppColors.secondary,
+    splashColor: AppColors.primary,
     backgroundColor: AppColors.background,
     scaffoldBackgroundColor: AppColors.background,
     bottomAppBarColor: AppColors.background,

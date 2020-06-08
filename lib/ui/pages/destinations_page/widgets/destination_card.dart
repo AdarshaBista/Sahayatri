@@ -56,8 +56,8 @@ class DestinationCard extends StatelessWidget {
           gradientBegin: Alignment.bottomLeft,
           gradientEnd: Alignment.topRight,
           gradientColors: [
-            AppColors.dark,
             AppColors.dark.withOpacity(0.8),
+            AppColors.dark.withOpacity(0.6),
             AppColors.dark.withOpacity(0.4),
             AppColors.dark.withOpacity(0.2),
             Colors.transparent,
@@ -84,18 +84,18 @@ class DestinationCard extends StatelessWidget {
             rating: destination.rating,
             size: 16.0,
           ),
-          const SizedBox(height: 6.0),
+          const SizedBox(height: 8.0),
           FadeAnimator(
             child: Text(
-              destination.name,
+              destination.name.toUpperCase(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.large.light,
+              style: AppTextStyles.medium.light,
             ),
           ),
           Divider(
             color: AppColors.light.withOpacity(0.5),
-            height: 12.0,
+            height: 10.0,
             endIndent: 64.0,
           ),
           Padding(

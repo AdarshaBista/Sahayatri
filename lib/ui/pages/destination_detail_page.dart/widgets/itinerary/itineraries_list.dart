@@ -61,10 +61,6 @@ class ItinerariesList extends StatelessWidget {
 
   Widget _buildCreateditinerary(BuildContext context) {
     return BlocBuilder<DestinationBloc, DestinationState>(
-      condition: (previous, current) {
-        return previous.destination.createdItinerary !=
-            current.destination.createdItinerary;
-      },
       builder: (context, state) {
         return Column(
           mainAxisSize: MainAxisSize.min,

@@ -32,7 +32,7 @@ class StarRatingBar extends StatelessWidget {
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,
         itemBuilder: (_, index) => SlideAnimator(
-          begin: Offset(0.2 + index * 0.2, 0.0),
+          begin: Offset(0.2 + index * 0.4, 0.0),
           child: Icon(
             Icons.star,
             color: color,

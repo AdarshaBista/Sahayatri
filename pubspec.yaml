@@ -26,6 +26,7 @@ dependencies:
   # Widgets
   animator: ^2.0.0
   photo_view: ^0.9.2
+  timeline_tile: ^0.1.2
   auto_size_text: ^2.1.0
   flutter_swiper: ^1.1.6
   sliding_up_panel: ^1.0.2

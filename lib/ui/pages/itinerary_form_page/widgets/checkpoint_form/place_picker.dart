@@ -89,6 +89,6 @@ class _PlacePickerState extends State<PlacePicker> {
           widget.onSelect(selectedPlace);
         });
       },
-    ).openDialog(context);
+    ).openModalBottomSheet(context);
   }
 }

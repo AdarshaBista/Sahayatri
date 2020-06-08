@@ -47,7 +47,7 @@ class CheckpointMarker extends StatelessWidget {
             colorBlendMode: BlendMode.srcATop,
           ),
           Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 checkpoint.date,

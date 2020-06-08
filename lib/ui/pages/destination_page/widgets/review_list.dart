@@ -36,7 +36,7 @@ class ReviewList extends StatelessWidget {
             itemCount: reviews.length,
             itemBuilder: (context, index) {
               return SlideAnimator(
-                begin: Offset(0.0, 0.2 + index * 0.2),
+                begin: Offset(0.0, 0.2 + index * 0.4),
                 child: ReviewCard(review: reviews[index]),
               );
             },

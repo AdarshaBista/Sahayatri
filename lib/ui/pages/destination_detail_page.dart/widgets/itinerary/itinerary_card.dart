@@ -30,29 +30,43 @@ class ItineraryCard extends StatelessWidget {
           .repository<DestinationNavService>()
           .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
       child: FadeAnimator(
-        child: Hero(
-          tag: itinerary.hashCode,
-          child: CustomCard(
-            margin: const EdgeInsets.symmetric(vertical: 6.0),
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: ListTile(
-              title: Text(
-                itinerary.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.medium.bold,
-              ),
-              subtitle: Text(
-                '${itinerary.days} days ${itinerary.nights} nights',
-                style: AppTextStyles.small,
-              ),
-              trailing: deletable
-                  ? _buildDeleteIcon(context)
-                  : _buildEditIcon(context),
+        child: CustomCard(
+          margin: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
             ),
+            title: Text(
+              itinerary.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.medium.bold,
+            ),
+            subtitle: _buildDetails(),
+            trailing:
+                deletable ? _buildDeleteIcon(context) : _buildEditIcon(context),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildDetails() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${itinerary.days} days ${itinerary.nights} nights',
+          style: AppTextStyles.small.bold,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          '${itinerary.checkpoints.length} checkpoints',
+          style: AppTextStyles.extraSmall,
+        ),
+      ],
     );
   }
 

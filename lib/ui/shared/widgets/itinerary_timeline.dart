@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
@@ -20,8 +20,6 @@ class ItineraryTimeline extends StatelessWidget {
   final bool isEditable;
   final ScrollController controller;
   final List<Checkpoint> checkpoints;
-
-  double get indicatorWidth => 72.0;
 
   const ItineraryTimeline({
     @required this.checkpoints,
@@ -37,6 +35,10 @@ class ItineraryTimeline extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         controller: controller,
+        padding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 16.0,
+        ),
         physics: isNested
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
@@ -46,23 +48,34 @@ class ItineraryTimeline extends StatelessWidget {
           final bool isLast = index == checkpoints.length - 1;
           final Checkpoint checkpoint = checkpoints[index];
 
-          return IntrinsicHeight(
-            child: SlideAnimator(
-              begin: Offset(0.0, 0.2 + index * 0.4),
-              child: Row(
-                children: [
-                  CustomPaint(
-                    child: _buildDateTime(checkpoint),
-                    foregroundPainter: _LinePainter(
-                      isFirst: isFirst,
-                      isLast: isLast,
-                      indicatorWidth: indicatorWidth,
-                    ),
-                  ),
-                  const SizedBox(width: 4.0),
-                  Expanded(child: _buildPlace(context, checkpoint)),
-                ],
+          return SlideAnimator(
+            begin: Offset(0.0, 0.2 + index * 0.4),
+            child: TimelineTile(
+              lineX: 0.3,
+              isLast: isLast,
+              isFirst: isFirst,
+              alignment: TimelineAlign.manual,
+              indicatorStyle: IndicatorStyle(
+                width: 44.0,
+                height: 44.0,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 4.0,
+                ),
+                indicator: CircleAvatar(
+                  backgroundImage: AssetImage(checkpoint.place.imageUrls[0]),
+                ),
               ),
+              topLineStyle: const LineStyle(
+                width: 1.5,
+                color: AppColors.disabled,
+              ),
+              bottomLineStyle: const LineStyle(
+                width: 1.5,
+                color: AppColors.disabled,
+              ),
+              leftChild: _buildDateTime(checkpoint),
+              rightChild: _buildPlace(context, checkpoint),
             ),
           );
         },
@@ -71,47 +84,77 @@ class ItineraryTimeline extends StatelessWidget {
   }
 
   Widget _buildDateTime(Checkpoint checkpoint) {
-    return Container(
-      width: indicatorWidth,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              checkpoint.date,
-              style: AppTextStyles.small.bold,
-            ),
-            const SizedBox(height: 4.0),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 80.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            checkpoint.date,
+            style: AppTextStyles.small.bold,
+          ),
+          if (!checkpoint.isTemplate) const SizedBox(height: 4.0),
+          if (!checkpoint.isTemplate)
             Text(
               checkpoint.time,
               style: AppTextStyles.extraSmall,
             ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlace(BuildContext context, Checkpoint checkpoint) {
+    return InkWell(
+      onTap: () => _handlePlaceTap(context, checkpoint),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: _buildCheckpointText(checkpoint)),
+            if (isEditable) _buildDeleteIcon(context, checkpoint),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPlace(BuildContext context, Checkpoint checkpoint) {
-    return CustomCard(
-      margin: const EdgeInsets.all(6.0),
-      child: InkWell(
-        onTap: () => _handlePlaceTap(context, checkpoint),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(
-                  checkpoint.place.imageUrls[0],
-                ),
-              ),
-              const SizedBox(width: 10.0),
-              Expanded(child: _buildCheckpointText(checkpoint)),
-              if (isEditable) _buildDeleteIcon(context, checkpoint),
-            ],
-          ),
+  Column _buildCheckpointText(Checkpoint checkpoint) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          checkpoint.place.name.toUpperCase(),
+          style: AppTextStyles.small.bold,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          checkpoint.description.isEmpty
+              ? 'No description provided.'
+              : checkpoint.description,
+          style: AppTextStyles.extraSmall,
+        ),
+      ],
+    );
+  }
+
+  GestureDetector _buildDeleteIcon(
+    BuildContext context,
+    Checkpoint checkpoint,
+  ) {
+    return GestureDetector(
+      onTap: () => context
+          .bloc<ItineraryFormBloc>()
+          .add(CheckpointRemoved(checkpoint: checkpoint)),
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: const Icon(
+          Icons.close,
+          size: 22.0,
+          color: Colors.redAccent,
         ),
       ),
     );
@@ -134,77 +177,5 @@ class ItineraryTimeline extends StatelessWidget {
             arguments: checkpoint.place,
           );
     }
-  }
-
-  Column _buildCheckpointText(Checkpoint checkpoint) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          checkpoint.place.name,
-          style: AppTextStyles.medium,
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          checkpoint.description,
-          style: AppTextStyles.extraSmall,
-        ),
-      ],
-    );
-  }
-
-  GestureDetector _buildDeleteIcon(
-      BuildContext context, Checkpoint checkpoint) {
-    return GestureDetector(
-      onTap: () => context
-          .bloc<ItineraryFormBloc>()
-          .add(CheckpointRemoved(checkpoint: checkpoint)),
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        child: const Icon(
-          Icons.close,
-          size: 22.0,
-          color: Colors.redAccent,
-        ),
-      ),
-    );
-  }
-}
-
-class _LinePainter extends CustomPainter {
-  final bool isFirst;
-  final bool isLast;
-  final double indicatorWidth;
-
-  _LinePainter({
-    @required this.isFirst,
-    @required this.isLast,
-    @required this.indicatorWidth,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final indicatorPadding = indicatorWidth / 2.0;
-    final linePaint = Paint()
-      ..strokeWidth = 1.5
-      ..color = AppColors.disabled
-      ..style = PaintingStyle.fill
-      ..strokeCap = StrokeCap.round;
-
-    final top = size.topLeft(Offset(indicatorPadding, -indicatorPadding / 2.0));
-    final centerTop =
-        size.centerLeft(Offset(indicatorPadding, -indicatorPadding));
-    final centerBottom =
-        size.centerLeft(Offset(indicatorPadding, indicatorPadding));
-    final bottom =
-        size.bottomLeft(Offset(indicatorPadding, indicatorPadding / 2.0));
-
-    if (!isFirst) canvas.drawLine(top, centerTop, linePaint);
-    if (!isLast) canvas.drawLine(centerBottom, bottom, linePaint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }

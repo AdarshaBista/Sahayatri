@@ -33,37 +33,41 @@ class ItineraryFormPage extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    final formState = context.bloc<ItineraryFormBloc>().state;
-
-    return FloatingActionButton.extended(
-      backgroundColor: AppColors.dark,
-      icon: const Icon(
-        Icons.save,
-        size: 20.0,
-        color: AppColors.primary,
-      ),
-      label: Text(
-        'Save Itinerary',
-        style: AppTextStyles.small.primary,
-      ),
-      onPressed: () {
-        if (!formState.isValid) {
-          const RequiredDialog().openDialog(context);
-          return;
-        }
-
-        if (formState.isTemplate) {
-          const RequiredDialog(
-            message: 'Please select appropriate date for checkpoints.',
-          ).openDialog(context);
-          return;
-        }
-
-        context
-            .bloc<DestinationBloc>()
-            .add(ItineraryCreated(itinerary: formState.itinerary));
-        context.repository<DestinationNavService>().pop();
+    return BlocBuilder<ItineraryFormBloc, ItineraryFormState>(
+      builder: (context, state) {
+        return FloatingActionButton.extended(
+          backgroundColor: AppColors.dark,
+          icon: const Icon(
+            Icons.save,
+            size: 20.0,
+            color: AppColors.primary,
+          ),
+          label: Text(
+            'Save Itinerary',
+            style: AppTextStyles.small.primary,
+          ),
+          onPressed: () => _saveItinerary(context, state),
+        );
       },
     );
+  }
+
+  void _saveItinerary(BuildContext context, ItineraryFormState state) {
+    if (!state.isValid) {
+      const RequiredDialog().openDialog(context);
+      return;
+    }
+
+    if (state.isTemplate) {
+      const RequiredDialog(
+        message: 'Please select appropriate date for checkpoints.',
+      ).openDialog(context);
+      return;
+    }
+
+    context
+        .bloc<DestinationBloc>()
+        .add(ItineraryCreated(itinerary: state.itinerary));
+    context.repository<DestinationNavService>().pop();
   }
 }

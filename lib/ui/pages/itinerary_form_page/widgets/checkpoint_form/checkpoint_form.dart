@@ -41,7 +41,9 @@ class CheckpointForm extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               children: [
                 Text(
-                  'Create a Checkpoint',
+                  checkpoint == null
+                      ? 'Create a Checkpoint'
+                      : 'Edit this checkpoint',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.medium.bold,
                 ),

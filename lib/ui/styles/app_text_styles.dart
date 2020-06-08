@@ -30,7 +30,7 @@ class AppTextStyles {
   );
 
   static final TextStyle medium = _base.copyWith(
-    fontSize: 18.0,
+    fontSize: 17.0,
     fontWeight: FontWeight.w400,
   );
 
