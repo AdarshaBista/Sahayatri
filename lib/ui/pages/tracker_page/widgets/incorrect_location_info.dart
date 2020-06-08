@@ -21,10 +21,8 @@ class IncorrectLocationInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const LocationErrorIndicator(
-            message: '''
-                    You do not seem to be at the trailhead. 
-                    Tracking is only possible when you are near the trailhead. 
-                    Would you like to go there.''',
+            message:
+                'You do not seem to be at the trailhead. Tracking is only possible when you are near the trailhead. Would you like to go there.',
           ),
           CustomButton(
             label: 'Sure, why not',
@@ -32,10 +30,7 @@ class IncorrectLocationInfo extends StatelessWidget {
             backgroundColor: Colors.teal,
             onTap: () {
               context.bloc<DirectionsBloc>().add(DirectionsStarted(
-                    trailHead: context
-                        .bloc<DestinationBloc>()
-                        .destination
-                        .startingPlace,
+                    trailHead: context.bloc<DestinationBloc>().destination.startingPlace,
                   ));
             },
           ),

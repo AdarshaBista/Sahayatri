@@ -14,9 +14,6 @@ class TrackerService {
   final Geodesy geodesy = Geodesy();
   final LocationService locationService;
 
-  UserLocation _currentLocation;
-  UserLocation get currentLocation => _currentLocation;
-
   TrackerService({
     @required this.locationService,
   }) : assert(locationService != null);
@@ -25,15 +22,17 @@ class TrackerService {
     return locationService.getLocationStream();
   }
 
-  Future<bool> isNearTrailHead(Coord trailHeadCoord) async {
+  Future<UserLocation> getUserLocation() async {
     try {
-      _currentLocation = await locationService.getLocation();
+      return await locationService.getLocation();
     } on Failure {
       rethrow;
     }
+  }
 
+  Future<bool> isNearTrailHead(Coord trailHeadCoord, Coord userLocationCoord) async {
     final distance = geodesy.distanceBetweenTwoGeoPoints(
-      _currentLocation.coord.toLatLng(),
+      userLocationCoord.toLatLng(),
       trailHeadCoord.toLatLng(),
     );
     return distance < kMinNearbyDistance;

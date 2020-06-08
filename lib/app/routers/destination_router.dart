@@ -8,6 +8,7 @@ import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 
@@ -72,7 +73,9 @@ class DestRouter {
             BlocProvider(
               create: (context) => TrackerBloc(
                 trackerService: context.repository<TrackerService>(),
-              ),
+              )..add(
+                  TrackingStarted(trailHeadCoord: settings.arguments as Coord),
+                ),
             ),
             BlocProvider<DirectionsBloc>(
               create: (context) => DirectionsBloc(

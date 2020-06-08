@@ -29,15 +29,19 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     if (event is TrackingStarted) {
       yield TrackerLoading();
       try {
+        final UserLocation userLocation = await trackerService.getUserLocation();
         final bool isNear = await trackerService.isNearTrailHead(
           event.trailHeadCoord,
+          userLocation.coord,
         );
+
         if (!isNear) {
           yield TrackerLocationError();
           return;
         }
+
         yield TrackerSuccess(
-          initialLocation: trackerService.currentLocation,
+          initialLocation: userLocation,
           userLocationStream: trackerService.getLocationStream(),
         );
       } on Failure catch (e) {

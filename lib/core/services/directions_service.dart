@@ -17,23 +17,23 @@ class DirectionsService {
     @required this.locationService,
   }) : assert(locationService != null);
 
-  Future<void> startNavigation(Place trailHead) async {
-    UserLocation currentLocation;
-
+  Future<UserLocation> getUserLocation() async {
     try {
-      currentLocation = await locationService.getLocation();
+      return await locationService.getLocation();
     } on Failure {
       rethrow;
     }
+  }
 
+  Future<void> startNavigation(Place trailHead, UserLocation userLocation) async {
     _directions = MapboxNavigation(onRouteProgress: (arrived) async {
       if (arrived) await _directions.finishNavigation();
     });
 
     final Location _origin = Location(
       name: 'Your location',
-      latitude: currentLocation.coord.lat,
-      longitude: currentLocation.coord.lng,
+      latitude: userLocation.coord.lat,
+      longitude: userLocation.coord.lng,
     );
 
     final Location _destination = Location(

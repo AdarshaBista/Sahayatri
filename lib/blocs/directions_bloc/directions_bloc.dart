@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/directions_service.dart';
 
@@ -26,7 +27,9 @@ class DirectionsBloc extends Bloc<DirectionsEvent, DirectionsState> {
     if (event is DirectionsStarted) {
       yield DirectionsLoading();
       try {
-        await directionsService.startNavigation(event.trailHead);
+        final UserLocation userLocation =
+            await directionsService.getUserLocation();
+        await directionsService.startNavigation(event.trailHead, userLocation);
         yield DirectionsInitial();
       } on Failure catch (e) {
         print(e.error);
