@@ -25,10 +25,15 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     if (event is WeatherFetched) {
+      if (weatherService.forecasts != null) {
+        yield WeatherSuccess(forecasts: weatherService.forecasts);
+        return;
+      }
+
       yield WeatherLoading();
       try {
-        final List<Weather> forecasts = await weatherService.fetchWeather(event.coord);
-        yield WeatherSuccess(forecasts: forecasts);
+        await weatherService.fetchWeather(event.coord);
+        yield WeatherSuccess(forecasts: weatherService.forecasts);
       } on Failure catch (e) {
         print(e.error);
         yield WeatherError(message: e.message);

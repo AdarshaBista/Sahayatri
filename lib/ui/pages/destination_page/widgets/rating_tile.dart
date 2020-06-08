@@ -53,9 +53,13 @@ class RatingTile extends StatelessWidget {
 
   Widget _buildWeatherButton(BuildContext context) {
     return ColumnButton(
-        label: 'Weather',
-        onTap: () {},
-        icon: CommunityMaterialIcons.weather_fog);
+      label: 'Weather',
+      onTap: () => context.repository<DestinationNavService>().pushNamed(
+            Routes.kWeatherPageRoute,
+            arguments: context.bloc<DestinationBloc>().destination.startingPlace.coord,
+          ),
+      icon: CommunityMaterialIcons.weather_fog,
+    );
   }
 
   Widget _buildDownloadButton(BuildContext context) {

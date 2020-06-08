@@ -96,7 +96,7 @@ class DestRouter {
           )..add(WeatherFetched(
               coord: settings.arguments as Coord,
             )),
-          child: WeatherPage(),
+          child: const WeatherPage(),
         );
         break;
 

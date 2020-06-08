@@ -12,8 +12,8 @@ class Weather {
   final double nightTemp;
   final double dayFeelsLikeTemp;
   final double nightFeelsLikeTemp;
-  final double pressure;
-  final double humidity;
+  final int pressure;
+  final int humidity;
   final double windSpeed;
   final String label;
   final IconData icon;
@@ -58,8 +58,8 @@ class Weather {
     double nightTemp,
     double dayFeelsLikeTemp,
     double nightFeelsLikeTemp,
-    double pressure,
-    double humidity,
+    int pressure,
+    int humidity,
     double windSpeed,
     String label,
     IconData icon,
@@ -108,17 +108,17 @@ class Weather {
       date: DateTime.fromMillisecondsSinceEpoch(map['dt'] as int),
       sunset: DateTime.fromMillisecondsSinceEpoch(map['sunset'] as int),
       sunrise: DateTime.fromMillisecondsSinceEpoch(map['sunrise'] as int),
-      minTemp: map['minTemp'] as double,
-      maxTemp: map['maxTemp'] as double,
-      dayTemp: map['dayTemp'] as double,
-      nightTemp: map['nightTemp'] as double,
-      dayFeelsLikeTemp: map['dayFeelsLikeTemp'] as double,
-      nightFeelsLikeTemp: map['nightFeelsLikeTemp'] as double,
-      pressure: map['pressure'] as double,
-      humidity: map['humidity'] as double,
-      windSpeed: map['windSpeed'] as double,
-      label: map['label'] as String,
-      icon: _getIconData(map['icon'] as String),
+      minTemp: map['temp']['min'] as double,
+      maxTemp: map['temp']['max'] as double,
+      dayTemp: map['temp']['day'] as double,
+      nightTemp: map['temp']['night'] as double,
+      dayFeelsLikeTemp: map['feels_like']['day'] as double,
+      nightFeelsLikeTemp: map['feels_like']['night'] as double,
+      pressure: map['pressure'] as int,
+      humidity: map['humidity'] as int,
+      windSpeed: map['wind_speed'] as double,
+      label: map['weather'][0]['main'] as String,
+      icon: _getIconData(map['weather'][0]['icon'] as String),
     );
   }
 
