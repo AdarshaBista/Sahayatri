@@ -12,36 +12,23 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
-class DestinationInfo extends StatelessWidget {
-  const DestinationInfo();
+class DestinationActions extends StatelessWidget {
+  const DestinationActions();
 
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
           children: [
-            FadeAnimator(
-              child: Text(
-                context.bloc<DestinationBloc>().destination.description,
-                textAlign: TextAlign.left,
-                style: AppTextStyles.small.serif,
-              ),
+            Expanded(
+              child: _buildViewRouteButton(context),
             ),
-            const SizedBox(height: 12.0),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildViewRouteButton(context),
-                ),
-                const SizedBox(width: 12.0),
-                Expanded(
-                  child: _buildGetDirectionsButton(context),
-                )
-              ],
-            ),
+            const SizedBox(width: 12.0),
+            Expanded(
+              child: _buildGetDirectionsButton(context),
+            )
           ],
         ),
       ),

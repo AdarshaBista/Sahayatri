@@ -8,13 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/column_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
 
-class RatingRow extends StatelessWidget {
-  const RatingRow();
+class RatingTile extends StatelessWidget {
+  const RatingTile();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,8 @@ class RatingRow extends StatelessWidget {
         children: [
           _buildRating(context),
           const Spacer(),
+          _buildWeatherButton(context),
+          const SizedBox(width: 12.0),
           _buildDownloadButton(context),
         ],
       ),
@@ -49,29 +51,22 @@ class RatingRow extends StatelessWidget {
     );
   }
 
+  Widget _buildWeatherButton(BuildContext context) {
+    return ColumnButton(
+        label: 'Weather',
+        onTap: () {},
+        icon: CommunityMaterialIcons.weather_fog);
+  }
+
   Widget _buildDownloadButton(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => _downloadAndNavigate(context),
-      child: ScaleAnimator(
-        child: Column(
-          children: [
-            const Icon(
-              CommunityMaterialIcons.cloud_download_outline,
-              size: 24.0,
-            ),
-            const SizedBox(height: 4.0),
-            Text(
-              'Download',
-              style: AppTextStyles.extraSmall.bold,
-            ),
-          ],
-        ),
-      ),
+    return ColumnButton(
+      label: 'Download',
+      onTap: () => _downloadAndShowDetailPage(context),
+      icon: CommunityMaterialIcons.cloud_download_outline,
     );
   }
 
-  Future<void> _downloadAndNavigate(BuildContext context) async {
+  Future<void> _downloadAndShowDetailPage(BuildContext context) async {
     if (!context.bloc<DestinationBloc>().state.destination.isDownloaded) {
       context.bloc<DestinationBloc>().add(DestinationDownloaded());
       DownloadDialog(

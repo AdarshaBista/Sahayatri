@@ -82,7 +82,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       zoomOffset: -1,
       urlTemplate: Values.kMapUrl,
       additionalOptions: {
-        'accessToken': kMapBoxAccessToken,
+        'accessToken': ApiKeys.kMapBoxAccessToken,
         'id': Values.kMapStyle,
       },
     );
