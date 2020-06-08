@@ -63,7 +63,7 @@ class RatingRow extends StatelessWidget {
             const SizedBox(height: 4.0),
             Text(
               'Download',
-              style: AppTextStyles.small,
+              style: AppTextStyles.extraSmall.bold,
             ),
           ],
         ),

@@ -170,8 +170,8 @@ final List<Place> places = [
   ),
 ];
 
-final List<Lodge> lodges = [
-  const Lodge(
+const List<Lodge> lodges = [
+  Lodge(
     id: 1,
     name: 'Lekali Lodge',
     contactNumber: '9841123456',
@@ -179,7 +179,7 @@ final List<Lodge> lodges = [
     rating: 3.5,
     imageUrls: imgUrls,
   ),
-  const Lodge(
+  Lodge(
     id: 2,
     name: 'Thakali Lodge',
     contactNumber: '9841127836',
@@ -187,7 +187,7 @@ final List<Lodge> lodges = [
     rating: 4.5,
     imageUrls: imgUrls,
   ),
-  const Lodge(
+  Lodge(
     id: 3,
     name: 'Muktinath Lodge',
     contactNumber: '9841462456',
@@ -195,7 +195,7 @@ final List<Lodge> lodges = [
     rating: 2.0,
     imageUrls: imgUrls,
   ),
-  const Lodge(
+  Lodge(
     id: 4,
     name: 'Atithi Lodge',
     contactNumber: '9861987575',
@@ -210,13 +210,63 @@ final List<Itinerary> itineraries = [
     name: 'Mardi Trek',
     days: '5',
     nights: '4',
-    checkpoints: checkpoints,
+    checkpoints: [
+      Checkpoint(
+        place: places[0],
+        description: '',
+        dateTime: null,
+        day: 1,
+      ),
+      Checkpoint(
+        place: places[2],
+        description: '',
+        dateTime: null,
+        day: 2,
+      ),
+      Checkpoint(
+        place: places[5],
+        description: '',
+        dateTime: null,
+        day: 3,
+      ),
+      Checkpoint(
+        place: places[7],
+        description: '',
+        dateTime: null,
+        day: 4,
+      ),
+      Checkpoint(
+        place: places[9],
+        description: '',
+        dateTime: null,
+        day: 4,
+      ),
+    ],
   ),
   Itinerary(
     name: 'Mardi Trail',
     days: '6',
     nights: '5',
-    checkpoints: checkpoints,
+    checkpoints: [
+      Checkpoint(
+        place: places[2],
+        description: '',
+        dateTime: null,
+        day: 2,
+      ),
+      Checkpoint(
+        place: places[5],
+        description: '',
+        dateTime: null,
+        day: 3,
+      ),
+      Checkpoint(
+        place: places[7],
+        description: '',
+        dateTime: null,
+        day: 4,
+      ),
+    ],
   ),
 ];
 
@@ -242,39 +292,6 @@ final List<Review> reviews = [
       email: 'jane@gmail.com',
       imageUrl: imgUrls[2],
     ),
-  ),
-];
-
-final List<Checkpoint> checkpoints = [
-  Checkpoint(
-    place: places[0],
-    description: '',
-    dateTime: null,
-    day: 1,
-  ),
-  Checkpoint(
-    place: places[2],
-    description: '',
-    dateTime: null,
-    day: 2,
-  ),
-  Checkpoint(
-    place: places[5],
-    description: '',
-    dateTime: null,
-    day: 3,
-  ),
-  Checkpoint(
-    place: places[7],
-    description: '',
-    dateTime: null,
-    day: 4,
-  ),
-  Checkpoint(
-    place: places[9],
-    description: '',
-    dateTime: null,
-    day: 4,
   ),
 ];
 

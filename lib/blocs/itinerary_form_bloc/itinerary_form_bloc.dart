@@ -21,7 +21,9 @@ class ItineraryFormBloc extends Bloc<ItineraryFormEvent, ItineraryFormState> {
         name: itinerary?.name ?? '',
         days: itinerary?.days ?? '',
         nights: itinerary?.nights ?? '',
-        checkpoints: itinerary?.checkpoints ?? [],
+        checkpoints: itinerary == null
+            ? []
+            : List<Checkpoint>.from(itinerary.checkpoints),
       );
 
   @override
