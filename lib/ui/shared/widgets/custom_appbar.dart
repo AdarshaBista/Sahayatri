@@ -7,12 +7,17 @@ import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 class CustomAppbar extends AppBar {
   CustomAppbar({
     @required String title,
-    double elevation = 8.0,
     Widget leading,
+    double elevation = 8.0,
+    Color color = AppColors.background,
   }) : super(
           centerTitle: true,
           leading: leading,
+          backgroundColor: color,
           elevation: elevation,
+          iconTheme: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? AppThemes.lightIconTheme
+              : AppThemes.darkIconTheme,
           title: SlideAnimator(
             begin: const Offset(0.0, -0.2),
             child: FadeAnimator(
@@ -20,7 +25,9 @@ class CustomAppbar extends AppBar {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.medium.bold,
+                style: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+                    ? AppTextStyles.medium.light
+                    : AppTextStyles.medium.bold,
               ),
             ),
           ),

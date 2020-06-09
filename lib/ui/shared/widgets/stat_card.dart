@@ -8,14 +8,19 @@ class StatCard extends StatelessWidget {
   final String label;
   final String count;
   final Color color;
+  final TextStyle countStyle;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const StatCard({
     @required this.label,
     @required this.count,
     @required this.color,
+    this.countStyle,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   })  : assert(label != null),
         assert(count != null),
-        assert(color != null);
+        assert(color != null),
+        assert(crossAxisAlignment != null);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,7 @@ class StatCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: crossAxisAlignment,
         children: <Widget>[
           Flexible(
             child: AutoSizeText(
@@ -35,7 +41,9 @@ class StatCard extends StatelessWidget {
           Flexible(
             child: AutoSizeText(
               count,
-              style: AppTextStyles.large.bold.copyWith(color: color),
+              textAlign: TextAlign.center,
+              style: countStyle?.copyWith(color: color) ??
+                  AppTextStyles.large.bold.copyWith(color: color),
             ),
           ),
         ],

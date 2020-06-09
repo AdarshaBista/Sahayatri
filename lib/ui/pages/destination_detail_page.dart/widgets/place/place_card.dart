@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
@@ -28,15 +27,13 @@ class PlaceCard extends StatelessWidget {
               arguments: place,
             );
       },
-      child: FadeAnimator(
-        child: CustomCard(
-          child: Stack(
-            alignment: Alignment.bottomLeft,
-            children: <Widget>[
-              _buildBackground(),
-              _buildDetails(),
-            ],
-          ),
+      child: CustomCard(
+        child: Stack(
+          alignment: Alignment.bottomLeft,
+          children: <Widget>[
+            _buildBackground(),
+            _buildDetails(),
+          ],
         ),
       ),
     );
@@ -68,13 +65,11 @@ class PlaceCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          FadeAnimator(
-            child: Text(
-              place.name,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.medium.light,
-            ),
+          Text(
+            place.name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.medium.light,
           ),
           Divider(
             height: 8.0,

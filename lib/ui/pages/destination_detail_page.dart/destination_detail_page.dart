@@ -29,9 +29,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     super.initState();
     _tabController = TabController(length: _tabs.length, vsync: this)
       ..addListener(() {
-        if (_tabController.indexIsChanging) {
-          setState(() {});
-        }
+        setState(() {});
       });
   }
 
@@ -42,10 +40,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   List<NestedTabData> get _tabs => [
-        NestedTabData(
-            label: 'Itinerary', icon: CommunityMaterialIcons.map_search),
-        NestedTabData(
-            label: 'Places', icon: CommunityMaterialIcons.map_marker_radius),
+        NestedTabData(label: 'Itinerary', icon: CommunityMaterialIcons.map_search),
+        NestedTabData(label: 'Places', icon: CommunityMaterialIcons.map_marker_radius),
       ];
 
   @override
@@ -76,8 +72,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       backgroundColor: AppColors.dark,
       onPressed: () => context.repository<DestinationNavService>().pushNamed(
             Routes.kTrackerPageRoute,
-            arguments:
-                context.bloc<DestinationBloc>().destination.startingPlace.coord,
+            arguments: context.bloc<DestinationBloc>().destination.startingPlace.coord,
           ),
       child: const Icon(
         Icons.directions_walk,
@@ -105,9 +100,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: NestedTab(
                   tab: _tabs[i],
-                  color: _tabController.index == i
-                      ? AppColors.primary
-                      : AppColors.dark,
+                  color: _tabController.index == i ? AppColors.primary : AppColors.dark,
                 ),
               ),
           ],
@@ -119,7 +112,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   Widget _buildTabViews() {
     return TabBarView(
       controller: _tabController,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       children: const [
         ItinerariesList(),
         PlacesGrid(),

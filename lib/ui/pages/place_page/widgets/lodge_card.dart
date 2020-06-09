@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
@@ -17,15 +16,13 @@ class LodgeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimator(
-      child: CustomCard(
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            _buildBackground(),
-            _buildDetails(),
-          ],
-        ),
+    return CustomCard(
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: <Widget>[
+          _buildBackground(),
+          _buildDetails(),
+        ],
       ),
     );
   }
@@ -53,11 +50,9 @@ class LodgeCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          FadeAnimator(
-            child: Text(
-              lodge.name,
-              style: AppTextStyles.medium.light,
-            ),
+          Text(
+            lodge.name,
+            style: AppTextStyles.medium.light,
           ),
           Divider(height: 16.0, color: AppColors.light.withOpacity(0.5)),
           _buildContact(),

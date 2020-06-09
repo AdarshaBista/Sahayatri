@@ -44,7 +44,6 @@ void main() {
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
-          RepositoryProvider(create: (_) => WeatherService()),
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
@@ -61,12 +60,19 @@ class Sahayatri extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (_) =>
-              TrackerService(locationService: context.repository<LocationService>()),
+          create: (_) => WeatherService(
+            apiService: context.repository<ApiService>(),
+          ),
         ),
         RepositoryProvider(
-          create: (_) =>
-              DirectionsService(locationService: context.repository<LocationService>()),
+          create: (_) => TrackerService(
+            locationService: context.repository<LocationService>(),
+          ),
+        ),
+        RepositoryProvider(
+          create: (_) => DirectionsService(
+            locationService: context.repository<LocationService>(),
+          ),
         ),
       ],
       child: MaterialApp(

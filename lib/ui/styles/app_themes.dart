@@ -46,14 +46,14 @@ class AppThemes {
 
   static const IconThemeData darkIconTheme = IconThemeData(
     size: 20.0,
-    color: AppColors.dark,
     opacity: 1.0,
+    color: AppColors.dark,
   );
 
   static const IconThemeData lightIconTheme = IconThemeData(
     size: 20.0,
-    color: AppColors.light,
     opacity: 1.0,
+    color: AppColors.background,
   );
 
   static final _circularBorderRadius = RoundedRectangleBorder(
@@ -65,8 +65,7 @@ class AppThemes {
     borderSide: BorderSide.none,
   );
 
-  static final InputDecorationTheme _inputDecorationTheme =
-      InputDecorationTheme(
+  static final InputDecorationTheme _inputDecorationTheme = InputDecorationTheme(
     filled: true,
     isDense: true,
     alignLabelWithHint: true,

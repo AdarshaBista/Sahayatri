@@ -82,9 +82,7 @@ class _NestedTabViewState extends State<NestedTabView>
             for (int i = 0; i < widget.tabs.length; ++i)
               NestedTab(
                 tab: widget.tabs[i],
-                color: _tabController.index == i
-                    ? AppColors.background
-                    : AppColors.dark,
+                color: _tabController.index == i ? AppColors.background : AppColors.dark,
               ),
           ],
         ),
@@ -131,7 +129,7 @@ class NestedTab extends StatelessWidget {
               child: Text(tab.label),
               style: AppTextStyles.small.bold.copyWith(color: color),
               duration: const Duration(milliseconds: 200),
-            )
+            ),
           ],
         ),
       ),

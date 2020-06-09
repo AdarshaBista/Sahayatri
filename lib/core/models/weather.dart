@@ -6,12 +6,10 @@ class Weather {
   final DateTime date;
   final DateTime sunset;
   final DateTime sunrise;
-  final double minTemp;
-  final double maxTemp;
-  final double dayTemp;
-  final double nightTemp;
-  final double dayFeelsLikeTemp;
-  final double nightFeelsLikeTemp;
+  final int temp;
+  final int minTemp;
+  final int maxTemp;
+  final int feelsLikeTemp;
   final int pressure;
   final int humidity;
   final double windSpeed;
@@ -22,12 +20,10 @@ class Weather {
     @required this.date,
     @required this.sunset,
     @required this.sunrise,
+    @required this.temp,
     @required this.minTemp,
     @required this.maxTemp,
-    @required this.dayTemp,
-    @required this.nightTemp,
-    @required this.dayFeelsLikeTemp,
-    @required this.nightFeelsLikeTemp,
+    @required this.feelsLikeTemp,
     @required this.pressure,
     @required this.humidity,
     @required this.windSpeed,
@@ -36,12 +32,10 @@ class Weather {
   })  : assert(date != null),
         assert(sunset != null),
         assert(sunrise != null),
+        assert(temp != null),
         assert(minTemp != null),
         assert(maxTemp != null),
-        assert(dayTemp != null),
-        assert(nightTemp != null),
-        assert(dayFeelsLikeTemp != null),
-        assert(nightFeelsLikeTemp != null),
+        assert(feelsLikeTemp != null),
         assert(pressure != null),
         assert(humidity != null),
         assert(windSpeed != null),
@@ -52,12 +46,11 @@ class Weather {
     DateTime date,
     DateTime sunset,
     DateTime sunrise,
-    double minTemp,
-    double maxTemp,
-    double dayTemp,
-    double nightTemp,
-    double dayFeelsLikeTemp,
-    double nightFeelsLikeTemp,
+    int temp,
+    int minTemp,
+    int maxTemp,
+    int nightTemp,
+    int feelsLikeTemp,
     int pressure,
     int humidity,
     double windSpeed,
@@ -68,12 +61,10 @@ class Weather {
       date: date ?? this.date,
       sunset: sunset ?? this.sunset,
       sunrise: sunrise ?? this.sunrise,
+      temp: temp ?? this.temp,
       minTemp: minTemp ?? this.minTemp,
       maxTemp: maxTemp ?? this.maxTemp,
-      dayTemp: dayTemp ?? this.dayTemp,
-      nightTemp: nightTemp ?? this.nightTemp,
-      dayFeelsLikeTemp: dayFeelsLikeTemp ?? this.dayFeelsLikeTemp,
-      nightFeelsLikeTemp: nightFeelsLikeTemp ?? this.nightFeelsLikeTemp,
+      feelsLikeTemp: feelsLikeTemp ?? this.feelsLikeTemp,
       pressure: pressure ?? this.pressure,
       humidity: humidity ?? this.humidity,
       windSpeed: windSpeed ?? this.windSpeed,
@@ -87,12 +78,10 @@ class Weather {
       'date': date?.millisecondsSinceEpoch,
       'sunset': sunset?.millisecondsSinceEpoch,
       'sunrise': sunrise?.millisecondsSinceEpoch,
+      'dayTemp': temp,
       'minTemp': minTemp,
       'maxTemp': maxTemp,
-      'dayTemp': dayTemp,
-      'nightTemp': nightTemp,
-      'dayFeelsLikeTemp': dayFeelsLikeTemp,
-      'nightFeelsLikeTemp': nightFeelsLikeTemp,
+      'dayFeelsLikeTemp': feelsLikeTemp,
       'pressure': pressure,
       'humidity': humidity,
       'windSpeed': windSpeed,
@@ -105,15 +94,13 @@ class Weather {
     if (map == null) return null;
 
     return Weather(
-      date: DateTime.fromMillisecondsSinceEpoch(map['dt'] as int),
-      sunset: DateTime.fromMillisecondsSinceEpoch(map['sunset'] as int),
-      sunrise: DateTime.fromMillisecondsSinceEpoch(map['sunrise'] as int),
-      minTemp: map['temp']['min'] as double,
-      maxTemp: map['temp']['max'] as double,
-      dayTemp: map['temp']['day'] as double,
-      nightTemp: map['temp']['night'] as double,
-      dayFeelsLikeTemp: map['feels_like']['day'] as double,
-      nightFeelsLikeTemp: map['feels_like']['night'] as double,
+      date: DateTime.fromMillisecondsSinceEpoch((map['dt'] as int) * 1000),
+      sunset: DateTime.fromMillisecondsSinceEpoch((map['sunset'] as int) * 1000),
+      sunrise: DateTime.fromMillisecondsSinceEpoch((map['sunrise'] as int) * 1000),
+      temp: (map['temp']['day'] as double).toInt(),
+      minTemp: (map['temp']['min'] as double).toInt(),
+      maxTemp: (map['temp']['max'] as double).toInt(),
+      feelsLikeTemp: (map['feels_like']['day'] as double).toInt(),
       pressure: map['pressure'] as int,
       humidity: map['humidity'] as int,
       windSpeed: map['wind_speed'] as double,
@@ -124,7 +111,7 @@ class Weather {
 
   @override
   String toString() {
-    return 'Weather(date: $date, sunset: $sunset, sunrise: $sunrise, minTemp: $minTemp, maxTemp: $maxTemp, dayTemp: $dayTemp, nightTemp: $nightTemp, dayFeelsLikeTemp: $dayFeelsLikeTemp, nightFeelsLikeTemp: $nightFeelsLikeTemp, pressure: $pressure, humidity: $humidity, windSpeed: $windSpeed, label: $label, icon: $icon)';
+    return 'Weather(date: $date, sunset: $sunset, sunrise: $sunrise, temp: $temp, minTemp: $minTemp, maxTemp: $maxTemp, dayFeelsLikeTemp: $feelsLikeTemp, pressure: $pressure, humidity: $humidity, windSpeed: $windSpeed, label: $label, icon: $icon)';
   }
 
   @override
@@ -135,12 +122,10 @@ class Weather {
         o.date == date &&
         o.sunset == sunset &&
         o.sunrise == sunrise &&
+        o.temp == temp &&
         o.minTemp == minTemp &&
         o.maxTemp == maxTemp &&
-        o.dayTemp == dayTemp &&
-        o.nightTemp == nightTemp &&
-        o.dayFeelsLikeTemp == dayFeelsLikeTemp &&
-        o.nightFeelsLikeTemp == nightFeelsLikeTemp &&
+        o.feelsLikeTemp == feelsLikeTemp &&
         o.pressure == pressure &&
         o.humidity == humidity &&
         o.windSpeed == windSpeed &&
@@ -153,12 +138,10 @@ class Weather {
     return date.hashCode ^
         sunset.hashCode ^
         sunrise.hashCode ^
+        temp.hashCode ^
         minTemp.hashCode ^
         maxTemp.hashCode ^
-        dayTemp.hashCode ^
-        nightTemp.hashCode ^
-        dayFeelsLikeTemp.hashCode ^
-        nightFeelsLikeTemp.hashCode ^
+        feelsLikeTemp.hashCode ^
         pressure.hashCode ^
         humidity.hashCode ^
         windSpeed.hashCode ^

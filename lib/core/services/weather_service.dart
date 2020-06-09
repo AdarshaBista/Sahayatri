@@ -1,33 +1,28 @@
-import 'package:dio/dio.dart';
-
-import 'package:sahayatri/app/constants/api_keys.dart';
+import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 
+import 'package:sahayatri/core/services/api_service.dart';
+
 class WeatherService {
-  static const String kBaseUrl = 'https://api.openweathermap.org/data/2.5';
+  final ApiService apiService;
+  final Map<Coord, List<Weather>> _forecastsCache = {};
 
-  List<Weather> _forecasts;
-  List<Weather> get forecasts => _forecasts;
+  WeatherService({
+    @required this.apiService,
+  }) : assert(apiService != null);
 
-  Future<void> fetchWeather(Coord coord) async {
+  Future<List<Weather>> fetchWeather(Coord coord) async {
+    if (_forecastsCache.containsKey(coord)) return _forecastsCache[coord];
+
     try {
-      final Response res = await Dio().get(
-        '$kBaseUrl/onecall?lat=${coord.lat}&lon=${coord.lng}&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
-      );
-      final List<dynamic> resList = res.data['daily'] as List<dynamic>;
-      _forecasts = resList
-          .map((m) => Weather.fromMap(
-                m as Map<String, dynamic>,
-              ))
-          .toList();
-    } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Unable to get weather.',
-      );
+      final List<Weather> forecasts = await apiService.fetchWeather(coord);
+      _forecastsCache[coord] = forecasts;
+      return _forecastsCache[coord];
+    } on Failure {
+      rethrow;
     }
   }
 }
