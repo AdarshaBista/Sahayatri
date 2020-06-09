@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/weather/weather_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/blocs/weather_bloc/weather_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
@@ -15,12 +14,10 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
-
     return Scaffold(
       appBar: CustomAppbar(
         elevation: 0.0,
-        title: destination.name,
+        title: context.bloc<WeatherBloc>().title,
       ),
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {

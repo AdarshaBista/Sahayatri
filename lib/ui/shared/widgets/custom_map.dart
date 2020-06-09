@@ -73,9 +73,8 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
 
   TileLayerOptions _buildTiles() {
     return TileLayerOptions(
-      tileProvider: Platform.isWindows
-          ? NetworkTileProvider()
-          : const CachedNetworkTileProvider(),
+      tileProvider:
+          Platform.isWindows ? NetworkTileProvider() : const CachedNetworkTileProvider(),
       backgroundColor: AppColors.background,
       keepBuffer: 8,
       tileSize: 512,

@@ -52,12 +52,17 @@ class RatingTile extends StatelessWidget {
   }
 
   Widget _buildWeatherButton(BuildContext context) {
+    final destination = context.bloc<DestinationBloc>().destination;
+
     return ColumnButton(
       label: 'Weather',
       onTap: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kWeatherPageRoute,
-            arguments: context.bloc<DestinationBloc>().destination.startingPlace.coord,
-          ),
+        Routes.kWeatherPageRoute,
+        arguments: [
+          destination.name,
+          destination.startingPlace.coord,
+        ],
+      ),
       icon: CommunityMaterialIcons.weather_fog,
     );
   }

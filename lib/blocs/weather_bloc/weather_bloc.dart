@@ -13,11 +13,14 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
+  final String title;
   final WeatherService weatherService;
 
   WeatherBloc({
+    @required this.title,
     @required this.weatherService,
-  }) : assert(weatherService != null);
+  })  : assert(title != null),
+        assert(weatherService != null);
 
   @override
   WeatherState get initialState => WeatherInitial();
