@@ -52,16 +52,7 @@ class DestinationPage extends StatelessWidget {
           const SizedBox(height: 16.0),
           const BestMonthsChips(),
           const Divider(height: 16.0),
-          NestedTabView(
-            tabs: [
-              NestedTabData(label: 'Photos', icon: Icons.photo),
-              NestedTabData(label: 'Reviews', icon: Icons.rate_review),
-            ],
-            children: [
-              PhotoGallery(imageUrls: destination.imageUrls),
-              ReviewList(reviews: destination.reviews),
-            ],
-          ),
+          _buildTabView(destination),
         ],
       ),
     );
@@ -84,6 +75,19 @@ class DestinationPage extends StatelessWidget {
           style: AppTextStyles.small.serif,
         ),
       ),
+    );
+  }
+
+  Widget _buildTabView(Destination destination) {
+    return NestedTabView(
+      tabs: [
+        NestedTabData(label: 'Photos', icon: Icons.photo),
+        NestedTabData(label: 'Reviews', icon: Icons.rate_review),
+      ],
+      children: [
+        PhotoGallery(imageUrls: destination.imageUrls),
+        ReviewList(reviews: destination.reviews),
+      ],
     );
   }
 }
