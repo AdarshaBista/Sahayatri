@@ -14,8 +14,8 @@ class SlidingPanel extends StatelessWidget {
   const SlidingPanel({
     @required this.body,
     @required this.minHeight,
-    @required this.onPanelSlide,
     @required this.panelBuilder,
+    this.onPanelSlide,
     this.maxHeight,
     this.borderRadius = 16.0,
   })  : assert(body != null),

@@ -13,6 +13,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 
 class CustomMap extends StatefulWidget {
   final Coord center;
@@ -44,29 +45,38 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      mapController: _mapController,
-      options: MapOptions(
-        zoom: 12.0,
-        minZoom: 10.0,
-        maxZoom: 16.0,
-        onTap: widget.onTap,
-        center: widget.center.toLatLng(),
-        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat - 1.0,
-              lng: widget.center.lng - 1.0,
-            ).toLatLng(),
-        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat + 1.0,
-              lng: widget.center.lng + 1.0,
-            ).toLatLng(),
-      ),
-      layers: [
-        _buildTiles(),
-        _buildRoute(context),
-        if (widget.markerLayerOptions != null) widget.markerLayerOptions,
+    return Stack(
+      children: [
+        FlutterMap(
+          mapController: _mapController,
+          options: MapOptions(
+            zoom: 12.0,
+            minZoom: 10.0,
+            maxZoom: 16.0,
+            onTap: widget.onTap,
+            center: widget.center.toLatLng(),
+            swPanBoundary: widget.swPanBoundary?.toLatLng() ??
+                Coord(
+                  lat: widget.center.lat - 1.0,
+                  lng: widget.center.lng - 1.0,
+                ).toLatLng(),
+            nePanBoundary: widget.nePanBoundary?.toLatLng() ??
+                Coord(
+                  lat: widget.center.lat + 1.0,
+                  lng: widget.center.lng + 1.0,
+                ).toLatLng(),
+          ),
+          layers: [
+            _buildTiles(),
+            _buildRoute(context),
+            if (widget.markerLayerOptions != null) widget.markerLayerOptions,
+          ],
+        ),
+        const Positioned(
+          top: 16.0,
+          right: 16.0,
+          child: SafeArea(child: CloseIcon()),
+        ),
       ],
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/user_location.dart';
@@ -8,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
-import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
@@ -16,16 +13,10 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';
 
-class TrackerPage extends StatefulWidget {
-  const TrackerPage();
-
-  @override
-  _TrackerPageState createState() => _TrackerPageState();
-}
-
-class _TrackerPageState extends State<TrackerPage> {
+class TrackerPage extends StatelessWidget {
   static const kCollapsedHeight = 100.0;
-  double panelOpenPercent = 0.0;
+
+  const TrackerPage();
 
   @override
   Widget build(BuildContext context) {
@@ -57,35 +48,16 @@ class _TrackerPageState extends State<TrackerPage> {
       minHeight: kCollapsedHeight,
       body: _buildMap(state),
       panelBuilder: (sc) => _buildPanel(sc, state),
-      onPanelSlide: (value) => setState(() {
-        panelOpenPercent = value;
-      }),
     );
   }
 
-  Stack _buildMap(TrackerSuccess state) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        StreamBuilder<UserLocation>(
-          stream: state.userLocationStream,
-          initialData: state.initialLocation,
-          builder: (context, snapshot) {
-            return TrackerMap(userLocation: snapshot.data);
-          },
-        ),
-        Positioned(
-          top: 16.0,
-          right: 16.0,
-          child: Transform.rotate(
-            angle: panelOpenPercent * 2 * math.pi,
-            child: Transform.scale(
-              scale: 1.0 - panelOpenPercent,
-              child: const SafeArea(child: CloseIcon()),
-            ),
-          ),
-        ),
-      ],
+  Widget _buildMap(TrackerSuccess state) {
+    return StreamBuilder<UserLocation>(
+      stream: state.userLocationStream,
+      initialData: state.initialLocation,
+      builder: (context, snapshot) {
+        return TrackerMap(userLocation: snapshot.data);
+      },
     );
   }
 

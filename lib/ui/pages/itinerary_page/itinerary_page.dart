@@ -6,54 +6,26 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
-import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_map.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_header.dart';
 
-class ItineraryPage extends StatefulWidget {
+class ItineraryPage extends StatelessWidget {
   const ItineraryPage();
-
-  @override
-  _ItineraryPageState createState() => _ItineraryPageState();
-}
-
-class _ItineraryPageState extends State<ItineraryPage> {
-  double panelOpenPercent = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SlidingPanel(
         minHeight: 90.0,
-        body: _buildMap(),
-        panelBuilder: (sc) => _buildPanel(sc),
-        onPanelSlide: (value) => setState(() {
-          panelOpenPercent = value;
-        }),
+        body: const ItineraryMap(),
+        panelBuilder: (sc) => _buildPanel(context, sc),
       ),
     );
   }
 
-  Stack _buildMap() {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        const ItineraryMap(),
-        Positioned(
-          top: 16.0,
-          right: 16.0,
-          child: Transform.scale(
-            scale: 1.0 - panelOpenPercent,
-            child: const SafeArea(child: CloseIcon()),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPanel(ScrollController controller) {
+  Widget _buildPanel(BuildContext context, ScrollController controller) {
     final itinerary = Provider.of<Itinerary>(context);
 
     return SlideAnimator(
