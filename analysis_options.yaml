@@ -4,3 +4,4 @@ linter:
   rules:
     avoid_print: false
     sort_child_properties_last: false
+    always_require_non_null_named_parameters: false

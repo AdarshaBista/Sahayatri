@@ -8,6 +8,7 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
@@ -75,15 +76,18 @@ class Sahayatri extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp(
-        builder: DevicePreview.appBuilder,
-        locale: DevicePreview.of(context).locale,
-        debugShowCheckedModeBanner: false,
-        title: Values.kAppName,
-        theme: AppThemes.light,
-        navigatorKey: context.repository<RootNavService>().navigatorKey,
-        initialRoute: Routes.kBottomNavPageRoute,
-        onGenerateRoute: RootRouter.onGenerateRoute,
+      child: BlocProvider<PrefsBloc>(
+        create: (_) => PrefsBloc(),
+        child: MaterialApp(
+          builder: DevicePreview.appBuilder,
+          locale: DevicePreview.of(context).locale,
+          debugShowCheckedModeBanner: false,
+          title: Values.kAppName,
+          theme: AppThemes.light,
+          navigatorKey: context.repository<RootNavService>().navigatorKey,
+          initialRoute: Routes.kBottomNavPageRoute,
+          onGenerateRoute: RootRouter.onGenerateRoute,
+        ),
       ),
     );
   }
