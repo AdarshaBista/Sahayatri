@@ -10,8 +10,8 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/place_marker.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
 
 class RoutePage extends StatelessWidget {
   const RoutePage();
@@ -20,19 +20,21 @@ class RoutePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.bloc<DestinationBloc>().destination;
 
-    return Hero(
-      tag: destination.routePoints,
-      child: CustomMap(
-        center: destination.midPointCoord,
-        swPanBoundary: Coord(
-          lat: destination.minLat - 0.15,
-          lng: destination.minLong - 0.15,
+    return Scaffold(
+      body: Hero(
+        tag: destination.routePoints,
+        child: CustomMap(
+          center: destination.midPointCoord,
+          swPanBoundary: Coord(
+            lat: destination.minLat - 0.15,
+            lng: destination.minLong - 0.15,
+          ),
+          nePanBoundary: Coord(
+            lat: destination.maxLat + 0.15,
+            lng: destination.maxLong + 0.15,
+          ),
+          markerLayerOptions: _buildMarkers(context),
         ),
-        nePanBoundary: Coord(
-          lat: destination.maxLat + 0.15,
-          lng: destination.maxLong + 0.15,
-        ),
-        markerLayerOptions: _buildMarkers(context),
       ),
     );
   }

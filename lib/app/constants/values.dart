@@ -5,7 +5,11 @@ class Values {
   static const String kFontFamilySerif = 'RobotoSlab';
 
   // Map
-  static const String kMapStyle = 'mapbox/outdoors-v11';
+  static const String kMapStyleDark = 'mapbox/dark-v10';
+  static const String kMapStyleLight = 'mapbox/light-v10';
+  static const String kMapStyleStreets = 'mapbox/streets-v11';
+  static const String kMapStyleOutdoors = 'mapbox/outdoors-v11';
+  static const String kMapStyleSatellite = 'mapbox/satellite-v9';
   static const String kMapUrl =
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
 

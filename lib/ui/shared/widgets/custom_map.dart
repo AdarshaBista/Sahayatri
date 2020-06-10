@@ -14,6 +14,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/layers_button.dart';
 
 class CustomMap extends StatefulWidget {
   final Coord center;
@@ -77,6 +78,11 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
           right: 16.0,
           child: SafeArea(child: CloseIcon()),
         ),
+        const Positioned(
+          top: 16.0,
+          left: 16.0,
+          child: SafeArea(child: LayersButton()),
+        ),
       ],
     );
   }
@@ -92,7 +98,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       urlTemplate: Values.kMapUrl,
       additionalOptions: {
         'accessToken': ApiKeys.kMapBoxAccessToken,
-        'id': Values.kMapStyle,
+        'id': Values.kMapStyleOutdoors,
       },
     );
   }

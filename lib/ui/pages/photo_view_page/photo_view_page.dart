@@ -31,8 +31,7 @@ class PhotoViewPage extends StatelessWidget {
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(
                 imageProvider: AssetImage(args.imageUrls[index]),
-                heroAttributes:
-                    PhotoViewHeroAttributes(tag: args.imageUrls[index]),
+                heroAttributes: PhotoViewHeroAttributes(tag: args.imageUrls[index]),
                 maxScale: PhotoViewComputedScale.covered * 2.5,
                 minScale: PhotoViewComputedScale.contained * 0.6,
                 initialScale: PhotoViewComputedScale.contained * 1.0,
