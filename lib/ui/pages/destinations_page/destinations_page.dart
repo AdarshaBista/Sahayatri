@@ -11,6 +11,8 @@ import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 import 'package:sahayatri/ui/pages/destinations_page/widgets/destinations_list.dart';
 
 class DestinationsPage extends StatefulWidget {
+  const DestinationsPage();
+
   @override
   _DestinationsPageState createState() => _DestinationsPageState();
 }

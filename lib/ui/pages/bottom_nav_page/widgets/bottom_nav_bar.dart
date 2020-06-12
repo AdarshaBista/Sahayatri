@@ -62,7 +62,7 @@ class BottomNavBar extends StatelessWidget {
         ),
         AnimatedContainer(
           curve: Curves.bounceIn,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 120),
           width: isSelected ? 6 : 0,
           height: isSelected ? 6 : 0,
           margin: const EdgeInsets.all(6),
