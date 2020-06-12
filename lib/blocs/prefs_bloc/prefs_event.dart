@@ -17,3 +17,14 @@ class MapLayerChanged extends PrefsEvent {
   @override
   List<Object> get props => throw [mapStyle];
 }
+
+class ContactSaved extends PrefsEvent {
+  final String contact;
+
+  const ContactSaved({
+    @required this.contact,
+  }) : assert(contact != null);
+
+  @override
+  List<Object> get props => throw [contact];
+}

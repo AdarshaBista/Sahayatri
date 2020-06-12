@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/duration_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/checkpoint_list.dart';
 
@@ -32,8 +32,7 @@ class ItineraryForm extends StatelessWidget {
     return CustomTextField(
       label: 'Name',
       initialValue: name,
-      onChanged: (name) =>
-          context.bloc<ItineraryFormBloc>().add(NameChanged(name: name)),
+      onChanged: (name) => context.bloc<ItineraryFormBloc>().add(NameChanged(name: name)),
     );
   }
 
@@ -52,9 +51,8 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Days',
                 initialValue: state.days,
-                onChanged: (days) => context
-                    .bloc<ItineraryFormBloc>()
-                    .add(DaysChanged(days: days)),
+                onChanged: (days) =>
+                    context.bloc<ItineraryFormBloc>().add(DaysChanged(days: days)),
               ),
             ),
             const SizedBox(width: 12.0),
@@ -62,9 +60,8 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Nights',
                 initialValue: state.nights,
-                onChanged: (nights) => context
-                    .bloc<ItineraryFormBloc>()
-                    .add(NightsChanged(nights: nights)),
+                onChanged: (nights) =>
+                    context.bloc<ItineraryFormBloc>().add(NightsChanged(nights: nights)),
               ),
             ),
           ],

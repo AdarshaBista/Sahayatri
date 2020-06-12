@@ -36,10 +36,10 @@ class _BottomNavPageState extends State<BottomNavPage> {
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [
-          Container(),
-          const DestinationsPage(),
-          const SettingsPage(),
+        children: const [
+          Offstage(),
+          DestinationsPage(),
+          SettingsPage(),
         ],
       ),
     );

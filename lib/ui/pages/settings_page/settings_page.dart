@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/extensions/widget_x.dart';
+
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/settings_page/widgets/contact_form.dart';
 import 'package:sahayatri/ui/pages/settings_page/widgets/settings_card.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -24,7 +27,7 @@ class SettingsPage extends StatelessWidget {
               title: 'Close Contact',
               subtitle: 'Setup close contact to notify them about your whereabouts',
               icon: CommunityMaterialIcons.account_alert_outline,
-              onTap: () {},
+              onTap: () => const ContactForm().openDialog(context),
             ),
             const SizedBox(height: 12.0),
             SettingsCard(

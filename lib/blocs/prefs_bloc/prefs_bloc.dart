@@ -10,12 +10,17 @@ part 'prefs_state.dart';
 
 class PrefsBloc extends Bloc<PrefsEvent, PrefsState> {
   @override
-  PrefsState get initialState => PrefsState(prefs: Prefs());
+  PrefsState get initialState => const PrefsState(prefs: Prefs());
 
   @override
   Stream<PrefsState> mapEventToState(PrefsEvent event) async* {
     if (event is MapLayerChanged) {
       final newPrefs = state.prefs.copyWith(mapStyle: event.mapStyle);
+      yield PrefsState(prefs: newPrefs);
+    }
+
+    if (event is ContactSaved) {
+      final newPrefs = state.prefs.copyWith(contact: event.contact);
       yield PrefsState(prefs: newPrefs);
     }
   }

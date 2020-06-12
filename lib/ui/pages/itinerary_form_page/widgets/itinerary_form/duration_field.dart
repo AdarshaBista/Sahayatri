@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 
 class DurationField extends StatelessWidget {
   final String label;

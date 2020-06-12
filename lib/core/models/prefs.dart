@@ -1,23 +1,29 @@
 import 'package:sahayatri/app/constants/values.dart';
 
 class Prefs {
-  String mapStyle;
+  final String contact;
+  final String mapStyle;
 
-  Prefs({
+  const Prefs({
+    this.contact = '',
     this.mapStyle = Values.kMapStyleOutdoors,
-  }) : assert(mapStyle != null);
+  })  : assert(contact != null),
+        assert(mapStyle != null);
 
   Prefs copyWith({
+    String contact,
     String mapStyle,
   }) {
     return Prefs(
+      contact: contact ?? this.contact,
       mapStyle: mapStyle ?? this.mapStyle,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'mapLayer': mapStyle,
+      'contact': contact,
+      'mapStyle': mapStyle,
     };
   }
 
@@ -25,20 +31,21 @@ class Prefs {
     if (map == null) return null;
 
     return Prefs(
+      contact: map['contact'] as String,
       mapStyle: map['mapLayer'] as String,
     );
   }
 
   @override
-  String toString() => 'Prefs(mapLayer: $mapStyle)';
+  String toString() => 'Prefs(contact: $contact, mapStyle: $mapStyle)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Prefs && o.mapStyle == mapStyle;
+    return o is Prefs && o.contact == contact && o.mapStyle == mapStyle;
   }
 
   @override
-  int get hashCode => mapStyle.hashCode;
+  int get hashCode => contact.hashCode ^ mapStyle.hashCode;
 }

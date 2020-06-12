@@ -11,8 +11,8 @@ import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/required_dialog.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 
@@ -41,9 +41,7 @@ class CheckpointForm extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               children: [
                 Text(
-                  checkpoint == null
-                      ? 'Create a Checkpoint'
-                      : 'Edit this checkpoint',
+                  checkpoint == null ? 'Create a Checkpoint' : 'Edit this checkpoint',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.medium.bold,
                 ),

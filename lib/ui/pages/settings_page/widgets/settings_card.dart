@@ -24,6 +24,7 @@ class SettingsCard extends StatelessWidget {
     return CustomCard(
       child: ListTile(
         isThreeLine: true,
+        onTap: onTap,
         title: Text(
           title,
           style: AppTextStyles.medium.bold,
