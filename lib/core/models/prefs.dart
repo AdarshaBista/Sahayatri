@@ -1,32 +1,44 @@
-import 'package:meta/meta.dart';
-
-import 'package:sahayatri/core/models/map_layer.dart';
+import 'package:sahayatri/app/constants/values.dart';
 
 class Prefs {
-  MapLayer mapLayer;
+  String mapStyle;
 
   Prefs({
-    @required this.mapLayer,
-  });
+    this.mapStyle = Values.kMapStyleOutdoors,
+  }) : assert(mapStyle != null);
 
   Prefs copyWith({
-    MapLayer mapLayer,
+    String mapStyle,
   }) {
     return Prefs(
-      mapLayer: mapLayer ?? this.mapLayer,
+      mapStyle: mapStyle ?? this.mapStyle,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'mapLayer': mapStyle,
+    };
+  }
+
+  factory Prefs.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return Prefs(
+      mapStyle: map['mapLayer'] as String,
     );
   }
 
   @override
-  String toString() => 'Prefs(mapLayer: $mapLayer)';
+  String toString() => 'Prefs(mapLayer: $mapStyle)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Prefs && o.mapLayer == mapLayer;
+    return o is Prefs && o.mapStyle == mapStyle;
   }
 
   @override
-  int get hashCode => mapLayer.hashCode;
+  int get hashCode => mapStyle.hashCode;
 }

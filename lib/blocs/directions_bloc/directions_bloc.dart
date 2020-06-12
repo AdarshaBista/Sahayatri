@@ -27,9 +27,12 @@ class DirectionsBloc extends Bloc<DirectionsEvent, DirectionsState> {
     if (event is DirectionsStarted) {
       yield DirectionsLoading();
       try {
-        final UserLocation userLocation =
-            await directionsService.getUserLocation();
-        await directionsService.startNavigation(event.trailHead, userLocation);
+        final UserLocation userLocation = await directionsService.getUserLocation();
+        await directionsService.startNavigation(
+          event.trailHead,
+          userLocation,
+          // event.mode,
+        );
         yield DirectionsInitial();
       } on Failure catch (e) {
         print(e.error);

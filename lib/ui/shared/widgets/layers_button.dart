@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/map_layers.dart';
-
-import 'package:sahayatri/core/models/map_layer.dart';
+import 'package:sahayatri/app/constants/values.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
@@ -13,6 +11,34 @@ import 'package:community_material_icon/community_material_icon.dart';
 
 class LayersButton extends StatelessWidget {
   const LayersButton();
+
+  List<_MapLayerData> get _mapLayersData => [
+        const _MapLayerData(
+          title: 'Dark',
+          style: Values.kMapStyleDark,
+          icon: CommunityMaterialIcons.weather_night,
+        ),
+        const _MapLayerData(
+          title: 'Light',
+          style: Values.kMapStyleLight,
+          icon: CommunityMaterialIcons.weather_sunny,
+        ),
+        const _MapLayerData(
+          title: 'Streets',
+          style: Values.kMapStyleStreets,
+          icon: CommunityMaterialIcons.google_street_view,
+        ),
+        const _MapLayerData(
+          title: 'Outdoors',
+          style: Values.kMapStyleOutdoors,
+          icon: CommunityMaterialIcons.hiking,
+        ),
+        const _MapLayerData(
+          title: 'Satellite',
+          style: Values.kMapStyleSatellite,
+          icon: CommunityMaterialIcons.earth,
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +52,13 @@ class LayersButton extends StatelessWidget {
                 color: AppColors.dark,
                 shape: BoxShape.circle,
               ),
-              child: PopupMenuButton<MapLayer>(
+              child: PopupMenuButton<String>(
                 elevation: 6.0,
-                initialValue: state.prefs.mapLayer,
+                initialValue: state.prefs.mapStyle,
                 color: AppColors.background,
-                onSelected: (mapLayer) {
+                onSelected: (mapStyle) {
                   _showSnackBar(context);
-                  context.bloc<PrefsBloc>().add(MapLayerChanged(mapLayer: mapLayer));
+                  context.bloc<PrefsBloc>().add(MapLayerChanged(mapStyle: mapStyle));
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -42,9 +68,9 @@ class LayersButton extends StatelessWidget {
                   ),
                 ),
                 itemBuilder: (BuildContext context) {
-                  return kMapLayers.values
-                      .map((layer) => PopupMenuItem(
-                            value: layer,
+                  return _mapLayersData
+                      .map((layer) => PopupMenuItem<String>(
+                            value: layer.style,
                             child: _buildTile(layer),
                           ))
                       .toList();
@@ -57,7 +83,7 @@ class LayersButton extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(MapLayer layer) {
+  Widget _buildTile(_MapLayerData layer) {
     return ListTile(
       title: Text(
         layer.title,
@@ -83,4 +109,18 @@ class LayersButton extends StatelessWidget {
         ),
       );
   }
+}
+
+class _MapLayerData {
+  final String title;
+  final String style;
+  final IconData icon;
+
+  const _MapLayerData({
+    @required this.title,
+    @required this.style,
+    @required this.icon,
+  })  : assert(title != null),
+        assert(style != null),
+        assert(icon != null);
 }

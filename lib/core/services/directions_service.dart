@@ -25,7 +25,11 @@ class DirectionsService {
     }
   }
 
-  Future<void> startNavigation(Place trailHead, UserLocation userLocation) async {
+  Future<void> startNavigation(
+    Place trailHead,
+    UserLocation userLocation,
+    // NavigationMode mode,
+  ) async {
     print('Directions from ${trailHead.coord} to ${userLocation.coord}');
     // _directions = MapboxNavigation(onRouteProgress: (arrived) async {
     //   if (arrived) await _directions.finishNavigation();
@@ -48,7 +52,7 @@ class DirectionsService {
     //   destination: _destination,
     //   language: 'en',
     //   units: VoiceUnits.metric,
-    //   mode: NavigationMode.driving,
+    //   mode: mode,
     // );
   }
 }

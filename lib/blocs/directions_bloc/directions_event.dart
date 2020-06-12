@@ -9,10 +9,13 @@ abstract class DirectionsEvent extends Equatable {
 
 class DirectionsStarted extends DirectionsEvent {
   final Place trailHead;
+  // final NavigationMode mode;
 
   const DirectionsStarted({
     @required this.trailHead,
+    // @required this.mode,
   }) : assert(trailHead != null);
+  // assert(mode != null);
 
   @override
   List<Object> get props => [trailHead];

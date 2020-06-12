@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class SlidingPanel extends StatelessWidget {
@@ -26,7 +25,6 @@ class SlidingPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      color: AppColors.background,
       backdropOpacity: 0.6,
       parallaxEnabled: true,
       backdropEnabled: true,

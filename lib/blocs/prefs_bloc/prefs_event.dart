@@ -8,12 +8,12 @@ abstract class PrefsEvent extends Equatable {
 }
 
 class MapLayerChanged extends PrefsEvent {
-  final MapLayer mapLayer;
+  final String mapStyle;
 
   const MapLayerChanged({
-    @required this.mapLayer,
-  }) : assert(mapLayer != null);
+    @required this.mapStyle,
+  }) : assert(mapStyle != null);
 
   @override
-  List<Object> get props => throw [mapLayer];
+  List<Object> get props => throw [mapStyle];
 }

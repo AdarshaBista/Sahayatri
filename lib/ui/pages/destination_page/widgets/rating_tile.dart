@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/column_button.dart';
+import 'package:sahayatri/ui/shared/widgets/column_button.dart';
+import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
 
 class RatingTile extends StatelessWidget {

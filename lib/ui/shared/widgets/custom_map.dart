@@ -71,7 +71,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                     ).toLatLng(),
               ),
               layers: [
-                _buildTiles(state.prefs.mapLayer.id),
+                _buildTiles(state.prefs.mapStyle),
                 _buildRoute(context),
                 if (widget.markerLayerOptions != null) widget.markerLayerOptions,
               ],

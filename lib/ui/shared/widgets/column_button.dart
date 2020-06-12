@@ -23,6 +23,7 @@ class ColumnButton extends StatelessWidget {
       onTap: onTap,
       child: ScaleAnimator(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
