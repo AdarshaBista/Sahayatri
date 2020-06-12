@@ -50,36 +50,45 @@ class ItineraryTimeline extends StatelessWidget {
 
           return SlideAnimator(
             begin: Offset(0.0, 0.2 + index * 0.4),
-            child: TimelineTile(
-              lineX: 0.3,
-              isLast: isLast,
-              isFirst: isFirst,
-              alignment: TimelineAlign.manual,
-              indicatorStyle: IndicatorStyle(
-                width: 44.0,
-                height: 44.0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 4.0,
-                ),
-                indicator: CircleAvatar(
-                  backgroundImage: AssetImage(checkpoint.place.imageUrls[0]),
-                ),
-              ),
-              topLineStyle: const LineStyle(
-                width: 1.5,
-                color: AppColors.disabled,
-              ),
-              bottomLineStyle: const LineStyle(
-                width: 1.5,
-                color: AppColors.disabled,
-              ),
-              leftChild: _buildDateTime(checkpoint),
-              rightChild: _buildPlace(context, checkpoint),
-            ),
+            child: _buildTile(context, isLast, isFirst, checkpoint),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildTile(
+    BuildContext context,
+    bool isLast,
+    bool isFirst,
+    Checkpoint checkpoint,
+  ) {
+    return TimelineTile(
+      lineX: 0.3,
+      isLast: isLast,
+      isFirst: isFirst,
+      alignment: TimelineAlign.manual,
+      indicatorStyle: IndicatorStyle(
+        width: 44.0,
+        height: 44.0,
+        padding: const EdgeInsets.symmetric(
+          vertical: 4.0,
+          horizontal: 8.0,
+        ),
+        indicator: CircleAvatar(
+          backgroundImage: AssetImage(checkpoint.place.imageUrls[0]),
+        ),
+      ),
+      topLineStyle: const LineStyle(
+        width: 1.5,
+        color: AppColors.disabled,
+      ),
+      bottomLineStyle: const LineStyle(
+        width: 1.5,
+        color: AppColors.disabled,
+      ),
+      leftChild: _buildDateTime(checkpoint),
+      rightChild: _buildPlace(context, checkpoint),
     );
   }
 
@@ -141,10 +150,7 @@ class ItineraryTimeline extends StatelessWidget {
     );
   }
 
-  GestureDetector _buildDeleteIcon(
-    BuildContext context,
-    Checkpoint checkpoint,
-  ) {
+  GestureDetector _buildDeleteIcon(BuildContext context, Checkpoint checkpoint) {
     return GestureDetector(
       onTap: () => context
           .bloc<ItineraryFormBloc>()

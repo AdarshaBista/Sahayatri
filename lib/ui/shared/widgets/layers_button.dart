@@ -30,9 +30,10 @@ class LayersButton extends StatelessWidget {
                 elevation: 6.0,
                 initialValue: state.prefs.mapLayer,
                 color: AppColors.background,
-                onSelected: (mapLayer) => context.bloc<PrefsBloc>().add(
-                      MapLayerChanged(mapLayer: mapLayer),
-                    ),
+                onSelected: (mapLayer) {
+                  _showSnackBar(context);
+                  context.bloc<PrefsBloc>().add(MapLayerChanged(mapLayer: mapLayer));
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
@@ -68,5 +69,18 @@ class LayersButton extends StatelessWidget {
         color: AppColors.dark,
       ),
     );
+  }
+
+  void _showSnackBar(BuildContext context) {
+    Scaffold.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            'You may need to reload the map to see changes.',
+            style: AppTextStyles.small.light,
+          ),
+        ),
+      );
   }
 }

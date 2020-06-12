@@ -80,12 +80,12 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         ),
         const Positioned(
           top: 16.0,
-          right: 16.0,
+          left: 16.0,
           child: SafeArea(child: CloseIcon()),
         ),
         const Positioned(
           top: 16.0,
-          left: 16.0,
+          right: 16.0,
           child: SafeArea(child: LayersButton()),
         ),
       ],
