@@ -14,15 +14,14 @@ part 'prefs_state.dart';
 class PrefsBloc extends Bloc<PrefsEvent, PrefsState> {
   @override
   PrefsState get initialState => PrefsState(
-        prefs: Prefs(
-          mapLayer: kMapLayers[MapLayerType.outdoors],
-        ),
+        prefs: Prefs(mapLayer: kMapLayers[MapLayerType.outdoors]),
       );
 
   @override
   Stream<PrefsState> mapEventToState(PrefsEvent event) async* {
     if (event is MapLayerChanged) {
-      yield PrefsState(prefs: state.prefs.copyWith(mapLayer: event.mapLayer));
+      final newPrefs = state.prefs.copyWith(mapLayer: event.mapLayer);
+      yield PrefsState(prefs: newPrefs);
     }
   }
 }

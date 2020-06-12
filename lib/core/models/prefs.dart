@@ -17,20 +17,6 @@ class Prefs {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'mapLayer': mapLayer?.toMap(),
-    };
-  }
-
-  factory Prefs.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Prefs(
-      mapLayer: MapLayer.fromMap(map['mapLayer'] as Map<String, dynamic>),
-    );
-  }
-
   @override
   String toString() => 'Prefs(mapLayer: $mapLayer)';
 

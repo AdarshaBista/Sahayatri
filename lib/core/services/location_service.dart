@@ -12,9 +12,7 @@ class LocationService {
   bool get hasPermission => _hasPermission;
 
   LocationService() {
-    location.changeSettings(
-      interval: 2000,
-    );
+    location.changeSettings(interval: 2000);
 
     location.hasPermission().then((value) {
       if (value == PermissionStatus.granted) _hasPermission = true;
@@ -29,10 +27,7 @@ class LocationService {
 
   Future<UserLocation> getLocation() async {
     if (!hasPermission) {
-      throw const Failure(
-        error: 'Location permission denied.',
-        message: 'Location permission denied.',
-      );
+      throw Failure(error: 'Location permission denied.');
     }
 
     try {

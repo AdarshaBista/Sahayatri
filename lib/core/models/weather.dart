@@ -100,9 +100,9 @@ class Weather {
       minTemp: (map['temp']['min'] as num).toInt(),
       maxTemp: (map['temp']['max'] as num).toInt(),
       feelsLikeTemp: (map['feels_like']['day'] as num).toInt(),
-      pressure: map['pressure'] as int,
-      humidity: map['humidity'] as int,
-      windSpeed: map['wind_speed'] as double,
+      pressure: (map['pressure'] as num).toInt(),
+      humidity: (map['humidity'] as num).toInt(),
+      windSpeed: (map['wind_speed'] as num).toDouble(),
       label: map['weather'][0]['main'] as String,
       icon: _getIconData(map['weather'][0]['icon'] as String),
     );

@@ -51,9 +51,9 @@ class CheckpointList extends StatelessWidget {
         FocusScope.of(context).unfocus();
         CheckpointForm(
           checkpoint: null,
-          onSubmit: (checkpoint) => context.bloc<ItineraryFormBloc>().add(
-                CheckpointAdded(checkpoint: checkpoint),
-              ),
+          onSubmit: (checkpoint) => context
+              .bloc<ItineraryFormBloc>()
+              .add(CheckpointAdded(checkpoint: checkpoint)),
         ).openModalBottomSheet(context);
       },
     );

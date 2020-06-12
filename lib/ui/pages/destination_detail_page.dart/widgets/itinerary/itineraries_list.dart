@@ -28,7 +28,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 20.0),
         _buildSuggestedItineraries(context),
         _buildCreateditinerary(context),
-        const SizedBox(height: 32.0),
+        const SizedBox(height: 72.0),
       ],
     );
   }
@@ -82,10 +82,8 @@ class ItinerariesList extends StatelessWidget {
               onTap: () {
                 context.repository<DestinationNavService>().pushNamed(
                       Routes.kItineraryFormPageRoute,
-                      arguments: context
-                          .bloc<DestinationBloc>()
-                          .destination
-                          .createdItinerary,
+                      arguments:
+                          context.bloc<DestinationBloc>().destination.createdItinerary,
                     );
               },
             ),
