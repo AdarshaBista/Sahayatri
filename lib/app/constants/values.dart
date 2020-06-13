@@ -4,6 +4,9 @@ class Values {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
 
+  // Database
+  static const String kPrefsBoxName = 'prefs_box';
+
   // Map
   static const String kMapStyleDark = 'mapbox/dark-v10';
   static const String kMapStyleLight = 'mapbox/light-v10';

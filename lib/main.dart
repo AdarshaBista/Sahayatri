@@ -7,6 +7,11 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
+import 'package:sahayatri/core/models/prefs.dart';
+
+import 'package:hive/hive.dart';
+import 'package:sahayatri/app/database/dao.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
@@ -20,14 +25,11 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:device_preview/device_preview.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
+Future<void> main() async {
+  setStatusBarStyle();
+  initHive();
+
+  final Box<Prefs> prefsBox = await Hive.openBox(Values.kPrefsBoxName);
 
   runApp(
     DevicePreview(
@@ -38,21 +40,37 @@ void main() {
           position: DevicePreviewToolBarPosition.left,
         ),
       ),
-      data: const DevicePreviewData(
-        deviceIndex: 11,
-        isFrameVisible: true,
-      ),
+      data: const DevicePreviewData(deviceIndex: 11, isFrameVisible: true),
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
+          RepositoryProvider(create: (_) => Dao<Prefs>(box: prefsBox)),
         ],
         child: Sahayatri(),
       ),
     ),
   );
+}
+
+void setStatusBarStyle() {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+}
+
+void initHive() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Hive.init('db');
+
+  // Adapters
+  Hive.registerAdapter(PrefsAdapter());
 }
 
 class Sahayatri extends StatelessWidget {
@@ -77,7 +95,9 @@ class Sahayatri extends StatelessWidget {
         ),
       ],
       child: BlocProvider<PrefsBloc>(
-        create: (_) => PrefsBloc(),
+        create: (_) => PrefsBloc(
+          prefsDao: context.repository<Dao<Prefs>>(),
+        ),
         child: MaterialApp(
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,
