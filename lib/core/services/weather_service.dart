@@ -8,19 +8,19 @@ import 'package:sahayatri/core/services/api_service.dart';
 
 class WeatherService {
   final ApiService apiService;
-  final Map<Coord, List<Weather>> _forecastsCache = {};
+  final Map<Coord, List<Weather>> forecastsCache = {};
 
   WeatherService({
     @required this.apiService,
   }) : assert(apiService != null);
 
   Future<List<Weather>> fetchWeather(Coord coord) async {
-    if (_forecastsCache.containsKey(coord)) return _forecastsCache[coord];
+    if (forecastsCache.containsKey(coord)) return forecastsCache[coord];
 
     try {
       final List<Weather> forecasts = await apiService.fetchWeather(coord);
-      _forecastsCache[coord] = forecasts;
-      return _forecastsCache[coord];
+      forecastsCache[coord] = forecasts;
+      return forecasts;
     } on Failure {
       rethrow;
     }

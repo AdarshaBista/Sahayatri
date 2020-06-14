@@ -1,15 +1,7 @@
-import 'package:hive/hive.dart';
-
 import 'package:sahayatri/app/constants/values.dart';
 
-part 'prefs.g.dart';
-
-@HiveType(typeId: 0)
 class Prefs {
-  @HiveField(0)
   final String contact;
-
-  @HiveField(1)
   final String mapStyle;
 
   const Prefs({

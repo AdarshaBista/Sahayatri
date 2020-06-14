@@ -7,11 +7,6 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
-import 'package:sahayatri/core/models/prefs.dart';
-
-import 'package:hive/hive.dart';
-import 'package:sahayatri/app/database/dao.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
@@ -27,10 +22,6 @@ import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   setStatusBarStyle();
-  initHive();
-
-  final Box<Prefs> prefsBox = await Hive.openBox(Values.kPrefsBoxName);
-
   runApp(
     DevicePreview(
       enabled: Platform.isWindows,
@@ -47,7 +38,6 @@ Future<void> main() async {
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
-          RepositoryProvider(create: (_) => Dao<Prefs>(box: prefsBox)),
         ],
         child: Sahayatri(),
       ),
@@ -63,14 +53,6 @@ void setStatusBarStyle() {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-}
-
-void initHive() {
-  WidgetsFlutterBinding.ensureInitialized();
-  Hive.init('db');
-
-  // Adapters
-  Hive.registerAdapter(PrefsAdapter());
 }
 
 class Sahayatri extends StatelessWidget {
@@ -95,9 +77,7 @@ class Sahayatri extends StatelessWidget {
         ),
       ],
       child: BlocProvider<PrefsBloc>(
-        create: (_) => PrefsBloc(
-          prefsDao: context.repository<Dao<Prefs>>(),
-        ),
+        create: (_) => PrefsBloc(),
         child: MaterialApp(
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,

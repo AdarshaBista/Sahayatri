@@ -14,7 +14,10 @@ class Weather {
   final int humidity;
   final double windSpeed;
   final String label;
-  final IconData icon;
+  final String iconString;
+  final DateTime createdAt;
+
+  IconData get icon => _iconsMap[iconString];
 
   Weather({
     @required this.date,
@@ -28,7 +31,8 @@ class Weather {
     @required this.humidity,
     @required this.windSpeed,
     @required this.label,
-    @required this.icon,
+    @required this.iconString,
+    @required this.createdAt,
   })  : assert(date != null),
         assert(sunset != null),
         assert(sunrise != null),
@@ -40,7 +44,8 @@ class Weather {
         assert(humidity != null),
         assert(windSpeed != null),
         assert(label != null),
-        assert(icon != null);
+        assert(iconString != null),
+        assert(createdAt != null);
 
   Weather copyWith({
     DateTime date,
@@ -54,7 +59,8 @@ class Weather {
     int humidity,
     double windSpeed,
     String label,
-    IconData icon,
+    String iconString,
+    DateTime createdAt,
   }) {
     return Weather(
       date: date ?? this.date,
@@ -68,24 +74,34 @@ class Weather {
       humidity: humidity ?? this.humidity,
       windSpeed: windSpeed ?? this.windSpeed,
       label: label ?? this.label,
-      icon: icon ?? this.icon,
+      iconString: iconString ?? this.iconString,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'date': date?.millisecondsSinceEpoch,
-      'sunset': sunset?.millisecondsSinceEpoch,
-      'sunrise': sunrise?.millisecondsSinceEpoch,
-      'dayTemp': temp,
-      'minTemp': minTemp,
-      'maxTemp': maxTemp,
-      'dayFeelsLikeTemp': feelsLikeTemp,
+      'dt': date.millisecondsSinceEpoch ~/ 1000,
+      'sunset': sunset.millisecondsSinceEpoch ~/ 1000,
+      'sunrise': sunrise.millisecondsSinceEpoch ~/ 1000,
+      'temp': {
+        'day': temp,
+        'min': minTemp,
+        'max': maxTemp,
+      },
+      'feels_like': {
+        'day': feelsLikeTemp,
+      },
       'pressure': pressure,
       'humidity': humidity,
-      'windSpeed': windSpeed,
-      'label': label,
-      'icon': icon?.codePoint,
+      'wind_speed': windSpeed,
+      'weather': [
+        {
+          'main': label,
+          'icon': iconString,
+        },
+      ],
+      'created_at': createdAt.millisecondsSinceEpoch,
     };
   }
 
@@ -104,13 +120,16 @@ class Weather {
       humidity: (map['humidity'] as num).toInt(),
       windSpeed: (map['wind_speed'] as num).toDouble(),
       label: map['weather'][0]['main'] as String,
-      icon: _getIconData(map['weather'][0]['icon'] as String),
+      iconString: map['weather'][0]['icon'] as String,
+      createdAt: map.containsKey('created_at')
+          ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int)
+          : DateTime.now(),
     );
   }
 
   @override
   String toString() {
-    return 'Weather(date: $date, sunset: $sunset, sunrise: $sunrise, temp: $temp, minTemp: $minTemp, maxTemp: $maxTemp, dayFeelsLikeTemp: $feelsLikeTemp, pressure: $pressure, humidity: $humidity, windSpeed: $windSpeed, label: $label, icon: $icon)';
+    return 'Weather(date: $date, sunset: $sunset, sunrise: $sunrise, temp: $temp, minTemp: $minTemp, maxTemp: $maxTemp, dayFeelsLikeTemp: $feelsLikeTemp, pressure: $pressure, humidity: $humidity, windSpeed: $windSpeed, label: $label, iconString: $iconString, createdAt: $createdAt)';
   }
 
   @override
@@ -129,7 +148,8 @@ class Weather {
         o.humidity == humidity &&
         o.windSpeed == windSpeed &&
         o.label == label &&
-        o.icon == icon;
+        o.iconString == iconString &&
+        o.createdAt == createdAt;
   }
 
   @override
@@ -145,39 +165,28 @@ class Weather {
         humidity.hashCode ^
         windSpeed.hashCode ^
         label.hashCode ^
-        icon.hashCode;
+        iconString.hashCode ^
+        createdAt.hashCode;
   }
 }
 
-IconData _getIconData(String iconCode) {
-  switch (iconCode) {
-    case '01d':
-      return CommunityMaterialIcons.weather_sunny;
-    case '02d':
-    case '02n':
-      return CommunityMaterialIcons.weather_partlycloudy;
-    case '03d':
-    case '04d':
-      return CommunityMaterialIcons.weather_cloudy;
-    case '01n':
-    case '03n':
-    case '04n':
-      return CommunityMaterialIcons.weather_night;
-    case '09d':
-    case '09n':
-    case '10d':
-    case '10n':
-      return CommunityMaterialIcons.weather_rainy;
-    case '11d':
-    case '11n':
-      return CommunityMaterialIcons.weather_lightning_rainy;
-    case '13d':
-    case '13n':
-      return CommunityMaterialIcons.weather_snowy;
-    case '50d':
-    case '50n':
-      return CommunityMaterialIcons.weather_fog;
-    default:
-      return CommunityMaterialIcons.weather_sunny;
-  }
-}
+const Map<String, IconData> _iconsMap = {
+  '01d': CommunityMaterialIcons.weather_sunny,
+  '02d': CommunityMaterialIcons.weather_partlycloudy,
+  '02n': CommunityMaterialIcons.weather_partlycloudy,
+  '03d': CommunityMaterialIcons.weather_cloudy,
+  '04d': CommunityMaterialIcons.weather_cloudy,
+  '01n': CommunityMaterialIcons.weather_night,
+  '03n': CommunityMaterialIcons.weather_night,
+  '04n': CommunityMaterialIcons.weather_night,
+  '09d': CommunityMaterialIcons.weather_rainy,
+  '09n': CommunityMaterialIcons.weather_rainy,
+  '10d': CommunityMaterialIcons.weather_rainy,
+  '10n': CommunityMaterialIcons.weather_rainy,
+  '11d': CommunityMaterialIcons.weather_lightning_rainy,
+  '11n': CommunityMaterialIcons.weather_lightning_rainy,
+  '13d': CommunityMaterialIcons.weather_snowy,
+  '13n': CommunityMaterialIcons.weather_snowy,
+  '50d': CommunityMaterialIcons.weather_fog,
+  '50n': CommunityMaterialIcons.weather_fog,
+};
