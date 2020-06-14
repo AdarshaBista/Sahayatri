@@ -23,7 +23,7 @@ class ApiService {
     }
   }
 
-  Future<List<Weather>> fetchWeather(Coord coord) async {
+  Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(
         '$kWeatherBaseUrl/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',

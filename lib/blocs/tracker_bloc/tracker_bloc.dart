@@ -7,7 +7,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
-import 'package:sahayatri/core/services/tracker_service.dart';
+import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
 
 part 'tracker_event.dart';
 part 'tracker_state.dart';

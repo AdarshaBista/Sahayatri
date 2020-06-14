@@ -14,11 +14,11 @@ class WeatherService {
     @required this.apiService,
   }) : assert(apiService != null);
 
-  Future<List<Weather>> fetchWeather(Coord coord) async {
+  Future<List<Weather>> fetchForecasts(Coord coord) async {
     if (forecastsCache.containsKey(coord)) return forecastsCache[coord];
 
     try {
-      final List<Weather> forecasts = await apiService.fetchWeather(coord);
+      final List<Weather> forecasts = await apiService.fetchForecasts(coord);
       forecastsCache[coord] = forecasts;
       return forecasts;
     } on Failure {

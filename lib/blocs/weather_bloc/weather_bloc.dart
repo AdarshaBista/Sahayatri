@@ -30,7 +30,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (event is WeatherFetched) {
       yield WeatherLoading();
       try {
-        final List<Weather> forecasts = await weatherService.fetchWeather(event.coord);
+        final List<Weather> forecasts = await weatherService.fetchForecasts(event.coord);
         yield WeatherSuccess(forecasts: forecasts);
       } on Failure catch (e) {
         print(e.error);

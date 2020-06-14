@@ -14,8 +14,8 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 
 import 'package:sahayatri/core/services/weather_service.dart';
-import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
+import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';

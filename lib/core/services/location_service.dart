@@ -13,7 +13,6 @@ class LocationService {
 
   LocationService() {
     location.changeSettings(interval: 2000);
-
     location.hasPermission().then((value) {
       if (value == PermissionStatus.granted) _hasPermission = true;
     });
