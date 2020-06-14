@@ -5,12 +5,11 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
-import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_panel.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';
 
 class TrackerPage extends StatelessWidget {
@@ -47,7 +46,11 @@ class TrackerPage extends StatelessWidget {
     return SlidingPanel(
       minHeight: kCollapsedHeight,
       body: _buildMap(state),
-      panelBuilder: (sc) => _buildPanel(sc, state),
+      panelBuilder: (sc) => TrackerPanel(
+        state: state,
+        controller: sc,
+        collapsedHeight: kCollapsedHeight,
+      ),
     );
   }
 
@@ -58,29 +61,6 @@ class TrackerPage extends StatelessWidget {
       builder: (context, snapshot) {
         return TrackerMap(userLocation: snapshot.data);
       },
-    );
-  }
-
-  Widget _buildPanel(ScrollController controller, TrackerSuccess state) {
-    return SingleChildScrollView(
-      controller: controller,
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          const SizedBox(height: 4.0),
-          const Pill(),
-          StreamBuilder<UserLocation>(
-            stream: state.userLocationStream,
-            initialData: state.initialLocation,
-            builder: (context, snapshot) {
-              return TrackerStats(
-                height: kCollapsedHeight,
-                userLocation: snapshot.data,
-              );
-            },
-          ),
-        ],
-      ),
     );
   }
 }

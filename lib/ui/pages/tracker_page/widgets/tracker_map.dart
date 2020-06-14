@@ -5,8 +5,8 @@ import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 
 class TrackerMap extends StatelessWidget {
   final UserLocation userLocation;
@@ -29,12 +29,14 @@ class TrackerMap extends StatelessWidget {
     return MarkerLayerOptions(
       markers: [
         Marker(
-          width: 40.0,
-          height: 40.0,
+          width: 32.0,
+          height: 32.0,
           point: center.toLatLng(),
+          anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (context) => const Icon(
-            CommunityMaterialIcons.map_marker_outline,
+            CommunityMaterialIcons.map_marker,
             color: AppColors.dark,
+            size: 32.0,
           ),
         ),
       ],

@@ -22,7 +22,7 @@ class TrackerSuccess extends TrackerState {
         assert(userLocationStream != null);
 
   @override
-  List<Object> get props => [userLocationStream];
+  List<Object> get props => [initialLocation, userLocationStream];
 }
 
 class TrackerError extends TrackerState {

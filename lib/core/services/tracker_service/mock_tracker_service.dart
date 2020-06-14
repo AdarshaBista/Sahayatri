@@ -14,7 +14,7 @@ class MockTrackerService implements TrackerService {
 
   @override
   Stream<UserLocation> getLocationStream() {
-    return Stream<UserLocation>.periodic(const Duration(milliseconds: 50), (index) {
+    return Stream<UserLocation>.periodic(const Duration(milliseconds: 400), (index) {
       return UserLocation(
         coord: routePoints[index],
         accuracy: 15.0 + _getOffset(-5.0, 5.0),
