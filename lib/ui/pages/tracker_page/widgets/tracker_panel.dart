@@ -40,6 +40,7 @@ class TrackerPanel extends StatelessWidget {
               );
             },
           ),
+          const Divider(height: 20.0),
           StreamBuilder<bool>(
             stream: state.userAlertStream,
             initialData: false,

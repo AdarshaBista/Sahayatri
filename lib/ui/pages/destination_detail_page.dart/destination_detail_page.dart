@@ -71,12 +71,9 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     return FloatingActionButton(
       backgroundColor: AppColors.dark,
       onPressed: () => context.repository<DestinationNavService>().pushNamed(
-        Routes.kTrackerPageRoute,
-        arguments: [
-          context.bloc<DestinationBloc>().destination.routePoints,
-          context.bloc<DestinationBloc>().destination.startingPlace.coord,
-        ],
-      ),
+            Routes.kTrackerPageRoute,
+            arguments: context.bloc<DestinationBloc>().destination.routePoints,
+          ),
       child: const Icon(
         Icons.directions_walk,
         size: 24.0,

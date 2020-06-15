@@ -71,17 +71,13 @@ class DestRouter {
         break;
 
       case Routes.kTrackerPageRoute:
-        final args = settings.arguments as List;
         _page = MultiBlocProvider(
           providers: [
             BlocProvider<TrackerBloc>(
                 create: (context) => TrackerBloc(
                       trackerService: context.repository<TrackerService>(),
                     )..add(
-                        TrackingStarted(
-                          route: args[0] as List<Coord>,
-                          trailHeadCoord: args[1] as Coord,
-                        ),
+                        TrackingStarted(route: settings.arguments as List<Coord>),
                       )),
             BlocProvider<DirectionsBloc>(
               create: (context) => DirectionsBloc(
