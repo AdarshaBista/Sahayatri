@@ -5,6 +5,7 @@ import 'package:sahayatri/core/models/user_location.dart';
 
 abstract class TrackerService {
   static const double kMinNearbyDistance = 50.0;
+  bool isAlreadyAlerted = false;
 
   Future<UserLocation> getUserLocation();
   Stream<UserLocation> getLocationStream(List<Coord> route);
@@ -19,11 +20,15 @@ abstract class TrackerService {
   }
 
   bool shouldAlertUser(Coord userLocation, List<Coord> route) {
-    return !PolygonUtil.isLocationOnPath(
+    final bool isOnRoute = PolygonUtil.isLocationOnPath(
       LatLng(userLocation.lat, userLocation.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
       tolerance: kMinNearbyDistance,
     );
+
+    if (!isOnRoute && isAlreadyAlerted) return false;
+    if (!isOnRoute && !isAlreadyAlerted) return isAlreadyAlerted = true;
+    return isAlreadyAlerted = false;
   }
 }

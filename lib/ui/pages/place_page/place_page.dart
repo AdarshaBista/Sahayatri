@@ -70,7 +70,7 @@ class PlacePage extends StatelessWidget {
         label: 'Weather',
         outlineOnly: true,
         color: AppColors.dark,
-        iconData: CommunityMaterialIcons.cloud_download_outline,
+        iconData: CommunityMaterialIcons.weather_fog,
         onTap: () => context.repository<DestinationNavService>().pushNamed(
           Routes.kWeatherPageRoute,
           arguments: [
