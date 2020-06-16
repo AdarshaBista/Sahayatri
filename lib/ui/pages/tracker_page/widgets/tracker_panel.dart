@@ -6,7 +6,6 @@ import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
-import 'package:sahayatri/ui/styles/app_text_styles.dart';
 
 class TrackerPanel extends StatelessWidget {
   final TrackerSuccess state;
@@ -41,16 +40,6 @@ class TrackerPanel extends StatelessWidget {
             },
           ),
           const Divider(height: 20.0),
-          StreamBuilder<bool>(
-            stream: state.userAlertStream,
-            initialData: false,
-            builder: (context, snapshot) {
-              return Text(
-                snapshot.data.toString(),
-                style: AppTextStyles.medium,
-              );
-            },
-          ),
         ],
       ),
     );

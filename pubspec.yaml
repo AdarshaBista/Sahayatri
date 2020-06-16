@@ -16,6 +16,7 @@ dependencies:
   dio: ^3.0.9
   intl: ^0.16.1
   device_preview: ^0.4.4
+  flutter_local_notifications: ^1.4.4+1
 
   # State Management
   equatable: ^1.2.0

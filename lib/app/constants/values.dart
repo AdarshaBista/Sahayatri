@@ -24,4 +24,9 @@ class Values {
 
   // Animations
   static const int kAnimatorDuration = 500;
+
+  // Notification Channels
+  static const String kOffRouteChannelId = 'off_route';
+  static const String kOffRouteChannelName = 'Off Route Alert';
+  static const String kOffRouteChannelDesc = 'Notify when user goes off-route';
 }
