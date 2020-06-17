@@ -4,14 +4,16 @@ class Values {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
 
+  // Database
+  static const String kPrefsBoxName = 'prefs_box';
+  static const String kWeatherBoxName = 'weather_box';
+
   // Map
   static const String kMapStyleDark = 'mapbox/dark-v10';
   static const String kMapStyleLight = 'mapbox/light-v10';
   static const String kMapStyleStreets = 'mapbox/streets-v11';
   static const String kMapStyleOutdoors = 'mapbox/outdoors-v11';
   static const String kMapStyleSatellite = 'mapbox/satellite-v9';
-  static const String kMapUrl =
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
 
   // Images
   static const String kMarkerImage = 'assets/images/indicators/marker.png';

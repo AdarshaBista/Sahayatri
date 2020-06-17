@@ -33,7 +33,7 @@ class MockTrackerService extends TrackerService {
           bearing: 90.0 + _randomOffset(-90.0, 90.0),
           timestamp: DateTime.now(),
           coord: Coord(
-            lat: routePoints[index].lat + _randomOffset(-0.0004, 0.0004),
+            lat: routePoints[index].lat + _randomOffset(-0.0003, 0.0003),
             lng: routePoints[index].lng,
           ),
         );

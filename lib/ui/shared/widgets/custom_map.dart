@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
 import 'package:latlong/latlong.dart';
@@ -39,13 +38,7 @@ class CustomMap extends StatefulWidget {
 }
 
 class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
-  MapController _mapController;
-
-  @override
-  void initState() {
-    super.initState();
-    _mapController = MapController();
-  }
+  final MapController _mapController = MapController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +96,10 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       keepBuffer: 8,
       tileSize: 512,
       zoomOffset: -1,
-      urlTemplate: Values.kMapUrl,
-      additionalOptions: {
-        'accessToken': ApiKeys.kMapBoxAccessToken,
-        'id': layerId,
-      },
+      tileFadeInDuration: 300,
+      overrideTilesWhenUrlChanges: true,
+      urlTemplate:
+          'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.kMapBoxAccessToken}',
     );
   }
 

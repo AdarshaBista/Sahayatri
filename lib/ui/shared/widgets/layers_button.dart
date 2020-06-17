@@ -57,7 +57,6 @@ class LayersButton extends StatelessWidget {
                 initialValue: state.prefs.mapStyle,
                 color: AppColors.background,
                 onSelected: (mapStyle) {
-                  _showSnackBar(context);
                   context.bloc<PrefsBloc>().add(MapLayerChanged(mapStyle: mapStyle));
                 },
                 child: const Padding(
@@ -95,19 +94,6 @@ class LayersButton extends StatelessWidget {
         color: AppColors.dark,
       ),
     );
-  }
-
-  void _showSnackBar(BuildContext context) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'You may need to reload the map to see changes.',
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }
 

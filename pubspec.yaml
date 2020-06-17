@@ -18,14 +18,20 @@ dependencies:
   device_preview: ^0.4.4
   flutter_local_notifications: ^1.4.4+1
 
+  # Database
+  hive: ^1.4.1+1
+
   # State Management
   equatable: ^1.2.0
   flutter_bloc: ^4.0.0
 
   # Map
   location: ^3.0.2
-  flutter_map: ^0.9.0
   maps_toolkit: ^1.1.0
+  flutter_map:
+    git:
+      url: git://github.com/johnpryan/flutter_map.git
+      ref: c590ab12edbf5b6fce30b13a42e974c0abadd506
   # flutter_mapbox_navigation: ^0.0.10
 
   # Widgets
