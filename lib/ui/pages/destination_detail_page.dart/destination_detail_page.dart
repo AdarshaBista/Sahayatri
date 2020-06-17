@@ -90,18 +90,16 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         data: Theme.of(context).copyWith(
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
         ),
         child: TabBar(
           controller: _tabController,
           indicator: const BoxDecoration(color: Colors.transparent),
           tabs: [
             for (int i = 0; i < _tabs.length; ++i)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: NestedTab(
-                  tab: _tabs[i],
-                  color: _tabController.index == i ? AppColors.primary : AppColors.dark,
-                ),
+              NestedTab(
+                tab: _tabs[i],
+                color: _tabController.index == i ? AppColors.primary : AppColors.dark,
               ),
           ],
         ),
