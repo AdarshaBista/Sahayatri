@@ -22,6 +22,7 @@ class CustomMap extends StatefulWidget {
   final Coord swPanBoundary;
   final Coord nePanBoundary;
   final Function(LatLng) onTap;
+  final CircleLayerOptions circleLayerOptions;
   final MarkerLayerOptions markerLayerOptions;
 
   const CustomMap({
@@ -29,6 +30,7 @@ class CustomMap extends StatefulWidget {
     this.onTap,
     this.swPanBoundary,
     this.nePanBoundary,
+    this.circleLayerOptions,
     this.markerLayerOptions,
   }) : assert(center != null);
 
@@ -56,7 +58,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
               options: MapOptions(
                 zoom: 12.0,
                 minZoom: 10.0,
-                maxZoom: 16.0,
+                maxZoom: 18.0,
                 onTap: widget.onTap,
                 center: widget.center.toLatLng(),
                 swPanBoundary: widget.swPanBoundary?.toLatLng() ??
@@ -73,6 +75,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
               layers: [
                 _buildTiles(state.prefs.mapStyle),
                 _buildRoute(context),
+                if (widget.circleLayerOptions != null) widget.circleLayerOptions,
                 if (widget.markerLayerOptions != null) widget.markerLayerOptions,
               ],
             );
