@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
 class LayersButton extends StatelessWidget {
@@ -46,7 +46,8 @@ class LayersButton extends StatelessWidget {
       builder: (context, state) {
         return Material(
           color: Colors.transparent,
-          child: ScaleAnimator(
+          child: SlideAnimator(
+            begin: const Offset(1.0, 0.0),
             child: Container(
               decoration: const BoxDecoration(
                 color: AppColors.dark,

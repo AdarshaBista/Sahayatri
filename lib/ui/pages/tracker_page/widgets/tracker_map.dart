@@ -22,6 +22,7 @@ class TrackerMap extends StatelessWidget {
 
     return CustomMap(
       center: center,
+      trackLocation: true,
       markerLayerOptions: _buildMarker(center),
       circleLayerOptions: _buildAccuracyCircle(center),
     );
