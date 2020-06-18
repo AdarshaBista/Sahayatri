@@ -35,14 +35,11 @@ class DestinationActions extends StatelessWidget {
   }
 
   Widget _buildViewRouteButton(BuildContext context) {
-    return Hero(
-      tag: context.bloc<DestinationBloc>().destination.routePoints,
-      child: CustomButton(
-        label: 'View Route',
-        iconData: CommunityMaterialIcons.chart_line_variant,
-        onTap: () =>
-            context.repository<DestinationNavService>().pushNamed(Routes.kRoutePageRoute),
-      ),
+    return CustomButton(
+      label: 'View Route',
+      iconData: CommunityMaterialIcons.chart_line_variant,
+      onTap: () =>
+          context.repository<DestinationNavService>().pushNamed(Routes.kRoutePageRoute),
     );
   }
 }

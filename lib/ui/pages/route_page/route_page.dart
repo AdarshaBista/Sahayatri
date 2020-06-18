@@ -21,20 +21,17 @@ class RoutePage extends StatelessWidget {
     final destination = context.bloc<DestinationBloc>().destination;
 
     return Scaffold(
-      body: Hero(
-        tag: destination.routePoints,
-        child: CustomMap(
-          center: destination.midPointCoord,
-          swPanBoundary: Coord(
-            lat: destination.minLat - 0.15,
-            lng: destination.minLong - 0.15,
-          ),
-          nePanBoundary: Coord(
-            lat: destination.maxLat + 0.15,
-            lng: destination.maxLong + 0.15,
-          ),
-          markerLayerOptions: _buildMarkers(context),
+      body: CustomMap(
+        center: destination.midPointCoord,
+        swPanBoundary: Coord(
+          lat: destination.minLat - 0.15,
+          lng: destination.minLong - 0.15,
         ),
+        nePanBoundary: Coord(
+          lat: destination.maxLat + 0.15,
+          lng: destination.maxLong + 0.15,
+        ),
+        markerLayerOptions: _buildMarkers(context),
       ),
     );
   }
