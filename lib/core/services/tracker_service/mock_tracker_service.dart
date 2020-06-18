@@ -18,7 +18,7 @@ class MockTrackerService extends TrackerService {
   }) : assert(userAlertService != null);
 
   double _randomOffset(double start, double end) {
-    return Random().nextDouble() * (end - start);
+    return Random().nextDouble() * (end - start) + start;
   }
 
   @override
@@ -33,7 +33,7 @@ class MockTrackerService extends TrackerService {
           bearing: 90.0 + _randomOffset(-90.0, 90.0),
           timestamp: DateTime.now(),
           coord: Coord(
-            lat: routePoints[index].lat + _randomOffset(-0.0003, 0.0003),
+            lat: routePoints[index].lat + _randomOffset(-0.0005, 0.0005),
             lng: routePoints[index].lng,
           ),
         );

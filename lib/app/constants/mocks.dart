@@ -13,7 +13,6 @@ final List<Destination> mockDestinations = [
   _destination,
   _destination.copyWith(id: 2),
   _destination.copyWith(id: 3),
-  _destination.copyWith(id: 4),
 ];
 
 final Destination _destination = Destination(
@@ -1617,8 +1616,8 @@ List<Coord> routePoints = [
 ];
 
 const double aMin = -1000.0;
-const double aMax = -1000.0;
+const double aMax = 1000.0;
 
 double _randomOffset(double start, double end) {
-  return Random().nextDouble() * (end - start);
+  return Random().nextDouble() * (end - start) + start;
 }
