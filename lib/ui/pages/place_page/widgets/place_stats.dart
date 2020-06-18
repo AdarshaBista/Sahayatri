@@ -20,7 +20,7 @@ class PlaceStats extends StatelessWidget {
         children: <Widget>[
           StatCard(
             label: 'Altitude',
-            count: '${place.altitude.floor()} m',
+            count: '${place.coord.alt.floor()} m',
             color: Colors.teal,
           ),
           StatCard(

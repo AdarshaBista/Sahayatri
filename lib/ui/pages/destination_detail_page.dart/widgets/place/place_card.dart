@@ -81,7 +81,7 @@ class PlaceCard extends StatelessWidget {
           ),
           const SizedBox(height: 4.0),
           Text(
-            '${place.altitude.toInt()} m',
+            '${place.coord.alt.toInt()} m',
             style: AppTextStyles.small.light.primary,
           ),
         ],

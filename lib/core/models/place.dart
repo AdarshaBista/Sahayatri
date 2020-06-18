@@ -8,7 +8,6 @@ class Place {
   final String name;
   final String description;
   final Coord coord;
-  final double altitude;
   final bool isNetworkAvailable;
   final List<Lodge> lodges;
   final List<String> imageUrls;
@@ -18,7 +17,6 @@ class Place {
     @required this.name,
     @required this.description,
     @required this.coord,
-    @required this.altitude,
     @required this.isNetworkAvailable,
     @required this.lodges,
     @required this.imageUrls,
@@ -26,7 +24,6 @@ class Place {
         assert(name != null),
         assert(description != null),
         assert(coord != null),
-        assert(altitude != null),
         assert(isNetworkAvailable != null),
         assert(lodges != null),
         assert(imageUrls != null);
@@ -36,7 +33,6 @@ class Place {
     String name,
     String description,
     Coord coord,
-    double altitude,
     bool isNetworkAvailable,
     List<Lodge> lodges,
     List<String> imageUrls,
@@ -46,7 +42,6 @@ class Place {
       name: name ?? this.name,
       description: description ?? this.description,
       coord: coord ?? this.coord,
-      altitude: altitude ?? this.altitude,
       isNetworkAvailable: isNetworkAvailable ?? this.isNetworkAvailable,
       lodges: lodges ?? this.lodges,
       imageUrls: imageUrls ?? this.imageUrls,
@@ -59,7 +54,6 @@ class Place {
       'name': name,
       'description': description,
       'coord': coord?.toMap(),
-      'altitude': altitude,
       'isNetworkAvailable': isNetworkAvailable,
       'lodges': lodges?.map((x) => x?.toMap())?.toList(),
       'imageUrls': imageUrls,
@@ -74,7 +68,6 @@ class Place {
       name: map['name'] as String,
       description: map['description'] as String,
       coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
-      altitude: map['altitude'] as double,
       isNetworkAvailable: map['isNetworkAvailable'] as bool,
       lodges: List<Lodge>.from((map['lodges'] as List<Lodge>)
           ?.map((x) => Lodge.fromMap(x as Map<String, dynamic>))),
@@ -84,7 +77,7 @@ class Place {
 
   @override
   String toString() {
-    return 'Place(id: $id, name: $name, description: $description, coord: $coord, altitude: $altitude, isNetworkAvailable: $isNetworkAvailable, lodges: $lodges, imageUrls: $imageUrls)';
+    return 'Place(id: $id, name: $name, description: $description, coord: $coord, isNetworkAvailable: $isNetworkAvailable, lodges: $lodges, imageUrls: $imageUrls)';
   }
 
   @override
@@ -96,7 +89,6 @@ class Place {
         o.name == name &&
         o.description == description &&
         o.coord == coord &&
-        o.altitude == altitude &&
         o.isNetworkAvailable == isNetworkAvailable &&
         listEquals(o.lodges, lodges) &&
         listEquals(o.imageUrls, imageUrls);
@@ -108,7 +100,6 @@ class Place {
         name.hashCode ^
         description.hashCode ^
         coord.hashCode ^
-        altitude.hashCode ^
         isNetworkAvailable.hashCode ^
         lodges.hashCode ^
         imageUrls.hashCode;
