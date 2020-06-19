@@ -15,8 +15,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
-import 'package:sahayatri/ui/shared/widgets/layers_button.dart';
-import 'package:sahayatri/ui/shared/widgets/track_location_button.dart';
+import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
+import 'package:sahayatri/ui/shared/widgets/map/track_location_button.dart';
 
 class CustomMap extends StatefulWidget {
   final bool trackLocation;

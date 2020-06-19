@@ -6,7 +6,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_map.dart';
+import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class TrackerMap extends StatelessWidget {
