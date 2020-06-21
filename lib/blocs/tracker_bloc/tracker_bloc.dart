@@ -35,10 +35,9 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
           return;
         }
 
-        yield TrackerSuccess(
-          initialLocation: userLocation,
-          userLocationStream: trackerService.getLocationStream(event.route),
-        );
+        await for (final userLocation in trackerService.getLocationStream(event.route)) {
+          yield TrackerSuccess(userLocation: userLocation);
+        }
       } on Failure catch (e) {
         print(e.error);
         yield TrackerError(message: e.message);

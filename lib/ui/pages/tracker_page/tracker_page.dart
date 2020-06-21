@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/user_location.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
@@ -45,22 +43,12 @@ class TrackerPage extends StatelessWidget {
   Widget _buildBody(TrackerSuccess state) {
     return SlidingPanel(
       minHeight: kCollapsedHeight,
-      body: _buildMap(state),
+      body: TrackerMap(userLocation: state.userLocation),
       panelBuilder: (sc) => TrackerPanel(
         state: state,
         controller: sc,
         collapsedHeight: kCollapsedHeight,
       ),
-    );
-  }
-
-  Widget _buildMap(TrackerSuccess state) {
-    return StreamBuilder<UserLocation>(
-      stream: state.userLocationStream,
-      initialData: state.initialLocation,
-      builder: (context, snapshot) {
-        return TrackerMap(userLocation: snapshot.data);
-      },
     );
   }
 }

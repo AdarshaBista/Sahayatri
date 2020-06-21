@@ -12,17 +12,14 @@ class TrackerLoading extends TrackerState {}
 class TrackerLocationError extends TrackerState {}
 
 class TrackerSuccess extends TrackerState {
-  final UserLocation initialLocation;
-  final Stream<UserLocation> userLocationStream;
+  final UserLocation userLocation;
 
   const TrackerSuccess({
-    @required this.initialLocation,
-    @required this.userLocationStream,
-  })  : assert(initialLocation != null),
-        assert(userLocationStream != null);
+    @required this.userLocation,
+  }) : assert(userLocation != null);
 
   @override
-  List<Object> get props => [initialLocation, userLocationStream];
+  List<Object> get props => [userLocation];
 }
 
 class TrackerError extends TrackerState {

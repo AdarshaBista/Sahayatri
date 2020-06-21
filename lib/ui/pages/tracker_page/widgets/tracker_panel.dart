@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/user_location.dart';
-
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
@@ -29,15 +27,9 @@ class TrackerPanel extends StatelessWidget {
         children: [
           const SizedBox(height: 4.0),
           const Pill(),
-          StreamBuilder<UserLocation>(
-            stream: state.userLocationStream,
-            initialData: state.initialLocation,
-            builder: (context, snapshot) {
-              return TrackerStats(
-                height: collapsedHeight,
-                userLocation: snapshot.data,
-              );
-            },
+          TrackerStats(
+            height: collapsedHeight,
+            userLocation: state.userLocation,
           ),
           const Divider(height: 20.0),
         ],
