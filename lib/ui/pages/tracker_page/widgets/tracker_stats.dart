@@ -23,7 +23,7 @@ class TrackerStats extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           StatCard(
-            label: 'Altitide',
+            label: 'Altitude',
             count: '${userLocation.altitude.floor()} m',
             color: Colors.teal,
           ),

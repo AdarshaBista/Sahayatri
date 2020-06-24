@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 extension WidgetX on Widget {
   void openDialog(BuildContext context) {
-    showDialog<void>(
+    showDialog(
       context: context,
       useSafeArea: true,
       useRootNavigator: false,
@@ -15,13 +15,23 @@ extension WidgetX on Widget {
   }
 
   void openModalBottomSheet(BuildContext context) {
-    showModalBottomSheet<void>(
+    showModalBottomSheet(
       context: context,
       enableDrag: true,
       isDismissible: true,
       useRootNavigator: false,
       isScrollControlled: true,
       barrierColor: AppColors.barrier,
+      backgroundColor: AppColors.background,
+      builder: (_) => this,
+    );
+  }
+
+  PersistentBottomSheetController openBottomSheet(BuildContext context) {
+    return showBottomSheet(
+      context: context,
+      elevation: 12.0,
+      clipBehavior: Clip.antiAlias,
       backgroundColor: AppColors.background,
       builder: (_) => this,
     );

@@ -10,25 +10,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
-import 'package:sahayatri/ui/shared/widgets/map/altitude_graph.dart';
+import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
 
-class RoutePage extends StatelessWidget {
+class RoutePage extends StatefulWidget {
   const RoutePage();
+
+  @override
+  _RoutePageState createState() => _RoutePageState();
+}
+
+class _RoutePageState extends State<RoutePage> {
+  bool isSheetOpen = false;
+  int altitudeDragCoordIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final destination = context.bloc<DestinationBloc>().destination;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(CommunityMaterialIcons.chart_bell_curve),
-        onPressed: () => AltitudeGraph(
-          altitudes: destination.routePoints.map((r) => r.alt).toList(),
-        ).openModalBottomSheet(context),
+      floatingActionButton: Builder(
+        builder: (context) => FloatingActionButton(
+          child: const Icon(CommunityMaterialIcons.chart_bell_curve),
+          onPressed: () => _openAltitudeSheet(context),
+        ),
       ),
       body: CustomMap(
         center: destination.midPointCoord,
@@ -45,20 +53,60 @@ class RoutePage extends StatelessWidget {
     );
   }
 
+  Future<void> _openAltitudeSheet(BuildContext context) async {
+    final destination = context.bloc<DestinationBloc>().destination;
+
+    setState(() {
+      isSheetOpen = !isSheetOpen;
+    });
+
+    if (isSheetOpen) {
+      final bsController = AltitudeGraph(
+        altitudes: destination.routePoints.map((p) => p.alt).toList(),
+        onDrag: (index) {
+          setState(() {
+            altitudeDragCoordIndex = index;
+          });
+        },
+      ).openBottomSheet(context);
+
+      await bsController.closed;
+      setState(() {
+        isSheetOpen = false;
+      });
+    } else {
+      context.repository<DestinationNavService>().pop();
+    }
+  }
+
   MarkerLayerOptions _buildMarkers(BuildContext context) {
-    final places = context.bloc<DestinationBloc>().destination.places;
+    final destination = context.bloc<DestinationBloc>().destination;
 
     return MarkerLayerOptions(
       markers: [
-        for (int i = 0; i < places.length; ++i)
+        for (int i = 0; i < destination.places.length; ++i)
           PlaceMarker(
-            point: places[i].coord.toLatLng(),
+            point: destination.places[i].coord.toLatLng(),
             color: AppColors.accentColors[i % AppColors.accentColors.length],
             onTap: () {
               context.repository<DestinationNavService>().pushNamed(
                     Routes.kPlacePageRoute,
-                    arguments: places[i],
+                    arguments: destination.places[i],
                   );
+            },
+          ),
+        if (isSheetOpen)
+          Marker(
+            width: 32.0,
+            height: 32.0,
+            point: destination.routePoints[altitudeDragCoordIndex].toLatLng(),
+            anchorPos: AnchorPos.align(AnchorAlign.top),
+            builder: (context) {
+              return const Icon(
+                Icons.location_on,
+                size: 32.0,
+                color: AppColors.dark,
+              );
             },
           ),
       ],

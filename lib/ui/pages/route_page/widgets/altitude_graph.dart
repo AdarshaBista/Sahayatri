@@ -7,10 +7,13 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 class AltitudeGraph extends StatelessWidget {
   final List<double> altitudes;
+  final Function(int) onDrag;
 
   const AltitudeGraph({
     @required this.altitudes,
-  }) : assert(altitudes != null);
+    @required this.onDrag,
+  })  : assert(altitudes != null),
+        assert(onDrag != null);
 
   @override
   Widget build(BuildContext context) {
@@ -41,59 +44,68 @@ class AltitudeGraph extends StatelessWidget {
   LineChart _buildGraph() {
     const double interval = 1000.0;
     final double maxY = altitudes.reduce(math.max).toDouble();
-    final List<double> xValues = List.generate(
-      altitudes.length,
-      (index) => index.toDouble(),
-    ).toList();
+    final List<double> xValues =
+        List.generate(altitudes.length, (index) => index.toDouble()).toList();
 
     return LineChart(
       LineChartData(
-        lineTouchData: LineTouchData(
-          handleBuiltInTouches: true,
-          touchTooltipData: LineTouchTooltipData(
-            fitInsideHorizontally: true,
-            tooltipBgColor: AppColors.dark,
-          ),
-        ),
-        minX: 0,
-        maxX: xValues.length.toDouble(),
         minY: 0.0,
+        minX: 0.0,
         maxY: maxY,
+        maxX: xValues.length.toDouble(),
         borderData: FlBorderData(show: false),
-        gridData: FlGridData(
-          show: true,
-          drawVerticalLine: false,
-          drawHorizontalLine: true,
-          verticalInterval: interval,
-          horizontalInterval: interval,
-        ),
-        titlesData: FlTitlesData(
-          bottomTitles: SideTitles(showTitles: false),
-          leftTitles: SideTitles(
-            showTitles: true,
-            margin: 8.0,
-            interval: interval,
-            reservedSize: 30.0,
-            textStyle: AppTextStyles.extraSmall.bold,
-            getTitles: (value) => '${value.round()}',
-          ),
-        ),
-        lineBarsData: [
-          _buildLineData(
-            xValues: xValues,
-            yValues: altitudes,
-            color: AppColors.primary,
-          ),
-        ],
+        lineTouchData: _buildTouchData(),
+        gridData: _buildGrid(interval),
+        titlesData: _buildTitles(interval),
+        lineBarsData: [_buildLineData(xValues, altitudes, AppColors.primary)],
       ),
     );
   }
 
-  LineChartBarData _buildLineData({
+  LineTouchData _buildTouchData() {
+    return LineTouchData(
+      handleBuiltInTouches: true,
+      touchTooltipData: LineTouchTooltipData(
+        fitInsideHorizontally: true,
+        tooltipBgColor: AppColors.dark,
+      ),
+      touchCallback: (response) {
+        if (response.lineBarSpots.isEmpty) return;
+        final int index = response.lineBarSpots.first.spotIndex;
+        onDrag(index);
+      },
+    );
+  }
+
+  FlGridData _buildGrid(double interval) {
+    return FlGridData(
+      show: true,
+      drawVerticalLine: false,
+      drawHorizontalLine: true,
+      verticalInterval: interval,
+      horizontalInterval: interval,
+    );
+  }
+
+  FlTitlesData _buildTitles(double interval) {
+    return FlTitlesData(
+      bottomTitles: SideTitles(showTitles: false),
+      leftTitles: SideTitles(
+        showTitles: true,
+        margin: 8.0,
+        interval: interval,
+        reservedSize: 30.0,
+        textStyle: AppTextStyles.extraSmall.bold,
+        getTitles: (value) => '${value.round()}',
+      ),
+    );
+  }
+
+  LineChartBarData _buildLineData(
     List<double> xValues,
     List<double> yValues,
     Color color,
-  }) {
+  ) {
     return LineChartBarData(
       spots: List<FlSpot>.generate(
         xValues.length,
