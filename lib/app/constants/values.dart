@@ -4,10 +4,6 @@ class Values {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
 
-  // Database
-  static const String kPrefsBoxName = 'prefs_box';
-  static const String kWeatherBoxName = 'weather_box';
-
   // Map
   static const String kMapStyleDark = 'mapbox/dark-v10';
   static const String kMapStyleLight = 'mapbox/light-v10';
@@ -16,6 +12,7 @@ class Values {
   static const String kMapStyleSatellite = 'mapbox/satellite-v9';
 
   // Images
+  static const String kSplashImage = 'assets/icon/splash.png';
   static const String kMarkerImage = 'assets/images/indicators/marker.png';
   static const String kUserMarkerImage = 'assets/images/indicators/user_marker.png';
   static const String kErrorImage = 'assets/images/indicators/error.png';

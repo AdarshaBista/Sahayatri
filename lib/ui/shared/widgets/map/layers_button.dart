@@ -55,7 +55,7 @@ class LayersButton extends StatelessWidget {
               ),
               child: PopupMenuButton<String>(
                 elevation: 6.0,
-                initialValue: state.prefs.mapStyle,
+                initialValue: (state as PrefsLoaded).prefs.mapStyle,
                 color: AppColors.background,
                 onSelected: (mapStyle) {
                   context.bloc<PrefsBloc>().add(MapLayerChanged(mapStyle: mapStyle));

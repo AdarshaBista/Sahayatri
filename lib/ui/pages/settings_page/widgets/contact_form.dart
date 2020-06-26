@@ -28,7 +28,7 @@ class _ContactFormState extends State<ContactForm> {
           title: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildTextField(state.prefs.contact),
+              _buildTextField((state as PrefsLoaded).prefs.contact),
               const SizedBox(height: 12.0),
               _buildSubmitButton(context),
             ],

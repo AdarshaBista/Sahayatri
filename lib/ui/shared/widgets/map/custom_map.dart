@@ -111,7 +111,7 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
                 ).toLatLng(),
           ),
           layers: [
-            _buildTiles(state.prefs.mapStyle),
+            _buildTiles((state as PrefsLoaded).prefs.mapStyle),
             _buildRoute(context),
             if (widget.circleLayerOptions != null) widget.circleLayerOptions,
             if (widget.markerLayerOptions != null) widget.markerLayerOptions,

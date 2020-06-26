@@ -9,6 +9,10 @@ abstract class NavigationService {
     await navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
   }
 
+  Future<void> pushReplacementNamed(String routeName, {Object arguments}) async {
+    await navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
+  }
+
   void pop() {
     navigatorKey.currentState.pop();
   }

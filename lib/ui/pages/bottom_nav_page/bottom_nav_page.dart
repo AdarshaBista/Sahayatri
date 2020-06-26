@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
+
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/splash_view.dart';
 import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 
 import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
@@ -18,6 +22,17 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<PrefsBloc, PrefsState>(
+      builder: (context, state) {
+        if (state is PrefsLoading) {
+          return const SplashView();
+        }
+        return _buildNavView();
+      },
+    );
+  }
+
+  Widget _buildNavView() {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,

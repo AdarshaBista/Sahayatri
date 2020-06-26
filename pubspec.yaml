@@ -15,12 +15,16 @@ dependencies:
   # Misc
   dio: ^3.0.9
   intl: ^0.16.1
+  path_provider: ^1.6.11
   device_preview: ^0.4.4
   flutter_local_notifications: ^1.4.4+1
 
   # State Management
   equatable: ^1.2.0
   flutter_bloc: ^4.0.0
+
+  # Database
+  hive: ^1.4.1+1
 
   # Map
   location: ^3.0.2
@@ -29,7 +33,6 @@ dependencies:
     git:
       url: git://github.com/johnpryan/flutter_map.git
       ref: c590ab12edbf5b6fce30b13a42e974c0abadd506
-  # flutter_mapbox_navigation: ^0.0.10
 
   # Widgets
   animator: ^2.0.0
@@ -48,6 +51,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^1.7.3
+  hive_generator:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_generator
 
   lint: ^1.2.0
   flutter_native_splash: ^0.1.9
@@ -70,6 +79,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icon/
     - assets/images/mardi/
     - assets/images/indicators/
 

@@ -3,7 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:sahayatri/core/models/prefs.dart';
+
+import 'package:path_provider/path_provider.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:hive/hive.dart';
+import 'package:sahayatri/core/database/prefs_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
@@ -13,8 +20,9 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/sahayatri.dart';
 import 'package:device_preview/device_preview.dart';
 
-void main() {
+Future<void> main() async {
   setStatusBarStyle();
+  await initHive();
   runApp(const App());
 }
 
@@ -26,6 +34,22 @@ void setStatusBarStyle() {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
+}
+
+Future<void> initHive() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  String hivePath;
+
+  if (Platform.isWindows) {
+    hivePath = 'db';
+  } else {
+    final appDir = await getApplicationDocumentsDirectory();
+    hivePath = appDir.path;
+  }
+
+  Hive
+    ..init(hivePath)
+    ..registerAdapter(PrefsAdapter());
 }
 
 class App extends StatelessWidget {
@@ -49,6 +73,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => UserAlertService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
+          RepositoryProvider(create: (_) => PrefsDao()),
         ],
         child: const Sahayatri(),
       ),

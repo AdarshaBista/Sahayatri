@@ -4,8 +4,10 @@ abstract class PrefsEvent extends Equatable {
   const PrefsEvent();
 
   @override
-  List<Object> get props => throw [];
+  List<Object> get props => [];
 }
+
+class PrefsInitialized extends PrefsEvent {}
 
 class MapLayerChanged extends PrefsEvent {
   final String mapStyle;
