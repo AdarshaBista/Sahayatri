@@ -5,6 +5,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final IconData icon;
+  final double iconGap;
   final String initialValue;
   final TextStyle labelStyle;
   final TextInputType keyboardType;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     @required this.onChanged,
     @required this.initialValue,
     this.icon,
+    this.iconGap = 32.0,
     this.labelStyle,
     this.keyboardType = TextInputType.text,
   })  : assert(label != null),
@@ -39,7 +41,7 @@ class CustomTextField extends StatelessWidget {
           decoration: icon != null
               ? InputDecoration(
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16.0, right: 32.0),
+                    padding: EdgeInsets.only(left: 16.0, right: iconGap),
                     child: Icon(
                       icon,
                       size: 22.0,

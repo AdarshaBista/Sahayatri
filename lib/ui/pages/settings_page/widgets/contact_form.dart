@@ -18,50 +18,42 @@ class _ContactFormState extends State<ContactForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrefsBloc, PrefsState>(
-      builder: (context, state) {
-        return AlertDialog(
-          elevation: 12.0,
-          clipBehavior: Clip.antiAlias,
-          titlePadding: const EdgeInsets.all(20.0),
-          backgroundColor: AppColors.background,
-          title: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildTextField((state as PrefsLoaded).prefs.contact),
-              const SizedBox(height: 12.0),
-              _buildSubmitButton(context),
-            ],
-          ),
-        );
-      },
+    return AlertDialog(
+      elevation: 12.0,
+      clipBehavior: Clip.antiAlias,
+      titlePadding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      backgroundColor: AppColors.background,
+      title: _buildTextField(),
+      actions: [_buildSubmitButton(context)],
     );
   }
 
-  Widget _buildTextField(String intialValue) {
-    return CustomTextField(
-      label: 'Contact',
-      onChanged: (value) => contact = value,
-      initialValue: intialValue,
-      keyboardType: const TextInputType.numberWithOptions(),
-    );
+  Widget _buildTextField() {
+    return BlocBuilder<PrefsBloc, PrefsState>(builder: (context, state) {
+      return CustomTextField(
+        label: 'Contact number',
+        icon: Icons.phone,
+        iconGap: 16.0,
+        onChanged: (value) => contact = value,
+        initialValue: (state as PrefsLoaded).prefs.contact,
+        keyboardType: const TextInputType.numberWithOptions(),
+      );
+    });
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      backgroundColor: AppColors.dark,
-      child: const Icon(
-        Icons.check,
-        size: 24.0,
-        color: AppColors.primary,
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: FlatButton(
+        child: Text(
+          'SAVE',
+          style: AppTextStyles.medium.primary,
+        ),
+        onPressed: () {
+          context.bloc<PrefsBloc>().add(ContactSaved(contact: contact));
+          Navigator.of(context).pop();
+        },
       ),
-      onPressed: () {
-        context.bloc<PrefsBloc>().add(
-              ContactSaved(contact: contact),
-            );
-        Navigator.of(context).pop();
-      },
     );
   }
 }
