@@ -31,4 +31,14 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
       ..writeByte(1)
       ..write(obj.mapStyle);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PrefsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

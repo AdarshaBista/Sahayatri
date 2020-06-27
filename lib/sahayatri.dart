@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
 import 'package:sahayatri/core/database/prefs_dao.dart';
+import 'package:sahayatri/core/database/weather_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
@@ -31,6 +32,7 @@ class Sahayatri extends StatelessWidget {
         RepositoryProvider<WeatherService>(
           create: (_) => WeatherService(
             apiService: context.repository<ApiService>(),
+            weatherDao: context.repository<WeatherDao>(),
           ),
         ),
         RepositoryProvider<DirectionsService>(

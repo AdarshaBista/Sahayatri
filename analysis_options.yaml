@@ -2,7 +2,7 @@ include: package:lint/analysis_options.yaml
 
 analyzer:
   exclude:
-    - lib/**/*.g.dart
+    - lib/core/models/*.g.dart
 
 linter:
   rules:

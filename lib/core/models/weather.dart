@@ -1,20 +1,49 @@
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:hive/hive.dart';
 
+part 'weather.g.dart';
+
+@HiveType(typeId: 1)
 class Weather {
+  @HiveField(0)
   final DateTime date;
+
+  @HiveField(1)
   final DateTime sunset;
+
+  @HiveField(2)
   final DateTime sunrise;
+
+  @HiveField(3)
   final int temp;
+
+  @HiveField(4)
   final int minTemp;
+
+  @HiveField(5)
   final int maxTemp;
+
+  @HiveField(6)
   final int feelsLikeTemp;
+
+  @HiveField(7)
   final int pressure;
+
+  @HiveField(8)
   final int humidity;
+
+  @HiveField(9)
   final double windSpeed;
+
+  @HiveField(10)
   final String label;
+
+  @HiveField(11)
   final String iconString;
+
+  @HiveField(12)
   final DateTime createdAt;
 
   IconData get icon => _iconsMap[iconString];
