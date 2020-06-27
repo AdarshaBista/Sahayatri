@@ -72,7 +72,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       backgroundColor: AppColors.dark,
       onPressed: () => context.repository<DestinationNavService>().pushNamed(
             Routes.kTrackerPageRoute,
-            arguments: context.bloc<DestinationBloc>().destination.routePoints,
+            arguments: context.bloc<DestinationBloc>().destination,
           ),
       child: const Icon(
         Icons.directions_walk,

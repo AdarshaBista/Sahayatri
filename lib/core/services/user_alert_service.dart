@@ -1,4 +1,3 @@
-import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/constants/values.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -36,7 +35,6 @@ class UserAlertService {
       'Sahayatri - Off Route',
       'You seem to be going off route. Please check the route on the app.',
       platformChannelSpecifics,
-      payload: Routes.kTrackerPageRoute,
     );
   }
 }

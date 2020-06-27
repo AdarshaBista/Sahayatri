@@ -8,12 +8,12 @@ abstract class TrackerEvent extends Equatable {
 }
 
 class TrackingStarted extends TrackerEvent {
-  final List<Coord> route;
+  final Destination destination;
 
   const TrackingStarted({
-    @required this.route,
-  }) : assert(route != null);
+    @required this.destination,
+  }) : assert(destination != null);
 
   @override
-  List<Object> get props => [route];
+  List<Object> get props => [destination];
 }

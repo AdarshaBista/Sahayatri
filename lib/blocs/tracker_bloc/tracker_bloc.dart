@@ -3,8 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
@@ -30,12 +30,17 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       yield TrackerLoading();
       try {
         final UserLocation userLocation = await trackerService.getUserLocation();
-        if (!trackerService.isNearTrail(userLocation.coord, event.route)) {
+        if (!trackerService.isNearTrail(
+          userLocation.coord,
+          event.destination.routePoints,
+        )) {
           yield TrackerLocationError();
           return;
         }
 
-        await for (final userLocation in trackerService.getLocationStream(event.route)) {
+        await for (final userLocation in trackerService.getLocationStream(
+          event.destination.routePoints,
+        )) {
           yield TrackerSuccess(userLocation: userLocation);
         }
       } on Failure catch (e) {

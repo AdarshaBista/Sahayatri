@@ -12,6 +12,7 @@ import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
@@ -77,7 +78,7 @@ class DestRouter {
                 create: (context) => TrackerBloc(
                       trackerService: context.repository<TrackerService>(),
                     )..add(
-                        TrackingStarted(route: settings.arguments as List<Coord>),
+                        TrackingStarted(destination: settings.arguments as Destination),
                       )),
             BlocProvider<DirectionsBloc>(
               create: (context) => DirectionsBloc(

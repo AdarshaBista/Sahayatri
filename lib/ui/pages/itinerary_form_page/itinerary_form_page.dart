@@ -22,7 +22,7 @@ class ItineraryFormPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _buildFab(context),
       appBar: CustomAppbar(
-        title: 'Create a Itinerary',
+        title: 'Create an Itinerary',
         elevation: 0.0,
       ),
       body: Padding(
@@ -65,9 +65,7 @@ class ItineraryFormPage extends StatelessWidget {
       return;
     }
 
-    context
-        .bloc<DestinationBloc>()
-        .add(ItineraryCreated(itinerary: state.itinerary));
+    context.bloc<DestinationBloc>().add(ItineraryCreated(itinerary: state.itinerary));
     context.repository<DestinationNavService>().pop();
   }
 }
