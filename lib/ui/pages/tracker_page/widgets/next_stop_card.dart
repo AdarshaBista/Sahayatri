@@ -9,6 +9,8 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
 class NextStopCard extends StatelessWidget {
   final Place place;
@@ -21,50 +23,94 @@ class NextStopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return place != null
+        ? FadeAnimator(
+            child: AspectRatio(
+              aspectRatio: 2.3,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .repository<DestinationNavService>()
+                      .pushNamed(Routes.kPlacePageRoute, arguments: place);
+                },
+                child: Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    _buildBackground(),
+                    _buildTitle(),
+                  ],
+                ),
+              ),
+            ),
+          )
+        : const Offstage();
+  }
+
+  Widget _buildBackground() {
+    return CustomCard(
+      child: GradientContainer(
+        gradientBegin: Alignment.bottomLeft,
+        gradientEnd: Alignment.topRight,
+        gradientColors: [
+          AppColors.dark.withOpacity(0.8),
+          AppColors.dark.withOpacity(0.6),
+          AppColors.dark.withOpacity(0.4),
+          AppColors.dark.withOpacity(0.2),
+          Colors.transparent,
+        ],
+        child: Image.asset(
+          place.imageUrls[0],
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'NEXT STOP',
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.medium.bold.light,
           ),
-          const SizedBox(height: 12.0),
-          CustomCard(
-            padding: EdgeInsets.all(place != null ? 0.0 : 16.0),
-            child: place != null ? _buildTile(context) : _buildNoNextStop(),
+          const Spacer(),
+          Text(
+            place.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.small.light,
+          ),
+          Divider(
+            color: AppColors.light.withOpacity(0.5),
+            height: 10.0,
+            endIndent: 64.0,
+          ),
+          Text(
+            eta != null
+                ? 'ETA: ${eta.inHours} hr ${eta.inMinutes.remainder(60)} min'
+                : '-',
+            style: AppTextStyles.small.bold.primary,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildTile(BuildContext context) {
-    return ListTile(
-      title: Text(
-        place.name,
-        style: AppTextStyles.medium.bold,
-      ),
-      subtitle: Text(
-        eta != null ? 'ETA: ${eta.inHours} hr ${eta.inMinutes.remainder(60)} min' : '-',
-        style: AppTextStyles.small,
-      ),
-      leading: CircleAvatar(backgroundImage: AssetImage(place.imageUrls[0])),
-      onTap: () {
-        context
-            .repository<DestinationNavService>()
-            .pushNamed(Routes.kPlacePageRoute, arguments: place);
-      },
-    );
-  }
-
   Widget _buildNoNextStop() {
     return Row(
       children: [
-        Text(
-          'No next stop!',
-          style: AppTextStyles.medium,
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            'No next stop!',
+            style: AppTextStyles.medium,
+          ),
         ),
       ],
     );

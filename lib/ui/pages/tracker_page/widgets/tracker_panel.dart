@@ -7,6 +7,7 @@ import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/next_stop_card.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/distance_stats.dart';
 
 class TrackerPanel extends StatelessWidget {
   static const double kCollapsedHeight = 100.0;
@@ -35,6 +36,7 @@ class TrackerPanel extends StatelessWidget {
   Widget _buildPanel(ScrollController controller) {
     return SingleChildScrollView(
       controller: controller,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
@@ -48,6 +50,11 @@ class TrackerPanel extends StatelessWidget {
           NextStopCard(
             eta: state.eta,
             place: state.nextStop,
+          ),
+          const SizedBox(height: 12.0),
+          DistanceStats(
+            walked: state.distanceWalked,
+            remaining: state.distanceRemaining,
           ),
         ],
       ),

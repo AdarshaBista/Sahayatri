@@ -37,6 +37,19 @@ abstract class TrackerService {
     return _getIndexOnRoute(userLocation, route, 0.1);
   }
 
+  double getDistanceWalked(int userIndex, List<Coord> route) {
+    final path = route.take(userIndex).map((p) => LatLng(p.lat, p.lng)).toList();
+    return SphericalUtil.computeLength(path).toDouble();
+  }
+
+  double getDistanceRemaining(int userIndex, List<Coord> route) {
+    final path = route
+        .getRange(userIndex, route.length - 1)
+        .map((p) => LatLng(p.lat, p.lng))
+        .toList();
+    return SphericalUtil.computeLength(path).toDouble();
+  }
+
   Place getNextStop(Coord userLocation, List<Place> places, List<Coord> route) {
     for (final place in places) {
       final userIndex = _getIndexOnRoute(userLocation, route);

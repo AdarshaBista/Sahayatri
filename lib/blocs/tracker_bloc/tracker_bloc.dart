@@ -58,27 +58,25 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     UserLocation userLocation,
     Destination destination,
   ) async* {
-    if (trackerService.shouldAlertUser(userLocation.coord, destination.routePoints)) {
+    final route = destination.routePoints;
+    if (trackerService.shouldAlertUser(userLocation.coord, route)) {
       userAlertService.alert();
     }
 
-    final nextStop = trackerService.getNextStop(
-      userLocation.coord,
-      destination.places,
-      destination.routePoints,
-    );
-
-    final eta = trackerService.getEta(userLocation, nextStop, destination.routePoints);
-    final int userIndex = trackerService.getUserIndex(
-      userLocation.coord,
-      destination.routePoints,
-    );
+    final nextStop =
+        trackerService.getNextStop(userLocation.coord, destination.places, route);
+    final eta = trackerService.getEta(userLocation, nextStop, route);
+    final userIndex = trackerService.getUserIndex(userLocation.coord, route);
+    final distanceWalked = trackerService.getDistanceWalked(userIndex, route);
+    final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
 
     yield TrackerSuccess(
       userIndex: userIndex,
       eta: eta,
       nextStop: nextStop,
       userLocation: userLocation,
+      distanceWalked: distanceWalked,
+      distanceRemaining: distanceRemaining,
     );
   }
 }
