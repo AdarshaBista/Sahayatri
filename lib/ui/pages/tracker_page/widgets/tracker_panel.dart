@@ -23,7 +23,10 @@ class TrackerPanel extends StatelessWidget {
         parallaxEnabled: false,
         minHeight: kCollapsedHeight,
         margin: const EdgeInsets.all(16.0),
-        body: TrackerMap(userLocation: state.userLocation),
+        body: TrackerMap(
+          userIndex: state.userIndex,
+          userLocation: state.userLocation,
+        ),
         panelBuilder: (sc) => _buildPanel(sc),
       ),
     );

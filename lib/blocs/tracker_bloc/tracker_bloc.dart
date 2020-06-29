@@ -69,8 +69,13 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     );
 
     final eta = trackerService.getEta(userLocation, nextStop, destination.routePoints);
+    final int userIndex = trackerService.getUserIndex(
+      userLocation.coord,
+      destination.routePoints,
+    );
 
     yield TrackerSuccess(
+      userIndex: userIndex,
       eta: eta,
       nextStop: nextStop,
       userLocation: userLocation,

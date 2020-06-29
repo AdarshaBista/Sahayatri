@@ -33,6 +33,10 @@ abstract class TrackerService {
     return isAlreadyAlerted = false;
   }
 
+  int getUserIndex(Coord userLocation, List<Coord> route) {
+    return _getIndexOnRoute(userLocation, route, 0.1);
+  }
+
   Place getNextStop(Coord userLocation, List<Place> places, List<Coord> route) {
     for (final place in places) {
       final userIndex = _getIndexOnRoute(userLocation, route);
@@ -57,12 +61,13 @@ abstract class TrackerService {
     return Duration(seconds: etaInSeconds.toInt());
   }
 
-  int _getIndexOnRoute(Coord point, List<Coord> route) {
+  int _getIndexOnRoute(Coord point, List<Coord> route,
+      [double tolerance = kMinNearbyDistance * 3.0]) {
     return PolygonUtil.locationIndexOnPath(
       LatLng(point.lat, point.lng),
       route.map((p) => LatLng(p.lat, p.lng)).toList(),
       false,
-      tolerance: kMinNearbyDistance * 3.0,
+      tolerance: tolerance,
     );
   }
 }

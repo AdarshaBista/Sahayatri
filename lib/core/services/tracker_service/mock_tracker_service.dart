@@ -22,10 +22,7 @@ class MockTrackerService extends TrackerService {
         speed: 2.0 + _randomOffset(-2.0, 2.0),
         bearing: 90.0 + _randomOffset(-90.0, 90.0),
         timestamp: DateTime.now(),
-        coord: Coord(
-          lat: routePoints[index].lat + _randomOffset(-0.0005, 0.0005),
-          lng: routePoints[index].lng,
-        ),
+        coord: routePoints[index],
       ),
     ).take(routePoints.length).asBroadcastStream();
   }

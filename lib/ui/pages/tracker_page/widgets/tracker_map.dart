@@ -16,11 +16,14 @@ import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 
 class TrackerMap extends StatelessWidget {
+  final int userIndex;
   final UserLocation userLocation;
 
   const TrackerMap({
+    @required this.userIndex,
     @required this.userLocation,
-  }) : assert(userLocation != null);
+  })  : assert(userIndex != null),
+        assert(userLocation != null);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,22 @@ class TrackerMap extends StatelessWidget {
       center: center,
       initialZoom: 18.0,
       trackLocation: true,
+      polyline: _getUserPolyline(context),
       markerLayerOptions: _buildMarkers(context, center),
       circleLayerOptions: _buildAccuracyCircle(center),
+    );
+  }
+
+  Polyline _getUserPolyline(BuildContext context) {
+    final route = context.bloc<DestinationBloc>().destination.routePoints;
+
+    return Polyline(
+      strokeWidth: 6.0,
+      color: AppColors.primary,
+      points: [
+        ...route.take(userIndex).map((p) => p.toLatLng()).toList(),
+        userLocation.coord.toLatLng(),
+      ],
     );
   }
 

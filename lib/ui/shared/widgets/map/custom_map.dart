@@ -25,6 +25,7 @@ class CustomMap extends StatefulWidget {
   final Coord nePanBoundary;
   final double initialZoom;
   final Function(LatLng) onTap;
+  final Polyline polyline;
   final CircleLayerOptions circleLayerOptions;
   final MarkerLayerOptions markerLayerOptions;
 
@@ -35,6 +36,7 @@ class CustomMap extends StatefulWidget {
     this.onTap,
     this.swPanBoundary,
     this.nePanBoundary,
+    this.polyline,
     this.circleLayerOptions,
     this.markerLayerOptions,
   }) : assert(center != null);
@@ -146,6 +148,7 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
           points: routePoints.map((p) => p.toLatLng()).toList(),
           gradientColors: AppColors.accentColors.getRange(4, 7).toList(),
         ),
+        if (widget.polyline != null) widget.polyline
       ],
     );
   }
