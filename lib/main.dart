@@ -18,6 +18,8 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/user_alert_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
+import 'package:sahayatri/core/services/tracker_service/mock_tracker_service.dart';
 
 import 'package:sahayatri/sahayatri.dart';
 import 'package:device_preview/device_preview.dart';
@@ -72,12 +74,13 @@ class App extends StatelessWidget {
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
-          RepositoryProvider(create: (_) => LocationService()),
-          RepositoryProvider(create: (_) => UserAlertService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
+          RepositoryProvider(create: (_) => LocationService()),
+          RepositoryProvider(create: (_) => UserAlertService()),
+          RepositoryProvider<TrackerService>(create: (_) => MockTrackerService()),
         ],
         child: const Sahayatri(),
       ),

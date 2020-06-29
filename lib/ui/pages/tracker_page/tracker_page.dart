@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/extensions/widget_x.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
@@ -10,7 +8,6 @@ import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_panel.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_setup.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';
 
 class TrackerPage extends StatelessWidget {

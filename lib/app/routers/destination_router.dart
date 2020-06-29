@@ -16,6 +16,7 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
+import 'package:sahayatri/core/services/user_alert_service.dart';
 import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
@@ -77,6 +78,7 @@ class DestRouter {
             BlocProvider<TrackerBloc>(
                 create: (context) => TrackerBloc(
                       trackerService: context.repository<TrackerService>(),
+                      userAlertService: context.repository<UserAlertService>(),
                     )..add(
                         TrackingStarted(destination: settings.arguments as Destination),
                       )),

@@ -15,9 +15,6 @@ import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-import 'package:sahayatri/core/services/user_alert_service.dart';
-import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
-import 'package:sahayatri/core/services/tracker_service/mock_tracker_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:device_preview/device_preview.dart';
@@ -38,11 +35,6 @@ class Sahayatri extends StatelessWidget {
         RepositoryProvider<DirectionsService>(
           create: (_) => DirectionsService(
             locationService: context.repository<LocationService>(),
-          ),
-        ),
-        RepositoryProvider<TrackerService>(
-          create: (_) => MockTrackerService(
-            userAlertService: context.repository<UserAlertService>(),
           ),
         ),
       ],
