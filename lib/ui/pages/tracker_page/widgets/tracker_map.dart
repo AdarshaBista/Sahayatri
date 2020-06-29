@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 
 class TrackerMap extends StatelessWidget {
   final UserLocation userLocation;
@@ -24,26 +30,37 @@ class TrackerMap extends StatelessWidget {
       center: center,
       initialZoom: 18.0,
       trackLocation: true,
-      markerLayerOptions: _buildMarker(center),
+      markerLayerOptions: _buildMarkers(context, center),
       circleLayerOptions: _buildAccuracyCircle(center),
     );
   }
 
-  MarkerLayerOptions _buildMarker(Coord center) {
+  MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
+    final destination = context.bloc<DestinationBloc>().destination;
+
     return MarkerLayerOptions(
       markers: [
+        for (int i = 0; i < destination.places.length; ++i)
+          PlaceMarker(
+            point: destination.places[i].coord.toLatLng(),
+            color: AppColors.accentColors[i % AppColors.accentColors.length],
+            onTap: () {
+              context.repository<DestinationNavService>().pushNamed(
+                    Routes.kPlacePageRoute,
+                    arguments: destination.places[i],
+                  );
+            },
+          ),
         Marker(
-          width: 32.0,
-          height: 32.0,
+          width: 24.0,
+          height: 24.0,
           point: center.toLatLng(),
-          builder: (context) => ScaleAnimator(
-            child: Transform.rotate(
-              angle: userLocation.bearing,
-              child: Image.asset(
-                Values.kUserMarkerImage,
-                width: 24.0,
-                height: 24.0,
-              ),
+          builder: (context) => Transform.rotate(
+            angle: userLocation.bearing,
+            child: Image.asset(
+              Values.kUserMarkerImage,
+              width: 26.0,
+              height: 26.0,
             ),
           ),
         ),

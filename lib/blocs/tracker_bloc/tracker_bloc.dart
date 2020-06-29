@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
@@ -61,7 +62,14 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       userAlertService.alert();
     }
 
+    final nextStop = trackerService.getNextStop(
+      userLocation.coord,
+      destination.places,
+      destination.routePoints,
+    );
+
     yield TrackerSuccess(
+      nextStop: nextStop,
       userLocation: userLocation,
     );
   }
