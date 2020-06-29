@@ -44,6 +44,19 @@ abstract class TrackerService {
     return null;
   }
 
+  Duration getEta(UserLocation userLocation, Place nextStop, List<Coord> route) {
+    if (userLocation.speed < 0.1) return null;
+
+    final userIndex = _getIndexOnRoute(userLocation.coord, route);
+    final placeIndex = _getIndexOnRoute(nextStop.coord, route);
+    final path =
+        route.getRange(userIndex, placeIndex).map((p) => LatLng(p.lat, p.lng)).toList();
+
+    final double distance = SphericalUtil.computeLength(path).toDouble();
+    final double etaInSeconds = distance / userLocation.speed;
+    return Duration(seconds: etaInSeconds.toInt());
+  }
+
   int _getIndexOnRoute(Coord point, List<Coord> route) {
     return PolygonUtil.locationIndexOnPath(
       LatLng(point.lat, point.lng),

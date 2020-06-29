@@ -42,7 +42,10 @@ class TrackerPanel extends StatelessWidget {
             userLocation: state.userLocation,
           ),
           const Divider(height: 20.0),
-          NextStopCard(place: state.nextStop),
+          NextStopCard(
+            eta: state.eta,
+            place: state.nextStop,
+          ),
         ],
       ),
     );

@@ -19,7 +19,7 @@ class MockTrackerService extends TrackerService {
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),
-        speed: 5.0 + _randomOffset(-2.0, 2.0),
+        speed: 2.0 + _randomOffset(-2.0, 2.0),
         bearing: 90.0 + _randomOffset(-90.0, 90.0),
         timestamp: DateTime.now(),
         coord: Coord(

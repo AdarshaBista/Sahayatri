@@ -12,8 +12,10 @@ import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 
 class NextStopCard extends StatelessWidget {
   final Place place;
+  final Duration eta;
 
   const NextStopCard({
+    @required this.eta,
     @required this.place,
   });
 
@@ -30,9 +32,7 @@ class NextStopCard extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           CustomCard(
-            padding: place != null
-                ? const EdgeInsets.symmetric(vertical: 8.0)
-                : const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(place != null ? 0.0 : 16.0),
             child: place != null ? _buildTile(context) : _buildNoNextStop(),
           ),
         ],
@@ -47,10 +47,8 @@ class NextStopCard extends StatelessWidget {
         style: AppTextStyles.medium.bold,
       ),
       subtitle: Text(
-        place.description,
+        eta != null ? 'ETA: ${eta.inHours} hr ${eta.inMinutes.remainder(60)} min' : '-',
         style: AppTextStyles.small,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
       ),
       leading: CircleAvatar(backgroundImage: AssetImage(place.imageUrls[0])),
       onTap: () {
