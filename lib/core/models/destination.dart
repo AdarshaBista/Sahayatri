@@ -117,8 +117,7 @@ class Destination {
       'places': places?.map((x) => x?.toMap())?.toList(),
       'reviews': reviews?.map((x) => x?.toMap())?.toList(),
       'routePoints': routePoints?.map((x) => x?.toMap())?.toList(),
-      'suggestedItineraries':
-          suggestedItineraries?.map((x) => x?.toMap())?.toList(),
+      'suggestedItineraries': suggestedItineraries?.map((x) => x?.toMap())?.toList(),
       'createdItinerary': createdItinerary?.toMap(),
       'isDownloaded': isDownloaded,
     };
