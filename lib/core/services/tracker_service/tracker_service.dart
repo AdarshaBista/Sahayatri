@@ -62,7 +62,7 @@ abstract class TrackerService {
   }
 
   Duration getEta(UserLocation userLocation, Place nextStop, List<Coord> route) {
-    if (userLocation.speed < 0.1) return null;
+    if (userLocation.speed < 0.1 || nextStop == null) return null;
 
     final userIndex = _getIndexOnRoute(userLocation.coord, route);
     final placeIndex = _getIndexOnRoute(nextStop.coord, route);

@@ -101,18 +101,4 @@ class NextStopCard extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildNoNextStop() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            'No next stop!',
-            style: AppTextStyles.medium,
-          ),
-        ),
-      ],
-    );
-  }
 }

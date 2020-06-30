@@ -25,7 +25,7 @@ class CustomMap extends StatefulWidget {
   final Coord nePanBoundary;
   final double initialZoom;
   final Function(LatLng) onTap;
-  final Polyline polyline;
+  final int userIndex;
   final CircleLayerOptions circleLayerOptions;
   final MarkerLayerOptions markerLayerOptions;
 
@@ -36,10 +36,11 @@ class CustomMap extends StatefulWidget {
     this.onTap,
     this.swPanBoundary,
     this.nePanBoundary,
-    this.polyline,
+    this.userIndex = 0,
     this.circleLayerOptions,
     this.markerLayerOptions,
-  }) : assert(center != null);
+  })  : assert(center != null),
+        assert(userIndex != null);
 
   @override
   _CustomMapState createState() => _CustomMapState();
@@ -140,15 +141,25 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
 
   PolylineLayerOptions _buildRoute(BuildContext context) {
     final routePoints = context.bloc<DestinationBloc>().destination.routePoints;
+    final userPath = routePoints.take(widget.userIndex).toList();
+    final remainingPath =
+        routePoints.getRange(widget.userIndex + 1, routePoints.length).toList();
 
     return PolylineLayerOptions(
       polylines: [
         Polyline(
           strokeWidth: 3.0,
-          points: routePoints.map((p) => p.toLatLng()).toList(),
-          gradientColors: AppColors.accentColors.getRange(4, 7).toList(),
+          points: remainingPath.map((p) => p.toLatLng()).toList(),
+          gradientColors: AppColors.accentColors.take(4).toList(),
         ),
-        if (widget.polyline != null) widget.polyline
+        Polyline(
+          strokeWidth: 6.0,
+          points: [
+            ...userPath.map((p) => p.toLatLng()).toList(),
+            widget.center.toLatLng(),
+          ],
+          gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
+        ),
       ],
     );
   }

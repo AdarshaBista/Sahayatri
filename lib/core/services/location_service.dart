@@ -12,7 +12,7 @@ class LocationService {
   bool get hasPermission => _hasPermission;
 
   LocationService() {
-    location.changeSettings(interval: 2000);
+    location.changeSettings(interval: 3000, distanceFilter: 10.0);
     location.hasPermission().then((value) {
       if (value == PermissionStatus.granted) _hasPermission = true;
     });
