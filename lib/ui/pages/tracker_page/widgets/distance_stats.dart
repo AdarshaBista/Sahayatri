@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
 class DistanceStats extends StatelessWidget {
-  final double walked;
-  final double remaining;
-
-  const DistanceStats({
-    @required this.walked,
-    @required this.remaining,
-  })  : assert(walked != null),
-        assert(remaining != null);
+  const DistanceStats();
 
   @override
   Widget build(BuildContext context) {
+    final trackerData = context.watch<TrackerData>();
+
     return FadeAnimator(
       child: CustomCard(
         padding: const EdgeInsets.all(16.0),
@@ -24,14 +22,14 @@ class DistanceStats extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildStat(
-              walked,
+              trackerData.distanceWalked,
               'metres walked',
               CommunityMaterialIcons.shoe_print,
               Colors.green,
             ),
             const Divider(height: 16.0),
             _buildStat(
-              remaining,
+              trackerData.distanceRemaining,
               'metres remaining',
               CommunityMaterialIcons.map_marker_distance,
               Colors.red,

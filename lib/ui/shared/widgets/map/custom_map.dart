@@ -148,7 +148,7 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
     return PolylineLayerOptions(
       polylines: [
         Polyline(
-          strokeWidth: 3.0,
+          strokeWidth: 4.0,
           points: remainingPath.map((p) => p.toLatLng()).toList(),
           gradientColors: AppColors.accentColors.take(4).toList(),
         ),

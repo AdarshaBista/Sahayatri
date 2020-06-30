@@ -12,34 +12,14 @@ class TrackerLoading extends TrackerState {}
 class TrackerLocationError extends TrackerState {}
 
 class TrackerSuccess extends TrackerState {
-  final int userIndex;
-  final Duration eta;
-  final Place nextStop;
-  final double distanceWalked;
-  final double distanceRemaining;
-  final UserLocation userLocation;
+  final TrackerData data;
 
   const TrackerSuccess({
-    @required this.userIndex,
-    @required this.eta,
-    @required this.nextStop,
-    @required this.distanceWalked,
-    @required this.distanceRemaining,
-    @required this.userLocation,
-  })  : assert(userIndex != null),
-        assert(userLocation != null),
-        assert(distanceWalked != null),
-        assert(distanceRemaining != null);
+    @required this.data,
+  }) : assert(data != null);
 
   @override
-  List<Object> get props => [
-        userIndex,
-        eta,
-        nextStop,
-        userLocation,
-        distanceWalked,
-        distanceRemaining,
-      ];
+  List<Object> get props => [data];
 }
 
 class TrackerError extends TrackerState {

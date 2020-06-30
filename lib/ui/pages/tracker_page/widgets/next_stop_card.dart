@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
 
-import 'package:sahayatri/core/models/place.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
@@ -13,16 +14,12 @@ import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
 class NextStopCard extends StatelessWidget {
-  final Place place;
-  final Duration eta;
-
-  const NextStopCard({
-    @required this.eta,
-    @required this.place,
-  });
+  const NextStopCard();
 
   @override
   Widget build(BuildContext context) {
+    final place = context.watch<TrackerData>().nextStop;
+
     return place != null
         ? FadeAnimator(
             child: AspectRatio(
@@ -36,8 +33,8 @@ class NextStopCard extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [
-                    _buildBackground(),
-                    _buildTitle(),
+                    _buildBackground(context),
+                    _buildTitle(context),
                   ],
                 ),
               ),
@@ -46,7 +43,8 @@ class NextStopCard extends StatelessWidget {
         : const Offstage();
   }
 
-  Widget _buildBackground() {
+  Widget _buildBackground(BuildContext context) {
+    final place = context.watch<TrackerData>().nextStop;
     return CustomCard(
       child: GradientContainer(
         gradientBegin: Alignment.bottomLeft,
@@ -68,7 +66,10 @@ class NextStopCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(BuildContext context) {
+    final eta = context.watch<TrackerData>().eta;
+    final place = context.watch<TrackerData>().nextStop;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/tracker_data.dart';
+
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
@@ -21,7 +24,10 @@ class TrackerPage extends StatelessWidget {
             body: const LoadingIndicator(),
           );
         } else if (state is TrackerSuccess) {
-          return TrackerPanel(state: state);
+          return Provider<TrackerData>.value(
+            value: state.data,
+            child: const TrackerPanel(),
+          );
         } else if (state is TrackerError) {
           return Scaffold(
             appBar: AppBar(),

@@ -4,11 +4,12 @@ import 'package:sahayatri/app/constants/values.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -16,31 +17,26 @@ import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 
 class TrackerMap extends StatelessWidget {
-  final int userIndex;
-  final UserLocation userLocation;
-
-  const TrackerMap({
-    @required this.userIndex,
-    @required this.userLocation,
-  })  : assert(userIndex != null),
-        assert(userLocation != null);
+  const TrackerMap();
 
   @override
   Widget build(BuildContext context) {
-    final Coord center = userLocation.coord;
+    final trackerData = context.watch<TrackerData>();
+    final center = trackerData.userLocation.coord;
 
     return CustomMap(
       center: center,
       initialZoom: 18.0,
       trackLocation: true,
-      userIndex: userIndex,
+      userIndex: trackerData.userIndex,
       markerLayerOptions: _buildMarkers(context, center),
-      circleLayerOptions: _buildAccuracyCircle(center),
+      circleLayerOptions: _buildAccuracyCircle(context, center),
     );
   }
 
   MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
     final destination = context.bloc<DestinationBloc>().destination;
+    final trackerData = context.watch<TrackerData>();
 
     return MarkerLayerOptions(
       markers: [
@@ -60,7 +56,7 @@ class TrackerMap extends StatelessWidget {
           height: 24.0,
           point: center.toLatLng(),
           builder: (context) => Transform.rotate(
-            angle: userLocation.bearing,
+            angle: trackerData.userLocation.bearing,
             child: Image.asset(
               Values.kUserMarkerImage,
               width: 26.0,
@@ -72,7 +68,8 @@ class TrackerMap extends StatelessWidget {
     );
   }
 
-  CircleLayerOptions _buildAccuracyCircle(Coord center) {
+  CircleLayerOptions _buildAccuracyCircle(BuildContext context, Coord center) {
+    final trackerData = context.watch<TrackerData>();
     return CircleLayerOptions(
       circles: [
         CircleMarker(
@@ -81,7 +78,7 @@ class TrackerMap extends StatelessWidget {
           color: Colors.teal.withOpacity(0.2),
           borderColor: Colors.teal.withOpacity(0.5),
           useRadiusInMeter: true,
-          radius: userLocation.accuracy,
+          radius: trackerData.userLocation.accuracy,
         ),
       ],
     );

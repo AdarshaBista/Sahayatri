@@ -3,9 +3,9 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/user_alert_service.dart';
@@ -59,24 +59,26 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     Destination destination,
   ) async* {
     final route = destination.routePoints;
+    final places = destination.places;
     if (trackerService.shouldAlertUser(userLocation.coord, route)) {
       userAlertService.alert();
     }
 
-    final nextStop =
-        trackerService.getNextStop(userLocation.coord, destination.places, route);
+    final nextStop = trackerService.getNextStop(userLocation.coord, places, route);
     final eta = trackerService.getEta(userLocation, nextStop, route);
     final userIndex = trackerService.getUserIndex(userLocation.coord, route);
     final distanceWalked = trackerService.getDistanceWalked(userIndex, route);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
 
     yield TrackerSuccess(
-      userIndex: userIndex,
-      eta: eta,
-      nextStop: nextStop,
-      userLocation: userLocation,
-      distanceWalked: distanceWalked,
-      distanceRemaining: distanceRemaining,
+      data: TrackerData(
+        eta: eta,
+        nextStop: nextStop,
+        userIndex: userIndex,
+        userLocation: userLocation,
+        distanceWalked: distanceWalked,
+        distanceRemaining: distanceRemaining,
+      ),
     );
   }
 }
