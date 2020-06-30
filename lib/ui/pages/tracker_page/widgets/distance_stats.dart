@@ -27,7 +27,7 @@ class DistanceStats extends StatelessWidget {
               CommunityMaterialIcons.shoe_print,
               Colors.green,
             ),
-            const Divider(height: 16.0),
+            const Divider(height: 24.0),
             _buildStat(
               trackerData.distanceRemaining,
               'metres remaining',

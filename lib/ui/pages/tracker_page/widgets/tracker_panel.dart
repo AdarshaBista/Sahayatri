@@ -36,9 +36,9 @@ class TrackerPanel extends StatelessWidget {
           Pill(),
           TrackerStats(height: kCollapsedHeight),
           Divider(height: 20.0),
-          NextStopCard(),
-          SizedBox(height: 12.0),
           DistanceStats(),
+          SizedBox(height: 12.0),
+          NextStopCard(),
         ],
       ),
     );

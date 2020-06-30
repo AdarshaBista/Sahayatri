@@ -60,6 +60,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   ) async* {
     final route = destination.routePoints;
     final places = destination.places;
+
     if (trackerService.shouldAlertUser(userLocation.coord, route)) {
       userAlertService.alert();
     }
