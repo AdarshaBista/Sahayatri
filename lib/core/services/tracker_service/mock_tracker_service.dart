@@ -15,7 +15,7 @@ class MockTrackerService extends TrackerService {
   @override
   Stream<UserLocation> getLocationStream(List<Coord> route) {
     return Stream<UserLocation>.periodic(
-      const Duration(milliseconds: 200),
+      const Duration(milliseconds: 300),
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),

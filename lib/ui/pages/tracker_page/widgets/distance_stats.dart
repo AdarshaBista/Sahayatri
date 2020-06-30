@@ -22,14 +22,21 @@ class DistanceStats extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildStat(
-              trackerData.distanceWalked,
+              _formatDuration(trackerData.elapsed),
+              'elapsed',
+              CommunityMaterialIcons.timer_outline,
+              Colors.blue,
+            ),
+            const Divider(height: 24.0),
+            _buildStat(
+              trackerData.distanceWalked.toStringAsFixed(0),
               'metres walked',
               CommunityMaterialIcons.shoe_print,
               Colors.green,
             ),
             const Divider(height: 24.0),
             _buildStat(
-              trackerData.distanceRemaining,
+              trackerData.distanceRemaining.toStringAsFixed(0),
               'metres remaining',
               CommunityMaterialIcons.map_marker_distance,
               Colors.red,
@@ -40,7 +47,7 @@ class DistanceStats extends StatelessWidget {
     );
   }
 
-  Widget _buildStat(double stat, String label, IconData icon, Color color) {
+  Widget _buildStat(String stat, String label, IconData icon, Color color) {
     return Row(
       textBaseline: TextBaseline.alphabetic,
       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -52,7 +59,7 @@ class DistanceStats extends StatelessWidget {
         ),
         const SizedBox(width: 8.0),
         Text(
-          stat.toStringAsFixed(0),
+          stat,
           style: AppTextStyles.large.bold,
         ),
         const SizedBox(width: 8.0),
@@ -62,5 +69,11 @@ class DistanceStats extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _formatDuration(Duration duration) {
+    return [duration.inHours, duration.inMinutes, duration.inSeconds]
+        .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
+        .join(':');
   }
 }

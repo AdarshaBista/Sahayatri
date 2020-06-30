@@ -7,6 +7,7 @@ class TrackerData {
   final int userIndex;
   final Duration eta;
   final Place nextStop;
+  final Duration elapsed;
   final double distanceWalked;
   final double distanceRemaining;
   final UserLocation userLocation;
@@ -15,6 +16,7 @@ class TrackerData {
     @required this.userIndex,
     @required this.eta,
     @required this.nextStop,
+    @required this.elapsed,
     @required this.distanceWalked,
     @required this.distanceRemaining,
     @required this.userLocation,
@@ -27,6 +29,7 @@ class TrackerData {
     int userIndex,
     Duration eta,
     Place nextStop,
+    Duration elapsed,
     double distanceWalked,
     double distanceRemaining,
     UserLocation userLocation,
@@ -35,6 +38,7 @@ class TrackerData {
       userIndex: userIndex ?? this.userIndex,
       eta: eta ?? this.eta,
       nextStop: nextStop ?? this.nextStop,
+      elapsed: elapsed ?? this.elapsed,
       distanceWalked: distanceWalked ?? this.distanceWalked,
       distanceRemaining: distanceRemaining ?? this.distanceRemaining,
       userLocation: userLocation ?? this.userLocation,
@@ -46,6 +50,7 @@ class TrackerData {
       'userIndex': userIndex,
       'eta': eta?.inSeconds,
       'nextStop': nextStop?.toMap(),
+      'elapsed': elapsed?.inSeconds,
       'distanceWalked': distanceWalked,
       'distanceRemaining': distanceRemaining,
       'userLocation': userLocation?.toMap(),
@@ -59,6 +64,7 @@ class TrackerData {
       userIndex: map['userIndex'] as int,
       eta: Duration(seconds: map['eta'] as int),
       nextStop: Place.fromMap(map['nextStop'] as Map<String, dynamic>),
+      elapsed: Duration(seconds: map['elapsed'] as int),
       distanceWalked: map['distanceWalked'] as double,
       distanceRemaining: map['distanceRemaining'] as double,
       userLocation: UserLocation.fromMap(map['userLocation'] as Map<String, dynamic>),
@@ -67,7 +73,7 @@ class TrackerData {
 
   @override
   String toString() {
-    return 'TrackerData(userIndex: $userIndex, eta: $eta, nextStop: $nextStop, distanceWalked: $distanceWalked, distanceRemaining: $distanceRemaining, userLocation: $userLocation)';
+    return 'TrackerData(userIndex: $userIndex, eta: $eta, nextStop: $nextStop, elapsed: $elapsed, distanceWalked: $distanceWalked, distanceRemaining: $distanceRemaining, userLocation: $userLocation)';
   }
 
   @override
@@ -78,6 +84,7 @@ class TrackerData {
         o.userIndex == userIndex &&
         o.eta == eta &&
         o.nextStop == nextStop &&
+        o.elapsed == elapsed &&
         o.distanceWalked == distanceWalked &&
         o.distanceRemaining == distanceRemaining &&
         o.userLocation == userLocation;
@@ -88,6 +95,7 @@ class TrackerData {
     return userIndex.hashCode ^
         eta.hashCode ^
         nextStop.hashCode ^
+        elapsed.hashCode ^
         distanceWalked.hashCode ^
         distanceRemaining.hashCode ^
         userLocation.hashCode;

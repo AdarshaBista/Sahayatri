@@ -45,9 +45,11 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
         return;
       }
 
+      trackerService.start();
       await for (final userLocation in trackerService.getLocationStream(route)) {
         yield* _getTrackerUpdates(userLocation, destination);
       }
+      trackerService.stop();
     } on Failure catch (e) {
       print(e.error);
       yield TrackerError(message: e.message);
@@ -68,12 +70,14 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     final nextStop = trackerService.getNextStop(userLocation.coord, places, route);
     final eta = trackerService.getEta(userLocation, nextStop, route);
     final userIndex = trackerService.getUserIndex(userLocation.coord, route);
+    final elapsed = trackerService.getElapsedDuration();
     final distanceWalked = trackerService.getDistanceWalked(userIndex, route);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
 
     yield TrackerSuccess(
       data: TrackerData(
         eta: eta,
+        elapsed: elapsed,
         nextStop: nextStop,
         userIndex: userIndex,
         userLocation: userLocation,

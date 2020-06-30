@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:maps_toolkit/maps_toolkit.dart';
 
 import 'package:sahayatri/core/models/place.dart';
@@ -6,7 +8,21 @@ import 'package:sahayatri/core/models/user_location.dart';
 
 abstract class TrackerService {
   static const double kMinNearbyDistance = 50.0;
+  final Stopwatch stopwatch = Stopwatch();
   bool isAlreadyAlerted = false;
+  bool hasStarted = false;
+
+  void start() {
+    if (hasStarted) return;
+    stopwatch.reset();
+    stopwatch.start();
+    hasStarted = true;
+  }
+
+  void stop() {
+    stopwatch.stop();
+    hasStarted = false;
+  }
 
   Future<UserLocation> getUserLocation();
   Stream<UserLocation> getLocationStream(List<Coord> route);
@@ -31,6 +47,10 @@ abstract class TrackerService {
     if (!isOnRoute && isAlreadyAlerted) return false;
     if (!isOnRoute && !isAlreadyAlerted) return isAlreadyAlerted = true;
     return isAlreadyAlerted = false;
+  }
+
+  Duration getElapsedDuration() {
+    return stopwatch.elapsed;
   }
 
   int getUserIndex(Coord userLocation, List<Coord> route) {
