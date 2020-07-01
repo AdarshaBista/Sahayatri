@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:maps_toolkit/maps_toolkit.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 abstract class TrackerService {
-  static const double kMinNearbyDistance = 50.0;
-  static const double kNextStopTolerance = 50.0;
-
   final Stopwatch stopwatch = Stopwatch();
-  bool isAlreadyAlerted = false;
   bool hasStarted = false;
 
   void start() {
@@ -34,21 +31,8 @@ abstract class TrackerService {
       LatLng(userLocation.lat, userLocation.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
-      tolerance: kMinNearbyDistance * 4.0,
+      tolerance: Distances.kMinNearbyDistance * 4.0,
     );
-  }
-
-  bool shouldAlertUser(Coord userLocation, List<Coord> route) {
-    final bool isOnRoute = PolygonUtil.isLocationOnPath(
-      LatLng(userLocation.lat, userLocation.lng),
-      route.map((l) => LatLng(l.lat, l.lng)).toList(),
-      false,
-      tolerance: kMinNearbyDistance,
-    );
-
-    if (!isOnRoute && isAlreadyAlerted) return false;
-    if (!isOnRoute && !isAlreadyAlerted) return isAlreadyAlerted = true;
-    return isAlreadyAlerted = false;
   }
 
   Duration getElapsedDuration() {
@@ -92,12 +76,12 @@ abstract class TrackerService {
         route.getRange(userIndex, placeIndex).map((p) => LatLng(p.lat, p.lng)).toList();
 
     final double distance = SphericalUtil.computeLength(path).toDouble();
-    final double etaInSeconds = distance / userLocation.speed;
-    return Duration(seconds: etaInSeconds.toInt());
+    final int etaInSeconds = distance ~/ userLocation.speed;
+    return Duration(seconds: etaInSeconds);
   }
 
   int _getIndexOnRoute(Coord point, List<Coord> route,
-      [double tolerance = kNextStopTolerance]) {
+      [double tolerance = Distances.kNextStopTolerance]) {
     return PolygonUtil.locationIndexOnPath(
       LatLng(point.lat, point.lng),
       route.map((p) => LatLng(p.lat, p.lng)).toList(),

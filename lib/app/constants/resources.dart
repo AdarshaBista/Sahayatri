@@ -30,3 +30,8 @@ class NotificationChannels {
   static const String kOffRouteName = 'Off Route Alert';
   static const String kOffRouteDesc = 'Notify when user goes off-route';
 }
+
+class Distances {
+  static const double kMinNearbyDistance = 50.0;
+  static const double kNextStopTolerance = 50.0;
+}
