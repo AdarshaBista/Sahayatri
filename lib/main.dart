@@ -15,6 +15,7 @@ import 'package:sahayatri/core/database/prefs_dao.dart';
 import 'package:sahayatri/core/database/weather_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/user_alert_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -79,6 +80,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
           RepositoryProvider(create: (_) => LocationService()),
+          RepositoryProvider(create: (_) => SmsService()),
           RepositoryProvider(create: (_) => UserAlertService()),
           RepositoryProvider<TrackerService>(create: (_) => MockTrackerService()),
         ],

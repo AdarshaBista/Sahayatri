@@ -7,6 +7,7 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/services/sms_service.dart';
 
 import 'package:sahayatri/core/services/user_alert_service.dart';
 import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
@@ -15,13 +16,16 @@ part 'tracker_event.dart';
 part 'tracker_state.dart';
 
 class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
+  final SmsService smsService;
   final TrackerService trackerService;
   final UserAlertService userAlertService;
 
   TrackerBloc({
+    @required this.smsService,
     @required this.trackerService,
     @required this.userAlertService,
-  })  : assert(trackerService != null),
+  })  : assert(smsService != null),
+        assert(trackerService != null),
         assert(userAlertService != null);
 
   @override
@@ -73,6 +77,10 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     final elapsed = trackerService.getElapsedDuration();
     final distanceWalked = trackerService.getDistanceWalked(userIndex, route);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
+
+    if (smsService.shouldSend(userLocation.coord, nextStop)) {
+      smsService.send(nextStop.id);
+    }
 
     yield TrackerSuccess(
       data: TrackerData(
