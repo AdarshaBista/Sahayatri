@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
@@ -46,7 +46,7 @@ class Sahayatri extends StatelessWidget {
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,
           debugShowCheckedModeBanner: false,
-          title: Values.kAppName,
+          title: AppConfig.kAppName,
           theme: AppThemes.light,
           navigatorKey: context.repository<RootNavService>().navigatorKey,
           initialRoute: Routes.kBottomNavPageRoute,

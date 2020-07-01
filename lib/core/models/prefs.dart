@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 part 'prefs.g.dart';
 
@@ -14,7 +14,7 @@ class Prefs {
 
   const Prefs({
     this.contact = '',
-    this.mapStyle = Values.kMapStyleOutdoors,
+    this.mapStyle = MapStyles.kOutdoors,
   })  : assert(contact != null),
         assert(mapStyle != null);
 

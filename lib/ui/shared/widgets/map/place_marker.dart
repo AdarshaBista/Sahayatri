@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:latlong/latlong.dart';
 
@@ -18,7 +18,7 @@ class PlaceMarker extends Marker {
             onTap: onTap,
             child: ScaleAnimator(
               child: Image.asset(
-                Values.kMarkerImage,
+                Images.kMarker,
                 width: 24.0,
                 height: 24.0,
                 color: color,

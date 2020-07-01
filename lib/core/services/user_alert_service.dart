@@ -1,4 +1,4 @@
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -17,9 +17,9 @@ class UserAlertService {
 
   Future<void> alert() async {
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      Values.kOffRouteChannelId,
-      Values.kOffRouteChannelName,
-      Values.kOffRouteChannelDesc,
+      NotificationChannels.kOffRouteId,
+      NotificationChannels.kOffRouteName,
+      NotificationChannels.kOffRouteDesc,
       priority: Priority.Max,
       importance: Importance.Max,
       visibility: NotificationVisibility.Public,

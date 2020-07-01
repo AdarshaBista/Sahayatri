@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
@@ -15,7 +15,7 @@ class RequiredIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Values.kRequiredImage,
+      imageUrl: Images.kRequired,
       title: Text(
         message,
         textAlign: TextAlign.center,

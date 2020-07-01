@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -58,7 +58,7 @@ class TrackerMap extends StatelessWidget {
           builder: (context) => Transform.rotate(
             angle: trackerData.userLocation.bearing,
             child: Image.asset(
-              Values.kUserMarkerImage,
+              Images.kUserMarker,
               width: 26.0,
               height: 26.0,
             ),

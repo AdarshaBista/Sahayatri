@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
@@ -12,7 +12,7 @@ class LoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Values.kLoadingImage,
+      imageUrl: Images.kLoading,
       title: Center(
         child: BallRotateIndicator(
           color: AppColors.primary,

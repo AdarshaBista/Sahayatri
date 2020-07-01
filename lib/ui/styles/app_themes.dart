@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/app_colors.dart';
 import 'package:sahayatri/ui/styles/app_text_styles.dart';
@@ -9,7 +9,7 @@ class AppThemes {
   AppThemes._();
 
   static final ThemeData light = ThemeData(
-    fontFamily: Values.kFontFamily,
+    fontFamily: AppConfig.kFontFamily,
     brightness: Brightness.light,
     accentColorBrightness: Brightness.light,
     primaryColor: AppColors.primary,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
@@ -11,7 +11,7 @@ class EmptyIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Values.kEmptyImage,
+      imageUrl: Images.kEmpty,
       title: Text(
         'Nothing to show',
         textAlign: TextAlign.center,

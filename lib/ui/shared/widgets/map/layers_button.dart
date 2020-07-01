@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
@@ -15,27 +15,27 @@ class LayersButton extends StatelessWidget {
   List<_MapLayerData> get _mapLayersData => [
         const _MapLayerData(
           title: 'Dark',
-          style: Values.kMapStyleDark,
+          style: MapStyles.kDark,
           icon: CommunityMaterialIcons.weather_night,
         ),
         const _MapLayerData(
           title: 'Light',
-          style: Values.kMapStyleLight,
+          style: MapStyles.kLight,
           icon: CommunityMaterialIcons.weather_sunny,
         ),
         const _MapLayerData(
           title: 'Streets',
-          style: Values.kMapStyleStreets,
+          style: MapStyles.kStreets,
           icon: CommunityMaterialIcons.google_street_view,
         ),
         const _MapLayerData(
           title: 'Outdoors',
-          style: Values.kMapStyleOutdoors,
+          style: MapStyles.kOutdoors,
           icon: CommunityMaterialIcons.hiking,
         ),
         const _MapLayerData(
           title: 'Satellite',
-          style: Values.kMapStyleSatellite,
+          style: MapStyles.kSatellite,
           icon: CommunityMaterialIcons.earth,
         ),
       ];

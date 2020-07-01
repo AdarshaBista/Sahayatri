@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/app_colors.dart';
 
@@ -9,7 +9,7 @@ class AppTextStyles {
 
   static const TextStyle _base = TextStyle(
     color: AppColors.dark,
-    fontFamily: Values.kFontFamily,
+    fontFamily: AppConfig.kFontFamily,
   );
 
   static final TextStyle huge = _base.copyWith(
@@ -48,7 +48,7 @@ class AppTextStyles {
 }
 
 extension TextStyleX on TextStyle {
-  TextStyle get serif => copyWith(fontFamily: Values.kFontFamilySerif);
+  TextStyle get serif => copyWith(fontFamily: AppConfig.kFontFamilySerif);
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
   TextStyle get primary => copyWith(color: AppColors.primary);
   TextStyle get light => copyWith(color: AppColors.background);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/values.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:animator/animator.dart';
 
@@ -10,7 +10,7 @@ class FadeAnimator extends StatelessWidget {
 
   const FadeAnimator({
     @required this.child,
-    this.duration = Values.kAnimatorDuration,
+    this.duration = AppConfig.kAnimatorDuration,
   }) : assert(child != null);
 
   @override
