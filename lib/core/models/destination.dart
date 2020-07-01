@@ -32,8 +32,10 @@ class Destination {
   double get maxLat => routePoints.map((c) => c.lat).reduce(math.max);
   double get minLong => routePoints.map((c) => c.lng).reduce(math.min);
   double get maxLong => routePoints.map((c) => c.lng).reduce(math.max);
-  double get rating =>
-      (reviews.map((r) => r.rating).reduce((e, v) => e + v)) / reviews.length;
+  double get rating {
+    if (reviews.isEmpty) return 0.0;
+    return (reviews.map((r) => r.rating).reduce((e, v) => e + v)) / reviews.length;
+  }
 
   Destination(
       {@required this.id,

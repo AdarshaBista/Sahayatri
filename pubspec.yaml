@@ -80,6 +80,7 @@ flutter:
 
   assets:
     - assets/icon/
+    - assets/images/home/
     - assets/images/mardi/
     - assets/images/indicators/
 

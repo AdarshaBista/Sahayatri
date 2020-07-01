@@ -8,6 +8,8 @@ import 'package:sahayatri/core/models/user_location.dart';
 
 abstract class TrackerService {
   static const double kMinNearbyDistance = 50.0;
+  static const double kNextStopTolerance = 50.0;
+
   final Stopwatch stopwatch = Stopwatch();
   bool isAlreadyAlerted = false;
   bool hasStarted = false;
@@ -24,7 +26,7 @@ abstract class TrackerService {
     hasStarted = false;
   }
 
-  Future<UserLocation> getUserLocation();
+  Future<UserLocation> getUserLocation(Coord initialPoint);
   Stream<UserLocation> getLocationStream(List<Coord> route);
 
   bool isNearTrail(Coord userLocation, List<Coord> route) {
@@ -95,7 +97,7 @@ abstract class TrackerService {
   }
 
   int _getIndexOnRoute(Coord point, List<Coord> route,
-      [double tolerance = kMinNearbyDistance * 3.0]) {
+      [double tolerance = kNextStopTolerance]) {
     return PolygonUtil.locationIndexOnPath(
       LatLng(point.lat, point.lng),
       route.map((p) => LatLng(p.lat, p.lng)).toList(),

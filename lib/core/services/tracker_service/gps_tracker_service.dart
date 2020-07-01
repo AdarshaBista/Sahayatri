@@ -20,7 +20,7 @@ class GpsTrackerService extends TrackerService {
   }
 
   @override
-  Future<UserLocation> getUserLocation() async {
+  Future<UserLocation> getUserLocation(Coord initialPoint) async {
     try {
       return await locationService.getLocation();
     } on Failure {

@@ -9,7 +9,7 @@ class WeatherDao {
 
   Future<List<Weather>> get(String key) async {
     final box = await _weatherBox;
-    return box.get(key).cast<Weather>();
+    return box.get(key)?.cast<Weather>();
   }
 
   Future<void> upsert(String key, List<Weather> value) async {

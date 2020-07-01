@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:sahayatri/app/constants/mocks.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
@@ -22,16 +20,16 @@ class MockTrackerService extends TrackerService {
         speed: 2.0 + _randomOffset(-2.0, 2.0),
         bearing: 90.0 + _randomOffset(-90.0, 90.0),
         timestamp: DateTime.now(),
-        coord: routePoints[index],
+        coord: route[index],
       ),
-    ).take(routePoints.length).asBroadcastStream();
+    ).take(route.length).asBroadcastStream();
   }
 
   @override
-  Future<UserLocation> getUserLocation() async {
+  Future<UserLocation> getUserLocation(Coord initialPoint) async {
     await Future.delayed(const Duration(milliseconds: 200));
     return UserLocation(
-      coord: routePoints[0],
+      coord: initialPoint,
       accuracy: 15.0 + _randomOffset(-5.0, 5.0),
       altitude: 2000.0 + _randomOffset(-50.0, 50.0),
       speed: 5.0 + _randomOffset(-2.0, 2.0),
