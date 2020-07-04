@@ -7,9 +7,13 @@ abstract class DirectionsState extends Equatable {
   List<Object> get props => [];
 }
 
-class DirectionsInitial extends DirectionsState {}
+class DirectionsInitial extends DirectionsState {
+  const DirectionsInitial();
+}
 
-class DirectionsLoading extends DirectionsState {}
+class DirectionsLoading extends DirectionsState {
+  const DirectionsLoading();
+}
 
 class DirectionsError extends DirectionsState {
   final String message;
@@ -19,5 +23,5 @@ class DirectionsError extends DirectionsState {
   }) : assert(message != null);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }

@@ -24,7 +24,7 @@ dependencies:
 
   # State Management
   equatable: ^1.2.0
-  flutter_bloc: ^4.0.0
+  flutter_bloc: ^5.0.0
 
   # Database
   hive: ^1.4.1+1

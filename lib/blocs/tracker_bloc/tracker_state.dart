@@ -7,9 +7,13 @@ abstract class TrackerState extends Equatable {
   List<Object> get props => [];
 }
 
-class TrackerLoading extends TrackerState {}
+class TrackerLoading extends TrackerState {
+  const TrackerLoading();
+}
 
-class TrackerLocationError extends TrackerState {}
+class TrackerLocationError extends TrackerState {
+  const TrackerLocationError();
+}
 
 class TrackerSuccess extends TrackerState {
   final TrackerData data;

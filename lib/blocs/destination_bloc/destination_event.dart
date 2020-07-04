@@ -18,4 +18,6 @@ class ItineraryCreated extends DestinationEvent {
   List<Object> get props => [itinerary];
 }
 
-class DestinationDownloaded extends DestinationEvent {}
+class DestinationDownloaded extends DestinationEvent {
+  const DestinationDownloaded();
+}

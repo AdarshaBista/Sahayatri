@@ -17,15 +17,13 @@ class DirectionsBloc extends Bloc<DirectionsEvent, DirectionsState> {
 
   DirectionsBloc({
     @required this.directionsService,
-  }) : assert(directionsService != null);
-
-  @override
-  DirectionsState get initialState => DirectionsInitial();
+  })  : assert(directionsService != null),
+        super(const DirectionsInitial());
 
   @override
   Stream<DirectionsState> mapEventToState(DirectionsEvent event) async* {
     if (event is DirectionsStarted) {
-      yield DirectionsLoading();
+      yield const DirectionsLoading();
       try {
         final UserLocation userLocation = await directionsService.getUserLocation();
         await directionsService.startNavigation(
@@ -33,7 +31,7 @@ class DirectionsBloc extends Bloc<DirectionsEvent, DirectionsState> {
           userLocation,
           // event.mode,
         );
-        yield DirectionsInitial();
+        yield const DirectionsInitial();
       } on Failure catch (e) {
         print(e.error);
         yield DirectionsError(message: e.message);

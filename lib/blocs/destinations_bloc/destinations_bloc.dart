@@ -19,7 +19,8 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
 
   DestinationsBloc({
     @required this.apiService,
-  }) : assert(apiService != null);
+  })  : assert(apiService != null),
+        super(const DestinationsEmpty());
 
   @override
   Stream<Transition<DestinationsEvent, DestinationsState>> transformEvents(
@@ -33,9 +34,6 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
   }
 
   @override
-  DestinationsState get initialState => DestinationsEmpty();
-
-  @override
   Stream<DestinationsState> mapEventToState(DestinationsEvent event) async* {
     if (event is DestinationsFetched) {
       yield* _mapDestinationsFetchedToState();
@@ -46,7 +44,7 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
   }
 
   Stream<DestinationsState> _mapDestinationsFetchedToState() async* {
-    yield DestinationsLoading();
+    yield const DestinationsLoading();
     try {
       _destinations = await apiService.fetchDestinations();
       yield DestinationsSuccess(destinations: _destinations);
@@ -56,14 +54,13 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
     }
   }
 
-  Stream<DestinationsState> _mapDestinationsSearchedToState(
-      String query) async* {
+  Stream<DestinationsState> _mapDestinationsSearchedToState(String query) async* {
     if (query.isEmpty) {
       yield DestinationsSuccess(destinations: _destinations);
       return;
     }
 
-    yield DestinationsLoading();
+    yield const DestinationsLoading();
     final searchedDestinations = _destinations
         .where(
           (d) => d.name.toLowerCase().contains(query.toLowerCase()),
@@ -71,7 +68,7 @@ class DestinationsBloc extends Bloc<DestinationsEvent, DestinationsState> {
         .toList();
 
     if (searchedDestinations.isEmpty) {
-      yield DestinationsEmpty();
+      yield const DestinationsEmpty();
       return;
     }
 

@@ -20,15 +20,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     @required this.title,
     @required this.weatherService,
   })  : assert(title != null),
-        assert(weatherService != null);
-
-  @override
-  WeatherState get initialState => WeatherInitial();
+        assert(weatherService != null),
+        super(const WeatherInitial());
 
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     if (event is WeatherFetched) {
-      yield WeatherLoading();
+      yield const WeatherLoading();
       try {
         final List<Weather> forecasts = await weatherService.fetchForecasts(event.coord);
         yield WeatherSuccess(forecasts: forecasts);

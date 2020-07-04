@@ -7,7 +7,9 @@ class PrefsState extends Equatable {
   List<Object> get props => [];
 }
 
-class PrefsLoading extends PrefsState {}
+class PrefsLoading extends PrefsState {
+  const PrefsLoading();
+}
 
 class PrefsLoaded extends PrefsState {
   final Prefs prefs;

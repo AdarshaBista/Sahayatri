@@ -7,7 +7,9 @@ abstract class DestinationsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class DestinationsFetched extends DestinationsEvent {}
+class DestinationsFetched extends DestinationsEvent {
+  const DestinationsFetched();
+}
 
 class DestinationsSearched extends DestinationsEvent {
   final String query;

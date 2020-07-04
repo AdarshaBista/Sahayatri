@@ -7,9 +7,13 @@ abstract class DestinationsState extends Equatable {
   List<Object> get props => [];
 }
 
-class DestinationsLoading extends DestinationsState {}
+class DestinationsLoading extends DestinationsState {
+  const DestinationsLoading();
+}
 
-class DestinationsEmpty extends DestinationsState {}
+class DestinationsEmpty extends DestinationsState {
+  const DestinationsEmpty();
+}
 
 class DestinationsSuccess extends DestinationsState {
   final List<Destination> destinations;

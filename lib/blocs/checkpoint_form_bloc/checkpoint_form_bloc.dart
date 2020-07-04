@@ -9,22 +9,20 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 part 'checkpoint_form_event.dart';
 part 'checkpoint_form_state.dart';
 
-class CheckpointFormBloc
-    extends Bloc<CheckpointFormEvent, CheckpointFormState> {
+class CheckpointFormBloc extends Bloc<CheckpointFormEvent, CheckpointFormState> {
   final Checkpoint checkpoint;
 
   CheckpointFormBloc({
     @required this.checkpoint,
-  });
-
-  @override
-  CheckpointFormState get initialState => CheckpointFormState(
-        place: checkpoint?.place,
-        description: checkpoint?.description ?? '',
-        dateTime: checkpoint == null
-            ? null
-            : checkpoint.isTemplate ? null : checkpoint.dateTime,
-      );
+  }) : super(
+          CheckpointFormState(
+            place: checkpoint?.place,
+            description: checkpoint?.description ?? '',
+            dateTime: checkpoint == null
+                ? null
+                : checkpoint.isTemplate ? null : checkpoint.dateTime,
+          ),
+        );
 
   @override
   Stream<CheckpointFormState> mapEventToState(

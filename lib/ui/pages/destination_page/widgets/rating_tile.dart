@@ -77,7 +77,7 @@ class RatingTile extends StatelessWidget {
 
   Future<void> _downloadAndShowDetailPage(BuildContext context) async {
     if (!context.bloc<DestinationBloc>().state.destination.isDownloaded) {
-      context.bloc<DestinationBloc>().add(DestinationDownloaded());
+      context.bloc<DestinationBloc>().add(const DestinationDownloaded());
       DownloadDialog(
         title: context.bloc<DestinationBloc>().destination.name,
       ).openDialog(context);

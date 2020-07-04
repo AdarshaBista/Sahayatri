@@ -15,10 +15,8 @@ class PrefsBloc extends Bloc<PrefsEvent, PrefsState> {
 
   PrefsBloc({
     @required this.prefsDao,
-  }) : assert(prefsDao != null);
-
-  @override
-  PrefsState get initialState => PrefsLoading();
+  })  : assert(prefsDao != null),
+        super(const PrefsLoading());
 
   @override
   Stream<PrefsState> mapEventToState(PrefsEvent event) async* {

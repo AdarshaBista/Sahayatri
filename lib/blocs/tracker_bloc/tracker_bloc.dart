@@ -26,10 +26,8 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     @required this.userAlertService,
   })  : assert(smsService != null),
         assert(trackerService != null),
-        assert(userAlertService != null);
-
-  @override
-  TrackerState get initialState => TrackerLoading();
+        assert(userAlertService != null),
+        super(const TrackerLoading());
 
   @override
   Stream<TrackerState> mapEventToState(TrackerEvent event) async* {
@@ -39,13 +37,13 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   }
 
   Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
-    yield TrackerLoading();
+    yield const TrackerLoading();
     try {
       final route = destination.routePoints;
       final userLocation = await trackerService.getUserLocation(route[0]);
 
       if (!trackerService.isNearTrail(userLocation.coord, route)) {
-        yield TrackerLocationError();
+        yield const TrackerLocationError();
         return;
       }
 

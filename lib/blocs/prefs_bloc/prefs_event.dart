@@ -7,7 +7,9 @@ abstract class PrefsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PrefsInitialized extends PrefsEvent {}
+class PrefsInitialized extends PrefsEvent {
+  const PrefsInitialized();
+}
 
 class MapLayerChanged extends PrefsEvent {
   final String mapStyle;
@@ -17,7 +19,7 @@ class MapLayerChanged extends PrefsEvent {
   }) : assert(mapStyle != null);
 
   @override
-  List<Object> get props => throw [mapStyle];
+  List<Object> get props => [mapStyle];
 }
 
 class ContactSaved extends PrefsEvent {
@@ -28,5 +30,5 @@ class ContactSaved extends PrefsEvent {
   }) : assert(contact != null);
 
   @override
-  List<Object> get props => throw [contact];
+  List<Object> get props => [contact];
 }

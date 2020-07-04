@@ -2,6 +2,9 @@ part of 'checkpoint_form_bloc.dart';
 
 abstract class CheckpointFormEvent extends Equatable {
   const CheckpointFormEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
 class PlaceChanged extends CheckpointFormEvent {

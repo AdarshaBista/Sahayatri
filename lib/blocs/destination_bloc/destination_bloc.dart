@@ -14,12 +14,8 @@ class DestinationBloc extends Bloc<DestinationEvent, DestinationState> {
 
   DestinationBloc({
     @required this.destination,
-  }) : assert(destination != null);
-
-  @override
-  DestinationState get initialState => DestinationState(
-        destination: destination,
-      );
+  })  : assert(destination != null),
+        super(DestinationState(destination: destination));
 
   @override
   Stream<DestinationState> mapEventToState(DestinationEvent event) async* {

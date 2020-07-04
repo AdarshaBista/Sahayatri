@@ -2,6 +2,9 @@ part of 'itinerary_form_bloc.dart';
 
 abstract class ItineraryFormEvent extends Equatable {
   const ItineraryFormEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
 class NameChanged extends ItineraryFormEvent {

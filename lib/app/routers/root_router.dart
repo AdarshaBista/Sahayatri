@@ -27,7 +27,7 @@ class RootRouter {
         _page = BlocProvider<DestinationsBloc>(
           create: (context) => DestinationsBloc(
             apiService: context.repository<ApiService>(),
-          )..add(DestinationsFetched()),
+          )..add(const DestinationsFetched()),
           child: const BottomNavPage(),
         );
         break;

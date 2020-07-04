@@ -32,5 +32,5 @@ class CheckpointFormState extends Equatable {
   }
 
   @override
-  List<Object> get props => [checkpoint];
+  List<Object> get props => [place, description, dateTime];
 }

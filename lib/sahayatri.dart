@@ -55,7 +55,7 @@ class Sahayatri extends StatelessWidget {
       child: BlocProvider<PrefsBloc>(
         create: (_) => PrefsBloc(
           prefsDao: context.repository<PrefsDao>(),
-        )..add(PrefsInitialized()),
+        )..add(const PrefsInitialized()),
         child: MaterialApp(
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,

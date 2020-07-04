@@ -14,17 +14,15 @@ class ItineraryFormBloc extends Bloc<ItineraryFormEvent, ItineraryFormState> {
 
   ItineraryFormBloc({
     @required this.itinerary,
-  });
-
-  @override
-  ItineraryFormState get initialState => ItineraryFormState(
-        name: itinerary?.name ?? '',
-        days: itinerary?.days ?? '',
-        nights: itinerary?.nights ?? '',
-        checkpoints: itinerary == null
-            ? []
-            : List<Checkpoint>.from(itinerary.checkpoints),
-      );
+  }) : super(
+          ItineraryFormState(
+            name: itinerary?.name ?? '',
+            days: itinerary?.days ?? '',
+            nights: itinerary?.nights ?? '',
+            checkpoints:
+                itinerary == null ? [] : List<Checkpoint>.from(itinerary.checkpoints),
+          ),
+        );
 
   @override
   Stream<ItineraryFormState> mapEventToState(
