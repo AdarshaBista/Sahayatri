@@ -1,25 +1,23 @@
+import 'package:meta/meta.dart';
+
 import 'package:maps_toolkit/maps_toolkit.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/notification_channels.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
+import 'package:sahayatri/core/services/notification_service.dart';
+
 class UserAlertService {
-  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final NotificationService notificationService;
   bool isAlreadyAlerted = false;
 
-  UserAlertService() {
-    const initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-    const initializationSettingsIOS = IOSInitializationSettings();
-    const initializationSettings = InitializationSettings(
-      initializationSettingsAndroid,
-      initializationSettingsIOS,
-    );
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  }
+  UserAlertService({
+    @required this.notificationService,
+  }) : assert(notificationService != null);
 
-  bool shouldAlertUser(Coord userLocation, List<Coord> route) {
+  bool shouldAlert(Coord userLocation, List<Coord> route) {
     final bool isOnRoute = PolygonUtil.isLocationOnPath(
       LatLng(userLocation.lat, userLocation.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
@@ -33,25 +31,12 @@ class UserAlertService {
   }
 
   Future<void> alert() async {
-    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    await notificationService.show(
       NotificationChannels.kOffRouteId,
-      NotificationChannels.kOffRouteName,
-      NotificationChannels.kOffRouteDesc,
-      priority: Priority.Max,
-      importance: Importance.Max,
-      visibility: NotificationVisibility.Public,
-    );
-    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    const platformChannelSpecifics = NotificationDetails(
-      androidPlatformChannelSpecifics,
-      iOSPlatformChannelSpecifics,
-    );
-
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'Sahayatri - Off Route',
-      'You seem to be going off route. Please reevaluate your course.',
-      platformChannelSpecifics,
+      'You seem to be going off route. Please re-evaluate your course.',
+      channelId: NotificationChannels.kOffRouteChannelId,
+      channelName: NotificationChannels.kOffRouteChannelName,
+      channelDescription: NotificationChannels.kOffRouteChannelDesc,
     );
   }
 }

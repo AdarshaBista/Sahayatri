@@ -7,8 +7,8 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
-import 'package:sahayatri/core/services/sms_service.dart';
 
+import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/user_alert_service.dart';
 import 'package:sahayatri/core/services/tracker_service/tracker_service.dart';
 
@@ -42,7 +42,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     yield TrackerLoading();
     try {
       final route = destination.routePoints;
-      final UserLocation userLocation = await trackerService.getUserLocation(route[0]);
+      final userLocation = await trackerService.getUserLocation(route[0]);
 
       if (!trackerService.isNearTrail(userLocation.coord, route)) {
         yield TrackerLocationError();
@@ -53,6 +53,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       await for (final userLocation in trackerService.getLocationStream(route)) {
         yield* _getTrackerUpdates(userLocation, destination);
       }
+      smsService.clear();
       trackerService.stop();
     } on Failure catch (e) {
       print(e.error);
@@ -67,7 +68,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     final route = destination.routePoints;
     final places = destination.places;
 
-    if (userAlertService.shouldAlertUser(userLocation.coord, route)) {
+    if (userAlertService.shouldAlert(userLocation.coord, route)) {
       userAlertService.alert();
     }
 
@@ -79,7 +80,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
 
     if (smsService.shouldSend(userLocation.coord, nextStop)) {
-      smsService.send(nextStop.id);
+      smsService.send(nextStop);
     }
 
     yield TrackerSuccess(

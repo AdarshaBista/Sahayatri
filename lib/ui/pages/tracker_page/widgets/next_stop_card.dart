@@ -46,6 +46,7 @@ class NextStopCard extends StatelessWidget {
   Widget _buildBackground(BuildContext context) {
     final place = context.watch<TrackerData>().nextStop;
     return CustomCard(
+      elevation: 8.0,
       child: GradientContainer(
         gradientBegin: Alignment.bottomLeft,
         gradientEnd: Alignment.topRight,

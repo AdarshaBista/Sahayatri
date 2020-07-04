@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -15,6 +14,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/user_marker.dart';
 
 class TrackerMap extends StatelessWidget {
   const TrackerMap();
@@ -55,13 +55,8 @@ class TrackerMap extends StatelessWidget {
           width: 24.0,
           height: 24.0,
           point: center.toLatLng(),
-          builder: (context) => Transform.rotate(
+          builder: (context) => UserMarker(
             angle: trackerData.userLocation.bearing,
-            child: Image.asset(
-              Images.kUserMarker,
-              width: 26.0,
-              height: 26.0,
-            ),
           ),
         ),
       ],

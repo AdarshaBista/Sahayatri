@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:location/location.dart';
 
@@ -12,6 +13,7 @@ class LocationService {
   bool get hasPermission => _hasPermission;
 
   LocationService() {
+    if (Platform.isWindows) return;
     location.changeSettings(interval: 3000, distanceFilter: 10.0);
     location.hasPermission().then((value) {
       if (value == PermissionStatus.granted) _hasPermission = true;

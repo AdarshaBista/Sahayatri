@@ -17,6 +17,9 @@ dependencies:
   intl: ^0.16.1
   path_provider: ^1.6.11
   device_preview: ^0.4.4
+
+  # Notification
+  sms_maintained: ^0.2.5
   flutter_local_notifications: ^1.4.4+1
 
   # State Management
