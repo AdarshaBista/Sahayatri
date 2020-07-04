@@ -5,6 +5,7 @@ import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/next_stop.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 abstract class TrackerService {
@@ -26,9 +27,9 @@ abstract class TrackerService {
   Future<UserLocation> getUserLocation(Coord initialPoint);
   Stream<UserLocation> getLocationStream(List<Coord> route);
 
-  bool isNearTrail(Coord userLocation, List<Coord> route) {
+  bool isNearTrail(Coord userCoord, List<Coord> route) {
     return PolygonUtil.isLocationOnPath(
-      LatLng(userLocation.lat, userLocation.lng),
+      LatLng(userCoord.lat, userCoord.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
       tolerance: Distances.kMinNearbyDistance * 4.0,
@@ -39,8 +40,8 @@ abstract class TrackerService {
     return stopwatch.elapsed;
   }
 
-  int getUserIndex(Coord userLocation, List<Coord> route) {
-    return _getIndexOnRoute(userLocation, route, 0.1);
+  int getUserIndex(Coord userCoord, List<Coord> route) {
+    return _getIndexOnRoute(userCoord, route, 0.1);
   }
 
   double getDistanceWalked(int userIndex, List<Coord> route) {
@@ -56,28 +57,40 @@ abstract class TrackerService {
     return SphericalUtil.computeLength(path).toDouble();
   }
 
-  Place getNextStop(Coord userLocation, List<Place> places, List<Coord> route) {
+  NextStop getNextStop(UserLocation userLocation, List<Place> places, List<Coord> route) {
+    int userIndex;
+    int placeIndex;
+    Place nextStopPlace;
+
     for (final place in places) {
-      final userIndex = _getIndexOnRoute(userLocation, route);
-      final placeIndex = _getIndexOnRoute(place.coord, route);
+      userIndex = _getIndexOnRoute(userLocation.coord, route);
+      placeIndex = _getIndexOnRoute(place.coord, route);
 
       if (userIndex >= placeIndex) continue;
-      return place;
+      nextStopPlace = place;
+      break;
     }
-    return null;
+    if (nextStopPlace == null) return null;
+
+    final double distance = _getNextStopDistance(userIndex, placeIndex, route);
+    final int eta = userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
+
+    return NextStop(
+      distance: distance,
+      place: nextStopPlace,
+      eta: eta == null ? null : Duration(seconds: eta),
+    );
   }
 
-  Duration getEta(UserLocation userLocation, Place nextStop, List<Coord> route) {
-    if (userLocation.speed < 0.1 || nextStop == null) return null;
-
-    final userIndex = _getIndexOnRoute(userLocation.coord, route);
-    final placeIndex = _getIndexOnRoute(nextStop.coord, route);
-    final path =
-        route.getRange(userIndex, placeIndex).map((p) => LatLng(p.lat, p.lng)).toList();
-
-    final double distance = SphericalUtil.computeLength(path).toDouble();
-    final int etaInSeconds = distance ~/ userLocation.speed;
-    return Duration(seconds: etaInSeconds);
+  double _getNextStopDistance(int userIndex, int placeIndex, List<Coord> route) {
+    final path = route
+        .getRange(userIndex, placeIndex)
+        .map((p) => LatLng(
+              p.lat,
+              p.lng,
+            ))
+        .toList();
+    return SphericalUtil.computeLength(path).toDouble();
   }
 
   int _getIndexOnRoute(Coord point, List<Coord> route,

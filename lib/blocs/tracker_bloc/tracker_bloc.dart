@@ -72,20 +72,18 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       userAlertService.alert();
     }
 
-    final nextStop = trackerService.getNextStop(userLocation.coord, places, route);
-    final eta = trackerService.getEta(userLocation, nextStop, route);
+    final nextStop = trackerService.getNextStop(userLocation, places, route);
     final userIndex = trackerService.getUserIndex(userLocation.coord, route);
     final elapsed = trackerService.getElapsedDuration();
     final distanceWalked = trackerService.getDistanceWalked(userIndex, route);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex, route);
 
-    if (smsService.shouldSend(userLocation.coord, nextStop)) {
-      smsService.send(nextStop);
+    if (smsService.shouldSend(userLocation.coord, nextStop?.place)) {
+      smsService.send(nextStop?.place);
     }
 
     yield TrackerSuccess(
       data: TrackerData(
-        eta: eta,
         elapsed: elapsed,
         nextStop: nextStop,
         userIndex: userIndex,

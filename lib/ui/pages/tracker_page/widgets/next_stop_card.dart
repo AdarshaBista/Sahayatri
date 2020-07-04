@@ -18,9 +18,9 @@ class NextStopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = context.watch<TrackerData>().nextStop;
+    final nextStop = context.watch<TrackerData>().nextStop;
 
-    return place != null
+    return nextStop != null
         ? FadeAnimator(
             child: AspectRatio(
               aspectRatio: 2.3,
@@ -28,13 +28,13 @@ class NextStopCard extends StatelessWidget {
                 onTap: () {
                   context
                       .repository<DestinationNavService>()
-                      .pushNamed(Routes.kPlacePageRoute, arguments: place);
+                      .pushNamed(Routes.kPlacePageRoute, arguments: nextStop.place);
                 },
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [
                     _buildBackground(context),
-                    _buildTitle(context),
+                    _buildOverlay(context),
                   ],
                 ),
               ),
@@ -44,11 +44,11 @@ class NextStopCard extends StatelessWidget {
   }
 
   Widget _buildBackground(BuildContext context) {
-    final place = context.watch<TrackerData>().nextStop;
+    final place = context.watch<TrackerData>().nextStop.place;
     return CustomCard(
       elevation: 8.0,
       child: GradientContainer(
-        gradientBegin: Alignment.bottomLeft,
+        gradientBegin: Alignment.bottomCenter,
         gradientEnd: Alignment.topRight,
         gradientColors: [
           AppColors.dark.withOpacity(0.8),
@@ -67,9 +67,8 @@ class NextStopCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle(BuildContext context) {
-    final eta = context.watch<TrackerData>().eta;
-    final place = context.watch<TrackerData>().nextStop;
+  Widget _buildOverlay(BuildContext context) {
+    final nextStop = context.watch<TrackerData>().nextStop;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -79,28 +78,43 @@ class NextStopCard extends StatelessWidget {
         children: [
           Text(
             'NEXT STOP',
-            style: AppTextStyles.medium.bold.light,
+            style: AppTextStyles.medium.light,
           ),
           const Spacer(),
           Text(
-            place.name,
+            nextStop.place.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.small.light,
+            style: AppTextStyles.small.light.bold,
           ),
           Divider(
             color: AppColors.light.withOpacity(0.5),
             height: 10.0,
             endIndent: 64.0,
           ),
-          Text(
-            eta != null
-                ? 'ETA: ${eta.inHours} hr ${eta.inMinutes.remainder(60)} min'
-                : '-',
-            style: AppTextStyles.small.bold.primary,
-          ),
+          _buildStatus(context),
         ],
       ),
+    );
+  }
+
+  Widget _buildStatus(BuildContext context) {
+    final nextStop = context.watch<TrackerData>().nextStop;
+
+    return Row(
+      children: [
+        Text(
+          '${nextStop.distance.toStringAsFixed(0)} m away',
+          style: AppTextStyles.small.bold.primary,
+        ),
+        const Spacer(),
+        Text(
+          nextStop.eta != null
+              ? 'ETA: ${nextStop.eta.inHours} hr ${nextStop.eta.inMinutes.remainder(60)} min'
+              : '-',
+          style: AppTextStyles.small.bold.primary,
+        ),
+      ],
     );
   }
 }
