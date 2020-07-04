@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/api_keys.dart';
 
-import 'package:latlong/latlong.dart';
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,57 +12,32 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
-import 'package:sahayatri/ui/shared/widgets/map/track_location_button.dart';
 
-class CustomMap extends StatefulWidget {
-  final bool trackLocation;
+class CustomMap extends StatelessWidget {
+  final int userIndex;
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
   final double initialZoom;
-  final Function(LatLng) onTap;
-  final int userIndex;
+  final MapController mapController;
   final CircleLayerOptions circleLayerOptions;
   final MarkerLayerOptions markerLayerOptions;
+  final Function(MapPosition, bool) onPositionChanged;
 
   const CustomMap({
     @required this.center,
-    this.trackLocation = false,
-    this.initialZoom = 12.0,
-    this.onTap,
+    this.mapController,
     this.swPanBoundary,
     this.nePanBoundary,
     this.userIndex = 0,
+    this.initialZoom = 14.0,
+    this.onPositionChanged,
     this.circleLayerOptions,
     this.markerLayerOptions,
   })  : assert(center != null),
         assert(userIndex != null);
-
-  @override
-  _CustomMapState createState() => _CustomMapState();
-}
-
-class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMixin {
-  bool isTracking;
-  MapAnimator mapAnimator;
-  MapController mapController;
-
-  @override
-  void initState() {
-    isTracking = widget.trackLocation;
-    mapController = MapController();
-    mapAnimator = MapAnimator(mapController: mapController, tickerProvider: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    mapAnimator.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,17 +46,6 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
         _buildMap(),
         const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: CloseIcon())),
         const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: LayersButton())),
-        if (widget.trackLocation)
-          Positioned(
-            top: 64.0,
-            right: 16.0,
-            child: SafeArea(
-              child: TrackLocationButton(
-                isTracking: isTracking,
-                onTap: () => isTracking = !isTracking,
-              ),
-            ),
-          ),
       ],
     );
   }
@@ -90,34 +53,30 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
   Widget _buildMap() {
     return BlocBuilder<PrefsBloc, PrefsState>(
       builder: (context, state) {
-        if (widget.trackLocation && isTracking) _trackLocation();
         return FlutterMap(
           mapController: mapController,
           options: MapOptions(
-            onTap: widget.onTap,
             minZoom: 10.0,
             maxZoom: 19.0,
-            zoom: widget.initialZoom,
-            center: widget.center.toLatLng(),
-            onPositionChanged: (position, hasGesture) {
-              if (hasGesture) isTracking = false;
-            },
-            swPanBoundary: widget.swPanBoundary?.toLatLng() ??
+            zoom: initialZoom,
+            center: center.toLatLng(),
+            onPositionChanged: onPositionChanged,
+            swPanBoundary: swPanBoundary?.toLatLng() ??
                 Coord(
-                  lat: widget.center.lat - 0.3,
-                  lng: widget.center.lng - 0.3,
+                  lat: center.lat - 0.3,
+                  lng: center.lng - 0.3,
                 ).toLatLng(),
-            nePanBoundary: widget.nePanBoundary?.toLatLng() ??
+            nePanBoundary: nePanBoundary?.toLatLng() ??
                 Coord(
-                  lat: widget.center.lat + 0.3,
-                  lng: widget.center.lng + 0.3,
+                  lat: center.lat + 0.3,
+                  lng: center.lng + 0.3,
                 ).toLatLng(),
           ),
           layers: [
             _buildTiles((state as PrefsLoaded).prefs.mapStyle),
             _buildRoute(context),
-            if (widget.circleLayerOptions != null) widget.circleLayerOptions,
-            if (widget.markerLayerOptions != null) widget.markerLayerOptions,
+            if (circleLayerOptions != null) circleLayerOptions,
+            if (markerLayerOptions != null) markerLayerOptions,
           ],
         );
       },
@@ -140,10 +99,9 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
   }
 
   PolylineLayerOptions _buildRoute(BuildContext context) {
-    final routePoints = context.bloc<DestinationBloc>().destination.routePoints;
-    final userPath = routePoints.take(widget.userIndex).toList();
-    final remainingPath =
-        routePoints.getRange(widget.userIndex + 1, routePoints.length).toList();
+    final route = context.bloc<DestinationBloc>().destination.routePoints;
+    final userPath = route.take(userIndex).toList();
+    final remainingPath = route.getRange(userIndex + 1, route.length).toList();
 
     return PolylineLayerOptions(
       polylines: [
@@ -156,17 +114,11 @@ class _CustomMapState extends State<CustomMap> with SingleTickerProviderStateMix
           strokeWidth: 6.0,
           points: [
             ...userPath.map((p) => p.toLatLng()).toList(),
-            widget.center.toLatLng(),
+            center.toLatLng(),
           ],
           gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
         ),
       ],
     );
-  }
-
-  void _trackLocation() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      mapAnimator.move(widget.center.toLatLng());
-    });
   }
 }

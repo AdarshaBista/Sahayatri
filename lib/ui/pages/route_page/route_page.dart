@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/extensions/widget_x.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -86,14 +86,8 @@ class _RoutePageState extends State<RoutePage> {
       markers: [
         for (int i = 0; i < destination.places.length; ++i)
           PlaceMarker(
-            point: destination.places[i].coord.toLatLng(),
+            place: destination.places[i],
             color: AppColors.accentColors[i % AppColors.accentColors.length],
-            onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPlacePageRoute,
-                    arguments: destination.places[i],
-                  );
-            },
           ),
         if (isSheetOpen)
           Marker(

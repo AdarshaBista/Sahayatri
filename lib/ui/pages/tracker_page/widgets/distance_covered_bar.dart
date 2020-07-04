@@ -6,8 +6,8 @@ import 'package:sahayatri/core/models/tracker_data.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
-class DistanceStat extends StatelessWidget {
-  const DistanceStat();
+class DistanceCoveredBar extends StatelessWidget {
+  const DistanceCoveredBar();
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +29,15 @@ class DistanceStat extends StatelessWidget {
             ),
           ),
           child: Slider(
-            max: trackerData.distanceRemaining + trackerData.distanceWalked,
-            value: trackerData.distanceWalked,
+            max: trackerData.distanceRemaining + trackerData.distanceCovered,
+            value: trackerData.distanceCovered,
             onChanged: (_) {},
           ),
         ),
         const SizedBox(height: 8.0),
         Row(
           children: [
-            _buildStat(trackerData.distanceWalked, 'walked', true),
+            _buildStat(trackerData.distanceCovered, 'covered', true),
             const Spacer(),
             _buildStat(trackerData.distanceRemaining, 'remaining', false),
           ],

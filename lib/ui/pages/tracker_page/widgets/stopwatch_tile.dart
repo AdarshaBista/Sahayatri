@@ -6,8 +6,8 @@ import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
-class TimerStat extends StatelessWidget {
-  const TimerStat();
+class StopwatchTile extends StatelessWidget {
+  const StopwatchTile();
 
   @override
   Widget build(BuildContext context) {

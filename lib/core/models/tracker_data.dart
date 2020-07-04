@@ -7,7 +7,7 @@ class TrackerData {
   final int userIndex;
   final Duration elapsed;
   final NextStop nextStop;
-  final double distanceWalked;
+  final double distanceCovered;
   final double distanceRemaining;
   final UserLocation userLocation;
 
@@ -15,11 +15,11 @@ class TrackerData {
     @required this.userIndex,
     @required this.elapsed,
     @required this.nextStop,
-    @required this.distanceWalked,
+    @required this.distanceCovered,
     @required this.distanceRemaining,
     @required this.userLocation,
   })  : assert(userIndex != null),
         assert(userLocation != null),
-        assert(distanceWalked != null),
+        assert(distanceCovered != null),
         assert(distanceRemaining != null);
 }

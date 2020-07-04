@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -12,44 +9,85 @@ import 'package:sahayatri/core/models/tracker_data.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/user_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/track_location_button.dart';
 
-class TrackerMap extends StatelessWidget {
+class TrackerMap extends StatefulWidget {
   const TrackerMap();
+
+  @override
+  _TrackerMapState createState() => _TrackerMapState();
+}
+
+class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateMixin {
+  bool isTracking = true;
+  MapAnimator mapAnimator;
+  MapController mapController;
+
+  @override
+  void initState() {
+    mapController = MapController();
+    mapAnimator = MapAnimator(mapController: mapController, tickerProvider: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    mapAnimator.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final trackerData = context.watch<TrackerData>();
     final center = trackerData.userLocation.coord;
 
-    return CustomMap(
-      center: center,
-      initialZoom: 18.0,
-      trackLocation: true,
-      userIndex: trackerData.userIndex,
-      markerLayerOptions: _buildMarkers(context, center),
-      circleLayerOptions: _buildAccuracyCircle(context, center),
+    if (isTracking) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        mapAnimator.move(center.toLatLng());
+      });
+    }
+
+    return Stack(
+      children: [
+        CustomMap(
+          center: center,
+          initialZoom: 18.0,
+          mapController: mapController,
+          userIndex: trackerData.userIndex,
+          markerLayerOptions: _buildMarkers(context, center),
+          circleLayerOptions: _buildAccuracyCircle(context, center),
+          onPositionChanged: (_, hasGesture) {
+            if (hasGesture) isTracking = false;
+          },
+        ),
+        Positioned(
+          top: 64.0,
+          right: 16.0,
+          child: SafeArea(
+            child: TrackLocationButton(
+              isTracking: isTracking,
+              onTap: () => isTracking = !isTracking,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final places = context.bloc<DestinationBloc>().destination.places;
     final trackerData = context.watch<TrackerData>();
 
     return MarkerLayerOptions(
       markers: [
-        for (int i = 0; i < destination.places.length; ++i)
+        for (int i = 0; i < places.length; ++i)
           PlaceMarker(
-            point: destination.places[i].coord.toLatLng(),
+            place: places[i],
             color: AppColors.accentColors[i % AppColors.accentColors.length],
-            onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPlacePageRoute,
-                    arguments: destination.places[i],
-                  );
-            },
           ),
         Marker(
           width: 24.0,
@@ -65,6 +103,7 @@ class TrackerMap extends StatelessWidget {
 
   CircleLayerOptions _buildAccuracyCircle(BuildContext context, Coord center) {
     final trackerData = context.watch<TrackerData>();
+
     return CircleLayerOptions(
       circles: [
         CircleMarker(

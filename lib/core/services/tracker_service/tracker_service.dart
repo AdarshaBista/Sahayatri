@@ -44,7 +44,7 @@ abstract class TrackerService {
     return _getIndexOnRoute(userCoord, route, 0.1);
   }
 
-  double getDistanceWalked(int userIndex, List<Coord> route) {
+  double getDistanceCovered(int userIndex, List<Coord> route) {
     final path = route.take(userIndex).map((p) => LatLng(p.lat, p.lng)).toList();
     return SphericalUtil.computeLength(path).toDouble();
   }
