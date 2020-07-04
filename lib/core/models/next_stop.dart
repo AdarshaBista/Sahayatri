@@ -34,7 +34,7 @@ class NextStop {
     };
   }
 
-  static NextStop fromMap(Map<String, dynamic> map) {
+  factory NextStop.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return NextStop(

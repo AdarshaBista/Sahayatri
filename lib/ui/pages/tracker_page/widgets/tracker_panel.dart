@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/stats_card.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/next_stop_card.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/distance_stats.dart';
 
 class TrackerPanel extends StatelessWidget {
   static const double kCollapsedHeight = 100.0;
@@ -36,7 +36,7 @@ class TrackerPanel extends StatelessWidget {
           Pill(),
           TrackerStats(height: kCollapsedHeight),
           Divider(height: 20.0),
-          DistanceStats(),
+          StatsCard(),
           SizedBox(height: 12.0),
           NextStopCard(),
         ],
