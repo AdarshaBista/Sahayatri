@@ -16,9 +16,11 @@ import 'package:sahayatri/core/services/notification_service.dart';
 
 class SmsService {
   final PrefsDao prefsDao;
+  final SmsSender sender = SmsSender();
   final NotificationService notificationService;
 
-  final SmsSender sender = SmsSender();
+  // TODO: Persist on disk
+  /// List of ids of [Place] for which sms has already been sent.
   final List<int> _sentList = [];
 
   SmsService({
@@ -27,6 +29,7 @@ class SmsService {
   })  : assert(prefsDao != null),
         assert(notificationService != null);
 
+  /// Returns true if sms should be sent on arrival to [nextStop].
   bool shouldSend(Coord userLocation, Place nextStop) {
     if (nextStop == null || _sentList.contains(nextStop?.id)) return false;
 
@@ -37,11 +40,14 @@ class SmsService {
     return distance < Distances.kMinNearbyDistance * 2.0;
   }
 
+  /// Send SMS to notify close contact of the user
+  /// on his/her arrival at a [place].
   Future<void> send(Place place) async {
     if (Platform.isWindows) return;
 
-    final String contact = (await prefsDao.get()).contact;
+    final contact = (await prefsDao.get()).contact;
     final message = SmsMessage(contact, 'I have safely reached ${place.name}');
+
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
         _alert('$contact has been notified of your arrival at ${place.name}');
@@ -60,6 +66,7 @@ class SmsService {
     _sentList.add(place.id);
   }
 
+  /// Show notification to user on status of sms.
   Future<void> _alert(String message) async {
     await notificationService.show(
       NotificationChannels.kSmsSentId,
@@ -70,6 +77,7 @@ class SmsService {
     );
   }
 
+  /// Clear sms sent list once tracking is over.
   void clear() {
     _sentList.clear();
   }

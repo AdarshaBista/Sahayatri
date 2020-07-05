@@ -30,7 +30,6 @@ class DirectionsService {
     UserLocation userLocation,
     // NavigationMode mode,
   ) async {
-    print('Directions from ${trailHead.coord} to ${userLocation.coord}');
     // _directions = MapboxNavigation(onRouteProgress: (arrived) async {
     //   if (arrived) await _directions.finishNavigation();
     // });

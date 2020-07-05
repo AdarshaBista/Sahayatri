@@ -20,9 +20,11 @@ class WeatherService {
   })  : assert(apiService != null),
         assert(weatherDao != null);
 
+  /// Fetches weather for a given [coord] from local cache.
+  /// If cache has expired, fetches weather from OpenWeatherMap one call API
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     final forecasts = await weatherDao.get(coord.toString());
-    if (_isValid(forecasts)) return forecasts;
+    if (_isCacheValid(forecasts)) return forecasts;
 
     try {
       final List<Weather> forecasts = await apiService.fetchForecasts(coord);
@@ -33,7 +35,9 @@ class WeatherService {
     }
   }
 
-  bool _isValid(List<Weather> forecasts) {
+  /// Checks the validity of the weather cache for a given coord.
+  /// Cache is only maintained for [KCacheDuration] minutes.
+  bool _isCacheValid(List<Weather> forecasts) {
     if (forecasts == null) return false;
 
     final createdAt = forecasts.first.createdAt;

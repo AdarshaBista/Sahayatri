@@ -13,20 +13,23 @@ abstract class NavigationService {
     await navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  void pop() {
-    navigatorKey.currentState.pop();
-  }
-
   bool canPop() {
     return navigatorKey.currentState.canPop();
   }
+
+  void pop() {
+    navigatorKey.currentState.pop();
+  }
 }
 
+// Navigation service for root pages off app
 class RootNavService extends NavigationService {
   static final rootNavKey = GlobalKey<NavigatorState>();
   RootNavService() : super(rootNavKey);
 }
 
+/// Navigation service for navigating between pages
+/// once a destiantion has been selected
 class DestinationNavService extends NavigationService {
   static final destinationNavKey = GlobalKey<NavigatorState>();
   DestinationNavService() : super(destinationNavKey);

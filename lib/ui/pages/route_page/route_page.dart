@@ -62,7 +62,7 @@ class _RoutePageState extends State<RoutePage> {
 
     if (isSheetOpen) {
       final bsController = AltitudeGraph(
-        altitudes: destination.routePoints.map((p) => p.alt).toList(),
+        altitudes: destination.route.map((p) => p.alt).toList(),
         onDrag: (index) {
           setState(() {
             altitudeDragCoordIndex = index;
@@ -93,7 +93,7 @@ class _RoutePageState extends State<RoutePage> {
           Marker(
             width: 32.0,
             height: 32.0,
-            point: destination.routePoints[altitudeDragCoordIndex].toLatLng(),
+            point: destination.route[altitudeDragCoordIndex].toLatLng(),
             anchorPos: AnchorPos.align(AnchorAlign.top),
             builder: (context) {
               return const Icon(

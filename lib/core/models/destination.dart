@@ -19,7 +19,7 @@ class Destination {
   final List<String> bestMonths;
   final List<Place> places;
   final List<Review> reviews;
-  final List<Coord> routePoints;
+  final List<Coord> route;
   final List<Itinerary> suggestedItineraries;
   Itinerary createdItinerary;
   bool isDownloaded;
@@ -27,11 +27,11 @@ class Destination {
   Place get startingPlace => places.first;
   Place get endingPlace => places.last;
 
-  Coord get midPointCoord => routePoints[routePoints.length ~/ 2];
-  double get minLat => routePoints.map((c) => c.lat).reduce(math.min);
-  double get maxLat => routePoints.map((c) => c.lat).reduce(math.max);
-  double get minLong => routePoints.map((c) => c.lng).reduce(math.min);
-  double get maxLong => routePoints.map((c) => c.lng).reduce(math.max);
+  Coord get midPointCoord => route[route.length ~/ 2];
+  double get minLat => route.map((c) => c.lat).reduce(math.min);
+  double get maxLat => route.map((c) => c.lat).reduce(math.max);
+  double get minLong => route.map((c) => c.lng).reduce(math.min);
+  double get maxLong => route.map((c) => c.lng).reduce(math.max);
   double get rating {
     if (reviews.isEmpty) return 0.0;
     return (reviews.map((r) => r.rating).reduce((e, v) => e + v)) / reviews.length;
@@ -49,7 +49,7 @@ class Destination {
       @required this.bestMonths,
       @required this.places,
       @required this.reviews,
-      @required this.routePoints,
+      @required this.route,
       @required this.suggestedItineraries,
       @required this.createdItinerary,
       @required this.isDownloaded})
@@ -64,7 +64,7 @@ class Destination {
         assert(bestMonths != null),
         assert(places != null),
         assert(reviews != null),
-        assert(routePoints != null),
+        assert(route != null),
         assert(suggestedItineraries != null),
         assert(isDownloaded != null);
 
@@ -81,7 +81,7 @@ class Destination {
     List<String> bestMonths,
     List<Place> places,
     List<Review> reviews,
-    List<Coord> routePoints,
+    List<Coord> route,
     List<Itinerary> suggestedItineraries,
     Itinerary createdItinerary,
     bool isDownloaded,
@@ -98,7 +98,7 @@ class Destination {
       bestMonths: bestMonths ?? this.bestMonths,
       places: places ?? this.places,
       reviews: reviews ?? this.reviews,
-      routePoints: routePoints ?? this.routePoints,
+      route: route ?? this.route,
       suggestedItineraries: suggestedItineraries ?? this.suggestedItineraries,
       createdItinerary: createdItinerary ?? this.createdItinerary,
       isDownloaded: isDownloaded ?? this.isDownloaded,
@@ -118,7 +118,7 @@ class Destination {
       'bestMonths': bestMonths,
       'places': places?.map((x) => x?.toMap())?.toList(),
       'reviews': reviews?.map((x) => x?.toMap())?.toList(),
-      'routePoints': routePoints?.map((x) => x?.toMap())?.toList(),
+      'routePoints': route?.map((x) => x?.toMap())?.toList(),
       'suggestedItineraries': suggestedItineraries?.map((x) => x?.toMap())?.toList(),
       'createdItinerary': createdItinerary?.toMap(),
       'isDownloaded': isDownloaded,
@@ -142,7 +142,7 @@ class Destination {
           ?.map((x) => Place.fromMap(x as Map<String, dynamic>))),
       reviews: List<Review>.from((map['reviews'] as List<Review>)
           ?.map((x) => Review.fromMap(x as Map<String, dynamic>))),
-      routePoints: List<Coord>.from((map['routePoints'] as List<Coord>)
+      route: List<Coord>.from((map['routePoints'] as List<Coord>)
           ?.map((x) => Coord.fromMap(x as Map<String, dynamic>))),
       suggestedItineraries: List<Itinerary>.from(
           (map['suggestedItineraries'] as List<Itinerary>)
@@ -155,7 +155,7 @@ class Destination {
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, description: $description, permit: $permit, length: $length, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, reviews: $reviews, routePoints: $routePoints, suggestedItineraries: $suggestedItineraries, createdItinerary: $createdItinerary, isDownloaded: $isDownloaded)';
+    return 'Destination(id: $id, name: $name, description: $description, permit: $permit, length: $length, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, reviews: $reviews, routePoints: $route, suggestedItineraries: $suggestedItineraries, createdItinerary: $createdItinerary, isDownloaded: $isDownloaded)';
   }
 
   @override
@@ -174,7 +174,7 @@ class Destination {
         listEquals(o.bestMonths, bestMonths) &&
         listEquals(o.places, places) &&
         listEquals(o.reviews, reviews) &&
-        listEquals(o.routePoints, routePoints) &&
+        listEquals(o.route, route) &&
         listEquals(o.suggestedItineraries, suggestedItineraries) &&
         o.createdItinerary == createdItinerary &&
         o.isDownloaded == isDownloaded;
@@ -193,7 +193,7 @@ class Destination {
         bestMonths.hashCode ^
         places.hashCode ^
         reviews.hashCode ^
-        routePoints.hashCode ^
+        route.hashCode ^
         suggestedItineraries.hashCode ^
         createdItinerary.hashCode ^
         isDownloaded.hashCode;

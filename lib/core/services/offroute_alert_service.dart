@@ -9,14 +9,16 @@ import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:sahayatri/core/services/notification_service.dart';
 
-class UserAlertService {
-  final NotificationService notificationService;
+class OffRouteAlertService {
   bool isAlreadyAlerted = false;
+  final NotificationService notificationService;
 
-  UserAlertService({
+  OffRouteAlertService({
     @required this.notificationService,
   }) : assert(notificationService != null);
 
+  /// Returns true if user should be alerted.
+  /// Do not alert the user if he/she has already been alerted once.
   bool shouldAlert(Coord userLocation, List<Coord> route) {
     final bool isOnRoute = PolygonUtil.isLocationOnPath(
       LatLng(userLocation.lat, userLocation.lng),
@@ -30,6 +32,7 @@ class UserAlertService {
     return isAlreadyAlerted = false;
   }
 
+  /// Show notification regarding off-route movement.
   Future<void> alert() async {
     await notificationService.show(
       NotificationChannels.kOffRouteId,
