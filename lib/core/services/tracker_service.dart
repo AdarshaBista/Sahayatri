@@ -6,6 +6,7 @@ import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/next_stop.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
@@ -19,30 +20,40 @@ class TrackerService {
   final Stopwatch _stopwatch = Stopwatch();
 
   /// Get continuous location updates.
-  final _locationStreamController = StreamController<UserLocation>();
-  Stream<UserLocation> get locationStream => _locationStreamController.stream;
+  StreamController<UserLocation> _userLocationStreamController;
+  Stream<UserLocation> get userLocationStream => _userLocationStreamController.stream;
 
-  /// Start the tracking proces for a [destination].
+  /// Subscription to user location stream.
+  StreamSubscription _userLocationStreamSub;
+
+  /// Start the tracking process for a [destination].
   void start(Destination destination) {
-    if (_destination != null) return;
+    if (_destination != null) {
+      if (destination.id != _destination.id) {
+        throw Failure(error: 'Tracking is already occuring for another destination.');
+      }
+      return;
+    }
+
     _destination = destination;
-
-    _stopwatch.reset();
     _stopwatch.start();
-
-    _getUserLocationStream().listen((userLocation) {
-      _locationStreamController.add(userLocation);
+    _userLocationStreamController = StreamController<UserLocation>.broadcast();
+    _userLocationStreamSub = _getUserLocationStream().listen((userLocation) {
+      print('Streaming');
+      _userLocationStreamController.add(userLocation);
     });
   }
 
-  /// Stop the tracking proces and reset fields.
+  /// Stop the tracking process and reset fields.
   void stop() {
     _destination = null;
 
-    _stopwatch.stop();
-    _locationStreamController.close();
+    _stopwatch?.reset();
+    _userLocationStreamSub?.cancel();
+    _userLocationStreamController?.close();
   }
 
+  // TODO: Remove function parameter
   /// Get user location to determine wheather tracking can be started.
   Future<UserLocation> getUserLocation(Coord fakeStartingPoint) async {
     await Future.delayed(const Duration(milliseconds: 200));
@@ -56,10 +67,11 @@ class TrackerService {
     );
   }
 
+  // TODO: This should get updates from LocationService.
   /// Get location updates once tracking has started.
   Stream<UserLocation> _getUserLocationStream() {
     return Stream<UserLocation>.periodic(
-      const Duration(milliseconds: 300),
+      const Duration(milliseconds: 10),
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),
@@ -68,7 +80,7 @@ class TrackerService {
         timestamp: DateTime.now(),
         coord: _destination.route[index],
       ),
-    ).take(_destination.route.length);
+    ).take(_destination.route.length).asBroadcastStream();
   }
 
   // TODO: Remove this

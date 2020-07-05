@@ -15,10 +15,10 @@ class TrackerLocationError extends TrackerState {
   const TrackerLocationError();
 }
 
-class TrackerSuccess extends TrackerState {
+class TrackerUpdating extends TrackerState {
   final TrackerData data;
 
-  const TrackerSuccess({
+  const TrackerUpdating({
     @required this.data,
   }) : assert(data != null);
 

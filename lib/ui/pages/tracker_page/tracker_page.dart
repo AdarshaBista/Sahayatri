@@ -23,7 +23,7 @@ class TrackerPage extends StatelessWidget {
             appBar: AppBar(),
             body: const LoadingIndicator(),
           );
-        } else if (state is TrackerSuccess) {
+        } else if (state is TrackerUpdating) {
           return Provider<TrackerData>.value(
             value: state.data,
             child: const TrackerPanel(),

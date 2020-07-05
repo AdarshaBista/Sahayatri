@@ -17,3 +17,18 @@ class TrackingStarted extends TrackerEvent {
   @override
   List<Object> get props => [destination];
 }
+
+class TrackingUpdated extends TrackerEvent {
+  final TrackerData data;
+
+  const TrackingUpdated({
+    @required this.data,
+  }) : assert(data != null);
+
+  @override
+  List<Object> get props => [data];
+}
+
+class TrackingStopped extends TrackerEvent {
+  const TrackingStopped();
+}

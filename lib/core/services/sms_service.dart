@@ -46,6 +46,8 @@ class SmsService {
     if (Platform.isWindows) return;
 
     final contact = (await prefsDao.get()).contact;
+    if (contact.isEmpty) return;
+
     final message = SmsMessage(contact, 'I have safely reached ${place.name}');
 
     message.onStateChanged.listen((state) {

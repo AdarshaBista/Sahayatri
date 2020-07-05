@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
@@ -9,8 +11,8 @@ import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/offroute_alert_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
+import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
 part 'tracker_event.dart';
 part 'tracker_state.dart';
@@ -19,6 +21,8 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   final SmsService smsService;
   final TrackerService trackerService;
   final OffRouteAlertService offRouteAlertService;
+
+  StreamSubscription _trackerUpdateSub;
 
   TrackerBloc({
     @required this.smsService,
@@ -30,9 +34,22 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
         super(const TrackerLoading());
 
   @override
+  Future<void> close() {
+    _trackerUpdateSub?.cancel();
+    return super.close();
+  }
+
+  @override
   Stream<TrackerState> mapEventToState(TrackerEvent event) async* {
     if (event is TrackingStarted) {
       yield* _mapTrackingStartedToState(event.destination);
+    }
+    if (event is TrackingUpdated) {
+      yield TrackerUpdating(data: event.data);
+    }
+    if (event is TrackingStopped) {
+      smsService.clear();
+      trackerService.stop();
     }
   }
 
@@ -46,21 +63,17 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       }
 
       trackerService.start(destination);
-      await for (final userLocation in trackerService.locationStream) {
-        yield* _getTrackerUpdates(userLocation, destination);
-      }
-      trackerService.stop();
-      smsService.clear();
+      _trackerUpdateSub?.cancel();
+      _trackerUpdateSub = trackerService.userLocationStream.listen((userLocation) {
+        _updateTrackerData(userLocation, destination);
+      });
     } on Failure catch (e) {
       print(e.error);
       yield TrackerError(message: e.message);
     }
   }
 
-  Stream<TrackerState> _getTrackerUpdates(
-    UserLocation userLocation,
-    Destination destination,
-  ) async* {
+  void _updateTrackerData(UserLocation userLocation, Destination destination) {
     if (offRouteAlertService.shouldAlert(userLocation.coord, destination.route)) {
       offRouteAlertService.alert();
     }
@@ -75,7 +88,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       smsService.send(nextStop?.place);
     }
 
-    yield TrackerSuccess(
+    add(TrackingUpdated(
       data: TrackerData(
         elapsed: elapsed,
         nextStop: nextStop,
@@ -84,6 +97,6 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
         distanceCovered: distanceCovered,
         distanceRemaining: distanceRemaining,
       ),
-    );
+    ));
   }
 }

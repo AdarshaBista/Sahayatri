@@ -18,8 +18,8 @@ class DistanceCoveredBar extends StatelessWidget {
         SliderTheme(
           data: const SliderThemeData(
             trackHeight: 8.0,
-            inactiveTrackColor: Colors.red,
             activeTrackColor: AppColors.primary,
+            inactiveTrackColor: AppColors.secondary,
             overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
             thumbColor: AppColors.primary,
             thumbShape: RoundSliderThumbShape(

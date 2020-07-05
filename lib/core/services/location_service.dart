@@ -41,7 +41,8 @@ class LocationService {
 
     return location.onLocationChanged
         .where((locationData) => locationData != null)
-        .map((locationData) => UserLocation.fromLocationData(locationData));
+        .map((locationData) => UserLocation.fromLocationData(locationData))
+        .asBroadcastStream();
   }
 
   /// One time location query.
