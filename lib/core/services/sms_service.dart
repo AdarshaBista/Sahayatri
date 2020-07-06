@@ -30,7 +30,7 @@ class SmsService {
         assert(notificationService != null);
 
   /// Returns true if sms should be sent on arrival to [nextStop].
-  bool shouldSend(Coord userLocation, Place nextStop) {
+  bool _shouldSend(Coord userLocation, Place nextStop) {
     if (nextStop == null || _sentList.contains(nextStop?.id)) return false;
 
     final distance = SphericalUtil.computeDistanceBetween(
@@ -42,17 +42,18 @@ class SmsService {
 
   /// Send SMS to notify close contact of the user
   /// on his/her arrival at a [place].
-  Future<void> send(Place place) async {
+  Future<void> send(Coord userLocation, Place nextStop) async {
+    if (!_shouldSend(userLocation, nextStop)) return;
     if (Platform.isWindows) return;
 
     final contact = (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
 
-    final message = SmsMessage(contact, 'I have safely reached ${place.name}');
+    final message = SmsMessage(contact, 'I have safely reached ${nextStop.name}');
 
     message.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
-        _alert('$contact has been notified of your arrival at ${place.name}');
+        _alert('$contact has been notified of your arrival at ${nextStop.name}');
       } else if (state == SmsMessageState.Fail) {
         _alert('Failed to send sms to $contact');
       }
@@ -60,12 +61,12 @@ class SmsService {
 
     try {
       // TODO: Remove this check
-      if (place.id == 13) sender.sendSms(message);
+      if (nextStop.id == 13) sender.sendSms(message);
     } catch (e) {
       print(e);
       return;
     }
-    _sentList.add(place.id);
+    _sentList.add(nextStop.id);
   }
 
   /// Show notification to user on status of sms.

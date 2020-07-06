@@ -19,6 +19,9 @@ class TrackerService {
   /// Keeps track of time spent on tracking.
   final Stopwatch _stopwatch = Stopwatch();
 
+  /// Called when user completes the trail
+  void Function() onCompleted;
+
   /// Get continuous location updates.
   StreamController<UserLocation> _userLocationStreamController;
   Stream<UserLocation> get userLocationStream => _userLocationStreamController.stream;
@@ -42,6 +45,7 @@ class TrackerService {
       print('Streaming');
       _userLocationStreamController.add(userLocation);
     });
+    _userLocationStreamSub.onDone(() => onCompleted());
   }
 
   /// Stop the tracking process and reset fields.

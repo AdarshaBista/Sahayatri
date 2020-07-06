@@ -19,7 +19,7 @@ class OffRouteAlertService {
 
   /// Returns true if user should be alerted.
   /// Do not alert the user if he/she has already been alerted once.
-  bool shouldAlert(Coord userLocation, List<Coord> route) {
+  bool _shouldAlert(Coord userLocation, List<Coord> route) {
     final bool isOnRoute = PolygonUtil.isLocationOnPath(
       LatLng(userLocation.lat, userLocation.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
@@ -33,7 +33,9 @@ class OffRouteAlertService {
   }
 
   /// Show notification regarding off-route movement.
-  Future<void> alert() async {
+  Future<void> alert(Coord userLocation, List<Coord> route) async {
+    if (!_shouldAlert(userLocation, route)) return;
+
     await notificationService.show(
       NotificationChannels.kOffRouteId,
       'You seem to be going off route. Please re-evaluate your course.',

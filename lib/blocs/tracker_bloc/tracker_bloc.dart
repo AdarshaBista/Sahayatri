@@ -63,6 +63,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       }
 
       trackerService.start(destination);
+      trackerService.onCompleted = () => add(const TrackingStopped());
       _trackerUpdateSub?.cancel();
       _trackerUpdateSub = trackerService.userLocationStream.listen((userLocation) {
         _updateTrackerData(userLocation, destination);
@@ -74,19 +75,14 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   }
 
   void _updateTrackerData(UserLocation userLocation, Destination destination) {
-    if (offRouteAlertService.shouldAlert(userLocation.coord, destination.route)) {
-      offRouteAlertService.alert();
-    }
-
     final elapsed = trackerService.getElapsedDuration();
     final nextStop = trackerService.getNextStop(userLocation);
     final userIndex = trackerService.getUserIndex(userLocation.coord);
     final distanceCovered = trackerService.getDistanceCovered(userIndex);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex);
 
-    if (smsService.shouldSend(userLocation.coord, nextStop?.place)) {
-      smsService.send(nextStop?.place);
-    }
+    smsService.send(userLocation.coord, nextStop?.place);
+    offRouteAlertService.alert(userLocation.coord, destination.route);
 
     add(TrackingUpdated(
       data: TrackerData(
