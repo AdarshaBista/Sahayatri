@@ -19,7 +19,7 @@ class TrackingStarted extends TrackerEvent {
 }
 
 class TrackingUpdated extends TrackerEvent {
-  final TrackerData data;
+  final TrackerUpdate data;
 
   const TrackingUpdated({
     @required this.data,

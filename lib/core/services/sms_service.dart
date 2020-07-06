@@ -12,6 +12,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/core/database/prefs_dao.dart';
+
 import 'package:sahayatri/core/services/notification_service.dart';
 
 class SmsService {
@@ -19,7 +20,6 @@ class SmsService {
   final SmsSender sender = SmsSender();
   final NotificationService notificationService;
 
-  // TODO: Persist on disk
   /// List of ids of [Place] for which sms has already been sent.
   final List<int> _sentList = [];
 

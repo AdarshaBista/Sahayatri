@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/tracker_data.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -42,8 +42,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final trackerData = context.watch<TrackerData>();
-    final center = trackerData.userLocation.coord;
+    final trackerUpdate = context.watch<TrackerUpdate>();
+    final center = trackerUpdate.userLocation.coord;
 
     if (isTracking) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -57,7 +57,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           center: center,
           initialZoom: 18.0,
           mapController: mapController,
-          userIndex: trackerData.userIndex,
+          userIndex: trackerUpdate.userIndex,
           markerLayerOptions: _buildMarkers(context, center),
           circleLayerOptions: _buildAccuracyCircle(context, center),
           onPositionChanged: (_, hasGesture) {
@@ -80,7 +80,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
     final places = context.bloc<DestinationBloc>().destination.places;
-    final trackerData = context.watch<TrackerData>();
+    final trackerUpdate = context.watch<TrackerUpdate>();
 
     return MarkerLayerOptions(
       markers: [
@@ -94,7 +94,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           height: 24.0,
           point: center.toLatLng(),
           builder: (context) => UserMarker(
-            angle: trackerData.userLocation.bearing,
+            angle: trackerUpdate.userLocation.bearing,
           ),
         ),
       ],
@@ -102,7 +102,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 
   CircleLayerOptions _buildAccuracyCircle(BuildContext context, Coord center) {
-    final trackerData = context.watch<TrackerData>();
+    final trackerUpdate = context.watch<TrackerUpdate>();
 
     return CircleLayerOptions(
       circles: [
@@ -112,7 +112,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           color: Colors.teal.withOpacity(0.2),
           borderColor: Colors.teal.withOpacity(0.5),
           useRadiusInMeter: true,
-          radius: trackerData.userLocation.accuracy,
+          radius: trackerUpdate.userLocation.accuracy,
         ),
       ],
     );

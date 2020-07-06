@@ -15,10 +15,10 @@ import 'package:sahayatri/core/database/prefs_dao.dart';
 import 'package:sahayatri/core/database/weather_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
-import 'package:sahayatri/core/services/tracker_service.dart';
 
 import 'package:sahayatri/sahayatri.dart';
 import 'package:device_preview/device_preview.dart';

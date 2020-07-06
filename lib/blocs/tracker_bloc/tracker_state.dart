@@ -16,14 +16,14 @@ class TrackerLocationError extends TrackerState {
 }
 
 class TrackerUpdating extends TrackerState {
-  final TrackerData data;
+  final TrackerUpdate update;
 
   const TrackerUpdating({
-    @required this.data,
-  }) : assert(data != null);
+    @required this.update,
+  }) : assert(update != null);
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [update];
 }
 
 class TrackerError extends TrackerState {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:sahayatri/core/models/tracker_data.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -11,7 +11,7 @@ class StopwatchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerData = context.watch<TrackerData>();
+    final trackerUpdate = context.watch<TrackerUpdate>();
 
     return Row(
       textBaseline: TextBaseline.alphabetic,
@@ -24,7 +24,7 @@ class StopwatchTile extends StatelessWidget {
         ),
         const SizedBox(width: 8.0),
         Text(
-          _formatDuration(trackerData.elapsed),
+          _formatDuration(trackerUpdate.elapsed),
           style: AppTextStyles.large.bold,
         ),
         const SizedBox(width: 8.0),

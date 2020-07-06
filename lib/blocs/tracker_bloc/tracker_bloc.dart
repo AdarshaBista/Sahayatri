@@ -5,10 +5,11 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
@@ -21,7 +22,6 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   final SmsService smsService;
   final TrackerService trackerService;
   final OffRouteAlertService offRouteAlertService;
-
   StreamSubscription _trackerUpdateSub;
 
   TrackerBloc({
@@ -41,37 +41,38 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
 
   @override
   Stream<TrackerState> mapEventToState(TrackerEvent event) async* {
-    if (event is TrackingStarted) {
-      yield* _mapTrackingStartedToState(event.destination);
-    }
-    if (event is TrackingUpdated) {
-      yield TrackerUpdating(data: event.data);
-    }
-    if (event is TrackingPaused) {
-      trackerService.pause();
-      yield TrackerUpdating(
-        data: (state as TrackerUpdating).data.copyWith(
+    if (event is TrackingPaused) yield* _mapTrackingPausedToState();
+    if (event is TrackingResumed) yield* _mapTrackingResumedToState();
+    if (event is TrackingStopped) yield* _mapTrackingStoppedToState();
+    if (event is TrackingUpdated) yield TrackerUpdating(update: event.data);
+    if (event is TrackingStarted) yield* _mapTrackingStartedToState(event.destination);
+  }
+
+  Stream<TrackerState> _mapTrackingPausedToState() async* {
+    trackerService.pause();
+    yield TrackerUpdating(
+        update: (state as TrackerUpdating).update.copyWith(
               trackingState: TrackingState.paused,
-            ),
-      );
-    }
-    if (event is TrackingResumed) {
-      trackerService.resume();
-      yield TrackerUpdating(
-        data: (state as TrackerUpdating).data.copyWith(
-              trackingState: TrackingState.updating,
-            ),
-      );
-    }
-    if (event is TrackingStopped) {
-      smsService.clear();
-      trackerService.stop();
-      yield TrackerUpdating(
-        data: (state as TrackerUpdating).data.copyWith(
-              trackingState: TrackingState.stopped,
-            ),
-      );
-    }
+            ));
+  }
+
+  Stream<TrackerState> _mapTrackingResumedToState() async* {
+    trackerService.resume();
+    yield TrackerUpdating(
+      update: (state as TrackerUpdating)
+          .update
+          .copyWith(trackingState: TrackingState.updating),
+    );
+  }
+
+  Stream<TrackerState> _mapTrackingStoppedToState() async* {
+    smsService.clear();
+    trackerService.stop();
+    yield TrackerUpdating(
+      update: (state as TrackerUpdating)
+          .update
+          .copyWith(trackingState: TrackingState.stopped),
+    );
   }
 
   Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
@@ -83,11 +84,12 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
         return;
       }
 
-      trackerService.start(destination);
+      await trackerService.start(destination);
       trackerService.onCompleted = () => add(const TrackingStopped());
+
       _trackerUpdateSub?.cancel();
       _trackerUpdateSub = trackerService.userLocationStream.listen((userLocation) {
-        _updateTrackerData(userLocation, destination);
+        _updateTrackerData(userLocation, destination.route);
       });
     } on Failure catch (e) {
       print(e.error);
@@ -95,18 +97,18 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     }
   }
 
-  void _updateTrackerData(UserLocation userLocation, Destination destination) {
+  void _updateTrackerData(UserLocation userLocation, List<Coord> route) {
     final elapsed = trackerService.getElapsedDuration();
     final nextStop = trackerService.getNextStop(userLocation);
-    final userIndex = trackerService.getUserIndex(userLocation.coord);
+    final userIndex = trackerService.getIndexOnRoute(userLocation.coord, 0.1);
     final distanceCovered = trackerService.getDistanceCovered(userIndex);
     final distanceRemaining = trackerService.getDistanceRemaining(userIndex);
 
     smsService.send(userLocation.coord, nextStop?.place);
-    offRouteAlertService.alert(userLocation.coord, destination.route);
+    offRouteAlertService.alert(userLocation.coord, route);
 
     add(TrackingUpdated(
-      data: TrackerData(
+      data: TrackerUpdate(
         elapsed: elapsed,
         nextStop: nextStop,
         userIndex: userIndex,

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
-import 'package:sahayatri/core/models/tracker_data.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -14,15 +14,15 @@ class TrackerActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerData = context.watch<TrackerData>();
+    final trackerUpdate = context.watch<TrackerUpdate>();
 
-    return trackerData.trackingState == TrackingState.stopped
+    return trackerUpdate.trackingState == TrackingState.stopped
         ? const Offstage()
         : Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const Divider(height: 4.0),
-              trackerData.trackingState == TrackingState.paused
+              trackerUpdate.trackingState == TrackingState.paused
                   ? _buildTile(
                       label: 'RESUME',
                       color: Colors.teal,

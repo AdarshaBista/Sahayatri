@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/user_location.dart';
 
 enum TrackingState { updating, paused, stopped }
 
-class TrackerData {
+class TrackerUpdate {
   final int userIndex;
   final Duration elapsed;
   final NextStop nextStop;
@@ -14,7 +14,7 @@ class TrackerData {
   final UserLocation userLocation;
   final TrackingState trackingState;
 
-  TrackerData({
+  TrackerUpdate({
     @required this.userIndex,
     @required this.elapsed,
     @required this.nextStop,
@@ -28,7 +28,7 @@ class TrackerData {
         assert(distanceCovered != null),
         assert(distanceRemaining != null);
 
-  TrackerData copyWith({
+  TrackerUpdate copyWith({
     int userIndex,
     Duration elapsed,
     NextStop nextStop,
@@ -37,7 +37,7 @@ class TrackerData {
     UserLocation userLocation,
     TrackingState trackingState,
   }) {
-    return TrackerData(
+    return TrackerUpdate(
       elapsed: elapsed ?? this.elapsed,
       nextStop: nextStop ?? this.nextStop,
       userIndex: userIndex ?? this.userIndex,

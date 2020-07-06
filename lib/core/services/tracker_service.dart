@@ -19,9 +19,6 @@ class TrackerService {
   /// Keeps track of time spent on tracking.
   final Stopwatch _stopwatch = Stopwatch();
 
-  /// Called when user completes the trail
-  void Function() onCompleted;
-
   /// Get continuous location updates.
   StreamController<UserLocation> _userLocationStreamController;
   Stream<UserLocation> get userLocationStream => _userLocationStreamController.stream;
@@ -29,23 +26,33 @@ class TrackerService {
   /// Subscription to user location stream.
   StreamSubscription _userLocationStreamSub;
 
+  /// Called when user completes the trail
+  void Function() onCompleted;
+
   /// Start the tracking process for a [destination].
-  void start(Destination destination) {
+  Future<void> start(Destination destination) async {
+    /// If [_destination] is not null, tacking is already in progress.
     if (_destination != null) {
       if (destination.id != _destination.id) {
         throw Failure(error: 'Tracking is already occuring for another destination.');
       }
+
+      // Resume tracking process.
+      // Does not do anything on initial start.
+      // Ensures tracking is resumed when starting from paused state.
       resume();
       return;
     }
 
-    _destination = destination;
     _stopwatch.start();
+    _destination = destination;
+
     _userLocationStreamController = StreamController<UserLocation>.broadcast();
     _userLocationStreamSub = _getUserLocationStream().listen((userLocation) {
-      print('SS');
       _userLocationStreamController.add(userLocation);
     });
+
+    /// Call [onCompleted] when user finishes trail.
     _userLocationStreamSub.onDone(() => onCompleted());
   }
 
@@ -54,8 +61,8 @@ class TrackerService {
     _destination = null;
 
     _stopwatch?.reset();
-    _userLocationStreamSub?.cancel();
-    _userLocationStreamController?.close();
+    _userLocationStreamSub.cancel();
+    _userLocationStreamController.close();
   }
 
   /// Pause the tracking process
@@ -121,12 +128,6 @@ class TrackerService {
     return _stopwatch.elapsed;
   }
 
-  /// Get the index of user on the route.
-  /// This index determines the position of user along a route.
-  int getUserIndex(Coord userCoord) {
-    return _getIndexOnRoute(userCoord, 0.1);
-  }
-
   /// Get the distance covered by the user in metres.
   double getDistanceCovered(int userIndex) {
     final path = _destination.route
@@ -154,8 +155,8 @@ class TrackerService {
     Place nextStopPlace;
 
     for (final place in _destination.places) {
-      userIndex = _getIndexOnRoute(userLocation.coord);
-      placeIndex = _getIndexOnRoute(place.coord);
+      userIndex = getIndexOnRoute(userLocation.coord);
+      placeIndex = getIndexOnRoute(place.coord);
 
       if (userIndex >= placeIndex) continue;
       nextStopPlace = place;
@@ -186,7 +187,8 @@ class TrackerService {
   }
 
   /// Get index of a [point] on the route.
-  int _getIndexOnRoute(Coord point, [double tolerance = Distances.kNextStopTolerance]) {
+  /// This index determines the position of [point] along a route.
+  int getIndexOnRoute(Coord point, [double tolerance = Distances.kNextStopTolerance]) {
     return PolygonUtil.locationIndexOnPath(
       LatLng(point.lat, point.lng),
       _destination.route.map((p) => LatLng(p.lat, p.lng)).toList(),

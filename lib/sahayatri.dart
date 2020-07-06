@@ -30,23 +30,23 @@ class Sahayatri extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<WeatherService>(
-          create: (_) => WeatherService(
+          create: (context) => WeatherService(
             apiService: context.repository<ApiService>(),
             weatherDao: context.repository<WeatherDao>(),
           ),
         ),
         RepositoryProvider<DirectionsService>(
-          create: (_) => DirectionsService(
+          create: (context) => DirectionsService(
             locationService: context.repository<LocationService>(),
           ),
         ),
         RepositoryProvider<OffRouteAlertService>(
-          create: (_) => OffRouteAlertService(
+          create: (context) => OffRouteAlertService(
             notificationService: context.repository<NotificationService>(),
           ),
         ),
         RepositoryProvider<SmsService>(
-          create: (_) => SmsService(
+          create: (context) => SmsService(
             prefsDao: context.repository<PrefsDao>(),
             notificationService: context.repository<NotificationService>(),
           ),

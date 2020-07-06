@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/core/models/tracker_data.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +18,7 @@ class NextStopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nextStop = context.watch<TrackerData>().nextStop;
+    final nextStop = context.watch<TrackerUpdate>().nextStop;
 
     return nextStop != null
         ? FadeAnimator(
@@ -44,7 +44,7 @@ class NextStopCard extends StatelessWidget {
   }
 
   Widget _buildBackground(BuildContext context) {
-    final place = context.watch<TrackerData>().nextStop.place;
+    final place = context.watch<TrackerUpdate>().nextStop.place;
     return CustomCard(
       elevation: 8.0,
       child: GradientContainer(
@@ -68,7 +68,7 @@ class NextStopCard extends StatelessWidget {
   }
 
   Widget _buildOverlay(BuildContext context) {
-    final nextStop = context.watch<TrackerData>().nextStop;
+    final nextStop = context.watch<TrackerUpdate>().nextStop;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -99,7 +99,7 @@ class NextStopCard extends StatelessWidget {
   }
 
   Widget _buildStatus(BuildContext context) {
-    final nextStop = context.watch<TrackerData>().nextStop;
+    final nextStop = context.watch<TrackerUpdate>().nextStop;
 
     return Row(
       children: [

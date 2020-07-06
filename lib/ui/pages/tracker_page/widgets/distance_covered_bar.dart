@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/core/models/tracker_data.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
@@ -11,7 +11,7 @@ class DistanceCoveredBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerData = context.watch<TrackerData>();
+    final trackerUpdate = context.watch<TrackerUpdate>();
 
     return Column(
       children: [
@@ -29,17 +29,17 @@ class DistanceCoveredBar extends StatelessWidget {
             ),
           ),
           child: Slider(
-            max: trackerData.distanceRemaining + trackerData.distanceCovered,
-            value: trackerData.distanceCovered,
+            max: trackerUpdate.distanceRemaining + trackerUpdate.distanceCovered,
+            value: trackerUpdate.distanceCovered,
             onChanged: (_) {},
           ),
         ),
         const SizedBox(height: 8.0),
         Row(
           children: [
-            _buildStat(trackerData.distanceCovered, 'covered', true),
+            _buildStat(trackerUpdate.distanceCovered, 'covered', true),
             const Spacer(),
-            _buildStat(trackerData.distanceRemaining, 'remaining', false),
+            _buildStat(trackerUpdate.distanceRemaining, 'remaining', false),
           ],
         ),
       ],
