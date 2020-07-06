@@ -21,12 +21,12 @@ class PhotoViewPage extends StatelessWidget {
       body: Stack(
         children: [
           PhotoViewGallery.builder(
+            enableRotation: true,
+            gaplessPlayback: true,
             scrollPhysics: const ClampingScrollPhysics(),
-            pageController: PageController(initialPage: args.initialPageIndex),
             loadingBuilder: (context, event) => const LoadingIndicator(),
-            loadFailedChild: const ErrorIndicator(
-              message: "Couldn't load photo",
-            ),
+            pageController: PageController(initialPage: args.initialPageIndex),
+            loadFailedChild: const ErrorIndicator(message: "Couldn't load photo"),
             itemCount: args.imageUrls.length,
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(

@@ -30,7 +30,10 @@ class PhotoGallery extends StatelessWidget {
         itemCount: imageUrls.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            child: ImageCard(imageUrl: imageUrls[index]),
+            child: Hero(
+              tag: imageUrls[index],
+              child: ImageCard(imageUrl: imageUrls[index]),
+            ),
             onTap: () => context.repository<DestinationNavService>().pushNamed(
                   Routes.kPhotoViewPageRoute,
                   arguments: PhotoViewPageArgs(
