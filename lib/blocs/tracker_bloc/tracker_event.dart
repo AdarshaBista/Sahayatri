@@ -29,6 +29,14 @@ class TrackingUpdated extends TrackerEvent {
   List<Object> get props => [data];
 }
 
+class TrackingPaused extends TrackerEvent {
+  const TrackingPaused();
+}
+
+class TrackingResumed extends TrackerEvent {
+  const TrackingResumed();
+}
+
 class TrackingStopped extends TrackerEvent {
   const TrackingStopped();
 }

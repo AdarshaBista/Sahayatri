@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
+import 'package:sahayatri/core/models/tracker_data.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
 class TrackerActions extends StatelessWidget {
@@ -12,27 +14,61 @@ class TrackerActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      color: AppColors.secondary,
-      child: ListTile(
-        dense: true,
-        isThreeLine: true,
-        leading: const Icon(
-          CommunityMaterialIcons.hand_left,
-          color: AppColors.light,
-          size: 36.0,
-        ),
-        title: Text(
-          'STOP TRACKING',
-          style: AppTextStyles.small.light.bold,
-        ),
-        subtitle: Text(
-          'You will stop receiving tracking updates.',
-          style: AppTextStyles.extraSmall.extraLight,
-        ),
-        onTap: () {
-          context.repository<TrackerBloc>().add(const TrackingStopped());
-        },
+    final trackerData = context.watch<TrackerData>();
+
+    return trackerData.trackingState == TrackingState.stopped
+        ? const Offstage()
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Divider(height: 4.0),
+              trackerData.trackingState == TrackingState.paused
+                  ? _buildTile(
+                      label: 'RESUME',
+                      color: Colors.teal,
+                      icon: CommunityMaterialIcons.play_circle_outline,
+                      onTap: () => context.repository<TrackerBloc>().add(
+                            const TrackingResumed(),
+                          ),
+                    )
+                  : _buildTile(
+                      label: 'PAUSE',
+                      color: Colors.blue,
+                      icon: CommunityMaterialIcons.pause_circle_outline,
+                      onTap: () => context.repository<TrackerBloc>().add(
+                            const TrackingPaused(),
+                          ),
+                    ),
+              _buildTile(
+                label: 'STOP',
+                color: Colors.red,
+                icon: CommunityMaterialIcons.stop_circle_outline,
+                onTap: () => context.repository<TrackerBloc>().add(
+                      const TrackingStopped(),
+                    ),
+              ),
+            ],
+          );
+  }
+
+  Widget _buildTile({
+    Color color,
+    String label,
+    IconData icon,
+    VoidCallback onTap,
+  }) {
+    return ListTile(
+      dense: true,
+      onTap: onTap,
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(
+        icon,
+        size: 24.0,
+        color: color,
+      ),
+      title: Text(
+        label,
+        style: AppTextStyles.small.bold.copyWith(color: color),
       ),
     );
   }

@@ -6,7 +6,6 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_map.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/location_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/next_stop_card.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_actions.dart';
 
 class TrackerPanel extends StatelessWidget {
   static const double kCollapsedHeight = 100.0;
@@ -40,8 +39,6 @@ class TrackerPanel extends StatelessWidget {
           TrackerStats(),
           SizedBox(height: 12.0),
           NextStopCard(),
-          SizedBox(height: 12.0),
-          TrackerActions(),
         ],
       ),
     );

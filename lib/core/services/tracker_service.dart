@@ -35,6 +35,7 @@ class TrackerService {
       if (destination.id != _destination.id) {
         throw Failure(error: 'Tracking is already occuring for another destination.');
       }
+      resume();
       return;
     }
 
@@ -42,7 +43,7 @@ class TrackerService {
     _stopwatch.start();
     _userLocationStreamController = StreamController<UserLocation>.broadcast();
     _userLocationStreamSub = _getUserLocationStream().listen((userLocation) {
-      print('Streaming');
+      print('SS');
       _userLocationStreamController.add(userLocation);
     });
     _userLocationStreamSub.onDone(() => onCompleted());
@@ -55,6 +56,18 @@ class TrackerService {
     _stopwatch?.reset();
     _userLocationStreamSub?.cancel();
     _userLocationStreamController?.close();
+  }
+
+  /// Pause the tracking process
+  void pause() {
+    _stopwatch.stop();
+    _userLocationStreamSub.pause();
+  }
+
+  /// Resume the tracking process
+  void resume() {
+    _stopwatch.start();
+    _userLocationStreamSub.resume();
   }
 
   // TODO: Remove function parameter
@@ -75,7 +88,7 @@ class TrackerService {
   /// Get location updates once tracking has started.
   Stream<UserLocation> _getUserLocationStream() {
     return Stream<UserLocation>.periodic(
-      const Duration(milliseconds: 10),
+      const Duration(milliseconds: 300),
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),

@@ -19,7 +19,7 @@ class StopwatchTile extends StatelessWidget {
       children: [
         const Icon(
           CommunityMaterialIcons.timer_outline,
-          color: Colors.blue,
+          color: AppColors.dark,
           size: 22.0,
         ),
         const SizedBox(width: 8.0),

@@ -8,3 +8,4 @@ linter:
   rules:
     avoid_print: false
     sort_child_properties_last: false
+    prefer_if_elements_to_conditional_expressions: false

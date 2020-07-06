@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_actions.dart';
 
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -17,7 +18,9 @@ class TrackerStats extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             StopwatchTile(),
-            SizedBox(height: 20.0),
+            SizedBox(height: 12.0),
+            TrackerActions(),
+            SizedBox(height: 12.0),
             DistanceCoveredBar(),
           ],
         ),

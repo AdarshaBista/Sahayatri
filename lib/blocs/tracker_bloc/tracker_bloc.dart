@@ -47,9 +47,30 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     if (event is TrackingUpdated) {
       yield TrackerUpdating(data: event.data);
     }
+    if (event is TrackingPaused) {
+      trackerService.pause();
+      yield TrackerUpdating(
+        data: (state as TrackerUpdating).data.copyWith(
+              trackingState: TrackingState.paused,
+            ),
+      );
+    }
+    if (event is TrackingResumed) {
+      trackerService.resume();
+      yield TrackerUpdating(
+        data: (state as TrackerUpdating).data.copyWith(
+              trackingState: TrackingState.updating,
+            ),
+      );
+    }
     if (event is TrackingStopped) {
       smsService.clear();
       trackerService.stop();
+      yield TrackerUpdating(
+        data: (state as TrackerUpdating).data.copyWith(
+              trackingState: TrackingState.stopped,
+            ),
+      );
     }
   }
 
