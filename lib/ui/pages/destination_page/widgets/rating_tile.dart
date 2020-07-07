@@ -26,7 +26,7 @@ class RatingTile extends StatelessWidget {
           const Spacer(),
           _buildWeatherButton(context),
           const SizedBox(width: 12.0),
-          _buildDownloadButton(context),
+          _buildMoreButton(context),
         ],
       ),
     );
@@ -67,11 +67,15 @@ class RatingTile extends StatelessWidget {
     );
   }
 
-  Widget _buildDownloadButton(BuildContext context) {
+  Widget _buildMoreButton(BuildContext context) {
+    final isDownloaded = context.bloc<DestinationBloc>().destination.isDownloaded;
+
     return ColumnButton(
-      label: 'Download',
+      label: isDownloaded ? 'More' : 'Download',
       onTap: () => _downloadAndShowDetailPage(context),
-      icon: CommunityMaterialIcons.cloud_download_outline,
+      icon: isDownloaded
+          ? CommunityMaterialIcons.forward
+          : CommunityMaterialIcons.cloud_download_outline,
     );
   }
 
