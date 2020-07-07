@@ -63,6 +63,7 @@ class _RoutePageState extends State<RoutePage> {
     if (isSheetOpen) {
       final bsController = AltitudeGraph(
         altitudes: destination.route.map((p) => p.alt).toList(),
+        routeLengthKm: double.parse(destination.length),
         onDrag: (index) {
           setState(() {
             altitudeDragCoordIndex = index;

@@ -6,19 +6,22 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class AltitudeGraph extends StatelessWidget {
-  final List<double> altitudes;
   final Function(int) onDrag;
+  final double routeLengthKm;
+  final List<double> altitudes;
 
   const AltitudeGraph({
-    @required this.altitudes,
     @required this.onDrag,
-  })  : assert(altitudes != null),
-        assert(onDrag != null);
+    @required this.altitudes,
+    @required this.routeLengthKm,
+  })  : assert(onDrag != null),
+        assert(altitudes != null),
+        assert(routeLengthKm != null);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240.0,
+      height: 280.0,
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -42,7 +45,8 @@ class AltitudeGraph extends StatelessWidget {
   }
 
   LineChart _buildGraph() {
-    const double interval = 1000.0;
+    const double vInterval = 1000.0;
+    final double hInterval = altitudes.length / 4.0;
     final double maxY = altitudes.reduce(math.max).toDouble();
     final List<double> xValues =
         List.generate(altitudes.length, (index) => index.toDouble()).toList();
@@ -55,8 +59,8 @@ class AltitudeGraph extends StatelessWidget {
         maxX: xValues.length.toDouble(),
         borderData: FlBorderData(show: false),
         lineTouchData: _buildTouchData(),
-        gridData: _buildGrid(interval),
-        titlesData: _buildTitles(interval),
+        gridData: _buildGrid(vInterval, hInterval),
+        titlesData: _buildTitles(vInterval, hInterval, xValues.length),
         lineBarsData: [_buildLineData(xValues, altitudes, AppColors.primary)],
       ),
     );
@@ -77,26 +81,36 @@ class AltitudeGraph extends StatelessWidget {
     );
   }
 
-  FlGridData _buildGrid(double interval) {
+  FlGridData _buildGrid(double vInterval, double hInterval) {
     return FlGridData(
       show: true,
-      drawVerticalLine: false,
+      drawVerticalLine: true,
       drawHorizontalLine: true,
-      verticalInterval: interval,
-      horizontalInterval: interval,
+      verticalInterval: hInterval,
+      horizontalInterval: vInterval,
     );
   }
 
-  FlTitlesData _buildTitles(double interval) {
+  FlTitlesData _buildTitles(double vInterval, double hInterval, int length) {
     return FlTitlesData(
-      bottomTitles: SideTitles(showTitles: false),
+      bottomTitles: SideTitles(
+        showTitles: true,
+        margin: 8.0,
+        interval: hInterval,
+        reservedSize: 30.0,
+        textStyle: AppTextStyles.extraSmall.bold,
+        getTitles: (value) {
+          final double percent = value / length;
+          return '${(percent * routeLengthKm).round()} km';
+        },
+      ),
       leftTitles: SideTitles(
         showTitles: true,
         margin: 8.0,
-        interval: interval,
+        interval: vInterval,
         reservedSize: 30.0,
         textStyle: AppTextStyles.extraSmall.bold,
-        getTitles: (value) => '${value.round()}',
+        getTitles: (value) => '${value.round()} m',
       ),
     );
   }
