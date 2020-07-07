@@ -74,7 +74,7 @@ class RatingTile extends StatelessWidget {
       label: isDownloaded ? 'More' : 'Download',
       onTap: () => _downloadAndShowDetailPage(context),
       icon: isDownloaded
-          ? CommunityMaterialIcons.forward
+          ? CommunityMaterialIcons.page_next_outline
           : CommunityMaterialIcons.cloud_download_outline,
     );
   }

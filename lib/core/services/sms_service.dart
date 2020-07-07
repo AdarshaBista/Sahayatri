@@ -23,6 +23,9 @@ class SmsService {
   /// List of ids of [Place] for which sms has already been sent.
   final List<int> _sentList = [];
 
+  /// Phone number of close contact.
+  String contact;
+
   SmsService({
     @required this.prefsDao,
     @required this.notificationService,
@@ -42,31 +45,30 @@ class SmsService {
 
   /// Send SMS to notify close contact of the user
   /// on his/her arrival at a [place].
-  Future<void> send(Coord userLocation, Place nextStop) async {
-    if (!_shouldSend(userLocation, nextStop)) return;
+  Future<void> send(Coord userLocation, Place place) async {
     if (Platform.isWindows) return;
+    if (!_shouldSend(userLocation, place)) return;
 
-    final contact = (await prefsDao.get()).contact;
+    contact ??= (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
 
-    final message = SmsMessage(contact, 'I have safely reached ${nextStop.name}');
-
-    message.onStateChanged.listen((state) {
+    final smsMessage = SmsMessage(contact, 'I have safely reached ${place.name}');
+    smsMessage.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
-        _alert('$contact has been notified of your arrival at ${nextStop.name}');
+        _alert('$contact has been notified on your arrival at ${place.name}');
       } else if (state == SmsMessageState.Fail) {
-        _alert('Failed to send sms to $contact');
+        _alert('Failed to send message to $contact');
       }
     });
 
     try {
-      // TODO: Remove this check
-      if (nextStop.id == 13) sender.sendSms(message);
+      //TODO: Enable sms
+      // sender.sendSms(smsMessage);
     } catch (e) {
       print(e);
       return;
     }
-    _sentList.add(nextStop.id);
+    _sentList.add(place.id);
   }
 
   /// Show notification to user on status of sms.
@@ -81,7 +83,7 @@ class SmsService {
   }
 
   /// Clear sms sent list once tracking is over.
-  void clear() {
+  void stop() {
     _sentList.clear();
   }
 }

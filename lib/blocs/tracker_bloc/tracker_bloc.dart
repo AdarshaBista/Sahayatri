@@ -66,7 +66,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   }
 
   Stream<TrackerState> _mapTrackingStoppedToState() async* {
-    smsService.clear();
+    smsService.stop();
     trackerService.stop();
     yield TrackerUpdating(
       update: (state as TrackerUpdating)
