@@ -20,7 +20,9 @@ class LocationService {
 
     // Check for permission and request if needed
     location.hasPermission().then((value) {
-      if (value != PermissionStatus.granted) {
+      if (value == PermissionStatus.granted) {
+        _hasPermission = true;
+      } else {
         location.requestPermission().then((value) {
           if (value == PermissionStatus.granted) _hasPermission = true;
         });
@@ -61,7 +63,7 @@ class LocationService {
     } catch (e) {
       throw Failure(
         error: e.toString(),
-        message: 'Could not get location!',
+        message: 'Could not get your location.',
       );
     }
   }
