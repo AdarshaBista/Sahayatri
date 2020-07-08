@@ -62,7 +62,7 @@ class SmsService {
     });
 
     try {
-      //TODO: Enable sms
+      // TODO: Enable sms
       // sender.sendSms(smsMessage);
     } catch (e) {
       print(e);

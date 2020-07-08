@@ -78,7 +78,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
     yield const TrackerLoading();
     try {
-      final userLocation = await trackerService.getUserLocation(destination.route[0]);
+      final userLocation = await trackerService.getUserLocation();
       if (!trackerService.isNearTrail(userLocation.coord, destination.route)) {
         yield const TrackerLocationError();
         return;
@@ -98,23 +98,20 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   }
 
   void _updateTrackerData(UserLocation userLocation, List<Coord> route) {
-    final elapsed = trackerService.getElapsedDuration();
-    final nextStop = trackerService.getNextStop(userLocation);
-    final userIndex = trackerService.getIndexOnRoute(userLocation.coord, 0.1);
-    final distanceCovered = trackerService.getDistanceCovered(userIndex);
-    final distanceRemaining = trackerService.getDistanceRemaining(userIndex);
+    final nextStop = trackerService.nextStop(userLocation);
+    final userIndex = trackerService.indexOnRoute(userLocation.coord, 0.1);
 
     smsService.send(userLocation.coord, nextStop?.place);
     offRouteAlertService.alert(userLocation.coord, route);
 
     add(TrackingUpdated(
       data: TrackerUpdate(
-        elapsed: elapsed,
-        nextStop: nextStop,
         userIndex: userIndex,
         userLocation: userLocation,
-        distanceCovered: distanceCovered,
-        distanceRemaining: distanceRemaining,
+        elapsed: trackerService.elapsedDuration(),
+        nextStop: trackerService.nextStop(userLocation),
+        distanceCovered: trackerService.distanceCovered(userIndex),
+        distanceRemaining: trackerService.distanceRemaining(userIndex),
       ),
     ));
   }

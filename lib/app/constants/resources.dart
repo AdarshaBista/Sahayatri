@@ -27,5 +27,4 @@ class MapStyles {
 
 class Distances {
   static const double kMinNearbyDistance = 50.0;
-  static const double kNextStopTolerance = 50.0;
 }
