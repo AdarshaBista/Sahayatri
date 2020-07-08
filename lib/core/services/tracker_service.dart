@@ -58,7 +58,7 @@ class TrackerService {
     _destination = destination;
 
     _userLocationStreamController = StreamController<UserLocation>.broadcast();
-    _userLocationStreamSub = locationService.getLocationStream().listen((userLocation) {
+    _userLocationStreamSub = _getMockUserLocationStream().listen((userLocation) {
       _userLocationStreamController.add(userLocation);
     });
 
@@ -96,6 +96,42 @@ class TrackerService {
     }
   }
 
+  // TODO: Remove this
+  Future<UserLocation> getMockUserLocation(Coord fakeStartingPoint) async {
+    await Future.delayed(const Duration(milliseconds: 200));
+    return UserLocation(
+      coord: fakeStartingPoint,
+      accuracy: 15.0,
+      altitude: 2000.0,
+      speed: 1.0,
+      bearing: 0.0,
+      timestamp: DateTime.now(),
+    );
+  }
+
+  // TODO: Remove this
+  Stream<UserLocation> _getMockUserLocationStream() {
+    return Stream<UserLocation>.periodic(
+      const Duration(milliseconds: 2000),
+      (index) => UserLocation(
+        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
+        altitude: 2000.0 + _randomOffset(-50.0, 50.0),
+        speed: 1.0 + _randomOffset(-1.0, 1.0),
+        bearing: _randomOffset(0.0, 360.0),
+        timestamp: DateTime.now(),
+        coord: Coord(
+          lat: _destination.route[index].lat,
+          lng: _destination.route[index].lng + _randomOffset(-0.0005, 0.0005),
+        ),
+      ),
+    ).take(_destination.route.length).asBroadcastStream();
+  }
+
+  // TODO: Remove this
+  double _randomOffset(double start, double end) {
+    return math.Random().nextDouble() * (end - start) + start;
+  }
+
   /// Check if user is near the trail.
   /// Tracking is only started if this returns true.
   bool isNearTrail(Coord userCoord, List<Coord> route) {
@@ -103,7 +139,7 @@ class TrackerService {
       LatLng(userCoord.lat, userCoord.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
-      tolerance: Distances.kMinNearbyDistance,
+      tolerance: Distances.kMinNearbyDistance * 2.0,
     );
   }
 
@@ -119,10 +155,7 @@ class TrackerService {
 
   /// Remaining distance on the route.
   double distanceRemaining(int userIndex) {
-    return _distanceBetweenIndices(
-      start: userIndex,
-      end: _destination.route.length - 1,
-    );
+    return _distanceBetweenIndices(start: userIndex, end: _destination.route.length);
   }
 
   /// [NextStop] the user is approaching along the route.
@@ -159,11 +192,6 @@ class TrackerService {
     for (final coord in _destination.route) {
       final distanceSq = math.pow(coord.lng - point.lng, 2).toDouble() +
           math.pow(coord.lat - point.lat, 2).toDouble();
-
-      if (distanceSq < math.pow(Distances.kClosestPointDistance, 2)) {
-        nearestCoord = coord;
-        break;
-      }
 
       if (distanceSq < shortestDistanceSq) {
         nearestCoord = coord;

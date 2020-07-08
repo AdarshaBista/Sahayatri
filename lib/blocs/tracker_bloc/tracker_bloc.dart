@@ -78,7 +78,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
     yield const TrackerLoading();
     try {
-      final userLocation = await trackerService.getUserLocation();
+      final userLocation = await trackerService.getMockUserLocation(destination.route[0]);
       if (!trackerService.isNearTrail(userLocation.coord, destination.route)) {
         yield const TrackerLocationError();
         return;

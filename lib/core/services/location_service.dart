@@ -7,7 +7,7 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 class LocationService {
-  static const int kLocationIntervalMs = 3000;
+  static const int kLocationIntervalMs = 2000;
   static const double kLocationDistanceFilter = 10.0;
 
   final Location location = Location();

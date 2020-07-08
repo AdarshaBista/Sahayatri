@@ -80,7 +80,6 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
     final places = context.bloc<DestinationBloc>().destination.places;
-    final trackerUpdate = context.watch<TrackerUpdate>();
 
     return MarkerLayerOptions(
       markers: [
