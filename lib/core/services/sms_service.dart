@@ -40,7 +40,7 @@ class SmsService {
       LatLng(userLocation.lat, userLocation.lng),
       LatLng(nextStop.coord.lat, nextStop.coord.lng),
     );
-    return distance < Distances.kMinNearbyDistance * 2.0;
+    return distance < Distances.kMinNearbyDistance;
   }
 
   /// Send SMS to notify close contact of the user
@@ -52,10 +52,12 @@ class SmsService {
     contact ??= (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
 
+    // TODO: Remove this
+    _alert('$contact has been notified on your arrival at ${place.name}');
+
     final smsMessage = SmsMessage(contact, 'I have safely reached ${place.name}');
     smsMessage.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
-        _alert('$contact has been notified on your arrival at ${place.name}');
       } else if (state == SmsMessageState.Fail) {
         _alert('Failed to send message to $contact');
       }
