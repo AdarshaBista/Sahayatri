@@ -101,7 +101,7 @@ class CustomMap extends StatelessWidget {
   PolylineLayerOptions _buildRoute(BuildContext context) {
     final route = context.bloc<DestinationBloc>().destination.route;
     final userPath = route.take(userIndex).toList();
-    final remainingPath = route.getRange(userIndex + 1, route.length).toList();
+    final remainingPath = route.getRange(userIndex - 1, route.length).toList();
 
     return PolylineLayerOptions(
       polylines: [

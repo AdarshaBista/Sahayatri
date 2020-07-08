@@ -93,9 +93,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           width: 24.0,
           height: 24.0,
           point: center.toLatLng(),
-          builder: (context) => UserMarker(
-            angle: trackerUpdate.userLocation.bearing,
-          ),
+          builder: (context) => const UserMarker(),
         ),
       ],
     );
