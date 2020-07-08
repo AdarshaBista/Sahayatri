@@ -61,7 +61,11 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           markerLayerOptions: _buildMarkers(context, center),
           circleLayerOptions: _buildAccuracyCircle(context, center),
           onPositionChanged: (_, hasGesture) {
-            if (hasGesture) isTracking = false;
+            if (hasGesture && isTracking) {
+              setState(() {
+                isTracking = false;
+              });
+            }
           },
         ),
         Positioned(
@@ -70,7 +74,9 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           child: SafeArea(
             child: TrackLocationButton(
               isTracking: isTracking,
-              onTap: () => isTracking = !isTracking,
+              onTap: () => setState(() {
+                isTracking = !isTracking;
+              }),
             ),
           ),
         ),

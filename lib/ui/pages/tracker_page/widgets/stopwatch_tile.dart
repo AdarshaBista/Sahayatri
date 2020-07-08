@@ -1,17 +1,40 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
-import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
-class StopwatchTile extends StatelessWidget {
+class StopwatchTile extends StatefulWidget {
   const StopwatchTile();
 
   @override
+  _StopwatchTileState createState() => _StopwatchTileState();
+}
+
+class _StopwatchTileState extends State<StopwatchTile> {
+  Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
+    final elapsed = context.bloc<TrackerBloc>().trackerService.elapsedDuration();
 
     return Row(
       textBaseline: TextBaseline.alphabetic,
@@ -24,7 +47,7 @@ class StopwatchTile extends StatelessWidget {
         ),
         const SizedBox(width: 8.0),
         Text(
-          _formatDuration(trackerUpdate.elapsed),
+          _formatDuration(elapsed),
           style: AppTextStyles.large.bold,
         ),
         const SizedBox(width: 8.0),

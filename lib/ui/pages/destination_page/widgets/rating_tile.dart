@@ -68,14 +68,16 @@ class RatingTile extends StatelessWidget {
   }
 
   Widget _buildMoreButton(BuildContext context) {
-    final isDownloaded = context.bloc<DestinationBloc>().destination.isDownloaded;
-
-    return ColumnButton(
-      label: isDownloaded ? 'More' : 'Download',
-      onTap: () => _downloadAndShowDetailPage(context),
-      icon: isDownloaded
-          ? CommunityMaterialIcons.page_next_outline
-          : CommunityMaterialIcons.cloud_download_outline,
+    return BlocBuilder<DestinationBloc, DestinationState>(
+      builder: (context, state) {
+        return ColumnButton(
+          label: state.destination.isDownloaded ? 'More' : 'Download',
+          onTap: () => _downloadAndShowDetailPage(context),
+          icon: state.destination.isDownloaded
+              ? CommunityMaterialIcons.page_next_outline
+              : CommunityMaterialIcons.cloud_download_outline,
+        );
+      },
     );
   }
 

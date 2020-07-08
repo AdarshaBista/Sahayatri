@@ -42,7 +42,7 @@ class TrackerService {
   }) : assert(locationService != null);
 
   /// Start the tracking process for a [destination].
-  Future<void> start(Destination destination) async {
+  void start(Destination destination) {
     /// If [_destination] is not null, tacking is already in progress.
     if (_destination != null) {
       if (destination.id != _destination.id) {
@@ -54,6 +54,7 @@ class TrackerService {
       return;
     }
 
+    _stopwatch.reset();
     _stopwatch.start();
     _destination = destination;
 
@@ -61,6 +62,9 @@ class TrackerService {
     _userLocationStreamSub = _getMockUserLocationStream().listen((userLocation) {
       _userLocationStreamController.add(userLocation);
     });
+    // _userLocationStreamSub = locationService.getLocationStream().listen((userLocation) {
+    //   _userLocationStreamController.add(userLocation);
+    // });
 
     /// Call [onCompleted] when user finishes trail.
     _userLocationStreamSub.onDone(() => onCompleted());
@@ -70,7 +74,7 @@ class TrackerService {
   void stop() {
     _destination = null;
 
-    _stopwatch?.reset();
+    _stopwatch.stop();
     _userLocationStreamSub.cancel();
     _userLocationStreamController.close();
   }
@@ -98,7 +102,7 @@ class TrackerService {
 
   // TODO: Remove this
   Future<UserLocation> getMockUserLocation(Coord fakeStartingPoint) async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 50));
     return UserLocation(
       coord: fakeStartingPoint,
       accuracy: 15.0,
@@ -112,7 +116,7 @@ class TrackerService {
   // TODO: Remove this
   Stream<UserLocation> _getMockUserLocationStream() {
     return Stream<UserLocation>.periodic(
-      const Duration(milliseconds: 2000),
+      const Duration(milliseconds: 1000),
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),
@@ -139,7 +143,7 @@ class TrackerService {
       LatLng(userCoord.lat, userCoord.lng),
       route.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
-      tolerance: Distances.kMinNearbyDistance * 2.0,
+      tolerance: Distances.kMinNearbyDistance,
     );
   }
 

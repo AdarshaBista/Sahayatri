@@ -101,12 +101,13 @@ class CustomMap extends StatelessWidget {
   PolylineLayerOptions _buildRoute(BuildContext context) {
     final route = context.bloc<DestinationBloc>().destination.route;
     final userPath = route.take(userIndex).toList();
-    final remainingPath = route.getRange(userIndex - 1, route.length).toList();
+    final remainingStartIndex = userIndex > 0 ? userIndex - 1 : 0;
+    final remainingPath = route.getRange(remainingStartIndex, route.length).toList();
 
     return PolylineLayerOptions(
       polylines: [
         Polyline(
-          strokeWidth: 4.0,
+          strokeWidth: 6.0,
           points: remainingPath.map((p) => p.toLatLng()).toList(),
           gradientColors: AppColors.accentColors.take(4).toList(),
         ),

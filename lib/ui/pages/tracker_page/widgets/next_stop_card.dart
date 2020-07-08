@@ -47,21 +47,24 @@ class NextStopCard extends StatelessWidget {
     final place = context.watch<TrackerUpdate>().nextStop.place;
     return CustomCard(
       elevation: 8.0,
-      child: GradientContainer(
-        gradientBegin: Alignment.bottomCenter,
-        gradientEnd: Alignment.topRight,
-        gradientColors: [
-          AppColors.dark.withOpacity(0.8),
-          AppColors.dark.withOpacity(0.6),
-          AppColors.dark.withOpacity(0.4),
-          AppColors.dark.withOpacity(0.2),
-          Colors.transparent,
-        ],
-        child: Image.asset(
-          place.imageUrls[0],
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
+      child: Hero(
+        tag: place.name,
+        child: GradientContainer(
+          gradientBegin: Alignment.bottomCenter,
+          gradientEnd: Alignment.topRight,
+          gradientColors: [
+            AppColors.dark.withOpacity(0.8),
+            AppColors.dark.withOpacity(0.6),
+            AppColors.dark.withOpacity(0.4),
+            AppColors.dark.withOpacity(0.2),
+            Colors.transparent,
+          ],
+          child: Image.asset(
+            place.imageUrls[0],
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
         ),
       ),
     );
