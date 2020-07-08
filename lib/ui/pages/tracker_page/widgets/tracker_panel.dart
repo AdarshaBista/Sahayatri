@@ -18,7 +18,7 @@ class TrackerPanel extends StatelessWidget {
       body: SlidingPanel(
         parallaxEnabled: false,
         minHeight: kCollapsedHeight,
-        margin: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(12.0),
         body: const TrackerMap(),
         panelBuilder: (sc) => _buildPanel(sc),
       ),

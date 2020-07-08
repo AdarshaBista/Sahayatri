@@ -131,7 +131,7 @@ class TrackerService {
     int userIndex, placeIndex;
 
     for (final place in _destination.places) {
-      userIndex = indexOnRoute(userLocation.coord, 0.1);
+      userIndex = indexOnRoute(userLocation.coord);
       placeIndex = indexOnRoute(place.coord);
 
       if (userIndex >= placeIndex) continue;
@@ -150,16 +150,27 @@ class TrackerService {
     );
   }
 
-  /// Index of a [point] on the route.
+  /// Index of a [Coord] closest to a [point] on the route.
   /// This index determines the position of [point] along a route.
-  int indexOnRoute(Coord point, [double tolerance = Distances.kMinNearbyDistance]) {
-    final index = PolygonUtil.locationIndexOnPath(
-      LatLng(point.lat, point.lng),
-      _destination.route.map((p) => LatLng(p.lat, p.lng)).toList(),
-      false,
-      tolerance: tolerance,
-    );
-    return math.max<int>(0, index);
+  int indexOnRoute(Coord point) {
+    Coord nearestCoord;
+    double shortestDistanceSq = double.infinity;
+
+    for (final coord in _destination.route) {
+      final distanceSq = math.pow(coord.lng - point.lng, 2).toDouble() +
+          math.pow(coord.lat - point.lat, 2).toDouble();
+
+      if (distanceSq < math.pow(Distances.kClosestPointDistance, 2)) {
+        nearestCoord = coord;
+        break;
+      }
+
+      if (distanceSq < shortestDistanceSq) {
+        nearestCoord = coord;
+        shortestDistanceSq = distanceSq;
+      }
+    }
+    return _destination.route.indexOf(nearestCoord);
   }
 
   /// Get distance between [start] and [end] indices of a route.
