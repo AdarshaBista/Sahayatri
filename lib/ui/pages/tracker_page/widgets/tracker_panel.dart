@@ -1,69 +1,54 @@
 import 'package:flutter/material.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/app/constants/resources.dart';
+
 import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
-import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/location_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/tracker_map.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
-class TrackerPanel extends StatelessWidget {
-  static const double kCollapsedHeight = 100.0;
-
+class TrackerPanel extends StatefulWidget {
   const TrackerPanel();
 
   @override
+  _TrackerPanelState createState() => _TrackerPanelState();
+}
+
+class _TrackerPanelState extends State<TrackerPanel> {
+  double panelOpenPercent = 0.0;
+
+  @override
   Widget build(BuildContext context) {
+    final margin = (1.0 - panelOpenPercent) * 12.0;
+
     return Scaffold(
       body: SlidingPanel(
-        snapPoint: 0.7,
+        borderRadius: 12.0,
         parallaxEnabled: false,
-        minHeight: kCollapsedHeight,
-        maxHeight: MediaQuery.of(context).size.height * 0.9,
-        margin: const EdgeInsets.all(12.0),
+        margin: EdgeInsets.all(margin),
+        minHeight: AppConfig.kTrackerPanelHeight,
+        maxHeight: MediaQuery.of(context).size.height * 0.8,
         body: const TrackerMap(),
         panelBuilder: (sc) => _buildPanel(sc),
+        onPanelSlide: (value) {
+          setState(() {
+            panelOpenPercent = value;
+          });
+        },
       ),
     );
   }
 
   Widget _buildPanel(ScrollController controller) {
-    return SingleChildScrollView(
-      controller: controller,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          const SizedBox(height: 4.0),
-          const Pill(),
-          const LocationStats(height: kCollapsedHeight),
-          const Divider(height: 20.0),
-          NestedTabView(
-            tabBarMargin: EdgeInsets.zero,
-            tabBarPadding: const EdgeInsets.only(bottom: 16.0),
-            tabs: [
-              NestedTabData(
-                label: 'Progress',
-                icon: CommunityMaterialIcons.progress_clock,
-              ),
-              NestedTabData(
-                label: 'Analytics',
-                icon: CommunityMaterialIcons.home_analytics,
-              ),
-              NestedTabData(
-                label: 'Network',
-                icon: CommunityMaterialIcons.access_point_network,
-              ),
-            ],
-            children: [
-              const ProgressTab(),
-              Container(),
-              Container(),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 4.0),
+        const Pill(),
+        const LocationStats(),
+        const Divider(height: 24.0),
+        Expanded(child: TrackerTabs(controller: controller)),
+      ],
     );
   }
 }

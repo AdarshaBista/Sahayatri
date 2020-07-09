@@ -3,6 +3,7 @@ class AppConfig {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
   static const int kAnimatorDuration = 500;
+  static const double kTrackerPanelHeight = 90.0;
 }
 
 class Images {

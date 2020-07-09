@@ -4,15 +4,23 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_stats.d
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_stop_card.dart';
 
 class ProgressTab extends StatelessWidget {
-  const ProgressTab();
+  final ScrollController controller;
+
+  const ProgressTab({
+    @required this.controller,
+  }) : assert(controller != null);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      controller: controller,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       children: const [
         TrackerStats(),
         SizedBox(height: 12.0),
         NextStopCard(),
+        SizedBox(height: 16.0),
       ],
     );
   }
