@@ -12,8 +12,8 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/user_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/track_location_button.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
 
 class TrackerMap extends StatefulWidget {
   const TrackerMap();

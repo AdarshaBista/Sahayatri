@@ -6,12 +6,14 @@ import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 class NestedTabView extends StatefulWidget {
   final List<Widget> children;
   final List<NestedTabData> tabs;
+  final EdgeInsetsGeometry tabBarMargin;
   final EdgeInsetsGeometry tabBarPadding;
 
   const NestedTabView({
     @required this.tabs,
     @required this.children,
     this.tabBarPadding = const EdgeInsets.symmetric(vertical: 8.0),
+    this.tabBarMargin = const EdgeInsets.symmetric(horizontal: 20.0),
   })  : assert(tabs != null),
         assert(children != null),
         assert(tabBarPadding != null),
@@ -65,7 +67,7 @@ class _NestedTabViewState extends State<NestedTabView>
       child: Container(
         height: 34.0,
         color: AppColors.background,
-        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        margin: widget.tabBarMargin,
         child: TabBar(
           isScrollable: true,
           controller: _tabController,

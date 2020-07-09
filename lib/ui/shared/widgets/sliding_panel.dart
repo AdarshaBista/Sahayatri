@@ -6,6 +6,7 @@ class SlidingPanel extends StatelessWidget {
   final Widget body;
   final double minHeight;
   final double maxHeight;
+  final double snapPoint;
   final double borderRadius;
   final EdgeInsets margin;
   final bool parallaxEnabled;
@@ -18,6 +19,7 @@ class SlidingPanel extends StatelessWidget {
     @required this.panelBuilder,
     this.onPanelSlide,
     this.maxHeight,
+    this.snapPoint,
     this.borderRadius = 16.0,
     this.parallaxEnabled = true,
     this.margin = EdgeInsets.zero,
@@ -35,6 +37,7 @@ class SlidingPanel extends StatelessWidget {
     return SlidingUpPanel(
       backdropOpacity: 0.6,
       backdropEnabled: true,
+      snapPoint: snapPoint,
       parallaxEnabled: parallaxEnabled,
       borderRadius: BorderRadius.only(
         topLeft: radius,

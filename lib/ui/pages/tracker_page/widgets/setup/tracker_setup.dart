@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/setup_tile.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tile.dart';
 
 class TrackerSetup extends StatelessWidget {
   const TrackerSetup();
