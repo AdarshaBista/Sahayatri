@@ -18,57 +18,70 @@ class TrackerActions extends StatelessWidget {
 
     return trackerUpdate.trackingState == TrackingState.stopped
         ? const Offstage()
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        : Row(
             children: [
-              const Divider(height: 4.0),
-              trackerUpdate.trackingState == TrackingState.paused
-                  ? _buildTile(
-                      label: 'RESUME',
-                      color: Colors.teal,
-                      icon: CommunityMaterialIcons.play_circle_outline,
-                      onTap: () => context.repository<TrackerBloc>().add(
-                            const TrackingResumed(),
-                          ),
-                    )
-                  : _buildTile(
-                      label: 'PAUSE',
-                      color: Colors.blue,
-                      icon: CommunityMaterialIcons.pause_circle_outline,
-                      onTap: () => context.repository<TrackerBloc>().add(
-                            const TrackingPaused(),
-                          ),
-                    ),
-              _buildTile(
-                label: 'STOP',
-                color: Colors.red,
-                icon: CommunityMaterialIcons.stop_circle_outline,
-                onTap: () => context.repository<TrackerBloc>().add(
-                      const TrackingStopped(),
-                    ),
+              if (trackerUpdate.trackingState == TrackingState.paused)
+                Expanded(
+                  child: _buildTile(
+                    label: 'RESUME',
+                    color: Colors.teal,
+                    icon: CommunityMaterialIcons.play_circle_outline,
+                    onTap: () => context.repository<TrackerBloc>().add(
+                          const TrackingResumed(),
+                        ),
+                  ),
+                ),
+              if (trackerUpdate.trackingState == TrackingState.updating)
+                Expanded(
+                  child: _buildTile(
+                    label: 'PAUSE',
+                    color: Colors.blue,
+                    icon: CommunityMaterialIcons.pause_circle_outline,
+                    onTap: () => context.repository<TrackerBloc>().add(
+                          const TrackingPaused(),
+                        ),
+                  ),
+                ),
+              Expanded(
+                child: _buildTile(
+                  label: 'STOP',
+                  color: Colors.red,
+                  icon: CommunityMaterialIcons.stop_circle_outline,
+                  onTap: () => context.repository<TrackerBloc>().add(
+                        const TrackingStopped(),
+                      ),
+                ),
               ),
             ],
           );
   }
 
-  Widget _buildTile({
-    Color color,
-    String label,
-    IconData icon,
-    VoidCallback onTap,
-  }) {
-    return ListTile(
-      dense: true,
+  Widget _buildTile({Color color, String label, IconData icon, VoidCallback onTap}) {
+    return GestureDetector(
       onTap: onTap,
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(
-        icon,
-        size: 24.0,
-        color: color,
-      ),
-      title: Text(
-        label,
-        style: AppTextStyles.small.bold.copyWith(color: color),
+      child: AnimatedContainer(
+        margin: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(12.0),
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 36.0,
+              color: color.withOpacity(0.8),
+            ),
+            const SizedBox(height: 4.0),
+            AnimatedDefaultTextStyle(
+              child: Text(label),
+              duration: const Duration(milliseconds: 300),
+              style: AppTextStyles.small.bold.copyWith(color: color),
+            ),
+          ],
+        ),
       ),
     );
   }

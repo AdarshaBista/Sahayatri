@@ -20,7 +20,7 @@ class TrackerStats extends StatelessWidget {
             StopwatchTile(),
             SizedBox(height: 12.0),
             TrackerActions(),
-            SizedBox(height: 12.0),
+            SizedBox(height: 16.0),
             DistanceCoveredBar(),
           ],
         ),

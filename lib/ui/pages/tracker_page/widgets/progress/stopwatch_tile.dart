@@ -40,9 +40,10 @@ class _StopwatchTileState extends State<StopwatchTile> {
       textBaseline: TextBaseline.alphabetic,
       crossAxisAlignment: CrossAxisAlignment.baseline,
       children: [
-        const Icon(
-          CommunityMaterialIcons.timer_outline,
-          color: AppColors.dark,
+        const SizedBox(width: 8.0),
+        Icon(
+          CommunityMaterialIcons.clock_check_outline,
+          color: AppColors.barrier,
           size: 22.0,
         ),
         const SizedBox(width: 8.0),
