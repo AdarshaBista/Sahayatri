@@ -57,7 +57,7 @@ class BottomNavBar extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 24.0,
+          size: 22.0,
           color: isSelected ? AppColors.primary : AppColors.disabled,
         ),
         AnimatedContainer(

@@ -52,7 +52,5 @@ extension TextStyleX on TextStyle {
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
   TextStyle get primary => copyWith(color: AppColors.primary);
   TextStyle get light => copyWith(color: AppColors.background);
-  TextStyle get extraLight => copyWith(
-        color: AppColors.background.withOpacity(0.7),
-      );
+  TextStyle get extraLight => copyWith(color: AppColors.background.withOpacity(0.7));
 }

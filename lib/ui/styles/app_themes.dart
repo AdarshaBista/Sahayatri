@@ -22,7 +22,7 @@ class AppThemes {
     cardColor: AppColors.light,
     buttonColor: AppColors.secondary,
     dialogBackgroundColor: AppColors.light,
-    dividerColor: AppColors.dark.withOpacity(0.7),
+    dividerColor: AppColors.barrier,
     canvasColor: AppColors.background,
     hintColor: AppColors.primary,
     errorColor: Colors.red,

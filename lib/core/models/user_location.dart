@@ -45,16 +45,16 @@ class UserLocation {
     );
   }
 
-  factory UserLocation.fromLocationData(LocationData userLocation) {
-    if (userLocation == null) return null;
+  factory UserLocation.fromLocationData(LocationData locationData) {
+    if (locationData == null) return null;
 
     return UserLocation(
-      coord: Coord(lat: userLocation.latitude, lng: userLocation.longitude),
-      altitude: userLocation.altitude,
-      bearing: userLocation.heading,
-      speed: userLocation.speed,
-      accuracy: userLocation.accuracy,
-      timestamp: DateTime.fromMillisecondsSinceEpoch(userLocation.time.toInt()),
+      coord: Coord(lat: locationData.latitude, lng: locationData.longitude),
+      altitude: locationData.altitude,
+      bearing: locationData.heading,
+      speed: locationData.speed,
+      accuracy: locationData.accuracy,
+      timestamp: DateTime.fromMillisecondsSinceEpoch(locationData.time.toInt()),
     );
   }
 
