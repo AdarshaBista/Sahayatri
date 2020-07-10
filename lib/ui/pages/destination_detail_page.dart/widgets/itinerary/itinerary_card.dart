@@ -45,8 +45,9 @@ class ItineraryCard extends StatelessWidget {
               style: AppTextStyles.medium.bold,
             ),
             subtitle: _buildDetails(),
-            trailing:
-                deletable ? _buildDeleteIcon(context) : _buildEditIcon(context),
+            trailing: ScaleAnimator(
+              child: deletable ? _buildDeleteIcon(context) : _buildEditIcon(context),
+            ),
           ),
         ),
       ),
@@ -71,24 +72,33 @@ class ItineraryCard extends StatelessWidget {
   }
 
   Widget _buildDeleteIcon(BuildContext context) {
-    return ScaleAnimator(
-      child: IconButton(
-        icon: const Icon(Icons.close, color: Colors.redAccent),
-        onPressed: () => context.bloc<DestinationBloc>().add(
-              const ItineraryCreated(itinerary: null),
-            ),
-      ),
+    return _buildActionIcon(
+      icon: Icons.close,
+      color: AppColors.secondary,
+      onTap: () => context.bloc<DestinationBloc>().add(
+            const ItineraryCreated(itinerary: null),
+          ),
     );
   }
 
   Widget _buildEditIcon(BuildContext context) {
-    return ScaleAnimator(
+    return _buildActionIcon(
+      icon: Icons.edit,
+      color: AppColors.primary,
+      onTap: () => context.repository<DestinationNavService>().pushNamed(
+            Routes.kItineraryFormPageRoute,
+            arguments: itinerary,
+          ),
+    );
+  }
+
+  Widget _buildActionIcon({IconData icon, Color color, VoidCallback onTap}) {
+    return CircleAvatar(
+      backgroundColor: color.withOpacity(0.6),
       child: IconButton(
-        icon: const Icon(Icons.edit, color: AppColors.primary),
-        onPressed: () => context.repository<DestinationNavService>().pushNamed(
-              Routes.kItineraryFormPageRoute,
-              arguments: itinerary,
-            ),
+        onPressed: onTap,
+        splashRadius: 16.0,
+        icon: Icon(icon, color: AppColors.dark),
       ),
     );
   }
