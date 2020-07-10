@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:meta/meta.dart';
 
 import 'package:sms_maintained/sms.dart';
-import 'package:maps_toolkit/maps_toolkit.dart';
 
 import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/notification_channels.dart';
@@ -13,6 +12,7 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 
+import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
 class SmsService {
@@ -35,11 +35,7 @@ class SmsService {
   /// Returns true if sms should be sent on arrival to [nextStop].
   bool _shouldSend(Coord userLocation, Place nextStop) {
     if (nextStop == null || _sentList.contains(nextStop?.id)) return false;
-
-    final distance = SphericalUtil.computeDistanceBetween(
-      LatLng(userLocation.lat, userLocation.lng),
-      LatLng(nextStop.coord.lat, nextStop.coord.lng),
-    );
+    final distance = GeoUtils.computeDistance(userLocation, nextStop.coord);
     return distance < Distances.kMinNearbyDistance;
   }
 

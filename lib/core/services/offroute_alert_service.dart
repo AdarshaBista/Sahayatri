@@ -1,12 +1,10 @@
 import 'package:meta/meta.dart';
 
-import 'package:maps_toolkit/maps_toolkit.dart';
-
-import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/notification_channels.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
+import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
 class OffRouteAlertService {
@@ -20,13 +18,7 @@ class OffRouteAlertService {
   /// Returns true if user should be alerted.
   /// Do not alert the user if he/she has already been alerted once.
   bool _shouldAlert(Coord userLocation, List<Coord> route) {
-    final bool isOnRoute = PolygonUtil.isLocationOnPath(
-      LatLng(userLocation.lat, userLocation.lng),
-      route.map((l) => LatLng(l.lat, l.lng)).toList(),
-      false,
-      tolerance: Distances.kMinNearbyDistance,
-    );
-
+    final isOnRoute = GeoUtils.isOnPath(userLocation, route);
     if (!isOnRoute && isAlreadyAlerted) return false;
     if (!isOnRoute && !isAlreadyAlerted) return isAlreadyAlerted = true;
     return isAlreadyAlerted = false;

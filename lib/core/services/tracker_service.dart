@@ -4,8 +4,7 @@ import 'dart:math' as math;
 import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:maps_toolkit/maps_toolkit.dart';
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/core/utils/geo_utils.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
@@ -139,12 +138,7 @@ class TrackerService {
   /// Check if user is near the trail.
   /// Tracking is only started if this returns true.
   bool isNearTrail(Coord userCoord, List<Coord> route) {
-    return PolygonUtil.isLocationOnPath(
-      LatLng(userCoord.lat, userCoord.lng),
-      route.map((l) => LatLng(l.lat, l.lng)).toList(),
-      false,
-      tolerance: Distances.kMinNearbyDistance,
-    );
+    return GeoUtils.isOnPath(userCoord, route);
   }
 
   /// Time since tracking started.
@@ -152,14 +146,22 @@ class TrackerService {
     return _stopwatch.elapsed;
   }
 
+  int userIndex(Coord userCoord) {
+    return GeoUtils.indexOnPath(userCoord, _destination.route);
+  }
+
   /// Distance covered by the user in metres.
   double distanceCovered(int userIndex) {
-    return _distanceBetweenIndices(end: userIndex);
+    return GeoUtils.distanceBetweenIndices(_destination.route, end: userIndex);
   }
 
   /// Remaining distance on the route.
   double distanceRemaining(int userIndex) {
-    return _distanceBetweenIndices(start: userIndex, end: _destination.route.length);
+    return GeoUtils.distanceBetweenIndices(
+      _destination.route,
+      start: userIndex,
+      end: _destination.route.length,
+    );
   }
 
   /// [NextStop] the user is approaching along the route.
@@ -168,8 +170,8 @@ class TrackerService {
     int userIndex, placeIndex;
 
     for (final place in _destination.places) {
-      userIndex = indexOnRoute(userLocation.coord);
-      placeIndex = indexOnRoute(place.coord);
+      placeIndex = GeoUtils.indexOnPath(place.coord, _destination.route);
+      userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
 
       if (userIndex >= placeIndex) continue;
       nextStopPlace = place;
@@ -177,7 +179,11 @@ class TrackerService {
     }
     if (nextStopPlace == null) return null;
 
-    final double distance = _distanceBetweenIndices(start: userIndex, end: placeIndex);
+    final double distance = GeoUtils.distanceBetweenIndices(
+      _destination.route,
+      start: userIndex,
+      end: placeIndex,
+    );
     final int eta = userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
 
     return NextStop(
@@ -185,34 +191,5 @@ class TrackerService {
       place: nextStopPlace,
       eta: eta == null ? null : Duration(seconds: eta),
     );
-  }
-
-  /// Index of a [Coord] closest to a [point] on the route.
-  /// This index determines the position of [point] along a route.
-  int indexOnRoute(Coord point) {
-    Coord nearestCoord;
-    double shortestDistanceSq = double.infinity;
-
-    for (final coord in _destination.route) {
-      final distanceSq = math.pow(coord.lng - point.lng, 2).toDouble() +
-          math.pow(coord.lat - point.lat, 2).toDouble();
-
-      if (distanceSq < shortestDistanceSq) {
-        nearestCoord = coord;
-        shortestDistanceSq = distanceSq;
-      }
-    }
-    return _destination.route.indexOf(nearestCoord);
-  }
-
-  /// Get distance between [start] and [end] indices of a route.
-  double _distanceBetweenIndices({int start = 0, @required int end}) {
-    final path = _destination.route
-        .getRange(start, end)
-        .map(
-          (p) => LatLng(p.lat, p.lng),
-        )
-        .toList();
-    return SphericalUtil.computeLength(path).toDouble();
   }
 }

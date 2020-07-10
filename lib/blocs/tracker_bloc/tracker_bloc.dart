@@ -100,7 +100,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
 
   void _updateTrackerData(UserLocation userLocation, List<Coord> route) {
     final nextStop = trackerService.nextStop(userLocation);
-    final userIndex = trackerService.indexOnRoute(userLocation.coord);
+    final userIndex = trackerService.userIndex(userLocation.coord);
 
     smsService.send(userLocation.coord, nextStop?.place);
     offRouteAlertService.alert(userLocation.coord, route);
