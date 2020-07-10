@@ -3,9 +3,9 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:sahayatri/core/models/prefs.dart';
+import 'package:sahayatri/app/database/prefs_dao.dart';
 
-import 'package:sahayatri/core/database/prefs_dao.dart';
+import 'package:sahayatri/core/models/prefs.dart';
 
 part 'prefs_event.dart';
 part 'prefs_state.dart';

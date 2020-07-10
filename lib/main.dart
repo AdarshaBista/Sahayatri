@@ -6,13 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:sahayatri/core/models/prefs.dart';
 import 'package:sahayatri/core/models/weather.dart';
 
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/weather_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:hive/hive.dart';
-import 'package:sahayatri/core/database/prefs_dao.dart';
-import 'package:sahayatri/core/database/weather_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';

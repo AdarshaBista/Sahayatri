@@ -4,11 +4,11 @@ import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
+import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/weather_dao.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-
-import 'package:sahayatri/core/database/prefs_dao.dart';
-import 'package:sahayatri/core/database/weather_dao.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/place.dart';
@@ -55,9 +56,8 @@ class _PlacePickerState extends State<PlacePicker> {
               Icons.place,
               size: 22.0,
             ),
-            trailing: selectedPlace == null
-                ? const Offstage()
-                : _buildViewButton(context),
+            trailing:
+                selectedPlace == null ? const Offstage() : _buildViewButton(context),
             onTap: () {
               FocusScope.of(context).unfocus();
               _selectPlace(context);

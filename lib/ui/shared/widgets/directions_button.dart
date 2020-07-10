@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';

@@ -8,10 +8,10 @@ import 'package:maps_toolkit/maps_toolkit.dart';
 import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/app/constants/notification_channels.dart';
 
+import 'package:sahayatri/app/database/prefs_dao.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
-
-import 'package:sahayatri/core/database/prefs_dao.dart';
 
 import 'package:sahayatri/core/services/notification_service.dart';
 
