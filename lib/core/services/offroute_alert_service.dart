@@ -36,9 +36,13 @@ class OffRouteAlertService {
   Future<void> alert(Coord userLocation, List<Coord> route) async {
     if (!_shouldAlert(userLocation, route)) return;
 
+    const alertMessage =
+        'You seem to be going off route. Please re-evaluate your course.';
+    print('[SAHAYATRI] $alertMessage');
+
     await notificationService.show(
       NotificationChannels.kOffRouteId,
-      'You seem to be going off route. Please re-evaluate your course.',
+      alertMessage,
       channelId: NotificationChannels.kOffRouteChannelId,
       channelName: NotificationChannels.kOffRouteChannelName,
       channelDescription: NotificationChannels.kOffRouteChannelDesc,

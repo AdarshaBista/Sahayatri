@@ -47,7 +47,7 @@ class _ContactFormState extends State<ContactForm> {
       child: FlatButton(
         child: Text(
           'SAVE',
-          style: AppTextStyles.medium.primary,
+          style: AppTextStyles.small.primary.bold,
         ),
         onPressed: () {
           context.bloc<PrefsBloc>().add(ContactSaved(contact: contact));

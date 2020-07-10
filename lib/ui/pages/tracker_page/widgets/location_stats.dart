@@ -16,7 +16,7 @@ class LocationStats extends StatelessWidget {
 
     return Container(
       height: AppConfig.kTrackerPanelHeight - 32.0,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[

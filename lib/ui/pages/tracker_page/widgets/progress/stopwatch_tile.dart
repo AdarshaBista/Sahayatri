@@ -37,12 +37,11 @@ class _StopwatchTileState extends State<StopwatchTile> {
     final elapsed = context.bloc<TrackerBloc>().trackerService.elapsedDuration();
 
     return Row(
-      textBaseline: TextBaseline.alphabetic,
-      crossAxisAlignment: CrossAxisAlignment.baseline,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         const SizedBox(width: 8.0),
         Icon(
-          CommunityMaterialIcons.clock_check_outline,
+          CommunityMaterialIcons.clock_outline,
           color: AppColors.barrier,
           size: 22.0,
         ),
@@ -52,9 +51,12 @@ class _StopwatchTileState extends State<StopwatchTile> {
           style: AppTextStyles.large.bold,
         ),
         const SizedBox(width: 8.0),
-        Text(
-          'elapsed',
-          style: AppTextStyles.small,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 3.0),
+          child: Text(
+            'elapsed',
+            style: AppTextStyles.small,
+          ),
         ),
       ],
     );

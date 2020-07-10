@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/extensions/widget_x.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_stop_dialog.dart';
 
 class TrackerActions extends StatelessWidget {
   const TrackerActions();
@@ -47,9 +50,11 @@ class TrackerActions extends StatelessWidget {
                   label: 'STOP',
                   color: Colors.red,
                   icon: CommunityMaterialIcons.stop_circle_outline,
-                  onTap: () => context.repository<TrackerBloc>().add(
-                        const TrackingStopped(),
-                      ),
+                  onTap: () => TrackerStopDialog(
+                    onStop: () => context.repository<TrackerBloc>().add(
+                          const TrackingStopped(),
+                        ),
+                  ).openDialog(context),
                 ),
               ),
             ],

@@ -51,6 +51,7 @@ extension TextStyleX on TextStyle {
   TextStyle get serif => copyWith(fontFamily: AppConfig.kFontFamilySerif);
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
   TextStyle get primary => copyWith(color: AppColors.primary);
+  TextStyle get secondary => copyWith(color: AppColors.secondary);
   TextStyle get light => copyWith(color: AppColors.background);
   TextStyle get extraLight => copyWith(color: AppColors.background.withOpacity(0.7));
 }
