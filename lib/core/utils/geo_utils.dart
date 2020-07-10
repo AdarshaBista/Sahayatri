@@ -30,7 +30,7 @@ class GeoUtils {
 
   /// Calculate length of [path] in metres.
   static double computeLength(List<Coord> path) {
-    final points = path.map((p) => LatLng(p.alt, p.lng)).toList();
+    final points = path.map((p) => LatLng(p.lat, p.lng)).toList();
     return SphericalUtil.computeLength(points).toDouble();
   }
 
