@@ -7,6 +7,17 @@ abstract class TrackerEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class TrackingAttempted extends TrackerEvent {
+  final Destination destination;
+
+  const TrackingAttempted({
+    @required this.destination,
+  }) : assert(destination != null);
+
+  @override
+  List<Object> get props => [destination];
+}
+
 class TrackingStarted extends TrackerEvent {
   final Destination destination;
 

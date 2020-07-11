@@ -9,6 +9,7 @@ import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_panel.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/tracker_setup.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';
 
 class TrackerPage extends StatelessWidget {
@@ -23,6 +24,8 @@ class TrackerPage extends StatelessWidget {
             appBar: AppBar(),
             body: const LoadingIndicator(),
           );
+        } else if (state is TrackerSettingUp) {
+          return const TrackerSetup();
         } else if (state is TrackerUpdating) {
           return Provider<TrackerUpdate>.value(
             value: state.update,

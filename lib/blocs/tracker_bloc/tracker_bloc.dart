@@ -46,6 +46,9 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     if (event is TrackingStopped) yield* _mapTrackingStoppedToState();
     if (event is TrackingUpdated) yield TrackerUpdating(update: event.data);
     if (event is TrackingStarted) yield* _mapTrackingStartedToState(event.destination);
+    if (event is TrackingAttempted) {
+      yield* _mapTrackingAttemptedToState(event.destination);
+    }
   }
 
   Stream<TrackerState> _mapTrackingPausedToState() async* {
@@ -75,7 +78,12 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     );
   }
 
-  Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
+  Stream<TrackerState> _mapTrackingAttemptedToState(Destination destination) async* {
+    if (trackerService.isTracking) {
+      add(TrackingStarted(destination: destination));
+      return;
+    }
+
     yield const TrackerLoading();
     try {
       final userLocation = await trackerService.getMockUserLocation(destination.route[0]);
@@ -85,6 +93,16 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
         return;
       }
 
+      yield const TrackerSettingUp();
+    } on Failure catch (e) {
+      print(e.error);
+      yield TrackerError(message: e.message);
+    }
+  }
+
+  Stream<TrackerState> _mapTrackingStartedToState(Destination destination) async* {
+    yield const TrackerLoading();
+    try {
       trackerService.start(destination);
       trackerService.onCompleted = () => add(const TrackingStopped());
 

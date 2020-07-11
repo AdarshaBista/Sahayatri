@@ -25,6 +25,7 @@ class TrackerService {
   /// The [Destination] this service is currently tracking.
   /// If destination is null, there is no tracking occuring.
   Destination _destination;
+  bool get isTracking => _destination != null;
 
   /// Called when user completes the trail.
   VoidCallback onCompleted;
@@ -101,7 +102,7 @@ class TrackerService {
 
   // TODO: Remove this
   Future<UserLocation> getMockUserLocation(Coord fakeStartingPoint) async {
-    await Future.delayed(const Duration(milliseconds: 50));
+    await Future.delayed(const Duration(milliseconds: 200));
     return UserLocation(
       coord: fakeStartingPoint,
       accuracy: 15.0,

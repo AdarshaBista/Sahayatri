@@ -15,6 +15,10 @@ class TrackerLocationError extends TrackerState {
   const TrackerLocationError();
 }
 
+class TrackerSettingUp extends TrackerState {
+  const TrackerSettingUp();
+}
+
 class TrackerUpdating extends TrackerState {
   final TrackerUpdate update;
 

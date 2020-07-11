@@ -28,10 +28,10 @@ class SetupTile extends StatelessWidget {
       isLast: isLast,
       isFirst: isFirst,
       indicatorStyle: IndicatorStyle(
-        width: 32.0,
-        height: 32.0,
+        width: 36.0,
+        height: 36.0,
         indicatorY: 0.1,
-        padding: const EdgeInsets.only(right: 16.0),
+        padding: const EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
         indicator: CircleAvatar(
           backgroundColor: AppColors.primary,
           child: Icon(

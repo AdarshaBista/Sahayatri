@@ -82,7 +82,7 @@ class DestRouter {
                       trackerService: context.repository<TrackerService>(),
                       offRouteAlertService: context.repository<OffRouteAlertService>(),
                     )..add(
-                        TrackingStarted(destination: settings.arguments as Destination),
+                        TrackingAttempted(destination: settings.arguments as Destination),
                       )),
             BlocProvider<DirectionsBloc>(
               create: (context) => DirectionsBloc(

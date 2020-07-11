@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
+import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tile.dart';
 
@@ -9,6 +15,9 @@ class TrackerSetup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppbar(title: 'Setup'),
+      floatingActionButton: _buildStartButton(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: ListView(
         padding: const EdgeInsets.only(
           left: 20.0,
@@ -20,7 +29,7 @@ class TrackerSetup extends StatelessWidget {
         children: [
           _buildItineraryTile(),
           _buildContactTile(),
-          _buildNetworkTile(),
+          _buildPeerNetworkTile(),
         ],
       ),
     );
@@ -49,7 +58,7 @@ class TrackerSetup extends StatelessWidget {
     );
   }
 
-  Widget _buildNetworkTile() {
+  Widget _buildPeerNetworkTile() {
     return SetupTile(
       icon: CommunityMaterialIcons.access_point_network,
       isLast: true,
@@ -58,6 +67,18 @@ class TrackerSetup extends StatelessWidget {
         height: 200,
         color: Colors.blue,
       ),
+    );
+  }
+
+  Widget _buildStartButton(BuildContext context) {
+    return FloatingActionButton.extended(
+      label: Text(
+        'Start',
+        style: AppTextStyles.small.primary,
+      ),
+      onPressed: () => context.bloc<TrackerBloc>().add(TrackingStarted(
+            destination: context.bloc<DestinationBloc>().destination,
+          )),
     );
   }
 }

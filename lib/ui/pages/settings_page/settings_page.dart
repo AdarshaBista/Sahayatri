@@ -31,8 +31,8 @@ class SettingsPage extends StatelessWidget {
             ),
             const SizedBox(height: 12.0),
             SettingsCard(
-              title: 'Network',
-              subtitle: 'Setup a network to remain connected with your friends',
+              title: 'Peer Network',
+              subtitle: 'Setup a peer network to remain connected with your friends',
               icon: CommunityMaterialIcons.access_point_network,
               onTap: () {},
             ),
