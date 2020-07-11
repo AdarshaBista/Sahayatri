@@ -27,7 +27,10 @@ class SettingsPage extends StatelessWidget {
               title: 'Close Contact',
               subtitle: 'Setup close contact to notify them about your whereabouts',
               icon: CommunityMaterialIcons.account_alert_outline,
-              onTap: () => const ContactForm().openDialog(context),
+              onTap: () => const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: ContactForm(),
+              ).openModalBottomSheet(context),
             ),
             const SizedBox(height: 12.0),
             SettingsCard(

@@ -6,75 +6,65 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tile.dart';
+import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
-class TrackerSetup extends StatelessWidget {
+class TrackerSetup extends StatefulWidget {
   const TrackerSetup();
+
+  @override
+  _TrackerSetupState createState() => _TrackerSetupState();
+}
+
+class _TrackerSetupState extends State<TrackerSetup> {
+  int currentStep = 0;
+
+  List<Step> get steps => [
+        _buildStep(
+          title: 'Choose a contact',
+          index: 0,
+          content: Container(),
+        ),
+        _buildStep(
+          title: 'Setup peer network',
+          index: 1,
+          content: Container(),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: 'Setup'),
-      floatingActionButton: _buildStartButton(context),
+      appBar: CustomAppbar(title: 'Review your settings'),
+      floatingActionButton: _buildStartButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: ListView(
-        padding: const EdgeInsets.only(
-          left: 20.0,
-          right: 20.0,
-          top: 20.0,
-          bottom: 64.0,
+      body: FadeAnimator(
+        child: Stepper(
+          steps: steps,
+          onStepTapped: (index) => setState(() => currentStep = index),
+          currentStep: currentStep,
+          physics: const BouncingScrollPhysics(),
+          controlsBuilder: (_, {onStepCancel, onStepContinue}) => const Offstage(),
         ),
-        physics: const BouncingScrollPhysics(),
-        children: [
-          _buildItineraryTile(),
-          _buildContactTile(),
-          _buildPeerNetworkTile(),
-        ],
       ),
     );
   }
 
-  Widget _buildItineraryTile() {
-    return SetupTile(
-      icon: CommunityMaterialIcons.map_search_outline,
-      isFirst: true,
-      title: 'Choose an itinerary',
-      child: Container(
-        height: 200,
-        color: Colors.red,
+  Step _buildStep({String title, Widget content, int index}) {
+    return Step(
+      content: content,
+      isActive: currentStep == index,
+      title: Text(
+        title,
+        style: AppTextStyles.medium.bold,
       ),
     );
   }
 
-  Widget _buildContactTile() {
-    return SetupTile(
-      icon: CommunityMaterialIcons.account_alert_outline,
-      title: 'Choose a contact',
-      child: Container(
-        height: 200,
-        color: Colors.green,
-      ),
-    );
-  }
-
-  Widget _buildPeerNetworkTile() {
-    return SetupTile(
-      icon: CommunityMaterialIcons.access_point_network,
-      isLast: true,
-      title: 'Setup a peer network',
-      child: Container(
-        height: 200,
-        color: Colors.blue,
-      ),
-    );
-  }
-
-  Widget _buildStartButton(BuildContext context) {
+  Widget _buildStartButton() {
     return FloatingActionButton.extended(
       label: Text(
-        'Start',
-        style: AppTextStyles.small.primary,
+        'START',
+        style: AppTextStyles.small.primary.bold,
       ),
       onPressed: () => context.bloc<TrackerBloc>().add(TrackingStarted(
             destination: context.bloc<DestinationBloc>().destination,

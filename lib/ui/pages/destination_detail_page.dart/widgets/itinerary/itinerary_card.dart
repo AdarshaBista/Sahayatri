@@ -94,11 +94,16 @@ class ItineraryCard extends StatelessWidget {
 
   Widget _buildActionIcon({IconData icon, Color color, VoidCallback onTap}) {
     return CircleAvatar(
-      backgroundColor: color.withOpacity(0.6),
+      radius: 20.0,
+      backgroundColor: color.withOpacity(0.5),
       child: IconButton(
         onPressed: onTap,
         splashRadius: 16.0,
-        icon: Icon(icon, color: AppColors.dark),
+        icon: Icon(
+          icon,
+          size: 20.0,
+          color: AppColors.dark,
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/app/database/prefs_dao.dart';
@@ -17,6 +18,17 @@ class PrefsBloc extends Bloc<PrefsEvent, PrefsState> {
     @required this.prefsDao,
   })  : assert(prefsDao != null),
         super(const PrefsLoading());
+
+  @override
+  Stream<Transition<PrefsEvent, PrefsState>> transformEvents(
+    Stream<PrefsEvent> events,
+    TransitionFunction<PrefsEvent, PrefsState> transitionFn,
+  ) {
+    return super.transformEvents(
+      events.debounceTime(const Duration(milliseconds: 300)),
+      transitionFn,
+    );
+  }
 
   @override
   Stream<PrefsState> mapEventToState(PrefsEvent event) async* {

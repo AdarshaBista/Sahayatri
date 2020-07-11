@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/header.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/created_itinerary_card.dart';
 
 class ItinerariesList extends StatelessWidget {
   const ItinerariesList();
@@ -27,7 +23,7 @@ class ItinerariesList extends StatelessWidget {
         ),
         const SizedBox(height: 20.0),
         _buildSuggestedItineraries(context),
-        _buildCreateditinerary(context),
+        _buildCreatedItinerary(),
         const SizedBox(height: 72.0),
       ],
     );
@@ -59,43 +55,18 @@ class ItinerariesList extends StatelessWidget {
     );
   }
 
-  Widget _buildCreateditinerary(BuildContext context) {
-    return BlocBuilder<DestinationBloc, DestinationState>(
-      builder: (context, state) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 16.0),
-            Text(
-              'Or Create Your Own',
-              style: AppTextStyles.medium,
-            ),
-            const Divider(height: 16.0),
-            CustomButton(
-              outlineOnly: true,
-              color: AppColors.dark,
-              iconData: CommunityMaterialIcons.map_search_outline,
-              label: state.destination.createdItinerary == null
-                  ? 'Create an itinerary'
-                  : 'Edit this itinerary',
-              onTap: () {
-                context.repository<DestinationNavService>().pushNamed(
-                      Routes.kItineraryFormPageRoute,
-                      arguments:
-                          context.bloc<DestinationBloc>().destination.createdItinerary,
-                    );
-              },
-            ),
-            const SizedBox(height: 8.0),
-            if (state.destination.createdItinerary != null)
-              ItineraryCard(
-                itinerary: state.destination.createdItinerary,
-                deletable: true,
-              ),
-          ],
-        );
-      },
+  Widget _buildCreatedItinerary() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16.0),
+        Text(
+          'Or Create Your Own',
+          style: AppTextStyles.medium,
+        ),
+        const Divider(height: 16.0),
+        const CreatedItineraryCard(),
+      ],
     );
   }
 }

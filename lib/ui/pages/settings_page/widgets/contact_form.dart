@@ -18,13 +18,18 @@ class _ContactFormState extends State<ContactForm> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      elevation: 12.0,
-      clipBehavior: Clip.antiAlias,
-      titlePadding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-      backgroundColor: AppColors.light,
-      title: _buildTextField(),
-      actions: [_buildSubmitButton(context)],
+    return AnimatedPadding(
+      curve: Curves.decelerate,
+      padding: MediaQuery.of(context).viewInsets,
+      duration: const Duration(milliseconds: 200),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildTextField(),
+          _buildSubmitButton(context),
+        ],
+      ),
     );
   }
 
