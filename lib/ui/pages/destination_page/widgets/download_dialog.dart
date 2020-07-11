@@ -18,7 +18,7 @@ class DownloadDialog extends StatelessWidget {
       child: AlertDialog(
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.light,
         title: DownloadingIndicator(title: title),
       ),
     );

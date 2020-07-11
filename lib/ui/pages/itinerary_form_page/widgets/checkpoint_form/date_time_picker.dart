@@ -100,8 +100,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   DatePickerTheme get _dateTimePickerTheme => DatePickerTheme(
         itemStyle: AppTextStyles.medium,
-        cancelStyle: AppTextStyles.small.copyWith(color: Colors.red),
-        doneStyle: AppTextStyles.small.copyWith(color: AppColors.primary),
+        doneStyle: AppTextStyles.small.primary,
+        cancelStyle: AppTextStyles.small.secondary,
       );
 
   String _formattedDate(DateTime date) {

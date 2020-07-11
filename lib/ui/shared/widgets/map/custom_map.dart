@@ -87,7 +87,7 @@ class CustomMap extends StatelessWidget {
     return TileLayerOptions(
       tileProvider:
           Platform.isWindows ? NetworkTileProvider() : const CachedNetworkTileProvider(),
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.light,
       keepBuffer: 8,
       tileSize: 512,
       zoomOffset: -1,

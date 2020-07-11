@@ -19,7 +19,7 @@ class StarRatingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = rating < 3.0 ? Colors.redAccent : AppColors.primary;
+    final color = rating < 3.0 ? AppColors.secondary : AppColors.primary;
     return FadeAnimator(
       child: RatingBar(
         maxRating: 5.0,
@@ -27,7 +27,7 @@ class StarRatingBar extends StatelessWidget {
         glowColor: color,
         allowHalfRating: true,
         initialRating: rating,
-        unratedColor: AppColors.light,
+        unratedColor: AppColors.lightAccent,
         itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,

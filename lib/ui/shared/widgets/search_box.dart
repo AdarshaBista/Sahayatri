@@ -34,7 +34,7 @@ class SearchBox extends StatelessWidget {
               onChanged: onChanged,
               style: AppTextStyles.small,
               decoration: InputDecoration(
-                fillColor: AppColors.light,
+                fillColor: AppColors.lightAccent,
                 border: InputBorder.none,
                 hintText: hintText,
                 prefixIcon: const ScaleAnimator(

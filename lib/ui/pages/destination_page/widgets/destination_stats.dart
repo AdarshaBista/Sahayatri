@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/stat_card.dart';
 
 class DestinationStats extends StatelessWidget {
@@ -20,17 +21,17 @@ class DestinationStats extends StatelessWidget {
           StatCard(
             label: 'Length',
             count: '${destination.length} km',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Duration',
             count: '${destination.estimatedDuration} days',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Altitude',
             count: '${destination.maxAltitude} m',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
         ],
       ),

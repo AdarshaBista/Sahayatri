@@ -18,7 +18,7 @@ class RequiredDialog extends StatelessWidget {
       child: AlertDialog(
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.light,
         title: RequiredIndicator(message: message),
       ),
     );

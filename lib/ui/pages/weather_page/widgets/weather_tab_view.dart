@@ -89,9 +89,7 @@ class _WeatherTabViewState extends State<WeatherTabView>
                 child: WeatherTab(
                   isToday: i == 0,
                   weather: widget.forecasts[i],
-                  color: _tabController.index == i
-                      ? AppColors.primary
-                      : AppColors.background,
+                  color: _tabController.index == i ? AppColors.primary : AppColors.light,
                 ),
               )
           ],

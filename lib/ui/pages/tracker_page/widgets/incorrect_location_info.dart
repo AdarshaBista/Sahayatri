@@ -16,22 +16,34 @@ class IncorrectLocationInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const LocationErrorIndicator(
-            message:
-                'You do not seem to be at the trailhead. Tracking is only possible when you are near the trailhead. Would you like to go there.',
-          ),
-          const DirectionsButton(label: 'Sure, why not'),
-          CustomButton(
-            label: 'No thanks',
-            outlineOnly: true,
-            iconData: Icons.close,
-            color: AppColors.dark,
-            onTap: () => context.repository<DestinationNavService>().pop(),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const LocationErrorIndicator(
+              message:
+                  'You do not seem to be at the trailhead. Tracking is only possible when you are near the trailhead. Would you like to go there.',
+            ),
+            Row(
+              children: [
+                const Expanded(
+                  child: DirectionsButton(label: 'Sure, why not'),
+                ),
+                const SizedBox(width: 12.0),
+                Expanded(
+                  child: CustomButton(
+                    label: 'No thanks',
+                    outlineOnly: true,
+                    iconData: Icons.close,
+                    color: AppColors.dark,
+                    onTap: () => context.repository<DestinationNavService>().pop(),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -57,7 +57,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       bottomNavigationBar: BottomAppBar(
         elevation: 8.0,
         notchMargin: 6.0,
-        color: AppColors.background,
+        color: AppColors.light,
         shape: const CircularNotchedRectangle(),
         child: _buildBottomNavBar(context),
       ),

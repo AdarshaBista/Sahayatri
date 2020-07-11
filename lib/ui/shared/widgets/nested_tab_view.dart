@@ -66,7 +66,7 @@ class _NestedTabViewState extends State<NestedTabView>
       ),
       child: Container(
         height: 34.0,
-        color: AppColors.background,
+        color: AppColors.light,
         margin: widget.tabBarMargin,
         child: TabBar(
           isScrollable: true,
@@ -84,7 +84,7 @@ class _NestedTabViewState extends State<NestedTabView>
             for (int i = 0; i < widget.tabs.length; ++i)
               NestedTab(
                 tab: widget.tabs[i],
-                color: _tabController.index == i ? AppColors.background : AppColors.dark,
+                color: _tabController.index == i ? AppColors.light : AppColors.dark,
               ),
           ],
         ),
@@ -129,8 +129,8 @@ class NestedTab extends StatelessWidget {
             const SizedBox(width: 8.0),
             AnimatedDefaultTextStyle(
               child: Text(tab.label),
-              style: AppTextStyles.small.bold.copyWith(color: color),
               duration: const Duration(milliseconds: 200),
+              style: AppTextStyles.small.bold.copyWith(color: color),
             ),
           ],
         ),

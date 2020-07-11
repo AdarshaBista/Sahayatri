@@ -28,16 +28,15 @@ class Header extends StatelessWidget {
               padding: EdgeInsets.only(left: leftPadding, top: 20.0),
               child: Text(
                 title,
-                style: AppTextStyles.extraLarge,
+                style: AppTextStyles.extraLarge.thin,
               ),
             ),
           if (boldTitle != null)
             Padding(
-              padding:
-                  EdgeInsets.only(left: leftPadding, top: boldTitleTopPadding),
+              padding: EdgeInsets.only(left: leftPadding, top: boldTitleTopPadding),
               child: Text(
                 boldTitle,
-                style: AppTextStyles.huge,
+                style: AppTextStyles.huge.thin,
               ),
             ),
         ],

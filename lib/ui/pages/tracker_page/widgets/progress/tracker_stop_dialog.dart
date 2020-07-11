@@ -15,7 +15,7 @@ class TrackerStopDialog extends StatelessWidget {
     return AlertDialog(
       elevation: 12.0,
       clipBehavior: Clip.antiAlias,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.light,
       contentPadding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
       title: const Icon(
         CommunityMaterialIcons.alert_circle_outline,

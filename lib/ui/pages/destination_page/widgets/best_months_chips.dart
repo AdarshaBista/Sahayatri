@@ -29,7 +29,7 @@ class BestMonthsChips extends StatelessWidget {
                 .map(
                   (m) => ScaleAnimator(
                     child: Chip(
-                      backgroundColor: AppColors.light,
+                      backgroundColor: AppColors.lightAccent,
                       visualDensity: VisualDensity.compact,
                       label: Text(
                         m,

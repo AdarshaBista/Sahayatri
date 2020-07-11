@@ -27,7 +27,7 @@ class CloseIcon extends StatelessWidget {
           ),
           child: Icon(
             iconData,
-            color: AppColors.background,
+            color: AppColors.light,
           ),
         ),
       ),

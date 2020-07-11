@@ -9,7 +9,7 @@ class CustomAppbar extends AppBar {
     @required String title,
     Widget leading,
     double elevation = 8.0,
-    Color color = AppColors.background,
+    Color color = AppColors.light,
   }) : super(
           centerTitle: true,
           leading: leading,

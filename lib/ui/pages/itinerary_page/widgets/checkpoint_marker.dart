@@ -21,7 +21,7 @@ class CheckpointMarker extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: 8.0,
-      color: AppColors.background,
+      color: AppColors.light,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -51,7 +51,7 @@ class CheckpointMarker extends StatelessWidget {
             children: [
               Text(
                 checkpoint.date,
-                style: AppTextStyles.small.bold.light,
+                style: AppTextStyles.small.light.bold,
               ),
               const SizedBox(height: 4.0),
               Text(

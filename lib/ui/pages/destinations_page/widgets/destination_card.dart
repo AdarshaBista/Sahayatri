@@ -94,7 +94,7 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
           Divider(
-            color: AppColors.light.withOpacity(0.5),
+            color: AppColors.lightAccent.withOpacity(0.5),
             height: 10.0,
             endIndent: 64.0,
           ),

@@ -22,7 +22,7 @@ extension WidgetX on Widget {
       useRootNavigator: false,
       isScrollControlled: true,
       barrierColor: AppColors.barrier,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.light,
       builder: (_) => this,
     );
   }
@@ -32,7 +32,7 @@ extension WidgetX on Widget {
       context: context,
       elevation: 12.0,
       clipBehavior: Clip.antiAlias,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.light,
       builder: (_) => this,
     );
   }

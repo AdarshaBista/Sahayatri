@@ -5,6 +5,7 @@ import 'package:sahayatri/app/constants/resources.dart';
 import 'package:provider/provider.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/stat_card.dart';
 
 class LocationStats extends StatelessWidget {
@@ -23,17 +24,17 @@ class LocationStats extends StatelessWidget {
           StatCard(
             label: 'Altitude',
             count: '${trackerUpdate.userLocation.altitude.floor()} m',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Speed',
             count: '${trackerUpdate.userLocation.speed.toStringAsFixed(1)} m/s',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Accuracy',
             count: '${trackerUpdate.userLocation.accuracy.toStringAsFixed(1)} m',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
         ],
       ),

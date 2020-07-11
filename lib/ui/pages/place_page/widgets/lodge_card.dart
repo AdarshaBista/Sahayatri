@@ -54,7 +54,7 @@ class LodgeCard extends StatelessWidget {
             lodge.name,
             style: AppTextStyles.medium.light,
           ),
-          Divider(height: 16.0, color: AppColors.light.withOpacity(0.5)),
+          Divider(height: 16.0, color: AppColors.lightAccent.withOpacity(0.5)),
           _buildContact(),
           const SizedBox(height: 8.0),
           StarRatingBar(
@@ -72,12 +72,12 @@ class LodgeCard extends StatelessWidget {
         const Icon(
           Icons.phone,
           size: 14.0,
-          color: AppColors.light,
+          color: AppColors.lightAccent,
         ),
         const SizedBox(width: 6.0),
         Text(
           lodge.contactNumber,
-          style: AppTextStyles.small.extraLight,
+          style: AppTextStyles.small.lightAccent,
         ),
       ],
     );

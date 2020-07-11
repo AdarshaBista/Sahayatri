@@ -27,7 +27,7 @@ class TrackerActions extends StatelessWidget {
                 Expanded(
                   child: _buildTile(
                     label: 'RESUME',
-                    color: Colors.teal,
+                    color: AppColors.primaryDark,
                     icon: CommunityMaterialIcons.play_circle_outline,
                     onTap: () => context.repository<TrackerBloc>().add(
                           const TrackingResumed(),
@@ -48,7 +48,7 @@ class TrackerActions extends StatelessWidget {
               Expanded(
                 child: _buildTile(
                   label: 'STOP',
-                  color: Colors.red,
+                  color: AppColors.secondary,
                   icon: CommunityMaterialIcons.stop_circle_outline,
                   onTap: () => TrackerStopDialog(
                     onStop: () => context.repository<TrackerBloc>().add(

@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/stat_card.dart';
 
 class PlaceStats extends StatelessWidget {
@@ -21,17 +22,17 @@ class PlaceStats extends StatelessWidget {
           StatCard(
             label: 'Altitude',
             count: '${place.coord.alt.floor()} m',
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Lodges',
             count: place.lodges.length.toString(),
-            color: Colors.teal,
+            color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Network',
             count: place.isNetworkAvailable ? 'Yes' : 'No',
-            color: place.isNetworkAvailable ? Colors.teal : Colors.redAccent,
+            color: place.isNetworkAvailable ? AppColors.primaryDark : AppColors.secondary,
           ),
         ],
       ),

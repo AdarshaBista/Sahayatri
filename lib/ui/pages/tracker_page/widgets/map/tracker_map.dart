@@ -112,8 +112,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
         CircleMarker(
           point: center.toLatLng(),
           borderStrokeWidth: 2.0,
-          color: Colors.teal.withOpacity(0.2),
-          borderColor: Colors.teal.withOpacity(0.5),
+          color: AppColors.primaryDark.withOpacity(0.2),
+          borderColor: AppColors.primaryDark.withOpacity(0.5),
           useRadiusInMeter: true,
           radius: trackerUpdate.userLocation.accuracy,
         ),

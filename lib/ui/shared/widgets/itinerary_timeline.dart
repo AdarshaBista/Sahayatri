@@ -161,7 +161,7 @@ class ItineraryTimeline extends StatelessWidget {
         child: const Icon(
           Icons.close,
           size: 22.0,
-          color: Colors.redAccent,
+          color: AppColors.secondary,
         ),
       ),
     );

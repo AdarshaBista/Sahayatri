@@ -91,7 +91,7 @@ class NextStopCard extends StatelessWidget {
             style: AppTextStyles.small.light.bold,
           ),
           Divider(
-            color: AppColors.light.withOpacity(0.5),
+            color: AppColors.lightAccent.withOpacity(0.5),
             height: 10.0,
             endIndent: 64.0,
           ),
@@ -108,14 +108,14 @@ class NextStopCard extends StatelessWidget {
       children: [
         Text(
           '${nextStop.distance.toStringAsFixed(0)} m away',
-          style: AppTextStyles.small.bold.primary,
+          style: AppTextStyles.small.primary.bold,
         ),
         const Spacer(),
         Text(
           nextStop.eta != null
               ? 'ETA: ${nextStop.eta.inHours} hr ${nextStop.eta.inMinutes.remainder(60)} min'
               : '-',
-          style: AppTextStyles.small.bold.primary,
+          style: AppTextStyles.small.primary.bold,
         ),
       ],
     );

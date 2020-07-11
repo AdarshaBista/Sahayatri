@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton({
     @required this.label,
-    this.color = AppColors.background,
+    this.color = AppColors.light,
     this.backgroundColor = AppColors.dark,
     this.outlineOnly = false,
     @required this.iconData,

@@ -73,7 +73,7 @@ class PlaceCard extends StatelessWidget {
           ),
           Divider(
             height: 8.0,
-            color: AppColors.light.withOpacity(0.5),
+            color: AppColors.lightAccent.withOpacity(0.5),
           ),
           Text(
             '${place.lodges.length} lodges',
@@ -82,7 +82,7 @@ class PlaceCard extends StatelessWidget {
           const SizedBox(height: 4.0),
           Text(
             '${place.coord.alt.toInt()} m',
-            style: AppTextStyles.small.light.primary,
+            style: AppTextStyles.small.primary,
           ),
         ],
       ),

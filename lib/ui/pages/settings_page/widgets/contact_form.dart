@@ -22,7 +22,7 @@ class _ContactFormState extends State<ContactForm> {
       elevation: 12.0,
       clipBehavior: Clip.antiAlias,
       titlePadding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.light,
       title: _buildTextField(),
       actions: [_buildSubmitButton(context)],
     );
