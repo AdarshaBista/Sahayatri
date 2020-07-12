@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/core/services/tracker_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
@@ -75,9 +79,17 @@ class ItineraryCard extends StatelessWidget {
     return _buildActionIcon(
       icon: Icons.close,
       color: AppColors.secondary,
-      onTap: () => context.bloc<DestinationBloc>().add(
-            const ItineraryCreated(itinerary: null),
-          ),
+      onTap: () {
+        if (context.repository<TrackerService>().isTracking) {
+          const RequiredDialog(
+            message: 'Cannot delete when tracker is running.',
+          ).openDialog(context);
+          return;
+        }
+        context.bloc<DestinationBloc>().add(
+              const ItineraryCreated(itinerary: null),
+            );
+      },
     );
   }
 

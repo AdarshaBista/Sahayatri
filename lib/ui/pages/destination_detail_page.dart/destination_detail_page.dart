@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
@@ -10,6 +12,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
+import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
 
@@ -68,17 +71,28 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   FloatingActionButton _buildFab(BuildContext context) {
+    final destination = context.bloc<DestinationBloc>().destination;
+
     return FloatingActionButton(
       backgroundColor: AppColors.dark,
-      onPressed: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kTrackerPageRoute,
-            arguments: context.bloc<DestinationBloc>().destination,
-          ),
       child: const Icon(
         Icons.directions_walk,
         size: 24.0,
         color: AppColors.primary,
       ),
+      onPressed: () {
+        if (destination.createdItinerary == null) {
+          const RequiredDialog(
+            message: 'You must create an itinerary before starting tracker.',
+          ).openDialog(context);
+          return;
+        }
+
+        context.repository<DestinationNavService>().pushNamed(
+              Routes.kTrackerPageRoute,
+              arguments: context.bloc<DestinationBloc>().destination,
+            );
+      },
     );
   }
 

@@ -10,7 +10,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/required_dialog.dart';
+import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {

@@ -61,7 +61,7 @@ class ItinerariesList extends StatelessWidget {
       children: [
         const SizedBox(height: 16.0),
         Text(
-          'Or Create Your Own',
+          'Create Your Own',
           style: AppTextStyles.medium,
         ),
         const Divider(height: 16.0),
