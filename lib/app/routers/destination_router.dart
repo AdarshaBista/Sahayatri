@@ -69,7 +69,7 @@ class DestRouter {
           create: (_) => ItineraryFormBloc(
             itinerary: settings.arguments as Itinerary,
           ),
-          child: const ItineraryFormPage(),
+          child: ItineraryFormPage(),
         );
         break;
 

@@ -6,10 +6,12 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
 
+import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_form_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 
@@ -35,7 +37,6 @@ class CheckpointForm extends StatelessWidget {
           builder: (context, state) {
             return Form(
               key: _formKey,
-              autovalidate: true,
               child: ListView(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
@@ -47,11 +48,11 @@ class CheckpointForm extends StatelessWidget {
                     style: AppTextStyles.medium.bold,
                   ),
                   const Divider(height: 24.0),
-                  _buildDescriptionField(state.description, context),
-                  const SizedBox(height: 16.0),
                   _buildPlaceField(state.place, context),
                   const SizedBox(height: 16.0),
                   _buildDateTimeField(state.dateTime, context),
+                  const SizedBox(height: 16.0),
+                  _buildDescriptionField(state.description, context),
                   const SizedBox(height: 16.0),
                   _buildSubmitButton(state, context),
                 ],
@@ -59,6 +60,38 @@ class CheckpointForm extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget _buildPlaceField(Place place, BuildContext context) {
+    return CustomFormField<Place>(
+      initialValue: place,
+      validator: FormValidators.nonNull('Please select a place.'),
+      builder: (field) => PlacePicker(
+        initialPlace: place,
+        onSelect: (selectedPlace) {
+          field.didChange(selectedPlace);
+          context.bloc<CheckpointFormBloc>().add(
+                PlaceChanged(place: selectedPlace),
+              );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDateTimeField(DateTime dateTime, BuildContext context) {
+    return CustomFormField<DateTime>(
+      initialValue: dateTime,
+      validator: FormValidators.nonNull('Please select date and time.'),
+      builder: (field) => DateTimePicker(
+        initialDateTime: dateTime,
+        onSelect: (selectedDateTime) {
+          field.didChange(selectedDateTime);
+          context.bloc<CheckpointFormBloc>().add(
+                DateTimeChanged(dateTime: selectedDateTime),
+              );
+        },
       ),
     );
   }
@@ -71,24 +104,6 @@ class CheckpointForm extends StatelessWidget {
       initialValue: description,
       onChanged: (desc) => context.bloc<CheckpointFormBloc>().add(
             DescriptionChanged(description: desc),
-          ),
-    );
-  }
-
-  Widget _buildPlaceField(Place place, BuildContext context) {
-    return PlacePicker(
-      initialPlace: place,
-      onSelect: (selectedPlace) => context.bloc<CheckpointFormBloc>().add(
-            PlaceChanged(place: selectedPlace),
-          ),
-    );
-  }
-
-  Widget _buildDateTimeField(DateTime dateTime, BuildContext context) {
-    return DateTimePicker(
-      initialDateTime: dateTime,
-      onSelect: (selectedDateTime) => context.bloc<CheckpointFormBloc>().add(
-            DateTimeChanged(dateTime: selectedDateTime),
           ),
     );
   }

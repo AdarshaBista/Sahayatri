@@ -18,27 +18,28 @@ class CustomFormField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormField<T>(
+      autovalidate: true,
       validator: validator,
       initialValue: initialValue,
       builder: (field) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             builder(field),
-            if (field.hasError) _buildError(field),
+            if (field.hasError) _buildError(field.errorText),
           ],
         );
       },
     );
   }
 
-  Padding _buildError(FormFieldState field) {
+  Padding _buildError(String message) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+      padding: const EdgeInsets.only(left: 16.0, top: 8.0),
       child: SlideAnimator(
         begin: const Offset(0.0, -1.0),
         child: Text(
-          field.errorText,
+          message,
           style: AppTextStyles.extraSmall.secondary,
         ),
       ),

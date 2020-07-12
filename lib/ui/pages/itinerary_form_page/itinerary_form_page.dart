@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
@@ -10,11 +8,12 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
-import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {
-  const ItineraryFormPage();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  ItineraryFormPage();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,10 @@ class ItineraryFormPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: ItineraryForm(),
+        child: Form(
+          key: _formKey,
+          child: const ItineraryForm(),
+        ),
       ),
     );
   }
@@ -53,17 +55,7 @@ class ItineraryFormPage extends StatelessWidget {
   }
 
   void _saveItinerary(BuildContext context, ItineraryFormState state) {
-    if (!state.isValid) {
-      const RequiredDialog().openDialog(context);
-      return;
-    }
-
-    if (state.isTemplate) {
-      const RequiredDialog(
-        message: 'Please select appropriate date for checkpoints.',
-      ).openDialog(context);
-      return;
-    }
+    if (!_formKey.currentState.validate()) return;
 
     context.bloc<DestinationBloc>().add(ItineraryCreated(itinerary: state.itinerary));
     context.repository<DestinationNavService>().pop();

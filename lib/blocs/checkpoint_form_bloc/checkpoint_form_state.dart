@@ -5,8 +5,6 @@ class CheckpointFormState extends Equatable {
   final String description;
   final DateTime dateTime;
 
-  bool get isValid => checkpoint.place != null && checkpoint.dateTime != null;
-
   Checkpoint get checkpoint => Checkpoint(
         place: place,
         description: description.trim(),

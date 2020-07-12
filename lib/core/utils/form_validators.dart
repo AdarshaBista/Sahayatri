@@ -1,37 +1,51 @@
+import 'package:meta/meta.dart';
+
+import 'package:sahayatri/core/models/checkpoint.dart';
+
 import 'package:form_field_validator/form_field_validator.dart';
 
 class FormValidators {
-  static TextFieldValidator requiredText([
-    String message = 'This field is required',
-  ]) {
+  static TextFieldValidator requiredText([String message = 'This field is required']) {
     return RequiredValidator(errorText: message);
   }
 
-  static TextFieldValidator phoneNumber([
-    String message = 'Please enter a valid number.',
-  ]) {
-    return _PhoneNumberValidator(errorText: message);
+  static FieldValidator nonNull<T>([String message = 'This field is required.']) {
+    return _NonNullValidator<T>(errorText: message);
   }
 
-  static MultiValidator duration([
-    String message = 'Please enter a valid duration.',
-  ]) {
+  static TextFieldValidator phoneNumber() {
+    return _PhoneNumberValidator(errorText: 'Please enter a valid number (98########).');
+  }
+
+  static MultiValidator duration() {
+    const int kMaxLength = 3;
     return MultiValidator([
-      requiredText(),
-      MaxLengthValidator(3, errorText: message),
+      RequiredValidator(errorText: 'Please enter a duration.'),
+      MaxLengthValidator(
+        kMaxLength,
+        errorText: 'Duration should be less than ${kMaxLength + 1} digits long.',
+      ),
+      PatternValidator(
+        r'^[0-9]{1,3}$',
+        errorText: 'Duration should only contain numbers.',
+      ),
     ]);
   }
 
-  static FieldValidator nonNull<T>([
-    String message = 'This field is required.',
-  ]) {
-    return _NonNullValidator<T>(errorText: message);
+  static MultiValidator checkpoints() {
+    return MultiValidator([
+      _NonEmptyListValidator(errorText: 'Please create at least one checkpoint.'),
+      _CheckpointsValidator(
+        errorText: 'Please select date and time for all checkpoints.',
+      ),
+    ]);
   }
 }
 
+/// Verifies phone number follows the pattern 98########
 class _PhoneNumberValidator extends TextFieldValidator {
   _PhoneNumberValidator({
-    String errorText = 'Please enter a valid number.',
+    @required String errorText,
   }) : super(errorText);
 
   @override
@@ -39,17 +53,42 @@ class _PhoneNumberValidator extends TextFieldValidator {
 
   @override
   bool isValid(String value) {
-    return RegExp('98[0-9]{8}').hasMatch(value);
+    return RegExp(r'^98[0-9]{8}$').hasMatch(value);
   }
 }
 
+/// Verifies value is not null
 class _NonNullValidator<T> extends FieldValidator<T> {
   _NonNullValidator({
-    String errorText,
+    @required String errorText,
   }) : super(errorText);
 
   @override
   bool isValid(T value) {
     return value != null;
+  }
+}
+
+/// Verifies list is not empty
+class _NonEmptyListValidator extends FieldValidator<List> {
+  _NonEmptyListValidator({
+    @required String errorText,
+  }) : super(errorText);
+
+  @override
+  bool isValid(List list) {
+    return list.isNotEmpty;
+  }
+}
+
+/// Verifies list of [Checkpoint] are not templates.
+class _CheckpointsValidator extends FieldValidator<List<Checkpoint>> {
+  _CheckpointsValidator({
+    @required String errorText,
+  }) : super(errorText);
+
+  @override
+  bool isValid(List<Checkpoint> checkpoints) {
+    return checkpoints.every((c) => !c.isTemplate);
   }
 }

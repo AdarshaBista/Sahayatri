@@ -11,6 +11,8 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/du
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/checkpoint_list.dart';
 
 class ItineraryForm extends StatelessWidget {
+  const ItineraryForm();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ItineraryFormBloc, ItineraryFormState>(
@@ -34,7 +36,7 @@ class ItineraryForm extends StatelessWidget {
     return CustomTextField(
       label: 'Name',
       initialValue: name,
-      validator: FormValidators.requiredText(),
+      validator: FormValidators.requiredText('Please enter a name.'),
       onChanged: (name) => context.bloc<ItineraryFormBloc>().add(NameChanged(name: name)),
     );
   }
@@ -49,13 +51,15 @@ class ItineraryForm extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               child: DurationField(
                 label: 'Days',
                 initialValue: state.days,
-                onChanged: (days) =>
-                    context.bloc<ItineraryFormBloc>().add(DaysChanged(days: days)),
+                onChanged: (days) => context.bloc<ItineraryFormBloc>().add(
+                      DaysChanged(days: days),
+                    ),
               ),
             ),
             const SizedBox(width: 12.0),
@@ -63,8 +67,9 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Nights',
                 initialValue: state.nights,
-                onChanged: (nights) =>
-                    context.bloc<ItineraryFormBloc>().add(NightsChanged(nights: nights)),
+                onChanged: (nights) => context.bloc<ItineraryFormBloc>().add(
+                      NightsChanged(nights: nights),
+                    ),
               ),
             ),
           ],

@@ -79,7 +79,7 @@ class AppThemes {
         prefixStyle: AppTextStyles.small,
         suffixStyle: AppTextStyles.small,
         counterStyle: AppTextStyles.small,
-        errorStyle: AppTextStyles.small.secondary,
+        errorStyle: AppTextStyles.extraSmall.secondary,
         border: _inputBorder,
         errorBorder: _inputBorder,
         enabledBorder: _inputBorder,
