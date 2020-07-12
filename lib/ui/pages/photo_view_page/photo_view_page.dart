@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/close_icon.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
 

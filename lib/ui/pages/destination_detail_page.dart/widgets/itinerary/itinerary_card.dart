@@ -13,9 +13,9 @@ import 'package:sahayatri/core/services/tracker_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/message_dialog.dart';
 
 class ItineraryCard extends StatelessWidget {
   final Itinerary itinerary;
@@ -81,7 +81,7 @@ class ItineraryCard extends StatelessWidget {
       color: AppColors.secondary,
       onTap: () {
         if (context.repository<TrackerService>().isTracking) {
-          const RequiredDialog(
+          const MessageDialog(
             message: 'Cannot delete when tracker is running.',
           ).openDialog(context);
           return;

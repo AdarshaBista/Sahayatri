@@ -5,9 +5,9 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
-import 'package:sahayatri/ui/shared/widgets/pill.dart';
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
+import 'package:sahayatri/ui/shared/widgets/drag_indicator_pill.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_map.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/widgets/itinerary_header.dart';
 
@@ -39,7 +39,7 @@ class ItineraryPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 4.0),
-            const Pill(),
+            const DragIndicatorPill(),
             const ItineraryHeader(),
             const Divider(),
             Expanded(

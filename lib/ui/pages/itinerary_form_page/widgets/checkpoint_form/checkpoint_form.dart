@@ -10,8 +10,8 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_form_field.dart';
+import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/widgets/form/custom_form_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 

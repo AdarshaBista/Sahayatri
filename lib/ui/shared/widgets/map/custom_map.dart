@@ -12,8 +12,8 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/close_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/close_icon.dart';
 
 class CustomMap extends StatelessWidget {
   final int userIndex;

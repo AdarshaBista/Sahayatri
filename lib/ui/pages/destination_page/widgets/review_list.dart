@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/review_card.dart';
 
 class ReviewList extends StatelessWidget {

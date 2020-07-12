@@ -5,10 +5,10 @@ import 'package:sahayatri/app/constants/resources.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
-class RequiredIndicator extends StatelessWidget {
+class MessageIndicator extends StatelessWidget {
   final String message;
 
-  const RequiredIndicator({
+  const MessageIndicator({
     @required this.message,
   }) : assert(message != null);
 

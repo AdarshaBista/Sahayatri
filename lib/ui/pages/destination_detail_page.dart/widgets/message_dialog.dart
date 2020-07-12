@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
-import 'package:sahayatri/ui/shared/indicators/required_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/message_indicator.dart';
 
-class RequiredDialog extends StatelessWidget {
+class MessageDialog extends StatelessWidget {
   final String message;
 
-  const RequiredDialog({
-    this.message = 'Please fill in the given fields.',
+  const MessageDialog({
+    @required this.message,
   }) : assert(message != null);
 
   @override
@@ -19,7 +19,7 @@ class RequiredDialog extends StatelessWidget {
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,
         backgroundColor: AppColors.light,
-        title: RequiredIndicator(message: message),
+        title: MessageIndicator(message: message),
       ),
     );
   }

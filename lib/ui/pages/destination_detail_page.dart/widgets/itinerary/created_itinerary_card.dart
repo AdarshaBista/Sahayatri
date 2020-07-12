@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 
 class CreatedItineraryCard extends StatelessWidget {

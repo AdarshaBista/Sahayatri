@@ -9,9 +9,9 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/column_button.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 
 class DirectionsButton extends StatelessWidget {
   final String label;

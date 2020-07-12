@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
-class Pill extends StatelessWidget {
-  const Pill();
+class DragIndicatorPill extends StatelessWidget {
+  const DragIndicatorPill();
 
   @override
   Widget build(BuildContext context) {

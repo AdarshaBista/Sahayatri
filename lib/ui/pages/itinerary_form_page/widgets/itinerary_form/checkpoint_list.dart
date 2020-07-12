@@ -9,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_form_field.dart';
 import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/widgets/form/custom_form_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
 
 class CheckpointList extends StatelessWidget {
