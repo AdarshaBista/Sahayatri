@@ -7,11 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:sahayatri/core/utils/geo_utils.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/failure.dart';
-import 'package:sahayatri/core/models/next_stop.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/models/next_checkpoint.dart';
 
 import 'package:sahayatri/core/services/location_service.dart';
 
@@ -165,20 +165,20 @@ class TrackerService {
     );
   }
 
-  /// [NextStop] the user is approaching along the route.
-  NextStop nextStop(UserLocation userLocation) {
-    Place nextStopPlace;
+  /// [NextCheckpoint] the user is approaching along the route.
+  NextCheckpoint nextCheckpoint(UserLocation userLocation) {
+    Checkpoint nextCheckpoint;
     int userIndex, placeIndex;
 
-    for (final place in _destination.places) {
-      placeIndex = GeoUtils.indexOnPath(place.coord, _destination.route);
+    for (final checkpoint in _destination.createdItinerary.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
+      placeIndex = GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
 
       if (userIndex >= placeIndex) continue;
-      nextStopPlace = place;
+      nextCheckpoint = checkpoint;
       break;
     }
-    if (nextStopPlace == null) return null;
+    if (nextCheckpoint == null) return null;
 
     final double distance = GeoUtils.distanceBetweenIndices(
       _destination.route,
@@ -187,9 +187,9 @@ class TrackerService {
     );
     final int eta = userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
 
-    return NextStop(
+    return NextCheckpoint(
       distance: distance,
-      place: nextStopPlace,
+      checkpoint: nextCheckpoint,
       eta: eta == null ? null : Duration(seconds: eta),
     );
   }

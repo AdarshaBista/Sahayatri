@@ -19,15 +19,18 @@ class CheckpointMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      elevation: 8.0,
-      color: AppColors.light,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildDateTime(),
-          Flexible(child: _buildPlace(context)),
-        ],
+    return Hero(
+      tag: checkpoint.place.name,
+      child: CustomCard(
+        elevation: 8.0,
+        color: AppColors.light,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildDateTime(),
+            Flexible(child: _buildPlace(context)),
+          ],
+        ),
       ),
     );
   }

@@ -117,18 +117,18 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   }
 
   void _updateTrackerData(UserLocation userLocation, List<Coord> route) {
-    final nextStop = trackerService.nextStop(userLocation);
+    final nextCheckpoint = trackerService.nextCheckpoint(userLocation);
     final userIndex = trackerService.userIndex(userLocation.coord);
 
-    smsService.send(userLocation.coord, nextStop?.place);
     offRouteAlertService.alert(userLocation.coord, route);
+    smsService.send(userLocation.coord, nextCheckpoint?.checkpoint?.place);
 
     add(TrackingUpdated(
       data: TrackerUpdate(
         userIndex: userIndex,
         userLocation: userLocation,
         elapsed: trackerService.elapsedDuration(),
-        nextStop: trackerService.nextStop(userLocation),
+        nextCheckpoint: trackerService.nextCheckpoint(userLocation),
         distanceCovered: trackerService.distanceCovered(userIndex),
         distanceRemaining: trackerService.distanceRemaining(userIndex),
       ),

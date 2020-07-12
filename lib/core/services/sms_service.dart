@@ -32,10 +32,10 @@ class SmsService {
   })  : assert(prefsDao != null),
         assert(notificationService != null);
 
-  /// Returns true if sms should be sent on arrival to [nextStop].
-  bool _shouldSend(Coord userLocation, Place nextStop) {
-    if (nextStop == null || _sentList.contains(nextStop?.id)) return false;
-    final distance = GeoUtils.computeDistance(userLocation, nextStop.coord);
+  /// Returns true if sms should be sent on arrival to [place].
+  bool _shouldSend(Coord userLocation, Place place) {
+    if (place == null || _sentList.contains(place?.id)) return false;
+    final distance = GeoUtils.computeDistance(userLocation, place.coord);
     return distance < Distances.kMinNearbyDistance;
   }
 

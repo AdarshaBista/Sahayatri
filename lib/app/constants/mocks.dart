@@ -116,7 +116,7 @@ final Destination _mardi = Destination(
   imageUrls: _mardiImgUrls,
   route: _mardiRoutePoints,
   suggestedItineraries: _mardiItineraries,
-  createdItinerary: null,
+  createdItinerary: _mardiCreatedItinerary,
   isDownloaded: false,
 );
 
@@ -283,6 +283,44 @@ const List<Lodge> lodges = [
     imageUrls: _mardiImgUrls,
   ),
 ];
+
+final Itinerary _mardiCreatedItinerary = Itinerary(
+  name: 'Mardi Custom',
+  days: '5',
+  nights: '4',
+  checkpoints: [
+    Checkpoint(
+      place: _mardiPlaces[0],
+      description: 'Breakfast',
+      dateTime: DateTime.now(),
+      day: 1,
+    ),
+    Checkpoint(
+      place: _mardiPlaces[2],
+      description: 'Lunch',
+      dateTime: DateTime.now(),
+      day: 2,
+    ),
+    Checkpoint(
+      place: _mardiPlaces[5],
+      description: 'Dinner',
+      dateTime: DateTime.now(),
+      day: 3,
+    ),
+    Checkpoint(
+      place: _mardiPlaces[7],
+      description: 'Breakfast again',
+      dateTime: DateTime.now(),
+      day: 4,
+    ),
+    Checkpoint(
+      place: _mardiPlaces[9],
+      description: 'Lunch again',
+      dateTime: DateTime.now(),
+      day: 4,
+    ),
+  ],
+);
 
 final List<Itinerary> _mardiItineraries = [
   Itinerary(

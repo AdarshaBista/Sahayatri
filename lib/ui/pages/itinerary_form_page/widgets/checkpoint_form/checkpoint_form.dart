@@ -83,7 +83,7 @@ class CheckpointForm extends StatelessWidget {
 
   Widget _buildDateTimeField(DateTime dateTime, BuildContext context) {
     return DateTimePicker(
-      initialDateTime: dateTime,
+      initialDateTime: dateTime ?? DateTime.now(),
       onSelect: (selectedDateTime) => context.bloc<CheckpointFormBloc>().add(
             DateTimeChanged(dateTime: selectedDateTime),
           ),
