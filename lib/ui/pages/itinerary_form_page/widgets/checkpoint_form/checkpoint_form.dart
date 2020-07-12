@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
-
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 
@@ -11,7 +9,6 @@ import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/required_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
@@ -19,8 +16,9 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/d
 class CheckpointForm extends StatelessWidget {
   final Checkpoint checkpoint;
   final Function(Checkpoint) onSubmit;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  const CheckpointForm({
+  CheckpointForm({
     @required this.onSubmit,
     @required this.checkpoint,
   }) : assert(onSubmit != null);
@@ -35,25 +33,29 @@ class CheckpointForm extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         child: BlocBuilder<CheckpointFormBloc, CheckpointFormState>(
           builder: (context, state) {
-            return ListView(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.all(20.0),
-              children: [
-                Text(
-                  checkpoint == null ? 'Create a Checkpoint' : 'Edit this checkpoint',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.medium.bold,
-                ),
-                const Divider(height: 24.0),
-                _buildDescriptionField(state.description, context),
-                const SizedBox(height: 16.0),
-                _buildPlaceField(state.place, context),
-                const SizedBox(height: 16.0),
-                _buildDateTimeField(state.dateTime, context),
-                const SizedBox(height: 16.0),
-                _buildSubmitButton(state, context),
-              ],
+            return Form(
+              key: _formKey,
+              autovalidate: true,
+              child: ListView(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(20.0),
+                children: [
+                  Text(
+                    checkpoint == null ? 'Create a Checkpoint' : 'Edit this checkpoint',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.medium.bold,
+                  ),
+                  const Divider(height: 24.0),
+                  _buildDescriptionField(state.description, context),
+                  const SizedBox(height: 16.0),
+                  _buildPlaceField(state.place, context),
+                  const SizedBox(height: 16.0),
+                  _buildDateTimeField(state.dateTime, context),
+                  const SizedBox(height: 16.0),
+                  _buildSubmitButton(state, context),
+                ],
+              ),
             );
           },
         ),
@@ -64,6 +66,7 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildDescriptionField(String description, BuildContext context) {
     return CustomTextField(
       label: 'Description',
+      validator: (_) => null,
       icon: Icons.description,
       initialValue: description,
       onChanged: (desc) => context.bloc<CheckpointFormBloc>().add(
@@ -83,7 +86,7 @@ class CheckpointForm extends StatelessWidget {
 
   Widget _buildDateTimeField(DateTime dateTime, BuildContext context) {
     return DateTimePicker(
-      initialDateTime: dateTime ?? DateTime.now(),
+      initialDateTime: dateTime,
       onSelect: (selectedDateTime) => context.bloc<CheckpointFormBloc>().add(
             DateTimeChanged(dateTime: selectedDateTime),
           ),
@@ -100,10 +103,8 @@ class CheckpointForm extends StatelessWidget {
         color: AppColors.primary,
       ),
       onPressed: () {
-        if (!state.isValid) {
-          const RequiredDialog().openDialog(context);
-          return;
-        }
+        if (!_formKey.currentState.validate()) return;
+
         onSubmit(state.checkpoint);
         context.repository<DestinationNavService>().pop();
       },

@@ -180,7 +180,9 @@ class _CardBack extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 32.0),
               child: Text(
-                checkpoint.description,
+                checkpoint.description.isEmpty
+                    ? 'No description provided.'
+                    : checkpoint.description,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.small.light,
               ),

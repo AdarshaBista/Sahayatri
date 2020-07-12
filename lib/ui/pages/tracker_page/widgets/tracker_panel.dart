@@ -25,7 +25,6 @@ class _TrackerPanelState extends State<TrackerPanel> {
     return Scaffold(
       body: SlidingPanel(
         borderRadius: 12.0,
-        parallaxEnabled: false,
         margin: EdgeInsets.all(margin),
         minHeight: AppConfig.kTrackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.8,

@@ -33,9 +33,9 @@ class CheckpointList extends StatelessWidget {
         _buildAddCheckpointButton(context),
         const Divider(height: 24.0),
         ItineraryTimeline(
-          checkpoints: checkpoints,
           isNested: true,
           isEditable: true,
+          checkpoints: checkpoints,
         ),
       ],
     );

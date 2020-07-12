@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/utils/form_validators.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 
@@ -23,6 +25,7 @@ class DurationField extends StatelessWidget {
       initialValue: initialValue,
       labelStyle: AppTextStyles.small,
       onChanged: onChanged,
+      validator: FormValidators.duration(),
       keyboardType: const TextInputType.numberWithOptions(),
     );
   }

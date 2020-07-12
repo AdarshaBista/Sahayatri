@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
 
+import 'package:sahayatri/core/utils/form_validators.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 
@@ -39,6 +41,7 @@ class _ContactFormState extends State<ContactForm> {
         label: 'Contact number',
         icon: Icons.phone,
         iconGap: 16.0,
+        validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
         initialValue: (state as PrefsLoaded).prefs.contact,
         keyboardType: const TextInputType.numberWithOptions(),

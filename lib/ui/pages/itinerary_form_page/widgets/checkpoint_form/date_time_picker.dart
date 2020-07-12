@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:sahayatri/core/utils/form_validators.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/custom_form_field.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class DateTimePicker extends StatefulWidget {
   final DateTime initialDateTime;
@@ -30,34 +33,41 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Date & Time',
-          style: AppTextStyles.medium,
-        ),
-        const SizedBox(height: 8.0),
-        CustomCard(
-          child: ListTile(
-            dense: true,
-            title: Text(
-              selectedDateTime == null
-                  ? 'No date & time selected'
-                  : _formattedDate(selectedDateTime),
-              style: AppTextStyles.small,
+    return CustomFormField<DateTime>(
+      initialValue: widget.initialDateTime,
+      validator: FormValidators.nonNull('Please select date and time.'),
+      builder: (field) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Date & Time',
+              style: AppTextStyles.medium,
             ),
-            leading: const Icon(
-              Icons.date_range,
-              size: 22.0,
+            const SizedBox(height: 8.0),
+            CustomCard(
+              child: ListTile(
+                dense: true,
+                title: Text(
+                  selectedDateTime == null
+                      ? 'No date & time selected'
+                      : _formattedDate(selectedDateTime),
+                  style: AppTextStyles.small,
+                ),
+                leading: const Icon(
+                  Icons.date_range,
+                  size: 22.0,
+                ),
+                onTap: () async {
+                  FocusScope.of(context).unfocus();
+                  _selectDateTime();
+                  field.didChange(selectedDateTime);
+                },
+              ),
             ),
-            onTap: () async {
-              FocusScope.of(context).unfocus();
-              _selectDateTime();
-            },
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 

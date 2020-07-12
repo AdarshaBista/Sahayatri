@@ -10,10 +10,12 @@ class CustomTextField extends StatelessWidget {
   final TextStyle labelStyle;
   final TextInputType keyboardType;
   final ValueChanged<String> onChanged;
+  final FormFieldValidator<String> validator;
 
   const CustomTextField({
     @required this.label,
     @required this.onChanged,
+    @required this.validator,
     @required this.initialValue,
     this.icon,
     this.iconGap = 32.0,
@@ -21,6 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
   })  : assert(label != null),
         assert(onChanged != null),
+        assert(validator != null),
         assert(initialValue != null);
 
   @override
@@ -34,9 +37,10 @@ class CustomTextField extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         TextFormField(
+          validator: validator,
+          onChanged: onChanged,
           initialValue: initialValue,
           keyboardType: keyboardType,
-          onChanged: onChanged,
           maxLines: null,
           decoration: icon != null
               ? InputDecoration(

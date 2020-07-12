@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.16.1
   path_provider: ^1.6.11
   device_preview: ^0.4.4
+  form_field_validator: ^1.0.1
 
   # Notification
   sms_maintained: ^0.2.5

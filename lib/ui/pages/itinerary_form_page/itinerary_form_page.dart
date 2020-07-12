@@ -22,8 +22,8 @@ class ItineraryFormPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _buildFab(context),
       appBar: CustomAppbar(
-        title: 'Create an Itinerary',
         elevation: 0.0,
+        title: 'Create an Itinerary',
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

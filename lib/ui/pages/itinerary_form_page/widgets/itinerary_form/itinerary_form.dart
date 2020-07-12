@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
 
+import 'package:sahayatri/core/utils/form_validators.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/duration_field.dart';
@@ -32,6 +34,7 @@ class ItineraryForm extends StatelessWidget {
     return CustomTextField(
       label: 'Name',
       initialValue: name,
+      validator: FormValidators.requiredText(),
       onChanged: (name) => context.bloc<ItineraryFormBloc>().add(NameChanged(name: name)),
     );
   }

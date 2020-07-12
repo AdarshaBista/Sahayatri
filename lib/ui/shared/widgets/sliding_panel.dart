@@ -9,7 +9,6 @@ class SlidingPanel extends StatelessWidget {
   final double snapPoint;
   final double borderRadius;
   final EdgeInsets margin;
-  final bool parallaxEnabled;
   final Function(double) onPanelSlide;
   final Widget Function(ScrollController) panelBuilder;
 
@@ -21,24 +20,21 @@ class SlidingPanel extends StatelessWidget {
     this.maxHeight,
     this.snapPoint,
     this.borderRadius = 16.0,
-    this.parallaxEnabled = true,
     this.margin = EdgeInsets.zero,
   })  : assert(body != null),
         assert(margin != null),
         assert(minHeight != null),
-        assert(panelBuilder != null),
         assert(borderRadius != null),
-        assert(parallaxEnabled != null);
+        assert(panelBuilder != null);
 
   @override
   Widget build(BuildContext context) {
     final radius = Radius.circular(borderRadius);
 
     return SlidingUpPanel(
+      snapPoint: snapPoint,
       backdropOpacity: 0.6,
       backdropEnabled: true,
-      snapPoint: snapPoint,
-      parallaxEnabled: parallaxEnabled,
       borderRadius: BorderRadius.only(
         topLeft: radius,
         topRight: radius,

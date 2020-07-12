@@ -7,10 +7,7 @@ class ItineraryFormState {
   final List<Checkpoint> checkpoints;
 
   bool get isValid =>
-      name.isNotEmpty &&
-      days.isNotEmpty &&
-      nights.isNotEmpty &&
-      checkpoints.isNotEmpty;
+      name.isNotEmpty && days.isNotEmpty && nights.isNotEmpty && checkpoints.isNotEmpty;
 
   bool get isTemplate => checkpoints.any((c) => c.isTemplate);
 

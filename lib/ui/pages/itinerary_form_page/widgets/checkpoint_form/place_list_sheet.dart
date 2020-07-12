@@ -11,7 +11,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class PlaceListSheet extends StatelessWidget {
-  final Function(Place) onSelect;
+  final void Function(Place) onSelect;
 
   const PlaceListSheet({
     @required this.onSelect,
@@ -33,8 +33,7 @@ class PlaceListSheet extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount:
-                    context.bloc<DestinationBloc>().destination.places.length,
+                itemCount: context.bloc<DestinationBloc>().destination.places.length,
                 itemBuilder: (context, index) {
                   return _buildPlaceTile(
                     context,
