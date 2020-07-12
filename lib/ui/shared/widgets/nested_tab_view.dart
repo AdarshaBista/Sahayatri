@@ -130,7 +130,7 @@ class NestedTab extends StatelessWidget {
             AnimatedDefaultTextStyle(
               child: Text(tab.label),
               duration: const Duration(milliseconds: 200),
-              style: AppTextStyles.small.bold.copyWith(color: color),
+              style: AppTextStyles.small.bold.withColor(color),
             ),
           ],
         ),

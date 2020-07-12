@@ -26,7 +26,7 @@ class CustomAppbar extends AppBar {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-                    ? AppTextStyles.medium.light
+                    ? AppTextStyles.medium.light.bold
                     : AppTextStyles.medium.bold,
               ),
             ),

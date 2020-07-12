@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
               icon: Icon(iconData, color: color),
               label: Text(
                 label,
-                style: AppTextStyles.small.copyWith(color: color),
+                style: AppTextStyles.small.withColor(color),
               ),
             )
           : FlatButton.icon(
@@ -46,7 +46,7 @@ class CustomButton extends StatelessWidget {
               icon: Icon(iconData, color: color),
               label: Text(
                 label,
-                style: AppTextStyles.small.copyWith(color: color),
+                style: AppTextStyles.small.withColor(color),
               ),
             ),
     );

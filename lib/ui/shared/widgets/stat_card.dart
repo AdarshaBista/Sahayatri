@@ -42,8 +42,8 @@ class StatCard extends StatelessWidget {
             child: AutoSizeText(
               count,
               textAlign: TextAlign.center,
-              style: countStyle?.copyWith(color: color) ??
-                  AppTextStyles.large.bold.copyWith(color: color),
+              style: countStyle?.withColor(color) ??
+                  AppTextStyles.large.bold.withColor(color),
             ),
           ),
         ],

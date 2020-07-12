@@ -83,7 +83,7 @@ class TrackerActions extends StatelessWidget {
             AnimatedDefaultTextStyle(
               child: Text(label),
               duration: const Duration(milliseconds: 300),
-              style: AppTextStyles.small.bold.copyWith(color: color),
+              style: AppTextStyles.small.bold.withColor(color),
             ),
           ],
         ),

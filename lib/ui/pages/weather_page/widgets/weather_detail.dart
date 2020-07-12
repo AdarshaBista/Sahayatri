@@ -53,7 +53,7 @@ class WeatherDetail extends StatelessWidget {
           ),
           Text(
             '${weather.temp}°',
-            style: AppTextStyles.large.copyWith(fontSize: 96.0),
+            style: AppTextStyles.large.withSize(96.0),
           ),
           Text(
             'Feels like ${weather.feelsLikeTemp}°',
