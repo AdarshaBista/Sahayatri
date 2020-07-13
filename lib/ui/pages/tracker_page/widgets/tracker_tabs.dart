@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tab.dart';
 import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
@@ -31,7 +32,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
         icons: const [
           CommunityMaterialIcons.progress_clock,
           CommunityMaterialIcons.google_analytics,
-          CommunityMaterialIcons.access_point_network,
+          CommunityMaterialIcons.cog_outline,
         ],
       ),
       body: IndexedStack(
@@ -39,7 +40,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
         children: [
           ProgressTab(controller: widget.controller),
           const Offstage(),
-          const Offstage(),
+          SetupTab(controller: widget.controller),
         ],
       ),
     );

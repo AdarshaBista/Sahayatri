@@ -36,7 +36,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(title: 'Review your settings'),
-      floatingActionButton: _buildStartButton(),
+      floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: FadeAnimator(
         child: Stepper(
@@ -61,7 +61,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
     );
   }
 
-  Widget _buildStartButton() {
+  Widget _buildStartButton(BuildContext context) {
     return FloatingActionButton.extended(
       label: Text(
         'START',

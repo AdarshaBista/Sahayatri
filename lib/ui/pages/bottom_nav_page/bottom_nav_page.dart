@@ -46,7 +46,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
         icons: const [
           CommunityMaterialIcons.home_outline,
           CommunityMaterialIcons.map_marker_multiple_outline,
-          Icons.settings,
+          CommunityMaterialIcons.cog_outline,
         ],
       ),
       body: IndexedStack(
