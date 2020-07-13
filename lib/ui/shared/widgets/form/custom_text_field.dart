@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
@@ -11,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String> validator;
+  final List<TextInputFormatter> inputFormatters;
 
   const CustomTextField({
     @required this.label,
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     this.icon,
     this.iconGap = 32.0,
     this.labelStyle,
+    this.inputFormatters,
     this.keyboardType = TextInputType.text,
   })  : assert(label != null),
         assert(onChanged != null),
@@ -43,6 +46,7 @@ class CustomTextField extends StatelessWidget {
           onChanged: onChanged,
           initialValue: initialValue,
           keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           decoration: icon != null
               ? InputDecoration(
                   prefixIcon: Padding(

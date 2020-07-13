@@ -17,10 +17,10 @@ class FormValidators {
     return _PhoneNumberValidator(errorText: 'Please enter a valid number (98########).');
   }
 
-  static MultiValidator duration() {
+  static MultiValidator duration([String message = 'Please enter a duration.']) {
     const int kMaxLength = 3;
     return MultiValidator([
-      RequiredValidator(errorText: 'Please enter a duration.'),
+      RequiredValidator(errorText: message),
       MaxLengthValidator(
         kMaxLength,
         errorText: 'Duration should be less than ${kMaxLength + 1} digits long.',

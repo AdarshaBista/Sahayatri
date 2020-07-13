@@ -7,6 +7,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
 
 class TrackerSetup extends StatefulWidget {
   const TrackerSetup();
@@ -22,7 +23,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
         _buildStep(
           title: 'Choose a contact',
           index: 0,
-          content: Container(),
+          content: const ContactForm(shouldPop: false),
         ),
         _buildStep(
           title: 'Setup peer network',

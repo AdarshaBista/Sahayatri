@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
@@ -25,8 +26,12 @@ class DurationField extends StatelessWidget {
       initialValue: initialValue,
       labelStyle: AppTextStyles.small,
       onChanged: onChanged,
-      validator: FormValidators.duration(),
+      validator: FormValidators.duration('Please enter number of ${label.toLowerCase()}'),
       keyboardType: const TextInputType.numberWithOptions(),
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(3),
+        WhitelistingTextInputFormatter.digitsOnly,
+      ],
     );
   }
 }
