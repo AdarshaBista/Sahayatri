@@ -4,6 +4,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class SlidingPanel extends StatelessWidget {
   final Widget body;
+  final Widget panel;
   final double minHeight;
   final double maxHeight;
   final double snapPoint;
@@ -15,17 +16,17 @@ class SlidingPanel extends StatelessWidget {
   const SlidingPanel({
     @required this.body,
     @required this.minHeight,
-    @required this.panelBuilder,
-    this.onPanelSlide,
+    this.panel,
     this.maxHeight,
     this.snapPoint,
+    this.onPanelSlide,
+    this.panelBuilder,
     this.borderRadius = 16.0,
     this.margin = EdgeInsets.zero,
   })  : assert(body != null),
         assert(margin != null),
         assert(minHeight != null),
-        assert(borderRadius != null),
-        assert(panelBuilder != null);
+        assert(borderRadius != null);
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class SlidingPanel extends StatelessWidget {
       maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.8,
       onPanelSlide: onPanelSlide,
       body: body,
+      panel: panel,
       panelBuilder: panelBuilder,
     );
   }

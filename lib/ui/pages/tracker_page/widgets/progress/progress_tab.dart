@@ -4,16 +4,11 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_stats.d
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint_card.dart';
 
 class ProgressTab extends StatelessWidget {
-  final ScrollController controller;
-
-  const ProgressTab({
-    @required this.controller,
-  }) : assert(controller != null);
+  const ProgressTab();
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      controller: controller,
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       children: const [

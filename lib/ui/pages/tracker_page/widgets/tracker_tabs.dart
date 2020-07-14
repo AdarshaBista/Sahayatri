@@ -6,11 +6,7 @@ import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
 class TrackerTabs extends StatefulWidget {
-  final ScrollController controller;
-
-  const TrackerTabs({
-    @required this.controller,
-  }) : assert(controller != null);
+  const TrackerTabs();
 
   @override
   _TrackerTabsState createState() => _TrackerTabsState();
@@ -31,16 +27,14 @@ class _TrackerTabsState extends State<TrackerTabs> {
         },
         icons: const [
           CommunityMaterialIcons.progress_clock,
-          CommunityMaterialIcons.google_analytics,
           CommunityMaterialIcons.cog_outline,
         ],
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [
-          ProgressTab(controller: widget.controller),
-          const Offstage(),
-          SetupTab(controller: widget.controller),
+        children: const [
+          ProgressTab(),
+          SetupTab(),
         ],
       ),
     );
