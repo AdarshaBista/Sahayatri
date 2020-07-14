@@ -16,7 +16,7 @@ import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/close_icon.dart';
 
 class CustomMap extends StatelessWidget {
-  final int userIndex;
+  final bool showRoute;
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
@@ -30,19 +30,19 @@ class CustomMap extends StatelessWidget {
     this.mapController,
     this.swPanBoundary,
     this.nePanBoundary,
-    this.userIndex = 0,
+    this.showRoute = true,
     this.initialZoom = 14.0,
     this.onPositionChanged,
     this.children = const [],
   })  : assert(center != null),
         assert(children != null),
-        assert(userIndex != null);
+        assert(showRoute != null);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _buildMap(),
+        RepaintBoundary(child: _buildMap()),
         const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: CloseIcon())),
         const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: LayersButton())),
       ],
@@ -54,7 +54,7 @@ class CustomMap extends StatelessWidget {
       mapController: mapController,
       children: [
         const _TileLayer(),
-        _RouteLayer(userCoord: center, userIndex: userIndex),
+        if (showRoute) const _RouteLayer(),
         ...children,
       ],
       options: MapOptions(
@@ -109,37 +109,19 @@ class _TileLayer extends StatelessWidget {
 }
 
 class _RouteLayer extends StatelessWidget {
-  final int userIndex;
-  final Coord userCoord;
-
-  const _RouteLayer({
-    @required this.userIndex,
-    @required this.userCoord,
-  })  : assert(userIndex != null),
-        assert(userCoord != null);
+  const _RouteLayer();
 
   @override
   Widget build(BuildContext context) {
     final route = context.bloc<DestinationBloc>().destination.route;
-    final userPath = route.take(userIndex).toList();
-    final remainingStartIndex = userIndex > 0 ? userIndex - 1 : 0;
-    final remainingPath = route.getRange(remainingStartIndex, route.length).toList();
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(
         polylines: [
           Polyline(
             strokeWidth: 6.0,
-            points: remainingPath.map((p) => p.toLatLng()).toList(),
+            points: route.map((p) => p.toLatLng()).toList(),
             gradientColors: AppColors.accentColors.take(4).toList(),
-          ),
-          Polyline(
-            strokeWidth: 6.0,
-            points: [
-              ...userPath.map((p) => p.toLatLng()).toList(),
-              userCoord.toLatLng(),
-            ],
-            gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
           ),
         ],
       ),

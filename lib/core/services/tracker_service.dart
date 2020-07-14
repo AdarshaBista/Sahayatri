@@ -116,7 +116,7 @@ class TrackerService {
   // TODO: Remove this
   Stream<UserLocation> _getMockUserLocationStream() {
     return Stream<UserLocation>.periodic(
-      const Duration(milliseconds: 200),
+      const Duration(milliseconds: 1000),
       (index) => UserLocation(
         accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         altitude: 2000.0 + _randomOffset(-50.0, 50.0),

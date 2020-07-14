@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/pages/itinerary_page/widgets/checkpoint_marker.dart';
+import 'package:sahayatri/ui/pages/itinerary_page/widgets/checkpoint_detail_marker.dart';
 
 class ItineraryMap extends StatelessWidget {
   const ItineraryMap();
@@ -28,7 +28,7 @@ class ItineraryMap extends StatelessWidget {
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: checkpoints.map((c) => CheckpointMarker(checkpoint: c)).toList(),
+        markers: checkpoints.map((c) => CheckpointDetailMarker(checkpoint: c)).toList(),
       ),
     );
   }

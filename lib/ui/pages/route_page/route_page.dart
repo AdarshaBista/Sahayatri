@@ -40,9 +40,8 @@ class _RoutePageState extends State<RoutePage> {
       body: CustomMap(
         center: destination.midPointCoord,
         children: [
-          _PlaceMarkers(
-            altitudeMarkerIndex: isSheetOpen ? altitudeDragCoordIndex : null,
-          )
+          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
+          const _PlaceMarkersLayer()
         ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
@@ -84,12 +83,41 @@ class _RoutePageState extends State<RoutePage> {
   }
 }
 
-class _PlaceMarkers extends StatelessWidget {
-  final int altitudeMarkerIndex;
+class _AltitudeMarkerLayer extends StatelessWidget {
+  final int index;
 
-  const _PlaceMarkers({
-    @required this.altitudeMarkerIndex,
-  });
+  const _AltitudeMarkerLayer({
+    @required this.index,
+  }) : assert(index != null);
+
+  @override
+  Widget build(BuildContext context) {
+    final destination = context.bloc<DestinationBloc>().destination;
+
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          Marker(
+            width: 32.0,
+            height: 32.0,
+            point: destination.route[index].toLatLng(),
+            anchorPos: AnchorPos.align(AnchorAlign.top),
+            builder: (context) {
+              return const Icon(
+                CommunityMaterialIcons.map_marker,
+                size: 32.0,
+                color: AppColors.secondary,
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PlaceMarkersLayer extends StatelessWidget {
+  const _PlaceMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
@@ -102,20 +130,6 @@ class _PlaceMarkers extends StatelessWidget {
             PlaceMarker(
               place: destination.places[i],
               color: AppColors.accentColors[i % AppColors.accentColors.length],
-            ),
-          if (altitudeMarkerIndex != null)
-            Marker(
-              width: 32.0,
-              height: 32.0,
-              point: destination.route[altitudeMarkerIndex].toLatLng(),
-              anchorPos: AnchorPos.align(AnchorAlign.top),
-              builder: (context) {
-                return const Icon(
-                  CommunityMaterialIcons.map_marker,
-                  size: 32.0,
-                  color: AppColors.secondary,
-                );
-              },
             ),
         ],
       ),

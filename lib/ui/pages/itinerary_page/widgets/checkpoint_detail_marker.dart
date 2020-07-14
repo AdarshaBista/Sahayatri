@@ -11,8 +11,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 
-class CheckpointMarker extends Marker {
-  CheckpointMarker({
+class CheckpointDetailMarker extends Marker {
+  CheckpointDetailMarker({
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
