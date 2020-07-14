@@ -15,7 +15,7 @@ class SetupTab extends StatelessWidget {
     return ListView(
       controller: controller,
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       children: [
         const ContactForm(shouldPop: false),
         const Divider(height: 16.0),

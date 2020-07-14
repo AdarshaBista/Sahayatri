@@ -7,102 +7,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-final List<Destination> mockDestinations = [_mardi, _home];
-
-///////////////////////// HOME //////////////////////////
-final Destination _home = Destination(
-  id: 2,
-  name: 'Home Trail',
-  length: '0.2',
-  maxAltitude: '1810',
-  estimatedDuration: '1',
-  permit: 'No Permits',
-  bestMonths: ['January', 'Februrary', 'March', 'April', 'September'],
-  description: _homeDesc,
-  places: _homePlaces,
-  reviews: [],
-  imageUrls: _homeImgUrls,
-  route: _homeRoutePoints,
-  suggestedItineraries: [],
-  createdItinerary: null,
-  isDownloaded: false,
-);
-
-const String _homeDesc = 'Home sweet home.';
-
-const List<String> _homeImgUrls = [
-  'assets/images/home/1.jpg',
-  'assets/images/home/2.jpg',
-  'assets/images/home/3.jpg',
-  'assets/images/home/4.jpg',
-  'assets/images/home/5.jpg',
-  'assets/images/home/6.jpg',
-  'assets/images/home/7.jpg',
-  'assets/images/home/8.jpg',
-  'assets/images/home/9.jpg',
-];
-
-final List<Place> _homePlaces = [
-  Place(
-    id: 12,
-    name: 'Home',
-    description: _homeDesc,
-    lodges: lodges,
-    isNetworkAvailable: true,
-    coord: const Coord(lat: 27.628914100, lng: 85.060972300, alt: 1807.8),
-    imageUrls: _homeImgUrls.getRange(0, 2).toList(),
-  ),
-  Place(
-    id: 13,
-    name: 'River',
-    description: _homeDesc,
-    lodges: [...lodges, ...lodges],
-    isNetworkAvailable: true,
-    coord: const Coord(lat: 27.628301000, lng: 85.060934700, alt: 1800.0),
-    imageUrls: _homeImgUrls.getRange(2, 5).toList(),
-  ),
-  Place(
-    id: 14,
-    name: 'Chautari',
-    description: _homeDesc,
-    lodges: lodges,
-    isNetworkAvailable: true,
-    coord: const Coord(lat: 27.627977800, lng: 85.060339300, alt: 1801.8),
-    imageUrls: _homeImgUrls.getRange(5, 7).toList(),
-  ),
-  Place(
-    id: 15,
-    name: 'Exit',
-    description: _homeDesc,
-    lodges: lodges,
-    isNetworkAvailable: true,
-    coord: const Coord(lat: 27.627657000, lng: 85.060374100, alt: 1801.1),
-    imageUrls: _homeImgUrls.getRange(7, 9).toList(),
-  ),
-];
-
-const List<Coord> _homeRoutePoints = [
-  Coord(lat: 27.628909300, lng: 85.060972300, alt: 1807.6),
-  Coord(lat: 27.628876000, lng: 85.060897200, alt: 1807.3),
-  Coord(lat: 27.628804700, lng: 85.060913300, alt: 1806.1),
-  Coord(lat: 27.628704900, lng: 85.060948100, alt: 1804.4),
-  Coord(lat: 27.628595600, lng: 85.060977600, alt: 1802.8),
-  Coord(lat: 27.628469700, lng: 85.060961500, alt: 1801.5),
-  Coord(lat: 27.628360400, lng: 85.060948100, alt: 1800.4),
-  Coord(lat: 27.628277200, lng: 85.060956200, alt: 1799.7),
-  Coord(lat: 27.628210600, lng: 85.060867700, alt: 1799.9),
-  Coord(lat: 27.628144100, lng: 85.060784500, alt: 1799.8),
-  Coord(lat: 27.628096600, lng: 85.060688000, alt: 1800.0),
-  Coord(lat: 27.628053800, lng: 85.060569900, alt: 1800.9),
-  Coord(lat: 27.628022900, lng: 85.060478700, alt: 1801.3),
-  Coord(lat: 27.627989600, lng: 85.060360700, alt: 1801.7),
-  Coord(lat: 27.627897000, lng: 85.060350000, alt: 1801.7),
-  Coord(lat: 27.627806700, lng: 85.060317800, alt: 1801.9),
-  Coord(lat: 27.627671200, lng: 85.060392900, alt: 1801.1),
-];
-
-///////////////////////// MARDI //////////////////////////
-final Destination _mardi = Destination(
+final Destination mardiTrek = Destination(
   id: 1,
   name: 'Mardi Himal Trek',
   length: '27',
@@ -110,20 +15,20 @@ final Destination _mardi = Destination(
   estimatedDuration: '5',
   permit: 'TIMS Card and Annapurna Sanctuary Permit',
   bestMonths: ['March', 'April', 'May', 'September', 'October', 'November', 'December'],
-  description: _mardiDesc,
-  places: _mardiPlaces,
-  reviews: _mardiReviews,
-  imageUrls: _mardiImgUrls,
-  route: _mardiRoutePoints,
-  suggestedItineraries: _mardiItineraries,
-  createdItinerary: _mardiCreatedItinerary,
+  description: _desc,
+  places: _places,
+  reviews: _reviews,
+  imageUrls: _imgUrls,
+  route: _route,
+  suggestedItineraries: _itineraries,
+  createdItinerary: _createdItinerary,
   isDownloaded: false,
 );
 
-const String _mardiDesc =
+const String _desc =
     'The trail goes along small winding paths, through magical rhododendron forests until you climb out of the forest at an elevation around 3,300 m.';
 
-const List<String> _mardiImgUrls = [
+const List<String> _imgUrls = [
   'assets/images/mardi/0.png',
   'assets/images/mardi/1.png',
   'assets/images/mardi/2.png',
@@ -142,179 +47,179 @@ const List<String> _mardiImgUrls = [
   'assets/images/mardi/15.png',
 ];
 
-final List<Place> _mardiPlaces = [
+final List<Place> _places = [
   Place(
     id: 1,
     name: 'Kande',
     description:
         "Kande, is a small village in the far western region of Nepal, part of the Baitadi District in Gurukhola, 01-Dasharathchand Municipality. Kande comprises 412 houses and covers an area of 4,856 sq.m.",
-    lodges: lodges,
+    lodges: _lodges,
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.2923439, lng: 83.8241071, alt: 2000.0),
-    imageUrls: _mardiImgUrls.getRange(1, 3).toList(),
+    imageUrls: _imgUrls.getRange(1, 3).toList(),
   ),
   Place(
     id: 2,
     name: 'Australian Base Camp',
     description:
         "Australian Camp set on the beautiful hill top offers striking views over the valleys and stunning views of the Annapurna Mountain range. The place is located on the north-west of Pokhara.",
-    lodges: [...lodges, ...lodges],
+    lodges: [..._lodges, ..._lodges],
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.3046830, lng: 83.8282183, alt: 2200.0),
-    imageUrls: _mardiImgUrls.getRange(2, 5).toList(),
+    imageUrls: _imgUrls.getRange(2, 5).toList(),
   ),
   Place(
     id: 3,
     name: 'Pothana',
     description:
         "Pothana is an early stop on some treks in the Annapurna Himalaya, such as the Ghandruk Trek and the Mardi Himal Trek. It's not far from Pokhara and can be reached through a combination of overland travel and trekking.",
-    lodges: lodges,
+    lodges: _lodges,
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.3132597, lng: 83.8303828, alt: 2100.0),
-    imageUrls: _mardiImgUrls.getRange(5, 9).toList(),
+    imageUrls: _imgUrls.getRange(5, 9).toList(),
   ),
   Place(
     id: 4,
     name: 'Pittam Deurali',
     description:
         "Deurali is a Village Development Committee in Kaski District of the Gandaki province of north-central Nepal. At the time of the 1991 Nepal census, it had a population of 2,882.[1] The base camp of Mount Machapuchare is situated at a 6 hours uphill trek from the village.",
-    lodges: lodges,
+    lodges: _lodges,
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.3299199, lng: 83.8300288, alt: 2300.0),
-    imageUrls: _mardiImgUrls.getRange(8, 14).toList(),
+    imageUrls: _imgUrls.getRange(8, 14).toList(),
   ),
   Place(
     id: 5,
     name: 'Forest Camp',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.3834813, lng: 83.8432467, alt: 2550.0),
-    imageUrls: _mardiImgUrls.getRange(12, 15).toList(),
+    imageUrls: _imgUrls.getRange(12, 15).toList(),
   ),
   Place(
     id: 6,
     name: 'Low Camp',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: true,
     coord: const Coord(lat: 28.4032260, lng: 83.8569582, alt: 2990.0),
-    imageUrls: _mardiImgUrls.getRange(5, 10).toList(),
+    imageUrls: _imgUrls.getRange(5, 10).toList(),
   ),
   Place(
     id: 7,
     name: 'Badal Danda',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: false,
     coord: const Coord(lat: 28.4153239, lng: 83.8546515, alt: 3200.0),
-    imageUrls: _mardiImgUrls.getRange(7, 13).toList(),
+    imageUrls: _imgUrls.getRange(7, 13).toList(),
   ),
   Place(
     id: 8,
     name: 'High Camp',
     description:
         "From High Camp (3580 m; some maps incorrectly mention 3900 m) you can climb up to Mardi Himal Base Camp in about 3-4 hours, which offers spectacular close up views of the entire Annapurna Range.",
-    lodges: lodges,
+    lodges: _lodges,
     isNetworkAvailable: false,
     coord: const Coord(lat: 28.4336758, lng: 83.8679981, alt: 3580.0),
-    imageUrls: _mardiImgUrls.getRange(12, 15).toList(),
+    imageUrls: _imgUrls.getRange(12, 15).toList(),
   ),
   Place(
     id: 9,
     name: 'Lower View Point',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: false,
     coord: const Coord(lat: 28.4486003, lng: 83.8770533, alt: 3900.0),
-    imageUrls: _mardiImgUrls.getRange(2, 6).toList(),
+    imageUrls: _imgUrls.getRange(2, 6).toList(),
   ),
   Place(
     id: 10,
     name: 'Upper View Point',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: false,
     coord: const Coord(lat: 28.4574767, lng: 83.8860762, alt: 4100.0),
-    imageUrls: _mardiImgUrls.getRange(6, 9).toList(),
+    imageUrls: _imgUrls.getRange(6, 9).toList(),
   ),
   Place(
     id: 11,
     name: 'Base Camp',
-    description: _mardiDesc,
-    lodges: lodges,
+    description: _desc,
+    lodges: _lodges,
     isNetworkAvailable: false,
     coord: const Coord(lat: 28.461787200, lng: 83.8996053, alt: 4288.0),
-    imageUrls: _mardiImgUrls.getRange(1, 7).toList(),
+    imageUrls: _imgUrls.getRange(1, 7).toList(),
   ),
 ];
 
-const List<Lodge> lodges = [
+final List<Lodge> _lodges = [
   Lodge(
     id: 1,
     name: 'Lekali Lodge',
     contactNumber: '9841123456',
-    coord: Coord(lat: 28.29914, lng: 83.82164),
+    coord: const Coord(lat: 28.29914, lng: 83.82164),
     rating: 3.5,
-    imageUrls: _mardiImgUrls,
+    imageUrls: _imgUrls.getRange(2, 5).toList(),
   ),
   Lodge(
     id: 2,
     name: 'Thakali Lodge',
     contactNumber: '9841127836',
-    coord: Coord(lat: 28.31495, lng: 83.83057),
+    coord: const Coord(lat: 28.31495, lng: 83.83057),
     rating: 4.5,
-    imageUrls: _mardiImgUrls,
+    imageUrls: _imgUrls.getRange(3, 8).toList(),
   ),
   Lodge(
     id: 3,
     name: 'Muktinath Lodge',
     contactNumber: '9841462456',
-    coord: Coord(lat: 28.30989, lng: 83.82946),
+    coord: const Coord(lat: 28.30989, lng: 83.82946),
     rating: 2.0,
-    imageUrls: _mardiImgUrls,
+    imageUrls: _imgUrls.getRange(7, 9).toList(),
   ),
   Lodge(
     id: 4,
     name: 'Atithi Lodge',
     contactNumber: '9861987575',
-    coord: Coord(lat: 28.30248, lng: 83.82234),
+    coord: const Coord(lat: 28.30248, lng: 83.82234),
     rating: 5.0,
-    imageUrls: _mardiImgUrls,
+    imageUrls: _imgUrls.getRange(9, 11).toList(),
   ),
 ];
 
-final Itinerary _mardiCreatedItinerary = Itinerary(
+final Itinerary _createdItinerary = Itinerary(
   name: 'Mardi Custom',
   days: '5',
   nights: '4',
   checkpoints: [
     Checkpoint(
-      place: _mardiPlaces[0],
+      place: _places[0],
       description: 'Breakfast',
       dateTime: DateTime.now(),
       day: 1,
     ),
     Checkpoint(
-      place: _mardiPlaces[2],
+      place: _places[2],
       description: 'Lunch',
       dateTime: DateTime.now(),
       day: 2,
     ),
     Checkpoint(
-      place: _mardiPlaces[5],
+      place: _places[5],
       description: 'Dinner',
       dateTime: DateTime.now(),
       day: 3,
     ),
     Checkpoint(
-      place: _mardiPlaces[7],
+      place: _places[7],
       description: 'Breakfast again',
       dateTime: DateTime.now(),
       day: 4,
     ),
     Checkpoint(
-      place: _mardiPlaces[9],
+      place: _places[9],
       description: 'Lunch again',
       dateTime: DateTime.now(),
       day: 4,
@@ -322,38 +227,38 @@ final Itinerary _mardiCreatedItinerary = Itinerary(
   ],
 );
 
-final List<Itinerary> _mardiItineraries = [
+final List<Itinerary> _itineraries = [
   Itinerary(
     name: 'Mardi Trek',
     days: '5',
     nights: '4',
     checkpoints: [
       Checkpoint(
-        place: _mardiPlaces[0],
+        place: _places[0],
         description: '',
         dateTime: null,
         day: 1,
       ),
       Checkpoint(
-        place: _mardiPlaces[2],
+        place: _places[2],
         description: '',
         dateTime: null,
         day: 2,
       ),
       Checkpoint(
-        place: _mardiPlaces[5],
+        place: _places[5],
         description: '',
         dateTime: null,
         day: 3,
       ),
       Checkpoint(
-        place: _mardiPlaces[7],
+        place: _places[7],
         description: '',
         dateTime: null,
         day: 4,
       ),
       Checkpoint(
-        place: _mardiPlaces[9],
+        place: _places[9],
         description: '',
         dateTime: null,
         day: 4,
@@ -366,19 +271,19 @@ final List<Itinerary> _mardiItineraries = [
     nights: '5',
     checkpoints: [
       Checkpoint(
-        place: _mardiPlaces[2],
+        place: _places[2],
         description: '',
         dateTime: null,
         day: 2,
       ),
       Checkpoint(
-        place: _mardiPlaces[5],
+        place: _places[5],
         description: '',
         dateTime: null,
         day: 3,
       ),
       Checkpoint(
-        place: _mardiPlaces[7],
+        place: _places[7],
         description: '',
         dateTime: null,
         day: 4,
@@ -387,32 +292,32 @@ final List<Itinerary> _mardiItineraries = [
   ),
 ];
 
-final List<Review> _mardiReviews = [
+final List<Review> _reviews = [
   Review(
     id: 1,
-    text: _mardiDesc,
+    text: _desc,
     rating: 5.0,
     user: User(
       id: 1,
       name: 'John Doe',
       email: 'john@gmail.com',
-      imageUrl: _mardiImgUrls[4],
+      imageUrl: _imgUrls[4],
     ),
   ),
   Review(
     id: 2,
-    text: _mardiDesc,
+    text: _desc,
     rating: 2.5,
     user: User(
       id: 2,
       name: 'Jane Doe',
       email: 'jane@gmail.com',
-      imageUrl: _mardiImgUrls[2],
+      imageUrl: _imgUrls[2],
     ),
   ),
 ];
 
-const List<Coord> _mardiRoutePoints = [
+const List<Coord> _route = [
   Coord(lat: 28.292345700, lng: 83.824106500, alt: 1737.2),
   Coord(lat: 28.292449600, lng: 83.824074300, alt: 1733.8),
   Coord(lat: 28.292539300, lng: 83.824125200, alt: 1731.7),

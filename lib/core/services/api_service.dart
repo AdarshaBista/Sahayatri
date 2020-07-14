@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'package:sahayatri/app/constants/mocks.dart';
+import 'package:sahayatri/app/mocks/mocks.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
 import 'package:sahayatri/core/models/coord.dart';

@@ -52,7 +52,7 @@ class NextCheckpointCard extends StatelessWidget {
     final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
 
     return CustomCard(
-      elevation: 8.0,
+      elevation: 6.0,
       child: Hero(
         tag: place.name,
         child: GradientContainer(

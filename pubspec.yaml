@@ -24,7 +24,7 @@ dependencies:
   flutter_local_notifications: ^1.4.4+1
 
   # State Management
-  equatable: ^1.2.0
+  equatable: ^1.2.2
   flutter_bloc: ^5.0.0
 
   # Database
@@ -32,11 +32,12 @@ dependencies:
 
   # Map
   location: ^3.0.2
-  maps_toolkit: ^1.1.0+1
-  flutter_map:
-    git:
-      url: git://github.com/johnpryan/flutter_map.git
-      ref: c590ab12edbf5b6fce30b13a42e974c0abadd506
+  flutter_map: ^0.10.1
+  maps_toolkit: ^1.1.0+2
+  # flutter_map:
+  #   git:
+  #     url: git://github.com/johnpryan/flutter_map.git
+  #     ref: c590ab12edbf5b6fce30b13a42e974c0abadd506
 
   # Widgets
   animator: ^2.0.1
@@ -58,14 +59,19 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.7.3
-  hive_generator:
-    git:
-      url: git://github.com/hivedb/hive.git
-      path: hive_generator
+  hive_generator: ^0.7.0+2
+    # git:
+    #   url: git://github.com/hivedb/hive.git
+    #   path: hive_generator
 
   lint: ^1.2.0
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.4
+
+
+dependency_overrides:
+  path: ^1.7.0
+  colection: 1.15.0-nullsafety
 
 
 flutter_icons:

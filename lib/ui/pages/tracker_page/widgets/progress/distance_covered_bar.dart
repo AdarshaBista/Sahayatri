@@ -13,36 +13,39 @@ class DistanceCoveredBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
 
-    return Column(
-      children: [
-        SliderTheme(
-          data: const SliderThemeData(
-            trackHeight: 8.0,
-            activeTrackColor: AppColors.primary,
-            inactiveTrackColor: AppColors.secondary,
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
-            thumbColor: AppColors.primary,
-            thumbShape: RoundSliderThumbShape(
-              elevation: 0.0,
-              pressedElevation: 0.0,
-              enabledThumbRadius: 5.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          SliderTheme(
+            data: const SliderThemeData(
+              trackHeight: 8.0,
+              activeTrackColor: AppColors.primary,
+              inactiveTrackColor: AppColors.secondary,
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
+              thumbColor: AppColors.primary,
+              thumbShape: RoundSliderThumbShape(
+                elevation: 0.0,
+                pressedElevation: 0.0,
+                enabledThumbRadius: 5.0,
+              ),
+            ),
+            child: Slider(
+              max: trackerUpdate.distanceRemaining + trackerUpdate.distanceCovered,
+              value: trackerUpdate.distanceCovered,
+              onChanged: (_) {},
             ),
           ),
-          child: Slider(
-            max: trackerUpdate.distanceRemaining + trackerUpdate.distanceCovered,
-            value: trackerUpdate.distanceCovered,
-            onChanged: (_) {},
+          const SizedBox(height: 8.0),
+          Row(
+            children: [
+              _buildStat(trackerUpdate.distanceCovered, 'covered', true),
+              const Spacer(),
+              _buildStat(trackerUpdate.distanceRemaining, 'remaining', false),
+            ],
           ),
-        ),
-        const SizedBox(height: 8.0),
-        Row(
-          children: [
-            _buildStat(trackerUpdate.distanceCovered, 'covered', true),
-            const Spacer(),
-            _buildStat(trackerUpdate.distanceRemaining, 'remaining', false),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 
