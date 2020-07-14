@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -40,6 +39,11 @@ class _RoutePageState extends State<RoutePage> {
       ),
       body: CustomMap(
         center: destination.midPointCoord,
+        children: [
+          _PlaceMarkers(
+            altitudeMarkerIndex: isSheetOpen ? altitudeDragCoordIndex : null,
+          )
+        ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
           lng: destination.minLong - 0.15,
@@ -48,7 +52,6 @@ class _RoutePageState extends State<RoutePage> {
           lat: destination.maxLat + 0.15,
           lng: destination.maxLong + 0.15,
         ),
-        markerLayerOptions: _buildMarkers(context),
       ),
     );
   }
@@ -79,32 +82,43 @@ class _RoutePageState extends State<RoutePage> {
       context.repository<DestinationNavService>().pop();
     }
   }
+}
 
-  MarkerLayerOptions _buildMarkers(BuildContext context) {
+class _PlaceMarkers extends StatelessWidget {
+  final int altitudeMarkerIndex;
+
+  const _PlaceMarkers({
+    @required this.altitudeMarkerIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final destination = context.bloc<DestinationBloc>().destination;
 
-    return MarkerLayerOptions(
-      markers: [
-        for (int i = 0; i < destination.places.length; ++i)
-          PlaceMarker(
-            place: destination.places[i],
-            color: AppColors.accentColors[i % AppColors.accentColors.length],
-          ),
-        if (isSheetOpen)
-          Marker(
-            width: 32.0,
-            height: 32.0,
-            point: destination.route[altitudeDragCoordIndex].toLatLng(),
-            anchorPos: AnchorPos.align(AnchorAlign.top),
-            builder: (context) {
-              return const Icon(
-                Icons.location_on,
-                size: 32.0,
-                color: AppColors.dark,
-              );
-            },
-          ),
-      ],
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          for (int i = 0; i < destination.places.length; ++i)
+            PlaceMarker(
+              place: destination.places[i],
+              color: AppColors.accentColors[i % AppColors.accentColors.length],
+            ),
+          if (altitudeMarkerIndex != null)
+            Marker(
+              width: 32.0,
+              height: 32.0,
+              point: destination.route[altitudeMarkerIndex].toLatLng(),
+              anchorPos: AnchorPos.align(AnchorAlign.top),
+              builder: (context) {
+                return const Icon(
+                  CommunityMaterialIcons.map_marker,
+                  size: 32.0,
+                  color: AppColors.secondary,
+                );
+              },
+            ),
+        ],
+      ),
     );
   }
 }

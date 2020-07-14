@@ -23,7 +23,7 @@ class PlacePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = Provider.of<Place>(context);
+    final place = Provider.of<Place>(context, listen: false);
 
     return Scaffold(
       appBar: CustomAppbar(title: place.name),

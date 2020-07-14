@@ -63,6 +63,7 @@ class Sahayatri extends StatelessWidget {
           prefsDao: context.repository<PrefsDao>(),
         )..add(const PrefsInitialized()),
         child: MaterialApp(
+          showPerformanceOverlay: true,
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,
           debugShowCheckedModeBanner: false,

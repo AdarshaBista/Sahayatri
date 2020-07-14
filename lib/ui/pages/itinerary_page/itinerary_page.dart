@@ -26,7 +26,7 @@ class ItineraryPage extends StatelessWidget {
   }
 
   Widget _buildPanel(BuildContext context, ScrollController controller) {
-    final itinerary = Provider.of<Itinerary>(context);
+    final itinerary = Provider.of<Itinerary>(context, listen: false);
 
     return SlideAnimator(
       begin: const Offset(0.0, 0.2),

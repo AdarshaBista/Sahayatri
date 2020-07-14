@@ -7,35 +7,45 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 
-class CheckpointMarker extends StatelessWidget {
+class CheckpointMarker extends Marker {
+  CheckpointMarker({
+    @required Checkpoint checkpoint,
+  })  : assert(checkpoint != null),
+        super(
+          width: 200,
+          height: 64,
+          anchorPos: AnchorPos.align(AnchorAlign.top),
+          point: checkpoint.place.coord.toLatLng(),
+          builder: (_) => Hero(
+            tag: checkpoint.place.name,
+            child: CustomCard(
+              elevation: 8.0,
+              color: AppColors.light,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _DateTimeInfo(checkpoint: checkpoint),
+                  Flexible(child: _PlaceInfo(checkpoint: checkpoint)),
+                ],
+              ),
+            ),
+          ),
+        );
+}
+
+class _DateTimeInfo extends StatelessWidget {
   final Checkpoint checkpoint;
 
-  const CheckpointMarker({
+  const _DateTimeInfo({
     @required this.checkpoint,
   }) : assert(checkpoint != null);
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: checkpoint.place.name,
-      child: CustomCard(
-        elevation: 8.0,
-        color: AppColors.light,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildDateTime(),
-            Flexible(child: _buildPlace(context)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDateTime() {
     return Container(
       width: 60.0,
       child: Stack(
@@ -67,8 +77,17 @@ class CheckpointMarker extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildPlace(BuildContext context) {
+class _PlaceInfo extends StatelessWidget {
+  final Checkpoint checkpoint;
+
+  const _PlaceInfo({
+    @required this.checkpoint,
+  }) : assert(checkpoint != null);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       child: GestureDetector(

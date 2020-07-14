@@ -11,7 +11,7 @@ class ItineraryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itinerary = Provider.of<Itinerary>(context);
+    final itinerary = Provider.of<Itinerary>(context, listen: false);
 
     return ListTile(
       dense: true,

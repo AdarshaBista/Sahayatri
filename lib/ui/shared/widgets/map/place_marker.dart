@@ -15,7 +15,9 @@ class PlaceMarker extends Marker {
   PlaceMarker({
     @required Color color,
     @required Place place,
-  }) : super(
+  })  : assert(color != null),
+        assert(place != null),
+        super(
           point: place.coord.toLatLng(),
           builder: (context) => GestureDetector(
             onTap: () {

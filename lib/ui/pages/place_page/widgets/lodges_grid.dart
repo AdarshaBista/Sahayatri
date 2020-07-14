@@ -11,7 +11,7 @@ class LodgesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lodges = Provider.of<Place>(context).lodges;
+    final lodges = Provider.of<Place>(context, listen: false).lodges;
 
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

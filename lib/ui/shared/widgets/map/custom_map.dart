@@ -21,9 +21,8 @@ class CustomMap extends StatelessWidget {
   final Coord swPanBoundary;
   final Coord nePanBoundary;
   final double initialZoom;
+  final List<Widget> children;
   final MapController mapController;
-  final CircleLayerOptions circleLayerOptions;
-  final MarkerLayerOptions markerLayerOptions;
   final Function(MapPosition, bool) onPositionChanged;
 
   const CustomMap({
@@ -34,9 +33,9 @@ class CustomMap extends StatelessWidget {
     this.userIndex = 0,
     this.initialZoom = 14.0,
     this.onPositionChanged,
-    this.circleLayerOptions,
-    this.markerLayerOptions,
+    this.children = const [],
   })  : assert(center != null),
+        assert(children != null),
         assert(userIndex != null);
 
   @override
@@ -51,75 +50,99 @@ class CustomMap extends StatelessWidget {
   }
 
   Widget _buildMap() {
+    return FlutterMap(
+      mapController: mapController,
+      children: [
+        const _TileLayer(),
+        _RouteLayer(userCoord: center, userIndex: userIndex),
+        ...children,
+      ],
+      options: MapOptions(
+        minZoom: 10.0,
+        maxZoom: 19.0,
+        zoom: initialZoom,
+        center: center.toLatLng(),
+        controller: mapController,
+        onPositionChanged: onPositionChanged,
+        swPanBoundary: swPanBoundary?.toLatLng() ??
+            Coord(
+              lat: center.lat - 0.3,
+              lng: center.lng - 0.3,
+            ).toLatLng(),
+        nePanBoundary: nePanBoundary?.toLatLng() ??
+            Coord(
+              lat: center.lat + 0.3,
+              lng: center.lng + 0.3,
+            ).toLatLng(),
+      ),
+    );
+  }
+}
+
+class _TileLayer extends StatelessWidget {
+  const _TileLayer();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<PrefsBloc, PrefsState>(
       builder: (context, state) {
-        return FlutterMap(
-          mapController: mapController,
-          options: MapOptions(
-            minZoom: 10.0,
-            maxZoom: 19.0,
-            zoom: initialZoom,
-            center: center.toLatLng(),
-            onPositionChanged: onPositionChanged,
-            swPanBoundary: swPanBoundary?.toLatLng() ??
-                Coord(
-                  lat: center.lat - 0.3,
-                  lng: center.lng - 0.3,
-                ).toLatLng(),
-            nePanBoundary: nePanBoundary?.toLatLng() ??
-                Coord(
-                  lat: center.lat + 0.3,
-                  lng: center.lng + 0.3,
-                ).toLatLng(),
+        final layerId = (state as PrefsLoaded).prefs.mapStyle;
+
+        return TileLayerWidget(
+          options: TileLayerOptions(
+            backgroundColor: AppColors.light,
+            tileProvider: Platform.isWindows
+                ? NetworkTileProvider()
+                : const CachedNetworkTileProvider(),
+            keepBuffer: 8,
+            tileSize: 512,
+            zoomOffset: -1,
+            tileFadeInDuration: 300,
+            overrideTilesWhenUrlChanges: true,
+            urlTemplate:
+                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.kMapBoxAccessToken}',
           ),
-          layers: [
-            _buildTiles((state as PrefsLoaded).prefs.mapStyle),
-            _buildRoute(context),
-            if (circleLayerOptions != null) circleLayerOptions,
-            if (markerLayerOptions != null) markerLayerOptions,
-          ],
         );
       },
     );
   }
+}
 
-  TileLayerOptions _buildTiles(String layerId) {
-    return TileLayerOptions(
-      tileProvider:
-          Platform.isWindows ? NetworkTileProvider() : const CachedNetworkTileProvider(),
-      backgroundColor: AppColors.light,
-      keepBuffer: 8,
-      tileSize: 512,
-      zoomOffset: -1,
-      tileFadeInDuration: 300,
-      overrideTilesWhenUrlChanges: true,
-      urlTemplate:
-          'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.kMapBoxAccessToken}',
-    );
-  }
+class _RouteLayer extends StatelessWidget {
+  final int userIndex;
+  final Coord userCoord;
 
-  PolylineLayerOptions _buildRoute(BuildContext context) {
+  const _RouteLayer({
+    @required this.userIndex,
+    @required this.userCoord,
+  })  : assert(userIndex != null),
+        assert(userCoord != null);
+
+  @override
+  Widget build(BuildContext context) {
     final route = context.bloc<DestinationBloc>().destination.route;
     final userPath = route.take(userIndex).toList();
     final remainingStartIndex = userIndex > 0 ? userIndex - 1 : 0;
     final remainingPath = route.getRange(remainingStartIndex, route.length).toList();
 
-    return PolylineLayerOptions(
-      polylines: [
-        Polyline(
-          strokeWidth: 6.0,
-          points: remainingPath.map((p) => p.toLatLng()).toList(),
-          gradientColors: AppColors.accentColors.take(4).toList(),
-        ),
-        Polyline(
-          strokeWidth: 6.0,
-          points: [
-            ...userPath.map((p) => p.toLatLng()).toList(),
-            center.toLatLng(),
-          ],
-          gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
-        ),
-      ],
+    return PolylineLayerWidget(
+      options: PolylineLayerOptions(
+        polylines: [
+          Polyline(
+            strokeWidth: 6.0,
+            points: remainingPath.map((p) => p.toLatLng()).toList(),
+            gradientColors: AppColors.accentColors.take(4).toList(),
+          ),
+          Polyline(
+            strokeWidth: 6.0,
+            points: [
+              ...userPath.map((p) => p.toLatLng()).toList(),
+              userCoord.toLatLng(),
+            ],
+            gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
+          ),
+        ],
+      ),
     );
   }
 }

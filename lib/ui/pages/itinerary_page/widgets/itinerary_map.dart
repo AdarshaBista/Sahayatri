@@ -13,31 +13,23 @@ class ItineraryMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itinerary = Provider.of<Itinerary>(context);
+    final itinerary = Provider.of<Itinerary>(context, listen: false);
     final places = itinerary.checkpoints.map((c) => c.place).toList();
     final center = places[places.length ~/ 2].coord;
 
     return CustomMap(
       center: center,
-      markerLayerOptions: _buildMarkers(context),
+      children: [_buildMarkers(context)],
     );
   }
 
-  MarkerLayerOptions _buildMarkers(BuildContext context) {
-    final checkpoints = Provider.of<Itinerary>(context).checkpoints;
+  Widget _buildMarkers(BuildContext context) {
+    final checkpoints = Provider.of<Itinerary>(context, listen: false).checkpoints;
 
-    return MarkerLayerOptions(
-      markers: checkpoints
-          .map(
-            (c) => Marker(
-              width: 200,
-              height: 64,
-              anchorPos: AnchorPos.align(AnchorAlign.top),
-              point: c.place.coord.toLatLng(),
-              builder: (_) => CheckpointMarker(checkpoint: c),
-            ),
-          )
-          .toList(),
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: checkpoints.map((c) => CheckpointMarker(checkpoint: c)).toList(),
+      ),
     );
   }
 }

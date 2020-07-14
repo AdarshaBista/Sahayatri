@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -13,6 +12,7 @@ import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
+import 'package:sahayatri/ui/pages/itinerary_page/widgets/checkpoint_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
 
 class TrackerMap extends StatefulWidget {
@@ -58,8 +58,10 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           initialZoom: 18.0,
           mapController: mapController,
           userIndex: trackerUpdate.userIndex,
-          markerLayerOptions: _buildMarkers(context, center),
-          circleLayerOptions: _buildAccuracyCircle(context, center),
+          children: const [
+            _AccuracyCircle(),
+            _MarkerLayer(),
+          ],
           onPositionChanged: (_, hasGesture) {
             if (hasGesture && isTracking) {
               setState(() {
@@ -83,41 +85,57 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
       ],
     );
   }
+}
 
-  MarkerLayerOptions _buildMarkers(BuildContext context, Coord center) {
-    final places = context.bloc<DestinationBloc>().destination.places;
+class _MarkerLayer extends StatelessWidget {
+  const _MarkerLayer();
 
-    return MarkerLayerOptions(
-      markers: [
-        for (int i = 0; i < places.length; ++i)
-          PlaceMarker(
-            place: places[i],
-            color: AppColors.accentColors[i % AppColors.accentColors.length],
-          ),
-        Marker(
-          width: 24.0,
-          height: 24.0,
-          point: center.toLatLng(),
-          builder: (context) => const UserMarker(),
-        ),
-      ],
+  @override
+  Widget build(BuildContext context) {
+    final destination = context.bloc<DestinationBloc>().destination;
+    final places = destination.places;
+    final checkpoints = destination.createdItinerary.checkpoints;
+    final checkpointPlaces = checkpoints.map((c) => c.place).toList();
+    final remainingPlaces = places.where((p) => !checkpointPlaces.contains(p)).toList();
+    final center = context.watch<TrackerUpdate>().userLocation.coord;
+
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          for (int i = 0; i < remainingPlaces.length; ++i)
+            PlaceMarker(
+              place: remainingPlaces[i],
+              color: AppColors.accentColors[i % AppColors.accentColors.length],
+            ),
+          for (int i = 0; i < checkpoints.length; ++i)
+            CheckpointMarker(checkpoint: checkpoints[i]),
+          UserMarker(point: center),
+        ],
+      ),
     );
   }
+}
 
-  CircleLayerOptions _buildAccuracyCircle(BuildContext context, Coord center) {
+class _AccuracyCircle extends StatelessWidget {
+  const _AccuracyCircle();
+
+  @override
+  Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
 
-    return CircleLayerOptions(
-      circles: [
-        CircleMarker(
-          point: center.toLatLng(),
-          borderStrokeWidth: 2.0,
-          color: AppColors.primaryDark.withOpacity(0.2),
-          borderColor: AppColors.primaryDark.withOpacity(0.5),
-          useRadiusInMeter: true,
-          radius: trackerUpdate.userLocation.accuracy,
-        ),
-      ],
+    return CircleLayerWidget(
+      options: CircleLayerOptions(
+        circles: [
+          CircleMarker(
+            useRadiusInMeter: true,
+            borderStrokeWidth: 2.0,
+            radius: trackerUpdate.userLocation.accuracy,
+            point: trackerUpdate.userLocation.coord.toLatLng(),
+            color: AppColors.primaryDark.withOpacity(0.2),
+            borderColor: AppColors.primaryDark.withOpacity(0.5),
+          ),
+        ],
+      ),
     );
   }
 }

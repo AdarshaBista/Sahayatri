@@ -12,7 +12,7 @@ class PlaceStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = Provider.of<Place>(context);
+    final place = Provider.of<Place>(context, listen: false);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
