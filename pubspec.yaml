@@ -72,10 +72,10 @@ dependency_overrides:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/icons/icon.png"
 
 flutter_native_splash:
-  image: assets/icon/splash.png
+  image: assets/icons/splash.png
   color: "36C7CB"
   android_disable_fullscreen: true
   
@@ -85,7 +85,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icon/
+    - assets/icons/
     - assets/images/home/
     - assets/images/mardi/
     - assets/images/indicators/

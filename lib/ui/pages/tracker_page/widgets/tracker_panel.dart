@@ -20,7 +20,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
 
   @override
   Widget build(BuildContext context) {
-    final margin = (1.0 - panelOpenPercent) * 12.0;
+    final margin = (1.0 - panelOpenPercent) * 16.0;
 
     return Scaffold(
       body: SlidingPanel(

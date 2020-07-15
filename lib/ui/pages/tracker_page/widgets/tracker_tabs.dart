@@ -17,26 +17,30 @@ class _TrackerTabsState extends State<TrackerTabs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        icons: const [
-          CommunityMaterialIcons.progress_clock,
-          CommunityMaterialIcons.cog_outline,
-        ],
-      ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const [
-          ProgressTab(),
-          SetupTab(),
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: IndexedStack(
+            index: _selectedIndex,
+            children: const [
+              ProgressTab(),
+              SetupTab(),
+            ],
+          ),
+        ),
+        BottomNavBar(
+          selectedIndex: _selectedIndex,
+          onItemSelected: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          icons: const [
+            CommunityMaterialIcons.progress_clock,
+            CommunityMaterialIcons.cog_outline,
+          ],
+        ),
+      ],
     );
   }
 }
