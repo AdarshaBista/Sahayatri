@@ -47,15 +47,20 @@ class AltitudeGraph extends StatelessWidget {
   LineChart _buildGraph() {
     const double vInterval = 1000.0;
     final double hInterval = altitudes.length / 4.0;
-    final double maxY = altitudes.reduce(math.max).toDouble();
+
     final List<double> xValues =
         List.generate(altitudes.length, (index) => index.toDouble()).toList();
 
+    final double maxY = altitudes.reduce(math.max).toDouble();
+    final double minY = altitudes.reduce(math.min).toDouble();
+    final double decreasedMinY = minY - (maxY - minY);
+    final double effectiveMinY = decreasedMinY > 0 ? decreasedMinY : minY;
+
     return LineChart(
       LineChartData(
-        minY: 0.0,
-        minX: 0.0,
+        minY: effectiveMinY,
         maxY: maxY,
+        minX: 0.0,
         maxX: xValues.length.toDouble(),
         borderData: FlBorderData(show: false),
         lineTouchData: _buildTouchData(),
@@ -125,7 +130,7 @@ class AltitudeGraph extends StatelessWidget {
         xValues.length,
         (index) => FlSpot(xValues[index], yValues[index]),
       ),
-      barWidth: 0,
+      barWidth: 1.0,
       isCurved: true,
       preventCurveOverShooting: true,
       isStrokeCapRound: true,
