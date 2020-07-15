@@ -21,7 +21,7 @@ class CheckpointDetailMarker extends Marker {
           anchorPos: AnchorPos.align(AnchorAlign.top),
           point: checkpoint.place.coord.toLatLng(),
           builder: (_) => Hero(
-            tag: checkpoint.place.name,
+            tag: checkpoint.place.id,
             child: CustomCard(
               elevation: 8.0,
               color: AppColors.light,

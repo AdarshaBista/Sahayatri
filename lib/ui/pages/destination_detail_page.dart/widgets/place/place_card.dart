@@ -41,7 +41,7 @@ class PlaceCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return Hero(
-      tag: place.name,
+      tag: place.id,
       child: GradientContainer(
         gradientColors: [
           Colors.transparent,

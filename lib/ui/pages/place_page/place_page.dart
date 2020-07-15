@@ -45,7 +45,7 @@ class PlacePage extends StatelessWidget {
 
   Widget _buildCarousel(Place place) {
     return Hero(
-      tag: place.name,
+      tag: place.id,
       child: Carousel(imageUrls: place.imageUrls),
     );
   }
