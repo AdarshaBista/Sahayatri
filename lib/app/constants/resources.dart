@@ -7,7 +7,7 @@ class AppConfig {
 }
 
 class Images {
-  static const String kSplash = 'assets/icon/splash.png';
+  static const String kSplash = 'assets/icons/splash.png';
   static const String kMarker = 'assets/images/indicators/marker.png';
   static const String kUserMarker = 'assets/images/indicators/user_marker.png';
   static const String kError = 'assets/images/indicators/error.png';

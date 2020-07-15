@@ -148,8 +148,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          for (int i = 0; i < checkpointPlaces.length; ++i)
-            CheckpointMarker(place: checkpointPlaces[i]),
+          for (final checkpoint in checkpoints) CheckpointMarker(checkpoint: checkpoint),
           for (int i = 0; i < remainingPlaces.length; ++i)
             PlaceMarker(
               place: remainingPlaces[i],

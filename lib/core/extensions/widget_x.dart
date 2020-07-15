@@ -14,6 +14,16 @@ extension WidgetX on Widget {
     );
   }
 
+  PersistentBottomSheetController openBottomSheet(BuildContext context) {
+    return showBottomSheet(
+      context: context,
+      elevation: 12.0,
+      clipBehavior: Clip.antiAlias,
+      backgroundColor: AppColors.light,
+      builder: (_) => this,
+    );
+  }
+
   void openModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -22,16 +32,6 @@ extension WidgetX on Widget {
       useRootNavigator: false,
       isScrollControlled: true,
       barrierColor: AppColors.barrier,
-      backgroundColor: AppColors.light,
-      builder: (_) => this,
-    );
-  }
-
-  PersistentBottomSheetController openBottomSheet(BuildContext context) {
-    return showBottomSheet(
-      context: context,
-      elevation: 12.0,
-      clipBehavior: Clip.antiAlias,
       backgroundColor: AppColors.light,
       builder: (_) => this,
     );

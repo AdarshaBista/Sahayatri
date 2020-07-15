@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/core/extensions/widget_x.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_details.dart';
 
 class CheckpointMarker extends Marker {
   CheckpointMarker({
-    @required Place place,
-  })  : assert(place != null),
+    @required Checkpoint checkpoint,
+  })  : assert(checkpoint != null),
         super(
           width: 32,
           height: 32,
-          point: place.coord.toLatLng(),
+          point: checkpoint.place.coord.toLatLng(),
           anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (context) => GestureDetector(
             onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPlacePageRoute,
-                    arguments: place,
-                  );
+              CheckpointDetails(checkpoint: checkpoint).openModalBottomSheet(context);
             },
             child: const ScaleAnimator(
               child: Icon(
-                CommunityMaterialIcons.map_marker,
+                CommunityMaterialIcons.map_marker_radius,
                 size: 32.0,
                 color: AppColors.secondary,
               ),
