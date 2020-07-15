@@ -75,10 +75,11 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
       initialZoom: 18.0,
       mapController: mapController,
       onPositionChanged: onPositionChanged,
-      children: [
-        _RouteLayer(userIndex: userIndex, userCoord: center),
-        const _AccuracyCircleLayer(),
-        const _MarkersLayer(),
+      children: const [
+        _RouteLayer(),
+        _AccuracyCircleLayer(),
+        _PlaceMarkersLayer(),
+        _UserMarkerLayer(),
       ],
     );
   }
@@ -99,8 +100,42 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 }
 
-class _MarkersLayer extends StatelessWidget {
-  const _MarkersLayer();
+class _RouteLayer extends StatelessWidget {
+  const _RouteLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    final trackerUpdate = context.watch<TrackerUpdate>();
+    final route = context.bloc<DestinationBloc>().destination.route;
+
+    final userPath = route.take(trackerUpdate.userIndex).toList();
+    final remainingIndex = trackerUpdate.userIndex == 0 ? 0 : trackerUpdate.userIndex - 1;
+    final remainingPath = route.getRange(remainingIndex, route.length).toList();
+
+    return PolylineLayerWidget(
+      options: PolylineLayerOptions(
+        polylines: [
+          Polyline(
+            strokeWidth: 6.0,
+            gradientColors: AppColors.accentColors.take(4).toList(),
+            points: remainingPath.map((p) => p.toLatLng()).toList(),
+          ),
+          Polyline(
+            strokeWidth: 6.0,
+            gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
+            points: [
+              ...userPath.map((p) => p.toLatLng()).toList(),
+              trackerUpdate.userLocation.coord.toLatLng(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PlaceMarkersLayer extends StatelessWidget {
+  const _PlaceMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
@@ -109,12 +144,10 @@ class _MarkersLayer extends StatelessWidget {
     final checkpoints = destination.createdItinerary.checkpoints;
     final checkpointPlaces = checkpoints.map((c) => c.place).toList();
     final remainingPlaces = places.where((p) => !checkpointPlaces.contains(p)).toList();
-    final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          UserMarker(point: userCoord),
           for (int i = 0; i < checkpointPlaces.length; ++i)
             CheckpointMarker(place: checkpointPlaces[i]),
           for (int i = 0; i < remainingPlaces.length; ++i)
@@ -123,6 +156,23 @@ class _MarkersLayer extends StatelessWidget {
               color: AppColors.accentColors[i % AppColors.accentColors.length],
             ),
         ],
+      ),
+    );
+  }
+}
+
+class _UserMarkerLayer extends StatelessWidget {
+  const _UserMarkerLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
+
+    return RepaintBoundary(
+      child: MarkerLayerWidget(
+        options: MarkerLayerOptions(
+          markers: [UserMarker(point: userCoord)],
+        ),
       ),
     );
   }
@@ -145,45 +195,6 @@ class _AccuracyCircleLayer extends StatelessWidget {
             point: trackerUpdate.userLocation.coord.toLatLng(),
             color: AppColors.primaryDark.withOpacity(0.2),
             borderColor: AppColors.primaryDark.withOpacity(0.5),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RouteLayer extends StatelessWidget {
-  final int userIndex;
-  final Coord userCoord;
-
-  const _RouteLayer({
-    @required this.userIndex,
-    @required this.userCoord,
-  })  : assert(userIndex != null),
-        assert(userCoord != null);
-
-  @override
-  Widget build(BuildContext context) {
-    final route = context.bloc<DestinationBloc>().destination.route;
-    final userPath = route.take(userIndex).toList();
-    final remainingStartIndex = userIndex > 0 ? userIndex - 1 : 0;
-    final remainingPath = route.getRange(remainingStartIndex, route.length).toList();
-
-    return PolylineLayerWidget(
-      options: PolylineLayerOptions(
-        polylines: [
-          Polyline(
-            strokeWidth: 6.0,
-            gradientColors: AppColors.accentColors.take(4).toList(),
-            points: remainingPath.map((p) => p.toLatLng()).toList(),
-          ),
-          Polyline(
-            strokeWidth: 6.0,
-            gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
-            points: [
-              ...userPath.map((p) => p.toLatLng()).toList(),
-              userCoord.toLatLng(),
-            ],
           ),
         ],
       ),

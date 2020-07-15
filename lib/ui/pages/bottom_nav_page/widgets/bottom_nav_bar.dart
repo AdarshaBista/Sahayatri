@@ -20,6 +20,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Container(
         width: double.infinity,
         height: 64.0,
