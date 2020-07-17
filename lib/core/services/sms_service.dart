@@ -48,6 +48,9 @@ class SmsService {
     contact ??= (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
 
+    // TODO: Remove this
+    _alert('$contact has been notified on your arrival at ${place.name}');
+
     final smsMessage = SmsMessage(contact, 'I have safely reached ${place.name}');
     smsMessage.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {

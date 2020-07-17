@@ -18,9 +18,9 @@ class CustomFormField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormField<T>(
-      autovalidate: true,
       validator: validator,
       initialValue: initialValue,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       builder: (field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

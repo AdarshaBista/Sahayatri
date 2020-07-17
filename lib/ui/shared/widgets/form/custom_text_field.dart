@@ -41,12 +41,12 @@ class CustomTextField extends StatelessWidget {
         const SizedBox(height: 8.0),
         TextFormField(
           maxLines: null,
-          autovalidate: true,
           validator: validator,
           onChanged: onChanged,
           initialValue: initialValue,
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: icon != null
               ? InputDecoration(
                   prefixIcon: Padding(
