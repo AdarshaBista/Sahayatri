@@ -30,7 +30,7 @@ class DurationField extends StatelessWidget {
       keyboardType: const TextInputType.numberWithOptions(),
       inputFormatters: [
         LengthLimitingTextInputFormatter(3),
-        WhitelistingTextInputFormatter.digitsOnly,
+        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
       ],
     );
   }

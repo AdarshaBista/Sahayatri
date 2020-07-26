@@ -64,8 +64,8 @@ class _ContactFormState extends State<ContactForm> {
         initialValue: (state as PrefsLoaded).prefs.contact,
         keyboardType: const TextInputType.numberWithOptions(),
         inputFormatters: [
-          WhitelistingTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(10),
+          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
         ],
       );
     });
