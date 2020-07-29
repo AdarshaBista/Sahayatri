@@ -296,7 +296,7 @@ final List<Review> _reviews = [
   Review(
     id: 1,
     text: _desc,
-    rating: 5.0,
+    rating: 4.0,
     user: User(
       id: 1,
       name: 'John Doe',
@@ -307,7 +307,7 @@ final List<Review> _reviews = [
   Review(
     id: 2,
     text: _desc,
-    rating: 2.5,
+    rating: 3,
     user: User(
       id: 2,
       name: 'Jane Doe',

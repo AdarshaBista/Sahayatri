@@ -26,7 +26,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
           content: const ContactForm(shouldPop: false),
         ),
         _buildStep(
-          title: 'Setup peer network',
+          title: 'Setup nearby network',
           index: 1,
           content: Container(),
         ),

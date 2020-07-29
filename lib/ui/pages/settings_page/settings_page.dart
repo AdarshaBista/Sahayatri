@@ -25,7 +25,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             SettingsCard(
               title: 'Close Contact',
-              subtitle: 'Setup close contact to notify them about your whereabouts',
+              subtitle: 'Setup close contact to notify them about your whereabouts.',
               icon: CommunityMaterialIcons.account_alert_outline,
               onTap: () => const Padding(
                 padding: EdgeInsets.all(20.0),
@@ -36,8 +36,8 @@ class SettingsPage extends StatelessWidget {
             ),
             const SizedBox(height: 12.0),
             SettingsCard(
-              title: 'Peer Network',
-              subtitle: 'Setup a peer network to remain connected with your friends',
+              title: 'Nearby Network',
+              subtitle: 'Setup a network to remain connected with your friends nearby.',
               icon: CommunityMaterialIcons.access_point_network,
               onTap: () {},
             ),

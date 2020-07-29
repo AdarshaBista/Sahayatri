@@ -20,6 +20,7 @@ class StarRatingBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = rating < 3.0 ? AppColors.secondary : AppColors.primary;
+
     return FadeAnimator(
       child: RatingBar(
         maxRating: 5.0,
@@ -31,13 +32,17 @@ class StarRatingBar extends StatelessWidget {
         itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,
-        itemBuilder: (_, index) => SlideAnimator(
-          begin: Offset(0.2 + index * 0.4, 0.0),
-          child: Icon(
-            Icons.star,
-            color: color,
-          ),
-        ),
+        itemBuilder: (_, index) {
+          final IconData iconData = index < rating ? Icons.star : Icons.star_border;
+
+          return SlideAnimator(
+            begin: Offset(0.2 + index * 0.4, 0.0),
+            child: Icon(
+              iconData,
+              color: color,
+            ),
+          );
+        },
       ),
     );
   }

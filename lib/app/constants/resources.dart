@@ -1,5 +1,6 @@
 class AppConfig {
   static const String kAppName = 'Sahayatri';
+  static const String kPackageName = 'com.adrsh.sahayatri';
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
   static const int kAnimatorDuration = 500;
