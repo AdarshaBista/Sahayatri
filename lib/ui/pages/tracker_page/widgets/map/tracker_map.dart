@@ -6,6 +6,7 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -24,12 +25,14 @@ class TrackerMap extends StatefulWidget {
 }
 
 class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateMixin {
+  double zoom;
   bool isTracking = true;
   MapAnimator mapAnimator;
   MapController mapController;
 
   @override
   void initState() {
+    zoom = 18.0;
     mapController = MapController();
     mapAnimator = MapAnimator(mapController: mapController, tickerProvider: this);
     super.initState();
@@ -42,8 +45,9 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 
   void onPositionChanged(MapPosition pos, bool hasGesture) {
-    if (hasGesture && isTracking) {
+    if (pos.zoom != zoom || (hasGesture && isTracking)) {
       setState(() {
+        zoom = pos.zoom;
         isTracking = false;
       });
     }
@@ -71,15 +75,14 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   Widget _buildMap(Coord center, int userIndex) {
     return CustomMap(
       center: center,
-      showRoute: false,
-      initialZoom: 18.0,
+      initialZoom: zoom,
       mapController: mapController,
       onPositionChanged: onPositionChanged,
-      children: const [
-        _RouteLayer(),
-        _AccuracyCircleLayer(),
-        _PlaceMarkersLayer(),
-        _UserMarkerLayer(),
+      children: [
+        _RouteLayer(zoom: zoom),
+        const _AccuracyCircleLayer(),
+        const _PlaceMarkersLayer(),
+        const _UserMarkerLayer(),
       ],
     );
   }
@@ -101,30 +104,26 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 }
 
 class _RouteLayer extends StatelessWidget {
-  const _RouteLayer();
+  final double zoom;
+
+  const _RouteLayer({
+    @required this.zoom,
+  }) : assert(zoom != null);
 
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
     final route = context.bloc<DestinationBloc>().destination.route;
-
     final userPath = route.take(trackerUpdate.userIndex).toList();
-    final remainingIndex = trackerUpdate.userIndex == 0 ? 0 : trackerUpdate.userIndex - 1;
-    final remainingPath = route.getRange(remainingIndex, route.length).toList();
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(
         polylines: [
           Polyline(
             strokeWidth: 6.0,
-            gradientColors: AppColors.accentColors.take(4).toList(),
-            points: remainingPath.map((p) => p.toLatLng()).toList(),
-          ),
-          Polyline(
-            strokeWidth: 6.0,
             gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
             points: [
-              ...userPath.map((p) => p.toLatLng()).toList(),
+              ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
               trackerUpdate.userLocation.coord.toLatLng(),
             ],
           ),

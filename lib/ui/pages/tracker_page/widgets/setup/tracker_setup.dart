@@ -8,6 +8,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
 
 class TrackerSetup extends StatefulWidget {
   const TrackerSetup();
@@ -28,7 +29,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
         _buildStep(
           title: 'Setup nearby network',
           index: 1,
-          content: Container(),
+          content: const NearbyForm(),
         ),
       ];
 

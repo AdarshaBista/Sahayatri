@@ -1,11 +1,11 @@
-import 'dart:math' as math;
-
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+
+import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 class Destination {
   final int id;
@@ -28,10 +28,10 @@ class Destination {
   Place get endingPlace => places.last;
 
   Coord get midPointCoord => route[route.length ~/ 2];
-  double get minLat => route.map((c) => c.lat).reduce(math.min);
-  double get maxLat => route.map((c) => c.lat).reduce(math.max);
-  double get minLong => route.map((c) => c.lng).reduce(math.min);
-  double get maxLong => route.map((c) => c.lng).reduce(math.max);
+  double get minLat => route.minLat;
+  double get maxLat => route.maxLat;
+  double get minLong => route.minLong;
+  double get maxLong => route.maxLong;
   double get rating {
     if (reviews.isEmpty) return 0.0;
     return (reviews.map((r) => r.rating).reduce((e, v) => e + v)) / reviews.length;

@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/api_keys.dart';
+import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
@@ -15,8 +17,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/close_icon.dart';
 
-class CustomMap extends StatelessWidget {
-  final bool showRoute;
+class CustomMap extends StatefulWidget {
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
@@ -30,13 +31,24 @@ class CustomMap extends StatelessWidget {
     this.mapController,
     this.swPanBoundary,
     this.nePanBoundary,
-    this.showRoute = true,
-    this.initialZoom = 14.0,
     this.onPositionChanged,
     this.children = const [],
+    this.initialZoom = MapConfig.kDefaultZoom,
   })  : assert(center != null),
-        assert(children != null),
-        assert(showRoute != null);
+        assert(children != null);
+
+  @override
+  _CustomMapState createState() => _CustomMapState();
+}
+
+class _CustomMapState extends State<CustomMap> {
+  double zoom;
+
+  @override
+  void initState() {
+    super.initState();
+    zoom = widget.initialZoom;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,30 +61,41 @@ class CustomMap extends StatelessWidget {
     );
   }
 
+  void updateRouteAccuracy(MapPosition pos, bool hasGesture) {
+    if (widget.onPositionChanged != null) {
+      widget.onPositionChanged(pos, hasGesture);
+    }
+    if (pos.zoom != zoom) {
+      setState(() {
+        zoom = pos.zoom;
+      });
+    }
+  }
+
   Widget _buildMap() {
     return FlutterMap(
-      mapController: mapController,
+      mapController: widget.mapController,
       children: [
         const _TileLayer(),
-        if (showRoute) const _RouteLayer(),
-        ...children,
+        _RouteLayer(zoom: zoom),
+        ...widget.children,
       ],
       options: MapOptions(
-        minZoom: 10.0,
-        maxZoom: 19.0,
-        zoom: initialZoom,
-        center: center.toLatLng(),
-        controller: mapController,
-        onPositionChanged: onPositionChanged,
-        swPanBoundary: swPanBoundary?.toLatLng() ??
+        zoom: widget.initialZoom,
+        minZoom: MapConfig.kMinZoom,
+        maxZoom: MapConfig.kMaxZoom,
+        center: widget.center.toLatLng(),
+        controller: widget.mapController,
+        onPositionChanged: updateRouteAccuracy,
+        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
             Coord(
-              lat: center.lat - 0.3,
-              lng: center.lng - 0.3,
+              lat: widget.center.lat - 0.3,
+              lng: widget.center.lng - 0.3,
             ).toLatLng(),
-        nePanBoundary: nePanBoundary?.toLatLng() ??
+        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
             Coord(
-              lat: center.lat + 0.3,
-              lng: center.lng + 0.3,
+              lat: widget.center.lat + 0.3,
+              lng: widget.center.lng + 0.3,
             ).toLatLng(),
       ),
     );
@@ -109,7 +132,11 @@ class _TileLayer extends StatelessWidget {
 }
 
 class _RouteLayer extends StatelessWidget {
-  const _RouteLayer();
+  final double zoom;
+
+  const _RouteLayer({
+    @required this.zoom,
+  }) : assert(zoom != null);
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +146,9 @@ class _RouteLayer extends StatelessWidget {
       options: PolylineLayerOptions(
         polylines: [
           Polyline(
-            strokeWidth: 6.0,
-            points: route.map((p) => p.toLatLng()).toList(),
+            strokeWidth: 5.0,
             gradientColors: AppColors.accentColors.take(4).toList(),
+            points: route.simplify(zoom).map((c) => c.toLatLng()).toList(),
           ),
         ],
       ),

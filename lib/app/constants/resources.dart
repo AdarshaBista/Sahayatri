@@ -19,6 +19,14 @@ class Images {
   static const String kLocationError = 'assets/images/indicators/location_error.png';
 }
 
+class MapConfig {
+  static const double kMinZoom = 10.0;
+  static const double kMaxZoom = 19.0;
+  static const double kDefaultZoom = 14.0;
+  static const int kMaxRouteAccuracy = 1;
+  static const int kMinRouteAccuracy = 15;
+}
+
 class MapStyles {
   static const String kDark = 'mapbox/dark-v10';
   static const String kLight = 'mapbox/light-v10';

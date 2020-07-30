@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
 
 class SetupTab extends StatelessWidget {
   const SetupTab();
@@ -10,10 +11,10 @@ class SetupTab extends StatelessWidget {
     return ListView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      children: [
-        const ContactForm(shouldPop: false),
-        const Divider(height: 16.0),
-        Container(),
+      children: const [
+        ContactForm(shouldPop: false),
+        Divider(height: 16.0),
+        NearbyForm(),
       ],
     );
   }
