@@ -16,19 +16,19 @@ dependencies:
   dio: ^3.0.9
   intl: ^0.16.1
   path_provider: ^1.6.11
-  device_preview: ^0.4.4
+  device_preview: ^0.4.7
   form_field_validator: ^1.0.1
 
   # Notification
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^1.4.4+1
+  flutter_local_notifications: ^1.4.4+2
 
   # State Management
-  equatable: ^1.2.2
+  equatable: ^1.2.3
   flutter_bloc: ^6.0.1
 
   # Database
-  hive: ^1.4.1+1
+  hive: ^1.4.2
 
   # Map
   location: ^3.0.2
@@ -37,7 +37,7 @@ dependencies:
 
   # Widgets
   animator: ^2.0.1
-  fl_chart: ^0.10.1
+  fl_chart: ^0.11.0
   photo_view: ^0.9.2
   flip_card: ^0.4.4
   timeline_tile: ^0.1.2
@@ -54,19 +54,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^1.7.3
-  hive_generator:
-    git:
-      url: git://github.com/hivedb/hive.git
-      path: hive_generator
-
   lint: ^1.2.0
+  build_runner: ^1.7.3
+  hive_generator: ^0.7.1
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.4
-
-
-dependency_overrides:
-  collection: ^1.15.0-nnbd
 
 
 flutter_icons:

@@ -25,7 +25,7 @@ class CheckpointMarker extends Marker {
             },
             child: const ScaleAnimator(
               child: Icon(
-                CommunityMaterialIcons.map_marker_radius,
+                CommunityMaterialIcons.map_marker,
                 size: 32.0,
                 color: AppColors.secondary,
               ),

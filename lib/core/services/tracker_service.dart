@@ -4,6 +4,8 @@ import 'dart:math' as math;
 import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:sahayatri/app/constants/resources.dart';
+
 import 'package:sahayatri/core/utils/geo_utils.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -139,7 +141,7 @@ class TrackerService {
   /// Check if user is near the trail.
   /// Tracking is only started if this returns true.
   bool isNearTrail(Coord userCoord, List<Coord> route) {
-    return GeoUtils.isOnPath(userCoord, route);
+    return GeoUtils.isOnPath(userCoord, route, Distances.kMinNearbyDistance * 2.0);
   }
 
   /// Time since tracking started.
