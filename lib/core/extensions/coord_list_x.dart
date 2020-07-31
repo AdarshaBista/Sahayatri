@@ -4,6 +4,8 @@ import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
+import 'package:sahayatri/core/utils/math_utls.dart';
+
 extension CoordListX on List<Coord> {
   double get minLat => map((c) => c.lat).reduce(math.min);
   double get maxLat => map((c) => c.lat).reduce(math.max);
@@ -11,14 +13,23 @@ extension CoordListX on List<Coord> {
   double get maxLong => map((c) => c.lng).reduce(math.max);
 
   List<Coord> simplify(double zoom) {
-    if (zoom > 16.0) return this;
+    if (zoom > MapConfig.kRouteAccuracyZoomThreshold) return this;
 
-    const double slope = (MapConfig.kMinRouteAccuracy - MapConfig.kMaxRouteAccuracy) /
-        (MapConfig.kMaxZoom - MapConfig.kMinZoom);
-    final int output =
-        (MapConfig.kMaxRouteAccuracy + slope * (zoom - MapConfig.kMinZoom)).toInt();
-    final int accuracy =
-        (MapConfig.kMinRouteAccuracy + MapConfig.kMaxRouteAccuracy) - output;
+    final double scaledZoom = MathUtils.mapRange(
+      zoom,
+      MapConfig.kMinZoom,
+      MapConfig.kMaxZoom,
+      MapConfig.kRouteAccuracyZoomThreshold,
+      MapConfig.kMaxZoom,
+    );
+
+    final int accuracy = MathUtils.mapRangeInverse(
+      scaledZoom,
+      MapConfig.kRouteAccuracyZoomThreshold,
+      MapConfig.kMaxZoom,
+      MapConfig.kMaxRouteAccuracy.toDouble(),
+      MapConfig.kMinRouteAccuracy.toDouble(),
+    ).toInt();
 
     return where((c) => (indexOf(c) + 1) % accuracy == 0).toList();
   }

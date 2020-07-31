@@ -25,6 +25,7 @@ class MapConfig {
   static const double kDefaultZoom = 14.0;
   static const int kMaxRouteAccuracy = 1;
   static const int kMinRouteAccuracy = 15;
+  static const double kRouteAccuracyZoomThreshold = 16.0;
 }
 
 class MapStyles {
