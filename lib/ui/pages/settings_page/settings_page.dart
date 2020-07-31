@@ -4,6 +4,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/pages/settings_page/widgets/settings_card.dart';
 
@@ -29,9 +30,7 @@ class SettingsPage extends StatelessWidget {
               icon: CommunityMaterialIcons.account_alert_outline,
               onTap: () => const Padding(
                 padding: EdgeInsets.all(20.0),
-                child: ContactForm(
-                  shouldPop: true,
-                ),
+                child: ContactForm(shouldPop: true),
               ).openModalBottomSheet(context),
             ),
             const SizedBox(height: 12.0),
@@ -39,7 +38,10 @@ class SettingsPage extends StatelessWidget {
               title: 'Nearby Network',
               subtitle: 'Setup a network to remain connected with your friends nearby.',
               icon: CommunityMaterialIcons.access_point_network,
-              onTap: () {},
+              onTap: () => const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: NearbyForm(),
+              ).openModalBottomSheet(context),
             ),
           ],
         ),

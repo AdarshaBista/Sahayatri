@@ -10,7 +10,7 @@ class SetupTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       children: const [
         ContactForm(shouldPop: false),
         Divider(height: 16.0),
