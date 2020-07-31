@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:loading_indicator_view/loading_indicator_view.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
 class DownloadingIndicator extends StatelessWidget {
@@ -20,8 +20,13 @@ class DownloadingIndicator extends StatelessWidget {
       title: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          BallRotateIndicator(
-            color: AppColors.primary,
+          SizedBox(
+            width: 32.0,
+            height: 32.0,
+            child: LoadingIndicator(
+              color: AppColors.primary,
+              indicatorType: Indicator.ballRotateChase,
+            ),
           ),
           const SizedBox(height: 32.0),
           Text(

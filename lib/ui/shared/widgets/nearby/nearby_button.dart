@@ -20,19 +20,16 @@ class NearbyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 16.0),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: ColumnButton(
-          label: label,
-          icon: icon,
-          onTap: () {},
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 16.0),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: ColumnButton(
+        label: label,
+        icon: icon,
+        onTap: onTap,
       ),
     );
   }

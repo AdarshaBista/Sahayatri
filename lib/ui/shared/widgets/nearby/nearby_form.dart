@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/nearby_status.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/nearby_actions.dart';
 
 class NearbyForm extends StatelessWidget {
   const NearbyForm();
@@ -27,27 +30,39 @@ class NearbyForm extends StatelessWidget {
                 style: AppTextStyles.small.bold,
               ),
               const SizedBox(height: 12.0),
-              Row(
-                children: [
-                  NearbyButton(
-                    label: 'Host',
-                    color: Colors.lightBlue,
-                    icon: CommunityMaterialIcons.circle_double,
-                    onTap: () {},
-                  ),
-                  const SizedBox(width: 12.0),
-                  NearbyButton(
-                    label: 'Join',
-                    color: Colors.green,
-                    icon: CommunityMaterialIcons.account_search_outline,
-                    onTap: () {},
-                  ),
-                ],
-              ),
+              _buildBody(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildBody() {
+    return BlocConsumer<NearbyBloc, NearbyState>(
+      listener: (context, state) {
+        if (state is NearbyError) _showSnackBar(context, state.message);
+      },
+      builder: (context, state) {
+        if (state is NearbyInProgress) {
+          return NearbyStatus(connected: state.connected);
+        } else {
+          return const NearbyActions();
+        }
+      },
+    );
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    Scaffold.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppTextStyles.small.light,
+          ),
+        ),
+      );
   }
 }

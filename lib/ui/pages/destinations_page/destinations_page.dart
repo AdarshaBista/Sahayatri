@@ -5,9 +5,9 @@ import 'package:sahayatri/blocs/destinations_bloc/destinations_bloc.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:sahayatri/ui/shared/widgets/search_box.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/loading_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destinations_page/widgets/destinations_list.dart';
 
 class DestinationsPage extends StatefulWidget {
@@ -86,7 +86,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
             if (state is DestinationsError) {
               return ErrorIndicator(message: state.message);
             } else if (state is DestinationsLoading) {
-              return const LoadingIndicator();
+              return const BusyIndicator();
             } else if (state is DestinationsSuccess) {
               return DestinationsList(destinations: state.destinations);
             } else {

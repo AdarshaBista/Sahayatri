@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:loading_indicator_view/loading_indicator_view.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView();
@@ -22,7 +22,10 @@ class SplashView extends StatelessWidget {
               height: 160.0,
             ),
             const SizedBox(height: 32.0),
-            BallRotateIndicator(),
+            LoadingIndicator(
+              color: AppColors.primary,
+              indicatorType: Indicator.ballPulse,
+            ),
           ],
         ),
       ),
