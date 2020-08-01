@@ -12,9 +12,9 @@ class SetupTab extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       children: const [
-        ContactForm(shouldPop: false),
+        ContactForm(isOnSettings: false),
         Divider(height: 16.0),
-        NearbyForm(),
+        NearbyForm(isOnSettings: false),
       ],
     );
   }

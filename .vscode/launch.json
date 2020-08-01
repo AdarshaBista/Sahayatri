@@ -1,13 +1,32 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
+            "name": "Windows",
+            "type": "dart",
             "request": "launch",
-            "type": "dart"
+            "deviceId": "windows"
+        },
+        {
+            "name": "Mi 4",
+            "type": "dart",
+            "request": "launch",
+            "deviceId": "d92302ea"
+        },
+        {
+            "name": "OnePlus 3T",
+            "type": "dart",
+            "request": "launch",
+            "deviceId": "3ec2a0ea"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All Phones",
+            "configurations": [
+                "Mi 4",
+                "OnePlus 3T"
+            ],
         }
     ]
 }

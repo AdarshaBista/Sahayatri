@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+
+import 'package:sahayatri/core/models/nearby_device.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class ConnectedList extends StatelessWidget {
-  final List<String> connected;
-
-  const ConnectedList({
-    @required this.connected,
-  }) : assert(connected != null);
+  const ConnectedList();
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<NearbyBloc, NearbyState>(
+      builder: (context, state) {
+        return (state as NearbyInProgress).connected.isEmpty
+            ? Text(
+                'No devices found yet.',
+                style: AppTextStyles.small.secondary,
+              )
+            : _buildList((state as NearbyInProgress).connected);
+      },
+    );
+  }
+
+  Widget _buildList(List<NearbyDevice> connected) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -20,7 +34,7 @@ class ConnectedList extends StatelessWidget {
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            connected[index],
+            connected[index].name,
             style: AppTextStyles.medium,
           ),
           leading: CircleAvatar(

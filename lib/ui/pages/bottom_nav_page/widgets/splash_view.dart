@@ -22,9 +22,13 @@ class SplashView extends StatelessWidget {
               height: 160.0,
             ),
             const SizedBox(height: 32.0),
-            LoadingIndicator(
-              color: AppColors.primary,
-              indicatorType: Indicator.ballPulse,
+            SizedBox(
+              width: 32.0,
+              height: 32.0,
+              child: LoadingIndicator(
+                color: AppColors.light,
+                indicatorType: Indicator.ballPulse,
+              ),
             ),
           ],
         ),

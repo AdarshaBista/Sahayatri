@@ -9,9 +9,11 @@ import 'package:sahayatri/app/database/weather_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
+import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
@@ -58,10 +60,19 @@ class Sahayatri extends StatelessWidget {
           ),
         ),
       ],
-      child: BlocProvider<PrefsBloc>(
-        create: (_) => PrefsBloc(
-          prefsDao: context.repository<PrefsDao>(),
-        )..add(const PrefsInitialized()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<PrefsBloc>(
+            create: (context) => PrefsBloc(
+              prefsDao: context.repository<PrefsDao>(),
+            )..add(const PrefsInitialized()),
+          ),
+          BlocProvider<NearbyBloc>(
+            create: (context) => NearbyBloc(
+              nearbyService: context.repository<NearbyService>(),
+            ),
+          ),
+        ],
         child: MaterialApp(
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.of(context).locale,

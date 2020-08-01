@@ -32,6 +32,7 @@ class ColumnButton extends StatelessWidget {
             const SizedBox(height: 4.0),
             Text(
               label,
+              textAlign: TextAlign.center,
               style: AppTextStyles.extraSmall.bold,
             ),
           ],

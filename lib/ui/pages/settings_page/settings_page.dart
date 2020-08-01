@@ -30,7 +30,7 @@ class SettingsPage extends StatelessWidget {
               icon: CommunityMaterialIcons.account_alert_outline,
               onTap: () => const Padding(
                 padding: EdgeInsets.all(20.0),
-                child: ContactForm(shouldPop: true),
+                child: ContactForm(isOnSettings: true),
               ).openModalBottomSheet(context),
             ),
             const SizedBox(height: 12.0),
@@ -39,8 +39,8 @@ class SettingsPage extends StatelessWidget {
               subtitle: 'Setup a network to remain connected with your friends nearby.',
               icon: CommunityMaterialIcons.access_point_network,
               onTap: () => const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: NearbyForm(),
+                padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                child: NearbyForm(isOnSettings: true),
               ).openModalBottomSheet(context),
             ),
           ],

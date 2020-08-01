@@ -12,11 +12,11 @@ import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
 
 class ContactForm extends StatefulWidget {
-  final bool shouldPop;
+  final bool isOnSettings;
 
   const ContactForm({
-    @required this.shouldPop,
-  }) : assert(shouldPop != null);
+    @required this.isOnSettings,
+  }) : assert(isOnSettings != null);
 
   @override
   _ContactFormState createState() => _ContactFormState();
@@ -81,7 +81,7 @@ class _ContactFormState extends State<ContactForm> {
         if (!_formKey.currentState.validate()) return;
 
         context.bloc<PrefsBloc>().add(ContactSaved(contact: contact));
-        if (widget.shouldPop) {
+        if (widget.isOnSettings) {
           Navigator.of(context).pop();
         } else {
           _showSavedSnackBar(context);
