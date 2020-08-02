@@ -14,6 +14,7 @@ import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
@@ -173,7 +174,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
       child: MarkerLayerWidget(
         options: MarkerLayerOptions(
           markers: [
-            ...devices.map((d) => UserMarker(point: d.userLocation.coord)).toList(),
+            ...devices.map((d) => DeviceMarker(context, device: d)).toList(),
             UserMarker(point: userCoord),
           ],
         ),
