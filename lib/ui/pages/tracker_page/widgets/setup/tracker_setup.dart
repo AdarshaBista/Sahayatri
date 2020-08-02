@@ -40,12 +40,15 @@ class _TrackerSetupState extends State<TrackerSetup> {
       floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: FadeAnimator(
-        child: Stepper(
-          steps: steps,
-          onStepTapped: (index) => setState(() => currentStep = index),
-          currentStep: currentStep,
-          physics: const BouncingScrollPhysics(),
-          controlsBuilder: (_, {onStepCancel, onStepContinue}) => const Offstage(),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 72.0),
+          child: Stepper(
+            steps: steps,
+            onStepTapped: (index) => setState(() => currentStep = index),
+            currentStep: currentStep,
+            physics: const BouncingScrollPhysics(),
+            controlsBuilder: (_, {onStepCancel, onStepContinue}) => const Offstage(),
+          ),
         ),
       ),
     );

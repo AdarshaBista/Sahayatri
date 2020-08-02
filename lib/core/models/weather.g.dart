@@ -8,13 +8,13 @@ part of 'weather.dart';
 
 class WeatherAdapter extends TypeAdapter<Weather> {
   @override
-  final typeId = 1;
+  final int typeId = 1;
 
   @override
   Weather read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Weather(
       date: fields[0] as DateTime,

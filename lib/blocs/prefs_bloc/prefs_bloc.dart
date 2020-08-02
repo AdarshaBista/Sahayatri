@@ -48,5 +48,12 @@ class PrefsBloc extends Bloc<PrefsEvent, PrefsState> {
       prefsDao.upsert(newPrefs);
       yield PrefsLoaded(prefs: newPrefs);
     }
+
+    if (event is DeviceNameSaved) {
+      final newPrefs =
+          (state as PrefsLoaded).prefs.copyWith(deviceName: event.deviceName);
+      prefsDao.upsert(newPrefs);
+      yield PrefsLoaded(prefs: newPrefs);
+    }
   }
 }

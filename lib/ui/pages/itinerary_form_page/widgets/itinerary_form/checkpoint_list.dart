@@ -34,7 +34,6 @@ class CheckpointList extends StatelessWidget {
           validator: FormValidators.checkpoints(),
           builder: (field) => _buildAddCheckpointButton(context),
         ),
-        const Divider(height: 24.0),
         ItineraryTimeline(
           isNested: true,
           isEditable: true,
@@ -47,8 +46,8 @@ class CheckpointList extends StatelessWidget {
   Widget _buildAddCheckpointButton(BuildContext context) {
     return CustomButton(
       label: 'Add a Checkpoint',
-      outlineOnly: true,
       color: AppColors.dark,
+      backgroundColor: AppColors.primary.withOpacity(0.4),
       iconData: CommunityMaterialIcons.map_marker_check,
       onTap: () {
         FocusScope.of(context).unfocus();

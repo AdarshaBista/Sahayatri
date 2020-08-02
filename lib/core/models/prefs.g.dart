@@ -8,28 +8,31 @@ part of 'prefs.dart';
 
 class PrefsAdapter extends TypeAdapter<Prefs> {
   @override
-  final typeId = 0;
+  final int typeId = 0;
 
   @override
   Prefs read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Prefs(
       contact: fields[0] as String,
       mapStyle: fields[1] as String,
+      deviceName: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Prefs obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.contact)
       ..writeByte(1)
-      ..write(obj.mapStyle);
+      ..write(obj.mapStyle)
+      ..writeByte(2)
+      ..write(obj.deviceName);
   }
 
   @override

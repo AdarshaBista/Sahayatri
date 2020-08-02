@@ -58,10 +58,14 @@ dev_dependencies:
     sdk: flutter
 
   lint: ^1.2.0
-  build_runner: ^1.7.3
+  build_runner: ^1.10.2
   hive_generator: ^0.7.1
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.4
+
+
+dependency_overrides:
+  build_resolvers: '1.3.10'
 
 
 flutter_icons:

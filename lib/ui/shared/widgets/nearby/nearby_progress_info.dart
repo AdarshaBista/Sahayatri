@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/scan_indicator.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_actions.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/connected_list.dart';
 
@@ -42,15 +42,7 @@ class NearbyProgressInfo extends StatelessWidget {
     return BlocBuilder<NearbyBloc, NearbyState>(
       builder: (context, state) {
         return (state as NearbyInProgress).isScanning
-            ? Container(
-                width: 150.0,
-                height: 150.0,
-                padding: const EdgeInsets.all(16.0),
-                child: LoadingIndicator(
-                  color: AppColors.primary,
-                  indicatorType: Indicator.ballScaleMultiple,
-                ),
-              )
+            ? const ScanIndicator()
             : const Offstage();
       },
     );

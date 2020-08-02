@@ -13,7 +13,7 @@ class SetupTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       children: const [
         ContactForm(isOnSettings: false),
-        Divider(height: 16.0),
+        Divider(height: 8.0),
         NearbyForm(isOnSettings: false),
       ],
     );

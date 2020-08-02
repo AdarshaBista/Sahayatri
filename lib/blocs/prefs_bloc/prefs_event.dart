@@ -32,3 +32,14 @@ class ContactSaved extends PrefsEvent {
   @override
   List<Object> get props => [contact];
 }
+
+class DeviceNameSaved extends PrefsEvent {
+  final String deviceName;
+
+  const DeviceNameSaved({
+    @required this.deviceName,
+  }) : assert(deviceName != null);
+
+  @override
+  List<Object> get props => [deviceName];
+}

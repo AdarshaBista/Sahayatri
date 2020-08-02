@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
+import 'package:sahayatri/ui/shared/widgets/message_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 
@@ -53,7 +57,15 @@ class NearbyActions extends StatelessWidget {
     return CustomButton(
       label: 'Start Nearby',
       iconData: CommunityMaterialIcons.circle_double,
-      onTap: () => context.bloc<NearbyBloc>().add(const NearbyStarted()),
+      onTap: () {
+        final name = (context.bloc<PrefsBloc>().state as PrefsLoaded).prefs.deviceName;
+        if (name.isNotEmpty) {
+          context.bloc<NearbyBloc>().add(NearbyStarted(name: name));
+        } else {
+          const MessageDialog(message: 'Please set your device name first.')
+              .openDialog(context);
+        }
+      },
     );
   }
 }

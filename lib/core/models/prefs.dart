@@ -12,19 +12,26 @@ class Prefs {
   @HiveField(1)
   final String mapStyle;
 
+  @HiveField(2)
+  final String deviceName;
+
   const Prefs({
     this.contact = '',
     this.mapStyle = MapStyles.kOutdoors,
+    this.deviceName = '',
   })  : assert(contact != null),
-        assert(mapStyle != null);
+        assert(mapStyle != null),
+        assert(deviceName != null);
 
   Prefs copyWith({
     String contact,
     String mapStyle,
+    String deviceName,
   }) {
     return Prefs(
       contact: contact ?? this.contact,
       mapStyle: mapStyle ?? this.mapStyle,
+      deviceName: deviceName ?? this.deviceName,
     );
   }
 
@@ -32,6 +39,7 @@ class Prefs {
     return {
       'contact': contact,
       'mapStyle': mapStyle,
+      'deviceName': deviceName,
     };
   }
 
@@ -41,19 +49,24 @@ class Prefs {
     return Prefs(
       contact: map['contact'] as String,
       mapStyle: map['mapLayer'] as String,
+      deviceName: map['deviceName'] as String,
     );
   }
 
   @override
-  String toString() => 'Prefs(contact: $contact, mapStyle: $mapStyle)';
+  String toString() =>
+      'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Prefs && o.contact == contact && o.mapStyle == mapStyle;
+    return o is Prefs &&
+        o.contact == contact &&
+        o.mapStyle == mapStyle &&
+        o.deviceName == deviceName;
   }
 
   @override
-  int get hashCode => contact.hashCode ^ mapStyle.hashCode;
+  int get hashCode => contact.hashCode ^ mapStyle.hashCode ^ deviceName.hashCode;
 }

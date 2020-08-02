@@ -8,7 +8,14 @@ abstract class NearbyEvent extends Equatable {
 }
 
 class NearbyStarted extends NearbyEvent {
-  const NearbyStarted();
+  final String name;
+
+  const NearbyStarted({
+    @required this.name,
+  }) : assert(name != null);
+
+  @override
+  List<Object> get props => [name];
 }
 
 class NearbyStopped extends NearbyEvent {

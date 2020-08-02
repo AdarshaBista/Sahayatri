@@ -23,19 +23,19 @@ class NearbyBloc extends Bloc<NearbyEvent, NearbyState> {
 
   @override
   Stream<NearbyState> mapEventToState(NearbyEvent event) async* {
-    if (event is NearbyStarted) yield* _mapNearbyStartedToState();
+    if (event is NearbyStarted) yield* _mapNearbyStartedToState(event.name);
     if (event is NearbyStopped) yield* _mapNearbyStoppedToState();
     if (event is ScanningStarted) yield* _mapScanningStartedToState();
     if (event is ScanningStopped) yield* _mapScanningStoppedToState();
     if (event is DeviceChanged) yield* _mapDeviceChangedToState();
   }
 
-  Stream<NearbyState> _mapNearbyStartedToState() async* {
+  Stream<NearbyState> _mapNearbyStartedToState(String name) async* {
     try {
-      yield NearbyInProgress(connected: nearbyService.connected);
+      nearbyService.stop();
+      nearbyService.start(name);
       nearbyService.onDeviceChanged = () => add(const DeviceChanged());
-      await nearbyService.stop();
-      await nearbyService.startScanning();
+      yield NearbyInProgress(connected: nearbyService.connected);
     } on Failure catch (e) {
       yield NearbyError(message: e.message);
       yield const NearbyInitial();

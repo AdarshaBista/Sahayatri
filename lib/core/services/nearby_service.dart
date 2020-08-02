@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:sahayatri/app/constants/resources.dart';
@@ -15,7 +14,7 @@ class NearbyService {
   final Strategy kStrategy = Strategy.P2P_STAR;
 
   /// Username identifying this device.
-  final String _username = Random().nextInt(10000).toString();
+  String _username;
   String get username => _username;
 
   /// List of connected devices.
@@ -24,6 +23,12 @@ class NearbyService {
 
   /// Called when device list changes.
   void Function() onDeviceChanged;
+
+  /// Start nearby service.
+  Future<void> start(String name) async {
+    _username = name;
+    await startScanning();
+  }
 
   /// Start scanning (advertising and discovery) process.
   Future<void> startScanning() async {

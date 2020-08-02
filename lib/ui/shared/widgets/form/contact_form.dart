@@ -40,10 +40,18 @@ class _ContactFormState extends State<ContactForm> {
             key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  'Contact',
+                  style: AppTextStyles.medium.bold,
+                ),
+                const SizedBox(height: 10.0),
                 _buildTextField(),
-                _buildSubmitButton(context),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: _buildSubmitButton(context),
+                ),
               ],
             ),
           ),
@@ -57,7 +65,7 @@ class _ContactFormState extends State<ContactForm> {
       return CustomTextField(
         iconGap: 16.0,
         icon: Icons.phone,
-        label: 'Contact number',
+        label: 'Phone number',
         labelStyle: AppTextStyles.small.bold,
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
@@ -96,7 +104,7 @@ class _ContactFormState extends State<ContactForm> {
       ..showSnackBar(
         SnackBar(
           content: Text(
-            'Contact Saved: $contact',
+            'Contact saved: $contact',
             style: AppTextStyles.small.light,
           ),
         ),

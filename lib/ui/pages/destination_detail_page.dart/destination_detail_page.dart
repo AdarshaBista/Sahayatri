@@ -11,8 +11,8 @@ import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/message_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/message_dialog.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
 

@@ -8,6 +8,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_actions.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/device_name_field.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_progress_info.dart';
 
 class NearbyForm extends StatelessWidget {
@@ -32,6 +33,7 @@ class NearbyForm extends StatelessWidget {
                     maxHeight: MediaQuery.of(context).size.height * 0.7,
                   ),
                   child: Scaffold(
+                    resizeToAvoidBottomInset: false,
                     body: _buildColumn(context),
                   ),
                 )
@@ -50,9 +52,9 @@ class NearbyForm extends StatelessWidget {
       children: [
         Text(
           'Nearby',
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.medium.bold,
         ),
-        const SizedBox(height: 12.0),
+        const SizedBox(height: 10.0),
         _buildBody(),
       ],
     );
@@ -70,7 +72,14 @@ class NearbyForm extends StatelessWidget {
             child: const NearbyProgressInfo(),
           );
         } else {
-          return const NearbyActions();
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: const [
+              DeviceNameField(),
+              NearbyActions(),
+            ],
+          );
         }
       },
     );
