@@ -42,7 +42,7 @@ class Coord {
 
   Map<String, dynamic> toMap() {
     return {
-      'latitudw': lat,
+      'latitude': lat,
       'longitude': lng,
       'altitude': alt,
     };

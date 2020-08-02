@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:sahayatri/app/constants/resources.dart';
 
 import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:nearby_connections/nearby_connections.dart';
@@ -15,7 +18,7 @@ class NearbyService {
   final String _username = Random().nextInt(10000).toString();
   String get username => _username;
 
-  /// Ids and names of connected endpoints.
+  /// List of connected devices.
   final List<NearbyDevice> _connectedDevices = [];
   List<NearbyDevice> get connected => _connectedDevices.toList();
 
@@ -79,8 +82,8 @@ class NearbyService {
     try {
       await Nearby().acceptConnection(
         id,
-        onPayLoadRecieved: (endpointId, payload) {},
-        onPayloadTransferUpdate: (endpointId, payloadTransferUpdate) {},
+        onPayLoadRecieved: onPayLoadRecieved,
+        onPayloadTransferUpdate: onPayloadTransferUpdate,
       );
       _addDevice(id, info.endpointName);
     } catch (e) {
@@ -119,6 +122,19 @@ class NearbyService {
   /// Called (by discoverer) when nearby device is lost.
   void onEndpointLost(String id) {}
 
+  /// Called when payload is sent from connected devices.
+  void onPayLoadRecieved(String id, Payload payload) {
+    final payloadJson = String.fromCharCodes(payload.bytes);
+    final parsedPayload = jsonDecode(payloadJson);
+    final userLocation = UserLocation.fromMap(parsedPayload as Map<String, dynamic>);
+
+    final recipientDevice = _findDevice(id);
+    if (recipientDevice != null) recipientDevice.userLocation = userLocation;
+  }
+
+  /// Called when payload is received on this device.
+  void onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
+
   /// Add a [NearbyDevice] to connected list.
   void _addDevice(String id, String name) {
     _connectedDevices.add(
@@ -134,5 +150,19 @@ class NearbyService {
   void _removeDevice(String id) {
     _connectedDevices.removeWhere((d) => d.id == id);
     onDeviceChanged();
+  }
+
+  /// Find [NearbyDevice] with given [id]
+  NearbyDevice _findDevice(String id) {
+    return connected.firstWhere((d) => d.id == id, orElse: () => null);
+  }
+
+  /// Broadcast this device's location to connected devices.
+  Future<void> broadcastLocation(UserLocation userLocation) async {
+    final String payload = jsonEncode(userLocation.toMap());
+
+    for (final device in _connectedDevices) {
+      Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
+    }
   }
 }

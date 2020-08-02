@@ -12,6 +12,7 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
+import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
@@ -20,15 +21,18 @@ part 'tracker_state.dart';
 
 class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   final SmsService smsService;
+  final NearbyService nearbyService;
   final TrackerService trackerService;
   final OffRouteAlertService offRouteAlertService;
   StreamSubscription _trackerUpdateSub;
 
   TrackerBloc({
     @required this.smsService,
+    @required this.nearbyService,
     @required this.trackerService,
     @required this.offRouteAlertService,
   })  : assert(smsService != null),
+        assert(nearbyService != null),
         assert(trackerService != null),
         assert(offRouteAlertService != null),
         super(const TrackerLoading());
@@ -120,6 +124,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     final nextCheckpoint = trackerService.nextCheckpoint(userLocation);
     final userIndex = trackerService.userIndex(userLocation.coord);
 
+    nearbyService.broadcastLocation(userLocation);
     offRouteAlertService.alert(userLocation.coord, route);
     smsService.send(userLocation.coord, nextCheckpoint?.checkpoint?.place);
 
@@ -127,6 +132,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       data: TrackerUpdate(
         userIndex: userIndex,
         userLocation: userLocation,
+        connectedDevices: nearbyService.connected,
         elapsed: trackerService.elapsedDuration(),
         nextCheckpoint: trackerService.nextCheckpoint(userLocation),
         distanceCovered: trackerService.distanceCovered(userIndex),

@@ -14,6 +14,7 @@ import 'package:sahayatri/ui/shared/animators/map_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
 
@@ -81,8 +82,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
       children: [
         _RouteLayer(zoom: zoom),
         const _AccuracyCircleLayer(),
+        const _DevicesMarkersLayer(),
         const _PlaceMarkersLayer(),
-        const _UserMarkerLayer(),
       ],
     );
   }
@@ -159,17 +160,22 @@ class _PlaceMarkersLayer extends StatelessWidget {
   }
 }
 
-class _UserMarkerLayer extends StatelessWidget {
-  const _UserMarkerLayer();
+class _DevicesMarkersLayer extends StatelessWidget {
+  const _DevicesMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
     final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
+    final connected = context.watch<TrackerUpdate>().connectedDevices;
+    final devices = connected.where((d) => d.userLocation != null).toList();
 
     return RepaintBoundary(
       child: MarkerLayerWidget(
         options: MarkerLayerOptions(
-          markers: [UserMarker(point: userCoord)],
+          markers: [
+            ...devices.map((d) => UserMarker(point: d.userLocation.coord)).toList(),
+            UserMarker(point: userCoord),
+          ],
         ),
       ),
     );
@@ -182,17 +188,23 @@ class _AccuracyCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
+    final connected = trackerUpdate.connectedDevices;
+    final devices = connected.where((d) => d.userLocation != null).toList();
 
     return CircleLayerWidget(
       options: CircleLayerOptions(
         circles: [
-          CircleMarker(
-            useRadiusInMeter: true,
-            borderStrokeWidth: 2.0,
+          ...devices
+              .map((d) => AccuracyCircle(
+                    color: Colors.blue,
+                    point: d.userLocation.coord,
+                    radius: d.userLocation.accuracy,
+                  ))
+              .toList(),
+          AccuracyCircle(
+            color: AppColors.primaryDark,
+            point: trackerUpdate.userLocation.coord,
             radius: trackerUpdate.userLocation.accuracy,
-            point: trackerUpdate.userLocation.coord.toLatLng(),
-            color: AppColors.primaryDark.withOpacity(0.2),
-            borderColor: AppColors.primaryDark.withOpacity(0.5),
           ),
         ],
       ),

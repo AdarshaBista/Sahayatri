@@ -15,6 +15,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
+import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
@@ -79,6 +80,7 @@ class DestRouter {
             BlocProvider<TrackerBloc>(
                 create: (context) => TrackerBloc(
                       smsService: context.repository<SmsService>(),
+                      nearbyService: context.repository<NearbyService>(),
                       trackerService: context.repository<TrackerService>(),
                       offRouteAlertService: context.repository<OffRouteAlertService>(),
                     )..add(

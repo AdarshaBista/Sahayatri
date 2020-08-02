@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 
 class NearbyActions extends StatelessWidget {
   const NearbyActions();
@@ -50,10 +50,9 @@ class NearbyActions extends StatelessWidget {
   }
 
   Widget _buildNearbyInitial(BuildContext context) {
-    return NearbyButton(
-      label: 'Start',
-      color: AppColors.primary,
-      icon: CommunityMaterialIcons.circle_double,
+    return CustomButton(
+      label: 'Start Nearby',
+      iconData: CommunityMaterialIcons.circle_double,
       onTap: () => context.bloc<NearbyBloc>().add(const NearbyStarted()),
     );
   }
