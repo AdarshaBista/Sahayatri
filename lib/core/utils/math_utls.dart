@@ -1,3 +1,5 @@
+import 'package:sahayatri/app/constants/resources.dart';
+
 class MathUtils {
   // Map input range [ix, iy] to output range [ox, oy]
   static double mapRange(
@@ -21,5 +23,13 @@ class MathUtils {
   ) {
     final double output = mapRange(value, minInput, maxInput, minOutput, maxOutput);
     return minOutput + maxOutput - output;
+  }
+
+  // Wheather list should be simplified based on zoom
+  static bool shouldSimplify(double currentZoom, double newZoom) {
+    final double zoomDiff = newZoom - currentZoom;
+    return newZoom < MapConfig.kRouteAccuracyZoomThreshold &&
+        (zoomDiff >= MapConfig.kZoomDiffThreshold ||
+            zoomDiff <= -MapConfig.kZoomDiffThreshold);
   }
 }

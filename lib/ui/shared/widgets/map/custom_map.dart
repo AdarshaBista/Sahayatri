@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 import 'package:sahayatri/app/constants/resources.dart';
 
+import 'package:sahayatri/core/utils/math_utls.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
@@ -65,7 +67,8 @@ class _CustomMapState extends State<CustomMap> {
     if (widget.onPositionChanged != null) {
       widget.onPositionChanged(pos, hasGesture);
     }
-    if (pos.zoom != zoom) {
+
+    if (MathUtils.shouldSimplify(zoom, pos.zoom)) {
       setState(() {
         zoom = pos.zoom;
       });

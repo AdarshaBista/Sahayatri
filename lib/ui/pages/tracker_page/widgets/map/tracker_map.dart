@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
+import 'package:sahayatri/core/utils/math_utls.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
@@ -47,7 +49,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 
   void onPositionChanged(MapPosition pos, bool hasGesture) {
-    if (pos.zoom != zoom || (hasGesture && isTracking)) {
+    if (MathUtils.shouldSimplify(zoom, pos.zoom) || (hasGesture && isTracking)) {
+      print('SETSTATE');
       setState(() {
         zoom = pos.zoom;
         isTracking = false;
