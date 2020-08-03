@@ -28,11 +28,13 @@ class NearbyActions extends StatelessWidget {
   }
 
   Widget _buildNearbyProgress(BuildContext context, bool isScanning) {
-    return Row(
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
       children: [
         NearbyButton(
           label: isScanning ? 'Stop\nScanning' : 'Start\nScanning',
-          color: isScanning ? Colors.orange : Colors.green,
+          color: isScanning ? Colors.blue : Colors.green,
           icon: isScanning
               ? Icons.search_off_outlined
               : CommunityMaterialIcons.account_search_outline,
@@ -42,12 +44,17 @@ class NearbyActions extends StatelessWidget {
                 : context.bloc<NearbyBloc>().add(const ScanningStarted());
           },
         ),
-        const SizedBox(width: 12.0),
         NearbyButton(
           label: 'Stop\n Nearby',
-          color: Colors.red,
+          color: Colors.orange,
           icon: Icons.exit_to_app_outlined,
           onTap: () => context.bloc<NearbyBloc>().add(const NearbyStopped()),
+        ),
+        NearbyButton(
+          label: 'Send\n SOS',
+          color: Colors.red,
+          icon: Icons.speaker_phone_outlined,
+          onTap: () => context.bloc<NearbyBloc>().sendSos(),
         ),
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
@@ -54,34 +54,41 @@ class Sahayatri extends StatelessWidget {
             notificationService: context.repository<NotificationService>(),
           ),
         ),
+        RepositoryProvider<NearbyService>(
+          create: (context) => NearbyService(
+            notificationService: context.repository<NotificationService>(),
+          ),
+        ),
         RepositoryProvider<TrackerService>(
           create: (context) => TrackerService(
             locationService: context.repository<LocationService>(),
           ),
         ),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<PrefsBloc>(
-            create: (context) => PrefsBloc(
-              prefsDao: context.repository<PrefsDao>(),
-            )..add(const PrefsInitialized()),
-          ),
-          BlocProvider<NearbyBloc>(
-            create: (context) => NearbyBloc(
-              nearbyService: context.repository<NearbyService>(),
+      child: Builder(
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<PrefsBloc>(
+              create: (context) => PrefsBloc(
+                prefsDao: context.repository<PrefsDao>(),
+              )..add(const PrefsInitialized()),
             ),
+            BlocProvider<NearbyBloc>(
+              create: (context) => NearbyBloc(
+                nearbyService: context.repository<NearbyService>(),
+              ),
+            ),
+          ],
+          child: MaterialApp(
+            builder: DevicePreview.appBuilder,
+            locale: DevicePreview.of(context).locale,
+            debugShowCheckedModeBanner: false,
+            title: AppConfig.kAppName,
+            theme: AppThemes.light,
+            navigatorKey: context.repository<RootNavService>().navigatorKey,
+            initialRoute: Routes.kBottomNavPageRoute,
+            onGenerateRoute: RootRouter.onGenerateRoute,
           ),
-        ],
-        child: MaterialApp(
-          builder: DevicePreview.appBuilder,
-          locale: DevicePreview.of(context).locale,
-          debugShowCheckedModeBanner: false,
-          title: AppConfig.kAppName,
-          theme: AppThemes.light,
-          navigatorKey: context.repository<RootNavService>().navigatorKey,
-          initialRoute: Routes.kBottomNavPageRoute,
-          onGenerateRoute: RootRouter.onGenerateRoute,
         ),
       ),
     );

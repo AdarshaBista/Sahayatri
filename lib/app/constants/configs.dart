@@ -40,3 +40,10 @@ class MapStyles {
 class Distances {
   static const double kMinNearbyDistance = 50.0;
 }
+
+class NearbyMessageType {
+  static const String kSos = 'sos';
+  static const String kChat = 'chat';
+  static const String kLocation = 'location';
+  static const String kSeparator = '::';
+}

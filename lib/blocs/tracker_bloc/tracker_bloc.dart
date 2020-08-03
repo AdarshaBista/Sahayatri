@@ -43,6 +43,8 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     return super.close();
   }
 
+  Duration get elapsed => trackerService.elapsedDuration();
+
   @override
   Stream<TrackerState> mapEventToState(TrackerEvent event) async* {
     if (event is TrackingPaused) yield* _mapTrackingPausedToState();

@@ -1,4 +1,4 @@
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 class MathUtils {
   // Map input range [ix, iy] to output range [ox, oy]

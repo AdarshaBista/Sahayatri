@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 

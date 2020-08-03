@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 import 'package:sms_maintained/sms.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/notification_channels.dart';
 
 import 'package:sahayatri/app/database/prefs_dao.dart';

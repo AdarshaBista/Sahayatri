@@ -21,6 +21,8 @@ class NearbyBloc extends Bloc<NearbyEvent, NearbyState> {
 
   String get username => nearbyService.username;
 
+  void sendSos() => nearbyService.broadcastSos();
+
   @override
   Stream<NearbyState> mapEventToState(NearbyEvent event) async* {
     if (event is NearbyStarted) yield* _mapNearbyStartedToState(event.name);

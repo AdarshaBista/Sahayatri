@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
 

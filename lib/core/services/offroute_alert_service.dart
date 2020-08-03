@@ -30,7 +30,6 @@ class OffRouteAlertService {
 
     const alertMessage =
         'You seem to be going off route. Please re-evaluate your course.';
-    print('[SAHAYATRI] $alertMessage');
 
     await notificationService.show(
       NotificationChannels.kOffRouteId,

@@ -20,13 +20,13 @@ class NearbyProgressInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Your username : ${context.bloc<NearbyBloc>().username}',
+          'Your Name : ${context.bloc<NearbyBloc>().username}',
           style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 12.0),
-        const NearbyActions(),
-        const SizedBox(height: 16.0),
         if (state.isScanning) _buildScanIndicator(),
+        const SizedBox(height: 16.0),
+        const NearbyActions(),
         const SizedBox(height: 16.0),
         Text(
           'CONNECTED DEVIECS',

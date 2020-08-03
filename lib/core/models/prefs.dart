@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 part 'prefs.g.dart';
 

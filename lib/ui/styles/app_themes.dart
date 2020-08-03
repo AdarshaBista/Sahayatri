@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/style_x.dart';
 import 'package:sahayatri/ui/styles/app_colors.dart';

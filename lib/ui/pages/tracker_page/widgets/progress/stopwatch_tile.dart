@@ -34,7 +34,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
 
   @override
   Widget build(BuildContext context) {
-    final elapsed = context.bloc<TrackerBloc>().trackerService.elapsedDuration();
+    final elapsed = context.bloc<TrackerBloc>().elapsed;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/resources.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/shared/widgets/sliding_panel.dart';
 import 'package:sahayatri/ui/shared/widgets/drag_indicator_pill.dart';
