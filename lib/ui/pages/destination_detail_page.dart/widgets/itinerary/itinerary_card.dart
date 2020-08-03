@@ -13,9 +13,9 @@ import 'package:sahayatri/core/services/tracker_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/widgets/message_dialog.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
 
 class ItineraryCard extends StatelessWidget {
   final Itinerary itinerary;

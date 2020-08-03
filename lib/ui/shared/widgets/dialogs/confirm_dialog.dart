@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
-class TrackerStopDialog extends StatelessWidget {
-  final VoidCallback onStop;
+class ConfirmDialog extends StatelessWidget {
+  final String message;
+  final VoidCallback onConfirm;
 
-  const TrackerStopDialog({
-    @required this.onStop,
-  }) : assert(onStop != null);
+  const ConfirmDialog({
+    @required this.message,
+    @required this.onConfirm,
+  })  : assert(message != null),
+        assert(onConfirm != null);
 
   @override
   Widget build(BuildContext context) {
@@ -23,35 +26,35 @@ class TrackerStopDialog extends StatelessWidget {
         size: 72.0,
       ),
       content: Text(
-        'Are you sure you want to stop the tracking process.',
+        message,
         style: AppTextStyles.small,
       ),
       actions: [
-        _buildYesButton(context),
-        _buildNoButton(context),
+        _buildConfirmButton(context),
+        _buildRejectButton(context),
       ],
     );
   }
 
-  Widget _buildYesButton(BuildContext context) {
+  Widget _buildConfirmButton(BuildContext context) {
     return FlatButton(
       child: Text(
         'YES',
-        style: AppTextStyles.small.primary.bold,
+        style: AppTextStyles.small.secondary.bold,
       ),
       onPressed: () {
-        onStop();
+        onConfirm();
         Navigator.of(context).pop();
       },
     );
   }
 
-  Widget _buildNoButton(BuildContext context) {
+  Widget _buildRejectButton(BuildContext context) {
     return FlatButton(
       onPressed: () => Navigator.of(context).pop(),
       child: Text(
         'NO',
-        style: AppTextStyles.small.secondary.bold,
+        style: AppTextStyles.small.primary.bold,
       ),
     );
   }

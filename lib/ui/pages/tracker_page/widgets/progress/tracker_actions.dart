@@ -10,7 +10,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_stop_dialog.dart';
+import 'package:sahayatri/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
 class TrackerActions extends StatelessWidget {
   const TrackerActions();
@@ -50,8 +50,9 @@ class TrackerActions extends StatelessWidget {
                   label: 'STOP',
                   color: AppColors.secondary,
                   icon: CommunityMaterialIcons.stop_circle_outline,
-                  onTap: () => TrackerStopDialog(
-                    onStop: () => context.repository<TrackerBloc>().add(
+                  onTap: () => ConfirmDialog(
+                    message: 'Are you sure you want to stop the tracking process.',
+                    onConfirm: () => context.repository<TrackerBloc>().add(
                           const TrackingStopped(),
                         ),
                   ).openDialog(context),
