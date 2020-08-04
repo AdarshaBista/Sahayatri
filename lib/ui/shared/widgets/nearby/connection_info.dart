@@ -6,15 +6,15 @@ import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/scan_indicator.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/devices_list.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_actions.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/connected_list.dart';
 
-class NearbyProgressInfo extends StatelessWidget {
-  const NearbyProgressInfo();
+class ConnectionInfo extends StatelessWidget {
+  const ConnectionInfo();
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<NearbyInProgress>();
+    final state = context.watch<NearbyConnected>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,17 +23,17 @@ class NearbyProgressInfo extends StatelessWidget {
           'Your Name : ${context.bloc<NearbyBloc>().username}',
           style: AppTextStyles.small.bold,
         ),
-        const SizedBox(height: 12.0),
+        const SizedBox(height: 10.0),
         if (state.isScanning) _buildScanIndicator(),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 10.0),
         const NearbyActions(),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 20.0),
         Text(
           'CONNECTED DEVIECS',
           style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 8.0),
-        const ConnectedList(),
+        const DevicesList(),
       ],
     );
   }
@@ -41,7 +41,7 @@ class NearbyProgressInfo extends StatelessWidget {
   Widget _buildScanIndicator() {
     return BlocBuilder<NearbyBloc, NearbyState>(
       builder: (context, state) {
-        return (state as NearbyInProgress).isScanning
+        return (state as NearbyConnected).isScanning
             ? const ScanIndicator()
             : const Offstage();
       },

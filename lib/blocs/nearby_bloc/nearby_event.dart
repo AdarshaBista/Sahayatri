@@ -30,6 +30,6 @@ class ScanningStopped extends NearbyEvent {
   const ScanningStopped();
 }
 
-class DeviceChanged extends NearbyEvent {
-  const DeviceChanged();
+class DeviceListChanged extends NearbyEvent {
+  const DeviceListChanged();
 }

@@ -1,28 +1,22 @@
 part of 'nearby_bloc.dart';
 
-abstract class NearbyState extends Equatable {
+abstract class NearbyState {
   const NearbyState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class NearbyInitial extends NearbyState {
   const NearbyInitial();
 }
 
-class NearbyInProgress extends NearbyState {
+class NearbyConnected extends NearbyState {
   final bool isScanning;
-  final List<NearbyDevice> connected;
+  final List<NearbyDevice> nearbyDevices;
 
-  const NearbyInProgress({
+  const NearbyConnected({
     this.isScanning = true,
-    @required this.connected,
-  })  : assert(connected != null),
-        assert(isScanning != null);
-
-  @override
-  List<Object> get props => [isScanning, connected];
+    @required this.nearbyDevices,
+  })  : assert(isScanning != null),
+        assert(nearbyDevices != null);
 }
 
 class NearbyError extends NearbyState {
@@ -31,7 +25,4 @@ class NearbyError extends NearbyState {
   const NearbyError({
     @required this.message,
   }) : assert(message != null);
-
-  @override
-  List<Object> get props => [message];
 }

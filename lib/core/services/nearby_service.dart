@@ -25,12 +25,12 @@ class NearbyService {
   String _username;
   String get username => _username;
 
-  /// List of connected devices.
-  final List<NearbyDevice> _connectedDevices = [];
-  List<NearbyDevice> get connected => _connectedDevices.toList();
+  /// List of nearby devices.
+  final Set<NearbyDevice> _nearbyDevices = {};
+  List<NearbyDevice> get nearbyDevices => _nearbyDevices.toList();
 
-  /// Called when device list changes.
-  void Function() onDeviceChanged;
+  /// Called when a device is added to or updated in [_nearbyDevices].
+  void Function() onDeviceListChanged;
 
   NearbyService({
     @required this.notificationService,
@@ -39,6 +39,9 @@ class NearbyService {
   /// Start nearby service.
   Future<void> start(String name) async {
     _username = name;
+
+    if (!await Nearby().checkLocationEnabled()) Nearby().enableLocationServices();
+    if (!await Nearby().checkLocationPermission()) Nearby().askLocationPermission();
     await startScanning();
   }
 
@@ -58,7 +61,7 @@ class NearbyService {
   Future<void> stop() async {
     await stopScanning();
     await Nearby().stopAllEndpoints();
-    _connectedDevices.clear();
+    _nearbyDevices.clear();
   }
 
   /// Start advertising to potential discoverers.
@@ -73,7 +76,6 @@ class NearbyService {
         onConnectionInitiated: onConnectionInit,
       );
     } catch (e) {
-      print(e.toString());
       throw Failure(error: e.toString());
     }
   }
@@ -89,51 +91,15 @@ class NearbyService {
         onEndpointFound: onEndpointFound,
       );
     } catch (e) {
-      print(e.toString());
       throw Failure(error: e.toString());
     }
   }
 
-  /// Called when a connection is requested.
-  Future<void> onConnectionInit(String id, ConnectionInfo info) async {
-    try {
-      await Nearby().acceptConnection(
-        id,
-        onPayLoadRecieved: onPayLoadRecieved,
-        onPayloadTransferUpdate: onPayloadTransferUpdate,
-      );
-      _addDevice(id, info.endpointName);
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  /// Called when connection is accepted or rejected.
-  Future<void> onConnectionResult(String id, Status status) async {
-    if (status != Status.CONNECTED) _removeDevice(id);
-  }
-
-  /// Called when a device disconnects.
-  /// Alert other devices about the lost connection.
-  void onDisconnected(String id) {
-    _removeDevice(id);
-
-    final device = _findDevice(id);
-    final alertMessage = '${device.name} has disconnected from network.';
-
-    notificationService.show(
-      NotificationChannels.kDeviceDisconnectedId,
-      alertMessage,
-      channelId: NotificationChannels.kDeviceDisconnectedChannelId,
-      channelName: NotificationChannels.kDeviceDisconnectedChannelName,
-      channelDescription: NotificationChannels.kDeviceDisconnectedChannelDesc,
-    );
-  }
-
   /// Called (by discoverer) when nearby device is found.
   Future<void> onEndpointFound(String id, String name, String serviceId) async {
-    await stopScanning();
+    if (_nearbyDevices.contains(_findDevice(id))) return;
 
+    await stopScanning();
     try {
       await Nearby().requestConnection(
         username,
@@ -142,31 +108,57 @@ class NearbyService {
         onConnectionResult: onConnectionResult,
         onConnectionInitiated: onConnectionInit,
       );
-      await startScanning();
     } catch (e) {
       print(e.toString());
+    } finally {
+      await startScanning();
     }
   }
 
   /// Called (by discoverer) when nearby device is lost.
   void onEndpointLost(String id) {}
 
-  /// Called when payload is received on this device.
-  void onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
+  /// Called when a connection is requested.
+  Future<void> onConnectionInit(String id, ConnectionInfo info) async {
+    _addDevice(id, info.endpointName);
+    try {
+      await Nearby().acceptConnection(
+        id,
+        onPayLoadRecieved: onPayLoadRecieved,
+        onPayloadTransferUpdate: onPayloadTransferUpdate,
+      );
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  /// Called when connection is accepted or rejected.
+  void onConnectionResult(String id, Status status) {
+    if (status == Status.CONNECTED) {
+      final device = _findDevice(id);
+      if (device == null) return;
+      device.isConnecting = false;
+      onDeviceListChanged();
+    } else {
+      _removeDevice(id);
+    }
+  }
+
+  /// Called when a device disconnects.
+  /// Alert other devices about the lost connection.
+  void onDisconnected(String id) {
+    _showDisconnectedNotification(id);
+  }
 
   /// Called when payload is sent from connected devices.
   /// Parses the incoming bytes and handles message according to [NearbyMessageType].
   void onPayLoadRecieved(String id, Payload payload) {
     final payloadStr = String.fromCharCodes(payload.bytes);
-    final NearbyMessage message = _splitMessage(payloadStr);
+    final message = _parseRawMessage(payloadStr);
 
     switch (message.type) {
       case NearbyMessageType.kSos:
         _showSosNotification(id);
-        break;
-
-      case NearbyMessageType.kChat:
-        _handleIncomingChatMessage(id, message.body);
         break;
 
       case NearbyMessageType.kLocation:
@@ -178,8 +170,29 @@ class NearbyService {
     }
   }
 
-  /// Splits the raw message string into type and body.
-  NearbyMessage _splitMessage(String payloadStr) {
+  /// Called when payload is received on this device.
+  void onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
+
+  /// Add a [NearbyDevice] to nearby devices set.
+  void _addDevice(String id, String name) {
+    _nearbyDevices.add(NearbyDevice(id: id, name: name));
+    onDeviceListChanged();
+  }
+
+  /// Remove a [NearbyDevice] from nearby devices set.
+  void _removeDevice(String id) {
+    final device = _findDevice(id);
+    _nearbyDevices.remove(device);
+    onDeviceListChanged();
+  }
+
+  /// Find [NearbyDevice] with given [id]
+  NearbyDevice _findDevice(String id) {
+    return nearbyDevices.firstWhere((d) => d.id == id, orElse: () => null);
+  }
+
+  /// Parses the raw message string into [NearbyMessage].
+  NearbyMessage _parseRawMessage(String payloadStr) {
     final payloadChunks = payloadStr.trim().split(NearbyMessageType.kSeparator);
     final messageType = payloadChunks[0];
     payloadChunks.removeAt(0);
@@ -191,9 +204,40 @@ class NearbyService {
     );
   }
 
+  /// Broadcast this device's location to connected devices.
+  void broadcastLocation(UserLocation userLocation) {
+    final String locationJson = jsonEncode(userLocation.toMap());
+    final String payload =
+        NearbyMessageType.kLocation + NearbyMessageType.kSeparator + locationJson;
+
+    for (final device in nearbyDevices) {
+      Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
+    }
+  }
+
+  /// Parses incoming user location data and updates corresponding device.
+  void _handleIncomingLocation(String deviceId, String message) {
+    final parsedMessage = jsonDecode(message);
+    final userLocation = UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
+    final recipientDevice = _findDevice(deviceId);
+    if (recipientDevice != null) recipientDevice.userLocation = userLocation;
+  }
+
+  /// Send SOS signal to connected devices.
+  void broadcastSos() {
+    const String payload = NearbyMessageType.kSos;
+    for (final device in nearbyDevices) {
+      Nearby().sendBytesPayload(
+        device.id,
+        Uint8List.fromList(payload.codeUnits),
+      );
+    }
+  }
+
   /// Show a SOS signal notification.
   void _showSosNotification(String id) {
     final device = _findDevice(id);
+    if (device == null) return;
     final alertMessage = '${device.name} has sent a SOS signal.';
 
     notificationService.show(
@@ -205,65 +249,18 @@ class NearbyService {
     );
   }
 
-  /// Parses incoming caht message and updates corresponding device.
-  void _handleIncomingChatMessage(String deviceId, String message) {}
+  /// Show notification when device is disconnected
+  void _showDisconnectedNotification(String id) {
+    final device = _findDevice(id);
+    if (device == null) return;
+    final alertMessage = '${device.name} has disconnected from network.';
 
-  /// Parses incoming user location data and updates corresponding device.
-  void _handleIncomingLocation(String deviceId, String message) {
-    final parsedMessage = jsonDecode(message);
-    final userLocation = UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
-    final recipientDevice = _findDevice(deviceId);
-    if (recipientDevice != null) recipientDevice.userLocation = userLocation;
-  }
-
-  /// Add a [NearbyDevice] to connected list.
-  void _addDevice(String id, String name) {
-    _connectedDevices.add(
-      NearbyDevice(
-        id: id,
-        name: name,
-      ),
+    notificationService.show(
+      NotificationChannels.kDeviceDisconnectedId,
+      alertMessage,
+      channelId: NotificationChannels.kDeviceDisconnectedChannelId,
+      channelName: NotificationChannels.kDeviceDisconnectedChannelName,
+      channelDescription: NotificationChannels.kDeviceDisconnectedChannelDesc,
     );
-    onDeviceChanged();
-  }
-
-  /// Remove a [NearbyDevice] from connected list.
-  void _removeDevice(String id) {
-    _connectedDevices.removeWhere((d) => d.id == id);
-    onDeviceChanged();
-  }
-
-  /// Find [NearbyDevice] with given [id]
-  NearbyDevice _findDevice(String id) {
-    return connected.firstWhere((d) => d.id == id, orElse: () => null);
-  }
-
-  /// Broadcast this device's location to connected devices.
-  void broadcastLocation(UserLocation userLocation) {
-    final String locationJson = jsonEncode(userLocation.toMap());
-    final String payload =
-        NearbyMessageType.kLocation + NearbyMessageType.kSeparator + locationJson;
-
-    for (final device in _connectedDevices) {
-      Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
-    }
-  }
-
-  /// Send SOS signal to connected devices.
-  void broadcastSos() {
-    for (final device in _connectedDevices) {
-      Nearby().sendBytesPayload(
-        device.id,
-        Uint8List.fromList(NearbyMessageType.kSos.codeUnits),
-      );
-    }
-  }
-
-  /// Send [message] to given [id].
-  void sendMessage(String id, String message) {
-    final String payload =
-        NearbyMessageType.kChat + NearbyMessageType.kSeparator + message;
-    final recipient = _findDevice(id);
-    Nearby().sendBytesPayload(recipient.id, Uint8List.fromList(payload.codeUnits));
   }
 }

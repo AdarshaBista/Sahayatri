@@ -29,15 +29,15 @@ class NearbyBloc extends Bloc<NearbyEvent, NearbyState> {
     if (event is NearbyStopped) yield* _mapNearbyStoppedToState();
     if (event is ScanningStarted) yield* _mapScanningStartedToState();
     if (event is ScanningStopped) yield* _mapScanningStoppedToState();
-    if (event is DeviceChanged) yield* _mapDeviceChangedToState();
+    if (event is DeviceListChanged) yield* _mapDeviceChangedToState();
   }
 
   Stream<NearbyState> _mapNearbyStartedToState(String name) async* {
     try {
       nearbyService.stop();
       nearbyService.start(name);
-      nearbyService.onDeviceChanged = () => add(const DeviceChanged());
-      yield NearbyInProgress(connected: nearbyService.connected);
+      nearbyService.onDeviceListChanged = () => add(const DeviceListChanged());
+      yield NearbyConnected(nearbyDevices: nearbyService.nearbyDevices);
     } on Failure catch (e) {
       yield NearbyError(message: e.message);
       yield const NearbyInitial();
@@ -45,27 +45,27 @@ class NearbyBloc extends Bloc<NearbyEvent, NearbyState> {
   }
 
   Stream<NearbyState> _mapNearbyStoppedToState() async* {
-    await nearbyService.stop();
+    nearbyService.stop();
     yield const NearbyInitial();
   }
 
   Stream<NearbyState> _mapScanningStartedToState() async* {
-    await nearbyService.startScanning();
-    yield NearbyInProgress(connected: nearbyService.connected);
+    nearbyService.startScanning();
+    yield NearbyConnected(nearbyDevices: nearbyService.nearbyDevices);
   }
 
   Stream<NearbyState> _mapScanningStoppedToState() async* {
-    await nearbyService.stopScanning();
-    yield NearbyInProgress(
+    nearbyService.stopScanning();
+    yield NearbyConnected(
       isScanning: false,
-      connected: nearbyService.connected,
+      nearbyDevices: nearbyService.nearbyDevices,
     );
   }
 
   Stream<NearbyState> _mapDeviceChangedToState() async* {
-    yield NearbyInProgress(
-      connected: nearbyService.connected,
-      isScanning: (state as NearbyInProgress).isScanning,
+    yield NearbyConnected(
+      nearbyDevices: nearbyService.nearbyDevices,
+      isScanning: (state as NearbyConnected).isScanning,
     );
   }
 }

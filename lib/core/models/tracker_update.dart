@@ -14,7 +14,7 @@ class TrackerUpdate {
   final UserLocation userLocation;
   final TrackingState trackingState;
   final NextCheckpoint nextCheckpoint;
-  final List<NearbyDevice> connectedDevices;
+  final List<NearbyDevice> nearbyDevices;
 
   TrackerUpdate({
     @required this.elapsed,
@@ -23,14 +23,14 @@ class TrackerUpdate {
     @required this.nextCheckpoint,
     @required this.distanceCovered,
     @required this.distanceRemaining,
-    @required this.connectedDevices,
+    @required this.nearbyDevices,
     this.trackingState = TrackingState.updating,
   })  : assert(userIndex != null),
         assert(userLocation != null),
         assert(trackingState != null),
         assert(distanceCovered != null),
         assert(distanceRemaining != null),
-        assert(connectedDevices != null);
+        assert(nearbyDevices != null);
 
   TrackerUpdate copyWith({
     int userIndex,
@@ -40,17 +40,17 @@ class TrackerUpdate {
     UserLocation userLocation,
     TrackingState trackingState,
     NextCheckpoint nextCheckpoint,
-    List<NearbyDevice> connectedDevices,
+    List<NearbyDevice> nearbyDevices,
   }) {
     return TrackerUpdate(
       elapsed: elapsed ?? this.elapsed,
       userIndex: userIndex ?? this.userIndex,
       userLocation: userLocation ?? this.userLocation,
       trackingState: trackingState ?? this.trackingState,
+      nearbyDevices: nearbyDevices ?? this.nearbyDevices,
       nextCheckpoint: nextCheckpoint ?? this.nextCheckpoint,
       distanceCovered: distanceCovered ?? this.distanceCovered,
       distanceRemaining: distanceRemaining ?? this.distanceRemaining,
-      connectedDevices: connectedDevices ?? this.connectedDevices,
     );
   }
 }

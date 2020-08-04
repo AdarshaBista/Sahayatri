@@ -43,7 +43,6 @@ class Distances {
 
 class NearbyMessageType {
   static const String kSos = 'sos';
-  static const String kChat = 'chat';
   static const String kLocation = 'location';
   static const String kSeparator = '::';
 }

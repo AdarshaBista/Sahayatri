@@ -6,6 +6,7 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_details.dart';
 
@@ -14,8 +15,8 @@ class CheckpointMarker extends Marker {
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
-          width: 32,
-          height: 32,
+          width: 28,
+          height: 28,
           point: checkpoint.place.coord.toLatLng(),
           anchorPos: AnchorPos.align(AnchorAlign.center),
           builder: (context) => GestureDetector(
@@ -24,7 +25,7 @@ class CheckpointMarker extends Marker {
             },
             child: const ScaleAnimator(
               child: Icon(
-                Icons.radio_button_checked,
+                CommunityMaterialIcons.map_marker_check,
                 size: 28.0,
                 color: AppColors.primaryDark,
               ),

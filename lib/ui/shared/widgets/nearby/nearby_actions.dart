@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
-
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/widgets/dialogs/confirm_dialog.dart';
-import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
 
 class NearbyActions extends StatelessWidget {
   const NearbyActions();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NearbyBloc, NearbyState>(
-      builder: (context, state) {
-        if (state is NearbyInProgress) {
-          return _buildNearbyProgress(context, state.isScanning);
-        } else {
-          return _buildNearbyInitial(context);
-        }
-      },
-    );
-  }
+    final isScanning = context.watch<NearbyConnected>().isScanning;
 
-  Widget _buildNearbyProgress(BuildContext context, bool isScanning) {
     return Wrap(
       spacing: 8.0,
       runSpacing: 8.0,
@@ -58,25 +47,25 @@ class NearbyActions extends StatelessWidget {
           label: 'Send\n SOS',
           color: Colors.red,
           icon: Icons.speaker_phone_outlined,
-          onTap: () => context.bloc<NearbyBloc>().sendSos(),
+          onTap: () {
+            _showSnackBar(context, 'SOS Sent');
+            context.bloc<NearbyBloc>().sendSos();
+          },
         ),
       ],
     );
   }
 
-  Widget _buildNearbyInitial(BuildContext context) {
-    return CustomButton(
-      label: 'Start Nearby',
-      iconData: CommunityMaterialIcons.circle_double,
-      onTap: () {
-        final name = (context.bloc<PrefsBloc>().state as PrefsLoaded).prefs.deviceName;
-        if (name.isNotEmpty) {
-          context.bloc<NearbyBloc>().add(NearbyStarted(name: name));
-        } else {
-          const MessageDialog(message: 'Please set your device name first.')
-              .openDialog(context);
-        }
-      },
-    );
+  void _showSnackBar(BuildContext context, String message) {
+    Scaffold.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppTextStyles.small.light,
+          ),
+        ),
+      );
   }
 }

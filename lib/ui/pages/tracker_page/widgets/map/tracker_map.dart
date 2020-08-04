@@ -170,14 +170,14 @@ class _DevicesMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
-    final connected = context.watch<TrackerUpdate>().connectedDevices;
-    final devices = connected.where((d) => d.userLocation != null).toList();
+    final nearbyDevices = context.watch<TrackerUpdate>().nearbyDevices;
+    final connected = nearbyDevices.where((d) => d.userLocation != null).toList();
 
     return RepaintBoundary(
       child: MarkerLayerWidget(
         options: MarkerLayerOptions(
           markers: [
-            ...devices.map((d) => DeviceMarker(context, device: d)).toList(),
+            ...connected.map((d) => DeviceMarker(context, device: d)).toList(),
             UserMarker(point: userCoord),
           ],
         ),
@@ -192,13 +192,13 @@ class _AccuracyCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final connected = trackerUpdate.connectedDevices;
-    final devices = connected.where((d) => d.userLocation != null).toList();
+    final nearbyDevices = trackerUpdate.nearbyDevices;
+    final connected = nearbyDevices.where((d) => d.userLocation != null).toList();
 
     return CircleLayerWidget(
       options: CircleLayerOptions(
         circles: [
-          ...devices
+          ...connected
               .map((d) => AccuracyCircle(
                     color: Colors.blue,
                     point: d.userLocation.coord,

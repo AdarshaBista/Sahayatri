@@ -134,7 +134,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       data: TrackerUpdate(
         userIndex: userIndex,
         userLocation: userLocation,
-        connectedDevices: nearbyService.connected,
+        nearbyDevices: nearbyService.nearbyDevices,
         elapsed: trackerService.elapsedDuration(),
         nextCheckpoint: trackerService.nextCheckpoint(userLocation),
         distanceCovered: trackerService.distanceCovered(userIndex),
