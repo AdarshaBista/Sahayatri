@@ -29,14 +29,14 @@ class NearbyBloc extends Bloc<NearbyEvent, NearbyState> {
     if (event is NearbyStopped) yield* _mapNearbyStoppedToState();
     if (event is ScanningStarted) yield* _mapScanningStartedToState();
     if (event is ScanningStopped) yield* _mapScanningStoppedToState();
-    if (event is DeviceListChanged) yield* _mapDeviceChangedToState();
+    if (event is DeviceChanged) yield* _mapDeviceChangedToState();
   }
 
   Stream<NearbyState> _mapNearbyStartedToState(String name) async* {
     try {
       nearbyService.stop();
       nearbyService.start(name);
-      nearbyService.onDeviceListChanged = () => add(const DeviceListChanged());
+      nearbyService.onDeviceChanged = () => add(const DeviceChanged());
       yield NearbyConnected(nearbyDevices: nearbyService.nearbyDevices);
     } on Failure catch (e) {
       yield NearbyError(message: e.message);

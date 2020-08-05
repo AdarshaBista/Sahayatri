@@ -1,6 +1,5 @@
 import 'package:meta/meta.dart';
 
-import 'package:sahayatri/core/models/nearby_device.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
@@ -14,7 +13,6 @@ class TrackerUpdate {
   final UserLocation userLocation;
   final TrackingState trackingState;
   final NextCheckpoint nextCheckpoint;
-  final List<NearbyDevice> nearbyDevices;
 
   TrackerUpdate({
     @required this.elapsed,
@@ -23,14 +21,12 @@ class TrackerUpdate {
     @required this.nextCheckpoint,
     @required this.distanceCovered,
     @required this.distanceRemaining,
-    @required this.nearbyDevices,
     this.trackingState = TrackingState.updating,
   })  : assert(userIndex != null),
         assert(userLocation != null),
         assert(trackingState != null),
         assert(distanceCovered != null),
-        assert(distanceRemaining != null),
-        assert(nearbyDevices != null);
+        assert(distanceRemaining != null);
 
   TrackerUpdate copyWith({
     int userIndex,
@@ -40,14 +36,12 @@ class TrackerUpdate {
     UserLocation userLocation,
     TrackingState trackingState,
     NextCheckpoint nextCheckpoint,
-    List<NearbyDevice> nearbyDevices,
   }) {
     return TrackerUpdate(
       elapsed: elapsed ?? this.elapsed,
       userIndex: userIndex ?? this.userIndex,
       userLocation: userLocation ?? this.userLocation,
       trackingState: trackingState ?? this.trackingState,
-      nearbyDevices: nearbyDevices ?? this.nearbyDevices,
       nextCheckpoint: nextCheckpoint ?? this.nextCheckpoint,
       distanceCovered: distanceCovered ?? this.distanceCovered,
       distanceRemaining: distanceRemaining ?? this.distanceRemaining,

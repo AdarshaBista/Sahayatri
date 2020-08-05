@@ -19,7 +19,7 @@ class NearbyService {
   final NotificationService notificationService;
 
   /// Topology of the network.
-  final Strategy kStrategy = Strategy.P2P_STAR;
+  final Strategy _kStrategy = Strategy.P2P_CLUSTER;
 
   /// Username identifying this device.
   String _username;
@@ -30,7 +30,7 @@ class NearbyService {
   List<NearbyDevice> get nearbyDevices => _nearbyDevices.toList();
 
   /// Called when a device is added to or updated in [_nearbyDevices].
-  void Function() onDeviceListChanged;
+  void Function() onDeviceChanged;
 
   NearbyService({
     @required this.notificationService,
@@ -47,8 +47,8 @@ class NearbyService {
 
   /// Start scanning (advertising and discovery) process.
   Future<void> startScanning() async {
-    await startAdvertising();
-    await startDiscovery();
+    await _startAdvertising();
+    await _startDiscovery();
   }
 
   /// Stop scanning (advertising and discovery) process.
@@ -65,15 +65,15 @@ class NearbyService {
   }
 
   /// Start advertising to potential discoverers.
-  Future<void> startAdvertising() async {
+  Future<void> _startAdvertising() async {
     try {
       await Nearby().startAdvertising(
-        username,
-        kStrategy,
+        _username,
+        _kStrategy,
         serviceId: AppConfig.kPackageName,
-        onDisconnected: onDisconnected,
-        onConnectionResult: onConnectionResult,
-        onConnectionInitiated: onConnectionInit,
+        onDisconnected: _onDisconnected,
+        onConnectionResult: _onConnectionResult,
+        onConnectionInitiated: _onConnectionInit,
       );
     } catch (e) {
       throw Failure(error: e.toString());
@@ -81,14 +81,14 @@ class NearbyService {
   }
 
   /// Start discovering potential advertisers.
-  Future<void> startDiscovery() async {
+  Future<void> _startDiscovery() async {
     try {
       await Nearby().startDiscovery(
-        username,
-        kStrategy,
+        _username,
+        _kStrategy,
         serviceId: AppConfig.kPackageName,
-        onEndpointLost: onEndpointLost,
-        onEndpointFound: onEndpointFound,
+        onEndpointLost: _onEndpointLost,
+        onEndpointFound: _onEndpointFound,
       );
     } catch (e) {
       throw Failure(error: e.toString());
@@ -96,17 +96,18 @@ class NearbyService {
   }
 
   /// Called (by discoverer) when nearby device is found.
-  Future<void> onEndpointFound(String id, String name, String serviceId) async {
-    if (_nearbyDevices.contains(_findDevice(id))) return;
+  Future<void> _onEndpointFound(String id, String name, String serviceId) async {
+    final device = _findDevice(id);
+    if (device != null) return;
 
     await stopScanning();
     try {
       await Nearby().requestConnection(
-        username,
+        _username,
         id,
-        onDisconnected: onDisconnected,
-        onConnectionResult: onConnectionResult,
-        onConnectionInitiated: onConnectionInit,
+        onDisconnected: _onDisconnected,
+        onConnectionResult: _onConnectionResult,
+        onConnectionInitiated: _onConnectionInit,
       );
     } catch (e) {
       print(e.toString());
@@ -116,43 +117,47 @@ class NearbyService {
   }
 
   /// Called (by discoverer) when nearby device is lost.
-  void onEndpointLost(String id) {}
+  void _onEndpointLost(String id) {}
 
   /// Called when a connection is requested.
-  Future<void> onConnectionInit(String id, ConnectionInfo info) async {
+  Future<void> _onConnectionInit(String id, ConnectionInfo info) async {
     _addDevice(id, info.endpointName);
     try {
       await Nearby().acceptConnection(
         id,
-        onPayLoadRecieved: onPayLoadRecieved,
-        onPayloadTransferUpdate: onPayloadTransferUpdate,
+        onPayLoadRecieved: _onPayLoadRecieved,
+        onPayloadTransferUpdate: _onPayloadTransferUpdate,
       );
     } catch (e) {
       print(e.toString());
     }
   }
 
-  /// Called when connection is accepted or rejected.
-  void onConnectionResult(String id, Status status) {
+  /// Called when connection is accepted or rejected (after [_onConnectionInit]).
+  void _onConnectionResult(String id, Status status) {
     if (status == Status.CONNECTED) {
       final device = _findDevice(id);
       if (device == null) return;
       device.isConnecting = false;
-      onDeviceListChanged();
+      onDeviceChanged();
     } else {
       _removeDevice(id);
     }
   }
 
   /// Called when a device disconnects.
-  /// Alert other devices about the lost connection.
-  void onDisconnected(String id) {
-    _showDisconnectedNotification(id);
+  /// Removes the disconnected device from [_nearbydevices] and
+  /// alerts other devices about the lost connection.
+  void _onDisconnected(String id) {
+    final device = _findDevice(id);
+    if (device == null) return;
+    _removeDevice(id);
+    _showDisconnectedNotification(device.name);
   }
 
   /// Called when payload is sent from connected devices.
   /// Parses the incoming bytes and handles message according to [NearbyMessageType].
-  void onPayLoadRecieved(String id, Payload payload) {
+  void _onPayLoadRecieved(String id, Payload payload) {
     final payloadStr = String.fromCharCodes(payload.bytes);
     final message = _parseRawMessage(payloadStr);
 
@@ -171,19 +176,20 @@ class NearbyService {
   }
 
   /// Called when payload is received on this device.
-  void onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
+  /// Irrelevant when payload type is [PayloadType.BYTES]
+  void _onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
 
   /// Add a [NearbyDevice] to nearby devices set.
   void _addDevice(String id, String name) {
     _nearbyDevices.add(NearbyDevice(id: id, name: name));
-    onDeviceListChanged();
+    onDeviceChanged();
   }
 
   /// Remove a [NearbyDevice] from nearby devices set.
   void _removeDevice(String id) {
     final device = _findDevice(id);
     _nearbyDevices.remove(device);
-    onDeviceListChanged();
+    onDeviceChanged();
   }
 
   /// Find [NearbyDevice] with given [id]
@@ -217,10 +223,13 @@ class NearbyService {
 
   /// Parses incoming user location data and updates corresponding device.
   void _handleIncomingLocation(String deviceId, String message) {
+    final sender = _findDevice(deviceId);
+    if (sender == null) return;
+
     final parsedMessage = jsonDecode(message);
     final userLocation = UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
-    final recipientDevice = _findDevice(deviceId);
-    if (recipientDevice != null) recipientDevice.userLocation = userLocation;
+    sender.userLocation = userLocation;
+    onDeviceChanged();
   }
 
   /// Send SOS signal to connected devices.
@@ -250,10 +259,8 @@ class NearbyService {
   }
 
   /// Show notification when device is disconnected
-  void _showDisconnectedNotification(String id) {
-    final device = _findDevice(id);
-    if (device == null) return;
-    final alertMessage = '${device.name} has disconnected from network.';
+  void _showDisconnectedNotification(String name) {
+    final alertMessage = '$name has disconnected from network.';
 
     notificationService.show(
       NotificationChannels.kDeviceDisconnectedId,

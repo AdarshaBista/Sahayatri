@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/utils/math_utls.dart';
@@ -50,7 +51,6 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   void onPositionChanged(MapPosition pos, bool hasGesture) {
     if (MathUtils.shouldSimplify(zoom, pos.zoom) || (hasGesture && isTracking)) {
-      print('SETSTATE');
       setState(() {
         zoom = pos.zoom;
         isTracking = false;
@@ -85,9 +85,11 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
       onPositionChanged: onPositionChanged,
       children: [
         _RouteLayer(zoom: zoom),
-        const _AccuracyCircleLayer(),
-        const _DevicesMarkersLayer(),
+        const _DevicesAccuracyCircleLayer(),
+        const _UserAccuracyCircleLayer(),
+        const _UserMarkerLayer(),
         const _PlaceMarkersLayer(),
+        const _DevicesMarkersLayer(),
       ],
     );
   }
@@ -164,47 +166,33 @@ class _PlaceMarkersLayer extends StatelessWidget {
   }
 }
 
-class _DevicesMarkersLayer extends StatelessWidget {
-  const _DevicesMarkersLayer();
+class _UserMarkerLayer extends StatelessWidget {
+  const _UserMarkerLayer();
 
   @override
   Widget build(BuildContext context) {
     final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
-    final nearbyDevices = context.watch<TrackerUpdate>().nearbyDevices;
-    final connected = nearbyDevices.where((d) => d.userLocation != null).toList();
 
     return RepaintBoundary(
       child: MarkerLayerWidget(
         options: MarkerLayerOptions(
-          markers: [
-            ...connected.map((d) => DeviceMarker(context, device: d)).toList(),
-            UserMarker(point: userCoord),
-          ],
+          markers: [UserMarker(point: userCoord)],
         ),
       ),
     );
   }
 }
 
-class _AccuracyCircleLayer extends StatelessWidget {
-  const _AccuracyCircleLayer();
+class _UserAccuracyCircleLayer extends StatelessWidget {
+  const _UserAccuracyCircleLayer();
 
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final nearbyDevices = trackerUpdate.nearbyDevices;
-    final connected = nearbyDevices.where((d) => d.userLocation != null).toList();
 
     return CircleLayerWidget(
       options: CircleLayerOptions(
         circles: [
-          ...connected
-              .map((d) => AccuracyCircle(
-                    color: Colors.blue,
-                    point: d.userLocation.coord,
-                    radius: d.userLocation.accuracy,
-                  ))
-              .toList(),
           AccuracyCircle(
             color: AppColors.primaryDark,
             point: trackerUpdate.userLocation.coord,
@@ -212,6 +200,68 @@ class _AccuracyCircleLayer extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DevicesMarkersLayer extends StatelessWidget {
+  const _DevicesMarkersLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+      cubit: context.bloc<NearbyBloc>(),
+      builder: (context, state) {
+        if (state is NearbyConnected) {
+          print('Buidling Map');
+          final devices =
+              state.nearbyDevices.where((d) => d.userLocation != null).toList();
+          return RepaintBoundary(
+            child: MarkerLayerWidget(
+              options: MarkerLayerOptions(
+                markers: devices.map((d) => DeviceMarker(context, device: d)).toList(),
+              ),
+            ),
+          );
+        } else {
+          print('Buidling offstage');
+          return const Offstage();
+        }
+      },
+    );
+  }
+}
+
+class _DevicesAccuracyCircleLayer extends StatelessWidget {
+  const _DevicesAccuracyCircleLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+      cubit: context.bloc<NearbyBloc>(),
+      builder: (context, state) {
+        if (state is NearbyConnected) {
+          final devices =
+              state.nearbyDevices.where((d) => d.userLocation != null).toList();
+          return RepaintBoundary(
+            child: CircleLayerWidget(
+              options: CircleLayerOptions(
+                circles: devices
+                    .map(
+                      (d) => AccuracyCircle(
+                        color: Colors.blue,
+                        point: d.userLocation.coord,
+                        radius: d.userLocation.accuracy,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          );
+        } else {
+          return const Offstage();
+        }
+      },
     );
   }
 }

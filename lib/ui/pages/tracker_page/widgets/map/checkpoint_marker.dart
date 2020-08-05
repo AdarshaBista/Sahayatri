@@ -18,7 +18,7 @@ class CheckpointMarker extends Marker {
           width: 28,
           height: 28,
           point: checkpoint.place.coord.toLatLng(),
-          anchorPos: AnchorPos.align(AnchorAlign.center),
+          anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (context) => GestureDetector(
             onTap: () {
               CheckpointDetails(checkpoint: checkpoint).openModalBottomSheet(context);

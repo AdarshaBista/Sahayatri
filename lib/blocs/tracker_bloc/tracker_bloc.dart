@@ -77,6 +77,7 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
   Stream<TrackerState> _mapTrackingStoppedToState() async* {
     smsService.stop();
     trackerService.stop();
+
     yield TrackerUpdating(
       update: (state as TrackerUpdating)
           .update
@@ -134,7 +135,6 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
       data: TrackerUpdate(
         userIndex: userIndex,
         userLocation: userLocation,
-        nearbyDevices: nearbyService.nearbyDevices,
         elapsed: trackerService.elapsedDuration(),
         nextCheckpoint: trackerService.nextCheckpoint(userLocation),
         distanceCovered: trackerService.distanceCovered(userIndex),

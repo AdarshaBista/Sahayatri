@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -15,38 +18,45 @@ class DeviceDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlideAnimator(
-      begin: const Offset(0.0, 0.5),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              device.name.toUpperCase(),
-              style: AppTextStyles.large.bold,
+    return BlocBuilder(
+      builder: (context, state) {
+        final deviceReactive =
+            (state as NearbyConnected).nearbyDevices.firstWhere((d) => d.id == device.id);
+
+        return SlideAnimator(
+          begin: const Offset(0.0, 0.5),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  device.name.toUpperCase(),
+                  style: AppTextStyles.large.bold,
+                ),
+                const SizedBox(height: 16.0),
+                _buildStat(
+                  label: 'Altitude',
+                  icon: CommunityMaterialIcons.altimeter,
+                  value: '${deviceReactive.userLocation.altitude.floor()} m',
+                ),
+                _buildStat(
+                  label: 'Speed',
+                  icon: CommunityMaterialIcons.speedometer,
+                  value: '${deviceReactive.userLocation.speed.toStringAsFixed(1)} m/s',
+                ),
+                _buildStat(
+                  label: 'Accuracy',
+                  icon: CommunityMaterialIcons.circle_slice_8,
+                  value: '${deviceReactive.userLocation.accuracy.toStringAsFixed(1)} m',
+                ),
+                const SizedBox(height: 16.0),
+              ],
             ),
-            const SizedBox(height: 16.0),
-            _buildStat(
-              label: 'Altitude',
-              icon: CommunityMaterialIcons.altimeter,
-              value: '${device.userLocation.altitude.floor()} m',
-            ),
-            _buildStat(
-              label: 'Speed',
-              icon: CommunityMaterialIcons.speedometer,
-              value: '${device.userLocation.speed.toStringAsFixed(1)} m/s',
-            ),
-            _buildStat(
-              label: 'Accuracy',
-              icon: CommunityMaterialIcons.circle_slice_8,
-              value: '${device.userLocation.accuracy.toStringAsFixed(1)} m',
-            ),
-            const SizedBox(height: 16.0),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
