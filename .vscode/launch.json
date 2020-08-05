@@ -8,6 +8,12 @@
             "deviceId": "windows"
         },
         {
+            "name": "Pixel 3",
+            "type": "dart",
+            "request": "launch",
+            "deviceId": "emulator-5554"
+        },
+        {
             "name": "Mi 4",
             "type": "dart",
             "request": "launch",
@@ -22,7 +28,7 @@
     ],
     "compounds": [
         {
-            "name": "All Phones",
+            "name": "Physical Devices",
             "configurations": [
                 "Mi 4",
                 "OnePlus 3T"

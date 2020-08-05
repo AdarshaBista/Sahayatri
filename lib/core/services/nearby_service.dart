@@ -40,21 +40,35 @@ class NearbyService {
   Future<void> start(String name) async {
     _username = name;
 
-    if (!await Nearby().checkLocationEnabled()) Nearby().enableLocationServices();
-    if (!await Nearby().checkLocationPermission()) Nearby().askLocationPermission();
-    await startScanning();
+    try {
+      if (!await Nearby().checkLocationPermission()) Nearby().askLocationPermission();
+      if (!await Nearby().checkLocationEnabled()) Nearby().enableLocationServices();
+      await startScanning();
+    } on Failure {
+      rethrow;
+    } catch (e) {
+      throw Failure(error: 'Please enable location services first.');
+    }
   }
 
   /// Start scanning (advertising and discovery) process.
   Future<void> startScanning() async {
-    await _startAdvertising();
-    await _startDiscovery();
+    try {
+      await _startAdvertising();
+      await _startDiscovery();
+    } on Failure {
+      rethrow;
+    }
   }
 
   /// Stop scanning (advertising and discovery) process.
   Future<void> stopScanning() async {
-    await Nearby().stopDiscovery();
-    await Nearby().stopAdvertising();
+    try {
+      await Nearby().stopDiscovery();
+      await Nearby().stopAdvertising();
+    } catch (e) {
+      throw Failure(error: 'Cannot initiate scanning.');
+    }
   }
 
   /// Stop scanning and disconnect from all devices.
@@ -76,7 +90,10 @@ class NearbyService {
         onConnectionInitiated: _onConnectionInit,
       );
     } catch (e) {
-      throw Failure(error: e.toString());
+      throw Failure(
+        error: e.toString(),
+        message: 'Cannot start advertising.',
+      );
     }
   }
 
@@ -91,7 +108,10 @@ class NearbyService {
         onEndpointFound: _onEndpointFound,
       );
     } catch (e) {
-      throw Failure(error: e.toString());
+      throw Failure(
+        error: e.toString(),
+        message: 'Cannot start discovery.',
+      );
     }
   }
 
