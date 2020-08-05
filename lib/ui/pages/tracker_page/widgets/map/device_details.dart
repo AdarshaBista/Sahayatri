@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
 
-import 'package:sahayatri/core/models/nearby_device.dart';
-
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
 class DeviceDetails extends StatelessWidget {
-  final NearbyDevice device;
+  final String deviceId;
 
   const DeviceDetails({
-    @required this.device,
-  }) : assert(device != null);
+    @required this.deviceId,
+  }) : assert(deviceId != null);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       builder: (context, state) {
-        final deviceReactive =
-            (state as NearbyConnected).nearbyDevices.firstWhere((d) => d.id == device.id);
+        final deviceReactive = (state as NearbyConnected)
+            .nearbyDevices
+            .firstWhere((d) => d.id == deviceId, orElse: () => null);
+
+        if (deviceReactive == null) return _buildDisconnected();
 
         return SlideAnimator(
           begin: const Offset(0.0, 0.5),
@@ -32,7 +33,7 @@ class DeviceDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  device.name.toUpperCase(),
+                  deviceReactive.name.toUpperCase(),
                   style: AppTextStyles.large.bold,
                 ),
                 const SizedBox(height: 16.0),
@@ -75,6 +76,16 @@ class DeviceDetails extends StatelessWidget {
       trailing: Text(
         value,
         style: AppTextStyles.medium.bold,
+      ),
+    );
+  }
+
+  Widget _buildDisconnected() {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Text(
+        'This device seems to have disconnected.',
+        style: AppTextStyles.medium.secondary,
       ),
     );
   }

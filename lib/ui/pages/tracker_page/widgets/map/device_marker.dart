@@ -16,7 +16,7 @@ class DeviceMarker extends Marker {
           height: 24.0,
           point: device.userLocation.coord.toLatLng(),
           builder: (_) => GestureDetector(
-            onTap: () => DeviceDetails(device: device).openModalBottomSheet(context),
+            onTap: () => DeviceDetails(deviceId: device.id).openModalBottomSheet(context),
             child: const Icon(
               Icons.radio_button_checked,
               size: 24.0,

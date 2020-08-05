@@ -213,7 +213,6 @@ class _DevicesMarkersLayer extends StatelessWidget {
       cubit: context.bloc<NearbyBloc>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
-          print('Buidling Map');
           final devices =
               state.nearbyDevices.where((d) => d.userLocation != null).toList();
           return RepaintBoundary(
@@ -224,7 +223,6 @@ class _DevicesMarkersLayer extends StatelessWidget {
             ),
           );
         } else {
-          print('Buidling offstage');
           return const Offstage();
         }
       },
