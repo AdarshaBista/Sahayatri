@@ -24,7 +24,7 @@ class DestinationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: AspectRatio(
-        aspectRatio: 2,
+        aspectRatio: 2.2,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -34,7 +34,7 @@ class DestinationCard extends StatelessWidget {
                 );
           },
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: [

@@ -18,7 +18,6 @@ class Carousel extends StatelessWidget {
       child: Swiper(
         autoplay: true,
         autoplayDelay: 2000,
-        pagination: showPagination ? const SwiperPagination() : null,
         itemWidth: double.infinity,
         itemHeight: double.infinity,
         itemCount: imageUrls.length,
@@ -26,6 +25,15 @@ class Carousel extends StatelessWidget {
           imageUrls[index],
           fit: BoxFit.cover,
         ),
+        pagination: showPagination
+            ? const SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+                  size: 6.0,
+                  activeSize: 8.0,
+                  color: Colors.white70,
+                ),
+              )
+            : null,
       ),
     );
   }

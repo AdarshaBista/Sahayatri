@@ -43,6 +43,8 @@ class TrackerBloc extends Bloc<TrackerEvent, TrackerState> {
     return super.close();
   }
 
+  bool get isTracking => trackerService.isTracking;
+
   Duration get elapsed => trackerService.elapsedDuration();
 
   @override
