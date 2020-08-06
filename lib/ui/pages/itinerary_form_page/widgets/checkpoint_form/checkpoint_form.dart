@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
@@ -121,7 +120,7 @@ class CheckpointForm extends StatelessWidget {
         if (!_formKey.currentState.validate()) return;
 
         onSubmit(state.checkpoint);
-        context.repository<DestinationNavService>().pop();
+        Navigator.of(context).pop();
       },
     );
   }

@@ -27,6 +27,7 @@ extension WidgetX on Widget {
   void openModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      elevation: 12.0,
       enableDrag: true,
       isDismissible: true,
       useRootNavigator: false,

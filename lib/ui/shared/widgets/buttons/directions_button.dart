@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
-import 'package:sahayatri/core/services/navigation_service.dart';
-
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/column_button.dart';
@@ -70,7 +68,7 @@ class DirectionsButton extends StatelessWidget {
                 label: m.title,
                 icon: m.icon,
                 onTap: () {
-                  context.repository<DestinationNavService>().pop();
+                  Navigator.of(context).pop();
                   context.bloc<DirectionsBloc>().add(
                         DirectionsStarted(
                             trailHead: context

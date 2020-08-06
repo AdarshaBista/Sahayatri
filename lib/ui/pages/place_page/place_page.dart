@@ -4,6 +4,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,10 +74,10 @@ class PlacePage extends StatelessWidget {
         iconData: CommunityMaterialIcons.weather_fog,
         onTap: () => context.repository<DestinationNavService>().pushNamed(
           Routes.kWeatherPageRoute,
-          arguments: [
-            place.name,
-            place.coord,
-          ],
+          arguments:WeatherPageArgs(
+            name: place.name,
+            coord: place.coord,
+          ),
         ),
       ),
     );

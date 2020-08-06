@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -78,7 +77,7 @@ class _RoutePageState extends State<RoutePage> {
         isSheetOpen = false;
       });
     } else {
-      context.repository<DestinationNavService>().pop();
+      Navigator.of(context).pop();
     }
   }
 }

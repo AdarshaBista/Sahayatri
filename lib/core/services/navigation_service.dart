@@ -22,7 +22,7 @@ abstract class NavigationService {
   }
 }
 
-// Navigation service for root pages off app
+// Navigation service for root pages of app
 class RootNavService extends NavigationService {
   static final rootNavKey = GlobalKey<NavigatorState>();
   RootNavService() : super(rootNavKey);

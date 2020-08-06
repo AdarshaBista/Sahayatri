@@ -52,7 +52,7 @@ class PlaceListSheet extends StatelessWidget {
     return ListTile(
       onTap: () {
         onSelect(place);
-        context.repository<DestinationNavService>().pop();
+        Navigator.of(context).pop();
       },
       title: Text(place.name, style: AppTextStyles.medium),
       leading: CircleAvatar(backgroundImage: AssetImage(place.imageUrls[0])),

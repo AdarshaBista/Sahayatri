@@ -4,6 +4,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
@@ -59,10 +60,10 @@ class RatingTile extends StatelessWidget {
       label: 'Weather',
       onTap: () => context.repository<DestinationNavService>().pushNamed(
         Routes.kWeatherPageRoute,
-        arguments: [
-          destination.name,
-          destination.startingPlace.coord,
-        ],
+        arguments: WeatherPageArgs(
+          name: destination.name,
+          coord: destination.startingPlace.coord,
+        ),
       ),
       icon: CommunityMaterialIcons.weather_fog,
     );
@@ -90,7 +91,7 @@ class RatingTile extends StatelessWidget {
       ).openDialog(context);
 
       await Future.delayed(const Duration(seconds: 1));
-      context.repository<DestinationNavService>().pop();
+      Navigator.of(context).pop();
     }
 
     context
