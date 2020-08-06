@@ -17,7 +17,3 @@ class ItineraryCreated extends DestinationEvent {
   @override
   List<Object> get props => [itinerary];
 }
-
-class DestinationDownloaded extends DestinationEvent {
-  const DestinationDownloaded();
-}

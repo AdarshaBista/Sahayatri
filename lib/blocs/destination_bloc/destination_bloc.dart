@@ -23,10 +23,5 @@ class DestinationBloc extends Bloc<DestinationEvent, DestinationState> {
       destination.createdItinerary = event.itinerary;
       yield DestinationState(destination: destination);
     }
-
-    if (event is DestinationDownloaded) {
-      destination.isDownloaded = true;
-      yield DestinationState(destination: destination);
-    }
   }
 }

@@ -15,7 +15,6 @@ class Images {
   static const String kEmpty = 'assets/images/indicators/empty.png';
   static const String kLoading = 'assets/images/indicators/loading.png';
   static const String kMessage = 'assets/images/indicators/message.png';
-  static const String kDownloading = 'assets/images/indicators/downloading.png';
   static const String kLocationError = 'assets/images/indicators/location_error.png';
 }
 
