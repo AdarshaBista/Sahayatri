@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
@@ -33,11 +33,11 @@ class PlaceListSheet extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: context.bloc<DestinationBloc>().destination.places.length,
+                itemCount: context.bloc<DestinationCubit>().destination.places.length,
                 itemBuilder: (context, index) {
                   return _buildPlaceTile(
                     context,
-                    context.bloc<DestinationBloc>().destination.places[index],
+                    context.bloc<DestinationCubit>().destination.places[index],
                   );
                 },
               ),

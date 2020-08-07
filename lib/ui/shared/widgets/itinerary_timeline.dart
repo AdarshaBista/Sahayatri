@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
+import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
@@ -153,9 +153,7 @@ class ItineraryTimeline extends StatelessWidget {
 
   GestureDetector _buildDeleteIcon(BuildContext context, Checkpoint checkpoint) {
     return GestureDetector(
-      onTap: () => context
-          .bloc<ItineraryFormBloc>()
-          .add(CheckpointRemoved(checkpoint: checkpoint)),
+      onTap: () => context.bloc<ItineraryFormCubit>().removeCheckpoint(checkpoint),
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: const Icon(
@@ -171,12 +169,9 @@ class ItineraryTimeline extends StatelessWidget {
     if (isEditable) {
       CheckpointForm(
         checkpoint: checkpoint,
-        onSubmit: (updatedCheckpoint) => context.bloc<ItineraryFormBloc>().add(
-              CheckpointUpdated(
-                newCheckpoint: updatedCheckpoint,
-                prevCheckpoint: checkpoint,
-              ),
-            ),
+        onSubmit: (updatedCheckpoint) => context
+            .bloc<ItineraryFormCubit>()
+            .updateCheckpoint(checkpoint, updatedCheckpoint),
       ).openModalBottomSheet(context);
     } else {
       context.repository<DestinationNavService>().pushNamed(

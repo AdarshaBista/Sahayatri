@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
-import 'package:sahayatri/core/models/tracker_update.dart';
-
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
 class TrackerActions extends StatelessWidget {
@@ -29,9 +28,7 @@ class TrackerActions extends StatelessWidget {
                     label: 'RESUME',
                     color: AppColors.primaryDark,
                     icon: CommunityMaterialIcons.play_circle_outline,
-                    onTap: () => context.repository<TrackerBloc>().add(
-                          const TrackingResumed(),
-                        ),
+                    onTap: () => context.repository<TrackerCubit>().resumeTracking(),
                   ),
                 ),
               if (trackerUpdate.trackingState == TrackingState.updating)
@@ -40,9 +37,7 @@ class TrackerActions extends StatelessWidget {
                     label: 'PAUSE',
                     color: Colors.blue,
                     icon: CommunityMaterialIcons.pause_circle_outline,
-                    onTap: () => context.repository<TrackerBloc>().add(
-                          const TrackingPaused(),
-                        ),
+                    onTap: () => context.repository<TrackerCubit>().pauseTracking(),
                   ),
                 ),
               Expanded(
@@ -52,9 +47,7 @@ class TrackerActions extends StatelessWidget {
                   icon: CommunityMaterialIcons.stop_circle_outline,
                   onTap: () => ConfirmDialog(
                     message: 'Are you sure you want to stop the tracking process.',
-                    onConfirm: () => context.repository<TrackerBloc>().add(
-                          const TrackingStopped(),
-                        ),
+                    onConfirm: () => context.repository<TrackerCubit>().stopTracking(),
                   ).openDialog(context),
                 ),
               ),

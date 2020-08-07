@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 
-import 'package:sahayatri/app/mocks/mocks.dart';
-import 'package:sahayatri/app/constants/api_keys.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
+
+import 'package:sahayatri/app/mocks/mocks.dart';
+import 'package:sahayatri/app/constants/api_keys.dart';
 
 class ApiService {
   static const String kWeatherBaseUrl = 'https://api.openweathermap.org/data/2.5';

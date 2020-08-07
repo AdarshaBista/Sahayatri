@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/column_button.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 
@@ -38,7 +38,7 @@ class DirectionsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DirectionsBloc, DirectionsState>(
+    return BlocListener<DirectionsCubit, DirectionsState>(
       listener: (context, state) {
         if (state is DirectionsError) {
           _showSnackBar(context, state.message);
@@ -69,12 +69,8 @@ class DirectionsButton extends StatelessWidget {
                 icon: m.icon,
                 onTap: () {
                   Navigator.of(context).pop();
-                  context.bloc<DirectionsBloc>().add(
-                        DirectionsStarted(
-                            trailHead: context
-                                .bloc<DestinationBloc>()
-                                .destination
-                                .startingPlace),
+                  context.bloc<DirectionsCubit>().startNavigation(
+                        context.bloc<DestinationCubit>().destination.startingPlace,
                       );
                 },
               ),

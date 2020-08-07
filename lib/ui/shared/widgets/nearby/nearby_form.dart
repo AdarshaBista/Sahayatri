@@ -4,11 +4,11 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
@@ -66,7 +66,7 @@ class NearbyForm extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<NearbyBloc, NearbyState>(
+    return BlocConsumer<NearbyCubit, NearbyState>(
       listener: (context, state) {
         if (state is NearbyError) _showSnackBar(context, state.message);
       },
@@ -97,7 +97,7 @@ class NearbyForm extends StatelessWidget {
       onTap: () {
         final name = (context.bloc<PrefsBloc>().state as PrefsLoaded).prefs.deviceName;
         if (name.isNotEmpty) {
-          context.bloc<NearbyBloc>().add(NearbyStarted(name: name));
+          context.bloc<NearbyCubit>().startNearby(name);
         } else {
           const MessageDialog(message: 'Please set your device name first.')
               .openDialog(context);

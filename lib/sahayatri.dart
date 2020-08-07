@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/routers/root_router.dart';
-
-import 'package:sahayatri/app/database/prefs_dao.dart';
-import 'package:sahayatri/app/database/weather_dao.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
-
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/nearby_service.dart';
@@ -21,6 +10,17 @@ import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/routers/root_router.dart';
+
+import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/weather_dao.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:device_preview/device_preview.dart';
@@ -71,10 +71,10 @@ class Sahayatri extends StatelessWidget {
             BlocProvider<PrefsBloc>(
               create: (context) => PrefsBloc(
                 prefsDao: context.repository<PrefsDao>(),
-              )..add(const PrefsInitialized()),
+              )..initPrefs(),
             ),
-            BlocProvider<NearbyBloc>(
-              create: (context) => NearbyBloc(
+            BlocProvider<NearbyCubit>(
+              create: (context) => NearbyCubit(
                 nearbyService: context.repository<NearbyService>(),
               ),
             ),

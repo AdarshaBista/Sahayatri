@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-
 import 'package:sahayatri/core/utils/form_validators.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
@@ -64,7 +64,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
       ),
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
-        context.bloc<PrefsBloc>().add(DeviceNameSaved(deviceName: deviceName));
+        context.bloc<PrefsBloc>().saveDeviceName(deviceName);
         _showSavedSnackBar(context);
       },
     );

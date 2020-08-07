@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -17,7 +17,7 @@ class TrackerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrackerBloc, TrackerState>(
+    return BlocBuilder<TrackerCubit, TrackerState>(
       builder: (context, state) {
         if (state is TrackerLoading) {
           return Scaffold(

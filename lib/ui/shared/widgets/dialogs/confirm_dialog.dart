@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String message;

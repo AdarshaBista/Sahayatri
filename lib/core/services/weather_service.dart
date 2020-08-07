@@ -4,9 +4,9 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 
-import 'package:sahayatri/app/database/weather_dao.dart';
-
 import 'package:sahayatri/core/services/api_service.dart';
+
+import 'package:sahayatri/app/database/weather_dao.dart';
 
 class WeatherService {
   static const int kCacheDuration = 20;

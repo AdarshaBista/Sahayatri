@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 

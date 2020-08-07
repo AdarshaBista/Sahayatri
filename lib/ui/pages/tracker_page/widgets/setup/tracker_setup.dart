@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
@@ -71,9 +71,9 @@ class _TrackerSetupState extends State<TrackerSetup> {
         'START',
         style: AppTextStyles.small.primary.bold,
       ),
-      onPressed: () => context.bloc<TrackerBloc>().add(TrackingStarted(
-            destination: context.bloc<DestinationBloc>().destination,
-          )),
+      onPressed: () => context
+          .bloc<TrackerCubit>()
+          .startTracking(context.bloc<DestinationCubit>().destination),
     );
   }
 }

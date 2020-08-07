@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
+
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

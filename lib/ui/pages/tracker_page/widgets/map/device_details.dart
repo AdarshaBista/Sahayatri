@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
-
 import 'package:sahayatri/core/models/nearby_device.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 
 class DeviceDetails extends StatelessWidget {
   final String deviceId;

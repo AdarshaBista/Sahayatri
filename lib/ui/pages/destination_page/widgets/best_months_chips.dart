@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
@@ -11,7 +11,7 @@ class BestMonthsChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bestMonths = context.bloc<DestinationBloc>().destination.bestMonths;
+    final bestMonths = context.bloc<DestinationCubit>().destination.bestMonths;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),

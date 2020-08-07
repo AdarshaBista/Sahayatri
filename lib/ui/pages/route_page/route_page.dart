@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
-
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+
 import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
@@ -27,7 +26,7 @@ class _RoutePageState extends State<RoutePage> {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return Scaffold(
       floatingActionButton: Builder(
@@ -55,7 +54,7 @@ class _RoutePageState extends State<RoutePage> {
   }
 
   Future<void> _openAltitudeSheet(BuildContext context) async {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     setState(() {
       isSheetOpen = !isSheetOpen;
@@ -91,7 +90,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
@@ -120,7 +119,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(

@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/weather_bloc/weather_bloc.dart';
-import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
-import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
-import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
-
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -19,6 +10,15 @@ import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
+import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
+import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -65,8 +65,8 @@ class DestinationRouter {
         break;
 
       case Routes.kItineraryFormPageRoute:
-        _page = BlocProvider<ItineraryFormBloc>(
-          create: (_) => ItineraryFormBloc(
+        _page = BlocProvider<ItineraryFormCubit>(
+          create: (_) => ItineraryFormCubit(
             itinerary: settings.arguments as Itinerary,
           ),
           child: ItineraryFormPage(),
@@ -76,17 +76,16 @@ class DestinationRouter {
       case Routes.kTrackerPageRoute:
         _page = MultiBlocProvider(
           providers: [
-            BlocProvider<TrackerBloc>(
-                create: (context) => TrackerBloc(
-                      smsService: context.repository<SmsService>(),
-                      nearbyService: context.repository<NearbyService>(),
-                      trackerService: context.repository<TrackerService>(),
-                      offRouteAlertService: context.repository<OffRouteAlertService>(),
-                    )..add(
-                        TrackingAttempted(destination: settings.arguments as Destination),
-                      )),
-            BlocProvider<DirectionsBloc>(
-              create: (context) => DirectionsBloc(
+            BlocProvider<TrackerCubit>(
+              create: (context) => TrackerCubit(
+                smsService: context.repository<SmsService>(),
+                nearbyService: context.repository<NearbyService>(),
+                trackerService: context.repository<TrackerService>(),
+                offRouteAlertService: context.repository<OffRouteAlertService>(),
+              )..attemptTracking(settings.arguments as Destination),
+            ),
+            BlocProvider<DirectionsCubit>(
+              create: (context) => DirectionsCubit(
                 directionsService: context.repository<DirectionsService>(),
               ),
             ),
@@ -97,11 +96,11 @@ class DestinationRouter {
 
       case Routes.kWeatherPageRoute:
         final weatherPageArgs = settings.arguments as WeatherPageArgs;
-        _page = BlocProvider<WeatherBloc>(
-          create: (context) => WeatherBloc(
+        _page = BlocProvider<WeatherCubit>(
+          create: (context) => WeatherCubit(
             title: weatherPageArgs.name,
             weatherService: context.repository<WeatherService>(),
-          )..add(WeatherFetched(coord: weatherPageArgs.coord)),
+          )..fetchWeather(weatherPageArgs.coord),
           child: const WeatherPage(),
         );
         break;

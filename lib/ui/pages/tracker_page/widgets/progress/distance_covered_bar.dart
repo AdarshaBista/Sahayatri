@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
-
 import 'package:sahayatri/core/models/tracker_update.dart';
+
+import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/place_card.dart';
@@ -11,7 +11,7 @@ class PlacesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final places = context.bloc<DestinationBloc>().destination.places;
+    final places = context.bloc<DestinationCubit>().destination.places;
 
     return ListView(
       physics: const BouncingScrollPhysics(),

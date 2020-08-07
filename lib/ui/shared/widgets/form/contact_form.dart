@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-
 import 'package:sahayatri/core/utils/form_validators.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -87,8 +87,8 @@ class _ContactFormState extends State<ContactForm> {
       ),
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
+        context.bloc<PrefsBloc>().saveContact(contact);
 
-        context.bloc<PrefsBloc>().add(ContactSaved(contact: contact));
         if (widget.isOnSettings) {
           Navigator.of(context).pop();
         } else {

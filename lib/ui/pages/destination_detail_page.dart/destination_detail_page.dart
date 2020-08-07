@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
@@ -49,7 +49,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return Scaffold(
       extendBody: true,
@@ -71,7 +71,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   FloatingActionButton _buildFab(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return FloatingActionButton(
       backgroundColor: AppColors.dark,
@@ -90,7 +90,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
 
         context.repository<DestinationNavService>().pushNamed(
               Routes.kTrackerPageRoute,
-              arguments: context.bloc<DestinationBloc>().destination,
+              arguments: context.bloc<DestinationCubit>().destination,
             );
       },
     );

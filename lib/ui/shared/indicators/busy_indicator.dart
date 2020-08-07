@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
 class BusyIndicator extends StatelessWidget {

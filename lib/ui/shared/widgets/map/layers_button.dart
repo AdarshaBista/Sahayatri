@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 
 class LayersButton extends StatelessWidget {
   const LayersButton();
@@ -57,9 +57,8 @@ class LayersButton extends StatelessWidget {
                 elevation: 6.0,
                 initialValue: (state as PrefsLoaded).prefs.mapStyle,
                 color: AppColors.light,
-                onSelected: (mapStyle) {
-                  context.bloc<PrefsBloc>().add(MapLayerChanged(mapStyle: mapStyle));
-                },
+                onSelected: (mapStyle) =>
+                    context.bloc<PrefsBloc>().changeMapLayer(mapStyle),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(

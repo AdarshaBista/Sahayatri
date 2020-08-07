@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
-
-import 'package:sahayatri/core/utils/math_utls.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
+
+import 'package:sahayatri/core/utils/math_utls.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
+
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -120,7 +120,7 @@ class _RouteLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final route = context.bloc<DestinationBloc>().destination.route;
+    final route = context.bloc<DestinationCubit>().destination.route;
     final userPath = route.take(trackerUpdate.userIndex).toList();
 
     return PolylineLayerWidget(
@@ -145,7 +145,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
     final places = destination.places;
     final checkpoints = destination.createdItinerary.checkpoints;
     final checkpointPlaces = checkpoints.map((c) => c.place).toList();
@@ -210,7 +210,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: context.bloc<NearbyBloc>(),
+      cubit: context.bloc<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
           final devices =
@@ -236,7 +236,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: context.bloc<NearbyBloc>(),
+      cubit: context.bloc<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
           final devices =

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/tracker_bloc/tracker_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class StopwatchTile extends StatefulWidget {
   const StopwatchTile();
@@ -34,7 +34,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
 
   @override
   Widget build(BuildContext context) {
-    final elapsed = context.bloc<TrackerBloc>().elapsed;
+    final elapsed = context.bloc<TrackerCubit>().elapsed;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,

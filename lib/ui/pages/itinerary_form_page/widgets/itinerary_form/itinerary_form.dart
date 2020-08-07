@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/itinerary_form_bloc/itinerary_form_bloc.dart';
+import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
@@ -15,7 +15,7 @@ class ItineraryForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ItineraryFormBloc, ItineraryFormState>(
+    return BlocBuilder<ItineraryFormCubit, ItineraryFormState>(
       builder: (context, state) {
         return ListView(
           physics: const BouncingScrollPhysics(),
@@ -37,7 +37,7 @@ class ItineraryForm extends StatelessWidget {
       label: 'Name',
       initialValue: name,
       validator: FormValidators.requiredText('Please enter a name.'),
-      onChanged: (name) => context.bloc<ItineraryFormBloc>().add(NameChanged(name: name)),
+      onChanged: (name) => context.bloc<ItineraryFormCubit>().changeName(name),
     );
   }
 
@@ -57,9 +57,7 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Days',
                 initialValue: state.days,
-                onChanged: (days) => context.bloc<ItineraryFormBloc>().add(
-                      DaysChanged(days: days),
-                    ),
+                onChanged: (days) => context.bloc<ItineraryFormCubit>().changeDays(days),
               ),
             ),
             const SizedBox(width: 12.0),
@@ -67,9 +65,8 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Nights',
                 initialValue: state.nights,
-                onChanged: (nights) => context.bloc<ItineraryFormBloc>().add(
-                      NightsChanged(nights: nights),
-                    ),
+                onChanged: (nights) =>
+                    context.bloc<ItineraryFormCubit>().changeNights(nights),
               ),
             ),
           ],

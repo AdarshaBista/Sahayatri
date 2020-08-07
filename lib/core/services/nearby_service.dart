@@ -5,15 +5,15 @@ import 'package:meta/meta.dart';
 
 import 'package:nearby_connections/nearby_connections.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/notification_channels.dart';
-
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 import 'package:sahayatri/core/models/nearby_message.dart';
 
 import 'package:sahayatri/core/services/notification_service.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/notification_channels.dart';
 
 class NearbyService {
   final NotificationService notificationService;

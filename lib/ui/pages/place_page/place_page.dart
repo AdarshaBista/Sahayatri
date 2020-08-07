@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -73,12 +74,12 @@ class PlacePage extends StatelessWidget {
         color: AppColors.dark,
         iconData: CommunityMaterialIcons.weather_fog,
         onTap: () => context.repository<DestinationNavService>().pushNamed(
-          Routes.kWeatherPageRoute,
-          arguments:WeatherPageArgs(
-            name: place.name,
-            coord: place.coord,
-          ),
-        ),
+              Routes.kWeatherPageRoute,
+              arguments: WeatherPageArgs(
+                name: place.name,
+                coord: place.coord,
+              ),
+            ),
       ),
     );
   }

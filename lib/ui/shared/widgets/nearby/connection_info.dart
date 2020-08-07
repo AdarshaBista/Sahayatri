@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/scan_indicator.dart';
@@ -20,7 +20,7 @@ class ConnectionInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Your Name : ${context.bloc<NearbyBloc>().username}',
+          'Your Name : ${context.bloc<NearbyCubit>().username}',
           style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 10.0),
@@ -39,7 +39,7 @@ class ConnectionInfo extends StatelessWidget {
   }
 
   Widget _buildScanIndicator() {
-    return BlocBuilder<NearbyBloc, NearbyState>(
+    return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
         return (state as NearbyConnected).isScanning
             ? const ScanIndicator()

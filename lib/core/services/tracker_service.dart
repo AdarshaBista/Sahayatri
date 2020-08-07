@@ -4,10 +4,6 @@ import 'dart:math' as math;
 import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
-import 'package:sahayatri/core/utils/geo_utils.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
@@ -15,7 +11,10 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
+import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/location_service.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
 
 class TrackerService {
   /// Location updates from GPS.

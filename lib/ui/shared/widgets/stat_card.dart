@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class StatCard extends StatelessWidget {

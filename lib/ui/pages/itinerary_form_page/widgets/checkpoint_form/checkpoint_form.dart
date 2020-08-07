@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/checkpoint_form_bloc/checkpoint_form_bloc.dart';
-
-import 'package:sahayatri/core/utils/form_validators.dart';
+import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
@@ -26,13 +25,13 @@ class CheckpointForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CheckpointFormBloc>(
-      create: (_) => CheckpointFormBloc(checkpoint: checkpoint),
+    return BlocProvider<CheckpointFormCubit>(
+      create: (_) => CheckpointFormCubit(checkpoint: checkpoint),
       child: AnimatedPadding(
         curve: Curves.decelerate,
         padding: MediaQuery.of(context).viewInsets,
         duration: const Duration(milliseconds: 200),
-        child: BlocBuilder<CheckpointFormBloc, CheckpointFormState>(
+        child: BlocBuilder<CheckpointFormCubit, CheckpointFormState>(
           builder: (context, state) {
             return Form(
               key: _formKey,
@@ -71,9 +70,7 @@ class CheckpointForm extends StatelessWidget {
         initialPlace: place,
         onSelect: (selectedPlace) {
           field.didChange(selectedPlace);
-          context.bloc<CheckpointFormBloc>().add(
-                PlaceChanged(place: selectedPlace),
-              );
+          context.bloc<CheckpointFormCubit>().changePlace(selectedPlace);
         },
       ),
     );
@@ -87,9 +84,7 @@ class CheckpointForm extends StatelessWidget {
         initialDateTime: dateTime,
         onSelect: (selectedDateTime) {
           field.didChange(selectedDateTime);
-          context.bloc<CheckpointFormBloc>().add(
-                DateTimeChanged(dateTime: selectedDateTime),
-              );
+          context.bloc<CheckpointFormCubit>().changeDateTime(selectedDateTime);
         },
       ),
     );
@@ -101,9 +96,7 @@ class CheckpointForm extends StatelessWidget {
       validator: (_) => null,
       icon: Icons.description,
       initialValue: description,
-      onChanged: (desc) => context.bloc<CheckpointFormBloc>().add(
-            DescriptionChanged(description: desc),
-          ),
+      onChanged: (desc) => context.bloc<CheckpointFormCubit>().changeDescription(desc),
     );
   }
 

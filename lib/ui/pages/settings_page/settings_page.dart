@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/pages/settings_page/widgets/settings_card.dart';
 
 class SettingsPage extends StatelessWidget {

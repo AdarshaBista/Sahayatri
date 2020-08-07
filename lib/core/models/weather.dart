@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:hive/hive.dart';
+
+import 'package:community_material_icon/community_material_icon.dart';
 
 part 'weather.g.dart';
 

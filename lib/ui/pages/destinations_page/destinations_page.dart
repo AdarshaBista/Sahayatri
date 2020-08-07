@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/utils/debouncer.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destinations_bloc/destinations_bloc.dart';
+import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
 import 'package:sahayatri/ui/shared/widgets/search_box.dart';
@@ -66,9 +68,9 @@ class _DestinationsPageState extends State<DestinationsPage> {
         SearchBox(
           elevation: searchElevation,
           hintText: 'Where do you want to go?',
-          onChanged: (query) => context.bloc<DestinationsBloc>().add(
-                DestinationsSearched(query: query),
-              ),
+          onChanged: (query) => Debouncer().run(
+            () => context.bloc<DestinationsCubit>().search(query),
+          ),
         ),
       ],
     );
@@ -81,7 +83,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
       children: [
         const Header(title: 'Choose your', boldTitle: 'Destination'),
         const SizedBox(height: 8.0),
-        BlocBuilder<DestinationsBloc, DestinationsState>(
+        BlocBuilder<DestinationsCubit, DestinationsState>(
           builder: (context, state) {
             if (state is DestinationsError) {
               return ErrorIndicator(message: state.message);

@@ -4,10 +4,10 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/nearby_bloc/nearby_bloc.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
 import 'package:sahayatri/ui/shared/widgets/dialogs/confirm_dialog.dart';
 
@@ -30,8 +30,8 @@ class NearbyActions extends StatelessWidget {
               : CommunityMaterialIcons.account_search_outline,
           onTap: () {
             isScanning
-                ? context.bloc<NearbyBloc>().add(const ScanningStopped())
-                : context.bloc<NearbyBloc>().add(const ScanningStarted());
+                ? context.bloc<NearbyCubit>().stopScanning()
+                : context.bloc<NearbyCubit>().startScanning();
           },
         ),
         NearbyButton(
@@ -40,7 +40,7 @@ class NearbyActions extends StatelessWidget {
           icon: Icons.exit_to_app_outlined,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
-            onConfirm: () => context.bloc<NearbyBloc>().add(const NearbyStopped()),
+            onConfirm: () => context.bloc<NearbyCubit>().stopNearby(),
           ).openDialog(context),
         ),
         NearbyButton(
@@ -49,7 +49,7 @@ class NearbyActions extends StatelessWidget {
           icon: Icons.speaker_phone_outlined,
           onTap: () {
             _showSnackBar(context, 'SOS Sent');
-            context.bloc<NearbyBloc>().sendSos();
+            context.bloc<NearbyCubit>().sendSos();
           },
         ),
       ],

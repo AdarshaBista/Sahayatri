@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
 
-import 'package:sahayatri/core/models/checkpoint.dart';
-
 import 'package:form_field_validator/form_field_validator.dart';
+
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 class FormValidators {
   static TextFieldValidator requiredText([String message = 'This field is required']) {

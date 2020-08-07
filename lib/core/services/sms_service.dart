@@ -4,16 +4,16 @@ import 'package:meta/meta.dart';
 
 import 'package:sms_maintained/sms.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/notification_channels.dart';
-
-import 'package:sahayatri/app/database/prefs_dao.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/notification_channels.dart';
+
+import 'package:sahayatri/app/database/prefs_dao.dart';
 
 class SmsService {
   final PrefsDao prefsDao;

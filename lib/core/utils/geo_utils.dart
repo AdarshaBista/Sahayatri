@@ -4,9 +4,9 @@ import 'package:meta/meta.dart';
 
 import 'package:maps_toolkit/maps_toolkit.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
 
 class GeoUtils {
   /// Determine if [coord] is in [path] within a given [tolerance].

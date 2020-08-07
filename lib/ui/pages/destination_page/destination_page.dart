@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
-
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
@@ -24,7 +24,7 @@ class DestinationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationBloc>().destination;
+    final destination = context.bloc<DestinationCubit>().destination;
 
     return Scaffold(
       appBar: CustomAppbar(

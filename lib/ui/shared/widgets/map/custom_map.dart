@@ -2,17 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/utils/math_utls.dart';
+import 'package:sahayatri/core/extensions/coord_list_x.dart';
+
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
-import 'package:sahayatri/core/utils/math_utls.dart';
-
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/extensions/coord_list_x.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/prefs_bloc/prefs_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -143,7 +142,7 @@ class _RouteLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route = context.bloc<DestinationBloc>().destination.route;
+    final route = context.bloc<DestinationCubit>().destination.route;
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(

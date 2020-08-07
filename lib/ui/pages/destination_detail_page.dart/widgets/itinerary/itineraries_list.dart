@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/header.dart';
@@ -31,7 +31,7 @@ class ItinerariesList extends StatelessWidget {
 
   Widget _buildSuggestedItineraries(BuildContext context) {
     final suggestedItineraries =
-        context.bloc<DestinationBloc>().destination.suggestedItineraries;
+        context.bloc<DestinationCubit>().destination.suggestedItineraries;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

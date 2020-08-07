@@ -1,10 +1,9 @@
 import 'dart:math' as math;
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
-
 import 'package:sahayatri/core/utils/math_utls.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
 
 extension CoordListX on List<Coord> {
   double get minLat => map((c) => c.lat).reduce(math.min);

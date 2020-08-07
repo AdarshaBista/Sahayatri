@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/directions_bloc/directions_bloc.dart';
-import 'package:sahayatri/blocs/destination_bloc/destination_bloc.dart';
-import 'package:sahayatri/blocs/destinations_bloc/destinations_bloc.dart';
-
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -24,10 +24,10 @@ class RootRouter {
 
     switch (settings.name) {
       case Routes.kBottomNavPageRoute:
-        _page = BlocProvider<DestinationsBloc>(
-          create: (context) => DestinationsBloc(
+        _page = BlocProvider<DestinationsCubit>(
+          create: (context) => DestinationsCubit(
             apiService: context.repository<ApiService>(),
-          )..add(const DestinationsFetched()),
+          )..fetchDestinations(),
           child: const BottomNavPage(),
         );
         break;
@@ -35,13 +35,13 @@ class RootRouter {
       case Routes.kDestinationPageRoute:
         _page = MultiBlocProvider(
           providers: [
-            BlocProvider<DestinationBloc>(
-              create: (context) => DestinationBloc(
+            BlocProvider<DestinationCubit>(
+              create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
               ),
             ),
-            BlocProvider<DirectionsBloc>(
-              create: (context) => DirectionsBloc(
+            BlocProvider<DirectionsCubit>(
+              create: (context) => DirectionsCubit(
                 directionsService: context.repository<DirectionsService>(),
               ),
             ),

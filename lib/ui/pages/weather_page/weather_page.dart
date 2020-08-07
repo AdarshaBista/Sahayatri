@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/blocs/weather_bloc/weather_bloc.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
@@ -19,9 +19,9 @@ class WeatherPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppbar(
         elevation: 0.0,
-        title: context.bloc<WeatherBloc>().title,
+        title: context.bloc<WeatherCubit>().title,
       ),
-      body: BlocBuilder<WeatherBloc, WeatherState>(
+      body: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, state) {
           if (state is WeatherLoading) {
             return const BusyIndicator();

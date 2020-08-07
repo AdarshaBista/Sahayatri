@@ -1,11 +1,10 @@
 import 'package:meta/meta.dart';
 
-import 'package:sahayatri/app/constants/notification_channels.dart';
-
 import 'package:sahayatri/core/models/coord.dart';
-
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
+
+import 'package:sahayatri/app/constants/notification_channels.dart';
 
 class OffRouteAlertService {
   bool isAlreadyAlerted = false;
