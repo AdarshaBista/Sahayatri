@@ -54,4 +54,12 @@ class NearbyCubit extends Cubit<NearbyState> {
       isScanning: (state as NearbyConnected).isScanning,
     ));
   }
+
+  Future<void> removeDevice(NearbyDevice device) async {
+    nearbyService.removeDevice(device);
+    emit(NearbyConnected(
+      nearbyDevices: nearbyService.nearbyDevices,
+      isScanning: (state as NearbyConnected).isScanning,
+    ));
+  }
 }

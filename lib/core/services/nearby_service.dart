@@ -211,16 +211,14 @@ class NearbyService {
     onDeviceChanged();
   }
 
-  // /// Remove a [NearbyDevice] from nearby devices set.
-  // void _removeDevice(String id) {
-  //   final device = _findDevice(id);
-  //   _nearbyDevices.remove(device);
-  //   onDeviceChanged();
-  // }
-
   /// Find [NearbyDevice] with given [id]
   NearbyDevice _findDevice(String id) {
     return nearbyDevices.firstWhere((d) => d.id == id, orElse: () => null);
+  }
+
+  /// Remove a [NearbyDevice] from nearby devices set.
+  void removeDevice(NearbyDevice device) {
+    _nearbyDevices.remove(device);
   }
 
   /// Parses the raw message string into [NearbyMessage].

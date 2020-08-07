@@ -8,6 +8,7 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/nearby/device_status_row.dart';
 
 class DeviceDetails extends StatelessWidget {
@@ -25,46 +26,78 @@ class DeviceDetails extends StatelessWidget {
             .trackingDevices
             .firstWhere((d) => d.id == deviceId, orElse: () => null);
 
-        return _buildBottomSheet(deviceReactive);
+        if (deviceReactive == null) return const Offstage();
+
+        return SlideAnimator(
+          begin: const Offset(0.0, 0.5),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
+            child: _buildBottomSheet(context, deviceReactive),
+          ),
+        );
       },
     );
   }
 
-  Widget _buildBottomSheet(NearbyDevice device) {
-    return SlideAnimator(
-      begin: const Offset(0.0, 0.5),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              device.name.toUpperCase(),
-              style: AppTextStyles.large.bold,
-            ),
-            const SizedBox(height: 8.0),
-            DeviceStatusRow(status: device.status),
-            const SizedBox(height: 16.0),
-            _buildStat(
-              label: 'Altitude',
-              icon: CommunityMaterialIcons.altimeter,
-              value: '${device.userLocation.altitude.floor()} m',
-            ),
-            _buildStat(
-              label: 'Speed',
-              icon: CommunityMaterialIcons.speedometer,
-              value: '${device.userLocation.speed.toStringAsFixed(1)} m/s',
-            ),
-            _buildStat(
-              label: 'Accuracy',
-              icon: CommunityMaterialIcons.circle_slice_8,
-              value: '${device.userLocation.accuracy.toStringAsFixed(1)} m',
-            ),
-            const SizedBox(height: 16.0),
-          ],
+  Widget _buildBottomSheet(BuildContext context, NearbyDevice device) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTitle(context, device),
+        const SizedBox(height: 8.0),
+        DeviceStatusRow(status: device.status),
+        const SizedBox(height: 16.0),
+        _buildStat(
+          label: 'Altitude',
+          icon: CommunityMaterialIcons.altimeter,
+          value: '${device.userLocation.altitude.floor()} m',
         ),
-      ),
+        _buildStat(
+          label: 'Speed',
+          icon: CommunityMaterialIcons.speedometer,
+          value: '${device.userLocation.speed.toStringAsFixed(1)} m/s',
+        ),
+        _buildStat(
+          label: 'Accuracy',
+          icon: CommunityMaterialIcons.circle_slice_8,
+          value: '${device.userLocation.accuracy.toStringAsFixed(1)} m',
+        ),
+        const SizedBox(height: 16.0),
+      ],
+    );
+  }
+
+  Widget _buildTitle(BuildContext context, NearbyDevice device) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          device.name.toUpperCase(),
+          style: AppTextStyles.large.bold,
+        ),
+        const SizedBox(width: 16.0),
+        if (device.status == DeviceStatus.disconnected)
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+              context.bloc<NearbyCubit>().removeDevice(device);
+            },
+            child: ScaleAnimator(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: const BoxDecoration(
+                  color: AppColors.dark,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.close,
+                  color: AppColors.secondary,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 
