@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
-
-import 'package:sahayatri/core/utils/math_utls.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:provider/provider.dart';
@@ -32,6 +30,7 @@ class TrackerMap extends StatefulWidget {
 class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateMixin {
   double zoom;
   bool isTracking = true;
+  bool shouldSimplifyRoute = false;
   MapAnimator mapAnimator;
   MapController mapController;
 
@@ -49,12 +48,24 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  void onPositionChanged(MapPosition pos, bool hasGesture) {
-    if (MathUtils.shouldSimplify(zoom, pos.zoom) || (hasGesture && isTracking)) {
+  void onPointerUp() {
+    if (shouldSimplifyRoute) {
       setState(() {
-        zoom = pos.zoom;
+        shouldSimplifyRoute = false;
+      });
+    }
+  }
+
+  void onPositionChanged(MapPosition pos, bool hasGesture) {
+    if (hasGesture && isTracking) {
+      setState(() {
         isTracking = false;
       });
+    }
+
+    if (zoom != pos.zoom) {
+      zoom = pos.zoom;
+      shouldSimplifyRoute = true;
     }
   }
 
@@ -78,19 +89,22 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 
   Widget _buildMap(Coord center, int userIndex) {
-    return CustomMap(
-      center: center,
-      initialZoom: zoom,
-      mapController: mapController,
-      onPositionChanged: onPositionChanged,
-      children: [
-        _RouteLayer(zoom: zoom),
-        const _DevicesAccuracyCircleLayer(),
-        const _UserAccuracyCircleLayer(),
-        const _UserMarkerLayer(),
-        const _PlaceMarkersLayer(),
-        const _DevicesMarkersLayer(),
-      ],
+    return Listener(
+      onPointerUp: (_) => onPointerUp(),
+      child: CustomMap(
+        center: center,
+        initialZoom: zoom,
+        mapController: mapController,
+        onPositionChanged: onPositionChanged,
+        children: [
+          _RouteLayer(zoom: zoom),
+          const _DevicesAccuracyCircleLayer(),
+          const _UserAccuracyCircleLayer(),
+          const _UserMarkerLayer(),
+          const _PlaceMarkersLayer(),
+          const _DevicesMarkersLayer(),
+        ],
+      ),
     );
   }
 

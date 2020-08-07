@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/utils/math_utls.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
@@ -44,11 +43,31 @@ class CustomMap extends StatefulWidget {
 
 class _CustomMapState extends State<CustomMap> {
   double zoom;
+  bool shouldSimplifyRoute = false;
 
   @override
   void initState() {
     super.initState();
     zoom = widget.initialZoom;
+  }
+
+  void onPointerUp() {
+    if (shouldSimplifyRoute) {
+      setState(() {
+        shouldSimplifyRoute = false;
+      });
+    }
+  }
+
+  void onPositionChanged(MapPosition pos, bool hasGesture) {
+    if (widget.onPositionChanged != null) {
+      widget.onPositionChanged(pos, hasGesture);
+    }
+
+    if (zoom != pos.zoom) {
+      zoom = pos.zoom;
+      shouldSimplifyRoute = true;
+    }
   }
 
   @override
@@ -62,43 +81,34 @@ class _CustomMapState extends State<CustomMap> {
     );
   }
 
-  void updateRouteAccuracy(MapPosition pos, bool hasGesture) {
-    if (widget.onPositionChanged != null) {
-      widget.onPositionChanged(pos, hasGesture);
-    }
-
-    if (MathUtils.shouldSimplify(zoom, pos.zoom)) {
-      setState(() {
-        zoom = pos.zoom;
-      });
-    }
-  }
-
   Widget _buildMap() {
-    return FlutterMap(
-      mapController: widget.mapController,
-      children: [
-        const _TileLayer(),
-        _RouteLayer(zoom: zoom),
-        ...widget.children,
-      ],
-      options: MapOptions(
-        zoom: widget.initialZoom,
-        minZoom: MapConfig.kMinZoom,
-        maxZoom: MapConfig.kMaxZoom,
-        center: widget.center.toLatLng(),
-        controller: widget.mapController,
-        onPositionChanged: updateRouteAccuracy,
-        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat - 0.3,
-              lng: widget.center.lng - 0.3,
-            ).toLatLng(),
-        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat + 0.3,
-              lng: widget.center.lng + 0.3,
-            ).toLatLng(),
+    return Listener(
+      onPointerUp: (_) => onPointerUp(),
+      child: FlutterMap(
+        mapController: widget.mapController,
+        children: [
+          const _TileLayer(),
+          _RouteLayer(zoom: zoom),
+          ...widget.children,
+        ],
+        options: MapOptions(
+          zoom: widget.initialZoom,
+          minZoom: MapConfig.kMinZoom,
+          maxZoom: MapConfig.kMaxZoom,
+          center: widget.center.toLatLng(),
+          controller: widget.mapController,
+          onPositionChanged: onPositionChanged,
+          swPanBoundary: widget.swPanBoundary?.toLatLng() ??
+              Coord(
+                lat: widget.center.lat - 0.3,
+                lng: widget.center.lng - 0.3,
+              ).toLatLng(),
+          nePanBoundary: widget.nePanBoundary?.toLatLng() ??
+              Coord(
+                lat: widget.center.lat + 0.3,
+                lng: widget.center.lng + 0.3,
+              ).toLatLng(),
+        ),
       ),
     );
   }
