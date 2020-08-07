@@ -12,9 +12,9 @@ class DevicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nearbyDevices = context.watch<NearbyConnected>().nearbyDevices;
+    final connectedDevices = context.watch<NearbyConnected>().connectedDevices;
 
-    return nearbyDevices.isEmpty
+    return connectedDevices.isEmpty
         ? Text(
             'No devices found yet.',
             style: AppTextStyles.small.secondary,
@@ -22,13 +22,13 @@ class DevicesList extends StatelessWidget {
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: nearbyDevices.length,
+            itemCount: connectedDevices.length,
             itemBuilder: (context, index) {
               return SlideAnimator(
                 begin: Offset(0.0, 0.2 + index * 0.4),
                 child: DeviceTile(
                   index: index,
-                  device: nearbyDevices[index],
+                  device: connectedDevices[index],
                 ),
               );
             },

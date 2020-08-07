@@ -156,12 +156,9 @@ class NearbyService {
   /// Called when connection is accepted or rejected (after [_onConnectionInit]).
   void _onConnectionResult(String id, Status status) {
     if (status == Status.CONNECTED) {
-      final device = _findDevice(id);
-      if (device == null) return;
-      device.isConnecting = false;
-      onDeviceChanged();
+      _updateDeviceStatus(id, DeviceStatus.connected);
     } else {
-      _removeDevice(id);
+      _updateDeviceStatus(id, DeviceStatus.disconnected);
     }
   }
 
@@ -169,10 +166,8 @@ class NearbyService {
   /// Removes the disconnected device from [_nearbydevices] and
   /// alerts other devices about the lost connection.
   void _onDisconnected(String id) {
-    final device = _findDevice(id);
-    if (device == null) return;
-    _removeDevice(id);
-    _showDisconnectedNotification(device.name);
+    _updateDeviceStatus(id, DeviceStatus.disconnected);
+    _showDisconnectedNotification(id);
   }
 
   /// Called when payload is sent from connected devices.
@@ -201,16 +196,27 @@ class NearbyService {
 
   /// Add a [NearbyDevice] to nearby devices set.
   void _addDevice(String id, String name) {
-    _nearbyDevices.add(NearbyDevice(id: id, name: name));
+    _nearbyDevices.add(NearbyDevice(
+      id: id,
+      name: name,
+      status: DeviceStatus.connecting,
+    ));
     onDeviceChanged();
   }
 
-  /// Remove a [NearbyDevice] from nearby devices set.
-  void _removeDevice(String id) {
+  void _updateDeviceStatus(String id, DeviceStatus status) {
     final device = _findDevice(id);
-    _nearbyDevices.remove(device);
+    if (device == null) return;
+    device.status = status;
     onDeviceChanged();
   }
+
+  // /// Remove a [NearbyDevice] from nearby devices set.
+  // void _removeDevice(String id) {
+  //   final device = _findDevice(id);
+  //   _nearbyDevices.remove(device);
+  //   onDeviceChanged();
+  // }
 
   /// Find [NearbyDevice] with given [id]
   NearbyDevice _findDevice(String id) {
@@ -279,8 +285,9 @@ class NearbyService {
   }
 
   /// Show notification when device is disconnected
-  void _showDisconnectedNotification(String name) {
-    final alertMessage = '$name has disconnected from network.';
+  void _showDisconnectedNotification(String id) {
+    final deviceName = _findDevice(id).name;
+    final alertMessage = '$deviceName has disconnected from network.';
 
     notificationService.show(
       NotificationChannels.kDeviceDisconnectedId,

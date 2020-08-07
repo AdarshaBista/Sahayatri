@@ -2,24 +2,26 @@ import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/user_location.dart';
 
+enum DeviceStatus { connected, connecting, disconnected }
+
 class NearbyDevice {
   final String id;
   final String name;
-  bool isConnecting;
+  DeviceStatus status;
   UserLocation userLocation;
 
   NearbyDevice({
     @required this.id,
     @required this.name,
+    @required this.status,
     this.userLocation,
-    this.isConnecting = true,
   })  : assert(id != null),
         assert(name != null),
-        assert(isConnecting != null);
+        assert(status != null);
 
   @override
   String toString() =>
-      'NearbyDevice(id: $id, name: $name, isConnecting: $isConnecting, userLocation: $userLocation)';
+      'NearbyDevice(id: $id, name: $name, status: $status, userLocation: $userLocation)';
 
   @override
   bool operator ==(Object o) {
@@ -30,5 +32,5 @@ class NearbyDevice {
 
   @override
   int get hashCode =>
-      id.hashCode ^ name.hashCode ^ isConnecting.hashCode ^ userLocation.hashCode;
+      id.hashCode ^ name.hashCode ^ status.hashCode ^ userLocation.hashCode;
 }

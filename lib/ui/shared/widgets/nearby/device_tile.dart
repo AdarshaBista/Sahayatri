@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/device_status_row.dart';
 
 class DeviceTile extends StatelessWidget {
   final int index;
@@ -22,20 +23,7 @@ class DeviceTile extends StatelessWidget {
         device.name,
         style: AppTextStyles.medium,
       ),
-      subtitle: Row(
-        children: [
-          Icon(
-            device.isConnecting ? Icons.radio_button_checked : Icons.check_circle,
-            color: device.isConnecting ? Colors.blue : Colors.green,
-            size: 12.0,
-          ),
-          const SizedBox(width: 2.0),
-          Text(
-            device.isConnecting ? 'Connecting...' : 'Connected',
-            style: AppTextStyles.extraSmall,
-          ),
-        ],
-      ),
+      subtitle: DeviceStatusRow(status: device.status),
       leading: CircleAvatar(
         radius: 16.0,
         backgroundColor: AppColors.primary.withOpacity(0.4),

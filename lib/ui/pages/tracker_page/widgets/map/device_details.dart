@@ -8,6 +8,7 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/nearby/device_status_row.dart';
 
 class DeviceDetails extends StatelessWidget {
   final String deviceId;
@@ -21,22 +22,11 @@ class DeviceDetails extends StatelessWidget {
     return BlocBuilder(
       builder: (context, state) {
         final deviceReactive = (state as NearbyConnected)
-            .nearbyDevices
+            .trackingDevices
             .firstWhere((d) => d.id == deviceId, orElse: () => null);
 
-        if (deviceReactive == null) return _buildDisconnected();
         return _buildBottomSheet(deviceReactive);
       },
-    );
-  }
-
-  Widget _buildDisconnected() {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Text(
-        'This device seems to have disconnected.',
-        style: AppTextStyles.medium.secondary,
-      ),
     );
   }
 
@@ -53,6 +43,8 @@ class DeviceDetails extends StatelessWidget {
               device.name.toUpperCase(),
               style: AppTextStyles.large.bold,
             ),
+            const SizedBox(height: 8.0),
+            DeviceStatusRow(status: device.status),
             const SizedBox(height: 16.0),
             _buildStat(
               label: 'Altitude',

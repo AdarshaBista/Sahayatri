@@ -227,12 +227,12 @@ class _DevicesMarkersLayer extends StatelessWidget {
       cubit: context.bloc<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
-          final devices =
-              state.nearbyDevices.where((d) => d.userLocation != null).toList();
           return RepaintBoundary(
             child: MarkerLayerWidget(
               options: MarkerLayerOptions(
-                markers: devices.map((d) => DeviceMarker(context, device: d)).toList(),
+                markers: state.trackingDevices
+                    .map((d) => DeviceMarker(context, device: d))
+                    .toList(),
               ),
             ),
           );
@@ -253,12 +253,10 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
       cubit: context.bloc<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
-          final devices =
-              state.nearbyDevices.where((d) => d.userLocation != null).toList();
           return RepaintBoundary(
             child: CircleLayerWidget(
               options: CircleLayerOptions(
-                circles: devices
+                circles: state.trackingDevices
                     .map(
                       (d) => AccuracyCircle(
                         color: Colors.blue,
