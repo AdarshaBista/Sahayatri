@@ -93,7 +93,7 @@ class WeatherDetail extends StatelessWidget {
           StatCard(
             label: 'Sunrise',
             count: DateFormat(DateFormat.HOUR_MINUTE).format(weather.sunrise),
-            color: AppColors.barrier,
+            color: AppColors.primaryDark,
             countStyle: AppTextStyles.small,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
@@ -101,7 +101,7 @@ class WeatherDetail extends StatelessWidget {
           StatCard(
             label: 'Sunset',
             count: DateFormat(DateFormat.HOUR_MINUTE).format(weather.sunset),
-            color: AppColors.barrier,
+            color: AppColors.primaryDark,
             countStyle: AppTextStyles.small,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
@@ -109,7 +109,7 @@ class WeatherDetail extends StatelessWidget {
           StatCard(
             label: 'Pressure',
             count: '${weather.pressure} hPa',
-            color: AppColors.barrier,
+            color: AppColors.primaryDark,
             countStyle: AppTextStyles.small,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
@@ -117,7 +117,7 @@ class WeatherDetail extends StatelessWidget {
           StatCard(
             label: 'Humidity',
             count: '${weather.humidity}%',
-            color: AppColors.barrier,
+            color: AppColors.primaryDark,
             countStyle: AppTextStyles.small,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
@@ -125,7 +125,7 @@ class WeatherDetail extends StatelessWidget {
           StatCard(
             label: 'Wind Speed',
             count: '${weather.windSpeed} m/s',
-            color: AppColors.barrier,
+            color: AppColors.primaryDark,
             countStyle: AppTextStyles.small,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),

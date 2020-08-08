@@ -53,8 +53,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       behavior: HitTestBehavior.opaque,
       onTap: () => _drawerController.close(),
       onPanUpdate: (details) {
-        if (details.delta.dx < -6.0) _drawerController.close();
         if (details.delta.dx > 6.0) _drawerController.open();
+        if (details.delta.dx < -6.0) _drawerController.close();
       },
       child: ZoomDrawer(
         angle: 0.0,
@@ -64,7 +64,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         closeCurve: Curves.easeIn,
         openCurve: Curves.fastLinearToSlowEaseIn,
         backgroundColor: AppColors.light.withOpacity(0.5),
-        slideWidth: MediaQuery.of(context).size.width * 0.65,
+        slideWidth: MediaQuery.of(context).size.width * 0.7,
         mainScreen: _buildPage(),
         menuScreen: const DestinationDrawer(),
       ),

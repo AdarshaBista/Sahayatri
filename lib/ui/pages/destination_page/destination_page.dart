@@ -76,8 +76,8 @@ class DestinationPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: CustomButton(
         label: 'OPEN',
-        color: AppColors.primaryDark,
-        backgroundColor: AppColors.primary.withOpacity(0.35),
+        color: AppColors.dark,
+        backgroundColor: AppColors.primary.withOpacity(0.5),
         iconData: CommunityMaterialIcons.page_next_outline,
         onTap: () => context
             .repository<DestinationNavService>()

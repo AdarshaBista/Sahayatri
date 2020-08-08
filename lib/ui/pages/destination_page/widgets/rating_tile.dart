@@ -55,6 +55,7 @@ class RatingTile extends StatelessWidget {
 
     return ColumnButton(
       label: 'Weather',
+      icon: CommunityMaterialIcons.weather_fog,
       onTap: () => context.repository<DestinationNavService>().pushNamed(
             Routes.kWeatherPageRoute,
             arguments: WeatherPageArgs(
@@ -62,7 +63,6 @@ class RatingTile extends StatelessWidget {
               coord: destination.startingPlace.coord,
             ),
           ),
-      icon: CommunityMaterialIcons.weather_fog,
     );
   }
 }
