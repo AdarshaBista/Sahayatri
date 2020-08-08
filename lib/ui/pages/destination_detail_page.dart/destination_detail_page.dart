@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
@@ -13,7 +8,8 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_icon.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/tracker_fab.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/destination_drawer.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
@@ -87,7 +83,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         child: _buildBottomNavBar(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFab(),
+      floatingActionButton: const TrackerFab(),
       body: _buildTabViews(),
     );
   }
@@ -97,42 +93,13 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     return CustomAppbar(
       elevation: 4.0,
       title: name,
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () => _drawerController.toggle(),
-      ),
+      leading: const DrawerIcon(),
       actions: [
         IconButton(
           icon: const Icon(Icons.home_outlined),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],
-    );
-  }
-
-  Widget _buildFab() {
-    final destination = context.bloc<DestinationCubit>().destination;
-
-    return FloatingActionButton(
-      backgroundColor: AppColors.dark,
-      child: const Icon(
-        Icons.directions_walk,
-        size: 24.0,
-        color: AppColors.primary,
-      ),
-      onPressed: () {
-        if (destination.createdItinerary == null) {
-          const MessageDialog(
-            message: 'You must create an itinerary before starting tracker.',
-          ).openDialog(context);
-          return;
-        }
-
-        context.repository<DestinationNavService>().pushNamed(
-              Routes.kTrackerPageRoute,
-              arguments: context.bloc<DestinationCubit>().destination,
-            );
-      },
     );
   }
 
