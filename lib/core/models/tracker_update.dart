@@ -10,20 +10,22 @@ class TrackerUpdate {
   final Duration elapsed;
   final double distanceCovered;
   final double distanceRemaining;
-  final UserLocation userLocation;
   final TrackingState trackingState;
+  final List<UserLocation> userTrack;
   final NextCheckpoint nextCheckpoint;
+
+  UserLocation get currentLocation => userTrack.last;
 
   TrackerUpdate({
     @required this.elapsed,
     @required this.userIndex,
-    @required this.userLocation,
+    @required this.userTrack,
     @required this.nextCheckpoint,
     @required this.distanceCovered,
     @required this.distanceRemaining,
     this.trackingState = TrackingState.updating,
   })  : assert(userIndex != null),
-        assert(userLocation != null),
+        assert(userTrack != null),
         assert(trackingState != null),
         assert(distanceCovered != null),
         assert(distanceRemaining != null);
@@ -33,14 +35,14 @@ class TrackerUpdate {
     Duration elapsed,
     double distanceCovered,
     double distanceRemaining,
-    UserLocation userLocation,
     TrackingState trackingState,
+    List<UserLocation> userTrack,
     NextCheckpoint nextCheckpoint,
   }) {
     return TrackerUpdate(
       elapsed: elapsed ?? this.elapsed,
       userIndex: userIndex ?? this.userIndex,
-      userLocation: userLocation ?? this.userLocation,
+      userTrack: userTrack ?? this.userTrack,
       trackingState: trackingState ?? this.trackingState,
       nextCheckpoint: nextCheckpoint ?? this.nextCheckpoint,
       distanceCovered: distanceCovered ?? this.distanceCovered,

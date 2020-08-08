@@ -24,17 +24,17 @@ class LocationStats extends StatelessWidget {
         children: <Widget>[
           StatCard(
             label: 'Altitude',
-            count: '${trackerUpdate.userLocation.altitude.floor()} m',
+            count: '${trackerUpdate.currentLocation.altitude.floor()} m',
             color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Speed',
-            count: '${trackerUpdate.userLocation.speed.toStringAsFixed(1)} m/s',
+            count: '${trackerUpdate.currentLocation.speed.toStringAsFixed(1)} m/s',
             color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Accuracy',
-            count: '${trackerUpdate.userLocation.accuracy.toStringAsFixed(1)} m',
+            count: '${trackerUpdate.currentLocation.accuracy.toStringAsFixed(1)} m',
             color: AppColors.primaryDark,
           ),
         ],

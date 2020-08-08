@@ -37,9 +37,9 @@ class TrackerCubit extends Cubit<TrackerState> {
         super(const TrackerLoading());
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     _trackerUpdateSub?.cancel();
-    return super.close();
+    await super.close();
   }
 
   bool get isTracking => trackerService.isTracking;
@@ -126,7 +126,7 @@ class TrackerCubit extends Cubit<TrackerState> {
     emit(TrackerUpdating(
       update: TrackerUpdate(
         userIndex: userIndex,
-        userLocation: userLocation,
+        userTrack: trackerService.userTrack,
         elapsed: trackerService.elapsedDuration(),
         nextCheckpoint: trackerService.nextCheckpoint(userLocation),
         distanceCovered: trackerService.distanceCovered(userIndex),

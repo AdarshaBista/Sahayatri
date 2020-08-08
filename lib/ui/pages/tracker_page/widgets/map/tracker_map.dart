@@ -72,7 +72,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final center = trackerUpdate.userLocation.coord;
+    final center = trackerUpdate.currentLocation.coord;
 
     if (isTracking) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -134,8 +134,7 @@ class _RouteLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final route = context.bloc<DestinationCubit>().destination.route;
-    final userPath = route.take(trackerUpdate.userIndex).toList();
+    final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(
@@ -145,7 +144,7 @@ class _RouteLayer extends StatelessWidget {
             gradientColors: AppColors.accentColors.getRange(5, 8).toList(),
             points: [
               ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
-              trackerUpdate.userLocation.coord.toLatLng(),
+              trackerUpdate.currentLocation.coord.toLatLng(),
             ],
           ),
         ],
@@ -185,7 +184,7 @@ class _UserMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userCoord = context.watch<TrackerUpdate>().userLocation.coord;
+    final userCoord = context.watch<TrackerUpdate>().currentLocation.coord;
 
     return RepaintBoundary(
       child: MarkerLayerWidget(
@@ -209,8 +208,8 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
         circles: [
           AccuracyCircle(
             color: AppColors.primaryDark,
-            point: trackerUpdate.userLocation.coord,
-            radius: trackerUpdate.userLocation.accuracy,
+            point: trackerUpdate.currentLocation.coord,
+            radius: trackerUpdate.currentLocation.accuracy,
           ),
         ],
       ),

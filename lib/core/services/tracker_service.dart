@@ -31,6 +31,10 @@ class TrackerService {
   /// Called when user completes the trail.
   VoidCallback onCompleted;
 
+  /// Track coverrd by user.
+  final Set<UserLocation> _userTrack = {};
+  List<UserLocation> get userTrack => _userTrack.toList();
+
   /// Subscription to user location stream.
   StreamSubscription _userLocationStreamSub;
 
@@ -62,6 +66,7 @@ class TrackerService {
     _userLocationStreamController = StreamController<UserLocation>.broadcast();
     _userLocationStreamSub = _getMockUserLocationStream().listen((userLocation) {
       _userLocationStreamController.add(userLocation);
+      _userTrack.add(userLocation);
     });
     // _userLocationStreamSub = locationService.getLocationStream().listen((userLocation) {
     //   _userLocationStreamController.add(userLocation);
@@ -76,6 +81,7 @@ class TrackerService {
     _destination = null;
 
     _stopwatch.stop();
+    _userTrack.clear();
     _userLocationStreamSub.cancel();
     _userLocationStreamController.close();
   }
@@ -116,7 +122,7 @@ class TrackerService {
 
   // TODO: Remove this
   Stream<UserLocation> _getMockUserLocationStream() {
-    final period = math.Random().nextInt(2000) + 2000;
+    final period = math.Random().nextInt(500) + 500;
     return Stream<UserLocation>.periodic(
       Duration(milliseconds: period),
       (index) => UserLocation(
@@ -127,7 +133,7 @@ class TrackerService {
         timestamp: DateTime.now(),
         coord: Coord(
           lat: _destination.route[index].lat,
-          lng: _destination.route[index].lng + _randomOffset(-0.0001, 0.0001),
+          lng: _destination.route[index].lng + _randomOffset(-0.00005, 0.00005),
         ),
       ),
     ).take(_destination.route.length).asBroadcastStream();
