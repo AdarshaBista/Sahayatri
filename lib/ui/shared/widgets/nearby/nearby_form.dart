@@ -59,6 +59,11 @@ class NearbyForm extends StatelessWidget {
           'Nearby',
           style: AppTextStyles.medium.bold,
         ),
+        const SizedBox(height: 8.0),
+        Text(
+          'Stay connected with your friends and get notified when someone is disconnected.',
+          style: AppTextStyles.extraSmall,
+        ),
         const SizedBox(height: 10.0),
         _buildBody(),
       ],

@@ -62,7 +62,7 @@ class DestinationDrawer extends StatelessWidget {
               ),
         ),
         DrawerItem(
-          icon: CommunityMaterialIcons.television_guide,
+          icon: CommunityMaterialIcons.book_open_outline,
           label: 'Guide Book',
           onTap: () {},
         ),

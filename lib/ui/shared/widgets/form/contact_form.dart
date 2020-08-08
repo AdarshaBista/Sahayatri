@@ -60,6 +60,7 @@ class _ContactFormState extends State<ContactForm> {
                   child: _buildSubmitButton(context),
                 ),
                 _buildPreviewText(),
+                const SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -70,6 +71,8 @@ class _ContactFormState extends State<ContactForm> {
 
   Widget _buildTextField() {
     return BlocBuilder<PrefsBloc, PrefsState>(builder: (context, state) {
+      contact = (state as PrefsLoaded).prefs.contact;
+
       return CustomTextField(
         iconGap: 16.0,
         icon: Icons.phone,
