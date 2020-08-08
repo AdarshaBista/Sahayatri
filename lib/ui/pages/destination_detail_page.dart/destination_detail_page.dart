@@ -8,11 +8,13 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/destination_drawer.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
 
@@ -26,10 +28,12 @@ class DestinationDetailPage extends StatefulWidget {
 class _DestinationDetailPageState extends State<DestinationDetailPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  ZoomDrawerController _drawerController;
 
   @override
   void initState() {
     super.initState();
+    _drawerController = ZoomDrawerController();
     _tabController = TabController(length: _tabs.length, vsync: this)
       ..addListener(() {
         setState(() {});
@@ -49,28 +53,64 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => _drawerController.close(),
+      onPanUpdate: (details) {
+        if (details.delta.dx < -6.0) _drawerController.close();
+        if (details.delta.dx > 6.0) _drawerController.open();
+      },
+      child: ZoomDrawer(
+        angle: 0.0,
+        showShadow: true,
+        borderRadius: 24.0,
+        controller: _drawerController,
+        closeCurve: Curves.easeIn,
+        openCurve: Curves.fastLinearToSlowEaseIn,
+        backgroundColor: AppColors.light.withOpacity(0.5),
+        slideWidth: MediaQuery.of(context).size.width * 0.65,
+        mainScreen: _buildPage(),
+        menuScreen: const DestinationDrawer(),
+      ),
+    );
+  }
 
+  Widget _buildPage() {
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(
-        elevation: 4.0,
-        title: destination.name,
-      ),
+      appBar: _buildAppBar(),
       bottomNavigationBar: BottomAppBar(
         elevation: 8.0,
         notchMargin: 6.0,
         color: AppColors.light,
         shape: const CircularNotchedRectangle(),
-        child: _buildBottomNavBar(context),
+        child: _buildBottomNavBar(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFab(context),
+      floatingActionButton: _buildFab(),
       body: _buildTabViews(),
     );
   }
 
-  FloatingActionButton _buildFab(BuildContext context) {
+  AppBar _buildAppBar() {
+    final name = context.bloc<DestinationCubit>().destination.name;
+    return CustomAppbar(
+      elevation: 4.0,
+      title: name,
+      leading: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () => _drawerController.toggle(),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.home_outlined),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFab() {
     final destination = context.bloc<DestinationCubit>().destination;
 
     return FloatingActionButton(
@@ -96,7 +136,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     );
   }
 
-  Widget _buildBottomNavBar(BuildContext context) {
+  Widget _buildBottomNavBar() {
     return Container(
       height: 50.0,
       padding: const EdgeInsets.all(8.0),

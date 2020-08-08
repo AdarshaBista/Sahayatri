@@ -10,11 +10,13 @@ class CustomAppbar extends AppBar {
     Widget leading,
     double elevation = 8.0,
     Color color = AppColors.light,
+    List<Widget> actions,
   }) : super(
           centerTitle: true,
           leading: leading,
-          backgroundColor: color,
+          actions: actions,
           elevation: elevation,
+          backgroundColor: color,
           iconTheme: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
               ? AppThemes.lightIconTheme
               : AppThemes.darkIconTheme,
