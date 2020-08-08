@@ -43,8 +43,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   List<NestedTabData> get _tabs => [
-        NestedTabData(label: 'Itinerary', icon: CommunityMaterialIcons.map_search),
         NestedTabData(label: 'Places', icon: CommunityMaterialIcons.map_marker_radius),
+        NestedTabData(label: 'Itinerary', icon: CommunityMaterialIcons.map_search),
       ];
 
   @override
@@ -126,8 +126,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       controller: _tabController,
       physics: const BouncingScrollPhysics(),
       children: const [
-        ItinerariesList(),
         PlacesGrid(),
+        ItinerariesList(),
       ],
     );
   }

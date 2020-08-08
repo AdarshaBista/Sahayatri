@@ -34,7 +34,7 @@ class ItineraryCard extends StatelessWidget {
           .repository<DestinationNavService>()
           .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
       child: SlideAnimator(
-        begin: const Offset(-0.8, 0.0),
+        begin: const Offset(0.8, 0.0),
         child: Container(
           height: 100.0,
           child: CustomCard(

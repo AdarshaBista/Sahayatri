@@ -51,7 +51,11 @@ class SmsService {
     // TODO: Remove this
     _alert('$contact has been notified on your arrival at ${place.name}');
 
-    final smsMessage = SmsMessage(contact, 'I have safely reached ${place.name}');
+    final smsMessage = SmsMessage(
+      contact,
+      '${AppConfig.kSmsMessagePrefix} ${place.name}',
+    );
+
     smsMessage.onStateChanged.listen((state) {
       if (state == SmsMessageState.Sent) {
         _alert('$contact has been notified on your arrival at ${place.name}');

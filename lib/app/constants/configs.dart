@@ -3,6 +3,7 @@ class AppConfig {
   static const String kPackageName = 'com.adrsh.sahayatri';
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
+  static const String kSmsMessagePrefix = 'I have safely reached';
   static const int kAnimatorDuration = 500;
   static const double kTrackerPanelHeight = 90.0;
 }

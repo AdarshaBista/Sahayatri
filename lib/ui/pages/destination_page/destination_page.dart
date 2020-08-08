@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
+import 'package:sahayatri/app/constants/routes.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
+import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/rating_tile.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
@@ -42,6 +46,8 @@ class DestinationPage extends StatelessWidget {
           const SizedBox(height: 16.0),
           const RatingTile(),
           const Divider(height: 16.0),
+          _buildOpenButton(context),
+          const SizedBox(height: 8.0),
           _buildDescription(destination),
           const SizedBox(height: 8.0),
           const DestinationActions(),
@@ -60,12 +66,26 @@ class DestinationPage extends StatelessWidget {
 
   Hero _buildCarousel(Destination destination) {
     return Hero(
-      tag: destination.id,
+      tag: destination.id.toString(),
       child: Carousel(imageUrls: destination.imageUrls),
     );
   }
 
-  FadeAnimator _buildDescription(Destination destination) {
+  Widget _buildOpenButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: CustomButton(
+        label: 'Open',
+        backgroundColor: AppColors.primary,
+        iconData: CommunityMaterialIcons.page_next_outline,
+        onTap: () => context
+            .repository<DestinationNavService>()
+            .pushNamed(Routes.kDestinationDetailPageRoute),
+      ),
+    );
+  }
+
+  Widget _buildDescription(Destination destination) {
     return FadeAnimator(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),

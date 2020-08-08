@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
@@ -43,8 +45,13 @@ class _ContactFormState extends State<ContactForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Contact',
+                  'Assign a contact',
                   style: AppTextStyles.medium.bold,
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  'A message will be automatically sent to this number once you reach a checkpoint.',
+                  style: AppTextStyles.extraSmall,
                 ),
                 const SizedBox(height: 10.0),
                 _buildTextField(),
@@ -52,6 +59,7 @@ class _ContactFormState extends State<ContactForm> {
                   alignment: Alignment.centerRight,
                   child: _buildSubmitButton(context),
                 ),
+                _buildPreviewText(),
               ],
             ),
           ),
@@ -95,6 +103,31 @@ class _ContactFormState extends State<ContactForm> {
           _showSavedSnackBar(context);
         }
       },
+    );
+  }
+
+  Widget _buildPreviewText() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Message Preview',
+          textAlign: TextAlign.left,
+          style: AppTextStyles.small.bold,
+        ),
+        const SizedBox(height: 8.0),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          decoration: BoxDecoration(
+            color: AppColors.primaryDark,
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Text(
+            '${AppConfig.kSmsMessagePrefix} .......',
+            style: AppTextStyles.extraSmall.light,
+          ),
+        ),
+      ],
     );
   }
 

@@ -50,7 +50,7 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return Hero(
-      tag: destination.id,
+      tag: destination.id.toString(),
       child: CustomCard(
         child: GradientContainer(
           gradientBegin: Alignment.bottomLeft,

@@ -26,8 +26,6 @@ class RatingTile extends StatelessWidget {
           _buildRating(context),
           const Spacer(),
           _buildWeatherButton(context),
-          const SizedBox(width: 12.0),
-          _buildMoreButton(context),
         ],
       ),
     );
@@ -65,16 +63,6 @@ class RatingTile extends StatelessWidget {
             ),
           ),
       icon: CommunityMaterialIcons.weather_fog,
-    );
-  }
-
-  Widget _buildMoreButton(BuildContext context) {
-    return ColumnButton(
-      label: 'More',
-      icon: CommunityMaterialIcons.page_next_outline,
-      onTap: () => context
-          .repository<DestinationNavService>()
-          .pushNamed(Routes.kDestinationDetailPageRoute),
     );
   }
 }
