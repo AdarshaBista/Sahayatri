@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/constants/configs.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
@@ -15,7 +20,7 @@ class AuthPage extends StatelessWidget {
       body: Stack(
         children: [
           _buildBackground(),
-          _buildForm(),
+          _buildForm(context),
         ],
       ),
     );
@@ -32,7 +37,7 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Widget _buildForm() {
+  Widget _buildForm(BuildContext context) {
     return Center(
       child: ListView(
         shrinkWrap: true,
@@ -45,7 +50,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
-          _buildSkipButton(),
+          _buildSkipButton(context),
         ],
       ),
     );
@@ -75,7 +80,7 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSkipButton() {
+  Widget _buildSkipButton(BuildContext context) {
     return FlatButton(
       hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
@@ -84,7 +89,9 @@ class AuthPage extends StatelessWidget {
         'Continue without signing in...',
         style: AppTextStyles.extraSmall.lightAccent,
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.repository<RootNavService>().pushReplacementNamed(Routes.kHomePageRoute);
+      },
     );
   }
 }

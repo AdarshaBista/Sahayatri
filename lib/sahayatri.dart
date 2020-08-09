@@ -21,6 +21,7 @@ import 'package:sahayatri/app/database/weather_dao.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/ui/shared/widgets/splash_view.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:device_preview/device_preview.dart';
@@ -79,18 +80,35 @@ class Sahayatri extends StatelessWidget {
               ),
             ),
           ],
-          child: MaterialApp(
-            builder: DevicePreview.appBuilder,
-            locale: DevicePreview.of(context).locale,
-            debugShowCheckedModeBanner: false,
-            title: AppConfig.kAppName,
-            theme: AppThemes.light,
-            navigatorKey: context.repository<RootNavService>().navigatorKey,
-            initialRoute: Routes.kBottomNavPageRoute,
-            onGenerateRoute: RootRouter.onGenerateRoute,
-          ),
+          child: const _App(),
         ),
       ),
+    );
+  }
+}
+
+class _App extends StatelessWidget {
+  const _App();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PrefsBloc, PrefsState>(
+      builder: (context, state) {
+        if (state is PrefsLoading) {
+          return const SplashView();
+        }
+
+        return MaterialApp(
+          builder: DevicePreview.appBuilder,
+          locale: DevicePreview.of(context).locale,
+          debugShowCheckedModeBanner: false,
+          title: AppConfig.kAppName,
+          theme: AppThemes.light,
+          navigatorKey: context.repository<RootNavService>().navigatorKey,
+          initialRoute: Routes.kAuthPageRoute,
+          onGenerateRoute: RootRouter.onGenerateRoute,
+        );
+      },
     );
   }
 }

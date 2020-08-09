@@ -41,6 +41,7 @@ class DestinationDrawer extends StatelessWidget {
 
     return ListView(
       shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.only(left: 32.0),
       children: [
         DrawerItem(

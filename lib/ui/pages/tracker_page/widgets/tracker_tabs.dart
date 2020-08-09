@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tab.dart';
-import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
 class TrackerTabs extends StatefulWidget {

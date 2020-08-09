@@ -15,7 +15,8 @@ import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 
-import 'package:sahayatri/ui/pages/bottom_nav_page/bottom_nav_page.dart';
+import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
+import 'package:sahayatri/ui/pages/home_page/home_page.dart';
 import 'package:sahayatri/ui/pages/destination_page/destination_nav_page.dart';
 
 class RootRouter {
@@ -23,12 +24,16 @@ class RootRouter {
     Widget _page;
 
     switch (settings.name) {
-      case Routes.kBottomNavPageRoute:
+      case Routes.kAuthPageRoute:
+        _page = const AuthPage();
+        break;
+
+      case Routes.kHomePageRoute:
         _page = BlocProvider<DestinationsCubit>(
           create: (context) => DestinationsCubit(
             apiService: context.repository<ApiService>(),
           )..fetchDestinations(),
-          child: const BottomNavPage(),
+          child: const HomePage(),
         );
         break;
 
