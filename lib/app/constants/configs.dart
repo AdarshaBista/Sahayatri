@@ -4,12 +4,16 @@ class AppConfig {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
   static const String kSmsMessagePrefix = 'I have safely reached';
+}
+
+class UiConfig {
   static const int kAnimatorDuration = 500;
   static const double kTrackerPanelHeight = 90.0;
 }
 
 class Images {
   static const String kSplash = 'assets/icons/splash.png';
+  static const String kAuthBackground = 'assets/images/auth.png';
   static const String kMarker = 'assets/images/indicators/marker.png';
   static const String kUserMarker = 'assets/images/indicators/user_marker.png';
   static const String kError = 'assets/images/indicators/error.png';

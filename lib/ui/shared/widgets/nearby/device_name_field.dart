@@ -39,11 +39,12 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   Widget _buildTextField() {
     return BlocBuilder<PrefsBloc, PrefsState>(
       builder: (context, state) {
+        deviceName = (state as PrefsLoaded).prefs.deviceName;
+
         return CustomTextField(
           iconGap: 16.0,
           icon: Icons.account_box,
           label: 'Device name',
-          labelStyle: AppTextStyles.small.bold,
           onChanged: (value) => deviceName = value,
           validator: FormValidators.requiredText(),
           initialValue: (state as PrefsLoaded).prefs.deviceName,

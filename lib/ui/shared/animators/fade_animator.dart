@@ -10,7 +10,7 @@ class FadeAnimator extends StatelessWidget {
 
   const FadeAnimator({
     @required this.child,
-    this.duration = AppConfig.kAnimatorDuration,
+    this.duration = UiConfig.kAnimatorDuration,
   }) : assert(child != null);
 
   @override

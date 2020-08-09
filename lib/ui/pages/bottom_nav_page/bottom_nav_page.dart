@@ -7,6 +7,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/splash_view.dart';
 import 'package:sahayatri/ui/pages/bottom_nav_page/widgets/bottom_nav_bar.dart';
 
+import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
@@ -44,16 +45,18 @@ class _BottomNavPageState extends State<BottomNavPage> {
           });
         },
         icons: const [
-          CommunityMaterialIcons.home_outline,
-          CommunityMaterialIcons.map_marker_multiple_outline,
+          CommunityMaterialIcons.map_search_outline,
+          CommunityMaterialIcons.check_circle_outline,
+          CommunityMaterialIcons.account_outline,
           CommunityMaterialIcons.cog_outline,
         ],
       ),
       body: IndexedStack(
         index: _selectedIndex,
         children: const [
-          Offstage(),
           DestinationsPage(),
+          Offstage(),
+          AuthPage(),
           SettingsPage(),
         ],
       ),

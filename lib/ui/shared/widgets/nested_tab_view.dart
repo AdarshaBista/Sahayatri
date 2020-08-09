@@ -4,6 +4,8 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class NestedTabView extends StatefulWidget {
+  final bool isCentered;
+  final bool isTabFilled;
   final List<Widget> children;
   final List<NestedTabData> tabs;
   final EdgeInsetsGeometry tabBarMargin;
@@ -12,9 +14,12 @@ class NestedTabView extends StatefulWidget {
   const NestedTabView({
     @required this.tabs,
     @required this.children,
+    this.isCentered = false,
+    this.isTabFilled = false,
     this.tabBarPadding = const EdgeInsets.symmetric(vertical: 8.0),
     this.tabBarMargin = const EdgeInsets.symmetric(horizontal: 20.0),
   })  : assert(tabs != null),
+        assert(isTabFilled != null),
         assert(children != null),
         assert(tabBarPadding != null),
         assert(tabs.length == children.length);
@@ -59,34 +64,46 @@ class _NestedTabViewState extends State<NestedTabView>
   }
 
   Widget _buildTabBar(BuildContext context) {
+    final height = widget.isTabFilled ? 38.0 : 34.0;
+    final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
+    final color = widget.isTabFilled ? AppColors.light : Colors.transparent;
+    final padding = widget.isTabFilled ? const EdgeInsets.all(2.0) : EdgeInsets.zero;
+
     return Theme(
       data: Theme.of(context).copyWith(
-        splashColor: Colors.transparent,
         hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
       ),
-      child: Container(
-        height: 34.0,
-        color: AppColors.light,
-        margin: widget.tabBarMargin,
-        child: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(32.0),
-            gradient: LinearGradient(
-              colors: [
-                AppColors.accentColors[0],
-                AppColors.accentColors[1],
-              ],
-            ),
+      child: Align(
+        alignment: widget.isCentered ? Alignment.center : Alignment.centerLeft,
+        child: Container(
+          margin: widget.tabBarMargin,
+          height: height,
+          padding: padding,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
-          tabs: [
-            for (int i = 0; i < widget.tabs.length; ++i)
-              NestedTab(
-                tab: widget.tabs[i],
-                color: _tabController.index == i ? AppColors.light : AppColors.dark,
+          child: TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(32.0),
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.accentColors[0],
+                  AppColors.accentColors[1],
+                ],
               ),
-          ],
+            ),
+            tabs: [
+              for (int i = 0; i < widget.tabs.length; ++i)
+                NestedTab(
+                  tab: widget.tabs[i],
+                  color: _tabController.index == i ? AppColors.light : AppColors.dark,
+                ),
+            ],
+          ),
         ),
       ),
     );

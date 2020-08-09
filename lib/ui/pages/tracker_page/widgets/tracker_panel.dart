@@ -26,7 +26,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
       body: SlidingPanel(
         borderRadius: 12.0,
         margin: EdgeInsets.all(margin),
-        minHeight: AppConfig.kTrackerPanelHeight,
+        minHeight: UiConfig.kTrackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.8,
         body: const TrackerMap(),
         panel: _buildPanel(ScrollController()),

@@ -9,6 +9,20 @@ class FormValidators {
     return RequiredValidator(errorText: message);
   }
 
+  static MultiValidator email([String message = 'Please enter a valid email.']) {
+    return MultiValidator([
+      RequiredValidator(errorText: message),
+      EmailValidator(errorText: message),
+    ]);
+  }
+
+  static MultiValidator password([String message = 'Please enter a valid password.']) {
+    return MultiValidator([
+      RequiredValidator(errorText: message),
+      MinLengthValidator(7, errorText: 'Password should be more than 6 characters long.')
+    ]);
+  }
+
   static FieldValidator nonNull<T>([String message = 'This field is required.']) {
     return _NonNullValidator<T>(errorText: message);
   }

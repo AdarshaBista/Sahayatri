@@ -77,7 +77,6 @@ class _ContactFormState extends State<ContactForm> {
         iconGap: 16.0,
         icon: Icons.phone,
         label: 'Phone number',
-        labelStyle: AppTextStyles.small.bold,
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
         initialValue: (state as PrefsLoaded).prefs.contact,

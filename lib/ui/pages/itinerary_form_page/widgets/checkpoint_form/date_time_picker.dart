@@ -35,7 +35,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
       children: [
         Text(
           'Date & Time',
-          style: AppTextStyles.medium,
+          style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 8.0),
         CustomCard(

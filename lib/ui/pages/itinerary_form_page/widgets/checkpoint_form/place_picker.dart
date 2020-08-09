@@ -41,7 +41,7 @@ class _PlacePickerState extends State<PlacePicker> {
       children: [
         Text(
           'Place',
-          style: AppTextStyles.medium,
+          style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 8.0),
         CustomCard(

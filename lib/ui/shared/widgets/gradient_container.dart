@@ -1,32 +1,65 @@
 import 'package:flutter/material.dart';
 
-class GradientContainer extends Container {
-  GradientContainer({
-    @required List<Color> gradientColors,
-    List<double> gradientStops,
-    AlignmentGeometry gradientBegin = Alignment.topCenter,
-    AlignmentGeometry gradientEnd = Alignment.bottomCenter,
-    EdgeInsetsGeometry margin = EdgeInsets.zero,
-    EdgeInsetsGeometry padding = EdgeInsets.zero,
-    AlignmentGeometry alignment = Alignment.center,
-    double width,
-    double height,
-    Widget child,
-  }) : super(
-          width: width,
-          height: height,
-          margin: margin,
-          padding: padding,
-          alignment: alignment,
-          foregroundDecoration: BoxDecoration(
-            backgroundBlendMode: BlendMode.srcOver,
-            gradient: LinearGradient(
-              begin: gradientBegin,
-              end: gradientEnd,
-              stops: gradientStops,
-              colors: gradientColors,
-            ),
-          ),
-          child: child,
-        );
+class GradientContainer extends StatelessWidget {
+  final Widget child;
+  final double width;
+  final double height;
+  final bool isForeground;
+  final double borderRadius;
+  final List<Color> gradientColors;
+  final List<double> gradientStops;
+  final AlignmentGeometry alignment;
+  final AlignmentGeometry gradientEnd;
+  final AlignmentGeometry gradientBegin;
+  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
+
+  const GradientContainer({
+    @required this.gradientColors,
+    this.gradientStops,
+    this.isForeground = true,
+    this.borderRadius = 0.0,
+    this.gradientBegin = Alignment.topCenter,
+    this.gradientEnd = Alignment.bottomCenter,
+    this.margin = EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
+    this.alignment = Alignment.center,
+    this.width,
+    this.height,
+    this.child,
+  })  : assert(margin != null),
+        assert(padding != null),
+        assert(alignment != null),
+        assert(isForeground != null),
+        assert(borderRadius != null),
+        assert(gradientEnd != null),
+        assert(gradientBegin != null),
+        assert(gradientColors != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
+      width: width,
+      height: height,
+      margin: margin,
+      padding: padding,
+      alignment: alignment,
+      decoration: isForeground ? null : _getDecoration(),
+      foregroundDecoration: !isForeground ? null : _getDecoration(),
+    );
+  }
+
+  BoxDecoration _getDecoration() {
+    return BoxDecoration(
+      backgroundBlendMode: BlendMode.srcOver,
+      borderRadius: BorderRadius.circular(borderRadius),
+      gradient: LinearGradient(
+        begin: gradientBegin,
+        end: gradientEnd,
+        stops: gradientStops,
+        colors: gradientColors,
+      ),
+    );
+  }
 }
