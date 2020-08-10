@@ -9,11 +9,14 @@ class User {
 
   User({
     @required this.id,
-    this.name,
-    this.email,
-    this.imageUrl,
-    this.accessToken,
-  }) : assert(id != null);
+    @required this.name,
+    @required this.email,
+    @required this.imageUrl,
+    @required this.accessToken,
+  })  : assert(id != null),
+        assert(name != null),
+        assert(email != null),
+        assert(accessToken != null);
 
   User copyWith({
     String id,
@@ -33,11 +36,11 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'userid': id,
       'name': name,
       'email': email,
       'imageUrl': imageUrl,
-      'accessToken': accessToken,
+      'access_token': accessToken,
     };
   }
 
@@ -45,11 +48,11 @@ class User {
     if (map == null) return null;
 
     return User(
-      id: map['id'] as String,
+      id: map['userid'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
       imageUrl: map['imageUrl'] as String,
-      accessToken: map['accessToken'] as String,
+      accessToken: map['access_token'] as String,
     );
   }
 

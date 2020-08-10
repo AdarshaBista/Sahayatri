@@ -18,6 +18,8 @@ class AuthCubit extends Cubit<AuthState> {
   })  : assert(authService != null),
         super(const Unauthenticated());
 
+  bool get isAuthenticated => state is Authenticated;
+
   Future<bool> login(String email, String password) async {
     emit(const AuthLoading());
     try {
@@ -40,6 +42,20 @@ class AuthCubit extends Cubit<AuthState> {
     } on Failure catch (e) {
       emit(AuthError(message: e.message));
       emit(const Unauthenticated());
+      return false;
+    }
+  }
+
+  Future<bool> logout() async {
+    final user = (state as Authenticated).user;
+    emit(const AuthLoading());
+    try {
+      await authService.logout(user);
+      emit(const Unauthenticated());
+      return true;
+    } on Failure catch (e) {
+      emit(AuthError(message: e.message));
+      emit(Authenticated(user: user));
       return false;
     }
   }

@@ -6,10 +6,12 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/failure.dart';
 
 class AuthService {
+  static const String kAuthBaseUrl = '${AppConfig.kApiBaseUrl}/auth';
+
   Future<User> login(String email, String password) async {
     try {
       final Response res = await Dio().post(
-        '${AppConfig.kApiBaseUrl}/auth/login',
+        '$kAuthBaseUrl/login',
         options: Options(contentType: Headers.jsonContentType),
         data: {
           "email": email,
@@ -18,11 +20,7 @@ class AuthService {
       );
 
       if (res.statusCode != 201) throw Failure(error: 'Could not login!');
-      final resBody = res.data as Map<String, dynamic>;
-      return User(
-        id: resBody['userid'] as String,
-        accessToken: resBody['access_token'] as String,
-      );
+      return User.fromMap(res.data as Map<String, dynamic>);
     } on DioError catch (e) {
       throw Failure(error: e.message);
     } catch (e) {
@@ -33,18 +31,35 @@ class AuthService {
   Future<User> signUp(String username, String email, String password) async {
     try {
       final Response res = await Dio().post(
-        '${AppConfig.kApiBaseUrl}/users',
+        '$kAuthBaseUrl/signup',
         options: Options(contentType: Headers.jsonContentType),
         data: {
           "email": email,
-          "username": username,
+          "name": username,
           "password": password,
         },
       );
 
       if (res.statusCode != 201) throw Failure(error: 'Could not sign up!');
-      final resBody = res.data as Map<String, dynamic>;
-      return User(id: resBody['id'] as String);
+      return User.fromMap(res.data as Map<String, dynamic>);
+    } on DioError catch (e) {
+      throw Failure(error: e.message);
+    } catch (e) {
+      throw Failure(error: 'Could not sign up!');
+    }
+  }
+
+  Future<bool> logout(User user) async {
+    try {
+      final Response res = await Dio().get(
+        '$kAuthBaseUrl/logout/${user.id}',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+      );
+
+      if (res.statusCode != 200) throw Failure(error: 'Could not logout!');
+      return true;
     } on DioError catch (e) {
       throw Failure(error: e.message);
     } catch (e) {

@@ -4,6 +4,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
 
 import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
+import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         icons: const [
           CommunityMaterialIcons.map_search_outline,
           CommunityMaterialIcons.check_circle_outline,
-          CommunityMaterialIcons.account_outline,
+          CommunityMaterialIcons.account_circle_outline,
           CommunityMaterialIcons.cog_outline,
         ],
       ),
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         children: const [
           DestinationsPage(),
           Offstage(),
-          Offstage(),
+          ProfilePage(),
           SettingsPage(),
         ],
       ),

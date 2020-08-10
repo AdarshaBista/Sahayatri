@@ -302,6 +302,7 @@ final List<Review> _reviews = [
       name: 'John Doe',
       email: 'john@gmail.com',
       imageUrl: _imgUrls[4],
+      accessToken: '',
     ),
   ),
   Review(
@@ -313,6 +314,7 @@ final List<Review> _reviews = [
       name: 'Jane Doe',
       email: 'jane@gmail.com',
       imageUrl: _imgUrls[2],
+      accessToken: '',
     ),
   ),
 ];

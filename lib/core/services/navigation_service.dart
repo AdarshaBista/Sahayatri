@@ -13,6 +13,10 @@ abstract class NavigationService {
     await navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
   }
 
+  Future<void> pushOnly(String routeName, {Object arguments}) async {
+    await navigatorKey.currentState.pushNamedAndRemoveUntil(routeName, (route) => false);
+  }
+
   bool canPop() {
     return navigatorKey.currentState.canPop();
   }

@@ -25,7 +25,11 @@ class RootRouter {
 
     switch (settings.name) {
       case Routes.kAuthPageRoute:
-        _page = const AuthPage();
+        if (settings.arguments != null) {
+          _page = AuthPage(isInitial: settings.arguments as bool);
+        } else {
+          _page = const AuthPage();
+        }
         break;
 
       case Routes.kHomePageRoute:

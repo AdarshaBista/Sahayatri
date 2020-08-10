@@ -15,6 +15,7 @@ class UiConfig {
 class Images {
   static const String kSplash = 'assets/icons/splash.png';
   static const String kAuthBackground = 'assets/images/auth.png';
+  static const String kUnauthenticated = 'assets/images/indicators/unauthenticated.png';
   static const String kMarker = 'assets/images/indicators/marker.png';
   static const String kUserMarker = 'assets/images/indicators/user_marker.png';
   static const String kError = 'assets/images/indicators/error.png';

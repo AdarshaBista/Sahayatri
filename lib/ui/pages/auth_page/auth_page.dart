@@ -13,11 +13,17 @@ import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/signup_form.dart';
 
 class AuthPage extends StatelessWidget {
-  const AuthPage();
+  final bool isInitial;
+
+  const AuthPage({
+    this.isInitial = true,
+  }) : assert(isInitial != null);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: Stack(
         children: [
           _buildBackground(),
@@ -44,7 +50,6 @@ class AuthPage extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: [
-          const SizedBox(height: 64.0),
           Image.asset(
             Images.kSplash,
             width: 120.0,
@@ -52,7 +57,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
-          _buildSkipButton(context),
+          if (isInitial) _buildSkipButton(context),
         ],
       ),
     );
