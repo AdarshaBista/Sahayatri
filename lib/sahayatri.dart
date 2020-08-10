@@ -16,6 +16,7 @@ import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
+import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 
@@ -78,6 +79,7 @@ class Sahayatri extends StatelessWidget {
             ),
             BlocProvider<AuthCubit>(
               create: (context) => AuthCubit(
+                userDao: context.repository<UserDao>(),
                 authService: context.repository<AuthService>(),
               ),
             ),
@@ -105,15 +107,27 @@ class _App extends StatelessWidget {
           return const SplashView();
         }
 
-        return MaterialApp(
-          builder: DevicePreview.appBuilder,
-          locale: DevicePreview.of(context).locale,
-          debugShowCheckedModeBanner: false,
-          title: AppConfig.kAppName,
-          theme: AppThemes.light,
-          navigatorKey: context.repository<RootNavService>().navigatorKey,
-          initialRoute: Routes.kAuthPageRoute,
-          onGenerateRoute: RootRouter.onGenerateRoute,
+        return FutureBuilder(
+          future: context.bloc<AuthCubit>().getUser(),
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.hasData) {
+              final bool isLoggedIn = snapshot.data;
+              final String initialRoute =
+                  isLoggedIn ? Routes.kHomePageRoute : Routes.kAuthPageRoute;
+
+              return MaterialApp(
+                builder: DevicePreview.appBuilder,
+                locale: DevicePreview.of(context).locale,
+                debugShowCheckedModeBanner: false,
+                title: AppConfig.kAppName,
+                theme: AppThemes.light,
+                navigatorKey: context.repository<RootNavService>().navigatorKey,
+                initialRoute: initialRoute,
+                onGenerateRoute: RootRouter.onGenerateRoute,
+              );
+            }
+            return const SplashView();
+          },
         );
       },
     );

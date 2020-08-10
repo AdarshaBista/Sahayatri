@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/prefs.dart';
 import 'package:sahayatri/core/models/weather.dart';
 
@@ -15,6 +16,7 @@ import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
+import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 
@@ -52,6 +54,7 @@ Future<void> initHive() async {
 
   Hive
     ..init(hivePath)
+    ..registerAdapter(UserAdapter())
     ..registerAdapter(PrefsAdapter())
     ..registerAdapter(WeatherAdapter());
 }
@@ -77,6 +80,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => AuthService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
+          RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
           RepositoryProvider(create: (_) => LocationService()),

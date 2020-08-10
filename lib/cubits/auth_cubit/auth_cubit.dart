@@ -8,22 +8,35 @@ import 'package:sahayatri/core/models/failure.dart';
 
 import 'package:sahayatri/core/services/auth_service.dart';
 
+import 'package:sahayatri/app/database/user_dao.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
+  final UserDao userDao;
   final AuthService authService;
 
   AuthCubit({
+    @required this.userDao,
     @required this.authService,
-  })  : assert(authService != null),
+  })  : assert(userDao != null),
+        assert(authService != null),
         super(const Unauthenticated());
 
   bool get isAuthenticated => state is Authenticated;
+
+  Future<bool> getUser() async {
+    final user = await userDao.get();
+    if (user == null) return false;
+    emit(Authenticated(user: user));
+    return true;
+  }
 
   Future<bool> login(String email, String password) async {
     emit(const AuthLoading());
     try {
       final user = await authService.login(email, password);
+      await userDao.save(user);
       emit(Authenticated(user: user));
       return true;
     } on Failure catch (e) {
@@ -37,6 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthLoading());
     try {
       final user = await authService.signUp(username, email, password);
+      await userDao.save(user);
       emit(Authenticated(user: user));
       return true;
     } on Failure catch (e) {
@@ -51,6 +65,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthLoading());
     try {
       await authService.logout(user);
+      await userDao.remove(user);
       emit(const Unauthenticated());
       return true;
     } on Failure catch (e) {

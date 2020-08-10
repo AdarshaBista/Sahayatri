@@ -1,10 +1,24 @@
 import 'package:meta/meta.dart';
 
+import 'package:hive/hive.dart';
+
+part 'user.g.dart';
+
+@HiveType(typeId: 2)
 class User {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String email;
+
+  @HiveField(3)
   final String imageUrl;
+
+  @HiveField(4)
   final String accessToken;
 
   User({
