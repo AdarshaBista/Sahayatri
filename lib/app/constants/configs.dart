@@ -4,6 +4,7 @@ class AppConfig {
   static const String kFontFamily = 'Sen';
   static const String kFontFamilySerif = 'RobotoSlab';
   static const String kSmsMessagePrefix = 'I have safely reached';
+  static const String kApiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
 }
 
 class UiConfig {

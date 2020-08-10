@@ -100,7 +100,7 @@ class NearbyForm extends StatelessWidget {
       label: 'Start Nearby',
       iconData: CommunityMaterialIcons.circle_double,
       onTap: () {
-        final name = (context.bloc<PrefsBloc>().state as PrefsLoaded).prefs.deviceName;
+        final name = (context.bloc<PrefsCubit>().state as PrefsLoaded).prefs.deviceName;
         if (name.isNotEmpty) {
           context.bloc<NearbyCubit>().startNearby(name);
         } else {

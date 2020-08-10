@@ -9,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/pages/auth_page/widgets/auth_form.dart';
+import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
+import 'package:sahayatri/ui/pages/auth_page/widgets/signup_form.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage();
@@ -43,6 +44,7 @@ class AuthPage extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: [
+          const SizedBox(height: 64.0),
           Image.asset(
             Images.kSplash,
             width: 120.0,
@@ -58,6 +60,7 @@ class AuthPage extends StatelessWidget {
 
   Widget _buildTabView() {
     return NestedTabView(
+      keepAlive: true,
       isCentered: true,
       isTabFilled: true,
       tabBarPadding: EdgeInsets.zero,
@@ -65,17 +68,9 @@ class AuthPage extends StatelessWidget {
         NestedTabData(label: 'Login', icon: Icons.login_outlined),
         NestedTabData(label: 'Sign Up', icon: Icons.app_registration),
       ],
-      children: [
-        AuthForm(
-          buttonLabel: 'LOGIN',
-          buttonIcon: Icons.login_outlined,
-          onSubmit: () {},
-        ),
-        AuthForm(
-          buttonLabel: 'SIGN UP',
-          buttonIcon: Icons.app_registration,
-          onSubmit: () {},
-        ),
+      children: const [
+        LoginForm(),
+        SignUpForm(),
       ],
     );
   }

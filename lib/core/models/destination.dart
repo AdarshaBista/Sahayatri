@@ -8,7 +8,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 class Destination {
-  final int id;
+  final String id;
   final String name;
   final String description;
   final String permit;
@@ -69,7 +69,7 @@ class Destination {
         assert(isDownloaded != null);
 
   Destination copyWith({
-    int id,
+    String id,
     String name,
     String description,
     String displayImageUrl,
@@ -129,7 +129,7 @@ class Destination {
     if (map == null) return null;
 
     return Destination(
-      id: map['id'] as int,
+      id: map['id'] as String,
       name: map['name'] as String,
       description: map['description'] as String,
       permit: map['permit'] as String,

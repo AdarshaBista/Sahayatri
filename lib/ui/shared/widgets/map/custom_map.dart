@@ -119,7 +119,7 @@ class _TileLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrefsBloc, PrefsState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
         final layerId = (state as PrefsLoaded).prefs.mapStyle;
 

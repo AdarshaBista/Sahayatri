@@ -8,7 +8,7 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 final Destination mardiTrek = Destination(
-  id: 1,
+  id: 'mardi',
   name: 'Mardi Himal Trek',
   length: '27',
   maxAltitude: '4300',
@@ -298,7 +298,7 @@ final List<Review> _reviews = [
     text: _desc,
     rating: 4.0,
     user: User(
-      id: 1,
+      id: 'user_one',
       name: 'John Doe',
       email: 'john@gmail.com',
       imageUrl: _imgUrls[4],
@@ -309,7 +309,7 @@ final List<Review> _reviews = [
     text: _desc,
     rating: 3,
     user: User(
-      id: 2,
+      id: 'user_two',
       name: 'Jane Doe',
       email: 'jane@gmail.com',
       imageUrl: _imgUrls[2],

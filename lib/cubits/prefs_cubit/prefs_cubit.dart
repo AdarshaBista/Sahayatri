@@ -9,10 +9,10 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 
 part 'prefs_state.dart';
 
-class PrefsBloc extends Cubit<PrefsState> {
+class PrefsCubit extends Cubit<PrefsState> {
   final PrefsDao prefsDao;
 
-  PrefsBloc({
+  PrefsCubit({
     @required this.prefsDao,
   })  : assert(prefsDao != null),
         super(const PrefsLoading());

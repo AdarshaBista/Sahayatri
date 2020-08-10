@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
@@ -19,12 +20,13 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
-import 'package:sahayatri/ui/shared/widgets/splash_view.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/splash_view.dart';
 
 class Sahayatri extends StatelessWidget {
   const Sahayatri();
@@ -69,10 +71,15 @@ class Sahayatri extends StatelessWidget {
       child: Builder(
         builder: (context) => MultiBlocProvider(
           providers: [
-            BlocProvider<PrefsBloc>(
-              create: (context) => PrefsBloc(
+            BlocProvider<PrefsCubit>(
+              create: (context) => PrefsCubit(
                 prefsDao: context.repository<PrefsDao>(),
               )..initPrefs(),
+            ),
+            BlocProvider<AuthCubit>(
+              create: (context) => AuthCubit(
+                authService: context.repository<AuthService>(),
+              ),
             ),
             BlocProvider<NearbyCubit>(
               create: (context) => NearbyCubit(
@@ -92,7 +99,7 @@ class _App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrefsBloc, PrefsState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
         if (state is PrefsLoading) {
           return const SplashView();

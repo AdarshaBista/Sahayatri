@@ -6,7 +6,7 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 final Destination mamagharHike = Destination(
-  id: 3,
+  id: 'mamaghar',
   name: 'Mamaghar Hike',
   length: '2.6',
   maxAltitude: '1864',

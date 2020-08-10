@@ -70,7 +70,7 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   Widget _buildTextField() {
-    return BlocBuilder<PrefsBloc, PrefsState>(builder: (context, state) {
+    return BlocBuilder<PrefsCubit, PrefsState>(builder: (context, state) {
       contact = (state as PrefsLoaded).prefs.contact;
 
       return CustomTextField(
@@ -97,7 +97,7 @@ class _ContactFormState extends State<ContactForm> {
       ),
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
-        context.bloc<PrefsBloc>().saveContact(contact);
+        context.bloc<PrefsCubit>().saveContact(contact);
 
         if (widget.isOnSettings) {
           Navigator.of(context).pop();

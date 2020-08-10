@@ -10,6 +10,7 @@ import 'package:sahayatri/core/models/prefs.dart';
 import 'package:sahayatri/core/models/weather.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
@@ -73,6 +74,7 @@ class App extends StatelessWidget {
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
+          RepositoryProvider(create: (_) => AuthService()),
           RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationNavService()),
           RepositoryProvider(create: (_) => PrefsDao()),

@@ -4,6 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class NestedTabView extends StatefulWidget {
+  final bool keepAlive;
   final bool isCentered;
   final bool isTabFilled;
   final List<Widget> children;
@@ -14,6 +15,7 @@ class NestedTabView extends StatefulWidget {
   const NestedTabView({
     @required this.tabs,
     @required this.children,
+    this.keepAlive = false,
     this.isCentered = false,
     this.isTabFilled = false,
     this.tabBarPadding = const EdgeInsets.symmetric(vertical: 8.0),
@@ -58,7 +60,12 @@ class _NestedTabViewState extends State<NestedTabView>
           padding: widget.tabBarPadding,
           child: _buildTabBar(context),
         ),
-        widget.children[_tabController.index],
+        widget.keepAlive
+            ? IndexedStack(
+                index: _tabController.index,
+                children: widget.children,
+              )
+            : widget.children[_tabController.index],
       ],
     );
   }

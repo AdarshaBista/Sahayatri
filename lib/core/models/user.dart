@@ -1,32 +1,37 @@
 import 'package:meta/meta.dart';
 
 class User {
-  final int id;
+  final String id;
   final String name;
   final String email;
   final String imageUrl;
+  final String accessToken;
 
   User({
     @required this.id,
     @required this.name,
     @required this.email,
     @required this.imageUrl,
+    this.accessToken = '',
   })  : assert(id != null),
         assert(name != null),
         assert(email != null),
-        assert(imageUrl != null);
+        assert(imageUrl != null),
+        assert(accessToken != null);
 
   User copyWith({
-    int id,
+    String id,
     String name,
     String email,
     String imageUrl,
+    String accessToken,
   }) {
     return User(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
       imageUrl: imageUrl ?? this.imageUrl,
+      accessToken: accessToken ?? this.accessToken,
     );
   }
 
@@ -36,6 +41,7 @@ class User {
       'name': name,
       'email': email,
       'imageUrl': imageUrl,
+      'accessToken': accessToken,
     };
   }
 
@@ -43,16 +49,17 @@ class User {
     if (map == null) return null;
 
     return User(
-      id: map['id'] as int,
+      id: map['id'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
       imageUrl: map['imageUrl'] as String,
+      accessToken: map['accessToken'] as String,
     );
   }
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, imageUrl: $imageUrl)';
+    return 'User(id: $id, name: $name, email: $email, imageUrl: $imageUrl, accessToken: $accessToken)';
   }
 
   @override
@@ -63,11 +70,16 @@ class User {
         o.id == id &&
         o.name == name &&
         o.email == email &&
-        o.imageUrl == imageUrl;
+        o.imageUrl == imageUrl &&
+        o.accessToken == accessToken;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ email.hashCode ^ imageUrl.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        email.hashCode ^
+        imageUrl.hashCode ^
+        accessToken.hashCode;
   }
 }

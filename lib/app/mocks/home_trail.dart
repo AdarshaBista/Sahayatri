@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 final Destination homeTrail = Destination(
-  id: 2,
+  id: 'home',
   name: 'Home Trail',
   length: '0.2',
   maxAltitude: '1810',

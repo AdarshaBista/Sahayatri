@@ -42,7 +42,7 @@ class LayersButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrefsBloc, PrefsState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
         return Material(
           color: Colors.transparent,
@@ -58,7 +58,7 @@ class LayersButton extends StatelessWidget {
                 initialValue: (state as PrefsLoaded).prefs.mapStyle,
                 color: AppColors.light,
                 onSelected: (mapStyle) =>
-                    context.bloc<PrefsBloc>().changeMapLayer(mapStyle),
+                    context.bloc<PrefsCubit>().changeMapLayer(mapStyle),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(

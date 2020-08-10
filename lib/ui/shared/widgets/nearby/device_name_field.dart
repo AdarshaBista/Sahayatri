@@ -37,7 +37,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   }
 
   Widget _buildTextField() {
-    return BlocBuilder<PrefsBloc, PrefsState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
         deviceName = (state as PrefsLoaded).prefs.deviceName;
 
@@ -65,7 +65,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
       ),
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
-        context.bloc<PrefsBloc>().saveDeviceName(deviceName);
+        context.bloc<PrefsCubit>().saveDeviceName(deviceName);
         _showSavedSnackBar(context);
       },
     );
