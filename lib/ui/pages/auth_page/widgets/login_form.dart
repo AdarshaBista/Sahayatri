@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
@@ -36,8 +43,8 @@ class _LoginFormState extends State<LoginForm> {
                 child: AuthFields(
                   initialEmail: email,
                   initialPassword: password,
-                  onEmailChanged: (value) {},
-                  onPasswordChanged: (value) {},
+                  onEmailChanged: (value) => email = value,
+                  onPasswordChanged: (value) => password = value,
                 ),
               ),
             ),
@@ -45,8 +52,15 @@ class _LoginFormState extends State<LoginForm> {
           AuthButton(
             label: 'LOGIN',
             icon: Icons.login_outlined,
-            onPressed: () {
+            onPressed: () async {
               if (!formKey.currentState.validate()) return;
+
+              final success = await context.bloc<AuthCubit>().login(email, password);
+              if (success) {
+                context
+                    .repository<RootNavService>()
+                    .pushReplacementNamed(Routes.kHomePageRoute);
+              }
             },
           ),
         ],

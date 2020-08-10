@@ -9,15 +9,11 @@ class User {
 
   User({
     @required this.id,
-    @required this.name,
-    @required this.email,
-    @required this.imageUrl,
-    this.accessToken = '',
-  })  : assert(id != null),
-        assert(name != null),
-        assert(email != null),
-        assert(imageUrl != null),
-        assert(accessToken != null);
+    this.name,
+    this.email,
+    this.imageUrl,
+    this.accessToken,
+  }) : assert(id != null);
 
   User copyWith({
     String id,

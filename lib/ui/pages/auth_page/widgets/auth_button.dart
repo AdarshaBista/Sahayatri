@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class AuthButton extends StatelessWidget {
   final String label;
@@ -17,14 +21,43 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      heroTag: '${label}Tag',
-      icon: Icon(icon),
-      onPressed: onPressed,
-      label: Text(
-        label,
-        style: AppTextStyles.small.bold.primary,
-      ),
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthError) _showSnackBar(context, state.message);
+      },
+      builder: (context, state) {
+        return FloatingActionButton.extended(
+          heroTag: '$label Tag',
+          icon: Icon(icon),
+          onPressed: (state is AuthLoading) ? null : onPressed,
+          label: (state is AuthLoading)
+              ? SizedBox(
+                  width: 32.0,
+                  height: 32.0,
+                  child: LoadingIndicator(
+                    color: AppColors.primary,
+                    indicatorType: Indicator.ballSpinFadeLoader,
+                  ),
+                )
+              : Text(
+                  label,
+                  style: AppTextStyles.small.bold.primary,
+                ),
+        );
+      },
     );
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    Scaffold.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppTextStyles.small.light,
+          ),
+        ),
+      );
   }
 }

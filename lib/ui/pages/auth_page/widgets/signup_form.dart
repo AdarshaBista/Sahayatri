@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
@@ -41,14 +47,14 @@ class _SignUpFormState extends State<SignUpForm> {
                   initialValue: username,
                   icon: Icons.account_circle_outlined,
                   validator: FormValidators.requiredText(),
-                  onChanged: (value) {},
+                  onChanged: (value) => username = value,
                 ),
                 const SizedBox(height: 20.0),
                 AuthFields(
                   initialEmail: email,
                   initialPassword: password,
-                  onEmailChanged: (value) {},
-                  onPasswordChanged: (value) {},
+                  onEmailChanged: (value) => email = value,
+                  onPasswordChanged: (value) => password = value,
                 ),
               ],
             ),
@@ -56,8 +62,15 @@ class _SignUpFormState extends State<SignUpForm> {
           AuthButton(
             label: 'SIGN UP',
             icon: Icons.app_registration,
-            onPressed: () {
+            onPressed: () async {
               if (!formKey.currentState.validate()) return;
+              final success =
+                  await context.bloc<AuthCubit>().signUp(username, email, password);
+              if (success) {
+                context
+                    .repository<RootNavService>()
+                    .pushReplacementNamed(Routes.kHomePageRoute);
+              }
             },
           ),
         ],
