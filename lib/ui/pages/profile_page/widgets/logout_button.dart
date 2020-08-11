@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
@@ -18,7 +14,7 @@ class LogoutButton extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return GestureDetector(
-          onTap: (state is AuthLoading) ? null : () async => _logout(context),
+          onTap: (state is AuthLoading) ? null : context.bloc<AuthCubit>().logout,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: (state is AuthLoading)
@@ -38,14 +34,5 @@ class LogoutButton extends StatelessWidget {
         );
       },
     );
-  }
-
-  Future<void> _logout(BuildContext context) async {
-    final success = await context.bloc<AuthCubit>().logout();
-    if (success) {
-      context
-          .repository<RootNavService>()
-          .pushOnly(Routes.kAuthPageRoute, arguments: true);
-    }
   }
 }

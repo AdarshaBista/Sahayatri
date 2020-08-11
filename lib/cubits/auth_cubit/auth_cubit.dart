@@ -60,18 +60,16 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<bool> logout() async {
+  Future<void> logout() async {
     final user = (state as Authenticated).user;
     emit(const AuthLoading());
     try {
       await authService.logout(user);
       await userDao.remove(user);
       emit(const Unauthenticated());
-      return true;
     } on Failure catch (e) {
       emit(AuthError(message: e.message));
       emit(Authenticated(user: user));
-      return false;
     }
   }
 }

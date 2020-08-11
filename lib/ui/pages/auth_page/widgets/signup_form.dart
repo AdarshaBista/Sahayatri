@@ -15,7 +15,11 @@ import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_button.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm();
+  final bool isInitial;
+
+  const SignUpForm({
+    @required this.isInitial,
+  }) : assert(isInitial != null);
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -67,9 +71,13 @@ class _SignUpFormState extends State<SignUpForm> {
               final success =
                   await context.bloc<AuthCubit>().signUp(username, email, password);
               if (success) {
-                context
-                    .repository<RootNavService>()
-                    .pushReplacementNamed(Routes.kHomePageRoute);
+                if (widget.isInitial) {
+                  context
+                      .repository<RootNavService>()
+                      .pushReplacementNamed(Routes.kHomePageRoute);
+                } else {
+                  Navigator.of(context).pop();
+                }
               }
             },
           ),

@@ -73,9 +73,9 @@ class AuthPage extends StatelessWidget {
         NestedTabData(label: 'Login', icon: Icons.login_outlined),
         NestedTabData(label: 'Sign Up', icon: Icons.app_registration),
       ],
-      children: const [
-        LoginForm(),
-        SignUpForm(),
+      children: [
+        LoginForm(isInitial: isInitial),
+        SignUpForm(isInitial: isInitial),
       ],
     );
   }
