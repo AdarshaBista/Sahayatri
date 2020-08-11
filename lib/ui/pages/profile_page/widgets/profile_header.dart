@@ -20,45 +20,52 @@ class ProfileHeader extends StatelessWidget {
         alignment: Alignment.bottomLeft,
         children: [
           const UserAvatar(),
-          _buildDetails(context),
+          _buildOverlay(context),
         ],
       ),
     );
   }
 
-  Widget _buildDetails(BuildContext context) {
-    final user = context.watch<User>();
-
+  Widget _buildOverlay(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            user.name.toUpperCase(),
-            style: AppTextStyles.medium.bold,
-          ),
-          const SizedBox(height: 4.0),
-          Text(
-            user.email,
-            style: AppTextStyles.small,
-          ),
+          _buildUserDetails(context),
           _buildLogoutButton(context),
         ],
       ),
     );
   }
 
+  Widget _buildUserDetails(BuildContext context) {
+    final user = context.watch<User>();
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          user.name.toUpperCase(),
+          style: AppTextStyles.medium.bold,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          user.email,
+          style: AppTextStyles.small,
+        ),
+      ],
+    );
+  }
+
   Widget _buildLogoutButton(BuildContext context) {
     return GestureDetector(
       onTap: context.bloc<AuthCubit>().logout,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
-        child: Text(
-          'LOGOUT',
-          style: AppTextStyles.small.light,
-        ),
+      child: Text(
+        'LOGOUT',
+        style: AppTextStyles.extraSmall.light,
       ),
     );
   }

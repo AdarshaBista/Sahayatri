@@ -14,7 +14,6 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class ItineraryCard extends StatelessWidget {
@@ -33,18 +32,15 @@ class ItineraryCard extends StatelessWidget {
       onTap: () => context
           .repository<DestinationNavService>()
           .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
-      child: SlideAnimator(
-        begin: const Offset(0.8, 0.0),
-        child: Container(
-          height: 100.0,
-          child: CustomCard(
-            margin: const EdgeInsets.symmetric(vertical: 6.0),
-            child: Stack(
-              children: [
-                _buildBackground(),
-                _buildTile(context),
-              ],
-            ),
+      child: Container(
+        height: 100.0,
+        child: CustomCard(
+          margin: const EdgeInsets.symmetric(vertical: 6.0),
+          child: Stack(
+            children: [
+              _buildBackground(),
+              _buildTile(context),
+            ],
           ),
         ),
       ),
