@@ -9,18 +9,26 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
+import 'package:sahayatri/core/services/nearby_service.dart';
+import 'package:sahayatri/core/services/tracker_service.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final UserDao userDao;
   final AuthService authService;
+  final NearbyService nearbyService;
+  final TrackerService trackerService;
 
   AuthCubit({
     @required this.userDao,
     @required this.authService,
+    @required this.nearbyService,
+    @required this.trackerService,
   })  : assert(userDao != null),
         assert(authService != null),
+        assert(nearbyService != null),
+        assert(trackerService != null),
         super(const Unauthenticated());
 
   bool get isAuthenticated => state is Authenticated;
@@ -66,6 +74,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await authService.logout(user);
       await userDao.remove(user);
+      await nearbyService.stop();
+      trackerService.stop();
       emit(const Unauthenticated());
     } on Failure catch (e) {
       emit(AuthError(message: e.message));

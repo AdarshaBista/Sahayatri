@@ -81,6 +81,8 @@ class Sahayatri extends StatelessWidget {
               create: (context) => AuthCubit(
                 userDao: context.repository<UserDao>(),
                 authService: context.repository<AuthService>(),
+                nearbyService: context.repository<NearbyService>(),
+                trackerService: context.repository<TrackerService>(),
               ),
             ),
             BlocProvider<NearbyCubit>(
