@@ -86,7 +86,10 @@ class _DestinationsPageState extends State<DestinationsPage> {
         BlocBuilder<DestinationsCubit, DestinationsState>(
           builder: (context, state) {
             if (state is DestinationsError) {
-              return ErrorIndicator(message: state.message);
+              return ErrorIndicator(
+                message: state.message,
+                onRetry: context.bloc<DestinationsCubit>().fetchDestinations,
+              );
             } else if (state is DestinationsLoading) {
               return const BusyIndicator();
             } else if (state is DestinationsSuccess) {

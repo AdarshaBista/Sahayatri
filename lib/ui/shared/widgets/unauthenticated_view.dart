@@ -35,7 +35,7 @@ class UnauthenticatedView extends StatelessWidget {
                 .repository<RootNavService>()
                 .pushNamed(Routes.kAuthPageRoute, arguments: false);
           },
-        )
+        ),
       ],
     );
   }
