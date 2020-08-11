@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/directions_button.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/buttons/directions_button.dart';
 import 'package:sahayatri/ui/shared/indicators/location_error_indicator.dart';
 
 class IncorrectLocationInfo extends StatelessWidget {

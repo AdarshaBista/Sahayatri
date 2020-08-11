@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
 
 class ContactForm extends StatefulWidget {
   final bool isOnSettings;

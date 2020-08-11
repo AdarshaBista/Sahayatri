@@ -9,12 +9,12 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/dialogs/message_dialog.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/connection_info.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/device_name_field.dart';
+import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
+import 'package:sahayatri/ui/shared/nearby/connection_info.dart';
+import 'package:sahayatri/ui/shared/nearby/device_name_field.dart';
 
 class NearbyForm extends StatelessWidget {
   final bool isOnSettings;

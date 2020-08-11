@@ -16,7 +16,7 @@ import 'package:sahayatri/ui/shared/widgets/carousel.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
 

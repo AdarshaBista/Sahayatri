@@ -8,8 +8,8 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/nearby_button.dart';
-import 'package:sahayatri/ui/shared/widgets/dialogs/confirm_dialog.dart';
+import 'package:sahayatri/ui/shared/nearby/nearby_button.dart';
+import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
 
 class NearbyActions extends StatelessWidget {
   const NearbyActions();

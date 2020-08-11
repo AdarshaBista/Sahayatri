@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/device_status_row.dart';
+import 'package:sahayatri/ui/shared/nearby/device_status_row.dart';
 
 class DeviceTile extends StatelessWidget {
   final int index;

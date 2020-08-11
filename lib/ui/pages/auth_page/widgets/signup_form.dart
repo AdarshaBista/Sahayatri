@@ -10,7 +10,7 @@ import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_button.dart';
 

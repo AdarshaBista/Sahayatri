@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 
 class DurationField extends StatelessWidget {
   final String label;

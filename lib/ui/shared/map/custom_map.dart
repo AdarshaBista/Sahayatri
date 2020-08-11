@@ -14,8 +14,8 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/map/layers_button.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
+import 'package:sahayatri/ui/shared/map/layers_button.dart';
 
 class CustomMap extends StatefulWidget {
   final Coord center;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
+import 'package:sahayatri/ui/shared/form/contact_form.dart';
+import 'package:sahayatri/ui/shared/nearby/nearby_form.dart';
 
 class SetupTab extends StatelessWidget {
   const SetupTab();

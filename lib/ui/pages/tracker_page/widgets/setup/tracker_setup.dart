@@ -5,10 +5,10 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/form/contact_form.dart';
+import 'package:sahayatri/ui/shared/nearby/nearby_form.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/form/contact_form.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/nearby_form.dart';
 
 class TrackerSetup extends StatefulWidget {
   const TrackerSetup();

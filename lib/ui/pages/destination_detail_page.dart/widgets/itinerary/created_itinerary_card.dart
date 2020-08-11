@@ -12,7 +12,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 
 class CreatedItineraryCard extends StatelessWidget {

@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/buttons/directions_button.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/buttons/directions_button.dart';
 
 class DestinationActions extends StatelessWidget {
   const DestinationActions();

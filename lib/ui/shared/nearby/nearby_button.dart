@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/shared/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/shared/buttons/column_button.dart';
 
 class NearbyButton extends StatelessWidget {
   final String label;

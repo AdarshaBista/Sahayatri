@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/nearby/device_tile.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/device_tile.dart';
 
 class DevicesList extends StatelessWidget {
   const DevicesList();

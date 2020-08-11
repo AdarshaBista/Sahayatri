@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/nearby/devices_list.dart';
+import 'package:sahayatri/ui/shared/nearby/nearby_actions.dart';
 import 'package:sahayatri/ui/shared/indicators/scan_indicator.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/devices_list.dart';
-import 'package:sahayatri/ui/shared/widgets/nearby/nearby_actions.dart';
 
 class ConnectionInfo extends StatelessWidget {
   const ConnectionInfo();
