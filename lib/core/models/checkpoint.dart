@@ -11,9 +11,7 @@ class Checkpoint {
   final int day;
 
   bool get isTemplate => dateTime == null;
-
-  String get date =>
-      isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime);
+  String get date => isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime);
   String get time => isTemplate ? '' : DateFormat('h:mm a').format(dateTime);
 
   const Checkpoint({
@@ -70,10 +68,7 @@ class Checkpoint {
 
   @override
   int get hashCode {
-    return place.hashCode ^
-        day.hashCode ^
-        description.hashCode ^
-        dateTime.hashCode;
+    return place.hashCode ^ day.hashCode ^ description.hashCode ^ dateTime.hashCode;
   }
 
   @override

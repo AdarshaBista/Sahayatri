@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
 
 final Destination mamagharHike = Destination(
   id: 'mamaghar',
@@ -115,20 +116,22 @@ final List<Place> _places = [
 
 final List<Lodge> _lodges = [
   Lodge(
-    id: 1,
+    id: 'lodge5',
     name: 'Hamro Lodge',
-    contactNumber: '9841146372',
     coord: const Coord(lat: 28.29914, lng: 83.82164),
     rating: 3.5,
     imageUrls: _imgUrls.getRange(1, 4).toList(),
+    contactNumbers: ['9841146372', '9847576267'],
+    facility: const LodgeFacility(wifi: true, toilet: true, shower: true),
   ),
   Lodge(
-    id: 2,
+    id: 'lodge6',
     name: 'Timro Lodge',
-    contactNumber: '9841127836',
     coord: const Coord(lat: 28.31495, lng: 83.83057),
     rating: 4.5,
     imageUrls: _imgUrls.getRange(5, 8).toList(),
+    contactNumbers: ['9841146372', '9847576267'],
+    facility: const LodgeFacility(wifi: true, toilet: true),
   ),
 ];
 

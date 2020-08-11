@@ -6,6 +6,7 @@ import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
 
 final Destination mardiTrek = Destination(
   id: 'mardi',
@@ -156,36 +157,40 @@ final List<Place> _places = [
 
 final List<Lodge> _lodges = [
   Lodge(
-    id: 1,
+    id: 'lodge1',
     name: 'Lekali Lodge',
-    contactNumber: '9841123456',
     coord: const Coord(lat: 28.29914, lng: 83.82164),
     rating: 3.5,
     imageUrls: _imgUrls.getRange(2, 5).toList(),
+    contactNumbers: ['9841123456', '9746351746'],
+    facility: const LodgeFacility(wifi: true, toilet: true),
   ),
   Lodge(
-    id: 2,
+    id: 'lodge2',
     name: 'Thakali Lodge',
-    contactNumber: '9841127836',
+    contactNumbers: ['9841127836'],
     coord: const Coord(lat: 28.31495, lng: 83.83057),
     rating: 4.5,
     imageUrls: _imgUrls.getRange(3, 8).toList(),
+    facility: const LodgeFacility(wifi: true, toilet: true),
   ),
   Lodge(
-    id: 3,
+    id: 'lodge3',
     name: 'Muktinath Lodge',
-    contactNumber: '9841462456',
     coord: const Coord(lat: 28.30989, lng: 83.82946),
     rating: 2.0,
     imageUrls: _imgUrls.getRange(7, 9).toList(),
+    contactNumbers: ['9841462456', '4372858'],
+    facility: const LodgeFacility(wifi: true, shower: true),
   ),
   Lodge(
-    id: 4,
+    id: 'lodge4',
     name: 'Atithi Lodge',
-    contactNumber: '9861987575',
     coord: const Coord(lat: 28.30248, lng: 83.82234),
     rating: 5.0,
     imageUrls: _imgUrls.getRange(9, 11).toList(),
+    contactNumbers: ['9861987575', '0987564738', '9282848282'],
+    facility: const LodgeFacility(shower: true, toilet: true),
   ),
 ];
 

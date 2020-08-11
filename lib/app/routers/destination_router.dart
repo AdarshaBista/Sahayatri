@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
@@ -25,6 +26,7 @@ import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 
 import 'package:sahayatri/ui/pages/route_page/route_page.dart';
 import 'package:sahayatri/ui/pages/place_page/place_page.dart';
+import 'package:sahayatri/ui/pages/lodge_page/lodge_page.dart';
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 import 'package:sahayatri/ui/pages/tracker_page/tracker_page.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/itinerary_page.dart';
@@ -54,6 +56,13 @@ class DestinationRouter {
         _page = Provider<Place>.value(
           value: settings.arguments as Place,
           child: const PlacePage(),
+        );
+        break;
+
+      case Routes.kLodgePageRoute:
+        _page = Provider<Lodge>.value(
+          value: settings.arguments as Lodge,
+          child: const LodgePage(),
         );
         break;
 

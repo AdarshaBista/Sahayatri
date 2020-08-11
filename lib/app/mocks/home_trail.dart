@@ -2,6 +2,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
 
 final Destination homeTrail = Destination(
   id: 'home',
@@ -76,20 +77,22 @@ final List<Place> _places = [
 
 final List<Lodge> _lodges = [
   Lodge(
-    id: 1,
-    name: 'Hamro Lodge',
-    contactNumber: '9841146372',
+    id: 'lodge7',
+    name: 'My Lodge',
     coord: const Coord(lat: 28.29914, lng: 83.82164),
     rating: 3.5,
     imageUrls: _imgUrls.getRange(1, 4).toList(),
+    contactNumbers: ['9841146372', '9837285838'],
+    facility: const LodgeFacility(wifi: true, toilet: true),
   ),
   Lodge(
-    id: 2,
-    name: 'Timro Lodge',
-    contactNumber: '9841127836',
+    id: 'lodge8',
+    name: 'Your Lodge',
     coord: const Coord(lat: 28.31495, lng: 83.83057),
     rating: 4.5,
     imageUrls: _imgUrls.getRange(5, 8).toList(),
+    contactNumbers: ['9841146372', '9837285838'],
+    facility: const LodgeFacility(wifi: true, toilet: true),
   ),
 ];
 

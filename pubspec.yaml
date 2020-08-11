@@ -15,6 +15,7 @@ dependencies:
   # Misc
   dio: ^3.0.9
   intl: ^0.16.1
+  url_launcher: ^5.5.0
   path_provider: ^1.6.11
   device_preview: ^0.4.7
   form_field_validator: ^1.0.1

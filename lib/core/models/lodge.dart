@@ -1,44 +1,50 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
 
 class Lodge {
-  final int id;
+  final String id;
   final String name;
   final Coord coord;
   final double rating;
-  final String contactNumber;
+  final LodgeFacility facility;
   final List<String> imageUrls;
+  final List<String> contactNumbers;
 
   const Lodge({
     @required this.id,
     @required this.name,
     @required this.coord,
     @required this.rating,
-    @required this.contactNumber,
+    @required this.facility,
     @required this.imageUrls,
+    @required this.contactNumbers,
   })  : assert(id != null),
         assert(name != null),
-        assert(contactNumber != null),
         assert(rating != null),
         assert(coord != null),
-        assert(imageUrls != null);
+        assert(facility != null),
+        assert(imageUrls != null),
+        assert(contactNumbers != null);
 
   Lodge copyWith({
-    int id,
+    String id,
     String name,
     Coord coord,
     double rating,
-    String contactNumber,
+    LodgeFacility facility,
     List<String> imageUrls,
+    List<String> contactNumbers,
   }) {
     return Lodge(
       id: id ?? this.id,
       name: name ?? this.name,
       coord: coord ?? this.coord,
       rating: rating ?? this.rating,
-      contactNumber: contactNumber ?? this.contactNumber,
       imageUrls: imageUrls ?? this.imageUrls,
+      facility: facility ?? this.facility,
+      contactNumbers: contactNumbers ?? this.contactNumbers,
     );
   }
 
@@ -48,8 +54,9 @@ class Lodge {
       'name': name,
       'coord': coord?.toMap(),
       'rating': rating,
-      'contactNumber': contactNumber,
       'imageUrls': imageUrls,
+      'contactNumbers': contactNumbers,
+      'facilities': facility?.toMap(),
     };
   }
 
@@ -57,18 +64,19 @@ class Lodge {
     if (map == null) return null;
 
     return Lodge(
-      id: map['id'] as int,
+      id: map['id'] as String,
       name: map['name'] as String,
       coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
       rating: map['rating'] as double,
-      contactNumber: map['contactNumber'] as String,
       imageUrls: List<String>.from(map['imageUrls'] as List<String>),
+      contactNumbers: List<String>.from(map['contactNumbers'] as List<String>),
+      facility: LodgeFacility.fromMap(map['facilities'] as Map<String, dynamic>),
     );
   }
 
   @override
   String toString() {
-    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumber: $contactNumber, imageUrls: $imageUrls)';
+    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls)';
   }
 
   @override
@@ -80,8 +88,9 @@ class Lodge {
         o.name == name &&
         o.coord == coord &&
         o.rating == rating &&
-        o.contactNumber == contactNumber &&
-        listEquals(o.imageUrls, imageUrls);
+        o.facility == facility &&
+        listEquals(o.imageUrls, imageUrls) &&
+        listEquals(o.contactNumbers, contactNumbers);
   }
 
   @override
@@ -90,7 +99,8 @@ class Lodge {
         name.hashCode ^
         coord.hashCode ^
         rating.hashCode ^
-        contactNumber.hashCode ^
-        imageUrls.hashCode;
+        facility.hashCode ^
+        imageUrls.hashCode ^
+        contactNumbers.hashCode;
   }
 }

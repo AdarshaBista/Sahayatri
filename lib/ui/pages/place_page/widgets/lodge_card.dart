@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
@@ -16,29 +21,40 @@ class LodgeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: <Widget>[
-          _buildBackground(),
-          _buildDetails(),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.repository<DestinationNavService>().pushNamed(
+              Routes.kLodgePageRoute,
+              arguments: lodge,
+            );
+      },
+      child: CustomCard(
+        child: Stack(
+          alignment: Alignment.bottomLeft,
+          children: <Widget>[
+            _buildBackground(),
+            _buildDetails(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildBackground() {
-    return GradientContainer(
-      gradientColors: [
-        Colors.transparent,
-        AppColors.dark.withOpacity(0.5),
-        AppColors.dark,
-      ],
-      child: Image.asset(
-        lodge.imageUrls[0],
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
+    return Hero(
+      tag: lodge.id,
+      child: GradientContainer(
+        gradientColors: [
+          Colors.transparent,
+          AppColors.dark.withOpacity(0.5),
+          AppColors.dark,
+        ],
+        child: Image.asset(
+          lodge.imageUrls[0],
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
       ),
     );
   }
@@ -76,7 +92,7 @@ class LodgeCard extends StatelessWidget {
         ),
         const SizedBox(width: 6.0),
         Text(
-          lodge.contactNumber,
+          lodge.contactNumbers.first,
           style: AppTextStyles.small.lightAccent,
         ),
       ],
