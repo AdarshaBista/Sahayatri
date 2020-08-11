@@ -25,7 +25,7 @@ class ErrorIndicator extends StatelessWidget {
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.medium,
+            style: AppTextStyles.small.bold,
           ),
         ),
         if (onRetry != null)

@@ -15,7 +15,7 @@ class UnauthenticatedIndicator extends StatelessWidget {
       title: Text(
         'Your are not logged in.',
         textAlign: TextAlign.center,
-        style: AppTextStyles.medium,
+        style: AppTextStyles.small.bold,
       ),
     );
   }

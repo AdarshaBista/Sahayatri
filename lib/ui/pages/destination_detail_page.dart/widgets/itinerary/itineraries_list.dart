@@ -5,6 +5,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/header.dart';
+import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/created_itinerary_card.dart';
 
@@ -39,18 +40,20 @@ class ItinerariesList extends StatelessWidget {
       children: [
         Text(
           'Our Suggested Itineraries',
-          style: AppTextStyles.medium,
+          style: AppTextStyles.small.bold,
         ),
         const Divider(height: 16.0),
-        ListView.builder(
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: suggestedItineraries.length,
-          itemBuilder: (context, index) {
-            return ItineraryCard(itinerary: suggestedItineraries[index]);
-          },
-        ),
+        suggestedItineraries.isEmpty
+            ? const EmptyIndicator()
+            : ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: suggestedItineraries.length,
+                itemBuilder: (context, index) {
+                  return ItineraryCard(itinerary: suggestedItineraries[index]);
+                },
+              ),
       ],
     );
   }
@@ -62,7 +65,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 16.0),
         Text(
           'Create Your Own',
-          style: AppTextStyles.medium,
+          style: AppTextStyles.small.bold,
         ),
         const Divider(height: 16.0),
         const CreatedItineraryCard(),

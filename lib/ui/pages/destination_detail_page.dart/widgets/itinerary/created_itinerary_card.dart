@@ -42,8 +42,8 @@ class CreatedItineraryCard extends StatelessWidget {
     return CustomButton(
       outlineOnly: true,
       color: AppColors.dark,
-      iconData: CommunityMaterialIcons.map_search_outline,
-      label: createdItinerary == null ? 'Create an itinerary' : 'Edit this itinerary',
+      iconData: CommunityMaterialIcons.pencil_circle_outline,
+      label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
       onTap: () => context.repository<DestinationNavService>().pushNamed(
             Routes.kItineraryFormPageRoute,
             arguments: context.bloc<DestinationCubit>().destination.createdItinerary,

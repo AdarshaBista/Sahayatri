@@ -13,9 +13,9 @@ class EmptyIndicator extends StatelessWidget {
     return IconIndicator(
       imageUrl: Images.kEmpty,
       title: Text(
-        'Nothing to show',
+        'Nothing to show...',
         textAlign: TextAlign.center,
-        style: AppTextStyles.medium,
+        style: AppTextStyles.small.bold,
       ),
     );
   }

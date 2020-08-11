@@ -81,7 +81,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
       controller: scrollController,
       physics: const BouncingScrollPhysics(),
       children: [
-        const Header(title: 'Choose your', boldTitle: 'Destination'),
+        const Header(leftPadding: 12.0, boldTitle: 'Destinations'),
         const SizedBox(height: 8.0),
         BlocBuilder<DestinationsCubit, DestinationsState>(
           builder: (context, state) {
