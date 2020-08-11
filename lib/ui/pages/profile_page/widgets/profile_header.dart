@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/user.dart';
 
 import 'package:provider/provider.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/user_avatar.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader();
@@ -18,46 +19,9 @@ class ProfileHeader extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
-          _buildAvatar(context),
+          const UserAvatar(),
           _buildDetails(context),
         ],
-      ),
-    );
-  }
-
-  Widget _buildAvatar(BuildContext context) {
-    final user = context.watch<User>();
-
-    return GradientContainer(
-      gradientBegin: Alignment.bottomCenter,
-      gradientEnd: Alignment.topCenter,
-      gradientColors: [
-        AppColors.primaryDark.withOpacity(0.8),
-        AppColors.primaryDark.withOpacity(0.5),
-        AppColors.primaryDark.withOpacity(0.2),
-        Colors.transparent,
-        Colors.transparent,
-      ],
-      child: user.imageUrl == null
-          ? _buildDefaultAvatar(user.name)
-          : Image.asset(
-              user.imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-    );
-  }
-
-  Widget _buildDefaultAvatar(String name) {
-    return Center(
-      child: CircleAvatar(
-        radius: 90.0,
-        backgroundColor: AppColors.primary.withOpacity(0.4),
-        child: Text(
-          name[0],
-          style: AppTextStyles.medium.withSize(90.0).withColor(AppColors.primaryDark),
-        ),
       ),
     );
   }
@@ -80,8 +44,21 @@ class ProfileHeader extends StatelessWidget {
             user.email,
             style: AppTextStyles.small,
           ),
-          const LogoutButton(),
+          _buildLogoutButton(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildLogoutButton(BuildContext context) {
+    return GestureDetector(
+      onTap: context.bloc<AuthCubit>().logout,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Text(
+          'LOGOUT',
+          style: AppTextStyles.small.light,
+        ),
       ),
     );
   }

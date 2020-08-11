@@ -6,6 +6,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
@@ -21,15 +22,22 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent),
-      body: Stack(
-        children: [
-          _buildBackground(),
-          _buildForm(context),
-        ],
-      ),
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            automaticallyImplyLeading: state is! AuthLoading,
+          ),
+          body: Stack(
+            children: [
+              _buildBackground(),
+              _buildForm(context),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -40,7 +48,7 @@ class AuthPage extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       colorBlendMode: BlendMode.srcATop,
-      color: AppColors.primary.withOpacity(0.6),
+      color: AppColors.primary.withOpacity(0.5),
     );
   }
 

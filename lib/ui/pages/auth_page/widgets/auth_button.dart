@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
 
 class AuthButton extends StatelessWidget {
   final String label;
@@ -31,14 +31,7 @@ class AuthButton extends StatelessWidget {
           icon: Icon(icon),
           onPressed: (state is AuthLoading) ? null : onPressed,
           label: (state is AuthLoading)
-              ? SizedBox(
-                  width: 32.0,
-                  height: 32.0,
-                  child: LoadingIndicator(
-                    color: AppColors.primary,
-                    indicatorType: Indicator.ballSpinFadeLoader,
-                  ),
-                )
+              ? const SimpleBusyIndicator()
               : Text(
                   label,
                   style: AppTextStyles.small.bold.primary,

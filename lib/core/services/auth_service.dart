@@ -21,8 +21,6 @@ class AuthService {
 
       if (res.statusCode != 201) throw Failure(error: 'Could not login!');
       return User.fromMap(res.data as Map<String, dynamic>);
-    } on DioError catch (e) {
-      throw Failure(error: e.message);
     } catch (e) {
       throw Failure(error: 'Could not login!');
     }
@@ -42,8 +40,6 @@ class AuthService {
 
       if (res.statusCode != 201) throw Failure(error: 'Could not sign up!');
       return User.fromMap(res.data as Map<String, dynamic>);
-    } on DioError catch (e) {
-      throw Failure(error: e.message);
     } catch (e) {
       throw Failure(error: 'Could not sign up!');
     }
@@ -60,10 +56,8 @@ class AuthService {
 
       if (res.statusCode != 200) throw Failure(error: 'Could not logout!');
       return true;
-    } on DioError catch (e) {
-      throw Failure(error: e.message);
     } catch (e) {
-      throw Failure(error: 'Could not sign up!');
+      throw Failure(error: 'Could not logout!');
     }
   }
 }

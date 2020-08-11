@@ -9,13 +9,15 @@ class UnauthenticatedDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ScaleAnimator(
+    return ScaleAnimator(
       duration: 200,
       child: AlertDialog(
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,
         backgroundColor: AppColors.light,
-        title: UnauthenticatedView(),
+        title: UnauthenticatedView(
+          onLogin: () => Navigator.of(context).pop(),
+        ),
       ),
     );
   }

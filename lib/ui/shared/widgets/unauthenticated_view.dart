@@ -11,7 +11,11 @@ import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/indicators/unauthenticated_indicator.dart';
 
 class UnauthenticatedView extends StatelessWidget {
-  const UnauthenticatedView();
+  final VoidCallback onLogin;
+
+  const UnauthenticatedView({
+    this.onLogin,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,13 @@ class UnauthenticatedView extends StatelessWidget {
           outlineOnly: true,
           iconData: Icons.account_box,
           color: AppColors.dark,
-          onTap: () => context
-              .repository<RootNavService>()
-              .pushNamed(Routes.kAuthPageRoute, arguments: false),
+          onTap: () {
+            if (onLogin != null) onLogin();
+
+            context
+                .repository<RootNavService>()
+                .pushNamed(Routes.kAuthPageRoute, arguments: false);
+          },
         )
       ],
     );
