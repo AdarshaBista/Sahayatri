@@ -15,7 +15,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/dialogs/unauthenticated_dialog.dart';
@@ -34,7 +34,7 @@ class DestinationPage extends StatelessWidget {
     final destination = context.bloc<DestinationCubit>().destination;
 
     return Scaffold(
-      appBar: CustomAppbar(
+      appBar: CurvedAppbar(
         title: destination.name,
         leading: IconButton(
           icon: const Icon(Icons.close),

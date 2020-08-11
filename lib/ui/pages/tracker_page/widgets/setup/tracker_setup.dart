@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/form/contact_form.dart';
 import 'package:sahayatri/ui/shared/nearby/nearby_form.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
 class TrackerSetup extends StatefulWidget {
@@ -36,7 +36,7 @@ class _TrackerSetupState extends State<TrackerSetup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: 'Review your settings'),
+      appBar: const CurvedAppbar(title: 'Review your settings'),
       floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: FadeAnimator(

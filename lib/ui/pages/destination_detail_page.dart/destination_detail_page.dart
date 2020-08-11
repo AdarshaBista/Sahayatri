@@ -6,7 +6,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_icon.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/tracker_fab.dart';
@@ -88,9 +88,9 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     );
   }
 
-  AppBar _buildAppBar() {
+  PreferredSizeWidget _buildAppBar() {
     final name = context.bloc<DestinationCubit>().destination.name;
-    return CustomAppbar(
+    return CurvedAppbar(
       elevation: 4.0,
       title: name,
       leading: const DrawerIcon(),

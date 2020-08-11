@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
-import 'package:sahayatri/ui/shared/widgets/custom_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -17,7 +17,7 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
+      appBar: CurvedAppbar(
         elevation: 0.0,
         title: context.bloc<WeatherCubit>().title,
       ),
