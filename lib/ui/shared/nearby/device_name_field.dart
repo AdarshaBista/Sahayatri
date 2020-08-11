@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,21 +67,8 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
         context.bloc<PrefsCubit>().saveDeviceName(deviceName);
-        _showSavedSnackBar(context);
+        context.openSnackBar('Device name saved: $deviceName');
       },
     );
-  }
-
-  void _showSavedSnackBar(BuildContext context) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'Device name saved: $deviceName',
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }

@@ -73,7 +73,7 @@ class NearbyForm extends StatelessWidget {
   Widget _buildBody() {
     return BlocConsumer<NearbyCubit, NearbyState>(
       listener: (context, state) {
-        if (state is NearbyError) _showSnackBar(context, state.message);
+        if (state is NearbyError) context.openSnackBar(state.message);
       },
       builder: (context, state) {
         if (state is NearbyConnected) {
@@ -109,18 +109,5 @@ class NearbyForm extends StatelessWidget {
         }
       },
     );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            message,
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }

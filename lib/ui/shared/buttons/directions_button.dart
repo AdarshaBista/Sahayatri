@@ -41,10 +41,10 @@ class DirectionsButton extends StatelessWidget {
     return BlocListener<DirectionsCubit, DirectionsState>(
       listener: (context, state) {
         if (state is DirectionsError) {
-          _showSnackBar(context, state.message);
+          context.openSnackBar(state.message);
         }
         if (state is DirectionsLoading) {
-          _showSnackBar(context, 'Loading Directions. Please wait...');
+          context.openSnackBar('Loading Directions. Please wait...');
         }
       },
       child: CustomButton(
@@ -78,19 +78,6 @@ class DirectionsButton extends StatelessWidget {
             .toList(),
       ),
     );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            message,
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }
 

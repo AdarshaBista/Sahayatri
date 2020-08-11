@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
@@ -23,7 +25,7 @@ class AuthButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is AuthError) _showSnackBar(context, state.message);
+        if (state is AuthError) context.openSnackBar(state.message);
       },
       builder: (context, state) {
         return FloatingActionButton.extended(
@@ -39,18 +41,5 @@ class AuthButton extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            message,
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }

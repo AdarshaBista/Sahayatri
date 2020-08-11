@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/nearby/nearby_button.dart';
 import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
 
@@ -48,24 +47,11 @@ class NearbyActions extends StatelessWidget {
           color: Colors.red,
           icon: Icons.speaker_phone_outlined,
           onTap: () {
-            _showSnackBar(context, 'SOS Sent');
+            context.openSnackBar('SOS Sent');
             context.bloc<NearbyCubit>().sendSos();
           },
         ),
       ],
     );
-  }
-
-  void _showSnackBar(BuildContext context, String message) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            message,
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }

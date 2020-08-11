@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
@@ -102,7 +103,7 @@ class _ContactFormState extends State<ContactForm> {
         if (widget.isOnSettings) {
           Navigator.of(context).pop();
         } else {
-          _showSavedSnackBar(context);
+          context.openSnackBar('Contact saved: $contact');
         }
       },
     );
@@ -131,18 +132,5 @@ class _ContactFormState extends State<ContactForm> {
         ),
       ],
     );
-  }
-
-  void _showSavedSnackBar(BuildContext context) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'Contact saved: $contact',
-            style: AppTextStyles.small.light,
-          ),
-        ),
-      );
   }
 }

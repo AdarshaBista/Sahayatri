@@ -38,3 +38,18 @@ extension WidgetX on Widget {
     );
   }
 }
+
+extension ContextX on BuildContext {
+  void openSnackBar(String message) {
+    Scaffold.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppTextStyles.small.light,
+          ),
+        ),
+      );
+  }
+}
