@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/lodge_review.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 class Lodge {
@@ -10,6 +11,7 @@ class Lodge {
   final double rating;
   final LodgeFacility facility;
   final List<String> imageUrls;
+  final List<LodgeReview> reviews;
   final List<String> contactNumbers;
 
   const Lodge({
@@ -17,6 +19,7 @@ class Lodge {
     @required this.name,
     @required this.coord,
     @required this.rating,
+    @required this.reviews,
     @required this.facility,
     @required this.imageUrls,
     @required this.contactNumbers,
@@ -24,6 +27,7 @@ class Lodge {
         assert(name != null),
         assert(rating != null),
         assert(coord != null),
+        assert(reviews != null),
         assert(facility != null),
         assert(imageUrls != null),
         assert(contactNumbers != null);
@@ -35,6 +39,7 @@ class Lodge {
     double rating,
     LodgeFacility facility,
     List<String> imageUrls,
+    List<LodgeReview> reviews,
     List<String> contactNumbers,
   }) {
     return Lodge(
@@ -42,6 +47,7 @@ class Lodge {
       name: name ?? this.name,
       coord: coord ?? this.coord,
       rating: rating ?? this.rating,
+      reviews: reviews ?? this.reviews,
       imageUrls: imageUrls ?? this.imageUrls,
       facility: facility ?? this.facility,
       contactNumbers: contactNumbers ?? this.contactNumbers,
@@ -57,6 +63,7 @@ class Lodge {
       'imageUrls': imageUrls,
       'contactNumbers': contactNumbers,
       'facilities': facility?.toMap(),
+      'reviews': reviews?.map((x) => x?.toMap())?.toList()
     };
   }
 
@@ -71,12 +78,14 @@ class Lodge {
       imageUrls: List<String>.from(map['imageUrls'] as List<String>),
       contactNumbers: List<String>.from(map['contactNumbers'] as List<String>),
       facility: LodgeFacility.fromMap(map['facilities'] as Map<String, dynamic>),
+      reviews: List<LodgeReview>.from((map['reviews'] as List<LodgeReview>)
+          ?.map((x) => LodgeReview.fromMap(x as Map<String, dynamic>))),
     );
   }
 
   @override
   String toString() {
-    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls)';
+    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviews: $reviews)';
   }
 
   @override
@@ -89,6 +98,7 @@ class Lodge {
         o.coord == coord &&
         o.rating == rating &&
         o.facility == facility &&
+        listEquals(o.reviews, reviews) &&
         listEquals(o.imageUrls, imageUrls) &&
         listEquals(o.contactNumbers, contactNumbers);
   }
@@ -99,6 +109,7 @@ class Lodge {
         name.hashCode ^
         coord.hashCode ^
         rating.hashCode ^
+        reviews.hashCode ^
         facility.hashCode ^
         imageUrls.hashCode ^
         contactNumbers.hashCode;

@@ -61,7 +61,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         showShadow: true,
         borderRadius: 24.0,
         controller: _drawerController,
-        closeCurve: Curves.easeIn,
+        closeCurve: Curves.easeInOut,
         openCurve: Curves.fastLinearToSlowEaseIn,
         backgroundColor: AppColors.light.withOpacity(0.5),
         slideWidth: MediaQuery.of(context).size.width * 0.7,

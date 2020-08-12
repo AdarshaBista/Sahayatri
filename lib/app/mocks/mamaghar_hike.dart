@@ -1,9 +1,11 @@
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_review.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 final Destination mamagharHike = Destination(
@@ -123,6 +125,7 @@ final List<Lodge> _lodges = [
     imageUrls: _imgUrls.getRange(1, 4).toList(),
     contactNumbers: ['9841146372', '9847576267'],
     facility: const LodgeFacility(wifi: true, toilet: true, shower: true),
+    reviews: _lodgeReviews,
   ),
   Lodge(
     id: 'lodge6',
@@ -132,6 +135,34 @@ final List<Lodge> _lodges = [
     imageUrls: _imgUrls.getRange(5, 8).toList(),
     contactNumbers: ['9841146372', '9847576267'],
     facility: const LodgeFacility(wifi: true, toilet: true),
+    reviews: _lodgeReviews,
+  ),
+];
+
+final List<LodgeReview> _lodgeReviews = [
+  LodgeReview(
+    id: 'lodge_review_1',
+    text: _desc,
+    rating: 4.0,
+    user: User(
+      id: 'user_one',
+      name: 'John Doe',
+      email: 'john@gmail.com',
+      imageUrl: _imgUrls[4],
+      accessToken: '',
+    ),
+  ),
+  LodgeReview(
+    id: 'lodge_review_2',
+    text: _desc,
+    rating: 3,
+    user: User(
+      id: 'user_two',
+      name: 'Jane Doe',
+      email: 'jane@gmail.com',
+      imageUrl: _imgUrls[2],
+      accessToken: '',
+    ),
   ),
 ];
 
