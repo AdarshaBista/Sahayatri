@@ -21,6 +21,8 @@ class CustomMap extends StatefulWidget {
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
+  final double minZoom;
+  final double maxZoom;
   final double initialZoom;
   final List<Widget> children;
   final MapController mapController;
@@ -33,8 +35,13 @@ class CustomMap extends StatefulWidget {
     this.nePanBoundary,
     this.onPositionChanged,
     this.children = const [],
+    this.minZoom = MapConfig.kMinZoom,
+    this.maxZoom = MapConfig.kMaxZoom,
     this.initialZoom = MapConfig.kDefaultZoom,
   })  : assert(center != null),
+        assert(minZoom != null),
+        assert(maxZoom != null),
+        assert(initialZoom != null),
         assert(children != null);
 
   @override
@@ -93,8 +100,8 @@ class _CustomMapState extends State<CustomMap> {
         ],
         options: MapOptions(
           zoom: widget.initialZoom,
-          minZoom: MapConfig.kMinZoom,
-          maxZoom: MapConfig.kMaxZoom,
+          minZoom: widget.minZoom,
+          maxZoom: widget.maxZoom,
           center: widget.center.toLatLng(),
           controller: widget.mapController,
           onPositionChanged: onPositionChanged,
