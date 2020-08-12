@@ -37,19 +37,19 @@ class GeoUtils {
   /// Index of a [Coord] closest to a [point] on the path.
   /// This index determines the position of [point] along a path.
   static int indexOnPath(Coord point, List<Coord> path) {
-    Coord nearestCoord;
+    int nearestIndex;
     double shortestDistanceSq = double.infinity;
 
-    for (final coord in path) {
-      final distanceSq = math.pow(coord.lng - point.lng, 2).toDouble() +
-          math.pow(coord.lat - point.lat, 2).toDouble();
+    for (int i = 0; i < path.length; ++i) {
+      final distanceSq = math.pow(path[i].lng - point.lng, 2).toDouble() +
+          math.pow(path[i].lat - point.lat, 2).toDouble();
 
       if (distanceSq < shortestDistanceSq) {
-        nearestCoord = coord;
+        nearestIndex = i;
         shortestDistanceSq = distanceSq;
       }
     }
-    return path.indexOf(nearestCoord);
+    return nearestIndex;
   }
 
   /// Distance between [start] and [end] indices of a [path].

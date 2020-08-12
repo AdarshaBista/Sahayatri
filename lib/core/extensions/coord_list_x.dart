@@ -30,6 +30,10 @@ extension CoordListX on List<Coord> {
       MapConfig.kMinRouteAccuracy.toDouble(),
     ).toInt();
 
-    return where((c) => (indexOf(c) + 1) % accuracy == 0).toList();
+    final List<Coord> simplified = [];
+    for (int i = 0; i < length; ++i) {
+      if ((i + 1) % accuracy == 0) simplified.add(this[i]);
+    }
+    return simplified;
   }
 }

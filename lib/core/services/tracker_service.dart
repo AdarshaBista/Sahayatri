@@ -70,6 +70,7 @@ class TrackerService {
     });
     // _userLocationStreamSub = locationService.getLocationStream().listen((userLocation) {
     //   _userLocationStreamController.add(userLocation);
+    //   _userTrack.add(userLocation);
     // });
 
     /// Call [onCompleted] when user finishes trail.
