@@ -96,20 +96,14 @@ class _NestedTabViewState extends State<NestedTabView>
             controller: _tabController,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(32.0),
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.accentColors[0],
-                  AppColors.accentColors[1],
-                ],
-              ),
+              color: AppColors.primary,
             ),
-            tabs: [
-              for (int i = 0; i < widget.tabs.length; ++i)
-                NestedTab(
-                  tab: widget.tabs[i],
-                  color: _tabController.index == i ? AppColors.light : AppColors.dark,
-                ),
-            ],
+            tabs: widget.tabs
+                .map((t) => NestedTab(
+                      tab: t,
+                      color: AppColors.dark,
+                    ))
+                .toList(),
           ),
         ),
       ),
