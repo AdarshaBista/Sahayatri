@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/models/lodge_review.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/form/review_form.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/lodge_review_card.dart';
@@ -28,7 +30,7 @@ class LodgeReviewList extends StatelessWidget {
             color: AppColors.dark,
             backgroundColor: AppColors.barrier,
             iconData: CommunityMaterialIcons.pencil_outline,
-            onTap: () {},
+            onTap: () => ReviewForm(onSubmit: () {}).openModalBottomSheet(context),
           ),
           ListView.builder(
             shrinkWrap: true,

@@ -34,14 +34,17 @@ class StarRatingBar extends StatelessWidget {
         onRatingUpdate: onUpdate,
         itemBuilder: (_, index) {
           final IconData iconData = index < rating ? Icons.star : Icons.star_border;
-
-          return SlideAnimator(
-            begin: Offset(0.2 + index * 0.4, 0.0),
-            child: Icon(
-              iconData,
-              color: color,
-            ),
+          final Icon icon = Icon(
+            iconData,
+            color: color,
           );
+
+          return onUpdate == null
+              ? SlideAnimator(
+                  begin: Offset(0.2 + index * 0.4, 0.0),
+                  child: icon,
+                )
+              : icon;
         },
       ),
     );

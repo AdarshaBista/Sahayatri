@@ -1,7 +1,7 @@
 name: sahayatri
-description: A virtual tour guide.
+description: A virtual travel companion.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -54,7 +54,6 @@ dependencies:
   flutter_datetime_picker: ^1.3.8
   community_material_icon: ^5.3.45
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,10 +64,8 @@ dev_dependencies:
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.5
 
-
 dependency_overrides:
-  build_resolvers: '1.3.10'
-
+  build_resolvers: "1.3.10"
 
 flutter_icons:
   android: true
@@ -79,10 +76,8 @@ flutter_native_splash:
   image: assets/icons/splash.png
   color: "36C7CB"
   android_disable_fullscreen: true
-  
 
 flutter:
-
   uses-material-design: true
 
   assets:

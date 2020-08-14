@@ -1,3 +1,3 @@
 # Sahayatri
 
-A virtual tour guide (WIP).
+A virtual travel companion (WIP).
