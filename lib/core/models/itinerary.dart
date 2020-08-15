@@ -34,25 +34,16 @@ class Itinerary {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'days': days,
-      'nights': nights,
-      'checkpoints': checkpoints?.map((x) => x?.toMap())?.toList(),
-    };
-  }
-
   factory Itinerary.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Itinerary(
-        name: map['name'] as String,
-        days: map['days'] as String,
-        nights: map['nights'] as String,
-        checkpoints: List<Checkpoint>.from(
-            (map['checkpoints'] as List<Checkpoint>)
-                ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>))));
+      name: map['name'] as String,
+      days: map['days'] as String,
+      nights: map['nights'] as String,
+      checkpoints: List<Checkpoint>.from((map['checkpoints'] as List<Checkpoint>)
+          ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>))),
+    );
   }
 
   @override
@@ -73,9 +64,6 @@ class Itinerary {
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        days.hashCode ^
-        nights.hashCode ^
-        checkpoints.hashCode;
+    return name.hashCode ^ days.hashCode ^ nights.hashCode ^ checkpoints.hashCode;
   }
 }

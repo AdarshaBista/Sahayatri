@@ -6,7 +6,6 @@ import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/app/mocks/mocks.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
@@ -16,7 +15,7 @@ class ApiService {
   Future<List<Destination>> fetchDestinations() async {
     try {
       await Future.delayed(const Duration(seconds: 1));
-      return mockDestinations;
+      return [];
     } catch (e) {
       throw Failure(
         error: e.toString(),

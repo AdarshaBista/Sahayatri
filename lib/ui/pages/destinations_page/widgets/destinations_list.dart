@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
+
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destinations_page/widgets/destination_card.dart';
 
 class DestinationsList extends StatelessWidget {
@@ -14,16 +18,22 @@ class DestinationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: destinations.length,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => SlideAnimator(
-        begin: Offset(0.0, 0.2 + index * 0.4),
-        child: DestinationCard(
-          destination: destinations[index],
-        ),
-      ),
-    );
+    return destinations.isEmpty
+        ? EmptyIndicator(
+            onRetry: () {
+              context.bloc<DestinationsCubit>().fetchDestinations();
+            },
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: destinations.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => SlideAnimator(
+              begin: Offset(0.0, 0.2 + index * 0.4),
+              child: DestinationCard(
+                destination: destinations[index],
+              ),
+            ),
+          );
   }
 }

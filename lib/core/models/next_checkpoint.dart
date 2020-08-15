@@ -26,14 +26,6 @@ class NextCheckpoint {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'eta': eta?.inSeconds,
-      'distance': distance,
-      'checkpoint': checkpoint?.toMap(),
-    };
-  }
-
   factory NextCheckpoint.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 

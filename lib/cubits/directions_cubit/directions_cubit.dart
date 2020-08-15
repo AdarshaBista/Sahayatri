@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
@@ -20,14 +20,16 @@ class DirectionsCubit extends Cubit<DirectionsState> {
         super(const DirectionsInitial());
 
   Future<void> startNavigation(
-    Place trailHead,
+    String name,
+    Coord coord,
     // NavigationMode mode,
   ) async {
     emit(const DirectionsLoading());
     try {
       final UserLocation userLocation = await directionsService.getUserLocation();
       await directionsService.startNavigation(
-        trailHead,
+        name,
+        coord,
         userLocation,
         // mode,
       );

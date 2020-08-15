@@ -60,7 +60,7 @@ class RatingTile extends StatelessWidget {
             Routes.kWeatherPageRoute,
             arguments: WeatherPageArgs(
               name: destination.name,
-              coord: destination.startingPlace.coord,
+              coord: destination.route.first,
             ),
           ),
     );

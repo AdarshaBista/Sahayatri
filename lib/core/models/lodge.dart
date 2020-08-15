@@ -4,6 +4,8 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/lodge_review.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
+import 'package:sahayatri/core/utils/api_utils.dart';
+
 class Lodge {
   final String id;
   final String name;
@@ -27,7 +29,6 @@ class Lodge {
         assert(name != null),
         assert(rating != null),
         assert(coord != null),
-        assert(reviews != null),
         assert(facility != null),
         assert(imageUrls != null),
         assert(contactNumbers != null);
@@ -54,32 +55,18 @@ class Lodge {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'coord': coord?.toMap(),
-      'rating': rating,
-      'imageUrls': imageUrls,
-      'contactNumbers': contactNumbers,
-      'facilities': facility?.toMap(),
-      'reviews': reviews?.map((x) => x?.toMap())?.toList()
-    };
-  }
-
   factory Lodge.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Lodge(
       id: map['id'] as String,
       name: map['name'] as String,
-      coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
-      rating: map['rating'] as double,
-      imageUrls: List<String>.from(map['imageUrls'] as List<String>),
-      contactNumbers: List<String>.from(map['contactNumbers'] as List<String>),
-      facility: LodgeFacility.fromMap(map['facilities'] as Map<String, dynamic>),
-      reviews: List<LodgeReview>.from((map['reviews'] as List<LodgeReview>)
-          ?.map((x) => LodgeReview.fromMap(x as Map<String, dynamic>))),
+      rating: double.tryParse(map['rating'] as String) ?? 0.0,
+      coord: ApiUtils.parseCoord(map['coord'] as String),
+      facility: LodgeFacility.parse(map['facility'] as String),
+      imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
+      contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
+      reviews: null,
     );
   }
 

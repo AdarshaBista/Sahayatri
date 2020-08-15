@@ -21,7 +21,7 @@ class SmsService {
   final NotificationService notificationService;
 
   /// List of ids of [Place] for which sms has already been sent.
-  final List<int> _sentList = [];
+  final List<String> _sentList = [];
 
   /// Phone number of close contact.
   String contact;

@@ -16,42 +16,33 @@ class Checkpoint {
 
   const Checkpoint({
     @required this.place,
-    @required this.description,
     @required this.dateTime,
+    @required this.description,
     this.day = 0,
   }) : assert(description != null);
 
   Checkpoint copyWith({
-    Place place,
     int day,
+    Place place,
     String description,
     DateTime dateTime,
   }) {
     return Checkpoint(
-      place: place ?? this.place,
       day: day ?? this.day,
+      place: place ?? this.place,
       description: description ?? this.description,
       dateTime: dateTime ?? this.dateTime,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'place': place?.toMap(),
-      'day': day,
-      'description': description,
-      'dateTime': dateTime?.millisecondsSinceEpoch,
-    };
   }
 
   factory Checkpoint.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return Checkpoint(
-      place: Place.fromMap(map['place'] as Map<String, dynamic>),
       day: map['day'] as int,
       description: map['description'] as String,
-      dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int),
+      place: Place.fromMap(map['place'] as Map<String, dynamic>),
+      dateTime: null,
     );
   }
 

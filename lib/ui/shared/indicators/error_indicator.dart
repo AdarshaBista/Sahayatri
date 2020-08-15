@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/buttons/retry_button.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
 class ErrorIndicator extends StatelessWidget {
@@ -28,14 +28,7 @@ class ErrorIndicator extends StatelessWidget {
             style: AppTextStyles.small.bold,
           ),
         ),
-        if (onRetry != null)
-          CustomButton(
-            label: 'Retry',
-            outlineOnly: true,
-            iconData: Icons.refresh,
-            color: AppColors.dark,
-            onTap: onRetry,
-          ),
+        if (onRetry != null) RetryButton(onTap: onRetry),
       ],
     );
   }

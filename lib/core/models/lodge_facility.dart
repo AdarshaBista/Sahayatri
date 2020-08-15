@@ -25,21 +25,14 @@ class LodgeFacility {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'wifi': wifi,
-      'toilet': toilet,
-      'shower': shower,
-    };
-  }
-
-  factory LodgeFacility.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory LodgeFacility.parse(String str) {
+    if (str == null) return null;
+    final List<String> values = str.split(',');
 
     return LodgeFacility(
-      wifi: map['wifi'] as bool,
-      toilet: map['toilet'] as bool,
-      shower: map['shower'] as bool,
+      wifi: values.contains('wifi'),
+      toilet: values.contains('toilet'),
+      shower: values.contains('shower'),
     );
   }
 

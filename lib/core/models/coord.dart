@@ -42,9 +42,9 @@ class Coord {
 
   Map<String, dynamic> toMap() {
     return {
-      'latitude': lat,
-      'longitude': lng,
-      'altitude': alt,
+      'lat': lat,
+      'lng': lng,
+      'alt': alt,
     };
   }
 
@@ -52,9 +52,9 @@ class Coord {
     if (map == null) return null;
 
     return Coord(
-      lat: map['latitude'] as double,
-      lng: map['longitude'] as double,
-      alt: map['altitude'] as double,
+      lat: map['lat'] as double,
+      lng: map['lng'] as double,
+      alt: map['alt'] as double,
     );
   }
 

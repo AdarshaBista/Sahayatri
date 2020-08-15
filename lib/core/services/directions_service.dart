@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 // import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 
-import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
@@ -26,7 +26,8 @@ class DirectionsService {
   }
 
   Future<void> startNavigation(
-    Place trailHead,
+    String name,
+    Coord coord,
     UserLocation userLocation,
     // NavigationMode mode,
   ) async {
@@ -41,9 +42,9 @@ class DirectionsService {
     // );
 
     // final Location _destination = Location(
-    //   name: trailHead.name,
-    //   latitude: trailHead.coord.lat,
-    //   longitude: trailHead.coord.lng,
+    //   name: name,
+    //   latitude: coord.lat,
+    //   longitude: coord.lng,
     // );
 
     // await _directions.startNavigation(

@@ -32,23 +32,14 @@ class LodgeReview {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'user': user?.toMap(),
-      'text': text,
-      'rating': rating,
-    };
-  }
-
   factory LodgeReview.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return LodgeReview(
       id: map['id'] as String,
-      user: User.fromMap(map['user'] as Map<String, dynamic>),
       text: map['text'] as String,
-      rating: map['rating'] as double,
+      rating: double.tryParse(map['rating'] as String) ?? 0.0,
+      user: User.fromMap(map['user'] as Map<String, dynamic>),
     );
   }
 
