@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:sahayatri/core/models/user.dart';
 
 class Review {
-  final int id;
+  final String id;
   final User user;
   final String text;
   final double rating;
@@ -19,7 +19,7 @@ class Review {
         assert(rating != null);
 
   Review copyWith({
-    int id,
+    String id,
     User user,
     String text,
     double rating,
@@ -45,7 +45,7 @@ class Review {
     if (map == null) return null;
 
     return Review(
-      id: map['id'] as int,
+      id: map['id'] as String,
       user: User.fromMap(map['user'] as Map<String, dynamic>),
       text: map['text'] as String,
       rating: map['rating'] as double,

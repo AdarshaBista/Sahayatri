@@ -30,7 +30,8 @@ class LodgeReviewList extends StatelessWidget {
             color: AppColors.dark,
             backgroundColor: AppColors.barrier,
             iconData: CommunityMaterialIcons.pencil_outline,
-            onTap: () => ReviewForm(onSubmit: () {}).openModalBottomSheet(context),
+            onTap: () =>
+                ReviewForm(onSubmit: (rating, text) {}).openModalBottomSheet(context),
           ),
           ListView.builder(
             shrinkWrap: true,

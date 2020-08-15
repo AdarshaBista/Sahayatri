@@ -7,7 +7,7 @@ import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 
 class ReviewForm extends StatefulWidget {
-  final VoidCallback onSubmit;
+  final void Function(double, String) onSubmit;
 
   const ReviewForm({
     @required this.onSubmit,
@@ -84,7 +84,7 @@ class _ReviewFormState extends State<ReviewForm> {
       onPressed: () {
         if (!formKey.currentState.validate()) return;
 
-        widget.onSubmit();
+        widget.onSubmit(rating, text);
         Navigator.of(context).pop();
       },
     );

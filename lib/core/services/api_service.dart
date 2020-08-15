@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/app/mocks/mocks.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
 class ApiService {
@@ -19,6 +21,35 @@ class ApiService {
       throw Failure(
         error: e.toString(),
         message: 'Failed to get destinations.',
+      );
+    }
+  }
+
+  Future<String> postDestinationReview(
+    double rating,
+    String text,
+    String destId,
+    User user,
+  ) async {
+    try {
+      final Response res = await Dio().post(
+        '${AppConfig.kApiBaseUrl}/reviews',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+        data: {
+          "text": text,
+          "rating": rating,
+          "user": {"id": user.id},
+          "destination": {"id": destId}
+        },
+      );
+      final body = res.data as Map<String, dynamic>;
+      return body['id'] as String;
+    } catch (e) {
+      throw Failure(
+        error: e.toString(),
+        message: 'Failed to post review.',
       );
     }
   }

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/form/review_form.dart';
@@ -24,14 +27,16 @@ class ReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CustomButton(
-            label: 'Write a review',
-            outlineOnly: true,
-            color: AppColors.dark,
-            backgroundColor: AppColors.barrier,
-            iconData: CommunityMaterialIcons.pencil_outline,
-            onTap: () => ReviewForm(onSubmit: () {}).openModalBottomSheet(context),
-          ),
+          if (context.bloc<AuthCubit>().isAuthenticated)
+            CustomButton(
+              label: 'Write a review',
+              outlineOnly: true,
+              color: AppColors.dark,
+              backgroundColor: AppColors.barrier,
+              iconData: CommunityMaterialIcons.pencil_outline,
+              onTap: () =>
+                  ReviewForm(onSubmit: (rating, text) {}).openModalBottomSheet(context),
+            ),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

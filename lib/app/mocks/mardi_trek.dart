@@ -331,7 +331,7 @@ final List<Itinerary> _itineraries = [
 
 final List<Review> _reviews = [
   Review(
-    id: 1,
+    id: 'review_1',
     text: _desc,
     rating: 4.0,
     user: User(
@@ -343,7 +343,7 @@ final List<Review> _reviews = [
     ),
   ),
   Review(
-    id: 2,
+    id: 'review_2',
     text: _desc,
     rating: 3,
     user: User(
