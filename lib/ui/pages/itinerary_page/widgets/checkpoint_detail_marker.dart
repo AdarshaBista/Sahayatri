@@ -51,7 +51,7 @@ class _DateTimeInfo extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
+          Image.network(
             checkpoint.place.imageUrls[0],
             fit: BoxFit.cover,
             width: double.infinity,

@@ -56,7 +56,7 @@ class ItineraryCard extends StatelessWidget {
         AppColors.dark.withOpacity(0.5),
         Colors.transparent,
       ],
-      child: Image.asset(
+      child: Image.network(
         itinerary.checkpoints.first.place.imageUrls.first,
         fit: BoxFit.cover,
         width: double.infinity,

@@ -23,7 +23,7 @@ class LodgeReviewCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(review.user.imageUrl),
+              backgroundImage: NetworkImage(review.user.imageUrl),
             ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

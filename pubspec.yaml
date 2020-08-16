@@ -83,8 +83,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/images/home/
-    - assets/images/mardi/
     - assets/images/indicators/
 
   fonts:

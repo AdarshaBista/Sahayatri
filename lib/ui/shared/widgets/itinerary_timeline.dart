@@ -77,7 +77,7 @@ class ItineraryTimeline extends StatelessWidget {
           horizontal: 8.0,
         ),
         indicator: CircleAvatar(
-          backgroundImage: AssetImage(checkpoint.place.imageUrls[0]),
+          backgroundImage: NetworkImage(checkpoint.place.imageUrls[0]),
         ),
       ),
       topLineStyle: const LineStyle(

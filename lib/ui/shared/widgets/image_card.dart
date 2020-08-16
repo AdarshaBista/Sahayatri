@@ -15,7 +15,7 @@ class ImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       margin: margin,
-      child: Image.asset(
+      child: Image.network(
         imageUrl,
         fit: BoxFit.cover,
         width: double.infinity,

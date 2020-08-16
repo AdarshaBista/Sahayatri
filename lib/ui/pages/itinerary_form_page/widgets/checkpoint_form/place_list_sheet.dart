@@ -55,7 +55,7 @@ class PlaceListSheet extends StatelessWidget {
         Navigator.of(context).pop();
       },
       title: Text(place.name, style: AppTextStyles.medium),
-      leading: CircleAvatar(backgroundImage: AssetImage(place.imageUrls[0])),
+      leading: CircleAvatar(backgroundImage: NetworkImage(place.imageUrls[0])),
       trailing: GestureDetector(
         onTap: () => context.repository<DestinationNavService>().pushNamed(
               Routes.kPlacePageRoute,

@@ -26,7 +26,7 @@ class UserAvatar extends StatelessWidget {
       ],
       child: user.imageUrl == null
           ? _buildDefaultAvatar(user.name)
-          : Image.asset(
+          : Image.network(
               user.imageUrl,
               fit: BoxFit.cover,
               width: double.infinity,

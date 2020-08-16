@@ -66,7 +66,7 @@ class NextCheckpointCard extends StatelessWidget {
             AppColors.dark.withOpacity(0.2),
             Colors.transparent,
           ],
-          child: Image.asset(
+          child: Image.network(
             place.imageUrls[0],
             fit: BoxFit.cover,
             width: double.infinity,

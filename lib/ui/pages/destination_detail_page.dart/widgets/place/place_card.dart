@@ -48,7 +48,7 @@ class PlaceCard extends StatelessWidget {
           AppColors.dark.withOpacity(0.5),
           AppColors.dark,
         ],
-        child: Image.asset(
+        child: Image.network(
           place.imageUrls[0],
           fit: BoxFit.cover,
           width: double.infinity,

@@ -30,7 +30,7 @@ class PhotoViewPage extends StatelessWidget {
             itemCount: args.imageUrls.length,
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: AssetImage(args.imageUrls[index]),
+                imageProvider: NetworkImage(args.imageUrls[index]),
                 heroAttributes: PhotoViewHeroAttributes(tag: args.imageUrls[index]),
                 maxScale: PhotoViewComputedScale.covered * 2.5,
                 minScale: PhotoViewComputedScale.contained * 0.6,

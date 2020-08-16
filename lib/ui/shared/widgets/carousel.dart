@@ -21,7 +21,7 @@ class Carousel extends StatelessWidget {
         itemWidth: double.infinity,
         itemHeight: double.infinity,
         itemCount: imageUrls.length,
-        itemBuilder: (context, index) => Image.asset(
+        itemBuilder: (context, index) => Image.network(
           imageUrls[index],
           fit: BoxFit.cover,
         ),

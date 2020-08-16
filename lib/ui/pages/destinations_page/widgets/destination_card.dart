@@ -38,7 +38,7 @@ class DestinationCard extends StatelessWidget {
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                if (destination.imageUrls.isNotEmpty) _buildBackground(),
+                _buildBackground(),
                 _buildTitle(),
               ],
             ),
@@ -61,7 +61,7 @@ class DestinationCard extends StatelessWidget {
             AppColors.dark.withOpacity(0.2),
             Colors.transparent,
           ],
-          child: Image.asset(
+          child: Image.network(
             destination.imageUrls.first,
             fit: BoxFit.cover,
             width: double.infinity,
