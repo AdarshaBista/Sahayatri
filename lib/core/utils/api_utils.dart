@@ -5,10 +5,8 @@ class ApiUtils {
     final List<String> values = routeStr.split(',');
     final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
-    final int length = points.length ~/ 3;
     final List<Coord> route = [];
-
-    for (int i = 0; i < length; i += 3) {
+    for (int i = 0; i < points.length; i += 3) {
       route.add(Coord(
         lat: points[i],
         lng: points[i + 1],

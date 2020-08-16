@@ -10,7 +10,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/map/place_marker.dart';
+import 'package:sahayatri/ui/pages/route_page/widgets/flag_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
 
 class RoutePage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _RoutePageState extends State<RoutePage> {
         center: destination.midPointCoord,
         children: [
           if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
-          const _PlaceMarkersLayer()
+          const _FlagMarkersLayer()
         ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
@@ -114,21 +114,24 @@ class _AltitudeMarkerLayer extends StatelessWidget {
   }
 }
 
-class _PlaceMarkersLayer extends StatelessWidget {
-  const _PlaceMarkersLayer();
+class _FlagMarkersLayer extends StatelessWidget {
+  const _FlagMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final route = context.bloc<DestinationCubit>().destination.route;
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          for (int i = 0; i < destination.places.length; ++i)
-            PlaceMarker(
-              place: destination.places[i],
-              color: AppColors.accentColors[i % AppColors.accentColors.length],
-            ),
+          FlagMarker(
+            coord: route.first,
+            color: Colors.green,
+          ),
+          FlagMarker(
+            coord: route.last,
+            color: Colors.red,
+          ),
         ],
       ),
     );

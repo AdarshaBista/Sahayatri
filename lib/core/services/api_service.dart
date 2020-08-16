@@ -14,8 +14,20 @@ class ApiService {
 
   Future<List<Destination>> fetchDestinations() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      return [];
+      final Response res = await Dio().get('${AppConfig.kApiBaseUrl}/destinations');
+      final body = res.data as Map<String, dynamic>;
+      final destinations = body['data'] as List<dynamic>;
+      return destinations
+          .map((d) {
+            try {
+              return Destination.fromMap(d as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((d) => d != null)
+          .toList();
     } catch (e) {
       throw Failure(
         error: e.toString(),

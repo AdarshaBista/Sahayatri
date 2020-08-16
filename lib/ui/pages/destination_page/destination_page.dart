@@ -113,11 +113,11 @@ class DestinationPage extends StatelessWidget {
     return NestedTabView(
       tabs: [
         NestedTabData(label: 'Photos', icon: Icons.photo),
-        NestedTabData(label: 'Reviews', icon: Icons.rate_review),
+        // NestedTabData(label: 'Reviews', icon: Icons.rate_review),
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),
-        ReviewList(reviews: destination.reviews),
+        // ReviewList(reviews: destination.reviews),
       ],
     );
   }
