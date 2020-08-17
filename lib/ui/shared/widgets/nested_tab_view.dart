@@ -96,7 +96,7 @@ class _NestedTabViewState extends State<NestedTabView>
             controller: _tabController,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(32.0),
-              color: AppColors.primary,
+              color: AppColors.primary.withOpacity(0.7),
             ),
             tabs: widget.tabs
                 .map((t) => NestedTab(

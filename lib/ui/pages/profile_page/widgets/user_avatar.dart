@@ -19,13 +19,11 @@ class UserAvatar extends StatelessWidget {
       backgroundColor: AppColors.barrier,
       child: CircleAvatar(
         radius: kRadius,
-        backgroundColor: AppColors.primary.withOpacity(0.4),
+        backgroundColor: AppColors.primary,
         child: user.imageUrl == null
             ? Text(
                 user.name[0],
-                style: AppTextStyles.medium.withSize(kRadius).withColor(
-                      AppColors.primaryDark,
-                    ),
+                style: AppTextStyles.medium.withSize(kRadius).darkAccent,
               )
             : ClipRRect(
                 borderRadius: BorderRadius.circular(kRadius),

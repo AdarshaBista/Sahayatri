@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
 import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/shared/dialogs/unauthenticated_dialog.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/rating_tile.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/review_list.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/route_actions.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/best_months_chips.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/destination_actions.dart';
 
 class DestinationPage extends StatelessWidget {
   const DestinationPage();
@@ -49,11 +43,11 @@ class DestinationPage extends StatelessWidget {
           const SizedBox(height: 16.0),
           const RatingTile(),
           const Divider(height: 16.0),
-          _buildOpenButton(context),
+          const OpenButton(),
           const SizedBox(height: 8.0),
           _buildDescription(destination),
           const SizedBox(height: 8.0),
-          const DestinationActions(),
+          const RouteActions(),
           const Divider(height: 16.0),
           const DestinationStats(),
           const Divider(height: 16.0),
@@ -71,28 +65,6 @@ class DestinationPage extends StatelessWidget {
     return Hero(
       tag: destination.id.toString(),
       child: Carousel(imageUrls: destination.imageUrls),
-    );
-  }
-
-  Widget _buildOpenButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: CustomButton(
-        label: 'OPEN',
-        color: AppColors.dark,
-        backgroundColor: AppColors.primary.withOpacity(0.5),
-        iconData: CommunityMaterialIcons.page_next_outline,
-        onTap: () {
-          if (!context.bloc<AuthCubit>().isAuthenticated) {
-            const UnauthenticatedDialog().openDialog(context);
-            return;
-          }
-
-          context
-              .repository<DestinationNavService>()
-              .pushNamed(Routes.kDestinationDetailPageRoute);
-        },
-      ),
     );
   }
 

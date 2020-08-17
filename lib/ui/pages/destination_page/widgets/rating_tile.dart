@@ -5,6 +5,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
@@ -19,13 +20,19 @@ class RatingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final destination = context.bloc<DestinationCubit>().destination;
+    final bool shouldShowDownloadButton =
+        !destination.isDownloaded && context.bloc<AuthCubit>().isAuthenticated;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
           _buildRating(context),
           const Spacer(),
-          _buildWeatherButton(context),
+          _buildDownloadButton(context),
+          const SizedBox(width: 12.0),
+          if (shouldShowDownloadButton) _buildWeatherButton(context),
         ],
       ),
     );
@@ -63,6 +70,14 @@ class RatingTile extends StatelessWidget {
               coord: destination.route.first,
             ),
           ),
+    );
+  }
+
+  Widget _buildDownloadButton(BuildContext context) {
+    return ColumnButton(
+      label: 'Download',
+      icon: CommunityMaterialIcons.cloud_download_outline,
+      onTap: () {},
     );
   }
 }

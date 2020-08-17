@@ -7,12 +7,13 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/buttons/directions_button.dart';
 
-class DestinationActions extends StatelessWidget {
-  const DestinationActions();
+class RouteActions extends StatelessWidget {
+  const RouteActions();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,8 @@ class DestinationActions extends StatelessWidget {
   Widget _buildViewRouteButton(BuildContext context) {
     return CustomButton(
       label: 'View Route',
+      outlineOnly: true,
+      color: AppColors.dark,
       iconData: CommunityMaterialIcons.chart_line_variant,
       onTap: () =>
           context.repository<DestinationNavService>().pushNamed(Routes.kRoutePageRoute),
