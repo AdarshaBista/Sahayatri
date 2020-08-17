@@ -68,7 +68,7 @@ class SmsService {
       // TODO: Enable sms
       // sender.sendSms(smsMessage);
     } catch (e) {
-      print(e);
+      print(e.toString());
       return;
     }
     _sentList.add(place.id);

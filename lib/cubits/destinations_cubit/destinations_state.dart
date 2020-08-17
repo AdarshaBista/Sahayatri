@@ -15,10 +15,10 @@ class DestinationsEmpty extends DestinationsState {
   const DestinationsEmpty();
 }
 
-class DestinationsSuccess extends DestinationsState {
+class DestinationsLoaded extends DestinationsState {
   final List<Destination> destinations;
 
-  const DestinationsSuccess({
+  const DestinationsLoaded({
     @required this.destinations,
   }) : assert(destinations != null);
 

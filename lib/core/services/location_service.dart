@@ -38,7 +38,7 @@ class LocationService {
   /// Get the stream of location as [UserLocation].
   Stream<UserLocation> getLocationStream() {
     if (!_hasPermission) {
-      throw Failure(error: 'Location permission denied.');
+      throw const Failure(message: 'Location permission denied.');
     }
 
     return location.onLocationChanged
@@ -50,21 +50,19 @@ class LocationService {
   /// One time location query.
   Future<UserLocation> getLocation() async {
     if (Platform.isWindows) {
-      throw Failure(error: 'Platform not supported.');
+      throw const Failure(message: 'Platform not supported.');
     }
 
     if (!_hasPermission) {
-      throw Failure(error: 'Location permission denied.');
+      throw const Failure(message: 'Location permission denied.');
     }
 
     try {
       final locationData = await location.getLocation();
       return UserLocation.fromLocationData(locationData);
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Could not get your location.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Could not get your location.');
     }
   }
 }

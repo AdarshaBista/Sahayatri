@@ -24,16 +24,15 @@ class DestinationsCubit extends Cubit<DestinationsState> {
     emit(const DestinationsLoading());
     try {
       _destinations = await apiService.fetchDestinations();
-      emit(DestinationsSuccess(destinations: _destinations));
+      emit(DestinationsLoaded(destinations: _destinations));
     } on Failure catch (e) {
-      print(e.error);
       emit(DestinationsError(message: e.message));
     }
   }
 
   Future<void> search(String query) async {
     if (query.isEmpty) {
-      emit(DestinationsSuccess(destinations: _destinations));
+      emit(DestinationsLoaded(destinations: _destinations));
       return;
     }
 
@@ -49,6 +48,6 @@ class DestinationsCubit extends Cubit<DestinationsState> {
       return;
     }
 
-    emit(DestinationsSuccess(destinations: searchedDestinations));
+    emit(DestinationsLoaded(destinations: searchedDestinations));
   }
 }

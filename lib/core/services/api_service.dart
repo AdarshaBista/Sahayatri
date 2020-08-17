@@ -30,10 +30,8 @@ class ApiService {
           .where((d) => d != null)
           .toList();
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Failed to get destinations.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Failed to get destinations.');
     }
   }
 
@@ -55,10 +53,8 @@ class ApiService {
           .where((r) => r != null)
           .toList();
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Failed to get reviews.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Failed to get reviews.');
     }
   }
 
@@ -84,10 +80,8 @@ class ApiService {
       final body = res.data as Map<String, dynamic>;
       return body['review']['id'] as String;
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Failed to post review.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Failed to post review.');
     }
   }
 
@@ -99,10 +93,8 @@ class ApiService {
       final resList = res.data['daily'] as List<dynamic>;
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Unable to get weather.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Unable to get weather.');
     }
   }
 }

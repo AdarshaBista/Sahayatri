@@ -35,7 +35,6 @@ class DirectionsCubit extends Cubit<DirectionsState> {
       );
       emit(const DirectionsInitial());
     } on Failure catch (e) {
-      print(e.error);
       emit(DirectionsError(message: e.message));
     }
   }

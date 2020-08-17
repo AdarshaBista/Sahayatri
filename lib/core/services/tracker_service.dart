@@ -51,7 +51,9 @@ class TrackerService {
     /// If [_destination] is not null, tacking is already in progress.
     if (_destination != null) {
       if (destination.id != _destination.id) {
-        throw Failure(error: 'Tracking is already occuring for another destination.');
+        throw const Failure(
+          message: 'Tracking is already occuring for another destination.',
+        );
       }
 
       // Ensures tracking is resumed when starting from paused state.

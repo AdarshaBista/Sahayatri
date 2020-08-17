@@ -47,7 +47,8 @@ class NearbyService {
     } on Failure {
       rethrow;
     } catch (e) {
-      throw Failure(error: 'Please enable location services first.');
+      print(e.toString());
+      throw const Failure(message: 'Please enable location services.');
     }
   }
 
@@ -67,7 +68,8 @@ class NearbyService {
       await Nearby().stopDiscovery();
       await Nearby().stopAdvertising();
     } catch (e) {
-      throw Failure(error: 'Cannot initiate scanning.');
+      print(e.toString());
+      throw const Failure(message: 'Cannot initiate scanning.');
     }
   }
 
@@ -90,10 +92,8 @@ class NearbyService {
         onConnectionInitiated: _onConnectionInit,
       );
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Cannot start advertising.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Cannot start advertising.');
     }
   }
 
@@ -108,10 +108,8 @@ class NearbyService {
         onEndpointFound: _onEndpointFound,
       );
     } catch (e) {
-      throw Failure(
-        error: e.toString(),
-        message: 'Cannot start discovery.',
-      );
+      print(e.toString());
+      throw const Failure(message: 'Cannot start discovery.');
     }
   }
 

@@ -94,7 +94,6 @@ class TrackerCubit extends Cubit<TrackerState> {
 
       emit(const TrackerSettingUp());
     } on Failure catch (e) {
-      print(e.error);
       emit(TrackerError(message: e.message));
     }
   }
@@ -110,7 +109,6 @@ class TrackerCubit extends Cubit<TrackerState> {
         _updateTrackerData(userLocation, destination.route);
       });
     } on Failure catch (e) {
-      print(e.error);
       emit(TrackerError(message: e.message));
     }
   }

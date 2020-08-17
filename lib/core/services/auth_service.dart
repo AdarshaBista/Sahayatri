@@ -18,12 +18,10 @@ class AuthService {
           "password": password,
         },
       );
-
-      if (res.statusCode != 201) throw Failure(error: 'Could not login!');
       return User.fromMap(res.data as Map<String, dynamic>);
     } catch (e) {
-      print(e);
-      throw Failure(error: 'Could not login!');
+      print(e.toString());
+      throw const Failure(message: 'Could not login!');
     }
   }
 
@@ -38,12 +36,10 @@ class AuthService {
           "password": password,
         },
       );
-
-      if (res.statusCode != 201) throw Failure(error: 'Could not sign up!');
       return User.fromMap(res.data as Map<String, dynamic>);
     } catch (e) {
-      print(e);
-      throw Failure(error: 'Could not sign up!');
+      print(e.toString());
+      throw const Failure(message: 'Could not sign up!');
     }
   }
 
@@ -57,8 +53,8 @@ class AuthService {
       );
       return true;
     } catch (e) {
-      print(e);
-      throw Failure(error: 'Could not logout!');
+      print(e.toString());
+      throw const Failure(message: 'Could not logout!');
     }
   }
 }

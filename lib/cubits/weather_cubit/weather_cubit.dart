@@ -28,7 +28,6 @@ class WeatherCubit extends Cubit<WeatherState> {
       final List<Weather> forecasts = await weatherService.fetchForecasts(coord);
       emit(WeatherSuccess(forecasts: forecasts));
     } on Failure catch (e) {
-      print(e.error);
       emit(WeatherError(message: e.message));
     }
   }

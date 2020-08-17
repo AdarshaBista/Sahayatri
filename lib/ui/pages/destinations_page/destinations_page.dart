@@ -92,7 +92,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
               );
             } else if (state is DestinationsLoading) {
               return const BusyIndicator();
-            } else if (state is DestinationsSuccess) {
+            } else if (state is DestinationsLoaded) {
               return DestinationsList(destinations: state.destinations);
             } else {
               return const EmptyIndicator();

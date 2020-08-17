@@ -34,7 +34,6 @@ class DestinationReviewCubit extends Cubit<DestinationReviewState> {
         emit(const DestinationReviewEmpty());
       }
     } on Failure catch (e) {
-      print(e.error);
       emit(DestinationReviewError(message: e.message));
     }
   }
@@ -53,8 +52,7 @@ class DestinationReviewCubit extends Cubit<DestinationReviewState> {
       );
       emit(DestinationReviewLoaded(reviews: destination.reviews));
       return true;
-    } on Failure catch (e) {
-      print(e);
+    } on Failure {
       return false;
     }
   }
