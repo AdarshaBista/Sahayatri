@@ -9,7 +9,9 @@ import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
 
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/unauthenticated_view.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/profile_header.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -17,36 +19,40 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthError) {
-            MessageDialog(message: state.message).openDialog(context);
-          }
-        },
-        builder: (context, state) {
-          if (state is Authenticated) {
-            return Provider<User>.value(
-              value: state.user,
-              child: _buildBody(),
-            );
-          } else if (state is AuthLoading) {
-            return const BusyIndicator();
-          }
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthError) {
+          MessageDialog(message: state.message).openDialog(context);
+        }
+      },
+      builder: (context, state) {
+        if (state is Authenticated) {
+          return Provider<User>.value(
+            value: state.user,
+            child: _buildBody(),
+          );
+        } else if (state is AuthLoading) {
+          return const BusyIndicator();
+        }
 
-          return const Center(child: UnauthenticatedView());
-        },
-      ),
+        return const Center(child: UnauthenticatedView());
+      },
     );
   }
 
   Widget _buildBody() {
-    return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      children: const [
-        ProfileHeader(),
-      ],
+    return Scaffold(
+      appBar: const CurvedAppbar(
+        title: 'Profile',
+        actions: [LogoutButton()],
+      ),
+      body: ListView(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        children: const [
+          ProfileHeader(),
+        ],
+      ),
     );
   }
 }

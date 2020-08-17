@@ -77,7 +77,7 @@ class NearbyService {
   Future<void> stop() async {
     await stopScanning();
     await Nearby().stopAllEndpoints();
-    _nearbyDevices.clear();
+    _nearbyDevices?.clear();
   }
 
   /// Start advertising to potential discoverers.

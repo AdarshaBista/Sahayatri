@@ -83,10 +83,10 @@ class TrackerService {
   void stop() {
     _destination = null;
 
-    _stopwatch.stop();
-    _userTrack.clear();
-    _userLocationStreamSub.cancel();
-    _userLocationStreamController.close();
+    _stopwatch?.stop();
+    _userTrack?.clear();
+    _userLocationStreamSub?.cancel();
+    _userLocationStreamController?.close();
   }
 
   /// Pause the tracking process

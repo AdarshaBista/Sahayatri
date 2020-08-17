@@ -1,7 +1,7 @@
 class Routes {
   // App Routes
-  static const String kAuthPageRoute = '/';
-  static const String kHomePageRoute = '/home';
+  static const String kHomePageRoute = '/';
+  static const String kAuthPageRoute = '/auth';
   static const String kDestinationPageRoute = '/destination';
 
   // Destination Routes
