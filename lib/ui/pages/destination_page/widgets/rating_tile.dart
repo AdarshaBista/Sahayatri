@@ -30,9 +30,9 @@ class RatingTile extends StatelessWidget {
         children: [
           _buildRating(context),
           const Spacer(),
-          _buildDownloadButton(context),
+          if (shouldShowDownloadButton) _buildDownloadButton(context),
           const SizedBox(width: 12.0),
-          if (shouldShowDownloadButton) _buildWeatherButton(context),
+          _buildWeatherButton(context),
         ],
       ),
     );
