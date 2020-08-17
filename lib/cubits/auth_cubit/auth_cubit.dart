@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
@@ -75,8 +77,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await authService.logout(user);
       await userDao.remove(user);
-      await nearbyService.stop();
       trackerService.stop();
+      if (!Platform.isWindows) await nearbyService.stop();
       emit(const Unauthenticated());
     } on Failure catch (e) {
       emit(AuthError(message: e.message));

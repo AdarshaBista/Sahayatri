@@ -22,9 +22,9 @@ class Destination {
   final List<String> bestMonths;
   bool isDownloaded;
   Itinerary createdItinerary;
-  final List<Place> places;
-  final List<Review> reviews;
-  final List<Itinerary> suggestedItineraries;
+  List<Place> places;
+  List<Review> reviews;
+  List<Itinerary> suggestedItineraries;
 
   double get minLat => route.minLat;
   double get maxLat => route.maxLat;

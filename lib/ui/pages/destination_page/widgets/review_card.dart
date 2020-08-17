@@ -22,20 +22,18 @@ class ReviewCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(review.user.imageUrl),
-            ),
+            leading: _buildUserAvatar(),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   review.user.name,
-                  style: AppTextStyles.medium,
+                  style: AppTextStyles.small.bold,
                 ),
                 const SizedBox(height: 4.0),
                 StarRatingBar(
                   rating: review.rating,
-                  size: 16.0,
+                  size: 14.0,
                 ),
                 const Divider(height: 8.0),
               ],
@@ -44,9 +42,25 @@ class ReviewCard extends StatelessWidget {
               review.text,
               style: AppTextStyles.small,
             ),
+            trailing: Text(
+              review.rating.toStringAsFixed(1),
+              style: AppTextStyles.medium.bold,
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildUserAvatar() {
+    return review.user.imageUrl != null
+        ? CircleAvatar(backgroundImage: NetworkImage(review.user.imageUrl))
+        : CircleAvatar(
+            backgroundColor: AppColors.primary.withOpacity(0.4),
+            child: Text(
+              review.user.name[0],
+              style: AppTextStyles.medium.withColor(AppColors.primaryDark),
+            ),
+          );
   }
 }

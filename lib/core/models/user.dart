@@ -29,8 +29,7 @@ class User {
     @required this.accessToken,
   })  : assert(id != null),
         assert(name != null),
-        assert(email != null),
-        assert(accessToken != null);
+        assert(email != null);
 
   User copyWith({
     String id,
@@ -50,7 +49,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
-      'userid': id,
+      'id': id,
       'name': name,
       'email': email,
       'imageUrl': imageUrl,
@@ -62,7 +61,7 @@ class User {
     if (map == null) return null;
 
     return User(
-      id: map['userid'] as String,
+      id: map['id'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
       imageUrl: map['imageUrl'] as String,

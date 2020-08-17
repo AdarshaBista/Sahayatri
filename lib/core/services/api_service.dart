@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -36,6 +37,31 @@ class ApiService {
     }
   }
 
+  Future<List<Review>> fetchReviews(String destId) async {
+    try {
+      final Response res =
+          await Dio().get('${AppConfig.kApiBaseUrl}/destinations/$destId/reviews');
+      final body = res.data as Map<String, dynamic>;
+      final reviews = body['data'] as List<dynamic>;
+      return reviews
+          .map((r) {
+            try {
+              return Review.fromMap(r as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((r) => r != null)
+          .toList();
+    } catch (e) {
+      throw Failure(
+        error: e.toString(),
+        message: 'Failed to get reviews.',
+      );
+    }
+  }
+
   Future<String> postDestinationReview(
     double rating,
     String text,
@@ -56,7 +82,7 @@ class ApiService {
         },
       );
       final body = res.data as Map<String, dynamic>;
-      return body['id'] as String;
+      return body['review']['id'] as String;
     } catch (e) {
       throw Failure(
         error: e.toString(),

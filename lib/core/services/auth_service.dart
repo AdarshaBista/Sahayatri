@@ -22,6 +22,7 @@ class AuthService {
       if (res.statusCode != 201) throw Failure(error: 'Could not login!');
       return User.fromMap(res.data as Map<String, dynamic>);
     } catch (e) {
+      print(e);
       throw Failure(error: 'Could not login!');
     }
   }
@@ -41,22 +42,22 @@ class AuthService {
       if (res.statusCode != 201) throw Failure(error: 'Could not sign up!');
       return User.fromMap(res.data as Map<String, dynamic>);
     } catch (e) {
+      print(e);
       throw Failure(error: 'Could not sign up!');
     }
   }
 
   Future<bool> logout(User user) async {
     try {
-      final Response res = await Dio().get(
+      await Dio().get(
         '$kAuthBaseUrl/logout/${user.id}',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
       );
-
-      if (res.statusCode != 200) throw Failure(error: 'Could not logout!');
       return true;
     } catch (e) {
+      print(e);
       throw Failure(error: 'Could not logout!');
     }
   }

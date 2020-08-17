@@ -19,7 +19,7 @@ class FormValidators {
   static MultiValidator password([String message = 'Please enter a valid password.']) {
     return MultiValidator([
       RequiredValidator(errorText: message),
-      MinLengthValidator(7, errorText: 'Password should be more than 6 characters long.')
+      MinLengthValidator(6, errorText: 'Password should be more than 5 characters long.')
     ]);
   }
 

@@ -20,7 +20,6 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          print(state);
           if (state is AuthError) {
             MessageDialog(message: state.message).openDialog(context);
           }

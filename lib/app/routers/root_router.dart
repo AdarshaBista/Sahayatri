@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
+import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -48,6 +49,12 @@ class RootRouter {
               create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
               ),
+            ),
+            BlocProvider<DestinationReviewCubit>(
+              create: (context) => DestinationReviewCubit(
+                apiService: context.repository<ApiService>(),
+                destination: settings.arguments as Destination,
+              )..fetchReviews(),
             ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(
