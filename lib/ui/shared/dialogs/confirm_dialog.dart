@@ -28,6 +28,7 @@ class ConfirmDialog extends StatelessWidget {
       content: Text(
         message,
         style: AppTextStyles.small,
+        textAlign: TextAlign.center,
       ),
       actions: [
         _buildConfirmButton(context),

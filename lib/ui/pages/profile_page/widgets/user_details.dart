@@ -18,12 +18,23 @@ class UserDetails extends StatelessWidget {
       children: [
         Text(
           user.name.toUpperCase(),
-          style: AppTextStyles.medium.bold,
+          style: AppTextStyles.large.bold,
         ),
-        const SizedBox(height: 4.0),
-        Text(
-          user.email,
-          style: AppTextStyles.extraSmall,
+        const SizedBox(height: 6.0),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(
+              color: AppColors.dark,
+              width: 0.5,
+            ),
+          ),
+          child: Text(
+            user.email,
+            style: AppTextStyles.extraSmall,
+          ),
         ),
       ],
     );

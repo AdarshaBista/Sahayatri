@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton();
@@ -10,7 +13,10 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       splashRadius: 20.0,
-      onPressed: context.bloc<AuthCubit>().logout,
+      onPressed: () => ConfirmDialog(
+        message: 'Do you want to log out?',
+        onConfirm: context.bloc<AuthCubit>().logout,
+      ).openDialog(context),
       icon: const Icon(
         Icons.login_outlined,
         size: 20.0,

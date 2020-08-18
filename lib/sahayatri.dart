@@ -13,7 +13,6 @@ import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
@@ -28,6 +27,9 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/splash_view.dart';
+
+import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
+import 'package:sahayatri/ui/pages/home_page/home_page.dart';
 
 class Sahayatri extends StatelessWidget {
   const Sahayatri();
@@ -91,7 +93,16 @@ class Sahayatri extends StatelessWidget {
               ),
             ),
           ],
-          child: const _App(),
+          child: MaterialApp(
+            builder: DevicePreview.appBuilder,
+            locale: DevicePreview.of(context).locale,
+            debugShowCheckedModeBanner: false,
+            title: AppConfig.kAppName,
+            theme: AppThemes.light,
+            navigatorKey: context.repository<RootNavService>().navigatorKey,
+            onGenerateRoute: RootRouter.onGenerateRoute,
+            home: const _App(),
+          ),
         ),
       ),
     );
@@ -114,19 +125,8 @@ class _App extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.hasData) {
               final bool isLoggedIn = snapshot.data;
-              final String initialRoute =
-                  isLoggedIn ? Routes.kHomePageRoute : Routes.kAuthPageRoute;
-
-              return MaterialApp(
-                builder: DevicePreview.appBuilder,
-                locale: DevicePreview.of(context).locale,
-                debugShowCheckedModeBanner: false,
-                title: AppConfig.kAppName,
-                theme: AppThemes.light,
-                navigatorKey: context.repository<RootNavService>().navigatorKey,
-                initialRoute: initialRoute,
-                onGenerateRoute: RootRouter.onGenerateRoute,
-              );
+              if (isLoggedIn) return const HomePage();
+              return const AuthPage();
             }
             return const SplashView();
           },

@@ -10,7 +10,6 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
-import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
@@ -34,12 +33,7 @@ class RootRouter {
         break;
 
       case Routes.kHomePageRoute:
-        _page = BlocProvider<DestinationsCubit>(
-          create: (context) => DestinationsCubit(
-            apiService: context.repository<ApiService>(),
-          )..fetchDestinations(),
-          child: const HomePage(),
-        );
+        _page = const HomePage();
         break;
 
       case Routes.kDestinationPageRoute:
