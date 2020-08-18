@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
@@ -23,7 +23,7 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is AuthError) context.openSnackBar(state.message);
       },

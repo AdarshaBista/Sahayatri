@@ -5,7 +5,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
@@ -22,7 +22,7 @@ class RatingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.bloc<DestinationCubit>().destination;
     final bool shouldShowDownloadButton =
-        !destination.isDownloaded && context.bloc<AuthCubit>().isAuthenticated;
+        !destination.isDownloaded && context.bloc<UserCubit>().isAuthenticated;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),

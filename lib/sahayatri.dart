@@ -20,7 +20,7 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
@@ -79,9 +79,10 @@ class Sahayatri extends StatelessWidget {
                 prefsDao: context.repository<PrefsDao>(),
               )..initPrefs(),
             ),
-            BlocProvider<AuthCubit>(
-              create: (context) => AuthCubit(
+            BlocProvider<UserCubit>(
+              create: (context) => UserCubit(
                 userDao: context.repository<UserDao>(),
+                apiService: context.repository<ApiService>(),
                 authService: context.repository<AuthService>(),
                 nearbyService: context.repository<NearbyService>(),
                 trackerService: context.repository<TrackerService>(),
@@ -121,7 +122,7 @@ class _App extends StatelessWidget {
         }
 
         return FutureBuilder(
-          future: context.bloc<AuthCubit>().getUser(),
+          future: context.bloc<UserCubit>().getUser(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.hasData) {
               final bool isLoggedIn = snapshot.data;

@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
@@ -27,7 +27,7 @@ class ReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.bloc<AuthCubit>().isAuthenticated)
+          if (context.bloc<UserCubit>().isAuthenticated)
             CustomButton(
               label: 'Write a review',
               outlineOnly: true,
@@ -79,7 +79,7 @@ class ReviewList extends StatelessWidget {
     context.openSnackBar('Posting review...');
     final bool success = await context
         .bloc<DestinationReviewCubit>()
-        .postReview(rating, text, context.bloc<AuthCubit>().user);
+        .postReview(rating, text, context.bloc<UserCubit>().user);
 
     if (success) {
       context.openSnackBar('Review posted');

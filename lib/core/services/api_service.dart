@@ -13,6 +13,27 @@ import 'package:sahayatri/app/constants/api_keys.dart';
 class ApiService {
   static const String kWeatherBaseUrl = 'https://api.openweathermap.org/data/2.5';
 
+  Future<String> updateUserAvatar(User user, String imagePath) async {
+    try {
+      final Response res = await Dio().post(
+        '${AppConfig.kApiBaseUrl}/users/${user.id}/images',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+        data: FormData()
+          ..files.add(MapEntry(
+            'images',
+            await MultipartFile.fromFile(imagePath, filename: '${user.id}_avatar.png'),
+          )),
+      );
+      final body = res.data as Map<String, dynamic>;
+      return body['imageUrl'] as String;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<List<Destination>> fetchDestinations() async {
     try {
       final Response res = await Dio().get('${AppConfig.kApiBaseUrl}/destinations');

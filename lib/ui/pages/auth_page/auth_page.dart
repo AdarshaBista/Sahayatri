@@ -6,7 +6,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
@@ -22,7 +22,7 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return Scaffold(
           extendBodyBehindAppBar: true,

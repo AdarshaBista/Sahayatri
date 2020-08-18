@@ -1,21 +1,21 @@
-part of 'auth_cubit.dart';
+part of 'user_cubit.dart';
 
-abstract class AuthState extends Equatable {
-  const AuthState();
+abstract class UserState extends Equatable {
+  const UserState();
 
   @override
   List<Object> get props => [];
 }
 
-class AuthLoading extends AuthState {
+class AuthLoading extends UserState {
   const AuthLoading();
 }
 
-class Unauthenticated extends AuthState {
+class Unauthenticated extends UserState {
   const Unauthenticated();
 }
 
-class Authenticated extends AuthState {
+class Authenticated extends UserState {
   final User user;
 
   const Authenticated({
@@ -26,7 +26,7 @@ class Authenticated extends AuthState {
   List<Object> get props => [user];
 }
 
-class AuthError extends AuthState {
+class AuthError extends UserState {
   final String message;
 
   const AuthError({

@@ -6,7 +6,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
@@ -69,7 +69,7 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () async {
               if (!formKey.currentState.validate()) return;
               final success =
-                  await context.bloc<AuthCubit>().signUp(username, email, password);
+                  await context.bloc<UserCubit>().signUp(username, email, password);
               if (success) {
                 if (widget.isInitial) {
                   context

@@ -6,7 +6,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
@@ -27,7 +27,7 @@ class OpenButton extends StatelessWidget {
           backgroundColor: AppColors.primary.withOpacity(0.3),
           iconData: Icons.keyboard_arrow_right,
           onTap: () {
-            if (!context.bloc<AuthCubit>().isAuthenticated) {
+            if (!context.bloc<UserCubit>().isAuthenticated) {
               const UnauthenticatedDialog().openDialog(context);
               return;
             }

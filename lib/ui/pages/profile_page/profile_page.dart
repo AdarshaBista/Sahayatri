@@ -5,7 +5,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/auth_cubit/auth_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
@@ -19,40 +19,47 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is AuthError) {
-          MessageDialog(message: state.message).openDialog(context);
-        }
-      },
-      builder: (context, state) {
-        if (state is Authenticated) {
-          return Provider<User>.value(
-            value: state.user,
-            child: _buildBody(),
-          );
-        } else if (state is AuthLoading) {
-          return const BusyIndicator();
-        }
+    return Scaffold(
+      appBar: CurvedAppbar(
+        title: 'Profile',
+        actions: [
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              if (state is Authenticated) return const LogoutButton();
+              return const Offstage();
+            },
+          )
+        ],
+      ),
+      body: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            MessageDialog(message: state.message).openDialog(context);
+          }
+        },
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return Provider<User>.value(
+              value: state.user,
+              child: _buildBody(),
+            );
+          } else if (state is AuthLoading) {
+            return const BusyIndicator();
+          }
 
-        return const Center(child: UnauthenticatedView());
-      },
+          return const Center(child: UnauthenticatedView());
+        },
+      ),
     );
   }
 
   Widget _buildBody() {
-    return Scaffold(
-      appBar: const CurvedAppbar(
-        title: 'Profile',
-        actions: [LogoutButton()],
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        children: const [
-          ProfileHeader(),
-        ],
-      ),
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      children: const [
+        ProfileHeader(),
+      ],
     );
   }
 }

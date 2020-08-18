@@ -23,7 +23,6 @@ class ProfileHeader extends StatelessWidget {
     return Container(
       height: 280.0,
       child: Stack(
-        fit: StackFit.expand,
         children: [
           if (user.imageUrl != null) _buildBlurredImage(user.imageUrl),
           if (user.imageUrl != null) _buildGradient(),
@@ -71,7 +70,7 @@ class ProfileHeader extends StatelessWidget {
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0),
+          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 2.0),
           child: Container(color: Colors.transparent),
         ),
       ),

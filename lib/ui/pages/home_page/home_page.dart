@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
         apiService: context.repository<ApiService>(),
       )..fetchDestinations(),
       child: Scaffold(
-        extendBody: true,
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomNavBar(
           selectedIndex: _selectedIndex,
