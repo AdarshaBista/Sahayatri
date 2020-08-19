@@ -41,7 +41,7 @@ class Itinerary {
       name: map['name'] as String,
       days: map['days'] as String,
       nights: map['nights'] as String,
-      checkpoints: List<Checkpoint>.from((map['checkpoints'] as List<Checkpoint>)
+      checkpoints: List<Checkpoint>.from((map['checkpoints'] as List<dynamic>)
           ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>))),
     );
   }

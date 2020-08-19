@@ -21,6 +21,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
+import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
@@ -57,6 +58,13 @@ class DestinationRouter {
                 apiService: context.repository<ApiService>(),
                 destination: context.bloc<DestinationCubit>().destination,
               )..fetchPlaces(),
+            ),
+            BlocProvider<ItineraryCubit>(
+              create: (context) => ItineraryCubit(
+                user: context.bloc<UserCubit>().user,
+                apiService: context.repository<ApiService>(),
+                destination: context.bloc<DestinationCubit>().destination,
+              )..fetchItineraries(),
             ),
           ],
           child: const DestinationDetailPage(),

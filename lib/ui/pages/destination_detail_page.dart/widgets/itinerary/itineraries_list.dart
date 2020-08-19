@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/header.dart';
+import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/created_itinerary_card.dart';
@@ -31,9 +33,6 @@ class ItinerariesList extends StatelessWidget {
   }
 
   Widget _buildSuggestedItineraries(BuildContext context) {
-    final suggestedItineraries =
-        context.bloc<DestinationCubit>().destination.suggestedItineraries;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,17 +42,32 @@ class ItinerariesList extends StatelessWidget {
           style: AppTextStyles.small.bold,
         ),
         const Divider(height: 16.0),
-        suggestedItineraries.isEmpty
-            ? const EmptyIndicator()
-            : ListView.builder(
+        BlocBuilder<ItineraryCubit, ItineraryState>(
+          builder: (context, state) {
+            if (state is ItineraryError) {
+              return ErrorIndicator(
+                message: state.message,
+                onRetry: context.bloc<ItineraryCubit>().fetchItineraries,
+              );
+            } else if (state is ItineraryLoaded) {
+              return ListView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: suggestedItineraries.length,
+                itemCount: state.itineraries.length,
                 itemBuilder: (context, index) {
-                  return ItineraryCard(itinerary: suggestedItineraries[index]);
+                  return ItineraryCard(itinerary: state.itineraries[index]);
                 },
-              ),
+              );
+            } else if (state is ItineraryEmpty) {
+              return EmptyIndicator(
+                onRetry: context.bloc<ItineraryCubit>().fetchItineraries,
+              );
+            } else {
+              return const BusyIndicator();
+            }
+          },
+        ),
       ],
     );
   }

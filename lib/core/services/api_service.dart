@@ -6,6 +6,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
@@ -126,6 +127,32 @@ class ApiService {
             }
           })
           .where((p) => p != null)
+          .toList();
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to get places.');
+    }
+  }
+
+  Future<List<Itinerary>> fetchItineraries(String destId, User user) async {
+    try {
+      final Response res = await Dio().get(
+        '${AppConfig.kApiBaseUrl}/destinations/$destId/itineraries',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+      );
+      final itineraries = res.data as List<dynamic>;
+      return itineraries
+          .map((i) {
+            try {
+              return Itinerary.fromMap(i as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((i) => i != null)
           .toList();
     } catch (e) {
       print(e.toString());
