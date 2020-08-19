@@ -125,10 +125,12 @@ class _FlagMarkersLayer extends StatelessWidget {
       options: MarkerLayerOptions(
         markers: [
           FlagMarker(
+            label: 'START',
             coord: route.first,
             color: Colors.green,
           ),
           FlagMarker(
+            label: 'FINISH',
             coord: route.last,
             color: Colors.red,
           ),
