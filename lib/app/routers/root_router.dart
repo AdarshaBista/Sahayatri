@@ -8,6 +8,7 @@ import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
@@ -46,6 +47,7 @@ class RootRouter {
             ),
             BlocProvider<DestinationReviewCubit>(
               create: (context) => DestinationReviewCubit(
+                user: context.bloc<UserCubit>().user,
                 apiService: context.repository<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchReviews(),

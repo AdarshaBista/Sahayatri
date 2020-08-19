@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
@@ -103,6 +104,32 @@ class ApiService {
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to post review.');
+    }
+  }
+
+  Future<List<Place>> fetchPlaces(String destId, User user) async {
+    try {
+      final Response res = await Dio().get(
+        '${AppConfig.kApiBaseUrl}/destinations/$destId/places',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+      );
+      final places = res.data as List<dynamic>;
+      return places
+          .map((p) {
+            try {
+              return Place.fromMap(p as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((p) => p != null)
+          .toList();
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to get places.');
     }
   }
 

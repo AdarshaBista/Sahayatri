@@ -60,7 +60,7 @@ class PlaceCard extends StatelessWidget {
 
   Widget _buildDetails() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,11 +75,6 @@ class PlaceCard extends StatelessWidget {
             height: 8.0,
             color: AppColors.lightAccent.withOpacity(0.5),
           ),
-          Text(
-            '${place.lodges.length} lodges',
-            style: AppTextStyles.small.light,
-          ),
-          const SizedBox(height: 4.0),
           Text(
             '${place.coord.alt.toInt()} m',
             style: AppTextStyles.small.primary,

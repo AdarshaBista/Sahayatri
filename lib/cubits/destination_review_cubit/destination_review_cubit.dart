@@ -12,10 +12,12 @@ import 'package:sahayatri/core/services/api_service.dart';
 part 'destination_review_state.dart';
 
 class DestinationReviewCubit extends Cubit<DestinationReviewState> {
+  final User user;
   final ApiService apiService;
   final Destination destination;
 
   DestinationReviewCubit({
+    @required this.user,
     @required this.apiService,
     @required this.destination,
   })  : assert(apiService != null),
@@ -38,7 +40,7 @@ class DestinationReviewCubit extends Cubit<DestinationReviewState> {
     }
   }
 
-  Future<bool> postReview(double rating, String text, User user) async {
+  Future<bool> postReview(double rating, String text) async {
     try {
       final id = await apiService.postDestinationReview(
         rating,

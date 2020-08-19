@@ -34,9 +34,9 @@ class PlacePage extends StatelessWidget {
         children: [
           _buildCarousel(place),
           const SizedBox(height: 8.0),
+          if (place.description.isNotEmpty) _buildDescription(place),
+          if (place.description.isNotEmpty) const Divider(height: 16.0),
           const PlaceStats(),
-          const Divider(height: 16.0),
-          _buildDescription(place),
           _buildWeatherButton(context, place),
           const Divider(height: 16.0),
           _buildTabView(place),

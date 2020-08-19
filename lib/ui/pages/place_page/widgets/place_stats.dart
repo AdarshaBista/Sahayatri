@@ -4,8 +4,8 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/stat_card.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/shared/widgets/stat_tile.dart';
 
 class PlaceStats extends StatelessWidget {
   const PlaceStats();
@@ -16,23 +16,17 @@ class PlaceStats extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
         children: <Widget>[
-          StatCard(
+          StatTile(
             label: 'Altitude',
-            count: '${place.coord.alt.floor()} m',
-            color: AppColors.primaryDark,
+            stat: '${place.coord.alt.floor()} m',
+            icon: CommunityMaterialIcons.altimeter,
           ),
-          StatCard(
-            label: 'Lodges',
-            count: place.lodges.length.toString(),
-            color: AppColors.primaryDark,
-          ),
-          StatCard(
+          StatTile(
             label: 'Network',
-            count: place.isNetworkAvailable ? 'Yes' : 'No',
-            color: place.isNetworkAvailable ? AppColors.primaryDark : AppColors.secondary,
+            stat: place.isNetworkAvailable ? 'Yes' : 'No',
+            icon: CommunityMaterialIcons.antenna,
           ),
         ],
       ),

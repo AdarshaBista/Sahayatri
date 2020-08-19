@@ -77,9 +77,8 @@ class ReviewList extends StatelessWidget {
 
   Future<void> _postReview(BuildContext context, double rating, String text) async {
     context.openSnackBar('Posting review...');
-    final bool success = await context
-        .bloc<DestinationReviewCubit>()
-        .postReview(rating, text, context.bloc<UserCubit>().user);
+    final bool success =
+        await context.bloc<DestinationReviewCubit>().postReview(rating, text);
 
     if (success) {
       context.openSnackBar('Review posted');

@@ -5,6 +5,7 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
+import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
@@ -16,9 +17,12 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
@@ -45,7 +49,18 @@ class DestinationRouter {
         break;
 
       case Routes.kDestinationDetailPageRoute:
-        _page = const DestinationDetailPage();
+        _page = MultiBlocProvider(
+          providers: [
+            BlocProvider<PlacesCubit>(
+              create: (context) => PlacesCubit(
+                user: context.bloc<UserCubit>().user,
+                apiService: context.repository<ApiService>(),
+                destination: context.bloc<DestinationCubit>().destination,
+              )..fetchPlaces(),
+            ),
+          ],
+          child: const DestinationDetailPage(),
+        );
         break;
 
       case Routes.kRoutePageRoute:

@@ -80,6 +80,7 @@ class _NestedTabViewState extends State<NestedTabView>
       data: Theme.of(context).copyWith(
         hoverColor: Colors.transparent,
         splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
       ),
       child: Align(
         alignment: widget.isCentered ? Alignment.center : Alignment.centerLeft,
