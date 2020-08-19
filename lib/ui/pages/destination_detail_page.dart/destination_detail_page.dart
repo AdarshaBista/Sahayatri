@@ -96,6 +96,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       leading: const DrawerIcon(),
       actions: [
         IconButton(
+          splashRadius: 20.0,
           icon: const Icon(Icons.home_outlined),
           onPressed: () => Navigator.of(context).pop(),
         ),

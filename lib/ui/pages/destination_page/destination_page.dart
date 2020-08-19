@@ -31,6 +31,7 @@ class DestinationPage extends StatelessWidget {
       appBar: CurvedAppbar(
         title: destination.name,
         leading: IconButton(
+          splashRadius: 20.0,
           icon: const Icon(Icons.close),
           onPressed: () => context.repository<RootNavService>().pop(),
         ),

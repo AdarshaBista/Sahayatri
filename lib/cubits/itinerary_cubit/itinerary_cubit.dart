@@ -27,7 +27,11 @@ class ItineraryCubit extends Cubit<ItineraryState> {
         super(const ItineraryEmpty());
 
   Future<void> fetchItineraries() async {
-    if (state is ItineraryLoaded) return;
+    if (destination.suggestedItineraries != null) {
+      emit(ItineraryLoaded(itineraries: destination.suggestedItineraries));
+      return;
+    }
+
     emit(const ItineraryLoading());
     try {
       final itineraries = await apiService.fetchItineraries(destination.id, user);

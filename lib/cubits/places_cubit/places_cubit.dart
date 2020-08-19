@@ -27,7 +27,11 @@ class PlacesCubit extends Cubit<PlacesState> {
         super(const PlacesEmpty());
 
   Future<void> fetchPlaces() async {
-    if (state is PlacesLoaded) return;
+    if (destination.places != null) {
+      emit(PlacesLoaded(places: destination.places));
+      return;
+    }
+
     emit(const PlacesLoading());
     try {
       final places = await apiService.fetchPlaces(destination.id, user);
