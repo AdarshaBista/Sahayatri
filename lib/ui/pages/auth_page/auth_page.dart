@@ -48,7 +48,7 @@ class AuthPage extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       colorBlendMode: BlendMode.srcATop,
-      color: AppColors.primary.withOpacity(0.5),
+      color: AppColors.dark.withOpacity(0.5),
     );
   }
 

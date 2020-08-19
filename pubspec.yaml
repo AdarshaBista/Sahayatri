@@ -84,7 +84,9 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/markers/
     - assets/images/indicators/
+    - assets/images/backgrounds/
 
   fonts:
     - family: Sen

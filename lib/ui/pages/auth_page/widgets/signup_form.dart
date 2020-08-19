@@ -39,9 +39,9 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         children: [
           CustomCard(
-            margin: const EdgeInsets.all(24.0),
-            padding: const EdgeInsets.all(24.0),
-            color: AppColors.light.withOpacity(0.5),
+            margin: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
+            color: AppColors.light.withOpacity(0.4),
             child: Column(
               children: [
                 CustomTextField(

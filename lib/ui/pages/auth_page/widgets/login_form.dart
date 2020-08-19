@@ -41,9 +41,9 @@ class _LoginFormState extends State<LoginForm> {
                 maxWidth: 500.0,
               ),
               child: CustomCard(
-                margin: const EdgeInsets.all(24.0),
-                padding: const EdgeInsets.all(24.0),
-                color: AppColors.light.withOpacity(0.5),
+                margin: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
+                color: AppColors.light.withOpacity(0.4),
                 child: AuthFields(
                   initialEmail: email,
                   initialPassword: password,
