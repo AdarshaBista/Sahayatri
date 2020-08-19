@@ -81,8 +81,9 @@ class TrackerService {
 
   /// Stop the tracking process and reset fields.
   void stop() {
-    _destination = null;
+    if (_destination == null) return;
 
+    _destination = null;
     _stopwatch?.stop();
     _userTrack?.clear();
     _userLocationStreamSub?.cancel();

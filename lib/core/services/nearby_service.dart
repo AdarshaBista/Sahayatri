@@ -18,6 +18,9 @@ import 'package:sahayatri/app/constants/notification_channels.dart';
 class NearbyService {
   final NotificationService notificationService;
 
+  /// Wheather nearby service is running or not
+  bool _isRunning = false;
+
   /// Topology of the network.
   final Strategy _kStrategy = Strategy.P2P_CLUSTER;
 
@@ -50,6 +53,7 @@ class NearbyService {
       print(e.toString());
       throw const Failure(message: 'Please enable location services.');
     }
+    _isRunning = true;
   }
 
   /// Start scanning (advertising and discovery) process.
@@ -75,9 +79,12 @@ class NearbyService {
 
   /// Stop scanning and disconnect from all devices.
   Future<void> stop() async {
+    if (!_isRunning) return;
+
     await stopScanning();
     await Nearby().stopAllEndpoints();
     _nearbyDevices?.clear();
+    _isRunning = false;
   }
 
   /// Start advertising to potential discoverers.

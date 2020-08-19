@@ -21,7 +21,7 @@ class SourceSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Select image from',
+            'Update avatar',
             style: AppTextStyles.small.bold,
           ),
           const SizedBox(height: 8.0),
