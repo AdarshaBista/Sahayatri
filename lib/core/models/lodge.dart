@@ -13,10 +13,10 @@ class Lodge {
   final double rating;
   final LodgeFacility facility;
   final List<String> imageUrls;
-  final List<LodgeReview> reviews;
   final List<String> contactNumbers;
+  List<LodgeReview> reviews;
 
-  const Lodge({
+  Lodge({
     @required this.id,
     @required this.name,
     @required this.coord,

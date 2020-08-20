@@ -68,15 +68,15 @@ class LodgeCard extends StatelessWidget {
         children: <Widget>[
           Text(
             lodge.name,
-            style: AppTextStyles.medium.light,
+            style: AppTextStyles.small.bold.light,
           ),
-          Divider(height: 16.0, color: AppColors.lightAccent.withOpacity(0.5)),
-          _buildContact(),
           const SizedBox(height: 8.0),
           StarRatingBar(
             rating: lodge.rating,
             size: 14.0,
           ),
+          Divider(height: 16.0, color: AppColors.lightAccent.withOpacity(0.5)),
+          _buildContact(),
         ],
       ),
     );

@@ -5,6 +5,7 @@ class AppConfig {
   static const String kFontFamilySerif = 'RobotoSlab';
   static const String kSmsMessagePrefix = 'I have safely reached';
   static const String kApiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
+  static const String kWeatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';
 }
 
 class UiConfig {

@@ -13,8 +13,6 @@ import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
 class ApiService {
-  static const String kWeatherBaseUrl = 'https://api.openweathermap.org/data/2.5';
-
   Future<String> updateUserAvatar(User user, String imagePath) async {
     try {
       final Response res = await Dio().post(
@@ -82,11 +80,7 @@ class ApiService {
   }
 
   Future<String> postDestinationReview(
-    double rating,
-    String text,
-    String destId,
-    User user,
-  ) async {
+      double rating, String text, String destId, User user) async {
     try {
       final Response res = await Dio().post(
         '${AppConfig.kApiBaseUrl}/reviews',
@@ -156,14 +150,14 @@ class ApiService {
           .toList();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get places.');
+      throw const Failure(message: 'Failed to get suggested itineraries.');
     }
   }
 
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(
-        '$kWeatherBaseUrl/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
+        '${AppConfig.kWeatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
       );
       final resList = res.data['daily'] as List<dynamic>;
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();

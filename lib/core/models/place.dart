@@ -14,7 +14,7 @@ class Place {
   final List<String> imageUrls;
   final List<Lodge> lodges;
 
-  const Place({
+  Place({
     @required this.id,
     @required this.name,
     @required this.coord,
@@ -25,8 +25,9 @@ class Place {
   })  : assert(id != null),
         assert(name != null),
         assert(coord != null),
-        assert(description != null),
+        assert(lodges != null),
         assert(imageUrls != null),
+        assert(description != null),
         assert(isNetworkAvailable != null);
 
   Place copyWith({
@@ -59,7 +60,8 @@ class Place {
       coord: ApiUtils.parseCoord(map['coord'] as String),
       isNetworkAvailable: map['isNetworkAvailable'] as bool,
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
-      lodges: null,
+      lodges: List<Lodge>.from((map['lodges'] as List<dynamic>)
+          ?.map((x) => Lodge.fromMap(x as Map<String, dynamic>))),
     );
   }
 
