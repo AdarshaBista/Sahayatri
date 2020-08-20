@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
+import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
@@ -86,7 +87,7 @@ class DestinationRouter {
       case Routes.kLodgePageRoute:
         _page = Provider<Lodge>.value(
           value: settings.arguments as Lodge,
-          child: BlocProvider<LodgeReviewCubit>(
+          child: BlocProvider<ReviewCubit>(
             create: (context) => LodgeReviewCubit(
               lodge: settings.arguments as Lodge,
               user: context.bloc<UserCubit>().user,

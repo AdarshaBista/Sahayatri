@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/lodge_review.dart';
+import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -14,7 +14,7 @@ class Lodge {
   final LodgeFacility facility;
   final List<String> imageUrls;
   final List<String> contactNumbers;
-  List<LodgeReview> reviews;
+  List<Review> reviews;
 
   Lodge({
     @required this.id,
@@ -40,7 +40,7 @@ class Lodge {
     double rating,
     LodgeFacility facility,
     List<String> imageUrls,
-    List<LodgeReview> reviews,
+    List<Review> reviews,
     List<String> contactNumbers,
   }) {
     return Lodge(

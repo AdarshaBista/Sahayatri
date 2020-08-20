@@ -8,7 +8,6 @@ import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/lodge_review.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
@@ -155,7 +154,7 @@ class ApiService {
     }
   }
 
-  Future<List<LodgeReview>> fetchLodgeReviews(String lodgeId, User user) async {
+  Future<List<Review>> fetchLodgeReviews(String lodgeId, User user) async {
     try {
       final Response res = await Dio().get(
         '${AppConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
@@ -169,7 +168,7 @@ class ApiService {
       return reviews
           .map((r) {
             try {
-              return LodgeReview.fromMap(r as Map<String, dynamic>);
+              return Review.fromMap(r as Map<String, dynamic>);
             } catch (e) {
               print(e.toString());
               return null;

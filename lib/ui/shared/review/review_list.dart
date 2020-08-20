@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
-import 'package:sahayatri/core/models/lodge_review.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/form/review_form.dart';
+import 'package:sahayatri/ui/shared/review/review_form.dart';
+import 'package:sahayatri/ui/shared/review/review_card.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/pages/lodge_page/widgets/lodge_review_card.dart';
 
-class LodgeReviewList extends StatelessWidget {
-  const LodgeReviewList();
+class ReviewList extends StatelessWidget {
+  final ReviewCubit reviewCubit;
+
+  const ReviewList({
+    @required this.reviewCubit,
+  }) : assert(reviewCubit != null);
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +31,29 @@ class LodgeReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CustomButton(
-            label: 'Write a review',
-            outlineOnly: true,
-            color: AppColors.dark,
-            backgroundColor: AppColors.barrier,
-            iconData: CommunityMaterialIcons.pencil_outline,
-            onTap: () => ReviewForm(
-              onSubmit: (rating, text) async => _postReview(context, rating, text),
-            ).openModalBottomSheet(context),
-          ),
-          BlocBuilder<LodgeReviewCubit, LodgeReviewState>(
+          if (context.bloc<UserCubit>().isAuthenticated)
+            CustomButton(
+              label: 'Write a review',
+              outlineOnly: true,
+              color: AppColors.dark,
+              backgroundColor: AppColors.barrier,
+              iconData: CommunityMaterialIcons.pencil_outline,
+              onTap: () => ReviewForm(
+                onSubmit: (rating, text) async => _postReview(context, rating, text),
+              ).openModalBottomSheet(context),
+            ),
+          BlocBuilder<ReviewCubit, ReviewState>(
             builder: (context, state) {
-              if (state is LodgeReviewError) {
+              if (state is ReviewError) {
                 return ErrorIndicator(
                   message: state.message,
-                  onRetry: context.bloc<LodgeReviewCubit>().fetchReviews,
+                  onRetry: context.bloc<ReviewCubit>().fetchReviews,
                 );
-              } else if (state is LodgeReviewLoaded) {
+              } else if (state is ReviewLoaded) {
                 return _buildList(state.reviews);
-              } else if (state is LodgeReviewEmpty) {
+              } else if (state is ReviewEmpty) {
                 return EmptyIndicator(
-                  onRetry: context.bloc<LodgeReviewCubit>().fetchReviews,
+                  onRetry: context.bloc<ReviewCubit>().fetchReviews,
                 );
               } else {
                 return const BusyIndicator();
@@ -59,7 +65,7 @@ class LodgeReviewList extends StatelessWidget {
     );
   }
 
-  Widget _buildList(List<LodgeReview> reviews) {
+  Widget _buildList(List<Review> reviews) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -67,20 +73,20 @@ class LodgeReviewList extends StatelessWidget {
       itemBuilder: (context, index) {
         return SlideAnimator(
           begin: Offset(0.0, 0.2 + index * 0.4),
-          child: LodgeReviewCard(review: reviews[index]),
+          child: ReviewCard(review: reviews[index]),
         );
       },
     );
   }
 
   Future<void> _postReview(BuildContext context, double rating, String text) async {
-    context.openSnackBar('Posting lodge review...');
-    final bool success = await context.bloc<LodgeReviewCubit>().postReview(rating, text);
+    context.openSnackBar('Posting review...');
+    final bool success = await reviewCubit.postReview(rating, text);
 
     if (success) {
-      context.openSnackBar('Lodge review posted');
+      context.openSnackBar('Review posted');
     } else {
-      context.openSnackBar('Failed to post lodge review!');
+      context.openSnackBar('Failed to post review!');
     }
   }
 }
