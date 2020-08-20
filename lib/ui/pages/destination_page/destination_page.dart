@@ -32,11 +32,13 @@ class DestinationPage extends StatelessWidget {
     return Scaffold(
       appBar: CurvedAppbar(
         title: destination.name,
-        leading: IconButton(
-          splashRadius: 20.0,
-          icon: const Icon(Icons.close),
-          onPressed: () => context.repository<RootNavService>().pop(),
-        ),
+        actions: [
+          IconButton(
+            splashRadius: 20.0,
+            icon: const Icon(Icons.close),
+            onPressed: () => context.repository<RootNavService>().pop(),
+          ),
+        ],
       ),
       body: ListView(
         shrinkWrap: true,

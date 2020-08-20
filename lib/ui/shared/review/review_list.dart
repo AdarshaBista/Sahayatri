@@ -42,6 +42,7 @@ class ReviewList extends StatelessWidget {
                 onSubmit: (rating, text) async => _postReview(context, rating, text),
               ).openModalBottomSheet(context),
             ),
+          const SizedBox(height: 8.0),
           BlocBuilder<ReviewCubit, ReviewState>(
             builder: (context, state) {
               if (state is ReviewError) {
@@ -67,10 +68,11 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _buildList(List<Review> reviews) {
-    return ListView.builder(
+    return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: reviews.length,
+      separatorBuilder: (_, __) => const Divider(height: 8.0),
       itemBuilder: (context, index) {
         return SlideAnimator(
           begin: Offset(0.0, 0.2 + index * 0.4),

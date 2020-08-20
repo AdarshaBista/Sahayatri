@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
@@ -17,35 +16,32 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: CustomCard(
-        margin: const EdgeInsets.symmetric(vertical: 6.0),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: ListTile(
-            leading: _buildUserAvatar(),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  review.user.name,
-                  style: AppTextStyles.small.bold,
-                ),
-                const SizedBox(height: 4.0),
-                StarRatingBar(
-                  rating: review.rating,
-                  size: 14.0,
-                ),
-                const Divider(height: 8.0),
-              ],
-            ),
-            subtitle: Text(
-              review.text,
-              style: AppTextStyles.small,
-            ),
-            trailing: Text(
-              review.rating.toStringAsFixed(1),
-              style: AppTextStyles.medium.bold,
-            ),
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: _buildUserAvatar(),
+          title: Text(
+            review.user.name,
+            style: AppTextStyles.small.bold,
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 4.0),
+              StarRatingBar(
+                rating: review.rating,
+                size: 15.0,
+              ),
+              const SizedBox(height: 6.0),
+              Text(
+                review.text,
+                style: AppTextStyles.small,
+              ),
+            ],
+          ),
+          trailing: Text(
+            review.rating.toStringAsFixed(1),
+            style: AppTextStyles.medium.bold.withColor(AppColors.barrier),
           ),
         ),
       ),

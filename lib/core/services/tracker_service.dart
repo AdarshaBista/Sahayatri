@@ -81,7 +81,7 @@ class TrackerService {
 
   /// Stop the tracking process and reset fields.
   void stop() {
-    if (_destination == null) return;
+    if (!isTracking) return;
 
     _destination = null;
     _stopwatch?.stop();
