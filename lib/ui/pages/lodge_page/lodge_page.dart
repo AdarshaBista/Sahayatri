@@ -28,7 +28,6 @@ class LodgePage extends StatelessWidget {
           _buildCarousel(lodge),
           const SizedBox(height: 8.0),
           const LodgeRating(),
-          const Divider(height: 16.0),
           const SizedBox(height: 8.0),
           const FacilitiesList(),
           const SizedBox(height: 16.0),
@@ -54,7 +53,7 @@ class LodgePage extends StatelessWidget {
         NestedTabData(label: 'Photos', icon: Icons.photo),
       ],
       children: [
-        LodgeReviewList(reviews: lodge.reviews),
+        const LodgeReviewList(),
         PhotoGallery(imageUrls: lodge.imageUrls),
       ],
     );

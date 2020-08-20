@@ -20,12 +20,17 @@ class DestinationReviewCubit extends Cubit<DestinationReviewState> {
     @required this.user,
     @required this.apiService,
     @required this.destination,
-  })  : assert(apiService != null),
+  })  : assert(user != null),
+        assert(apiService != null),
         assert(destination != null),
         super(const DestinationReviewEmpty());
 
   Future<void> fetchReviews() async {
-    if (state is DestinationReviewLoaded) return;
+    if (destination.reviews != null) {
+      emit(DestinationReviewLoaded(reviews: destination.reviews));
+      return;
+    }
+
     emit(const DestinationReviewLoading());
     try {
       final reviews = await apiService.fetchReviews(destination.id);

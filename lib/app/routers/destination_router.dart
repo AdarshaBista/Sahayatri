@@ -24,6 +24,7 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
@@ -85,7 +86,14 @@ class DestinationRouter {
       case Routes.kLodgePageRoute:
         _page = Provider<Lodge>.value(
           value: settings.arguments as Lodge,
-          child: const LodgePage(),
+          child: BlocProvider<LodgeReviewCubit>(
+            create: (context) => LodgeReviewCubit(
+              lodge: settings.arguments as Lodge,
+              user: context.bloc<UserCubit>().user,
+              apiService: context.repository<ApiService>(),
+            )..fetchReviews(),
+            child: const LodgePage(),
+          ),
         );
         break;
 

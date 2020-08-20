@@ -8,6 +8,7 @@ import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_review.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
@@ -151,6 +152,57 @@ class ApiService {
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get suggested itineraries.');
+    }
+  }
+
+  Future<List<LodgeReview>> fetchLodgeReviews(String lodgeId, User user) async {
+    try {
+      final Response res = await Dio().get(
+        '${AppConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+      );
+
+      final body = res.data as Map<String, dynamic>;
+      final reviews = body['data'] as List<dynamic>;
+      return reviews
+          .map((r) {
+            try {
+              return LodgeReview.fromMap(r as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((r) => r != null)
+          .toList();
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to get lodge reviews.');
+    }
+  }
+
+  Future<String> postLodgeReview(
+      double rating, String text, String lodgeId, User user) async {
+    try {
+      final Response res = await Dio().post(
+        '${AppConfig.kApiBaseUrl}/lodgereviews',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+        data: {
+          "text": text,
+          "rating": rating,
+          "user": {"id": user.id},
+          "lodge": {"id": lodgeId}
+        },
+      );
+      final body = res.data as Map<String, dynamic>;
+      return body['review']['id'] as String;
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to post lodge review.');
     }
   }
 

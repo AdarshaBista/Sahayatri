@@ -24,7 +24,7 @@ class PlaceStats extends StatelessWidget {
             icon: CommunityMaterialIcons.altimeter,
           ),
           StatTile(
-            label: 'Network',
+            label: 'Cell Network',
             stat: place.isNetworkAvailable ? 'Yes' : 'No',
             icon: CommunityMaterialIcons.antenna,
           ),
