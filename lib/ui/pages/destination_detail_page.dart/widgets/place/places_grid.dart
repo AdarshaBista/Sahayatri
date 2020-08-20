@@ -31,6 +31,7 @@ class PlacesGrid extends StatelessWidget {
               return _buildGrid(state.places);
             } else if (state is PlacesEmpty) {
               return EmptyIndicator(
+                message: 'No places found.',
                 onRetry: context.bloc<PlacesCubit>().fetchPlaces,
               );
             } else {

@@ -7,11 +7,13 @@ import 'package:sahayatri/ui/shared/buttons/retry_button.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 
 class EmptyIndicator extends StatelessWidget {
+  final String message;
   final VoidCallback onRetry;
 
   const EmptyIndicator({
     this.onRetry,
-  });
+    this.message = 'Nothing to show...',
+  }) : assert(message != null);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class EmptyIndicator extends StatelessWidget {
         IconIndicator(
           imageUrl: Images.kEmpty,
           title: Text(
-            'Nothing to show...',
+            message,
             textAlign: TextAlign.center,
             style: AppTextStyles.small.bold,
           ),

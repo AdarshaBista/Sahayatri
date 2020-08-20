@@ -7,6 +7,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
+import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 
 import 'package:sahayatri/ui/shared/widgets/image_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -21,30 +22,34 @@ class PhotoGallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 120.0,
-        ),
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(12.0),
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: imageUrls.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            child: Hero(
-              tag: imageUrls[index],
-              child: ImageCard(imageUrl: imageUrls[index]),
-            ),
-            onTap: () => context.repository<DestinationNavService>().pushNamed(
-                  Routes.kPhotoViewPageRoute,
-                  arguments: PhotoViewPageArgs(
-                    initialPageIndex: imageUrls.indexOf(imageUrls[index]),
-                    imageUrls: imageUrls,
+      child: imageUrls.isEmpty
+          ? const EmptyIndicator(
+              message: 'Not photos at the moment.',
+            )
+          : GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 120.0,
+              ),
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(12.0),
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: imageUrls.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: Hero(
+                    tag: imageUrls[index],
+                    child: ImageCard(imageUrl: imageUrls[index]),
                   ),
-                ),
-          );
-        },
-      ),
+                  onTap: () => context.repository<DestinationNavService>().pushNamed(
+                        Routes.kPhotoViewPageRoute,
+                        arguments: PhotoViewPageArgs(
+                          initialPageIndex: imageUrls.indexOf(imageUrls[index]),
+                          imageUrls: imageUrls,
+                        ),
+                      ),
+                );
+              },
+            ),
     );
   }
 }

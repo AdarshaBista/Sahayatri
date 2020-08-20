@@ -61,6 +61,7 @@ class ItinerariesList extends StatelessWidget {
               );
             } else if (state is ItineraryEmpty) {
               return EmptyIndicator(
+                message: 'No itineraries found.',
                 onRetry: context.bloc<ItineraryCubit>().fetchItineraries,
               );
             } else {

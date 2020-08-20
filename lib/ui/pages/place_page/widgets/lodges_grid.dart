@@ -20,7 +20,9 @@ class LodgesGrid extends StatelessWidget {
     final lodges = place.lodges;
 
     return lodges.isEmpty
-        ? const EmptyIndicator()
+        ? const EmptyIndicator(
+            message: 'No lodges found.',
+          )
         : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

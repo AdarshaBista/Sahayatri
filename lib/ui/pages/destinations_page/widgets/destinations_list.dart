@@ -20,9 +20,8 @@ class DestinationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return destinations.isEmpty
         ? EmptyIndicator(
-            onRetry: () {
-              context.bloc<DestinationsCubit>().fetchDestinations();
-            },
+            message: 'Could not find any destination.',
+            onRetry: () => context.bloc<DestinationsCubit>().fetchDestinations(),
           )
         : ListView.builder(
             shrinkWrap: true,

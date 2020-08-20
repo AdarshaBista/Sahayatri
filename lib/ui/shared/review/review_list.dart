@@ -53,6 +53,7 @@ class ReviewList extends StatelessWidget {
                 return _buildList(state.reviews);
               } else if (state is ReviewEmpty) {
                 return EmptyIndicator(
+                  message: 'No reviews yet.',
                   onRetry: context.bloc<ReviewCubit>().fetchReviews,
                 );
               } else {
