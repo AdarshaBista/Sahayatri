@@ -59,7 +59,7 @@ class DistanceCoveredBar extends StatelessWidget {
         ),
         Text(
           label,
-          style: AppTextStyles.small,
+          style: AppTextStyles.extraSmall,
         ),
       ],
     );

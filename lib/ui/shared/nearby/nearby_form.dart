@@ -51,6 +51,7 @@ class NearbyForm extends StatelessWidget {
   Widget _buildList(BuildContext context) {
     return ListView(
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       physics: isOnSettings
           ? const BouncingScrollPhysics()
           : const NeverScrollableScrollPhysics(),

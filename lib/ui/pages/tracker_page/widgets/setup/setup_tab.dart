@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/shared/form/contact_form.dart';
 import 'package:sahayatri/ui/shared/nearby/nearby_form.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 
 class SetupTab extends StatelessWidget {
   const SetupTab();
@@ -9,12 +10,19 @@ class SetupTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       children: const [
-        ContactForm(isOnSettings: false),
-        Divider(height: 8.0),
-        NearbyForm(isOnSettings: false),
+        ElevatedCard(
+          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: ContactForm(isOnSettings: false),
+        ),
+        ElevatedCard(
+          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: NearbyForm(isOnSettings: false),
+        ),
       ],
     );
   }

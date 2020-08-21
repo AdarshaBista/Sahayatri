@@ -50,14 +50,6 @@ class _StopwatchTileState extends State<StopwatchTile> {
           _formatDuration(elapsed),
           style: AppTextStyles.large.bold,
         ),
-        const SizedBox(width: 8.0),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 3.0),
-          child: Text(
-            'elapsed',
-            style: AppTextStyles.small,
-          ),
-        ),
       ],
     );
   }

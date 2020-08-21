@@ -27,10 +27,10 @@ class NextCheckpointCard extends StatelessWidget {
 
     return nextCheckpoint != null
         ? FadeAnimator(
-            child: AspectRatio(
-              aspectRatio: 2.3,
-              child: GestureDetector(
-                onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: AspectRatio(
+                aspectRatio: 2.3,
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [

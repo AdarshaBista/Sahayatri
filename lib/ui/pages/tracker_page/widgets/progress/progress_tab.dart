@@ -9,8 +9,8 @@ class ProgressTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       children: const [
         TrackerStats(),
         SizedBox(height: 12.0),

@@ -25,7 +25,7 @@ class TrackerActions extends StatelessWidget {
               if (trackerUpdate.trackingState == TrackingState.paused)
                 Expanded(
                   child: _buildTile(
-                    label: 'RESUME',
+                    label: 'Resume',
                     color: AppColors.primaryDark,
                     icon: CommunityMaterialIcons.play_circle_outline,
                     onTap: () => context.repository<TrackerCubit>().resumeTracking(),
@@ -34,7 +34,7 @@ class TrackerActions extends StatelessWidget {
               if (trackerUpdate.trackingState == TrackingState.updating)
                 Expanded(
                   child: _buildTile(
-                    label: 'PAUSE',
+                    label: 'Pause',
                     color: Colors.blue,
                     icon: CommunityMaterialIcons.pause_circle_outline,
                     onTap: () => context.repository<TrackerCubit>().pauseTracking(),
@@ -42,7 +42,7 @@ class TrackerActions extends StatelessWidget {
                 ),
               Expanded(
                 child: _buildTile(
-                  label: 'STOP',
+                  label: 'Stop',
                   color: AppColors.secondary,
                   icon: CommunityMaterialIcons.stop_circle_outline,
                   onTap: () => ConfirmDialog(

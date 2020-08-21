@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
-class CustomCard extends StatelessWidget {
+class ElevatedCard extends StatelessWidget {
   final Widget child;
   final Color color;
+  final Color shadowColor;
   final double elevation;
   final double borderRadius;
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
 
-  const CustomCard({
+  const ElevatedCard({
     @required this.child,
-    this.color = AppColors.lightAccent,
+    this.color = AppColors.light,
+    this.shadowColor = AppColors.dark,
+    this.elevation = 6.0,
     this.borderRadius = 8.0,
-    this.elevation = 0.0,
-    this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
+    this.margin = const EdgeInsets.all(12.0),
   })  : assert(child != null),
         assert(color != null),
         assert(elevation != null),
@@ -26,18 +28,22 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: color,
+    return Container(
       margin: margin,
-      elevation: elevation,
-      borderOnForeground: false,
+      padding: padding,
       clipBehavior: Clip.antiAlias,
-      shadowColor: AppColors.dark.withOpacity(0.4),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
-      child: Padding(
-        padding: padding,
-        child: child,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(borderRadius),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 12.0,
+            spreadRadius: elevation,
+            color: shadowColor.withOpacity(0.12),
+          ),
+        ],
       ),
+      child: child,
     );
   }
 }
