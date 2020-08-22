@@ -72,7 +72,7 @@ class ReviewList extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: reviews.length,
-      separatorBuilder: (_, __) => const Divider(height: 8.0),
+      separatorBuilder: (_, __) => const Divider(height: 2.0),
       itemBuilder: (context, index) {
         return SlideAnimator(
           begin: Offset(0.0, 0.2 + index * 0.4),

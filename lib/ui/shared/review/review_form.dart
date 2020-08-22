@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
@@ -64,11 +65,29 @@ class _ReviewFormState extends State<ReviewForm> {
   }
 
   Widget _buildTextField() {
-    return CustomTextField(
-      label: 'Review',
-      initialValue: text,
-      onChanged: (value) => text = value,
-      validator: FormValidators.requiredText(),
+    const int kMaxLength = 500;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        CustomTextField(
+          label: 'Review',
+          initialValue: text,
+          onChanged: (value) => setState(() => text = value),
+          validator: FormValidators.requiredText(),
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(kMaxLength),
+          ],
+        ),
+        const SizedBox(height: 6.0),
+        Padding(
+          padding: const EdgeInsets.only(right: 4.0),
+          child: Text(
+            '${text.length} / $kMaxLength',
+            style: AppTextStyles.extraSmall,
+          ),
+        ),
+      ],
     );
   }
 

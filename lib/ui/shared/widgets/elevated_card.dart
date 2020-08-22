@@ -43,7 +43,10 @@ class ElevatedCard extends StatelessWidget {
           ),
         ],
       ),
-      child: child,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: child,
+      ),
     );
   }
 }
