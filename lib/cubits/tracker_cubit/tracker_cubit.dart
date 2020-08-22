@@ -8,7 +8,6 @@ import 'package:equatable/equatable.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
@@ -85,8 +84,7 @@ class TrackerCubit extends Cubit<TrackerState> {
 
     emit(const TrackerLoading());
     try {
-      final userLocation = await trackerService.getMockUserLocation(destination.route[0]);
-      // final userLocation = await trackerService.getUserLocation();
+      final userLocation = await trackerService.getUserLocation(destination.route.first);
       if (!trackerService.isNearTrail(userLocation.coord, destination.route)) {
         emit(const TrackerLocationError());
         return;
@@ -102,34 +100,22 @@ class TrackerCubit extends Cubit<TrackerState> {
     emit(const TrackerLoading());
     try {
       trackerService.start(destination);
-      trackerService.onCompleted = stopTracking;
 
       _trackerUpdateSub?.cancel();
-      _trackerUpdateSub = trackerService.userLocationStream.listen((userLocation) {
-        _updateTrackerData(userLocation, destination.route);
+      _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {
+        _updateTrackerData(trackerUpdate, destination.route);
       });
     } on Failure catch (e) {
       emit(TrackerError(message: e.message));
     }
   }
 
-  void _updateTrackerData(UserLocation userLocation, List<Coord> route) {
-    final nextCheckpoint = trackerService.nextCheckpoint(userLocation);
-    final userIndex = trackerService.userIndex(userLocation.coord);
-
+  void _updateTrackerData(TrackerUpdate trackerUpdate, List<Coord> route) {
+    final userLocation = trackerUpdate.currentLocation;
     nearbyService.broadcastLocation(userLocation);
     offRouteAlertService.alert(userLocation.coord, route);
-    smsService.send(userLocation.coord, nextCheckpoint?.checkpoint?.place);
+    smsService.send(userLocation.coord, trackerUpdate.nextCheckpoint?.checkpoint?.place);
 
-    emit(TrackerUpdating(
-      update: TrackerUpdate(
-        userIndex: userIndex,
-        userTrack: trackerService.userTrack,
-        elapsed: trackerService.elapsedDuration(),
-        nextCheckpoint: trackerService.nextCheckpoint(userLocation),
-        distanceCovered: trackerService.distanceCovered(userIndex),
-        distanceRemaining: trackerService.distanceRemaining(userIndex),
-      ),
-    ));
+    emit(TrackerUpdating(update: trackerUpdate));
   }
 }

@@ -18,6 +18,7 @@ class PlacesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       children: [
         const Header(title: 'Places'),
         BlocBuilder<PlacesCubit, PlacesState>(

@@ -16,7 +16,7 @@ class TrackerUpdate {
 
   UserLocation get currentLocation => userTrack.last;
 
-  TrackerUpdate({
+  const TrackerUpdate({
     @required this.elapsed,
     @required this.userIndex,
     @required this.userTrack,

@@ -30,7 +30,13 @@ class UserCubit extends Cubit<UserState> {
         super(const Unauthenticated());
 
   bool get isAuthenticated => state is Authenticated;
-  User get user => (state as Authenticated).user;
+  User get user {
+    try {
+      return (state as Authenticated).user;
+    } catch (_) {
+      return null;
+    }
+  }
 
   Future<bool> getUser() async {
     final user = await userDao.get();

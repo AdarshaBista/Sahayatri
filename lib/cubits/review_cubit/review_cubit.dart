@@ -16,8 +16,7 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   ReviewCubit({
     @required this.user,
     @required this.apiService,
-  })  : assert(user != null),
-        assert(apiService != null),
+  })  : assert(apiService != null),
         super(const ReviewEmpty());
 
   Future<void> fetchReviews();

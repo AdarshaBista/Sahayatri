@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
@@ -24,23 +23,20 @@ class TrackerService {
   final Stopwatch _stopwatch = Stopwatch();
 
   /// The [Destination] this service is currently tracking.
-  /// If destination is null, there is no tracking occuring.
   Destination _destination;
+
+  /// If destination is null, there is no tracking in progress.
   bool get isTracking => _destination != null;
 
-  /// Called when user completes the trail.
-  VoidCallback onCompleted;
-
-  /// Track coverrd by user.
+  /// Track covered by user.
   final Set<UserLocation> _userTrack = {};
-  List<UserLocation> get userTrack => _userTrack.toList();
 
-  /// Subscription to user location stream.
-  StreamSubscription _userLocationStreamSub;
+  /// Tracker update subscription.
+  StreamSubscription<TrackerUpdate> _trackerStreamSub;
 
-  /// Continuous location updates.
-  StreamController<UserLocation> _userLocationStreamController;
-  Stream<UserLocation> get userLocationStream => _userLocationStreamController.stream;
+  /// Continuous tracker updates.
+  StreamController<TrackerUpdate> _trackerStreamController;
+  Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
 
   TrackerService({
     @required this.locationService,
@@ -48,35 +44,41 @@ class TrackerService {
 
   /// Start the tracking process for a [destination].
   void start(Destination destination) {
-    /// If [_destination] is not null, tacking is already in progress.
-    if (_destination != null) {
+    if (isTracking) {
       if (destination.id != _destination.id) {
         throw const Failure(
-          message: 'Tracking is already occuring for another destination.',
+          message: 'Tracking is already in progress for another destination.',
         );
       }
-
       // Ensures tracking is resumed when starting from paused state.
       resume();
       return;
     }
 
+    _destination = destination;
     _stopwatch.reset();
     _stopwatch.start();
-    _destination = destination;
+    _initTrackerStream();
+  }
 
-    _userLocationStreamController = StreamController<UserLocation>.broadcast();
-    _userLocationStreamSub = _getMockUserLocationStream().listen((userLocation) {
-      _userLocationStreamController.add(userLocation);
-      _userTrack.add(userLocation);
+  void _initTrackerStream() {
+    _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
+    _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
+      (userLocation) {
+        _userTrack.add(userLocation);
+        final index = _userIndex(userLocation.coord);
+        return TrackerUpdate(
+          userIndex: index,
+          elapsed: elapsedDuration(),
+          userTrack: _userTrack.toList(),
+          nextCheckpoint: _nextCheckpoint(userLocation),
+          distanceCovered: _distanceCovered(index),
+          distanceRemaining: _distanceRemaining(index),
+        );
+      },
+    ).listen((trackerUpdate) {
+      _trackerStreamController.add(trackerUpdate);
     });
-    // _userLocationStreamSub = locationService.getLocationStream().listen((userLocation) {
-    //   _userLocationStreamController.add(userLocation);
-    //   _userTrack.add(userLocation);
-    // });
-
-    /// Call [onCompleted] when user finishes trail.
-    _userLocationStreamSub.onDone(() => onCompleted());
   }
 
   /// Stop the tracking process and reset fields.
@@ -86,66 +88,29 @@ class TrackerService {
     _destination = null;
     _stopwatch?.stop();
     _userTrack?.clear();
-    _userLocationStreamSub?.cancel();
-    _userLocationStreamController?.close();
+    _trackerStreamSub?.cancel();
+    _trackerStreamController?.close();
   }
 
   /// Pause the tracking process
   void pause() {
     _stopwatch.stop();
-    _userLocationStreamSub.pause();
+    _trackerStreamSub?.pause();
   }
 
   /// Resume the tracking process
   void resume() {
     _stopwatch.start();
-    _userLocationStreamSub.resume();
+    _trackerStreamSub?.resume();
   }
 
   /// Get user location to determine wheather tracking can be started.
-  Future<UserLocation> getUserLocation() async {
+  Future<UserLocation> getUserLocation(Coord startingCoord) async {
     try {
-      return await locationService.getLocation();
+      return await locationService.getMockLocation(startingCoord);
     } on Failure {
       rethrow;
     }
-  }
-
-  // TODO: Remove this
-  Future<UserLocation> getMockUserLocation(Coord fakeStartingPoint) async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    return UserLocation(
-      coord: fakeStartingPoint,
-      accuracy: 15.0,
-      altitude: 2000.0,
-      speed: 1.0,
-      bearing: 0.0,
-      timestamp: DateTime.now(),
-    );
-  }
-
-  // TODO: Remove this
-  Stream<UserLocation> _getMockUserLocationStream() {
-    final period = math.Random().nextInt(500) + 500;
-    return Stream<UserLocation>.periodic(
-      Duration(milliseconds: period),
-      (index) => UserLocation(
-        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
-        altitude: 2000.0 + _randomOffset(-50.0, 50.0),
-        speed: 1.0 + _randomOffset(-1.0, 1.0),
-        bearing: _randomOffset(0.0, 360.0),
-        timestamp: DateTime.now(),
-        coord: Coord(
-          lat: _destination.route[index].lat,
-          lng: _destination.route[index].lng + _randomOffset(-0.00005, 0.00005),
-        ),
-      ),
-    ).take(_destination.route.length).asBroadcastStream();
-  }
-
-  // TODO: Remove this
-  double _randomOffset(double start, double end) {
-    return math.Random().nextDouble() * (end - start) + start;
   }
 
   /// Check if user is near the trail.
@@ -159,17 +124,17 @@ class TrackerService {
     return _stopwatch.elapsed;
   }
 
-  int userIndex(Coord userCoord) {
+  int _userIndex(Coord userCoord) {
     return GeoUtils.indexOnPath(userCoord, _destination.route);
   }
 
   /// Distance covered by the user in metres.
-  double distanceCovered(int userIndex) {
+  double _distanceCovered(int userIndex) {
     return GeoUtils.distanceBetweenIndices(_destination.route, end: userIndex);
   }
 
   /// Remaining distance on the route.
-  double distanceRemaining(int userIndex) {
+  double _distanceRemaining(int userIndex) {
     return GeoUtils.distanceBetweenIndices(
       _destination.route,
       start: userIndex,
@@ -178,7 +143,7 @@ class TrackerService {
   }
 
   /// [NextCheckpoint] the user is approaching along the route.
-  NextCheckpoint nextCheckpoint(UserLocation userLocation) {
+  NextCheckpoint _nextCheckpoint(UserLocation userLocation) {
     Checkpoint nextCheckpoint;
     int userIndex, placeIndex;
 

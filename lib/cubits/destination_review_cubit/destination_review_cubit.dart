@@ -16,8 +16,7 @@ class DestinationReviewCubit extends ReviewCubit {
     @required this.destination,
     @required User user,
     @required ApiService apiService,
-  })  : assert(user != null),
-        assert(apiService != null),
+  })  : assert(apiService != null),
         assert(destination != null),
         super(user: user, apiService: apiService);
 
@@ -44,6 +43,8 @@ class DestinationReviewCubit extends ReviewCubit {
 
   @override
   Future<bool> postReview(double rating, String text) async {
+    if (user == null) return false;
+
     try {
       final id = await apiService.postDestinationReview(
         rating,
