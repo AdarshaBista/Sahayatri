@@ -42,7 +42,6 @@ class CheckpointForm extends StatelessWidget {
                 children: [
                   Text(
                     checkpoint == null ? 'Create a Checkpoint' : 'Edit this checkpoint',
-                    textAlign: TextAlign.center,
                     style: AppTextStyles.medium.bold,
                   ),
                   const Divider(height: 24.0),

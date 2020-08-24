@@ -18,7 +18,6 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
-import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
@@ -52,23 +51,12 @@ class DestinationRouter {
         break;
 
       case Routes.kDestinationDetailPageRoute:
-        _page = MultiBlocProvider(
-          providers: [
-            BlocProvider<PlacesCubit>(
-              create: (context) => PlacesCubit(
-                user: context.bloc<UserCubit>().user,
-                apiService: context.repository<ApiService>(),
-                destination: context.bloc<DestinationCubit>().destination,
-              )..fetchPlaces(),
-            ),
-            BlocProvider<ItineraryCubit>(
-              create: (context) => ItineraryCubit(
-                user: context.bloc<UserCubit>().user,
-                apiService: context.repository<ApiService>(),
-                destination: context.bloc<DestinationCubit>().destination,
-              )..fetchItineraries(),
-            ),
-          ],
+        _page = BlocProvider<ItineraryCubit>(
+          create: (context) => ItineraryCubit(
+            user: context.bloc<UserCubit>().user,
+            apiService: context.repository<ApiService>(),
+            destination: context.bloc<DestinationCubit>().destination,
+          )..fetchItineraries(),
           child: const DestinationDetailPage(),
         );
         break;

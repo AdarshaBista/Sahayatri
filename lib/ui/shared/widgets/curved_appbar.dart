@@ -22,7 +22,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
         assert(elevation != null);
 
   @override
-  Size get preferredSize => const Size.fromHeight(44.0);
+  Size get preferredSize => const Size.fromHeight(40.0);
 
   @override
   Widget build(BuildContext context) {

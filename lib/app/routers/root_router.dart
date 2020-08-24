@@ -11,6 +11,7 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
+import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
@@ -60,6 +61,13 @@ class RootRouter {
                 apiService: context.repository<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchReviews(),
+            ),
+            BlocProvider<PlacesCubit>(
+              create: (context) => PlacesCubit(
+                user: context.bloc<UserCubit>().user,
+                apiService: context.repository<ApiService>(),
+                destination: context.bloc<DestinationCubit>().destination,
+              )..fetchPlaces(),
             ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(

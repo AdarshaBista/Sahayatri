@@ -44,7 +44,7 @@ class DestinationPage extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: [
-          _buildCarousel(destination),
+          Carousel(imageUrls: destination.imageUrls),
           const SizedBox(height: 16.0),
           const RatingTile(),
           const SizedBox(height: 8.0),
@@ -63,13 +63,6 @@ class DestinationPage extends StatelessWidget {
           _buildTabView(context, destination),
         ],
       ),
-    );
-  }
-
-  Hero _buildCarousel(Destination destination) {
-    return Hero(
-      tag: destination.id.toString(),
-      child: Carousel(imageUrls: destination.imageUrls),
     );
   }
 
