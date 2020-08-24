@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
@@ -28,13 +28,13 @@ class SearchBox extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 16.0),
           width: double.infinity,
           height: 50.0,
-          child: CustomCard(
+          child: ElevatedCard(
             elevation: elevation,
             child: TextField(
               onChanged: onChanged,
               style: AppTextStyles.small,
               decoration: InputDecoration(
-                fillColor: AppColors.lightAccent,
+                fillColor: AppColors.light,
                 border: InputBorder.none,
                 hintText: hintText,
                 prefixIcon: const ScaleAnimator(

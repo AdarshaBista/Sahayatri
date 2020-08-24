@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stopwatch_tile.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_actions.dart';
@@ -12,9 +11,8 @@ class TrackerStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: ElevatedCard(
-        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-        padding: const EdgeInsets.all(16.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [

@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
@@ -52,8 +52,8 @@ class NextCheckpointCard extends StatelessWidget {
   Widget _buildBackground(BuildContext context) {
     final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
 
-    return CustomCard(
-      elevation: 6.0,
+    return ElevatedCard(
+      elevation: 8.0,
       child: Hero(
         tag: place.id,
         child: GradientContainer(

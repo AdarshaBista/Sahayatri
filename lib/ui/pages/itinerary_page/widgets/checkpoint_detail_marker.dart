@@ -16,14 +16,13 @@ class CheckpointDetailMarker extends Marker {
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
-          width: 220,
-          height: 80,
+          width: 200,
+          height: 64,
           anchorPos: AnchorPos.align(AnchorAlign.center),
           point: checkpoint.place.coord.toLatLng(),
           builder: (_) => Hero(
             tag: checkpoint.place.id,
             child: ElevatedCard(
-              elevation: 4.0,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

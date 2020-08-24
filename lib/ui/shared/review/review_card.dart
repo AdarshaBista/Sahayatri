@@ -97,33 +97,26 @@ class _ReviewCardState extends State<ReviewCard> {
   }
 
   Widget _buildUserAvatar() {
-    return widget.review.user.imageUrl != null
-        ? Container(
-            width: 72.0,
-            height: 72.0,
-            child: ElevatedCard(
-              elevation: 4.0,
-              child: Image.network(
+    return Container(
+      width: 72.0,
+      height: 72.0,
+      child: ElevatedCard(
+        margin: const EdgeInsets.all(12.0),
+        color: AppColors.primary.withOpacity(0.4),
+        child: widget.review.user.imageUrl != null
+            ? Image.network(
                 widget.review.user.imageUrl,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
-              ),
-            ),
-          )
-        : Container(
-            width: 72.0,
-            height: 72.0,
-            child: ElevatedCard(
-              elevation: 4.0,
-              color: AppColors.primary.withOpacity(0.4),
-              child: Center(
+              )
+            : Center(
                 child: Text(
                   widget.review.user.name[0],
                   style: AppTextStyles.large.withColor(AppColors.primaryDark),
                 ),
               ),
-            ),
-          );
+      ),
+    );
   }
 }

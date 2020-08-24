@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 
 class ImageCard extends StatelessWidget {
   final String imageUrl;
@@ -13,7 +13,7 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
+    return ElevatedCard(
       margin: margin,
       child: Image.network(
         imageUrl,

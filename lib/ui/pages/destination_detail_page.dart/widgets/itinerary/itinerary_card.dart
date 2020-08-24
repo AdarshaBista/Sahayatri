@@ -11,8 +11,8 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
@@ -34,7 +34,7 @@ class ItineraryCard extends StatelessWidget {
           .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
       child: Container(
         height: 100.0,
-        child: CustomCard(
+        child: ElevatedCard(
           margin: const EdgeInsets.symmetric(vertical: 6.0),
           child: Stack(
             children: [

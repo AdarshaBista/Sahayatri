@@ -8,7 +8,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
@@ -28,7 +28,7 @@ class LodgeCard extends StatelessWidget {
               arguments: lodge,
             );
       },
-      child: CustomCard(
+      child: ElevatedCard(
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[

@@ -36,7 +36,7 @@ class DistanceCoveredBar extends StatelessWidget {
               onChanged: (_) {},
             ),
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 10.0),
           Row(
             children: [
               _buildStat(trackerUpdate.distanceCovered, 'covered', true),
@@ -57,6 +57,7 @@ class DistanceCoveredBar extends StatelessWidget {
           '${stat.toStringAsFixed(0)} m',
           style: AppTextStyles.medium.bold,
         ),
+        const SizedBox(height: 2.0),
         Text(
           label,
           style: AppTextStyles.extraSmall,

@@ -8,7 +8,7 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
 class PlaceCard extends StatelessWidget {
@@ -27,7 +27,7 @@ class PlaceCard extends StatelessWidget {
               arguments: place,
             );
       },
-      child: CustomCard(
+      child: ElevatedCard(
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[
