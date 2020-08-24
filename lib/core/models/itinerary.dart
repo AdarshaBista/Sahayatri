@@ -56,7 +56,8 @@ class Itinerary {
       days: map['days'] as String,
       nights: map['nights'] as String,
       checkpoints: List<Checkpoint>.from((map['checkpoints'] as List<dynamic>)
-          ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>))),
+          ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>)))
+        ..sort((c1, c2) => c1.day.compareTo(c2.day)),
     );
   }
 
