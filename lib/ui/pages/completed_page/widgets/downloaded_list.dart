@@ -26,7 +26,7 @@ class DownloadedList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              const Header(title: 'Downloaded'),
+              const Header(leftPadding: 12.0, boldTitle: 'Downloaded'),
               const SizedBox(height: 8.0),
               _buildList(),
             ],

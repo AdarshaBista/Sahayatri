@@ -15,10 +15,10 @@ class ElevatedCard extends StatelessWidget {
     @required this.child,
     this.color = AppColors.light,
     this.shadowColor = AppColors.dark,
-    this.elevation = 6.0,
-    this.borderRadius = 8.0,
+    this.elevation = 4.0,
+    this.borderRadius = 10.0,
+    this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
-    this.margin = const EdgeInsets.all(12.0),
   })  : assert(child != null),
         assert(color != null),
         assert(elevation != null),
@@ -31,7 +31,6 @@ class ElevatedCard extends StatelessWidget {
     return Container(
       margin: margin,
       padding: padding,
-      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(borderRadius),

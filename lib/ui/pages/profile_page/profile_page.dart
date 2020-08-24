@@ -12,8 +12,8 @@ import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/profile_header.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/downloaded_list.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/settings/settings_list.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage();
@@ -60,8 +60,7 @@ class ProfilePage extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: const [
         ProfileHeader(),
-        SizedBox(height: 8.0),
-        DownloadedList(),
+        SettingsList(),
       ],
     );
   }

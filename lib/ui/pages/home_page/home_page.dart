@@ -9,7 +9,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
-import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
+import 'package:sahayatri/ui/pages/completed_page/completed_page.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,16 +41,14 @@ class _HomePageState extends State<HomePage> {
             CommunityMaterialIcons.map_marker_circle,
             CommunityMaterialIcons.check_circle_outline,
             CommunityMaterialIcons.account_circle_outline,
-            CommunityMaterialIcons.cog_outline,
           ],
         ),
         body: IndexedStack(
           index: _selectedIndex,
           children: const [
             DestinationsPage(),
-            Offstage(),
+            CompletedPage(),
             ProfilePage(),
-            SettingsPage(),
           ],
         ),
       ),
