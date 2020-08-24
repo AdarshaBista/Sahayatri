@@ -8,7 +8,15 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/prefs.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/lodge.dart';
+import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
@@ -19,6 +27,7 @@ import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
+import 'package:sahayatri/app/database/destination_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,7 +65,15 @@ Future<void> initHive() async {
     ..init(hivePath)
     ..registerAdapter(UserAdapter())
     ..registerAdapter(PrefsAdapter())
-    ..registerAdapter(WeatherAdapter());
+    ..registerAdapter(CoordAdapter())
+    ..registerAdapter(LodgeAdapter())
+    ..registerAdapter(PlaceAdapter())
+    ..registerAdapter(ReviewAdapter())
+    ..registerAdapter(WeatherAdapter())
+    ..registerAdapter(ItineraryAdapter())
+    ..registerAdapter(CheckpointAdapter())
+    ..registerAdapter(DestinationAdapter())
+    ..registerAdapter(LodgeFacilityAdapter());
 }
 
 class App extends StatelessWidget {
@@ -83,6 +100,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
+          RepositoryProvider(create: (_) => DestinationDao()),
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => NotificationService()),
         ],

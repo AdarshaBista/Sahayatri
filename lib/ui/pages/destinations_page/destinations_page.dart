@@ -10,7 +10,7 @@ import 'package:sahayatri/ui/shared/widgets/search_box.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/pages/destinations_page/widgets/destinations_list.dart';
+import 'package:sahayatri/ui/shared/destinations/destinations_list.dart';
 
 class DestinationsPage extends StatefulWidget {
   const DestinationsPage();

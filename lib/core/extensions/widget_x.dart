@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 extension WidgetX on Widget {
-  void openDialog(BuildContext context) {
+  void openDialog(BuildContext context, {bool barrierDismissible = true}) {
     showDialog(
       context: context,
       useSafeArea: true,
       useRootNavigator: false,
-      barrierDismissible: true,
       barrierColor: AppColors.barrier,
+      barrierDismissible: barrierDismissible,
       builder: (_) => this,
     );
   }

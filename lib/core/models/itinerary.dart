@@ -1,11 +1,25 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'itinerary.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kItinerary)
 class Itinerary {
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   final String days;
+
+  @HiveField(2)
   final String nights;
+
+  @HiveField(3)
   final List<Checkpoint> checkpoints;
 
   bool get isTemplate => checkpoints.any((c) => c.isTemplate);

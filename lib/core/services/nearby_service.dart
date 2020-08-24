@@ -44,8 +44,13 @@ class NearbyService {
     _username = name;
 
     try {
-      if (!await Nearby().checkLocationPermission()) Nearby().askLocationPermission();
-      if (!await Nearby().checkLocationEnabled()) Nearby().enableLocationServices();
+      if (!await Nearby().checkLocationPermission()) {
+        await Nearby().askLocationPermission();
+      }
+      if (!await Nearby().checkLocationEnabled()) {
+        await Nearby().enableLocationServices();
+      }
+
       await startScanning();
     } on Failure {
       rethrow;

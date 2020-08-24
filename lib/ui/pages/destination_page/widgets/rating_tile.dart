@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
@@ -14,6 +16,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/column_button.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
 
 class RatingTile extends StatelessWidget {
   const RatingTile();
@@ -74,10 +77,15 @@ class RatingTile extends StatelessWidget {
   }
 
   Widget _buildDownloadButton(BuildContext context) {
+    final destination = context.bloc<DestinationCubit>().destination;
+
     return ColumnButton(
       label: 'Download',
       icon: CommunityMaterialIcons.cloud_download_outline,
-      onTap: () {},
+      onTap: () {
+        context.bloc<DownloadCubit>().startDownload(destination);
+        const DownloadDialog().openDialog(context, barrierDismissible: false);
+      },
     );
   }
 }

@@ -12,8 +12,7 @@ part 'destinations_state.dart';
 
 class DestinationsCubit extends Cubit<DestinationsState> {
   final ApiService apiService;
-
-  List<Destination> _destinations;
+  List<Destination> _destinations = [];
 
   DestinationsCubit({
     @required this.apiService,

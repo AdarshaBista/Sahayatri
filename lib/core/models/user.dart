@@ -2,9 +2,11 @@ import 'package:meta/meta.dart';
 
 import 'package:hive/hive.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
 part 'user.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: HiveTypeIds.kUser)
 class User {
   @HiveField(0)
   final String id;

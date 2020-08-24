@@ -1,10 +1,11 @@
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'prefs.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: HiveTypeIds.kPrefs)
 class Prefs {
   @HiveField(0)
   final String contact;

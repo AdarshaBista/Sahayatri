@@ -8,8 +8,8 @@ import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
 
-import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
+import 'package:sahayatri/ui/pages/settings_page/settings_page.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
 class HomePage extends StatefulWidget {

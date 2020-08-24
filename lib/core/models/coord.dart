@@ -1,10 +1,22 @@
 import 'package:meta/meta.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:latlong/latlong.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'coord.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kCoord)
 class Coord {
+  @HiveField(0)
   final double lat;
+
+  @HiveField(1)
   final double lng;
+
+  @HiveField(2)
   final double alt;
 
   const Coord({

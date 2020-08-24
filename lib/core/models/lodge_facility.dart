@@ -1,6 +1,18 @@
+import 'package:hive/hive.dart';
+
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'lodge_facility.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kLodgeFacility)
 class LodgeFacility {
+  @HiveField(0)
   final bool wifi;
+
+  @HiveField(1)
   final bool toilet;
+
+  @HiveField(2)
   final bool shower;
 
   bool get isEmpty => !wifi && !toilet && !shower;

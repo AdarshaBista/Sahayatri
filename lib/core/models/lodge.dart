@@ -1,19 +1,41 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'lodge.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kLodge)
 class Lodge {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final Coord coord;
+
+  @HiveField(3)
   final double rating;
+
+  @HiveField(4)
   final LodgeFacility facility;
+
+  @HiveField(5)
   final List<String> imageUrls;
+
+  @HiveField(6)
   final List<String> contactNumbers;
+
+  @HiveField(7)
   List<Review> reviews;
 
   Lodge({

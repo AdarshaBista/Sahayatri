@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/pages/destinations_page/widgets/destination_card.dart';
+import 'package:sahayatri/ui/shared/destinations/destination_card.dart';
 
 class DestinationsList extends StatelessWidget {
   final List<Destination> destinations;
@@ -20,7 +20,7 @@ class DestinationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return destinations.isEmpty
         ? EmptyIndicator(
-            message: 'Could not find any destination.',
+            message: 'No destinations found',
             onRetry: () => context.bloc<DestinationsCubit>().fetchDestinations(),
           )
         : ListView.builder(

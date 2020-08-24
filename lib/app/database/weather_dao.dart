@@ -2,10 +2,11 @@ import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/weather.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
 class WeatherDao {
   static const String kWeatherBoxName = 'weather_box';
-
-  final Future<Box<List>> _weatherBox = Hive.openBox(kWeatherBoxName);
+  final Future<Box<List>> _weatherBox = Hive.openBox(HiveConfig.kWeatherBoxName);
 
   Future<List<Weather>> get(String key) async {
     final box = await _weatherBox;

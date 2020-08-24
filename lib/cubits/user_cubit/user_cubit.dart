@@ -53,7 +53,7 @@ class UserCubit extends Cubit<UserState> {
     final newUrl = await apiService.updateUserAvatar(user, pickedImage.path);
     if (newUrl != null) {
       final updatedUser = user.copyWith(imageUrl: newUrl);
-      await userDao.save(updatedUser);
+      await userDao.upsert(updatedUser);
       emit(Authenticated(user: updatedUser));
     }
     return newUrl != null;
@@ -63,7 +63,7 @@ class UserCubit extends Cubit<UserState> {
     emit(const AuthLoading());
     try {
       final user = await authService.login(email, password);
-      await userDao.save(user);
+      await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
     } on Failure catch (e) {
@@ -77,7 +77,7 @@ class UserCubit extends Cubit<UserState> {
     emit(const AuthLoading());
     try {
       final user = await authService.signUp(username, email, password);
-      await userDao.save(user);
+      await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
     } on Failure catch (e) {
@@ -92,7 +92,7 @@ class UserCubit extends Cubit<UserState> {
     emit(const AuthLoading());
     try {
       await authService.logout(user);
-      await userDao.remove(user);
+      await userDao.delete(user);
       emit(const Unauthenticated());
     } on Failure catch (e) {
       emit(AuthError(message: e.message));

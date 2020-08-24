@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/review.dart';
@@ -8,22 +10,58 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'destination.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kDestination)
 class Destination {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String permit;
+
+  @HiveField(3)
   final String length;
+
+  @HiveField(4)
   final double rating;
+
+  @HiveField(5)
   final String description;
+
+  @HiveField(6)
   final String maxAltitude;
+
+  @HiveField(7)
   final String estimatedDuration;
+
+  @HiveField(8)
   final List<Coord> route;
+
+  @HiveField(9)
   final List<String> imageUrls;
+
+  @HiveField(10)
   final List<String> bestMonths;
+
+  @HiveField(11)
   bool isDownloaded;
+
+  @HiveField(12)
   Itinerary createdItinerary;
+
+  @HiveField(13)
   List<Place> places;
+
+  @HiveField(14)
   List<Review> reviews;
+
+  @HiveField(15)
   List<Itinerary> suggestedItineraries;
 
   double get minLat => route.minLat;

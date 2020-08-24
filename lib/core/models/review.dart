@@ -1,11 +1,25 @@
 import 'package:meta/meta.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'review.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kReview)
 class Review {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final User user;
+
+  @HiveField(2)
   final String text;
+
+  @HiveField(3)
   final double rating;
 
   const Review({

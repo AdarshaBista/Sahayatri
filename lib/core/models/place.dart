@@ -1,17 +1,37 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:hive/hive.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'place.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kPlace)
 class Place {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final Coord coord;
+
+  @HiveField(3)
   final String description;
+
+  @HiveField(4)
   final bool isNetworkAvailable;
+
+  @HiveField(5)
   final List<String> imageUrls;
+
+  @HiveField(6)
   final List<Lodge> lodges;
 
   Place({

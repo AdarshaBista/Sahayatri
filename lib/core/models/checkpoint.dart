@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 
+import 'package:sahayatri/app/constants/hive_config.dart';
+
+part 'checkpoint.g.dart';
+
+@HiveType(typeId: HiveTypeIds.kCheckpoint)
 class Checkpoint {
+  @HiveField(0)
   final Place place;
+
+  @HiveField(1)
   final String description;
+
+  @HiveField(2)
   final DateTime dateTime;
+
+  @HiveField(3)
   final int day;
 
   bool get isTemplate => dateTime == null;

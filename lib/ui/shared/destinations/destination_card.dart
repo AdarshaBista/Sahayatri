@@ -49,24 +49,21 @@ class DestinationCard extends StatelessWidget {
   }
 
   Widget _buildBackground() {
-    return Hero(
-      tag: destination.id.toString(),
-      child: CustomCard(
-        child: GradientContainer(
-          gradientEnd: Alignment.topRight,
-          gradientBegin: Alignment.bottomCenter,
-          gradientColors: [
-            AppColors.dark.withOpacity(0.7),
-            AppColors.dark.withOpacity(0.5),
-            AppColors.dark.withOpacity(0.2),
-            Colors.transparent,
-          ],
-          child: Image.network(
-            destination.imageUrls.first,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+    return CustomCard(
+      child: GradientContainer(
+        gradientEnd: Alignment.topRight,
+        gradientBegin: Alignment.bottomCenter,
+        gradientColors: [
+          AppColors.dark.withOpacity(0.7),
+          AppColors.dark.withOpacity(0.5),
+          AppColors.dark.withOpacity(0.2),
+          Colors.transparent,
+        ],
+        child: Image.network(
+          destination.imageUrls.first,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
         ),
       ),
     );

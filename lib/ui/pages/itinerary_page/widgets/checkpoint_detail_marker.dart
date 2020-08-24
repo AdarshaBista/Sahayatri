@@ -9,22 +9,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
-          width: 200,
-          height: 64,
-          anchorPos: AnchorPos.align(AnchorAlign.top),
+          width: 220,
+          height: 80,
+          anchorPos: AnchorPos.align(AnchorAlign.center),
           point: checkpoint.place.coord.toLatLng(),
           builder: (_) => Hero(
             tag: checkpoint.place.id,
-            child: CustomCard(
-              elevation: 8.0,
-              color: AppColors.light,
+            child: ElevatedCard(
+              elevation: 4.0,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

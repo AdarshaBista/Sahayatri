@@ -102,6 +102,7 @@ class _ReviewCardState extends State<ReviewCard> {
             width: 72.0,
             height: 72.0,
             child: ElevatedCard(
+              elevation: 4.0,
               child: Image.network(
                 widget.review.user.imageUrl,
                 fit: BoxFit.cover,
@@ -114,10 +115,13 @@ class _ReviewCardState extends State<ReviewCard> {
             width: 72.0,
             height: 72.0,
             child: ElevatedCard(
+              elevation: 4.0,
               color: AppColors.primary.withOpacity(0.4),
-              child: Text(
-                widget.review.user.name[0],
-                style: AppTextStyles.medium.withColor(AppColors.primaryDark),
+              child: Center(
+                child: Text(
+                  widget.review.user.name[0],
+                  style: AppTextStyles.large.withColor(AppColors.primaryDark),
+                ),
               ),
             ),
           );
