@@ -71,7 +71,7 @@ class _NestedTabViewState extends State<NestedTabView>
   }
 
   Widget _buildTabBar(BuildContext context) {
-    final height = widget.isTabFilled ? 38.0 : 34.0;
+    final height = widget.isTabFilled ? 36.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
     final color = widget.isTabFilled ? AppColors.light : Colors.transparent;
     final padding = widget.isTabFilled ? const EdgeInsets.all(2.0) : EdgeInsets.zero;
@@ -142,10 +142,10 @@ class NestedTab extends StatelessWidget {
           children: [
             Icon(
               tab.icon,
-              size: 20.0,
+              size: 18.0,
               color: color,
             ),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 6.0),
             AnimatedDefaultTextStyle(
               child: Text(tab.label),
               duration: const Duration(milliseconds: 200),

@@ -29,7 +29,7 @@ class AppTextStyles {
   );
 
   static final TextStyle medium = _base.copyWith(
-    fontSize: 16.0,
+    fontSize: 17.0,
     fontWeight: FontWeight.w400,
   );
 
@@ -40,7 +40,7 @@ class AppTextStyles {
   );
 
   static final TextStyle extraSmall = _base.copyWith(
-    fontSize: 10.0,
+    fontSize: 11.0,
     color: AppColors.barrier,
     fontWeight: FontWeight.w200,
   );

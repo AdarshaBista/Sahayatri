@@ -68,17 +68,29 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _buildList(List<Review> reviews) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: reviews.length,
-      separatorBuilder: (_, __) => const Divider(height: 2.0),
-      itemBuilder: (context, index) {
-        return SlideAnimator(
-          begin: Offset(0.0, 0.2 + index * 0.4),
-          child: ReviewCard(review: reviews[index]),
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: Text(
+            '${reviews.length} reviews',
+            style: AppTextStyles.small.primary,
+          ),
+        ),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: reviews.length,
+          separatorBuilder: (_, __) => const Divider(height: 2.0),
+          itemBuilder: (context, index) {
+            return SlideAnimator(
+              begin: Offset(0.0, 0.2 + index * 0.4),
+              child: ReviewCard(review: reviews[index]),
+            );
+          },
+        ),
+      ],
     );
   }
 

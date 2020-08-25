@@ -53,8 +53,8 @@ class LodgePage extends StatelessWidget {
   Widget _buildTabView(BuildContext context, Lodge lodge) {
     return NestedTabView(
       tabs: [
-        NestedTabData(label: 'Photos', icon: Icons.photo),
-        NestedTabData(label: 'Reviews', icon: Icons.rate_review),
+        NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
+        NestedTabData(label: 'Reviews', icon: Icons.star_outline),
       ],
       children: [
         PhotoGallery(imageUrls: lodge.imageUrls),

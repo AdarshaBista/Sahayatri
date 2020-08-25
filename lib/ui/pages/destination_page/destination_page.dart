@@ -60,6 +60,7 @@ class DestinationPage extends StatelessWidget {
           const SizedBox(height: 16.0),
           const BestMonthsChips(),
           const SizedBox(height: 8.0),
+          const Divider(height: 8.0),
           _buildTabView(context, destination),
         ],
       ),
@@ -82,8 +83,8 @@ class DestinationPage extends StatelessWidget {
   Widget _buildTabView(BuildContext context, Destination destination) {
     return NestedTabView(
       tabs: [
-        NestedTabData(label: 'Photos', icon: Icons.photo),
-        NestedTabData(label: 'Reviews', icon: Icons.rate_review),
+        NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
+        NestedTabData(label: 'Reviews', icon: Icons.star_outline)
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),

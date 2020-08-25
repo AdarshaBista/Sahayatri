@@ -15,7 +15,7 @@ class ElevatedCard extends StatelessWidget {
     @required this.child,
     this.color = AppColors.light,
     this.shadowColor = AppColors.dark,
-    this.elevation = 4.0,
+    this.elevation = 2.0,
     this.borderRadius = 10.0,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
