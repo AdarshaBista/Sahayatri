@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 
+import 'package:sahayatri/app/database/destination_dao.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
+import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
@@ -24,10 +27,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DestinationsCubit>(
-      create: (context) => DestinationsCubit(
-        apiService: context.repository<ApiService>(),
-      )..fetchDestinations(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DestinationsCubit>(
+          create: (context) => DestinationsCubit(
+            apiService: context.repository<ApiService>(),
+          )..fetchDestinations(),
+        ),
+        BlocProvider<DownloadedDestinationsCubit>(
+          create: (context) => DownloadedDestinationsCubit(
+            destinationDao: context.repository<DestinationDao>(),
+          )..getDestinations(),
+        ),
+      ],
       child: Scaffold(
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomNavBar(

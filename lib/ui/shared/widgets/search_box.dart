@@ -29,7 +29,7 @@ class SearchBox extends StatelessWidget {
           width: double.infinity,
           height: 50.0,
           child: ElevatedCard(
-            elevation: elevation,
+            elevation: elevation + 2.0,
             child: TextField(
               onChanged: onChanged,
               style: AppTextStyles.small,

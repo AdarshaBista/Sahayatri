@@ -23,5 +23,12 @@ class DownloadInProgress extends DownloadState {
 }
 
 class DownloadCompleted extends DownloadState {
-  const DownloadCompleted();
+  final String message;
+
+  const DownloadCompleted({
+    @required this.message,
+  }) : assert(message != null);
+
+  @override
+  List<Object> get props => [message];
 }

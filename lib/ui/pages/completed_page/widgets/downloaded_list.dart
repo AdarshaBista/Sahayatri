@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/database/destination_dao.dart';
+import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
@@ -16,28 +16,24 @@ class DownloadedList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DownloadedDestinationsCubit>(
-      create: (context) => DownloadedDestinationsCubit(
-        destinationDao: context.repository<DestinationDao>(),
-      )..getDestinations(),
-      child: Builder(
-        builder: (context) {
-          return ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const Header(leftPadding: 12.0, boldTitle: 'Downloaded'),
-              const SizedBox(height: 8.0),
-              _buildList(),
-            ],
-          );
-        },
-      ),
+    return ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        const Header(leftPadding: 12.0, boldTitle: 'Downloaded'),
+        const SizedBox(height: 8.0),
+        _buildList(),
+      ],
     );
   }
 
   Widget _buildList() {
-    return BlocBuilder<DownloadedDestinationsCubit, DownloadedDestinationsState>(
+    return BlocConsumer<DownloadedDestinationsCubit, DownloadedDestinationsState>(
+      listener: (context, state) {
+        if (state is DownloadedDestinationsMessage) {
+          context.openSnackBar(state.message);
+        }
+      },
       builder: (context, state) {
         if (state is DownloadedDestinationsError) {
           return ErrorIndicator(
@@ -47,7 +43,10 @@ class DownloadedList extends StatelessWidget {
         } else if (state is DownloadedDestinationsLoading) {
           return const BusyIndicator();
         } else if (state is DownloadedDestinationsLoaded) {
-          return DestinationsList(destinations: state.destinations);
+          return DestinationsList(
+            destinations: state.destinations,
+            onRefresh: context.bloc<DownloadedDestinationsCubit>().getDestinations,
+          );
         } else {
           return EmptyIndicator(
             message: 'No downloaded destinations!',

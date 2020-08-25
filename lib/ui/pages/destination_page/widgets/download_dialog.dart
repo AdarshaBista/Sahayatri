@@ -26,7 +26,7 @@ class DownloadDialog extends StatelessWidget {
         title: BlocBuilder<DownloadCubit, DownloadState>(
           builder: (context, state) {
             if (state is DownloadCompleted) {
-              return _buildCompleted(context);
+              return _buildCompleted(context, state.message);
             } else if (state is DownloadInProgress) {
               return _buildTitle(context, state.message);
             } else {
@@ -40,6 +40,7 @@ class DownloadDialog extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context, String message) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const BusyIndicator(),
         Text(
@@ -55,7 +56,7 @@ class DownloadDialog extends StatelessWidget {
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to cancel the download?',
             onConfirm: () {
-              context.bloc<DownloadCubit>().stopDownload();
+              context.bloc<DownloadCubit>().cancelDownload();
               Navigator.of(context).pop();
             },
           ),
@@ -64,13 +65,13 @@ class DownloadDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildCompleted(BuildContext context) {
+  Widget _buildCompleted(BuildContext context, String message) {
     return Column(
       children: [
         IconIndicator(
           imageUrl: Images.kDownloaded,
           title: Text(
-            'Download Complete! You can view downloaded destinations on your profile page.',
+            message,
             textAlign: TextAlign.center,
             style: AppTextStyles.small.bold,
           ),

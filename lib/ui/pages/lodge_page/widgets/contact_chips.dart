@@ -26,7 +26,6 @@ class ContactChips extends StatelessWidget {
             'Contact Numbers',
             style: AppTextStyles.medium.bold,
           ),
-          const SizedBox(height: 8.0),
           Wrap(
             spacing: 8.0,
             children: contactNumbers

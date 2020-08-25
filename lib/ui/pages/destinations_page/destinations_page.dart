@@ -93,7 +93,10 @@ class _DestinationsPageState extends State<DestinationsPage> {
             } else if (state is DestinationsLoading) {
               return const BusyIndicator();
             } else if (state is DestinationsLoaded) {
-              return DestinationsList(destinations: state.destinations);
+              return DestinationsList(
+                destinations: state.destinations,
+                onRefresh: context.bloc<DestinationsCubit>().fetchDestinations,
+              );
             } else {
               return const EmptyIndicator();
             }

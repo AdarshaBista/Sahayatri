@@ -1,7 +1,6 @@
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -26,5 +25,13 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
     } on Failure catch (e) {
       emit(DownloadedDestinationsError(message: e.message));
     }
+  }
+
+  Future<void> deleteDestination(Destination destination) async {
+    final destinations = (state as DownloadedDestinationsLoaded).destinations;
+    destinations.remove(destination);
+    emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));
+    emit(DownloadedDestinationsLoaded(destinations: destinations));
+    destinationDao.delete(destination.id);
   }
 }

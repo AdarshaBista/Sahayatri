@@ -38,7 +38,7 @@ class ElevatedCard extends StatelessWidget {
           BoxShadow(
             blurRadius: 12.0,
             spreadRadius: elevation,
-            color: shadowColor.withOpacity(0.15),
+            color: shadowColor.withOpacity(0.12),
           ),
         ],
       ),

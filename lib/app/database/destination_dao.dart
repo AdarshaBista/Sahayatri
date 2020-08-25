@@ -27,4 +27,9 @@ class DestinationDao {
     final box = await _destinationBox;
     box.delete(id);
   }
+
+  Future<bool> contains(String id) async {
+    final box = await _destinationBox;
+    return box.containsKey(id);
+  }
 }

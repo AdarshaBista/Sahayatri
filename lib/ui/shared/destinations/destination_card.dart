@@ -6,6 +6,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -28,10 +29,9 @@ class DestinationCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
-            context.repository<RootNavService>().pushNamed(
-                  Routes.kDestinationPageRoute,
-                  arguments: destination,
-                );
+            context
+                .repository<RootNavService>()
+                .pushNamed(Routes.kDestinationPageRoute, arguments: destination);
           },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
@@ -39,7 +39,8 @@ class DestinationCard extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               children: [
                 _buildBackground(),
-                _buildTitle(),
+                _buildDetails(),
+                if (destination.isDownloaded) _buildDeleteIcon(context),
               ],
             ),
           ),
@@ -69,7 +70,7 @@ class DestinationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildDetails() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -106,6 +107,27 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDeleteIcon(BuildContext context) {
+    return Positioned(
+      top: 16.0,
+      right: 16.0,
+      child: CircleAvatar(
+        radius: 16.0,
+        backgroundColor: AppColors.secondary.withOpacity(0.8),
+        child: IconButton(
+          onPressed: () =>
+              context.bloc<DownloadedDestinationsCubit>().deleteDestination(destination),
+          splashRadius: 16.0,
+          icon: const Icon(
+            Icons.close,
+            size: 16.0,
+            color: AppColors.dark,
+          ),
+        ),
       ),
     );
   }

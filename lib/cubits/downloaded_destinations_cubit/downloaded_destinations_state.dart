@@ -1,10 +1,7 @@
 part of 'downloaded_destinations_cubit.dart';
 
-abstract class DownloadedDestinationsState extends Equatable {
+abstract class DownloadedDestinationsState {
   const DownloadedDestinationsState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class DownloadedDestinationsLoading extends DownloadedDestinationsState {
@@ -21,9 +18,6 @@ class DownloadedDestinationsLoaded extends DownloadedDestinationsState {
   const DownloadedDestinationsLoaded({
     @required this.destinations,
   }) : assert(destinations != null);
-
-  @override
-  List<Object> get props => [destinations];
 }
 
 class DownloadedDestinationsError extends DownloadedDestinationsState {
@@ -32,7 +26,12 @@ class DownloadedDestinationsError extends DownloadedDestinationsState {
   const DownloadedDestinationsError({
     @required this.message,
   }) : assert(message != null);
+}
 
-  @override
-  List<Object> get props => [message];
+class DownloadedDestinationsMessage extends DownloadedDestinationsState {
+  final String message;
+
+  const DownloadedDestinationsMessage({
+    @required this.message,
+  }) : assert(message != null);
 }
