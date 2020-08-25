@@ -9,7 +9,6 @@ class CompletedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         body: ListView(
           physics: const BouncingScrollPhysics(),
           children: const [

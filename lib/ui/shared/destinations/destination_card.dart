@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
@@ -60,12 +61,19 @@ class DestinationCard extends StatelessWidget {
           AppColors.dark.withOpacity(0.2),
           Colors.transparent,
         ],
-        child: Image.network(
-          destination.imageUrls.first,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
+        child: destination.imageUrls.isEmpty
+            ? Image.asset(
+                Images.kAuthBackground,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              )
+            : Image.network(
+                destination.imageUrls.first,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
       ),
     );
   }
