@@ -9,6 +9,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_button.dart';
 
@@ -31,47 +32,50 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 500.0,
-              ),
-              child: CustomCard(
-                margin: const EdgeInsets.all(20.0),
-                padding: const EdgeInsets.all(20.0),
-                color: AppColors.light.withOpacity(0.4),
-                child: AuthFields(
-                  initialEmail: email,
-                  initialPassword: password,
-                  onEmailChanged: (value) => email = value,
-                  onPasswordChanged: (value) => password = value,
+    return SlideAnimator(
+      begin: const Offset(0.0, 0.5),
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 500.0,
+                ),
+                child: CustomCard(
+                  margin: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
+                  color: AppColors.light.withOpacity(0.4),
+                  child: AuthFields(
+                    initialEmail: email,
+                    initialPassword: password,
+                    onEmailChanged: (value) => email = value,
+                    onPasswordChanged: (value) => password = value,
+                  ),
                 ),
               ),
             ),
-          ),
-          AuthButton(
-            label: 'LOGIN',
-            icon: Icons.login_outlined,
-            onPressed: () async {
-              if (!formKey.currentState.validate()) return;
+            AuthButton(
+              label: 'LOGIN',
+              icon: Icons.login_outlined,
+              onPressed: () async {
+                if (!formKey.currentState.validate()) return;
 
-              final success = await context.bloc<UserCubit>().login(email, password);
-              if (success) {
-                if (widget.isInitial) {
-                  context
-                      .repository<RootNavService>()
-                      .pushReplacementNamed(Routes.kHomePageRoute);
-                } else {
-                  Navigator.of(context).pop();
+                final success = await context.bloc<UserCubit>().login(email, password);
+                if (success) {
+                  if (widget.isInitial) {
+                    context
+                        .repository<RootNavService>()
+                        .pushReplacementNamed(Routes.kHomePageRoute);
+                  } else {
+                    Navigator.of(context).pop();
+                  }
                 }
-              }
-            },
-          ),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

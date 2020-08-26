@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/source_sheet.dart';
 
 class UserAvatar extends StatelessWidget {
@@ -25,13 +26,15 @@ class UserAvatar extends StatelessWidget {
       onTap: () => SourceSheet(
         onSelect: (source) => _updateAvatar(context, source),
       ).openModalBottomSheet(context),
-      child: CircleAvatar(
-        radius: kRadius + 2.0,
-        backgroundColor: user.imageUrl == null ? AppColors.barrier : AppColors.light,
+      child: ScaleAnimator(
         child: CircleAvatar(
-          radius: kRadius,
-          backgroundColor: AppColors.primary,
-          child: _buildImage(user),
+          radius: kRadius + 2.0,
+          backgroundColor: user.imageUrl == null ? AppColors.barrier : AppColors.light,
+          child: CircleAvatar(
+            radius: kRadius,
+            backgroundColor: AppColors.primary,
+            child: _buildImage(user),
+          ),
         ),
       ),
     );

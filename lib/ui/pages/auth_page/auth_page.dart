@@ -10,6 +10,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/signup_form.dart';
 
@@ -89,17 +90,21 @@ class AuthPage extends StatelessWidget {
   }
 
   Widget _buildSkipButton(BuildContext context) {
-    return FlatButton(
-      hoverColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      child: Text(
-        'Continue without signing in...',
-        style: AppTextStyles.extraSmall.lightAccent,
+    return ScaleAnimator(
+      child: FlatButton(
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        child: Text(
+          'Continue without signing in...',
+          style: AppTextStyles.extraSmall.lightAccent,
+        ),
+        onPressed: () {
+          context
+              .repository<RootNavService>()
+              .pushReplacementNamed(Routes.kHomePageRoute);
+        },
       ),
-      onPressed: () {
-        context.repository<RootNavService>().pushReplacementNamed(Routes.kHomePageRoute);
-      },
     );
   }
 }

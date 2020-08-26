@@ -14,8 +14,9 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
 import 'package:sahayatri/ui/shared/map/layers_button.dart';
+import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class CustomMap extends StatefulWidget {
   final Coord center;
@@ -99,7 +100,7 @@ class _CustomMapState extends State<CustomMap> {
           ...widget.children,
         ],
         options: MapOptions(
-          zoom: widget.initialZoom,
+          zoom: 12.0,
           minZoom: widget.minZoom,
           maxZoom: widget.maxZoom,
           center: widget.center.toLatLng(),
@@ -161,15 +162,17 @@ class _RouteLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final route = context.bloc<DestinationCubit>().destination.route;
 
-    return PolylineLayerWidget(
-      options: PolylineLayerOptions(
-        polylines: [
-          Polyline(
-            strokeWidth: 5.0,
-            gradientColors: AppColors.accentColors.take(4).toList(),
-            points: route.simplify(zoom).map((c) => c.toLatLng()).toList(),
-          ),
-        ],
+    return ScaleAnimator(
+      child: PolylineLayerWidget(
+        options: PolylineLayerOptions(
+          polylines: [
+            Polyline(
+              strokeWidth: 5.0,
+              gradientColors: AppColors.accentColors.take(4).toList(),
+              points: route.simplify(zoom).map((c) => c.toLatLng()).toList(),
+            ),
+          ],
+        ),
       ),
     );
   }
