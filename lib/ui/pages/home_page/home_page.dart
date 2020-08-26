@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
         BlocProvider<DestinationsCubit>(
           create: (context) => DestinationsCubit(
             apiService: context.repository<ApiService>(),
+            destinationDao: context.repository<DestinationDao>(),
           )..fetchDestinations(),
         ),
         BlocProvider<DownloadedDestinationsCubit>(
