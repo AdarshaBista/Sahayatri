@@ -5,7 +5,6 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
-import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
@@ -36,10 +35,10 @@ class DownloadButton extends StatelessWidget {
         : ColumnButton(
             label: 'Download',
             icon: CommunityMaterialIcons.cloud_download_outline,
-            onTap: () {
-              context.bloc<DownloadCubit>().startDownload(destination);
-              const DownloadDialog().openDialog(context, barrierDismissible: false);
-            },
+            onTap: () => const DownloadDialog().openDialog(
+              context,
+              barrierDismissible: false,
+            ),
           );
   }
 }

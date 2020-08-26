@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
-import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
@@ -44,12 +43,6 @@ class RootRouter {
       case Routes.kDestinationPageRoute:
         _page = MultiBlocProvider(
           providers: [
-            BlocProvider<DownloadCubit>(
-              create: (context) => DownloadCubit(
-                apiService: context.repository<ApiService>(),
-                destinationDao: context.repository<DestinationDao>(),
-              ),
-            ),
             BlocProvider<DestinationCubit>(
               create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
