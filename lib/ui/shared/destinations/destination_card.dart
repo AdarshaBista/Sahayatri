@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -11,6 +12,7 @@ import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destin
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
 import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
@@ -121,8 +123,12 @@ class DestinationCard extends StatelessWidget {
         radius: 16.0,
         backgroundColor: AppColors.secondary.withOpacity(0.8),
         child: IconButton(
-          onPressed: () =>
-              context.bloc<DownloadedDestinationsCubit>().deleteDestination(destination),
+          onPressed: () => ConfirmDialog(
+            message: 'Do you want to delete\n${destination.name}',
+            onConfirm: () => context
+                .bloc<DownloadedDestinationsCubit>()
+                .deleteDestination(destination),
+          ).openDialog(context),
           splashRadius: 16.0,
           icon: const Icon(
             Icons.close,

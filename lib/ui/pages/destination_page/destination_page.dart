@@ -15,6 +15,7 @@ import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/rating_tile.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
@@ -40,30 +41,42 @@ class DestinationPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        children: [
-          Carousel(imageUrls: destination.imageUrls),
-          const SizedBox(height: 16.0),
-          const RatingTile(),
-          const SizedBox(height: 8.0),
-          const OpenButton(),
-          const SizedBox(height: 8.0),
-          _buildDescription(destination),
-          const SizedBox(height: 8.0),
-          const RouteActions(),
-          const Divider(height: 16.0),
-          const DestinationStats(),
-          const Divider(height: 16.0),
-          const PermitCard(),
-          const SizedBox(height: 16.0),
-          const BestMonthsChips(),
-          const SizedBox(height: 8.0),
-          const Divider(height: 8.0),
-          _buildTabView(context, destination),
-        ],
+      body: FutureBuilder(
+        future: context.bloc<DestinationCubit>().checkDownload(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) return _buildList(context);
+          return const BusyIndicator();
+        },
       ),
+    );
+  }
+
+  Widget _buildList(BuildContext context) {
+    final destination = context.bloc<DestinationCubit>().destination;
+
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      children: [
+        Carousel(imageUrls: destination.imageUrls),
+        const SizedBox(height: 16.0),
+        const RatingTile(),
+        const SizedBox(height: 8.0),
+        const OpenButton(),
+        const SizedBox(height: 8.0),
+        _buildDescription(destination),
+        const SizedBox(height: 8.0),
+        const RouteActions(),
+        const Divider(height: 16.0),
+        const DestinationStats(),
+        const Divider(height: 16.0),
+        const PermitCard(),
+        const SizedBox(height: 16.0),
+        const BestMonthsChips(),
+        const SizedBox(height: 8.0),
+        const Divider(height: 8.0),
+        _buildTabView(context, destination),
+      ],
     );
   }
 

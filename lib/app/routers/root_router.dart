@@ -53,6 +53,7 @@ class RootRouter {
             BlocProvider<DestinationCubit>(
               create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
+                destinationDao: context.repository<DestinationDao>(),
               ),
             ),
             BlocProvider<ReviewCubit>(

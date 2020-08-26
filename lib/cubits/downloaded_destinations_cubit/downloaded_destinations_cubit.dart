@@ -32,6 +32,6 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
     destinations.remove(destination);
     emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));
     emit(DownloadedDestinationsLoaded(destinations: destinations));
-    destinationDao.delete(destination.id);
+    await destinationDao.delete(destination.id);
   }
 }

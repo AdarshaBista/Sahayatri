@@ -13,10 +13,6 @@ class DestinationDao {
     return box.values.toList();
   }
 
-  Future<List<String>> getAllIds() async {
-    return (await getAll()).map((d) => d.id).toList();
-  }
-
   Future<Destination> get(String id) async {
     final box = await _destinationBox;
     return box.get(id);
