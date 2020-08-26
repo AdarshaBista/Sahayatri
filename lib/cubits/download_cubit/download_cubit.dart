@@ -23,12 +23,6 @@ class DownloadCubit extends Cubit<DownloadState> {
         super(const DownloadInitial());
 
   Future<void> startDownload(Destination destination) async {
-    if (await destinationDao.contains(destination.id)) {
-      destination.isDownloaded = true;
-      emit(const DownloadCompleted(message: 'Already downloaded!'));
-      return;
-    }
-
     emit(DownloadInProgress(message: 'Downloading ${destination.name}'));
     await destinationDao.upsert(destination);
     destination.isDownloaded = true;

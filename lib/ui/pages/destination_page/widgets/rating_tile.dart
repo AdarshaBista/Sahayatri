@@ -23,17 +23,13 @@ class RatingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
-    final bool shouldShowDownloadButton =
-        !destination.isDownloaded && context.bloc<UserCubit>().isAuthenticated;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
           _buildRating(context),
           const Spacer(),
-          if (shouldShowDownloadButton) _buildDownloadButton(context),
+          _buildDownloadButton(context),
           const SizedBox(width: 12.0),
           _buildWeatherButton(context),
         ],
@@ -77,15 +73,22 @@ class RatingTile extends StatelessWidget {
   }
 
   Widget _buildDownloadButton(BuildContext context) {
+    if (!context.bloc<UserCubit>().isAuthenticated) return const Offstage();
     final destination = context.bloc<DestinationCubit>().destination;
 
-    return ColumnButton(
-      label: 'Download',
-      icon: CommunityMaterialIcons.cloud_download_outline,
-      onTap: () {
-        context.bloc<DownloadCubit>().startDownload(destination);
-        const DownloadDialog().openDialog(context, barrierDismissible: false);
-      },
-    );
+    return destination.isDownloaded
+        ? ColumnButton(
+            label: 'Downloaded',
+            icon: CommunityMaterialIcons.check_circle_outline,
+            onTap: () {},
+          )
+        : ColumnButton(
+            label: 'Download',
+            icon: CommunityMaterialIcons.cloud_download_outline,
+            onTap: () {
+              context.bloc<DownloadCubit>().startDownload(destination);
+              const DownloadDialog().openDialog(context, barrierDismissible: false);
+            },
+          );
   }
 }
