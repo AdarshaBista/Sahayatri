@@ -77,33 +77,35 @@ class _DestinationsPageState extends State<DestinationsPage> {
   }
 
   Widget _buildBody() {
-    return ListView(
-      controller: scrollController,
-      physics: const BouncingScrollPhysics(),
-      children: [
-        const Header(leftPadding: 12.0, boldTitle: 'Destinations'),
-        const SizedBox(height: 8.0),
-        BlocBuilder<DestinationsCubit, DestinationsState>(
-          builder: (context, state) {
-            if (state is DestinationsError) {
-              return ErrorIndicator(
-                message: state.message,
-                onRetry: context.bloc<DestinationsCubit>().fetchDestinations,
-              );
-            } else if (state is DestinationsLoading) {
-              return const BusyIndicator();
-            } else if (state is DestinationsLoaded) {
-              return DestinationsList(
-                destinations: state.destinations,
-                onRefresh: context.bloc<DestinationsCubit>().fetchDestinations,
-              );
-            } else {
-              return const EmptyIndicator();
-            }
-          },
+    return RefreshIndicator(
+      onRefresh: context.bloc<DestinationsCubit>().fetchDestinations,
+      child: ListView(
+        controller: scrollController,
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
         ),
-        const SizedBox(height: 16.0),
-      ],
+        children: [
+          const Header(leftPadding: 12.0, boldTitle: 'Destinations'),
+          const SizedBox(height: 8.0),
+          BlocBuilder<DestinationsCubit, DestinationsState>(
+            builder: (context, state) {
+              if (state is DestinationsError) {
+                return ErrorIndicator(
+                  message: state.message,
+                  onRetry: context.bloc<DestinationsCubit>().fetchDestinations,
+                );
+              } else if (state is DestinationsLoading) {
+                return const BusyIndicator();
+              } else if (state is DestinationsLoaded) {
+                return DestinationsList(destinations: state.destinations);
+              } else {
+                return const EmptyIndicator();
+              }
+            },
+          ),
+          const SizedBox(height: 16.0),
+        ],
+      ),
     );
   }
 }
