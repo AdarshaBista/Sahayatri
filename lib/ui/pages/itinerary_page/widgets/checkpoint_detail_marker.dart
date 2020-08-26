@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
@@ -49,13 +50,9 @@ class _DateTimeInfo extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Image.network(
+          AdaptiveImage(
             checkpoint.place.imageUrls[0],
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
             color: AppColors.barrier,
-            colorBlendMode: BlendMode.srcATop,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

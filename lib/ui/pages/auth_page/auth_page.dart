@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
@@ -33,23 +34,15 @@ class AuthPage extends StatelessWidget {
           ),
           body: Stack(
             children: [
-              _buildBackground(),
+              AdaptiveImage(
+                Images.kAuthBackground,
+                color: AppColors.dark.withOpacity(0.5),
+              ),
               _buildForm(context),
             ],
           ),
         );
       },
-    );
-  }
-
-  Widget _buildBackground() {
-    return Image.asset(
-      Images.kAuthBackground,
-      fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
-      colorBlendMode: BlendMode.srcATop,
-      color: AppColors.dark.withOpacity(0.5),
     );
   }
 

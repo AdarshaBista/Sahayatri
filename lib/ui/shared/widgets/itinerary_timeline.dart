@@ -12,6 +12,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
@@ -76,8 +77,10 @@ class ItineraryTimeline extends StatelessWidget {
           vertical: 4.0,
           horizontal: 8.0,
         ),
-        indicator: CircleAvatar(
-          backgroundImage: NetworkImage(checkpoint.place.imageUrls[0]),
+        indicator: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(shape: BoxShape.circle),
+          child: AdaptiveImage(checkpoint.place.imageUrls[0]),
         ),
       ),
       topLineStyle: const LineStyle(

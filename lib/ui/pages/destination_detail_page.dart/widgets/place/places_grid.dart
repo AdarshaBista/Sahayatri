@@ -58,7 +58,7 @@ class PlacesGrid extends StatelessWidget {
         top: 20.0,
         left: 20.0,
         right: 20.0,
-        bottom: 40.0,
+        bottom: 80.0,
       ),
       itemCount: places.length,
       itemBuilder: (context, index) {

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+import 'package:sahayatri/core/utils/image_utils.dart';
 
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -30,7 +34,7 @@ class PhotoViewPage extends StatelessWidget {
             itemCount: args.imageUrls.length,
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: NetworkImage(args.imageUrls[index]),
+                imageProvider: getImageProvider(args.imageUrls[index]),
                 heroAttributes: PhotoViewHeroAttributes(tag: args.imageUrls[index]),
                 maxScale: PhotoViewComputedScale.covered * 2.5,
                 minScale: PhotoViewComputedScale.contained * 0.6,
@@ -46,6 +50,18 @@ class PhotoViewPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  ImageProvider getImageProvider(String imageUrl) {
+    final imageType = ImageUtils.getImageType(imageUrl);
+
+    if (imageType == ImageType.asset) {
+      return AssetImage(imageUrl);
+    } else if (imageType == ImageType.network) {
+      return NetworkImage(imageUrl);
+    } else {
+      return FileImage(File(imageUrl));
+    }
   }
 }
 

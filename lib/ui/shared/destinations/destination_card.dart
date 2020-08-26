@@ -12,6 +12,7 @@ import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destin
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
@@ -62,18 +63,8 @@ class DestinationCard extends StatelessWidget {
           Colors.transparent,
         ],
         child: destination.imageUrls.isEmpty
-            ? Image.asset(
-                Images.kAuthBackground,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              )
-            : Image.network(
-                destination.imageUrls.first,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
+            ? const AdaptiveImage(Images.kAuthBackground)
+            : AdaptiveImage(destination.imageUrls.first),
       ),
     );
   }

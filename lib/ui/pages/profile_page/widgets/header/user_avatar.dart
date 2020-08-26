@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/source_sheet.dart';
 
@@ -48,12 +49,7 @@ class UserAvatar extends StatelessWidget {
           )
         : ClipRRect(
             borderRadius: BorderRadius.circular(kRadius),
-            child: Image.network(
-              user.imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
+            child: AdaptiveImage(user.imageUrl),
           );
   }
 

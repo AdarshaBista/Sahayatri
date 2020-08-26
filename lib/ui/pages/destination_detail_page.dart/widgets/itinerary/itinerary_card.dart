@@ -11,6 +11,7 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
@@ -56,12 +57,7 @@ class ItineraryCard extends StatelessWidget {
         AppColors.dark.withOpacity(0.5),
         Colors.transparent,
       ],
-      child: Image.network(
-        itinerary.checkpoints.first.place.imageUrls.first,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      ),
+      child: AdaptiveImage(itinerary.checkpoints.first.place.imageUrls.first),
     );
   }
 

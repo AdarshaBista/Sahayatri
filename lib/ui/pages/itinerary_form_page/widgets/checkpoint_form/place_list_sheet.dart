@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/image_card.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -77,7 +78,11 @@ class PlaceListSheet extends StatelessWidget {
         Navigator.of(context).pop();
       },
       title: Text(place.name, style: AppTextStyles.medium),
-      leading: CircleAvatar(backgroundImage: NetworkImage(place.imageUrls[0])),
+      leading: SizedBox(
+        height: 50.0,
+        width: 50.0,
+        child: ImageCard(imageUrl: place.imageUrls[0]),
+      ),
       trailing: GestureDetector(
         onTap: () => context.repository<DestinationNavService>().pushNamed(
               Routes.kPlacePageRoute,

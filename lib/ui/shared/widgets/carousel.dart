@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 
 class Carousel extends StatelessWidget {
   final bool showPagination;
@@ -21,10 +22,7 @@ class Carousel extends StatelessWidget {
         itemWidth: double.infinity,
         itemHeight: double.infinity,
         itemCount: imageUrls.length,
-        itemBuilder: (context, index) => Image.network(
-          imageUrls[index],
-          fit: BoxFit.cover,
-        ),
+        itemBuilder: (context, index) => AdaptiveImage(imageUrls[index]),
         pagination: showPagination
             ? const SwiperPagination(
                 builder: DotSwiperPaginationBuilder(

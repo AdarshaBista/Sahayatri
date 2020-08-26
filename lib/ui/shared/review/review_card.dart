@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 
@@ -104,12 +105,7 @@ class _ReviewCardState extends State<ReviewCard> {
         margin: const EdgeInsets.all(12.0),
         color: AppColors.primary.withOpacity(0.4),
         child: widget.review.user.imageUrl != null
-            ? Image.network(
-                widget.review.user.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              )
+            ? AdaptiveImage(widget.review.user.imageUrl)
             : Center(
                 child: Text(
                   widget.review.user.name[0],

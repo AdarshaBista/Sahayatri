@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
 class PlaceCard extends StatelessWidget {
@@ -48,12 +49,7 @@ class PlaceCard extends StatelessWidget {
           AppColors.dark.withOpacity(0.5),
           AppColors.dark,
         ],
-        child: Image.network(
-          place.imageUrls[0],
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
+        child: AdaptiveImage(place.imageUrls[0]),
       ),
     );
   }

@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
@@ -66,12 +67,7 @@ class NextCheckpointCard extends StatelessWidget {
             AppColors.dark.withOpacity(0.2),
             Colors.transparent,
           ],
-          child: Image.network(
-            place.imageUrls[0],
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+          child: AdaptiveImage(place.imageUrls[0]),
         ),
       ),
     );
