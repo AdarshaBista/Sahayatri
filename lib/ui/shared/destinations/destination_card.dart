@@ -17,11 +17,14 @@ import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
 
 class DestinationCard extends StatelessWidget {
+  final bool deletable;
   final Destination destination;
 
   const DestinationCard({
+    this.deletable = false,
     @required this.destination,
-  }) : assert(destination != null);
+  })  : assert(deletable != null),
+        assert(destination != null);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class DestinationCard extends StatelessWidget {
               children: [
                 _buildBackground(),
                 _buildDetails(),
-                if (destination.isDownloaded) _buildDeleteIcon(context),
+                if (deletable) _buildDeleteIcon(context),
               ],
             ),
           ),

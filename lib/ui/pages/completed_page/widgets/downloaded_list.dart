@@ -43,7 +43,10 @@ class DownloadedList extends StatelessWidget {
         } else if (state is DownloadedDestinationsLoading) {
           return const BusyIndicator();
         } else if (state is DownloadedDestinationsLoaded) {
-          return DestinationsList(destinations: state.destinations);
+          return DestinationsList(
+            deletable: true,
+            destinations: state.destinations,
+          );
         } else {
           return EmptyIndicator(
             message: 'No downloaded destinations!',
