@@ -58,6 +58,7 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return CustomCard(
+      borderRadius: 12.0,
       child: GradientContainer(
         gradientEnd: Alignment.topRight,
         gradientBegin: Alignment.bottomCenter,
@@ -117,23 +118,28 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildDeleteIcon(BuildContext context) {
     return Positioned(
-      top: 16.0,
-      right: 16.0,
-      child: CircleAvatar(
-        radius: 16.0,
-        backgroundColor: AppColors.secondary.withOpacity(0.8),
-        child: IconButton(
-          onPressed: () => ConfirmDialog(
-            message: 'Do you want to delete\n${destination.name}',
-            onConfirm: () => context
-                .bloc<DownloadedDestinationsCubit>()
-                .deleteDestination(destination),
-          ).openDialog(context),
-          splashRadius: 16.0,
-          icon: const Icon(
+      top: 0.0,
+      right: 0.0,
+      child: GestureDetector(
+        onTap: () => ConfirmDialog(
+          message: 'Do you want to delete\n${destination.name}',
+          onConfirm: () =>
+              context.bloc<DownloadedDestinationsCubit>().deleteDestination(destination),
+        ).openDialog(context),
+        child: Container(
+          width: 44.0,
+          height: 44.0,
+          decoration: const BoxDecoration(
+            color: AppColors.secondary,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(12.0),
+              bottomLeft: Radius.circular(20.0),
+            ),
+          ),
+          child: const Icon(
             Icons.close,
-            size: 16.0,
-            color: AppColors.dark,
+            size: 20.0,
+            color: AppColors.lightAccent,
           ),
         ),
       ),
