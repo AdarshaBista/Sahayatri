@@ -141,6 +141,21 @@ class Destination {
   factory Destination.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
+    final places = !map.containsKey('places')
+        ? null
+        : List<Place>.from((map['places'] as List<dynamic>)
+            ?.map((x) => Place.fromMap(x as Map<String, dynamic>)));
+
+    final reviews = !map.containsKey('reviews')
+        ? null
+        : List<Review>.from((map['reviews'] as List<dynamic>)
+            ?.map((x) => Review.fromMap(x as Map<String, dynamic>)));
+
+    final suggestedItineraries = !map.containsKey('suggestedItineraries')
+        ? null
+        : List<Itinerary>.from((map['suggestedItineraries'] as List<dynamic>)
+            ?.map((x) => Itinerary.fromMap(x as Map<String, dynamic>)));
+
     return Destination(
       id: map['id'] as String,
       name: map['name'] as String,
@@ -155,9 +170,9 @@ class Destination {
       bestMonths: ApiUtils.parseCsv(map['bestMonths'] as String),
       isDownloaded: false,
       createdItinerary: null,
-      places: null,
-      reviews: null,
-      suggestedItineraries: null,
+      places: places,
+      reviews: reviews,
+      suggestedItineraries: suggestedItineraries,
     );
   }
 

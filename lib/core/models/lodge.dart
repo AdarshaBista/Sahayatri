@@ -88,7 +88,10 @@ class Lodge {
       facility: LodgeFacility.parse(map['facility'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
-      reviews: null,
+      reviews: !map.containsKey('reviews')
+          ? null
+          : List<Review>.from((map['reviews'] as List<dynamic>)
+              ?.map((x) => Review.fromMap(x as Map<String, dynamic>))),
     );
   }
 
