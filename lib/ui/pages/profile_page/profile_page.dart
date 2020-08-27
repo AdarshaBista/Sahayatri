@@ -7,13 +7,16 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
+import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/widgets/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/settings/settings_list.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/downloaded/downloaded_list.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage();
@@ -42,7 +45,7 @@ class ProfilePage extends StatelessWidget {
           if (state is Authenticated) {
             return Provider<User>.value(
               value: state.user,
-              child: _buildBody(),
+              child: _buildPage(),
             );
           } else if (state is AuthLoading) {
             return const BusyIndicator();
@@ -54,13 +57,33 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildPage() {
     return ListView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
+      children: [
+        const ProfileHeader(),
+        const SizedBox(height: 12.0),
+        _buildTabView(),
+      ],
+    );
+  }
+
+  Widget _buildTabView() {
+    return NestedTabView(
+      tabs: [
+        NestedTabData(
+          label: 'Settings',
+          icon: Icons.settings_outlined,
+        ),
+        NestedTabData(
+          label: 'Downloaded',
+          icon: CommunityMaterialIcons.cloud_check_outline,
+        ),
+      ],
       children: const [
-        ProfileHeader(),
         SettingsList(),
+        DownloadedList(),
       ],
     );
   }

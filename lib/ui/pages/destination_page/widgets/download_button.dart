@@ -29,7 +29,7 @@ class DownloadButton extends StatelessWidget {
     return destination.isDownloaded
         ? ColumnButton(
             label: 'Downloaded',
-            icon: CommunityMaterialIcons.check_circle_outline,
+            icon: CommunityMaterialIcons.cloud_check_outline,
             onTap: () {},
           )
         : ColumnButton(

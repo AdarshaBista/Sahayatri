@@ -14,15 +14,10 @@ class SettingsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Settings',
-            style: AppTextStyles.medium.bold,
-          ),
-          const SizedBox(height: 16.0),
           SettingsCard(
             title: 'Close Contact',
             subtitle: 'Setup close contact to notify them about your whereabouts.',

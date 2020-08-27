@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
@@ -41,13 +42,15 @@ class DestinationPage extends StatelessWidget {
           ),
         ],
       ),
-      body: FutureBuilder(
-        future: context.bloc<DestinationCubit>().checkDownload(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) return _buildList(context);
-          return const BusyIndicator();
-        },
-      ),
+      body: context.bloc<UserCubit>().isAuthenticated
+          ? FutureBuilder(
+              future: context.bloc<DestinationCubit>().checkDownload(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) return _buildList(context);
+                return const BusyIndicator();
+              },
+            )
+          : _buildList(context),
     );
   }
 
