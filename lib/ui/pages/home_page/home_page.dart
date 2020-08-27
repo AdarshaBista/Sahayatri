@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-
-import 'package:sahayatri/app/database/destination_dao.dart';
+import 'package:sahayatri/core/services/destinations_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
@@ -31,13 +29,13 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider<DestinationsCubit>(
           create: (context) => DestinationsCubit(
-            apiService: context.repository<ApiService>(),
+            destinationsService: context.repository<DestinationsService>(),
           )..fetchDestinations(),
         ),
         BlocProvider<DownloadedDestinationsCubit>(
           create: (context) => DownloadedDestinationsCubit(
-            destinationDao: context.repository<DestinationDao>(),
-          )..getDestinations(),
+            destinationsService: context.repository<DestinationsService>(),
+          )..fetchDownloaded(),
         ),
       ],
       child: Scaffold(

@@ -9,6 +9,7 @@ import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/core/services/destinations_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
@@ -18,6 +19,7 @@ import 'package:sahayatri/app/routers/root_router.dart';
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
+import 'package:sahayatri/app/database/destination_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
@@ -68,6 +70,12 @@ class Sahayatri extends StatelessWidget {
         RepositoryProvider<TrackerService>(
           create: (context) => TrackerService(
             locationService: context.repository<LocationService>(),
+          ),
+        ),
+        RepositoryProvider<DestinationsService>(
+          create: (context) => DestinationsService(
+            apiService: context.repository<ApiService>(),
+            destinationDao: context.repository<DestinationDao>(),
           ),
         ),
       ],

@@ -38,7 +38,7 @@ class DownloadedList extends StatelessWidget {
         if (state is DownloadedDestinationsError) {
           return ErrorIndicator(
             message: state.message,
-            onRetry: context.bloc<DownloadedDestinationsCubit>().getDestinations,
+            onRetry: context.bloc<DownloadedDestinationsCubit>().fetchDownloaded,
           );
         } else if (state is DownloadedDestinationsLoading) {
           return const BusyIndicator();
@@ -50,7 +50,7 @@ class DownloadedList extends StatelessWidget {
         } else {
           return EmptyIndicator(
             message: 'No downloaded destinations!',
-            onRetry: context.bloc<DownloadedDestinationsCubit>().getDestinations,
+            onRetry: context.bloc<DownloadedDestinationsCubit>().fetchDownloaded,
           );
         }
       },
