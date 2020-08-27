@@ -15,21 +15,33 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
   DownloadedDestinationsCubit({
     @required this.destinationsService,
   })  : assert(destinationsService != null),
-        super(const DownloadedDestinationsEmpty());
+        super(const DownloadedDestinationsEmpty()) {
+    destinationsService.onDownload = () {
+      emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+    };
+  }
 
   Future<void> fetchDownloaded() async {
     emit(const DownloadedDestinationsLoading());
     try {
       await destinationsService.fetchDownloaded();
-      emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+      if (destinationsService.downloaded.isEmpty) {
+        emit(const DownloadedDestinationsEmpty());
+      } else {
+        emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+      }
     } on Failure catch (e) {
       emit(DownloadedDestinationsError(message: e.message));
     }
   }
 
   Future<void> deleteDestination(Destination destination) async {
-    await destinationsService.deleteDestination(destination);
+    await destinationsService.deleteDownloaded(destination);
     emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));
-    emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+    if (destinationsService.downloaded.isEmpty) {
+      emit(const DownloadedDestinationsEmpty());
+    } else {
+      emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+    }
   }
 }

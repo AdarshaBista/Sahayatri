@@ -22,7 +22,11 @@ class DestinationsCubit extends Cubit<DestinationsState> {
     emit(const DestinationsLoading());
     try {
       await destinationsService.fetchDestinations();
-      emit(DestinationsLoaded(destinations: destinationsService.destinations));
+      if (destinationsService.destinations.isEmpty) {
+        emit(const DestinationsEmpty());
+      } else {
+        emit(DestinationsLoaded(destinations: destinationsService.destinations));
+      }
     } on Failure catch (e) {
       emit(DestinationsError(message: e.message));
     }

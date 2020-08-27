@@ -17,6 +17,7 @@ class ConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaleAnimator(
+      duration: 200,
       child: AlertDialog(
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,

@@ -99,7 +99,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
               } else if (state is DestinationsLoaded) {
                 return DestinationsList(destinations: state.destinations);
               } else {
-                return const EmptyIndicator();
+                return const EmptyIndicator(message: 'No destinations found!');
               }
             },
           ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/destinations_service.dart';
 
-import 'package:sahayatri/app/database/destination_dao.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
@@ -25,9 +24,8 @@ class DownloadDialog extends StatelessWidget {
       onWillPop: () => Future.value(false),
       child: BlocProvider<DownloadCubit>(
         create: (context) => DownloadCubit(
-          apiService: context.repository<ApiService>(),
           destinationCubit: context.bloc<DestinationCubit>(),
-          destinationDao: context.repository<DestinationDao>(),
+          destinationsService: context.repository<DestinationsService>(),
         )..startDownload(context.bloc<DestinationCubit>().destination),
         child: Builder(
           builder: (context) {
@@ -61,12 +59,15 @@ class DownloadDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const BusyIndicator(),
-        Text(
-          message,
-          textAlign: TextAlign.center,
-          style: AppTextStyles.small.bold,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: AppTextStyles.small.bold,
+          ),
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 16.0),
         CustomButton(
           label: 'Cancel',
           iconData: Icons.close,

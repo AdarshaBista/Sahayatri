@@ -11,9 +11,14 @@ class DestinationsService {
   final ApiService apiService;
   final DestinationDao destinationDao;
 
+  /// Called when destination has finished downloading.
+  void Function() onDownload;
+
+  /// List of destiantions fetched from api.
   List<Destination> _destinations = [];
   List<Destination> get destinations => _destinations;
 
+  /// List of destiantions downloaded on device.
   List<Destination> _downloaded = [];
   List<Destination> get downloaded => _downloaded;
 
@@ -39,7 +44,14 @@ class DestinationsService {
     }
   }
 
-  Future<void> deleteDestination(Destination destination) async {
+  Future<void> download(Destination destination) async {
+    await destinationDao.upsert(destination);
+    destination.isDownloaded = true;
+    _downloaded.add(destination);
+    if (onDownload != null) onDownload();
+  }
+
+  Future<void> deleteDownloaded(Destination destination) async {
     _downloaded.remove(destination);
     await destinationDao.delete(destination.id);
   }
