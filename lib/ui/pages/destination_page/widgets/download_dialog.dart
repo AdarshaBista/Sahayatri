@@ -5,6 +5,7 @@ import 'package:sahayatri/core/services/destinations_service.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
@@ -24,6 +25,7 @@ class DownloadDialog extends StatelessWidget {
       onWillPop: () => Future.value(false),
       child: BlocProvider<DownloadCubit>(
         create: (context) => DownloadCubit(
+          user: context.bloc<UserCubit>().user,
           destinationCubit: context.bloc<DestinationCubit>(),
           destinationsService: context.repository<DestinationsService>(),
         )..startDownload(context.bloc<DestinationCubit>().destination),
@@ -86,6 +88,7 @@ class DownloadDialog extends StatelessWidget {
 
   Widget _buildCompleted(BuildContext context, String message) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         IconIndicator(
           imageUrl: Images.kDownloaded,

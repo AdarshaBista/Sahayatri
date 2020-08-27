@@ -205,6 +205,21 @@ class ApiService {
     }
   }
 
+  Future<Destination> download(String destId, User user) async {
+    try {
+      final Response res = await Dio().get(
+        '${AppConfig.kApiBaseUrl}/destinations/$destId/download',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+      );
+      return Destination.fromMap(res.data as Map<String, dynamic>);
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to download data.');
+    }
+  }
+
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(

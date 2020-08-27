@@ -151,9 +151,9 @@ class Destination {
         : List<Review>.from((map['reviews'] as List<dynamic>)
             ?.map((x) => Review.fromMap(x as Map<String, dynamic>)));
 
-    final suggestedItineraries = !map.containsKey('suggestedItineraries')
+    final suggestedItineraries = !map.containsKey('itinenaries')
         ? null
-        : List<Itinerary>.from((map['suggestedItineraries'] as List<dynamic>)
+        : List<Itinerary>.from((map['itinenaries'] as List<dynamic>)
             ?.map((x) => Itinerary.fromMap(x as Map<String, dynamic>)));
 
     return Destination(
