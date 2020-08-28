@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/user.dart';
@@ -22,27 +23,36 @@ class Review {
   @HiveField(3)
   final double rating;
 
+  @HiveField(4)
+  final DateTime dateUpdated;
+
+  String get date => DateFormat('MM/dd/yyyy').format(dateUpdated);
+
   const Review({
     @required this.id,
     @required this.user,
     @required this.text,
     @required this.rating,
+    @required this.dateUpdated,
   })  : assert(id != null),
         assert(user != null),
         assert(text != null),
-        assert(rating != null);
+        assert(rating != null),
+        assert(dateUpdated != null);
 
   Review copyWith({
     String id,
     User user,
     String text,
     double rating,
+    DateTime dateUpdated,
   }) {
     return Review(
       id: id ?? this.id,
       user: user ?? this.user,
       text: text ?? this.text,
       rating: rating ?? this.rating,
+      dateUpdated: dateUpdated ?? this.dateUpdated,
     );
   }
 
@@ -54,12 +64,14 @@ class Review {
       text: map['text'] as String,
       rating: double.tryParse(map['rating'] as String) ?? 0.0,
       user: User.fromMap(map['user'] as Map<String, dynamic>),
+      dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
+          DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 
   @override
   String toString() {
-    return 'Review(id: $id, user: $user, text: $text, rating: $rating)';
+    return 'Review(id: $id, user: $user, text: $text, rating: $rating, dateUpdated: $dateUpdated)';
   }
 
   @override
@@ -70,11 +82,16 @@ class Review {
         o.id == id &&
         o.user == user &&
         o.text == text &&
-        o.rating == rating;
+        o.rating == rating &&
+        o.dateUpdated == dateUpdated;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ user.hashCode ^ text.hashCode ^ rating.hashCode;
+    return id.hashCode ^
+        user.hashCode ^
+        text.hashCode ^
+        rating.hashCode ^
+        dateUpdated.hashCode;
   }
 }

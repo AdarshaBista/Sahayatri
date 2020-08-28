@@ -54,7 +54,13 @@ class DestinationReviewCubit extends ReviewCubit {
       );
       destination.reviews.insert(
         0,
-        Review(id: id, text: text, user: user, rating: rating),
+        Review(
+          id: id,
+          text: text,
+          user: user,
+          rating: rating,
+          dateUpdated: DateTime.now(),
+        ),
       );
       emit(ReviewLoaded(reviews: destination.reviews));
       return true;

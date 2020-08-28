@@ -63,6 +63,8 @@ class _ReviewCardState extends State<ReviewCard> {
           padding: const EdgeInsets.only(left: 4.0),
           child: Text(
             widget.review.user.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AppTextStyles.small.bold,
           ),
         ),
@@ -76,12 +78,20 @@ class _ReviewCardState extends State<ReviewCard> {
   }
 
   Widget _buildRating() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Text(
-        widget.review.rating.toStringAsFixed(1),
-        style: AppTextStyles.medium.bold.withColor(AppColors.barrier),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          widget.review.rating.toStringAsFixed(1),
+          style: AppTextStyles.medium.bold.withColor(AppColors.barrier),
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          widget.review.date,
+          style: AppTextStyles.extraSmall,
+        ),
+        const SizedBox(height: 6.0),
+      ],
     );
   }
 
