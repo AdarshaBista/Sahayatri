@@ -11,6 +11,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/review/review_form.dart';
 import 'package:sahayatri/ui/shared/review/review_card.dart';
+import 'package:sahayatri/ui/shared/review/rating_chart.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
@@ -71,13 +72,8 @@ class ReviewList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: Text(
-            '${reviews.length} reviews',
-            style: AppTextStyles.small.primary,
-          ),
-        ),
+        RatingChart(ratings: reviews.map((r) => r.rating).toList()),
+        const Divider(height: 0.0),
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
