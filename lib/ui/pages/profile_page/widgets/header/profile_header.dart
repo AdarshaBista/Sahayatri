@@ -8,11 +8,12 @@ import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_avatar.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_details.dart';
 
 class ProfileHeader extends StatelessWidget {
-  static const double kHeaderHeight = 280.0;
+  static const double kHeaderHeight = 300.0;
 
   const ProfileHeader();
 
@@ -21,11 +22,12 @@ class ProfileHeader extends StatelessWidget {
     final user = context.watch<User>();
 
     return Container(
-      height: 280.0,
+      height: kHeaderHeight,
       child: Stack(
         children: [
           if (user.imageUrl != null) _buildBlurredImage(user.imageUrl),
           if (user.imageUrl != null) _buildGradient(),
+          _buildLogoutButton(),
           _buildForeground(),
         ],
       ),
@@ -51,6 +53,7 @@ class ProfileHeader extends StatelessWidget {
       gradientColors: [
         Colors.transparent,
         Colors.transparent,
+        Colors.transparent,
         AppColors.light.withOpacity(0.2),
         AppColors.light.withOpacity(0.7),
         AppColors.light,
@@ -74,6 +77,14 @@ class ProfileHeader extends StatelessWidget {
           child: Container(color: Colors.transparent),
         ),
       ),
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return const Positioned(
+      top: 12.0,
+      right: 12.0,
+      child: LogoutButton(),
     );
   }
 }
