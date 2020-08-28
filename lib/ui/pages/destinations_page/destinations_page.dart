@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/utils/debouncer.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
 import 'package:sahayatri/ui/shared/widgets/header.dart';
-import 'package:sahayatri/ui/shared/widgets/search_box.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/destinations/destinations_list.dart';
+import 'package:sahayatri/ui/pages/destinations_page/widgets/search_card.dart';
 
 class DestinationsPage extends StatefulWidget {
   const DestinationsPage();
@@ -50,29 +48,19 @@ class _DestinationsPageState extends State<DestinationsPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(64.0),
-          child: _buildSearchBox(context),
-        ),
-        body: _buildBody(),
+      child: BlocBuilder<DestinationsCubit, DestinationsState>(
+        builder: (context, state) {
+          if (state is DestinationsLoaded) {
+            return Scaffold(
+              extendBodyBehindAppBar: true,
+              appBar: SearchCard(elevation: searchElevation),
+              body: _buildBody(),
+            );
+          } else {
+            return Scaffold(body: _buildBody());
+          }
+        },
       ),
-    );
-  }
-
-  Column _buildSearchBox(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 12.0),
-        SearchBox(
-          elevation: searchElevation,
-          hintText: 'Where do you want to go?',
-          onChanged: (query) => Debouncer().run(
-            () => context.bloc<DestinationsCubit>().search(query),
-          ),
-        ),
-      ],
     );
   }
 
