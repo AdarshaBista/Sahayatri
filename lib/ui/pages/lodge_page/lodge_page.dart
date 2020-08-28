@@ -13,7 +13,7 @@ import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/lodge_rating.dart';
-import 'package:sahayatri/ui/pages/lodge_page/widgets/contact_chips.dart';
+import 'package:sahayatri/ui/pages/lodge_page/widgets/contacts_list.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/facalities_list.dart';
 
 class LodgePage extends StatelessWidget {
@@ -34,7 +34,7 @@ class LodgePage extends StatelessWidget {
           const Divider(height: 16.0),
           const FacilitiesList(),
           const SizedBox(height: 16.0),
-          const ContactChips(),
+          const ContactList(),
           const SizedBox(height: 8.0),
           const Divider(height: 12.0),
           _buildTabView(context, lodge),

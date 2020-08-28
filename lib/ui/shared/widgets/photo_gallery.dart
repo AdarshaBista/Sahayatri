@@ -31,7 +31,7 @@ class PhotoGallery extends StatelessWidget {
                 maxCrossAxisExtent: 120.0,
               ),
               shrinkWrap: true,
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
               physics: const NeverScrollableScrollPhysics(),
               itemCount: imageUrls.length,
               itemBuilder: (context, index) {

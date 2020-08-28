@@ -8,10 +8,9 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
-class ContactChips extends StatelessWidget {
-  const ContactChips();
+class ContactList extends StatelessWidget {
+  const ContactList();
 
   @override
   Widget build(BuildContext context) {
@@ -26,43 +25,38 @@ class ContactChips extends StatelessWidget {
             'Contact Numbers',
             style: AppTextStyles.medium.bold,
           ),
-          Wrap(
-            spacing: 8.0,
-            children: contactNumbers
-                .map(
-                  (number) => ScaleAnimator(
-                    child: GestureDetector(
-                      onTap: () => _launchPhone(context, number),
-                      child: Chip(
-                        backgroundColor: AppColors.lightAccent,
-                        visualDensity: VisualDensity.compact,
-                        label: _buildNumber(number),
-                      ),
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+          const SizedBox(height: 8.0),
+          ...contactNumbers.map((n) => _buildNumber(context, n)).toList(),
         ],
       ),
     );
   }
 
-  Widget _buildNumber(String number) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Icon(
+  Widget _buildNumber(BuildContext context, String number) {
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      visualDensity: VisualDensity.compact,
+      leading: const CircleAvatar(
+        radius: 14.0,
+        backgroundColor: AppColors.lightAccent,
+        child: Icon(
           Icons.phone,
           size: 14.0,
           color: Colors.black54,
         ),
-        const SizedBox(width: 6.0),
-        Text(
-          number,
-          style: AppTextStyles.extraSmall,
+      ),
+      title: Text(
+        number,
+        style: AppTextStyles.small,
+      ),
+      trailing: GestureDetector(
+        onTap: () => _launchPhone(context, number),
+        child: Text(
+          'Call',
+          style: AppTextStyles.small.primary,
         ),
-      ],
+      ),
     );
   }
 

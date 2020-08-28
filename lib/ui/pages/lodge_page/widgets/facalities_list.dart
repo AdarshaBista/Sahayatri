@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/buttons/column_button.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
@@ -13,33 +14,47 @@ class FacilitiesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final facility = context.watch<Lodge>().facility;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Wrap(
-        spacing: 8.0,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (facility.wifi)
-            _buildIcon(
-              'WiFi',
-              Colors.green,
-              CommunityMaterialIcons.wifi,
-            ),
-          if (facility.toilet)
-            _buildIcon(
-              'Toilet',
-              Colors.red,
-              CommunityMaterialIcons.toilet,
-            ),
-          if (facility.shower)
-            _buildIcon(
-              'Shower',
-              Colors.blue,
-              CommunityMaterialIcons.shower_head,
-            ),
+          Text(
+            'Facilities',
+            style: AppTextStyles.medium.bold,
+          ),
+          const SizedBox(height: 12.0),
+          _buildFacilities(context),
         ],
       ),
+    );
+  }
+
+  Widget _buildFacilities(BuildContext context) {
+    final facility = context.watch<Lodge>().facility;
+
+    return Wrap(
+      spacing: 8.0,
+      children: [
+        if (facility.wifi)
+          _buildIcon(
+            'WiFi',
+            Colors.green,
+            CommunityMaterialIcons.wifi,
+          ),
+        if (facility.toilet)
+          _buildIcon(
+            'Toilet',
+            Colors.red,
+            CommunityMaterialIcons.toilet,
+          ),
+        if (facility.shower)
+          _buildIcon(
+            'Shower',
+            Colors.blue,
+            CommunityMaterialIcons.shower_head,
+          ),
+      ],
     );
   }
 
