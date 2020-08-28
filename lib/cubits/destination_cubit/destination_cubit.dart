@@ -23,24 +23,14 @@ class DestinationCubit extends Cubit<Destination> {
         super(destination);
 
   Future<bool> open() async {
-    final downloaded = await destinationDao.get(destination.id);
+    final isDownloaded = await destinationDao.contains(destination.id);
     final createdItinerary = await itineraryDao.get(destination.id);
 
     destination = destination.copyWith(
-      isDownloaded: false,
+      isDownloaded: isDownloaded,
       createdItinerary: createdItinerary,
     );
-
-    if (downloaded != null) {
-      destination = destination.copyWith(
-        isDownloaded: true,
-        createdItinerary: downloaded.createdItinerary,
-        places: downloaded.places,
-        reviews: downloaded.reviews,
-        suggestedItineraries: downloaded.suggestedItineraries,
-      );
-      emit(destination);
-    }
+    emit(destination);
     return true;
   }
 
