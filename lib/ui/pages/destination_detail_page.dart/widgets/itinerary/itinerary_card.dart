@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
+
+import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -103,13 +104,13 @@ class ItineraryCard extends StatelessWidget {
       icon: Icons.close,
       color: AppColors.secondary,
       onTap: () {
-        if (context.bloc<TrackerCubit>().isTracking) {
+        if (context.repository<TrackerService>().isTracking) {
           const MessageDialog(
             message: 'Cannot delete when tracker is running.',
           ).openDialog(context);
           return;
         }
-        context.bloc<DestinationCubit>().changeCreatedItinerary(null);
+        context.bloc<DestinationCubit>().deleteItinerary();
       },
     );
   }

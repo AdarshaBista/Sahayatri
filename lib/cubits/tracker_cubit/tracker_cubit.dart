@@ -41,8 +41,6 @@ class TrackerCubit extends Cubit<TrackerState> {
     await super.close();
   }
 
-  bool get isTracking => trackerService.isTracking;
-
   Duration get elapsed => trackerService.elapsedDuration();
 
   Future<void> pauseTracking() async {
