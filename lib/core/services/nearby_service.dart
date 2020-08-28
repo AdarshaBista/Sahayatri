@@ -42,23 +42,30 @@ class NearbyService {
   /// Start nearby service.
   Future<void> start(String name) async {
     _username = name;
-
     try {
-      if (!await Nearby().checkLocationPermission()) {
-        await Nearby().askLocationPermission();
-      }
-      if (!await Nearby().checkLocationEnabled()) {
-        await Nearby().enableLocationServices();
-      }
-
+      await checkLocationPermissions();
       await startScanning();
     } on Failure {
       rethrow;
-    } catch (e) {
-      print(e.toString());
-      throw const Failure(message: 'Please enable location services.');
     }
     _isRunning = true;
+  }
+
+  /// Check location permissions on start.
+  Future<void> checkLocationPermissions() async {
+    try {
+      if (!await Nearby().checkLocationPermission()) {
+        final enabled = await Nearby().askLocationPermission();
+        if (!enabled) throw const Failure(message: 'Location permission denied.');
+      }
+      if (!await Nearby().checkLocationEnabled()) {
+        final enabled = await Nearby().enableLocationServices();
+        if (!enabled) throw const Failure(message: 'GPS is not turned on.');
+      }
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Please allow location permissions.');
+    }
   }
 
   /// Start scanning (advertising and discovery) process.
