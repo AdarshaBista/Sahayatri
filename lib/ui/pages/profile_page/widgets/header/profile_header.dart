@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/logout_button.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_avatar.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_details.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/header/logout_button.dart';
 
 class ProfileHeader extends StatelessWidget {
   static const double kHeaderHeight = 300.0;

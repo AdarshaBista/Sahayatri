@@ -44,7 +44,7 @@ class DestinationPage extends StatelessWidget {
       ),
       body: context.bloc<UserCubit>().isAuthenticated
           ? FutureBuilder(
-              future: context.bloc<DestinationCubit>().checkDownload(),
+              future: context.bloc<DestinationCubit>().open(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) return _buildList(context);
                 return const BusyIndicator();

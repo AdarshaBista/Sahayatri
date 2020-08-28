@@ -2,6 +2,7 @@ class HiveConfig {
   static const String kUserBoxName = 'user_box';
   static const String kPrefsBoxName = 'prefs_box';
   static const String kWeatherBoxName = 'weather_box';
+  static const String kItineraryBoxName = 'itinerary_box';
   static const String kDestinationBoxName = 'destination_box';
 }
 

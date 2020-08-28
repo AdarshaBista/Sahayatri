@@ -5,22 +5,29 @@ import 'package:bloc/bloc.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
+import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 class DestinationCubit extends Cubit<Destination> {
-  Destination destination;
+  final Destination destination;
+  final ItineraryDao itineraryDao;
   final DestinationDao destinationDao;
 
   DestinationCubit({
     @required this.destination,
+    @required this.itineraryDao,
     @required this.destinationDao,
   })  : assert(destination != null),
+        assert(itineraryDao != null),
         assert(destinationDao != null),
         super(destination);
 
-  Future<bool> checkDownload() async {
+  Future<bool> open() async {
     final downloaded = await destinationDao.get(destination.id);
+    final createdItinerary = await itineraryDao.get(destination.id);
+
     destination.isDownloaded = false;
+    destination.createdItinerary = createdItinerary;
 
     if (downloaded != null) {
       destination.isDownloaded = true;
@@ -33,8 +40,14 @@ class DestinationCubit extends Cubit<Destination> {
     return true;
   }
 
-  void createItinerary(Itinerary itinerary) {
+  Future<void> changeCreatedItinerary(Itinerary itinerary) async {
     destination.createdItinerary = itinerary;
     emit(destination);
+
+    if (itinerary != null) {
+      itineraryDao.upsert(destination.id, itinerary);
+    } else {
+      itineraryDao.delete(destination.id);
+    }
   }
 }

@@ -6,6 +6,7 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,6 +47,7 @@ class RootRouter {
             BlocProvider<DestinationCubit>(
               create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
+                itineraryDao: context.repository<ItineraryDao>(),
                 destinationDao: context.repository<DestinationDao>(),
               ),
             ),

@@ -109,7 +109,7 @@ class ItineraryCard extends StatelessWidget {
           ).openDialog(context);
           return;
         }
-        context.bloc<DestinationCubit>().createItinerary(null);
+        context.bloc<DestinationCubit>().changeCreatedItinerary(null);
       },
     );
   }

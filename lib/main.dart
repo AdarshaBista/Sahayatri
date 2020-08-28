@@ -27,6 +27,7 @@ import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
+import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,6 +101,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
+          RepositoryProvider(create: (_) => ItineraryDao()),
           RepositoryProvider(create: (_) => DestinationDao()),
           RepositoryProvider(create: (_) => LocationService()),
           RepositoryProvider(create: (_) => NotificationService()),
