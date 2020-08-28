@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
 enum ImageType { asset, network, file }
 
 class ImageUtils {
@@ -8,6 +12,18 @@ class ImageUtils {
       return ImageType.asset;
     } else {
       return ImageType.file;
+    }
+  }
+
+  static ImageProvider getImageProvider(String imageUrl) {
+    final imageType = ImageUtils.getImageType(imageUrl);
+
+    if (imageType == ImageType.asset) {
+      return AssetImage(imageUrl);
+    } else if (imageType == ImageType.network) {
+      return NetworkImage(imageUrl);
+    } else {
+      return FileImage(File(imageUrl));
     }
   }
 }

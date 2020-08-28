@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/utils/image_utils.dart';
@@ -7,8 +5,8 @@ import 'package:sahayatri/core/utils/image_utils.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
 
 class PhotoViewPage extends StatelessWidget {
   final PhotoViewPageArgs args;
@@ -28,13 +26,13 @@ class PhotoViewPage extends StatelessWidget {
             enableRotation: true,
             gaplessPlayback: true,
             scrollPhysics: const ClampingScrollPhysics(),
-            loadingBuilder: (context, event) => const BusyIndicator(),
+            loadingBuilder: (context, event) => const SimpleBusyIndicator(),
             pageController: PageController(initialPage: args.initialPageIndex),
             loadFailedChild: const ErrorIndicator(message: "Couldn't load photo"),
             itemCount: args.imageUrls.length,
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: getImageProvider(args.imageUrls[index]),
+                imageProvider: ImageUtils.getImageProvider(args.imageUrls[index]),
                 heroAttributes: PhotoViewHeroAttributes(tag: args.imageUrls[index]),
                 maxScale: PhotoViewComputedScale.covered * 2.5,
                 minScale: PhotoViewComputedScale.contained * 0.6,
@@ -50,18 +48,6 @@ class PhotoViewPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  ImageProvider getImageProvider(String imageUrl) {
-    final imageType = ImageUtils.getImageType(imageUrl);
-
-    if (imageType == ImageType.asset) {
-      return AssetImage(imageUrl);
-    } else if (imageType == ImageType.network) {
-      return NetworkImage(imageUrl);
-    } else {
-      return FileImage(File(imageUrl));
-    }
   }
 }
 
