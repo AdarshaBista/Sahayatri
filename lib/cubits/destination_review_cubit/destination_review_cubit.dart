@@ -52,6 +52,7 @@ class DestinationReviewCubit extends ReviewCubit {
         destination.id,
         user,
       );
+      destination.reviews ??= [];
       destination.reviews.insert(
         0,
         Review(

@@ -51,6 +51,7 @@ class LodgeReviewCubit extends ReviewCubit {
         lodge.id,
         user,
       );
+      lodge.reviews ??= [];
       lodge.reviews.insert(
         0,
         Review(

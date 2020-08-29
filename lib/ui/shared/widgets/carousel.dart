@@ -15,7 +15,7 @@ class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240.0,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: Swiper(
         autoplay: true,
         autoplayDelay: 2000,
