@@ -15,8 +15,8 @@ import 'package:sahayatri/ui/shared/buttons/column_button.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_button.dart';
 
-class RatingTile extends StatelessWidget {
-  const RatingTile();
+class HeaderTile extends StatelessWidget {
+  const HeaderTile();
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ import 'package:sahayatri/ui/shared/widgets/carousel.dart';
 import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/pages/lodge_page/widgets/lodge_rating.dart';
+import 'package:sahayatri/ui/pages/lodge_page/widgets/header_tile.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/contacts_list.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/facalities_list.dart';
 
@@ -29,8 +29,8 @@ class LodgePage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           _buildCarousel(lodge),
-          const SizedBox(height: 8.0),
-          const LodgeRating(),
+          const SizedBox(height: 12.0),
+          const HeaderTile(),
           const Divider(height: 16.0),
           const FacilitiesList(),
           const SizedBox(height: 16.0),

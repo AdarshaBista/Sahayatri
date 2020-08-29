@@ -18,7 +18,7 @@ import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/rating_tile.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/route_actions.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
@@ -63,7 +63,7 @@ class DestinationPage extends StatelessWidget {
       children: [
         Carousel(imageUrls: destination.imageUrls),
         const SizedBox(height: 16.0),
-        const RatingTile(),
+        const HeaderTile(),
         const SizedBox(height: 8.0),
         const OpenButton(),
         const SizedBox(height: 8.0),
