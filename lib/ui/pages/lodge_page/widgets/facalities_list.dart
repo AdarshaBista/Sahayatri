@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/buttons/column_button.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class FacilitiesList extends StatelessWidget {
   const FacilitiesList();
@@ -59,20 +58,18 @@ class FacilitiesList extends StatelessWidget {
   }
 
   Widget _buildIcon(String label, Color color, IconData icon) {
-    return ScaleAnimator(
-      child: Container(
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Center(
-          child: ColumnButton(
-            label: label,
-            icon: icon,
-            onTap: () {},
-          ),
+    return Container(
+      width: 70,
+      height: 70,
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Center(
+        child: ColumnButton(
+          label: label,
+          icon: icon,
+          onTap: () {},
         ),
       ),
     );

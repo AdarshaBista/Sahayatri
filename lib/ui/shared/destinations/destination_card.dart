@@ -32,7 +32,7 @@ class DestinationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: AspectRatio(
-        aspectRatio: 2.2,
+        aspectRatio: 1.9,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -87,32 +87,57 @@ class DestinationCard extends StatelessWidget {
             size: 16.0,
           ),
           const SizedBox(height: 8.0),
-          FadeAnimator(
+          Text(
+            destination.name.toUpperCase(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.medium.light,
+          ),
+          const SizedBox(height: 8.0),
+          Padding(
+            padding: const EdgeInsets.only(right: 32.0),
             child: Text(
-              destination.name.toUpperCase(),
-              maxLines: 1,
+              destination.description,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.medium.light,
+              style: AppTextStyles.extraSmall.light,
             ),
           ),
           Divider(
             color: AppColors.lightAccent.withOpacity(0.5),
-            height: 10.0,
+            height: 16.0,
             endIndent: 64.0,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 32.0),
-            child: FadeAnimator(
-              child: Text(
-                destination.description,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.extraSmall.light,
-              ),
-            ),
-          ),
+          _buildStats(),
         ],
       ),
+    );
+  }
+
+  Widget _buildStats() {
+    final separator = [
+      const SizedBox(width: 10.0),
+      const CircleAvatar(radius: 2.0, backgroundColor: AppColors.primary),
+      const SizedBox(width: 10.0),
+    ];
+
+    return Row(
+      children: [
+        Text(
+          '${destination.length} km',
+          style: AppTextStyles.extraSmall.primary,
+        ),
+        ...separator,
+        Text(
+          '${destination.maxAltitude} m',
+          style: AppTextStyles.extraSmall.primary,
+        ),
+        ...separator,
+        Text(
+          '${destination.estimatedDuration} days',
+          style: AppTextStyles.extraSmall.primary,
+        ),
+      ],
     );
   }
 
