@@ -46,7 +46,7 @@ class DestinationDrawer extends StatelessWidget {
       children: [
         DrawerItem(
           icon: CommunityMaterialIcons.chart_line_variant,
-          label: 'View Route',
+          label: 'Route',
           onTap: () => context
               .repository<DestinationNavService>()
               .pushNamed(Routes.kRoutePageRoute),
@@ -68,8 +68,13 @@ class DestinationDrawer extends StatelessWidget {
           onTap: () {},
         ),
         DrawerItem(
-          icon: Icons.healing_outlined,
+          icon: CommunityMaterialIcons.medical_bag,
           label: 'Safety',
+          onTap: () {},
+        ),
+        DrawerItem(
+          icon: CommunityMaterialIcons.bag_personal,
+          label: 'Gear',
           onTap: () {},
         ),
       ],
