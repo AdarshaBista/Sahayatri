@@ -26,6 +26,7 @@ import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
+import 'package:sahayatri/ui/pages/lodge_rooms_page/lodge_rooms_page.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -84,6 +85,10 @@ class DestinationRouter {
             child: const LodgePage(),
           ),
         );
+        break;
+
+      case Routes.kLodgeRoomsPageRoute:
+        _page = const LodgeRoomsPage();
         break;
 
       case Routes.kItineraryPageRoute:

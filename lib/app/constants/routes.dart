@@ -8,6 +8,7 @@ class Routes {
   static const String kRoutePageRoute = '$kDestinationPageRoute/route';
   static const String kPlacePageRoute = '$kDestinationPageRoute/place';
   static const String kLodgePageRoute = '$kDestinationPageRoute/lodge';
+  static const String kLodgeRoomsPageRoute = '$kDestinationPageRoute/lodge_rooms';
   static const String kWeatherPageRoute = '$kDestinationPageRoute/weather';
   static const String kTrackerPageRoute = '$kDestinationPageRoute/tracker';
   static const String kPhotoViewPageRoute = '$kDestinationPageRoute/photos';

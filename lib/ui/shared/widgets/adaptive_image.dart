@@ -5,11 +5,15 @@ import 'package:sahayatri/core/utils/image_utils.dart';
 
 class AdaptiveImage extends StatelessWidget {
   final Color color;
+  final double width;
+  final double height;
   final String imageUrl;
 
   const AdaptiveImage(
     this.imageUrl, {
     this.color = Colors.transparent,
+    this.width,
+    this.height,
   }) : assert(color != null);
 
   @override
@@ -18,8 +22,8 @@ class AdaptiveImage extends StatelessWidget {
       image: ImageUtils.getImageProvider(imageUrl),
       color: color,
       fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
+      width: width ?? double.infinity,
+      height: height ?? double.infinity,
       colorBlendMode: BlendMode.srcATop,
       errorBuilder: _buildError,
       frameBuilder: _buildFrame,
