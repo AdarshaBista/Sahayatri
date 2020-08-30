@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 
 class LodgeRoomsPage extends StatelessWidget {
   const LodgeRoomsPage();
@@ -17,9 +18,8 @@ class LodgeRoomsPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
+              const AdaptiveImage(
                 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-                fit: BoxFit.cover,
                 height: 220.0,
                 width: double.infinity,
               ),
@@ -42,7 +42,7 @@ class LodgeRoomsPage extends StatelessWidget {
                           children: [
                             Text(
                               'Rs. 4000',
-                              style: AppTextStyles.large,
+                              style: AppTextStyles.large.serif,
                             ),
                             const SizedBox(width: 8.0),
                             Text(
