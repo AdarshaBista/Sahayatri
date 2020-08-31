@@ -20,7 +20,10 @@ class PlacesGrid extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       children: [
-        const Header(title: 'Places'),
+        const Header(
+          title: 'Places',
+          slideDirection: SlideDirection.right,
+        ),
         BlocBuilder<PlacesCubit, PlacesState>(
           builder: (context, state) {
             if (state is PlacesError) {

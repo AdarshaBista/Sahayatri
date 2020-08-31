@@ -23,6 +23,7 @@ class ItinerariesList extends StatelessWidget {
         const Header(
           title: 'Itinerary',
           leftPadding: 0.0,
+          slideDirection: SlideDirection.right,
         ),
         const SizedBox(height: 20.0),
         _buildSuggestedItineraries(context),

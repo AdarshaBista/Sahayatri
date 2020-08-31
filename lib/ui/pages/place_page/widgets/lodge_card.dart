@@ -47,8 +47,9 @@ class LodgeCard extends StatelessWidget {
       child: GradientContainer(
         gradientColors: [
           Colors.transparent,
-          AppColors.dark.withOpacity(0.5),
-          AppColors.dark,
+          AppColors.dark.withOpacity(0.2),
+          AppColors.dark.withOpacity(0.6),
+          AppColors.dark.withOpacity(0.8),
         ],
         child: AdaptiveImage(lodge.imageUrls[0]),
       ),

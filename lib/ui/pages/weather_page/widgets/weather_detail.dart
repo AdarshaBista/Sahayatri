@@ -51,12 +51,9 @@ class WeatherDetail extends StatelessWidget {
             weather.label.toUpperCase(),
             style: AppTextStyles.large.bold,
           ),
+          _buildTemp(),
           Text(
-            '${weather.temp}°',
-            style: AppTextStyles.large.withSize(96.0),
-          ),
-          Text(
-            'Feels like ${weather.feelsLikeTemp}°',
+            'Feels like ${weather.feelsLikeTemp}°c',
             style: AppTextStyles.small,
           ),
           const Divider(height: 24.0),
@@ -80,6 +77,32 @@ class WeatherDetail extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTemp() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${weather.temp}',
+          style: AppTextStyles.large.serif.withSize(96.0),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            '°',
+            style: AppTextStyles.large.withSize(50.0),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Text(
+            'C',
+            style: AppTextStyles.extraLarge.withSize(40.0),
+          ),
+        ),
+      ],
     );
   }
 

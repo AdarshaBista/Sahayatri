@@ -63,8 +63,8 @@ class DestinationCard extends StatelessWidget {
         gradientEnd: Alignment.topRight,
         gradientBegin: Alignment.bottomCenter,
         gradientColors: [
-          AppColors.dark.withOpacity(0.7),
-          AppColors.dark.withOpacity(0.5),
+          AppColors.dark.withOpacity(0.8),
+          AppColors.dark.withOpacity(0.6),
           AppColors.dark.withOpacity(0.2),
           Colors.transparent,
         ],
