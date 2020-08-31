@@ -182,27 +182,7 @@ class Destination {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is Destination &&
-        o.id == id &&
-        o.name == name &&
-        o.permit == permit &&
-        o.length == length &&
-        o.rating == rating &&
-        o.description == description &&
-        o.maxAltitude == maxAltitude &&
-        o.estimatedDuration == estimatedDuration &&
-        listEquals(o.route, route) &&
-        listEquals(o.imageUrls, imageUrls) &&
-        listEquals(o.bestMonths, bestMonths) &&
-        o.isDownloaded == isDownloaded &&
-        o.createdItinerary == createdItinerary &&
-        listEquals(o.places, places) &&
-        listEquals(o.reviews, reviews) &&
-        listEquals(o.suggestedItineraries, suggestedItineraries);
-  }
+  bool operator ==(Object o) => false;
 
   @override
   int get hashCode {

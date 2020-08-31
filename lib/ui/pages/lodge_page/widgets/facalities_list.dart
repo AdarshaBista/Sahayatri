@@ -32,6 +32,13 @@ class FacilitiesList extends StatelessWidget {
   Widget _buildFacilities(BuildContext context) {
     final facility = context.watch<Lodge>().facility;
 
+    if (facility.isEmpty) {
+      return Text(
+        'N/A',
+        style: AppTextStyles.extraSmall,
+      );
+    }
+
     return Wrap(
       spacing: 8.0,
       children: [

@@ -9,7 +9,7 @@ import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 class DestinationCubit extends Cubit<Destination> {
-  Destination destination;
+  final Destination destination;
   final ItineraryDao itineraryDao;
   final DestinationDao destinationDao;
 
@@ -25,23 +25,20 @@ class DestinationCubit extends Cubit<Destination> {
   Future<bool> open() async {
     final isDownloaded = await destinationDao.contains(destination.id);
     final createdItinerary = await itineraryDao.get(destination.id);
-
-    destination = destination.copyWith(
-      isDownloaded: isDownloaded,
-      createdItinerary: createdItinerary,
-    );
+    destination.isDownloaded = isDownloaded;
+    destination.createdItinerary = createdItinerary;
     emit(destination);
     return true;
   }
 
   void createItinerary(Itinerary itinerary) {
-    destination = destination.copyWith(createdItinerary: itinerary);
+    destination.createdItinerary = itinerary;
     emit(destination);
     itineraryDao.upsert(destination.id, itinerary);
   }
 
   void deleteItinerary() {
-    destination = destination.copyWith()..createdItinerary = null;
+    destination.createdItinerary = null;
     emit(destination);
     itineraryDao.delete(destination.id);
   }

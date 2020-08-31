@@ -31,10 +31,10 @@ class SettingsCard extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: AppColors.primary.withOpacity(0.3),
+                backgroundColor: AppColors.primary.withOpacity(0.25),
                 child: Icon(
                   icon,
-                  color: AppColors.dark,
+                  color: AppColors.primaryDark,
                 ),
               ),
               const SizedBox(width: 16.0),

@@ -50,7 +50,8 @@ class DirectionsButton extends StatelessWidget {
       child: CustomButton(
         label: label,
         outlineOnly: true,
-        color: AppColors.dark,
+        color: AppColors.darkAccent,
+        backgroundColor: AppColors.darkAccent,
         iconData: CommunityMaterialIcons.sign_direction,
         onTap: () => _buildModesRow(context).openModalBottomSheet(context),
       ),

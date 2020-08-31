@@ -39,7 +39,8 @@ class RouteActions extends StatelessWidget {
     return CustomButton(
       label: 'View Route',
       outlineOnly: true,
-      color: AppColors.dark,
+      color: AppColors.darkAccent,
+      backgroundColor: AppColors.darkAccent,
       iconData: CommunityMaterialIcons.chart_line_variant,
       onTap: () =>
           context.repository<DestinationNavService>().pushNamed(Routes.kRoutePageRoute),
