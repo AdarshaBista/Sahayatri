@@ -8,6 +8,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 
 class ContactList extends StatelessWidget {
   const ContactList();
@@ -23,9 +24,9 @@ class ContactList extends StatelessWidget {
         children: [
           Text(
             'Contact Numbers',
-            style: AppTextStyles.medium.bold,
+            style: AppTextStyles.small.bold,
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 10.0),
           ...contactNumbers.map((n) => _buildNumber(context, n)).toList(),
         ],
       ),
@@ -33,28 +34,27 @@ class ContactList extends StatelessWidget {
   }
 
   Widget _buildNumber(BuildContext context, String number) {
-    return ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      visualDensity: VisualDensity.compact,
-      leading: const CircleAvatar(
-        radius: 14.0,
-        backgroundColor: AppColors.lightAccent,
-        child: Icon(
-          Icons.phone,
-          size: 14.0,
-          color: Colors.black54,
+    return ElevatedCard(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+      child: ListTile(
+        dense: true,
+        contentPadding: EdgeInsets.zero,
+        visualDensity: VisualDensity.compact,
+        leading: CircleAvatar(
+          radius: 14.0,
+          backgroundColor: AppColors.primary.withOpacity(0.25),
+          child: const Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
         ),
-      ),
-      title: Text(
-        number,
-        style: AppTextStyles.small,
-      ),
-      trailing: GestureDetector(
-        onTap: () => _launchPhone(context, number),
-        child: Text(
-          'Call',
-          style: AppTextStyles.small.primary,
+        title: Text(
+          number,
+          style: AppTextStyles.small.bold.serif,
+        ),
+        trailing: GestureDetector(
+          onTap: () => _launchPhone(context, number),
+          child: Text(
+            'Call',
+            style: AppTextStyles.small.primary,
+          ),
         ),
       ),
     );

@@ -28,7 +28,7 @@ class PhotoGallery extends StatelessWidget {
             )
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 120.0,
+                maxCrossAxisExtent: 90.0,
               ),
               shrinkWrap: true,
               padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),

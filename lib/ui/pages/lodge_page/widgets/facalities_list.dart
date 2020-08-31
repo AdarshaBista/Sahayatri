@@ -5,8 +5,8 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/buttons/column_button.dart';
 
 class FacilitiesList extends StatelessWidget {
   const FacilitiesList();
@@ -20,9 +20,9 @@ class FacilitiesList extends StatelessWidget {
         children: [
           Text(
             'Facilities',
-            style: AppTextStyles.medium.bold,
+            style: AppTextStyles.small.bold,
           ),
-          const SizedBox(height: 12.0),
+          const SizedBox(height: 10.0),
           _buildFacilities(context),
         ],
       ),
@@ -35,41 +35,27 @@ class FacilitiesList extends StatelessWidget {
     return Wrap(
       spacing: 8.0,
       children: [
-        if (facility.wifi)
-          _buildIcon(
-            'WiFi',
-            Colors.green,
-            CommunityMaterialIcons.wifi,
-          ),
-        if (facility.toilet)
-          _buildIcon(
-            'Toilet',
-            Colors.red,
-            CommunityMaterialIcons.toilet,
-          ),
-        if (facility.shower)
-          _buildIcon(
-            'Shower',
-            Colors.blue,
-            CommunityMaterialIcons.shower_head,
-          ),
+        if (facility.wifi) _buildIcon(CommunityMaterialIcons.wifi),
+        if (facility.toilet) _buildIcon(CommunityMaterialIcons.toilet),
+        if (facility.shower) _buildIcon(CommunityMaterialIcons.shower_head),
       ],
     );
   }
 
-  Widget _buildIcon(String label, Color color, IconData icon) {
-    return Container(
-      width: 70,
-      height: 70,
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Center(
-        child: ColumnButton(
-          label: label,
-          icon: icon,
-          onTap: () {},
+  Widget _buildIcon(IconData icon) {
+    return ScaleAnimator(
+      child: Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: AppColors.primary.withOpacity(0.25),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Center(
+          child: Icon(
+            icon,
+            color: AppColors.primaryDark,
+          ),
         ),
       ),
     );

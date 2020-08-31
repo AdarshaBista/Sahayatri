@@ -29,7 +29,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
         minHeight: UiConfig.kTrackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.8,
         body: const TrackerMap(),
-        panel: _buildPanel(ScrollController()),
+        panel: _buildPanel(),
         onPanelSlide: (value) {
           setState(() {
             panelOpenPercent = value;
@@ -39,7 +39,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
     );
   }
 
-  Widget _buildPanel(ScrollController controller) {
+  Widget _buildPanel() {
     return Column(
       children: const [
         SizedBox(height: 4.0),

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/column_button.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 
 class HeaderTile extends StatelessWidget {
@@ -19,10 +19,11 @@ class HeaderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildRating(context),
-          const Spacer(),
+          const SizedBox(height: 8.0),
           _buildViewRoomsButton(context),
         ],
       ),
@@ -32,26 +33,27 @@ class HeaderTile extends StatelessWidget {
   Widget _buildRating(BuildContext context) {
     final rating = context.watch<Lodge>().rating;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
         StarRatingBar(
-          size: 20.0,
+          size: 18.0,
           rating: rating,
         ),
-        const SizedBox(height: 4.0),
+        const SizedBox(width: 8.0),
         Text(
-          rating.toString(),
-          style: AppTextStyles.large.bold,
+          '($rating)',
+          style: AppTextStyles.small.darkAccent,
         ),
       ],
     );
   }
 
   Widget _buildViewRoomsButton(BuildContext context) {
-    return ColumnButton(
+    return CustomButton(
       label: 'View Rooms',
-      icon: Icons.hotel_outlined,
+      color: AppColors.dark,
+      backgroundColor: AppColors.primary.withOpacity(0.3),
+      iconData: Icons.hotel_outlined,
       onTap: () => context
           .repository<DestinationNavService>()
           .pushNamed(Routes.kLodgeRoomsPageRoute),

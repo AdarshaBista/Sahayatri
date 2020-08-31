@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
+import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 
 import 'package:sahayatri/ui/shared/review/review_list.dart';
 import 'package:sahayatri/ui/shared/widgets/carousel.dart';
-import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
 import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/header_tile.dart';
@@ -26,31 +26,26 @@ class LodgePage extends StatelessWidget {
     return Scaffold(
       appBar: CurvedAppbar(title: lodge.name),
       body: ListView(
+        padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         children: [
-          _buildCarousel(lodge),
-          const SizedBox(height: 12.0),
+          Hero(tag: lodge.id, child: Carousel(imageUrls: lodge.imageUrls)),
+          const SizedBox(height: 16.0),
           const HeaderTile(),
-          const Divider(height: 16.0),
+          const SizedBox(height: 10.0),
           const FacilitiesList(),
           const SizedBox(height: 16.0),
           const ContactList(),
-          const SizedBox(height: 8.0),
-          const Divider(height: 12.0),
-          _buildTabView(context, lodge),
+          const SizedBox(height: 16.0),
+          _buildTabView(context),
         ],
       ),
     );
   }
 
-  Widget _buildCarousel(Lodge lodge) {
-    return Hero(
-      tag: lodge.id,
-      child: Carousel(imageUrls: lodge.imageUrls),
-    );
-  }
+  Widget _buildTabView(BuildContext context) {
+    final lodge = context.watch<Lodge>();
 
-  Widget _buildTabView(BuildContext context, Lodge lodge) {
     return NestedTabView(
       tabs: [
         NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
