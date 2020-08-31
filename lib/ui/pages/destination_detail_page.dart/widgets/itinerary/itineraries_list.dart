@@ -20,12 +20,13 @@ class ItinerariesList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       children: [
+        const SizedBox(height: 16.0),
         const Header(
           title: 'Itinerary',
-          leftPadding: 0.0,
+          padding: 0.0,
           slideDirection: SlideDirection.right,
         ),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 12.0),
         _buildSuggestedItineraries(context),
         _buildCreatedItinerary(),
         const SizedBox(height: 72.0),

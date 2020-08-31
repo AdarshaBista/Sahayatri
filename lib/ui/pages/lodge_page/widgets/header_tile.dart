@@ -36,7 +36,7 @@ class HeaderTile extends StatelessWidget {
     return Row(
       children: [
         StarRatingBar(
-          size: 18.0,
+          size: 20.0,
           rating: rating,
         ),
         const SizedBox(width: 8.0),

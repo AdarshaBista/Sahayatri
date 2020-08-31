@@ -6,17 +6,20 @@ import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 enum SlideDirection { left, right }
 
 class Header extends StatelessWidget {
+  final bool isSerif;
   final String title;
   final String boldTitle;
-  final double leftPadding;
+  final double padding;
   final SlideDirection slideDirection;
 
   const Header({
     this.title,
     this.boldTitle,
-    this.leftPadding = 20.0,
+    this.isSerif = false,
+    this.padding = 20.0,
     this.slideDirection = SlideDirection.left,
-  })  : assert(leftPadding != null),
+  })  : assert(isSerif != null),
+        assert(padding != null),
         assert(slideDirection != null);
 
   @override
@@ -32,18 +35,24 @@ class Header extends StatelessWidget {
         children: <Widget>[
           if (title != null)
             Padding(
-              padding: EdgeInsets.only(left: leftPadding, top: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: padding),
               child: Text(
                 title,
-                style: AppTextStyles.extraLarge.thin,
+                style: isSerif
+                    ? AppTextStyles.extraLarge.thin.serif
+                    : AppTextStyles.extraLarge.thin,
               ),
             ),
           if (boldTitle != null)
             Padding(
-              padding: EdgeInsets.only(left: leftPadding, top: boldTitleTopPadding),
+              padding: EdgeInsets.only(
+                left: padding,
+                right: padding,
+                top: boldTitleTopPadding,
+              ),
               child: Text(
                 boldTitle,
-                style: AppTextStyles.huge.thin,
+                style: isSerif ? AppTextStyles.huge.thin.serif : AppTextStyles.huge.thin,
               ),
             ),
         ],

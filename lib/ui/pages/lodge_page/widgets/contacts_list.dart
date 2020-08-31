@@ -26,7 +26,7 @@ class ContactList extends StatelessWidget {
             'Contact Numbers',
             style: AppTextStyles.small.bold,
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 16.0),
           ...contactNumbers.map((n) => _buildNumber(context, n)).toList(),
         ],
       ),

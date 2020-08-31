@@ -4,11 +4,20 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class CloseIcon extends StatelessWidget {
+  final double size;
+  final Color iconColor;
   final IconData iconData;
+  final Color backgroundColor;
 
   const CloseIcon({
+    this.size = 18.0,
     this.iconData = Icons.close,
-  });
+    this.iconColor = AppColors.light,
+    this.backgroundColor = AppColors.dark,
+  })  : assert(size != null),
+        assert(iconData != null),
+        assert(iconColor != null),
+        assert(backgroundColor != null);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +26,14 @@ class CloseIcon extends StatelessWidget {
       child: ScaleAnimator(
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          decoration: const BoxDecoration(
-            color: AppColors.dark,
+          decoration: BoxDecoration(
+            color: backgroundColor,
             shape: BoxShape.circle,
           ),
           child: Icon(
             iconData,
-            color: AppColors.light,
+            size: size,
+            color: iconColor,
           ),
         ),
       ),

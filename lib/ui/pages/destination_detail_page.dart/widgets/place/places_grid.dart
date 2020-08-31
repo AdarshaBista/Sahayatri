@@ -20,6 +20,7 @@ class PlacesGrid extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       children: [
+        const SizedBox(height: 16.0),
         const Header(
           title: 'Places',
           slideDirection: SlideDirection.right,

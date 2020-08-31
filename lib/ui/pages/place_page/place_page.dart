@@ -12,11 +12,10 @@ import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/carousel.dart';
-import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
-import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
-import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
+import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
+import 'package:sahayatri/ui/shared/widgets/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
 
@@ -28,27 +27,29 @@ class PlacePage extends StatelessWidget {
     final place = Provider.of<Place>(context, listen: false);
 
     return Scaffold(
-      appBar: CurvedAppbar(title: place.name),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          _buildCarousel(place),
-          const SizedBox(height: 8.0),
-          if (place.description.isNotEmpty) _buildDescription(place),
-          if (place.description.isNotEmpty) const Divider(height: 16.0),
-          const PlaceStats(),
-          _buildWeatherButton(context, place),
-          const Divider(height: 16.0),
-          _buildTabView(place),
-        ],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, _) {
+          return [
+            CollapsibleCarousel(
+              title: place.name,
+              heroId: place.id,
+              imageUrls: place.imageUrls,
+            ),
+          ];
+        },
+        body: ListView(
+          padding: EdgeInsets.zero,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            if (place.description.isNotEmpty) _buildDescription(place),
+            if (place.description.isNotEmpty) const Divider(height: 16.0),
+            const PlaceStats(),
+            _buildWeatherButton(context, place),
+            const Divider(height: 16.0),
+            _buildTabView(place),
+          ],
+        ),
       ),
-    );
-  }
-
-  Widget _buildCarousel(Place place) {
-    return Hero(
-      tag: place.id,
-      child: Carousel(imageUrls: place.imageUrls),
     );
   }
 
