@@ -34,7 +34,7 @@ class StatCard extends StatelessWidget {
             child: AutoSizeText(
               label,
               textAlign: TextAlign.center,
-              style: AppTextStyles.small.bold,
+              style: AppTextStyles.extraSmall.bold,
             ),
           ),
           const SizedBox(height: 6.0),
@@ -43,7 +43,7 @@ class StatCard extends StatelessWidget {
               count,
               textAlign: TextAlign.center,
               style: countStyle?.withColor(color) ??
-                  AppTextStyles.large.bold.withColor(color),
+                  AppTextStyles.medium.bold.withColor(color),
             ),
           ),
         ],

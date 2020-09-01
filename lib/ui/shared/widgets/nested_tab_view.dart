@@ -82,37 +82,36 @@ class _NestedTabViewState extends State<NestedTabView>
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      child: Align(
+      child: Container(
+        margin: widget.tabBarMargin,
+        height: height,
+        padding: padding,
         alignment: widget.isCentered ? Alignment.center : Alignment.centerLeft,
-        child: Container(
-          margin: widget.tabBarMargin,
-          height: height,
-          padding: padding,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(borderRadius),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: TabBar(
+          isScrollable: true,
+          controller: _tabController,
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(32.0),
+            color: AppColors.primary.withOpacity(0.25),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 10.0,
+                spreadRadius: 3.0,
+                color: AppColors.primary.withOpacity(0.12),
+              ),
+            ],
           ),
-          child: TabBar(
-            isScrollable: true,
-            controller: _tabController,
-            indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(32.0),
-              color: AppColors.primary.withOpacity(0.6),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 10.0,
-                  spreadRadius: 4.0,
-                  color: AppColors.primary.withOpacity(0.2),
-                ),
-              ],
-            ),
-            tabs: widget.tabs
-                .map((t) => NestedTab(
-                      tab: t,
-                      color: AppColors.dark,
-                    ))
-                .toList(),
-          ),
+          tabs: [
+            for (int i = 0; i < widget.tabs.length; ++i)
+              NestedTab(
+                tab: widget.tabs[i],
+                color: AppColors.dark,
+              )
+          ],
         ),
       ),
     );

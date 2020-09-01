@@ -15,7 +15,7 @@ class PlaceStats extends StatelessWidget {
     final place = Provider.of<Place>(context, listen: false);
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Column(
         children: <Widget>[
           StatTile(

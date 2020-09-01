@@ -18,7 +18,6 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CurvedAppbar(
-        elevation: 0.0,
         title: context.bloc<WeatherCubit>().title,
       ),
       body: BlocBuilder<WeatherCubit, WeatherState>(

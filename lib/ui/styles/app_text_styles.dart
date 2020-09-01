@@ -40,7 +40,7 @@ class AppTextStyles {
   );
 
   static final TextStyle extraSmall = _base.copyWith(
-    fontSize: 11.0,
+    fontSize: 10.0,
     color: AppColors.barrier,
     fontWeight: FontWeight.w200,
   );

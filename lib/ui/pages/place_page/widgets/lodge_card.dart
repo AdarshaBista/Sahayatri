@@ -84,13 +84,13 @@ class LodgeCard extends StatelessWidget {
       children: [
         const Icon(
           Icons.phone,
-          size: 14.0,
+          size: 10.0,
           color: AppColors.lightAccent,
         ),
         const SizedBox(width: 6.0),
         Text(
           lodge.contactNumbers.first,
-          style: AppTextStyles.small.lightAccent,
+          style: AppTextStyles.extraSmall.serif.lightAccent,
         ),
       ],
     );

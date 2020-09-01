@@ -16,7 +16,7 @@ class ImageUtils {
   }
 
   static ImageProvider getImageProvider(String imageUrl) {
-    final imageType = ImageUtils.getImageType(imageUrl);
+    final imageType = getImageType(imageUrl);
 
     if (imageType == ImageType.asset) {
       return AssetImage(imageUrl);

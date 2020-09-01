@@ -25,7 +25,7 @@ class CollapsibleCarousel extends StatelessWidget {
       elevation: 8.0,
       expandedHeight: 280.0,
       leading: const Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.symmetric(vertical: 13.0),
         child: CloseIcon(
           size: 16.0,
           backgroundColor: AppColors.light,

@@ -25,7 +25,7 @@ class IconIndicator extends StatelessWidget {
                 imageUrl,
                 width: MediaQuery.of(context).size.width,
               ),
-              const SizedBox(height: 12.0),
+              const SizedBox(height: 8.0),
               title,
             ],
           ),

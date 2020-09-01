@@ -24,7 +24,7 @@ class LodgeRoomsPage extends StatelessWidget {
                 width: double.infinity,
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

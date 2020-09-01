@@ -36,7 +36,7 @@ class RatingChart extends StatelessWidget {
 
   Widget _buildDetails() {
     return SlideAnimator(
-      begin: const Offset(-1.0, 0.0),
+      begin: const Offset(-0.4, 0.0),
       child: Column(
         children: [
           Text(
@@ -59,7 +59,7 @@ class RatingChart extends StatelessWidget {
 
   Widget _buildBars() {
     return SlideAnimator(
-      begin: const Offset(1.0, 0.0),
+      begin: const Offset(0.4, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

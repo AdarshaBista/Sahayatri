@@ -24,13 +24,13 @@ class DestinationStats extends StatelessWidget {
             color: AppColors.primaryDark,
           ),
           StatCard(
-            label: 'Duration',
-            count: '${destination.estimatedDuration} days',
+            label: 'Altitude',
+            count: '${destination.maxAltitude} m',
             color: AppColors.primaryDark,
           ),
           StatCard(
-            label: 'Altitude',
-            count: '${destination.maxAltitude} m',
+            label: 'Duration',
+            count: '${destination.estimatedDuration} days',
             color: AppColors.primaryDark,
           ),
         ],

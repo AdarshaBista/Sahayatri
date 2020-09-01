@@ -21,18 +21,19 @@ class StatTile extends StatelessWidget {
     return FadeAnimator(
       child: ListTile(
         dense: true,
+        visualDensity: VisualDensity.compact,
         contentPadding: EdgeInsets.zero,
         title: Text(
           label,
-          style: AppTextStyles.small,
+          style: AppTextStyles.small.bold,
         ),
         leading: Icon(
           icon,
-          size: 22.0,
+          size: 20.0,
         ),
         trailing: Text(
           stat,
-          style: AppTextStyles.medium.bold,
+          style: AppTextStyles.medium,
         ),
       ),
     );
