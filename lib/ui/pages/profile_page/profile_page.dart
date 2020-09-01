@@ -46,14 +46,16 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildPage() {
-    return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      children: [
-        const ProfileHeader(),
-        const SizedBox(height: 12.0),
-        _buildTabView(),
-      ],
+    return NestedScrollView(
+      headerSliverBuilder: (context, _) => [const ProfileHeader()],
+      body: ListView(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.only(top: 8.0),
+        children: [
+          _buildTabView(),
+        ],
+      ),
     );
   }
 

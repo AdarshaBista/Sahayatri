@@ -27,15 +27,15 @@ class LogoutButton extends StatelessWidget {
       ).openDialog(context),
       child: ScaleAnimator(
         child: Container(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-            color: AppColors.dark,
+            color: AppColors.light,
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.exit_to_app,
-            size: 14.0,
-            color: AppColors.lightAccent,
+            size: 18.0,
+            color: AppColors.secondary,
           ),
         ),
       ),

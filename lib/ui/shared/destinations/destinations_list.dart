@@ -20,6 +20,7 @@ class DestinationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       itemCount: destinations.length,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => SlideAnimator(
