@@ -56,7 +56,7 @@ class LodgeRoomsPage extends StatelessWidget {
                     CustomButton(
                       label: 'BOOK',
                       color: AppColors.dark,
-                      backgroundColor: AppColors.primary.withOpacity(0.5),
+                      backgroundColor: AppColors.primaryLight,
                       iconData: Icons.bookmark_outline,
                       onTap: () {},
                     ),

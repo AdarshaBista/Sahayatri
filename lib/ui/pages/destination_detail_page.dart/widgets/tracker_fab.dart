@@ -30,9 +30,10 @@ class TrackerFab extends StatelessWidget {
   Widget _buildFab(BuildContext context) {
     final destination = context.bloc<DestinationCubit>().destination;
     return FloatingActionButton(
+      mini: true,
       backgroundColor: AppColors.dark,
       child: const Icon(
-        Icons.directions_walk,
+        Icons.play_arrow_outlined,
         size: 24.0,
         color: AppColors.primary,
       ),

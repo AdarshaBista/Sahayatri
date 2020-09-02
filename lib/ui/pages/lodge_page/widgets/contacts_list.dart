@@ -42,7 +42,7 @@ class ContactList extends StatelessWidget {
         visualDensity: VisualDensity.compact,
         leading: CircleAvatar(
           radius: 14.0,
-          backgroundColor: AppColors.primary.withOpacity(0.25),
+          backgroundColor: AppColors.primaryLight,
           child: const Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
         ),
         title: Text(

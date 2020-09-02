@@ -26,7 +26,7 @@ class FlagMarker extends Marker {
                   padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
                   decoration: BoxDecoration(
                     color: color,
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: BorderRadius.circular(4.0),
                   ),
                   child: Text(
                     label,

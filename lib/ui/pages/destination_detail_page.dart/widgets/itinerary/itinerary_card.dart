@@ -30,89 +30,72 @@ class ItineraryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-      child: Stack(
-        children: [
-          _buildCard(context),
-          _buildImage(),
-          _buildActions(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCard(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context
-          .repository<DestinationNavService>()
-          .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
-      child: ElevatedCard(
-        elevation: 8.0,
-        borderRadius: 4.0,
-        margin: const EdgeInsets.only(left: 12.0, top: 12.0),
-        child: Container(
-          height: kCardHeight,
-          child: _buildDetails(),
-          padding:
-              const EdgeInsets.only(left: 104.0, top: 12.0, right: 36.0, bottom: 12.0),
+    return Hero(
+      tag: itinerary,
+      child: GestureDetector(
+        onTap: () => context
+            .repository<DestinationNavService>()
+            .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
+        child: ElevatedCard(
+          borderRadius: 8.0,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildImage(),
+              Expanded(child: _buildDetails()),
+              ItineraryActions(itinerary: itinerary, deletable: deletable),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildDetails() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          itinerary.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.small.bold,
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          '${itinerary.days} days / ${itinerary.nights} nights',
-          style: AppTextStyles.extraSmall,
-        ),
-        const Divider(height: 10.0, endIndent: 80.0),
-        Text(
-          '${itinerary.checkpoints.length} checkpoints',
-          style: AppTextStyles.extraSmall,
-        ),
-        const SizedBox(height: 6.0),
-        CheckpointImages(imageUrls: imageUrls),
-        const SizedBox(height: 6.0),
-        if (!itinerary.isTemplate)
+    return Container(
+      height: kCardHeight,
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           Text(
-            '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
-            style: AppTextStyles.extraSmall.primary.bold,
+            itinerary.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.small.bold,
           ),
-      ],
+          const SizedBox(height: 4.0),
+          Text(
+            '${itinerary.days} days / ${itinerary.nights} nights',
+            style: AppTextStyles.extraSmall,
+          ),
+          const Divider(height: 10.0, endIndent: 80.0),
+          Text(
+            '${itinerary.checkpoints.length} checkpoints',
+            style: AppTextStyles.extraSmall,
+          ),
+          const SizedBox(height: 6.0),
+          CheckpointImages(imageUrls: imageUrls),
+          const SizedBox(height: 8.0),
+          if (!itinerary.isTemplate)
+            Text(
+              '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
+              style: AppTextStyles.extraSmall.primary.bold,
+            ),
+        ],
+      ),
     );
   }
 
   Widget _buildImage() {
     return ElevatedCard(
       elevation: 0.0,
-      borderRadius: 4.0,
+      borderRadius: 8.0,
       child: Carousel(
         width: 100.0,
         height: kCardHeight,
         imageUrls: imageUrls,
         showPagination: false,
-      ),
-    );
-  }
-
-  Widget _buildActions() {
-    return Positioned(
-      top: 12.0,
-      right: 0.0,
-      child: ItineraryActions(
-        itinerary: itinerary,
-        deletable: deletable,
       ),
     );
   }

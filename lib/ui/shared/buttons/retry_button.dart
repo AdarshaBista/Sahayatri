@@ -13,7 +13,7 @@ class RetryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20.0,
-      backgroundColor: AppColors.primary.withOpacity(0.4),
+      backgroundColor: AppColors.primaryLight,
       child: IconButton(
         onPressed: onTap,
         splashRadius: 20.0,

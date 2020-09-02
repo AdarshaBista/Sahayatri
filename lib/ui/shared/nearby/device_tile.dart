@@ -26,7 +26,7 @@ class DeviceTile extends StatelessWidget {
       subtitle: DeviceStatusRow(status: device.status),
       leading: CircleAvatar(
         radius: 16.0,
-        backgroundColor: AppColors.primary.withOpacity(0.4),
+        backgroundColor: AppColors.primaryLight,
         child: Text(
           '${index + 1}',
           style: AppTextStyles.small.bold,

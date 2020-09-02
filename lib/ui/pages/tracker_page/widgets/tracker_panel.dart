@@ -24,7 +24,6 @@ class _TrackerPanelState extends State<TrackerPanel> {
 
     return Scaffold(
       body: SlidingPanel(
-        borderRadius: 12.0,
         margin: EdgeInsets.all(margin),
         minHeight: UiConfig.kTrackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.8,
@@ -45,7 +44,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
         SizedBox(height: 4.0),
         DragIndicatorPill(),
         LocationStats(),
-        SizedBox(height: 16.0),
+        SizedBox(height: 4.0),
         Expanded(child: TrackerTabs()),
       ],
     );

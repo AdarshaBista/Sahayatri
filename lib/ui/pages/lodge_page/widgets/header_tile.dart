@@ -52,7 +52,7 @@ class HeaderTile extends StatelessWidget {
     return CustomButton(
       label: 'View Rooms',
       color: AppColors.dark,
-      backgroundColor: AppColors.primary.withOpacity(0.3),
+      backgroundColor: AppColors.primaryLight,
       iconData: Icons.hotel_outlined,
       onTap: () => context
           .repository<DestinationNavService>()

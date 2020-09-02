@@ -29,6 +29,7 @@ class PlaceCard extends StatelessWidget {
             );
       },
       child: ElevatedCard(
+        borderRadius: 8.0,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[
@@ -63,23 +64,15 @@ class PlaceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            place.name,
+            place.name.toUpperCase(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.small.bold.light,
           ),
-          Divider(
-            height: 8.0,
-            color: AppColors.lightAccent.withOpacity(0.5),
-          ),
-          Text(
-            '${place.coord.alt.toInt()} m',
-            style: AppTextStyles.small.primary,
-          ),
           const SizedBox(height: 4.0),
           Text(
-            '${place.lodges.length} lodges',
-            style: AppTextStyles.extraSmall.lightAccent,
+            '${place.coord.alt.toInt()} m',
+            style: AppTextStyles.extraSmall.primary,
           ),
         ],
       ),

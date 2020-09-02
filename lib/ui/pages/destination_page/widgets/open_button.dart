@@ -23,8 +23,8 @@ class OpenButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: CustomButton(
           label: 'OPEN',
-          color: AppColors.dark,
-          backgroundColor: AppColors.primary.withOpacity(0.3),
+          color: AppColors.primaryDark,
+          backgroundColor: AppColors.primaryLight,
           iconData: Icons.keyboard_arrow_right,
           onTap: () {
             if (!context.bloc<UserCubit>().isAuthenticated) {

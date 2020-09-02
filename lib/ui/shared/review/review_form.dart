@@ -54,13 +54,23 @@ class _ReviewFormState extends State<ReviewForm> {
   }
 
   Widget _buildRatingField() {
-    return StarRatingBar(
-      rating: rating,
-      onUpdate: (value) {
-        setState(() {
-          rating = value;
-        });
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Rating',
+          style: AppTextStyles.small.bold,
+        ),
+        const SizedBox(height: 12.0),
+        StarRatingBar(
+          rating: rating,
+          onUpdate: (value) {
+            setState(() {
+              rating = value;
+            });
+          },
+        ),
+      ],
     );
   }
 

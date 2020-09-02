@@ -13,7 +13,7 @@ class SearchBox extends StatelessWidget {
 
   const SearchBox({
     this.hintText = 'Search',
-    this.elevation = 8.0,
+    this.elevation = 4.0,
     @required this.onChanged,
   })  : assert(hintText != null),
         assert(elevation != null),

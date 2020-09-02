@@ -58,7 +58,7 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return CustomCard(
-      borderRadius: 12.0,
+      borderRadius: 8.0,
       child: GradientContainer(
         gradientEnd: Alignment.topRight,
         gradientBegin: Alignment.bottomCenter,
@@ -84,7 +84,7 @@ class DestinationCard extends StatelessWidget {
         children: [
           StarRatingBar(
             rating: destination.rating,
-            size: 16.0,
+            size: 14.0,
           ),
           const SizedBox(height: 8.0),
           Text(
@@ -157,7 +157,7 @@ class DestinationCard extends StatelessWidget {
           decoration: const BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(12.0),
+              topRight: Radius.circular(8.0),
               bottomLeft: Radius.circular(20.0),
             ),
           ),

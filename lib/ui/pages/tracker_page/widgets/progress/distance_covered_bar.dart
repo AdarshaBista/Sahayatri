@@ -18,13 +18,13 @@ class DistanceCoveredBar extends StatelessWidget {
       child: Column(
         children: [
           SliderTheme(
-            data: const SliderThemeData(
+            data: SliderThemeData(
               trackHeight: 8.0,
               activeTrackColor: AppColors.primary,
-              inactiveTrackColor: AppColors.secondary,
-              overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
+              inactiveTrackColor: AppColors.primaryLight,
+              overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
               thumbColor: AppColors.primary,
-              thumbShape: RoundSliderThumbShape(
+              thumbShape: const RoundSliderThumbShape(
                 elevation: 0.0,
                 pressedElevation: 0.0,
                 enabledThumbRadius: 5.0,

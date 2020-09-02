@@ -34,6 +34,7 @@ class CustomButton extends StatelessWidget {
               highlightedBorderColor: backgroundColor,
               borderSide: BorderSide(color: backgroundColor),
               icon: Icon(iconData, color: color),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
               label: Text(
                 label,
                 style: AppTextStyles.small.withColor(color),
@@ -44,6 +45,7 @@ class CustomButton extends StatelessWidget {
               color: backgroundColor,
               splashColor: AppColors.primary,
               icon: Icon(iconData, color: color),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
               label: Text(
                 label,
                 style: AppTextStyles.small.withColor(color),

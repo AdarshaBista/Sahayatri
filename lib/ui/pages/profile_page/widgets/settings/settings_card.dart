@@ -31,7 +31,7 @@ class SettingsCard extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: AppColors.primary.withOpacity(0.25),
+                backgroundColor: AppColors.primaryLight,
                 child: Icon(
                   icon,
                   color: AppColors.primaryDark,

@@ -39,7 +39,7 @@ class PlaceActions extends StatelessWidget {
     return CustomButton(
       label: 'Weather',
       color: AppColors.dark,
-      backgroundColor: AppColors.primary.withOpacity(0.25),
+      backgroundColor: AppColors.primaryLight,
       iconData: CommunityMaterialIcons.weather_fog,
       onTap: () => context.repository<DestinationNavService>().pushNamed(
             Routes.kWeatherPageRoute,
@@ -56,7 +56,7 @@ class PlaceActions extends StatelessWidget {
       label: 'View Map',
       color: AppColors.dark,
       iconData: Icons.map_outlined,
-      backgroundColor: AppColors.primary.withOpacity(0.25),
+      backgroundColor: AppColors.primaryLight,
       onTap: () => PlaceMapDialog(place: place).openDialog(context),
     );
   }

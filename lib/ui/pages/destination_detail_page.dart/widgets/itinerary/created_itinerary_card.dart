@@ -22,33 +22,32 @@ class CreatedItineraryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DestinationCubit, Destination>(
       builder: (context, destination) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildButton(context, destination.createdItinerary),
-            const SizedBox(height: 12.0),
-            if (destination.createdItinerary != null)
-              ItineraryCard(
-                deletable: true,
-                itinerary: destination.createdItinerary,
-              ),
-          ],
-        );
+        return destination.createdItinerary == null
+            ? _buildButton(context, destination.createdItinerary)
+            : Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: ItineraryCard(
+                  deletable: true,
+                  itinerary: destination.createdItinerary,
+                ),
+              );
       },
     );
   }
 
   Widget _buildButton(BuildContext context, Itinerary createdItinerary) {
-    return CustomButton(
-      outlineOnly: true,
-      color: AppColors.dark,
-      iconData: CommunityMaterialIcons.pencil_circle_outline,
-      label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
-      onTap: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kItineraryFormPageRoute,
-            arguments: context.bloc<DestinationCubit>().destination.createdItinerary,
-          ),
+    return Container(
+      width: double.infinity,
+      child: CustomButton(
+        color: AppColors.primaryDark,
+        backgroundColor: AppColors.primaryLight,
+        iconData: CommunityMaterialIcons.pencil_circle_outline,
+        label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
+        onTap: () => context.repository<DestinationNavService>().pushNamed(
+              Routes.kItineraryFormPageRoute,
+              arguments: context.bloc<DestinationCubit>().destination.createdItinerary,
+            ),
+      ),
     );
   }
 }

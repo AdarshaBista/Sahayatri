@@ -57,9 +57,8 @@ class ConfirmDialog extends StatelessWidget {
     return CustomButton(
       label: 'YES',
       iconData: Icons.check,
-      outlineOnly: true,
       color: AppColors.secondary,
-      backgroundColor: AppColors.secondary,
+      backgroundColor: AppColors.secondaryLight,
       onTap: () {
         onConfirm();
         Navigator.of(context).pop();
@@ -71,9 +70,8 @@ class ConfirmDialog extends StatelessWidget {
     return CustomButton(
       label: 'NO',
       iconData: Icons.close,
-      outlineOnly: true,
-      color: AppColors.primary,
-      backgroundColor: AppColors.primary,
+      color: AppColors.primaryDark,
+      backgroundColor: AppColors.primaryLight,
       onTap: () => Navigator.of(context).pop(),
     );
   }

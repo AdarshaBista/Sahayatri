@@ -112,8 +112,9 @@ class _ReviewCardState extends State<ReviewCard> {
       width: 72.0,
       height: 72.0,
       child: ElevatedCard(
+        borderRadius: 8.0,
         margin: const EdgeInsets.all(12.0),
-        color: AppColors.primary.withOpacity(0.4),
+        color: AppColors.primaryLight,
         child: widget.review.user.imageUrl != null
             ? AdaptiveImage(widget.review.user.imageUrl)
             : Center(

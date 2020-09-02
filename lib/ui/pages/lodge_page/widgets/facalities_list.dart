@@ -55,8 +55,8 @@ class FacilitiesList extends StatelessWidget {
         width: 48,
         height: 48,
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.25),
-          borderRadius: BorderRadius.circular(12.0),
+          color: AppColors.primaryLight,
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Center(
           child: Icon(

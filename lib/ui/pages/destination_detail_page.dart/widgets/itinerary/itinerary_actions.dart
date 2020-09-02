@@ -30,40 +30,41 @@ class ItineraryActions extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         color: AppColors.secondary,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(4.0),
-          bottomLeft: Radius.circular(10.0),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0)),
+      ),
+      child: _buildButtons(context),
+    );
+  }
+
+  Widget _buildButtons(BuildContext context) {
+    return Column(
+      children: [
+        _buildIcon(
+          color: AppColors.primaryDark,
+          icon: Icons.edit,
+          onTap: () => context.repository<DestinationNavService>().pushNamed(
+                Routes.kItineraryFormPageRoute,
+                arguments: itinerary,
+              ),
         ),
-      ),
-      child: Column(
-        children: [
+        if (deletable)
           _buildIcon(
-            color: AppColors.primaryDark,
-            icon: Icons.edit,
-            onTap: () => context.repository<DestinationNavService>().pushNamed(
-                  Routes.kItineraryFormPageRoute,
-                  arguments: itinerary,
-                ),
-          ),
-          if (deletable)
-            _buildIcon(
-              color: Colors.redAccent,
-              icon: Icons.close,
-              onTap: () {
-                if (context.repository<TrackerService>().isTracking) {
-                  const MessageDialog(
-                    message: 'Cannot delete when tracker is running.',
-                  ).openDialog(context);
-                  return;
-                }
-                ConfirmDialog(
-                  message: 'Do you want to delete this itinerary?',
-                  onConfirm: context.bloc<DestinationCubit>().deleteItinerary,
+            color: Colors.redAccent,
+            icon: Icons.close,
+            onTap: () {
+              if (context.repository<TrackerService>().isTracking) {
+                const MessageDialog(
+                  message: 'Cannot delete when tracker is running.',
                 ).openDialog(context);
-              },
-            ),
-        ],
-      ),
+                return;
+              }
+              ConfirmDialog(
+                message: 'Do you want to delete this itinerary?',
+                onConfirm: context.bloc<DestinationCubit>().deleteItinerary,
+              ).openDialog(context);
+            },
+          ),
+      ],
     );
   }
 

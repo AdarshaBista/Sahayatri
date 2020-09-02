@@ -53,8 +53,8 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-                ? AppTextStyles.medium.light.bold.serif
-                : AppTextStyles.medium.bold.serif,
+                ? AppTextStyles.medium.light.serif
+                : AppTextStyles.medium.serif,
           ),
         ),
       ),

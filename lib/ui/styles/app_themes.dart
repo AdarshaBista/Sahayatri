@@ -56,12 +56,12 @@ class AppThemes {
       );
 
   static RoundedRectangleBorder get _circularBorderRadius => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(4.0),
       );
 
   static InputBorder get _inputBorder => OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(4.0),
       );
 
   static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
@@ -70,7 +70,7 @@ class AppThemes {
         errorMaxLines: 2,
         helperMaxLines: 2,
         alignLabelWithHint: true,
-        contentPadding: const EdgeInsets.all(16.0),
+        contentPadding: const EdgeInsets.all(12.0),
         fillColor: AppColors.lightAccent,
         focusColor: AppColors.lightAccent,
         hintStyle: AppTextStyles.small,
@@ -156,8 +156,8 @@ class AppThemes {
         modalBackgroundColor: AppColors.lightAccent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12.0),
-            topRight: Radius.circular(12.0),
+            topLeft: Radius.circular(8.0),
+            topRight: Radius.circular(8.0),
           ),
         ),
       );

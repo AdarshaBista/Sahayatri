@@ -89,7 +89,7 @@ class DownloadDialog extends StatelessWidget {
           outlineOnly: true,
           color: AppColors.dark,
           iconData: Icons.check,
-          backgroundColor: AppColors.primary.withOpacity(0.3),
+          backgroundColor: AppColors.primaryLight,
           onTap: () => Navigator.of(context).pop(),
         ),
       ],

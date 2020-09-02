@@ -55,6 +55,7 @@ class NextCheckpointCard extends StatelessWidget {
 
     return ElevatedCard(
       elevation: 8.0,
+      borderRadius: 8.0,
       child: Hero(
         tag: place.id,
         child: GradientContainer(

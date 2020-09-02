@@ -49,7 +49,7 @@ class PlacesGrid extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 10 / 13,
+        childAspectRatio: 0.9,
         crossAxisSpacing: 12.0,
         mainAxisSpacing: 12.0,
       ),

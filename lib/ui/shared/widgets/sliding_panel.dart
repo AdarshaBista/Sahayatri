@@ -22,7 +22,7 @@ class SlidingPanel extends StatelessWidget {
     this.snapPoint,
     this.onPanelSlide,
     this.panelBuilder,
-    this.borderRadius = 16.0,
+    this.borderRadius = 12.0,
     this.parallaxEnabled = false,
     this.margin = EdgeInsets.zero,
   })  : assert(body != null),
