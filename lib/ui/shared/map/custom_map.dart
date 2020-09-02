@@ -100,7 +100,7 @@ class _CustomMapState extends State<CustomMap> {
           ...widget.children,
         ],
         options: MapOptions(
-          zoom: 12.0,
+          zoom: widget.initialZoom,
           minZoom: widget.minZoom,
           maxZoom: widget.maxZoom,
           center: widget.center.toLatLng(),

@@ -27,10 +27,11 @@ class CreatedItineraryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildButton(context, destination.createdItinerary),
+            const SizedBox(height: 12.0),
             if (destination.createdItinerary != null)
               ItineraryCard(
-                itinerary: destination.createdItinerary,
                 deletable: true,
+                itinerary: destination.createdItinerary,
               ),
           ],
         );

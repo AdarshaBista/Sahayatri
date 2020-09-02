@@ -11,7 +11,6 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
@@ -67,19 +66,6 @@ class DownloadDialog extends StatelessWidget {
             message,
             textAlign: TextAlign.center,
             style: AppTextStyles.small.bold,
-          ),
-        ),
-        const SizedBox(height: 16.0),
-        CustomButton(
-          label: 'Cancel',
-          iconData: Icons.close,
-          backgroundColor: AppColors.secondary,
-          onTap: () => ConfirmDialog(
-            message: 'Are you sure you want to cancel the download?',
-            onConfirm: () {
-              context.bloc<DownloadCubit>().cancelDownload();
-              Navigator.of(context).pop();
-            },
           ),
         ),
       ],

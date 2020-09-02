@@ -21,10 +21,7 @@ class PlacesGrid extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       children: [
         const SizedBox(height: 16.0),
-        const Header(
-          title: 'Places',
-          slideDirection: SlideDirection.right,
-        ),
+        const Header(title: 'Places'),
         BlocBuilder<PlacesCubit, PlacesState>(
           builder: (context, state) {
             if (state is PlacesError) {

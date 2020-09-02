@@ -4,11 +4,13 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 
 class Carousel extends StatelessWidget {
+  final double width;
   final double height;
   final bool showPagination;
   final List<String> imageUrls;
 
   const Carousel({
+    this.width,
     this.height,
     this.showPagination = true,
     @required this.imageUrls,
@@ -17,6 +19,7 @@ class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width ?? MediaQuery.of(context).size.width,
       height: height ?? MediaQuery.of(context).size.height * 0.3,
       child: Swiper(
         autoplay: true,

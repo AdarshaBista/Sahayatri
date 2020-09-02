@@ -44,6 +44,7 @@ class ItinerariesList extends StatelessWidget {
           style: AppTextStyles.small.bold,
         ),
         const Divider(height: 16.0),
+        const SizedBox(height: 8.0),
         BlocBuilder<ItineraryCubit, ItineraryState>(
           builder: (context, state) {
             if (state is ItineraryError) {

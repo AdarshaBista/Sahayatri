@@ -5,8 +5,8 @@ import 'package:sahayatri/core/utils/image_utils.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
+import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
 
 class PhotoViewPage extends StatelessWidget {
   final PhotoViewPageArgs args;
@@ -26,7 +26,7 @@ class PhotoViewPage extends StatelessWidget {
             enableRotation: true,
             gaplessPlayback: true,
             scrollPhysics: const ClampingScrollPhysics(),
-            loadingBuilder: (context, event) => const SimpleBusyIndicator(),
+            loadingBuilder: (context, event) => const BusyIndicator(),
             pageController: PageController(initialPage: args.initialPageIndex),
             loadFailedChild: const ErrorIndicator(message: "Couldn't load photo"),
             itemCount: args.imageUrls.length,

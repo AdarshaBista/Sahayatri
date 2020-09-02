@@ -37,6 +37,12 @@ class StatCard extends StatelessWidget {
               style: AppTextStyles.extraSmall.bold,
             ),
           ),
+          const SizedBox(height: 3.0),
+          Container(
+            height: 1.0,
+            width: 24.0,
+            color: AppColors.lightAccent,
+          ),
           const SizedBox(height: 6.0),
           Flexible(
             child: AutoSizeText(
