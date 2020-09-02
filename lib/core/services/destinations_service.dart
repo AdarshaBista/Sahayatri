@@ -70,8 +70,8 @@ class DestinationsService {
     _downloaded.add(destination);
   }
 
-  Future<void> deleteDownloaded(Destination destination) async {
-    _downloaded.remove(destination);
-    await destinationDao.delete(destination.id);
+  Future<void> deleteDownloaded(String id) async {
+    _downloaded.removeWhere((d) => d.id == id);
+    await destinationDao.delete(id);
   }
 }

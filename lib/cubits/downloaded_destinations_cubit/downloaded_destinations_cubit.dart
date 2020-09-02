@@ -36,7 +36,8 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
   }
 
   Future<void> deleteDestination(Destination destination) async {
-    await destinationsService.deleteDownloaded(destination);
+    emit(DownloadedDestinationsMessage(message: 'Deleting ${destination.name}...'));
+    await destinationsService.deleteDownloaded(destination.id);
     emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));
     if (destinationsService.downloaded.isEmpty) {
       emit(const DownloadedDestinationsEmpty());

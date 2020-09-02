@@ -86,9 +86,8 @@ class DownloadDialog extends StatelessWidget {
         ),
         CustomButton(
           label: 'OK',
-          outlineOnly: true,
-          color: AppColors.dark,
           iconData: Icons.check,
+          color: AppColors.primaryDark,
           backgroundColor: AppColors.primaryLight,
           onTap: () => Navigator.of(context).pop(),
         ),
