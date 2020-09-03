@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/lodges_list.dart';
 
 class CheckpointDetails extends StatelessWidget {
   final Checkpoint checkpoint;
@@ -32,6 +33,8 @@ class CheckpointDetails extends StatelessWidget {
             _buildDescription(),
             const SizedBox(height: 16.0),
             _buildDateTime(),
+            Divider(height: 16.0, endIndent: MediaQuery.of(context).size.width / 2.0),
+            LodgesList(lodges: checkpoint.place.lodges),
             const SizedBox(height: 8.0),
           ],
         ),

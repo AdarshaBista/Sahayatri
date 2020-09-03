@@ -111,7 +111,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   Widget _buildTrackLocationButton() {
     return Positioned(
       top: 64.0,
-      right: 16.0,
+      left: 16.0,
       child: SafeArea(
         child: TrackLocationButton(
           isTracking: isTracking,

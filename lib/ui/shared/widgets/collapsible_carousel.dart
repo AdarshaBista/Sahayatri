@@ -24,19 +24,21 @@ class CollapsibleCarousel extends StatelessWidget {
       pinned: true,
       elevation: 8.0,
       expandedHeight: 280.0,
-      leading: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 13.0),
-        child: CloseIcon(
-          size: 16.0,
-          backgroundColor: AppColors.light,
-          iconColor: AppColors.dark,
+      automaticallyImplyLeading: false,
+      actions: const [
+        Padding(
+          padding: EdgeInsets.only(right: 12.0),
+          child: CloseIcon(
+            backgroundColor: AppColors.light,
+            iconColor: AppColors.dark,
+          ),
         ),
-      ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
+        centerTitle: false,
         background: _buildCarousel(),
         collapseMode: CollapseMode.pin,
-        titlePadding: const EdgeInsets.all(16.0),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         title: Text(
           title,
           maxLines: 3,

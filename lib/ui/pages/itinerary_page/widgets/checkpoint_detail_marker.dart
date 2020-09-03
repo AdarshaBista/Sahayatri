@@ -24,12 +24,14 @@ class CheckpointDetailMarker extends Marker {
           builder: (_) => Hero(
             tag: checkpoint.place.id,
             child: ElevatedCard(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _DateTimeInfo(checkpoint: checkpoint),
-                  Flexible(child: _PlaceInfo(checkpoint: checkpoint)),
-                ],
+              child: Material(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _DateTimeInfo(checkpoint: checkpoint),
+                    Flexible(child: _PlaceInfo(checkpoint: checkpoint)),
+                  ],
+                ),
               ),
             ),
           ),
@@ -86,13 +88,14 @@ class _PlaceInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => context.repository<DestinationNavService>().pushNamed(
               Routes.kPlacePageRoute,
               arguments: checkpoint.place,
             ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Flexible(
               child: Text(

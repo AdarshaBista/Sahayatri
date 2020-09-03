@@ -68,6 +68,7 @@ class DownloadDialog extends StatelessWidget {
             style: AppTextStyles.small.bold,
           ),
         ),
+        const SizedBox(height: 24.0),
       ],
     );
   }

@@ -32,7 +32,7 @@ class DestinationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: AspectRatio(
-        aspectRatio: 1.9,
+        aspectRatio: 2.0,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -58,13 +58,13 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return CustomCard(
-      borderRadius: 8.0,
+      borderRadius: 6.0,
       child: GradientContainer(
-        gradientEnd: Alignment.topRight,
+        gradientEnd: Alignment.topCenter,
         gradientBegin: Alignment.bottomCenter,
         gradientColors: [
           AppColors.dark.withOpacity(0.8),
-          AppColors.dark.withOpacity(0.6),
+          AppColors.dark.withOpacity(0.5),
           AppColors.dark.withOpacity(0.2),
           Colors.transparent,
         ],
@@ -82,31 +82,25 @@ class DestinationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          StarRatingBar(
-            rating: destination.rating,
-            size: 14.0,
-          ),
-          const SizedBox(height: 8.0),
           Text(
             destination.name.toUpperCase(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium.light,
+            style: AppTextStyles.medium.bold.light,
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 6.0),
           Padding(
             padding: const EdgeInsets.only(right: 32.0),
             child: Text(
               destination.description,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.extraSmall.light,
+              style: AppTextStyles.extraSmall.lightAccent,
             ),
           ),
           Divider(
+            height: 12.0,
             color: AppColors.lightAccent.withOpacity(0.5),
-            height: 16.0,
-            endIndent: 64.0,
           ),
           _buildStats(),
         ],
@@ -116,9 +110,9 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildStats() {
     final separator = [
-      const SizedBox(width: 10.0),
+      const SizedBox(width: 8.0),
       const CircleAvatar(radius: 2.0, backgroundColor: AppColors.primary),
-      const SizedBox(width: 10.0),
+      const SizedBox(width: 8.0),
     ];
 
     return Row(
@@ -136,6 +130,11 @@ class DestinationCard extends StatelessWidget {
         Text(
           '${destination.estimatedDuration} days',
           style: AppTextStyles.extraSmall.primary,
+        ),
+        const Spacer(),
+        StarRatingBar(
+          rating: destination.rating,
+          size: 12.0,
         ),
       ],
     );

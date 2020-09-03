@@ -83,8 +83,8 @@ class _CustomMapState extends State<CustomMap> {
     return Stack(
       children: [
         RepaintBoundary(child: _buildMap()),
-        const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: CloseIcon())),
-        const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: LayersButton())),
+        const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: CloseIcon())),
+        const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: LayersButton())),
       ],
     );
   }
