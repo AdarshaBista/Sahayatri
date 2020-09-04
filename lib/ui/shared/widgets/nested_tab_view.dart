@@ -54,7 +54,7 @@ class _NestedTabViewState extends State<NestedTabView>
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
           padding: widget.tabBarPadding,
@@ -71,10 +71,10 @@ class _NestedTabViewState extends State<NestedTabView>
   }
 
   Widget _buildTabBar(BuildContext context) {
-    final height = widget.isTabFilled ? 36.0 : 32.0;
+    final height = widget.isTabFilled ? 40.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
     final color = widget.isTabFilled ? AppColors.light : Colors.transparent;
-    final padding = widget.isTabFilled ? const EdgeInsets.all(2.0) : EdgeInsets.zero;
+    final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
     return Theme(
       data: Theme.of(context).copyWith(

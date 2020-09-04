@@ -33,8 +33,10 @@ class CheckpointDetails extends StatelessWidget {
             _buildDescription(),
             const SizedBox(height: 16.0),
             _buildDateTime(),
-            Divider(height: 16.0, endIndent: MediaQuery.of(context).size.width / 2.0),
-            LodgesList(lodges: checkpoint.place.lodges),
+            if (checkpoint.place.lodges.isNotEmpty) ...[
+              Divider(height: 16.0, endIndent: MediaQuery.of(context).size.width / 2.0),
+              LodgesList(lodges: checkpoint.place.lodges),
+            ],
             const SizedBox(height: 8.0),
           ],
         ),

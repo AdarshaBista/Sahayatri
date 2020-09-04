@@ -30,6 +30,7 @@ class LodgeCard extends StatelessWidget {
             );
       },
       child: ElevatedCard(
+        borderRadius: 8.0,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[
@@ -58,41 +59,26 @@ class LodgeCard extends StatelessWidget {
 
   Widget _buildDetails() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            lodge.name,
-            style: AppTextStyles.small.bold.light,
+          Flexible(
+            child: Text(
+              lodge.name,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.small.bold.light,
+            ),
           ),
-          const SizedBox(height: 8.0),
+          Divider(height: 12.0, color: AppColors.lightAccent.withOpacity(0.5)),
           StarRatingBar(
             rating: lodge.rating,
             size: 14.0,
           ),
-          Divider(height: 16.0, color: AppColors.lightAccent.withOpacity(0.5)),
-          _buildContact(),
         ],
       ),
-    );
-  }
-
-  Widget _buildContact() {
-    return Row(
-      children: [
-        const Icon(
-          Icons.phone,
-          size: 10.0,
-          color: AppColors.lightAccent,
-        ),
-        const SizedBox(width: 6.0),
-        Text(
-          lodge.contactNumbers.first,
-          style: AppTextStyles.extraSmall.serif.lightAccent,
-        ),
-      ],
     );
   }
 }

@@ -26,28 +26,26 @@ class NextCheckpointCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
 
-    return nextCheckpoint != null
-        ? FadeAnimator(
-            child: Padding(
+    return nextCheckpoint == null
+        ? const Offstage()
+        : FadeAnimator(
+            child: Container(
+              height: 180.0,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: AspectRatio(
-                aspectRatio: 2.3,
-                child: Stack(
-                  alignment: Alignment.bottomLeft,
-                  children: [
-                    _buildBackground(context),
-                    const FlipCard(
-                      speed: 300,
-                      back: _CardBack(),
-                      front: _CardFront(),
-                      direction: FlipDirection.VERTICAL,
-                    ),
-                  ],
-                ),
+              child: Stack(
+                alignment: Alignment.bottomLeft,
+                children: [
+                  _buildBackground(context),
+                  const FlipCard(
+                    speed: 300,
+                    back: _CardBack(),
+                    front: _CardFront(),
+                    direction: FlipDirection.VERTICAL,
+                  ),
+                ],
               ),
             ),
-          )
-        : const Offstage();
+          );
   }
 
   Widget _buildBackground(BuildContext context) {
@@ -96,11 +94,7 @@ class _CardFront extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.medium.light,
           ),
-          Divider(
-            color: AppColors.lightAccent.withOpacity(0.5),
-            height: 10.0,
-            endIndent: 64.0,
-          ),
+          Divider(height: 10.0, color: AppColors.lightAccent.withOpacity(0.5)),
           _buildStatus(context),
         ],
       ),
@@ -173,19 +167,19 @@ class _CardBack extends StatelessWidget {
             'Description',
             style: AppTextStyles.small.primary.bold,
           ),
-          const Divider(height: 16.0, color: AppColors.lightAccent),
+          const Divider(height: 12.0, color: AppColors.lightAccent),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 32.0),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Text(
                 checkpoint.description.isEmpty
                     ? 'No description provided.'
                     : checkpoint.description,
-                overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.small.light,
               ),
             ),
           ),
+          const SizedBox(height: 8.0),
           _buildDateTime(checkpoint),
         ],
       ),

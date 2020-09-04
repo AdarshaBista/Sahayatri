@@ -4,8 +4,8 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:sahayatri/ui/shared/widgets/lodge_card.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/lodge_card.dart';
 
 class LodgesGrid extends StatelessWidget {
   const LodgesGrid();
