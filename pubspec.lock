@@ -636,7 +636,7 @@ packages:
       name: nearby_connections
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "1.1.1+1"
   nested:
     dependency: transitive
     description:
@@ -1120,4 +1120,4 @@ packages:
     version: "2.2.0"
 sdks:
   dart: ">=2.10.0-0.0.dev <2.10.0"
-  flutter: ">=1.20.0 <2.0.0"
+  flutter: ">=1.16.0 <2.0.0"

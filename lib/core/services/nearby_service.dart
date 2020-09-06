@@ -55,12 +55,10 @@ class NearbyService {
   Future<void> checkLocationPermissions() async {
     try {
       if (!await Nearby().checkLocationPermission()) {
-        final enabled = await Nearby().askLocationPermission();
-        if (!enabled) throw const Failure(message: 'Location permission denied.');
+        Nearby().askLocationPermission();
       }
       if (!await Nearby().checkLocationEnabled()) {
-        final enabled = await Nearby().enableLocationServices();
-        if (!enabled) throw const Failure(message: 'GPS is not turned on.');
+        Nearby().enableLocationServices();
       }
     } catch (e) {
       print(e.toString());

@@ -40,7 +40,7 @@ dependencies:
   location: ^3.0.2
 
   # Nearby
-  nearby_connections: ^2.0.1
+  nearby_connections: ^1.1.1+1
 
   # Widgets
   animator: ^2.0.1
