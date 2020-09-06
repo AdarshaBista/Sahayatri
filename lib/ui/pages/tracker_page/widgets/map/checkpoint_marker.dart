@@ -26,7 +26,7 @@ class CheckpointMarker extends Marker {
               child: Icon(
                 CommunityMaterialIcons.map_marker_check,
                 size: 28.0,
-                color: AppColors.primaryDark,
+                color: AppColors.primary,
               ),
             ),
           ),
