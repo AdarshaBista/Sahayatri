@@ -22,7 +22,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           if (state is AuthError) {

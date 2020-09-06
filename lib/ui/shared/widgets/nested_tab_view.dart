@@ -54,7 +54,8 @@ class _NestedTabViewState extends State<NestedTabView>
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment:
+          widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Padding(
           padding: widget.tabBarPadding,
@@ -86,7 +87,6 @@ class _NestedTabViewState extends State<NestedTabView>
         margin: widget.tabBarMargin,
         height: height,
         padding: padding,
-        alignment: widget.isCentered ? Alignment.center : Alignment.centerLeft,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(borderRadius),

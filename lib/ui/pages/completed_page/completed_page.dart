@@ -12,16 +12,14 @@ class CompletedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<UserCubit, UserState>(
-          builder: (context, state) {
-            if (state is Authenticated) {
-              return _buildPage();
-            }
-            return const Center(child: UnauthenticatedView());
-          },
-        ),
+    return Scaffold(
+      body: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return _buildPage();
+          }
+          return const Center(child: UnauthenticatedView());
+        },
       ),
     );
   }
