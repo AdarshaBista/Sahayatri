@@ -16,11 +16,14 @@ class DownloadButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!context.bloc<UserCubit>().isAuthenticated) return const Offstage();
-
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return _buildButton(context, destination);
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is! Authenticated) return const Offstage();
+        return BlocBuilder<DestinationCubit, Destination>(
+          builder: (context, destination) {
+            return _buildButton(context, destination);
+          },
+        );
       },
     );
   }
