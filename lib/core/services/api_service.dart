@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/reviews_list.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
@@ -56,23 +56,17 @@ class ApiService {
     }
   }
 
-  Future<List<Review>> fetchReviews(String destId) async {
+  Future<ReviewsList> fetchReviews(String destId, int page) async {
     try {
-      final Response res =
-          await Dio().get('${AppConfig.kApiBaseUrl}/destinations/$destId/reviews');
+      final Response res = await Dio().get(
+        '${AppConfig.kApiBaseUrl}/destinations/$destId/reviews',
+        queryParameters: {
+          'limit': 10,
+          'page': page,
+        },
+      );
       final body = res.data as Map<String, dynamic>;
-      final reviews = body['data'] as List<dynamic>;
-      return reviews
-          .map((r) {
-            try {
-              return Review.fromMap(r as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((r) => r != null)
-          .toList();
+      return ReviewsList.fromMap(body);
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get reviews.');
@@ -154,28 +148,21 @@ class ApiService {
     }
   }
 
-  Future<List<Review>> fetchLodgeReviews(String lodgeId, User user) async {
+  Future<ReviewsList> fetchLodgeReviews(String lodgeId, int page, User user) async {
     try {
       final Response res = await Dio().get(
         '${AppConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
+        queryParameters: {
+          'limit': 10,
+          'page': page,
+        },
       );
 
       final body = res.data as Map<String, dynamic>;
-      final reviews = body['data'] as List<dynamic>;
-      return reviews
-          .map((r) {
-            try {
-              return Review.fromMap(r as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((r) => r != null)
-          .toList();
+      return ReviewsList.fromMap(body);
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get lodge reviews.');

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +51,7 @@ class ReviewList extends StatelessWidget {
                   onRetry: context.bloc<ReviewCubit>().fetchReviews,
                 );
               } else if (state is ReviewLoaded) {
-                return _buildList(state.reviews);
+                return _buildList(state);
               } else if (state is ReviewEmpty) {
                 return EmptyIndicator(
                   message: 'No reviews yet.',
@@ -68,21 +67,28 @@ class ReviewList extends StatelessWidget {
     );
   }
 
-  Widget _buildList(List<Review> reviews) {
+  Widget _buildList(ReviewLoaded state) {
+    final reviewsList = state.reviewsList;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        RatingChart(ratings: reviews.map((r) => r.rating).toList()),
+        RatingChart(
+          total: reviewsList.total,
+          stars: reviewsList.stars,
+          average: state.average,
+        ),
         const Divider(height: 0.0),
         ListView.separated(
           shrinkWrap: true,
+          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: reviews.length,
+          itemCount: reviewsList.reviews.length,
           separatorBuilder: (_, __) => const Divider(height: 2.0),
           itemBuilder: (context, index) {
             return SlideAnimator(
               begin: Offset(0.0, 0.2 + index * 0.4),
-              child: ReviewCard(review: reviews[index]),
+              child: ReviewCard(review: reviewsList.reviews[index]),
             );
           },
         ),

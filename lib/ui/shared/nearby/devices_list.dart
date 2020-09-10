@@ -17,10 +17,11 @@ class DevicesList extends StatelessWidget {
     return connectedDevices.isEmpty
         ? Text(
             'No devices found yet.',
-            style: AppTextStyles.small.secondary,
+            style: AppTextStyles.extraSmall.secondary,
           )
         : ListView.builder(
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: connectedDevices.length,
             itemBuilder: (context, index) {

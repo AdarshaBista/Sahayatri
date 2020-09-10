@@ -5,20 +5,17 @@ import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
 class RatingChart extends StatelessWidget {
-  final List<double> ratings;
+  final int total;
+  final double average;
+  final Map<int, int> stars;
 
   const RatingChart({
-    @required this.ratings,
-  }) : assert(ratings != null);
-
-  int get total => ratings.length;
-  double get average => ratings.reduce((a, b) => a + b) / total;
-
-  int get rating5 => ratings.where((r) => r >= 5.0).length;
-  int get rating4 => ratings.where((r) => r >= 4.0 && r < 5.0).length;
-  int get rating3 => ratings.where((r) => r >= 3.0 && r < 4.0).length;
-  int get rating2 => ratings.where((r) => r >= 2.0 && r < 3.0).length;
-  int get rating1 => ratings.where((r) => r >= 0.0 && r < 2.0).length;
+    @required this.total,
+    @required this.stars,
+    @required this.average,
+  })  : assert(total != null),
+        assert(stars != null),
+        assert(average != null);
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +41,8 @@ class RatingChart extends StatelessWidget {
             style: AppTextStyles.huge.darkAccent,
           ),
           StarRatingBar(
-            rating: average,
             size: 12.0,
+            rating: average,
           ),
           const SizedBox(height: 6.0),
           Text(
@@ -63,21 +60,17 @@ class RatingChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildBar(5, rating5),
-          _buildBar(4, rating4),
-          _buildBar(3, rating3),
-          _buildBar(2, rating2),
-          _buildBar(1, rating1),
+          for (int i = stars.length; i > 0; --i) _buildBar(i),
         ],
       ),
     );
   }
 
-  Widget _buildBar(int label, int value) {
+  Widget _buildBar(int index) {
     return Row(
       children: [
         Text(
-          label.toString(),
+          index.toString(),
           style: AppTextStyles.extraSmall.bold,
         ),
         const SizedBox(width: 8.0),
@@ -85,7 +78,7 @@ class RatingChart extends StatelessWidget {
           child: Stack(
             children: [
               _buildContainer(AppColors.lightAccent),
-              _buildContainer(AppColors.primary, value / total),
+              _buildContainer(AppColors.primary, stars[index] / total),
             ],
           ),
         ),

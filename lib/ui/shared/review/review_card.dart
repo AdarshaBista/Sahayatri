@@ -35,7 +35,7 @@ class _ReviewCardState extends State<ReviewCard> {
         onTap: _expandText,
         behavior: HitTestBehavior.opaque,
         child: Container(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

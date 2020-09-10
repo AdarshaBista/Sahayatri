@@ -6,6 +6,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/reviews_list.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
@@ -59,7 +60,7 @@ class Destination {
   List<Place> places;
 
   @HiveField(14)
-  List<Review> reviews;
+  ReviewsList reviewsList;
 
   @HiveField(15)
   List<Itinerary> suggestedItineraries;
@@ -79,11 +80,11 @@ class Destination {
     @required this.description,
     @required this.maxAltitude,
     @required this.estimatedDuration,
+    @required this.route,
     @required this.imageUrls,
     @required this.bestMonths,
     @required this.places,
-    @required this.reviews,
-    @required this.route,
+    @required this.reviewsList,
     @required this.suggestedItineraries,
     @required this.createdItinerary,
     @required this.isDownloaded,
@@ -95,6 +96,7 @@ class Destination {
         assert(route != null),
         assert(imageUrls != null),
         assert(bestMonths != null),
+        assert(reviewsList != null),
         assert(description != null),
         assert(maxAltitude != null),
         assert(isDownloaded != null),
@@ -115,7 +117,7 @@ class Destination {
     bool isDownloaded,
     Itinerary createdItinerary,
     List<Place> places,
-    List<Review> reviews,
+    ReviewsList reviewsList,
     List<Itinerary> suggestedItineraries,
   }) {
     return Destination(
@@ -133,7 +135,7 @@ class Destination {
       isDownloaded: isDownloaded ?? this.isDownloaded,
       createdItinerary: createdItinerary ?? this.createdItinerary,
       places: places ?? this.places,
-      reviews: reviews ?? this.reviews,
+      reviewsList: reviewsList ?? this.reviewsList,
       suggestedItineraries: suggestedItineraries ?? this.suggestedItineraries,
     );
   }
@@ -146,10 +148,9 @@ class Destination {
         : List<Place>.from((map['places'] as List<dynamic>)
             ?.map((x) => Place.fromMap(x as Map<String, dynamic>)));
 
-    final reviews = !map.containsKey('reviews')
-        ? null
-        : List<Review>.from((map['reviews'] as List<dynamic>)
-            ?.map((x) => Review.fromMap(x as Map<String, dynamic>)));
+    final reviewsList = !map.containsKey('reviews')
+        ? const ReviewsList()
+        : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>);
 
     final suggestedItineraries = !map.containsKey('itinenaries')
         ? null
@@ -171,14 +172,14 @@ class Destination {
       isDownloaded: false,
       createdItinerary: null,
       places: places,
-      reviews: reviews,
+      reviewsList: reviewsList,
       suggestedItineraries: suggestedItineraries,
     );
   }
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, isDownloaded: $isDownloaded, createdItinerary: $createdItinerary, places: $places, reviews: $reviews, suggestedItineraries: $suggestedItineraries)';
+    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, isDownloaded: $isDownloaded, createdItinerary: $createdItinerary, places: $places, reviewsList: $reviewsList, suggestedItineraries: $suggestedItineraries)';
   }
 
   @override
@@ -200,7 +201,7 @@ class Destination {
         isDownloaded.hashCode ^
         createdItinerary.hashCode ^
         places.hashCode ^
-        reviews.hashCode ^
+        reviewsList.hashCode ^
         suggestedItineraries.hashCode;
   }
 }

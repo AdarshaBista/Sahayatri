@@ -22,17 +22,20 @@ class DestinationReviewCubit extends ReviewCubit {
 
   @override
   Future<void> fetchReviews() async {
-    if (destination.reviews != null) {
-      emit(ReviewLoaded(reviews: destination.reviews));
+    if (destination.reviewsList.isNotEmpty) {
+      emit(ReviewLoaded(
+        reviewsList: destination.reviewsList,
+        average: destination.rating,
+      ));
       return;
     }
 
     emit(const ReviewLoading());
     try {
-      final reviews = await apiService.fetchReviews(destination.id);
-      if (reviews.isNotEmpty) {
-        destination.reviews = reviews;
-        emit(ReviewLoaded(reviews: reviews));
+      final reviewsList = await apiService.fetchReviews(destination.id, page);
+      if (reviewsList.isNotEmpty) {
+        destination.reviewsList = reviewsList;
+        emit(ReviewLoaded(reviewsList: reviewsList, average: destination.rating));
       } else {
         emit(const ReviewEmpty());
       }
@@ -46,24 +49,19 @@ class DestinationReviewCubit extends ReviewCubit {
     if (user == null) return false;
 
     try {
-      final id = await apiService.postDestinationReview(
-        rating,
-        text,
-        destination.id,
-        user,
+      final id =
+          await apiService.postDestinationReview(rating, text, destination.id, user);
+      final review = Review(
+        id: id,
+        text: text,
+        user: user,
+        rating: rating,
+        dateUpdated: DateTime.now(),
       );
-      destination.reviews ??= [];
-      destination.reviews.insert(
-        0,
-        Review(
-          id: id,
-          text: text,
-          user: user,
-          rating: rating,
-          dateUpdated: DateTime.now(),
-        ),
-      );
-      emit(ReviewLoaded(reviews: destination.reviews));
+
+      final updatedList = updateReviewsList(destination.reviewsList, rating, review);
+      final updatedAverage = updateAverage(destination.rating, rating, updatedList.total);
+      emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
       return true;
     } on Failure {
       return false;

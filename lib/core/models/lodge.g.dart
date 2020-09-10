@@ -21,9 +21,9 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
       name: fields[1] as String,
       coord: fields[2] as Coord,
       rating: fields[3] as double,
-      reviews: (fields[7] as List)?.cast<Review>(),
       facility: fields[4] as LodgeFacility,
       imageUrls: (fields[5] as List)?.cast<String>(),
+      reviewsList: fields[7] as ReviewsList,
       contactNumbers: (fields[6] as List)?.cast<String>(),
     );
   }
@@ -47,7 +47,7 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
       ..writeByte(6)
       ..write(obj.contactNumbers)
       ..writeByte(7)
-      ..write(obj.reviews);
+      ..write(obj.reviewsList);
   }
 
   @override

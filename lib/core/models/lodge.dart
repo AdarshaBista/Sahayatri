@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/review.dart';
+import 'package:sahayatri/core/models/reviews_list.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -36,16 +36,16 @@ class Lodge {
   final List<String> contactNumbers;
 
   @HiveField(7)
-  List<Review> reviews;
+  ReviewsList reviewsList;
 
   Lodge({
     @required this.id,
     @required this.name,
     @required this.coord,
     @required this.rating,
-    @required this.reviews,
     @required this.facility,
     @required this.imageUrls,
+    @required this.reviewsList,
     @required this.contactNumbers,
   })  : assert(id != null),
         assert(name != null),
@@ -53,6 +53,7 @@ class Lodge {
         assert(coord != null),
         assert(facility != null),
         assert(imageUrls != null),
+        assert(reviewsList != null),
         assert(contactNumbers != null);
 
   Lodge copyWith({
@@ -62,7 +63,7 @@ class Lodge {
     double rating,
     LodgeFacility facility,
     List<String> imageUrls,
-    List<Review> reviews,
+    ReviewsList reviewsList,
     List<String> contactNumbers,
   }) {
     return Lodge(
@@ -70,9 +71,9 @@ class Lodge {
       name: name ?? this.name,
       coord: coord ?? this.coord,
       rating: rating ?? this.rating,
-      reviews: reviews ?? this.reviews,
-      imageUrls: imageUrls ?? this.imageUrls,
       facility: facility ?? this.facility,
+      imageUrls: imageUrls ?? this.imageUrls,
+      reviewsList: reviewsList ?? this.reviewsList,
       contactNumbers: contactNumbers ?? this.contactNumbers,
     );
   }
@@ -88,16 +89,15 @@ class Lodge {
       facility: LodgeFacility.parse(map['facility'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
-      reviews: !map.containsKey('reviews')
-          ? null
-          : List<Review>.from((map['reviews'] as List<dynamic>)
-              ?.map((x) => Review.fromMap(x as Map<String, dynamic>))),
+      reviewsList: !map.containsKey('reviews')
+          ? const ReviewsList()
+          : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>),
     );
   }
 
   @override
   String toString() {
-    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviews: $reviews)';
+    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviewsList: $reviewsList)';
   }
 
   @override
@@ -110,7 +110,7 @@ class Lodge {
         o.coord == coord &&
         o.rating == rating &&
         o.facility == facility &&
-        listEquals(o.reviews, reviews) &&
+        o.reviewsList == reviewsList &&
         listEquals(o.imageUrls, imageUrls) &&
         listEquals(o.contactNumbers, contactNumbers);
   }
@@ -121,9 +121,9 @@ class Lodge {
         name.hashCode ^
         coord.hashCode ^
         rating.hashCode ^
-        reviews.hashCode ^
         facility.hashCode ^
         imageUrls.hashCode ^
+        reviewsList.hashCode ^
         contactNumbers.hashCode;
   }
 }

@@ -23,17 +23,17 @@ class LodgeReviewCubit extends ReviewCubit {
 
   @override
   Future<void> fetchReviews() async {
-    if (lodge.reviews != null) {
-      emit(ReviewLoaded(reviews: lodge.reviews));
+    if (lodge.reviewsList.isNotEmpty) {
+      emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
       return;
     }
 
     emit(const ReviewLoading());
     try {
-      final reviews = await apiService.fetchLodgeReviews(lodge.id, user);
-      if (reviews.isNotEmpty) {
-        lodge.reviews = reviews;
-        emit(ReviewLoaded(reviews: reviews));
+      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, page, user);
+      if (reviewsList.isNotEmpty) {
+        lodge.reviewsList = reviewsList;
+        emit(ReviewLoaded(reviewsList: reviewsList, average: lodge.rating));
       } else {
         emit(const ReviewEmpty());
       }
@@ -45,24 +45,18 @@ class LodgeReviewCubit extends ReviewCubit {
   @override
   Future<bool> postReview(double rating, String text) async {
     try {
-      final id = await apiService.postLodgeReview(
-        rating,
-        text,
-        lodge.id,
-        user,
+      final id = await apiService.postLodgeReview(rating, text, lodge.id, user);
+      final review = Review(
+        id: id,
+        text: text,
+        user: user,
+        rating: rating,
+        dateUpdated: DateTime.now(),
       );
-      lodge.reviews ??= [];
-      lodge.reviews.insert(
-        0,
-        Review(
-          id: id,
-          text: text,
-          user: user,
-          rating: rating,
-          dateUpdated: DateTime.now(),
-        ),
-      );
-      emit(ReviewLoaded(reviews: lodge.reviews));
+
+      final updatedList = updateReviewsList(lodge.reviewsList, rating, review);
+      final updatedAverage = updateAverage(lodge.rating, rating, updatedList.total);
+      emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
       return true;
     } on Failure {
       return false;

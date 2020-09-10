@@ -50,7 +50,7 @@ class DestinationsService {
       final fullDestination = await apiService.download(destination.id, user);
       fullDestination.isDownloaded = true;
       destination.places = fullDestination.places;
-      destination.reviews = fullDestination.reviews;
+      destination.reviewsList = fullDestination.reviewsList;
       destination.isDownloaded = fullDestination.isDownloaded;
       destination.suggestedItineraries = fullDestination.suggestedItineraries;
 

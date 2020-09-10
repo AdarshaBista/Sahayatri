@@ -16,6 +16,7 @@ import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/reviews_list.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
@@ -74,6 +75,7 @@ Future<void> initHive() async {
     ..registerAdapter(ItineraryAdapter())
     ..registerAdapter(CheckpointAdapter())
     ..registerAdapter(DestinationAdapter())
+    ..registerAdapter(ReviewsListAdapter())
     ..registerAdapter(LodgeFacilityAdapter());
 }
 

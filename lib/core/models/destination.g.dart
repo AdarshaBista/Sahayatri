@@ -25,11 +25,11 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       description: fields[5] as String,
       maxAltitude: fields[6] as String,
       estimatedDuration: fields[7] as String,
+      route: (fields[8] as List)?.cast<Coord>(),
       imageUrls: (fields[9] as List)?.cast<String>(),
       bestMonths: (fields[10] as List)?.cast<String>(),
       places: (fields[13] as List)?.cast<Place>(),
-      reviews: (fields[14] as List)?.cast<Review>(),
-      route: (fields[8] as List)?.cast<Coord>(),
+      reviewsList: fields[14] as ReviewsList,
       suggestedItineraries: (fields[15] as List)?.cast<Itinerary>(),
       createdItinerary: fields[12] as Itinerary,
       isDownloaded: fields[11] as bool,
@@ -69,7 +69,7 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       ..writeByte(13)
       ..write(obj.places)
       ..writeByte(14)
-      ..write(obj.reviews)
+      ..write(obj.reviewsList)
       ..writeByte(15)
       ..write(obj.suggestedItineraries);
   }

@@ -18,4 +18,5 @@ class HiveTypeIds {
   static const int kLodgeFacility = 8;
   static const int kPlace = 9;
   static const int kReview = 10;
+  static const int kReviewsList = 11;
 }
