@@ -8,10 +8,11 @@ import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/review/review_form.dart';
 import 'package:sahayatri/ui/shared/review/review_card.dart';
 import 'package:sahayatri/ui/shared/review/rating_chart.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/shared/review/view_more_button.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
@@ -99,21 +100,11 @@ class ReviewList extends StatelessWidget {
             );
           },
         ),
-        _buildViewMoreButton(context),
+        ViewMoreButton(
+          hasMore: reviewCubit.hasMore,
+          onLoadMore: reviewCubit.loadMore,
+        ),
       ],
-    );
-  }
-
-  Widget _buildViewMoreButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: CustomButton(
-        label: 'View More',
-        color: AppColors.primaryDark,
-        backgroundColor: AppColors.primaryLight,
-        iconData: Icons.arrow_right_alt_outlined,
-        onTap: () {},
-      ),
     );
   }
 

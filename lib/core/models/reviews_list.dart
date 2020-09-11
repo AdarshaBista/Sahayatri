@@ -19,6 +19,7 @@ class ReviewsList {
   @HiveField(2)
   final List<Review> reviews;
 
+  int get length => reviews.length;
   bool get isNotEmpty => reviews.isNotEmpty;
 
   const ReviewsList({

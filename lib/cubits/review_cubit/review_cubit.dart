@@ -20,6 +20,10 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   })  : assert(apiService != null),
         super(const ReviewEmpty());
 
+  int page = 1;
+  bool get hasMore;
+
+  Future<bool> loadMore();
   Future<void> fetchReviews();
   Future<bool> postReview(double rating, String text);
 

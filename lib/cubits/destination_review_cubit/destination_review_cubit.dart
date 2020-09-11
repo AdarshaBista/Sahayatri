@@ -21,6 +21,25 @@ class DestinationReviewCubit extends ReviewCubit {
         super(user: user, apiService: apiService);
 
   @override
+  bool get hasMore => destination.reviewsList.length < destination.reviewsList.total;
+
+  @override
+  Future<bool> loadMore() async {
+    page++;
+    try {
+      final reviewsList = await apiService.fetchReviews(destination.id, page);
+      destination.reviewsList.reviews.addAll(reviewsList.reviews);
+      emit(ReviewLoaded(
+        reviewsList: destination.reviewsList,
+        average: destination.rating,
+      ));
+      return true;
+    } on Failure {
+      return false;
+    }
+  }
+
+  @override
   Future<void> fetchReviews() async {
     if (destination.reviewsList.isNotEmpty) {
       emit(ReviewLoaded(

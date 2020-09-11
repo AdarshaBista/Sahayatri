@@ -22,6 +22,22 @@ class LodgeReviewCubit extends ReviewCubit {
         super(user: user, apiService: apiService);
 
   @override
+  bool get hasMore => lodge.reviewsList.length < lodge.reviewsList.total;
+
+  @override
+  Future<bool> loadMore() async {
+    page++;
+    try {
+      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, page, user);
+      lodge.reviewsList.reviews.addAll(reviewsList.reviews);
+      emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
+      return true;
+    } on Failure {
+      return false;
+    }
+  }
+
+  @override
   Future<void> fetchReviews() async {
     if (lodge.reviewsList.isNotEmpty) {
       emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
