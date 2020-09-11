@@ -27,34 +27,35 @@ class ContactList extends StatelessWidget {
             style: AppTextStyles.small.bold,
           ),
           const SizedBox(height: 16.0),
-          ...contactNumbers.map((n) => _buildNumber(context, n)).toList(),
+          ElevatedCard(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: contactNumbers.map((n) => _buildNumber(context, n)).toList(),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildNumber(BuildContext context, String number) {
-    return ElevatedCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
-      child: ListTile(
-        dense: true,
-        contentPadding: EdgeInsets.zero,
-        visualDensity: VisualDensity.compact,
-        leading: CircleAvatar(
-          radius: 14.0,
-          backgroundColor: AppColors.primaryLight,
-          child: const Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
-        ),
-        title: Text(
-          number,
-          style: AppTextStyles.small.bold.serif,
-        ),
-        trailing: GestureDetector(
-          onTap: () => _launchPhone(context, number),
-          child: Text(
-            'Call',
-            style: AppTextStyles.small.primary,
-          ),
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      visualDensity: VisualDensity.compact,
+      leading: CircleAvatar(
+        radius: 14.0,
+        backgroundColor: AppColors.primaryLight,
+        child: const Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
+      ),
+      title: Text(
+        number,
+        style: AppTextStyles.small.bold.serif,
+      ),
+      trailing: GestureDetector(
+        onTap: () => _launchPhone(context, number),
+        child: Text(
+          'Call',
+          style: AppTextStyles.small.primary,
         ),
       ),
     );

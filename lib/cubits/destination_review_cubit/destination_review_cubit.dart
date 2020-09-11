@@ -32,7 +32,7 @@ class DestinationReviewCubit extends ReviewCubit {
 
     emit(const ReviewLoading());
     try {
-      final reviewsList = await apiService.fetchReviews(destination.id, page);
+      final reviewsList = await apiService.fetchReviews(destination.id, 1);
       if (reviewsList.isNotEmpty) {
         destination.reviewsList = reviewsList;
         emit(ReviewLoaded(reviewsList: reviewsList, average: destination.rating));

@@ -14,8 +14,6 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   final User user;
   final ApiService apiService;
 
-  int page = 1;
-
   ReviewCubit({
     @required this.user,
     @required this.apiService,

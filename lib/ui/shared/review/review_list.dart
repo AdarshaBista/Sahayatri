@@ -31,43 +31,50 @@ class ReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.bloc<UserCubit>().isAuthenticated)
-            CustomButton(
-              label: 'Write a review',
-              outlineOnly: true,
-              color: AppColors.dark,
-              backgroundColor: AppColors.barrier,
-              iconData: CommunityMaterialIcons.pencil_outline,
-              onTap: () => ReviewForm(
-                onSubmit: (rating, text) async => _postReview(context, rating, text),
-              ).openModalBottomSheet(context),
-            ),
+          if (context.bloc<UserCubit>().isAuthenticated) _buildWriteReviewButton(context),
           const SizedBox(height: 8.0),
-          BlocBuilder<ReviewCubit, ReviewState>(
-            builder: (context, state) {
-              if (state is ReviewError) {
-                return ErrorIndicator(
-                  message: state.message,
-                  onRetry: context.bloc<ReviewCubit>().fetchReviews,
-                );
-              } else if (state is ReviewLoaded) {
-                return _buildList(state);
-              } else if (state is ReviewEmpty) {
-                return EmptyIndicator(
-                  message: 'No reviews yet.',
-                  onRetry: context.bloc<ReviewCubit>().fetchReviews,
-                );
-              } else {
-                return const BusyIndicator();
-              }
-            },
-          ),
+          _buildReviews(context),
         ],
       ),
     );
   }
 
-  Widget _buildList(ReviewLoaded state) {
+  Widget _buildWriteReviewButton(BuildContext context) {
+    return CustomButton(
+      label: 'Write a review',
+      outlineOnly: true,
+      color: AppColors.dark,
+      backgroundColor: AppColors.barrier,
+      iconData: CommunityMaterialIcons.pencil_outline,
+      onTap: () => ReviewForm(
+        onSubmit: (rating, text) async => _postReview(context, rating, text),
+      ).openModalBottomSheet(context),
+    );
+  }
+
+  Widget _buildReviews(BuildContext context) {
+    return BlocBuilder<ReviewCubit, ReviewState>(
+      builder: (context, state) {
+        if (state is ReviewError) {
+          return ErrorIndicator(
+            message: state.message,
+            onRetry: context.bloc<ReviewCubit>().fetchReviews,
+          );
+        } else if (state is ReviewLoaded) {
+          return _buildList(context, state);
+        } else if (state is ReviewEmpty) {
+          return EmptyIndicator(
+            message: 'No reviews yet.',
+            onRetry: context.bloc<ReviewCubit>().fetchReviews,
+          );
+        } else {
+          return const BusyIndicator();
+        }
+      },
+    );
+  }
+
+  Widget _buildList(BuildContext context, ReviewLoaded state) {
     final reviewsList = state.reviewsList;
 
     return Column(
@@ -92,7 +99,21 @@ class ReviewList extends StatelessWidget {
             );
           },
         ),
+        _buildViewMoreButton(context),
       ],
+    );
+  }
+
+  Widget _buildViewMoreButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: CustomButton(
+        label: 'View More',
+        color: AppColors.primaryDark,
+        backgroundColor: AppColors.primaryLight,
+        iconData: Icons.arrow_right_alt_outlined,
+        onTap: () {},
+      ),
     );
   }
 

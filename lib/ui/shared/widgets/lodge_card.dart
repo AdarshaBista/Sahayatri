@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -43,6 +44,11 @@ class LodgeCard extends StatelessWidget {
   }
 
   Widget _buildBackground() {
+    String imageUrl = Images.kSplash;
+    if (lodge.imageUrls != null && lodge.imageUrls.isNotEmpty) {
+      imageUrl = lodge.imageUrls.first;
+    }
+
     return Hero(
       tag: lodge.id,
       child: GradientContainer(
@@ -52,7 +58,7 @@ class LodgeCard extends StatelessWidget {
           AppColors.dark.withOpacity(0.6),
           AppColors.dark.withOpacity(0.8),
         ],
-        child: AdaptiveImage(lodge.imageUrls[0]),
+        child: AdaptiveImage(imageUrl),
       ),
     );
   }

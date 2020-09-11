@@ -22,14 +22,14 @@ class _TrackerSetupState extends State<TrackerSetup> {
 
   List<Step> get steps => [
         _buildStep(
-          title: 'Choose a contact',
-          index: 0,
-          content: const ContactForm(isOnSettings: false),
-        ),
-        _buildStep(
           title: 'Setup nearby network',
           index: 1,
           content: const NearbyForm(isOnSettings: false),
+        ),
+        _buildStep(
+          title: 'Choose a contact',
+          index: 0,
+          content: const ContactForm(isOnSettings: false),
         ),
       ];
 

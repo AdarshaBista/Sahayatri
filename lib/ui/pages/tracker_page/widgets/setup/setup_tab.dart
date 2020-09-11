@@ -16,12 +16,12 @@ class SetupTab extends StatelessWidget {
         ElevatedCard(
           padding: EdgeInsets.all(16.0),
           margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: ContactForm(isOnSettings: false),
+          child: NearbyForm(isOnSettings: false),
         ),
         ElevatedCard(
           padding: EdgeInsets.all(16.0),
           margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: NearbyForm(isOnSettings: false),
+          child: ContactForm(isOnSettings: false),
         ),
       ],
     );

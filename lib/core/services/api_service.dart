@@ -16,7 +16,7 @@ class ApiService {
   Future<String> updateUserAvatar(User user, String imagePath) async {
     try {
       final Response res = await Dio().post(
-        '${AppConfig.kApiBaseUrl}/users/${user.id}/images',
+        '${ApiConfig.kApiBaseUrl}/users/${user.id}/images',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -36,7 +36,7 @@ class ApiService {
 
   Future<List<Destination>> fetchDestinations() async {
     try {
-      final Response res = await Dio().get('${AppConfig.kApiBaseUrl}/destinations');
+      final Response res = await Dio().get('${ApiConfig.kApiBaseUrl}/destinations');
       final body = res.data as Map<String, dynamic>;
       final destinations = body['data'] as List<dynamic>;
       return destinations
@@ -59,9 +59,9 @@ class ApiService {
   Future<ReviewsList> fetchReviews(String destId, int page) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kApiBaseUrl}/destinations/$destId/reviews',
+        '${ApiConfig.kApiBaseUrl}/destinations/$destId/reviews',
         queryParameters: {
-          'limit': 10,
+          'limit': ApiConfig.kReviewsLimit,
           'page': page,
         },
       );
@@ -77,7 +77,7 @@ class ApiService {
       double rating, String text, String destId, User user) async {
     try {
       final Response res = await Dio().post(
-        '${AppConfig.kApiBaseUrl}/reviews',
+        '${ApiConfig.kApiBaseUrl}/reviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -99,7 +99,7 @@ class ApiService {
   Future<List<Place>> fetchPlaces(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kApiBaseUrl}/destinations/$destId/places',
+        '${ApiConfig.kApiBaseUrl}/destinations/$destId/places',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -125,7 +125,7 @@ class ApiService {
   Future<List<Itinerary>> fetchItineraries(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kApiBaseUrl}/destinations/$destId/itineraries',
+        '${ApiConfig.kApiBaseUrl}/destinations/$destId/itineraries',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -151,12 +151,12 @@ class ApiService {
   Future<ReviewsList> fetchLodgeReviews(String lodgeId, int page, User user) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
+        '${ApiConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
         queryParameters: {
-          'limit': 10,
+          'limit': ApiConfig.kReviewsLimit,
           'page': page,
         },
       );
@@ -173,7 +173,7 @@ class ApiService {
       double rating, String text, String lodgeId, User user) async {
     try {
       final Response res = await Dio().post(
-        '${AppConfig.kApiBaseUrl}/lodgereviews',
+        '${ApiConfig.kApiBaseUrl}/lodgereviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -195,7 +195,7 @@ class ApiService {
   Future<Destination> download(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kApiBaseUrl}/destinations/$destId/download',
+        '${ApiConfig.kApiBaseUrl}/destinations/$destId/download',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -210,7 +210,7 @@ class ApiService {
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(
-        '${AppConfig.kWeatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
+        '${ApiConfig.kWeatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
       );
       final resList = res.data['daily'] as List<dynamic>;
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();

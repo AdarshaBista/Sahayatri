@@ -30,7 +30,7 @@ class LodgeReviewCubit extends ReviewCubit {
 
     emit(const ReviewLoading());
     try {
-      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, page, user);
+      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, 1, user);
       if (reviewsList.isNotEmpty) {
         lodge.reviewsList = reviewsList;
         emit(ReviewLoaded(reviewsList: reviewsList, average: lodge.rating));

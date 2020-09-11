@@ -6,7 +6,7 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/failure.dart';
 
 class AuthService {
-  static const String kAuthBaseUrl = '${AppConfig.kApiBaseUrl}/auth';
+  static const String kAuthBaseUrl = '${ApiConfig.kApiBaseUrl}/auth';
 
   Future<User> login(String email, String password) async {
     try {

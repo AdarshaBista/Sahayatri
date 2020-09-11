@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/reviews_list.dart';
 
@@ -149,7 +148,7 @@ class Destination {
             ?.map((x) => Place.fromMap(x as Map<String, dynamic>)));
 
     final reviewsList = !map.containsKey('reviews')
-        ? const ReviewsList()
+        ? ReviewsList()
         : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>);
 
     final suggestedItineraries = !map.containsKey('itinenaries')

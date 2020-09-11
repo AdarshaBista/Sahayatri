@@ -24,11 +24,12 @@ class LodgesList extends StatelessWidget {
         const SizedBox(height: 12.0),
         Container(
           height: 160.0,
-          child: ListView.builder(
+          child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemCount: lodges.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 12.0),
             itemBuilder: (context, index) {
               return AspectRatio(
                 aspectRatio: 0.8,

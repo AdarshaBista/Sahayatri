@@ -14,14 +14,14 @@ class ReviewsList {
   final int total;
 
   @HiveField(1)
-  final Map<int, int> stars;
+  Map<int, int> stars;
 
   @HiveField(2)
-  final List<Review> reviews;
+  List<Review> reviews;
 
   bool get isNotEmpty => reviews.isNotEmpty;
 
-  const ReviewsList({
+  ReviewsList({
     this.total = 0,
     this.stars = const {},
     this.reviews = const [],
