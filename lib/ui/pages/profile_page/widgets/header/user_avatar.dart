@@ -43,9 +43,10 @@ class UserAvatar extends StatelessWidget {
 
   Widget _buildImage(User user) {
     return user.imageUrl == null
-        ? Text(
-            user.name[0],
-            style: AppTextStyles.medium.withSize(kRadius).darkAccent,
+        ? const Icon(
+            Icons.edit_outlined,
+            size: 24.0,
+            color: AppColors.darkAccent,
           )
         : ClipRRect(
             borderRadius: BorderRadius.circular(kRadius),
