@@ -36,7 +36,7 @@ class ItineraryFormCubit extends Cubit<ItineraryFormState> {
 
   void addCheckpoint(Checkpoint checkpoint) {
     final checkpoints = state.checkpoints..add(checkpoint);
-    checkpoints.sort((c1, c2) => c1.dateTime.compareTo(c2.dateTime));
+    _sortCheckpoints(checkpoints);
     emit(state.copyWith(checkpoints: checkpoints));
   }
 
@@ -45,12 +45,19 @@ class ItineraryFormCubit extends Cubit<ItineraryFormState> {
     final index = checkpoints.indexOf(prevCheckpoint);
     checkpoints.remove(prevCheckpoint);
     checkpoints.insert(index, newCheckpoint);
-    checkpoints.sort((c1, c2) => c1.dateTime.compareTo(c2.dateTime));
+    _sortCheckpoints(checkpoints);
     emit(state.copyWith(checkpoints: checkpoints));
   }
 
   void removeCheckpoint(Checkpoint checkpoint) {
     final checkpoints = state.checkpoints..remove(checkpoint);
+    _sortCheckpoints(checkpoints);
     emit(state.copyWith(checkpoints: checkpoints));
+  }
+
+  void _sortCheckpoints(List<Checkpoint> checkpoints) {
+    final bool isSortable = checkpoints.every((c) => c.dateTime != null);
+    if (!isSortable) return;
+    checkpoints.sort((c1, c2) => c1.dateTime.compareTo(c2.dateTime));
   }
 }
