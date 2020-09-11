@@ -164,7 +164,8 @@ class Destination {
       description: map['description'] as String,
       maxAltitude: map['maxAltitude'] as String,
       estimatedDuration: map['estimatedDuration'] as String,
-      rating: double.tryParse(map['rating'] as String) ?? 0.0,
+      rating:
+          map['rating'] == null ? 0.0 : double.tryParse(map['rating'] as String) ?? 0.0,
       route: ApiUtils.parseRoute(map['route'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       bestMonths: ApiUtils.parseCsv(map['bestMonths'] as String),

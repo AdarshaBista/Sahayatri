@@ -60,8 +60,12 @@ class DestinationReviewCubit extends ReviewCubit {
       );
 
       final updatedList = updateReviewsList(destination.reviewsList, rating, review);
-      final updatedAverage = updateAverage(destination.rating, rating, updatedList.total);
+      final oldAverage =
+          state is ReviewLoaded ? (state as ReviewLoaded).average : destination.rating;
+      final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);
+      destination.reviewsList = updatedList;
       emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
+
       return true;
     } on Failure {
       return false;

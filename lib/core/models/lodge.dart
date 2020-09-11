@@ -84,7 +84,8 @@ class Lodge {
     return Lodge(
       id: map['id'] as String,
       name: map['name'] as String,
-      rating: double.tryParse(map['rating'] as String) ?? 0.0,
+      rating:
+          map['rating'] == null ? 0.0 : double.tryParse(map['rating'] as String) ?? 0.0,
       coord: ApiUtils.parseCoord(map['coord'] as String),
       facility: LodgeFacility.parse(map['facility'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),

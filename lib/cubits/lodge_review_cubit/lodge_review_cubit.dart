@@ -55,8 +55,12 @@ class LodgeReviewCubit extends ReviewCubit {
       );
 
       final updatedList = updateReviewsList(lodge.reviewsList, rating, review);
-      final updatedAverage = updateAverage(lodge.rating, rating, updatedList.total);
+      final oldAverage =
+          state is ReviewLoaded ? (state as ReviewLoaded).average : lodge.rating;
+      final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);
+      lodge.reviewsList = updatedList;
       emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
+
       return true;
     } on Failure {
       return false;

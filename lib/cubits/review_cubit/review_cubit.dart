@@ -24,14 +24,24 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   Future<bool> postReview(double rating, String text);
 
   ReviewsList updateReviewsList(ReviewsList old, double rating, Review review) {
-    return old.copyWith(
-      total: old.total + 1,
-      stars: old.stars..update(rating.ceil(), (value) => ++value),
-      reviews: old.reviews..insert(0, review),
+    if (old.isNotEmpty) {
+      return old.copyWith(
+        total: old.total + 1,
+        stars: old.stars..update(rating.ceil(), (value) => ++value),
+        reviews: old.reviews..insert(0, review),
+      );
+    }
+
+    final Map<int, int> stars = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+    stars[rating.ceil()] = 1;
+    return ReviewsList(
+      total: 1,
+      stars: stars,
+      reviews: [review],
     );
   }
 
   double updateAverage(double oldAverage, double rating, int total) {
-    return oldAverage + (rating - oldAverage) / total;
+    return (oldAverage * (total - 1) + rating) / total;
   }
 }
