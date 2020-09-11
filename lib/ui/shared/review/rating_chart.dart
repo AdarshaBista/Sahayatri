@@ -113,11 +113,14 @@ class BarPainter extends CustomPainter {
       Offset(width, hOffset),
       barPaint..color = AppColors.lightAccent,
     );
-    canvas.drawLine(
-      Offset(0, hOffset),
-      Offset(value, hOffset),
-      barPaint..color = AppColors.primary,
-    );
+
+    if (value > 0.0) {
+      canvas.drawLine(
+        Offset(0, hOffset),
+        Offset(value, hOffset),
+        barPaint..color = AppColors.primary,
+      );
+    }
   }
 
   @override
