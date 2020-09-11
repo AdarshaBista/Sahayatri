@@ -90,7 +90,7 @@ class Lodge {
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
       reviewsList: !map.containsKey('reviews')
-          ? ReviewsList()
+          ? const ReviewsList()
           : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>),
     );
   }

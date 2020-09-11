@@ -148,7 +148,7 @@ class Destination {
             ?.map((x) => Place.fromMap(x as Map<String, dynamic>)));
 
     final reviewsList = !map.containsKey('reviews')
-        ? ReviewsList()
+        ? const ReviewsList()
         : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>);
 
     final suggestedItineraries = !map.containsKey('itinenaries')

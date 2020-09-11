@@ -14,14 +14,14 @@ class ReviewsList {
   final int total;
 
   @HiveField(1)
-  Map<int, int> stars;
+  final Map<int, int> stars;
 
   @HiveField(2)
-  List<Review> reviews;
+  final List<Review> reviews;
 
   bool get isNotEmpty => reviews.isNotEmpty;
 
-  ReviewsList({
+  const ReviewsList({
     this.total = 0,
     this.stars = const {},
     this.reviews = const [],
@@ -31,8 +31,8 @@ class ReviewsList {
 
   ReviewsList copyWith({
     int total,
-    List<Review> reviews,
     Map<int, int> stars,
+    List<Review> reviews,
   }) {
     return ReviewsList(
       total: total ?? this.total,

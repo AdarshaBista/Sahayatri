@@ -55,52 +55,73 @@ class RatingChart extends StatelessWidget {
   }
 
   Widget _buildBars() {
-    return SlideAnimator(
-      begin: const Offset(0.4, 0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (int i = stars.length; i > 0; --i) _buildBar(i),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBar(int index) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          index.toString(),
-          style: AppTextStyles.extraSmall.bold,
-        ),
-        const SizedBox(width: 8.0),
-        Expanded(
-          child: Stack(
-            children: [
-              _buildContainer(AppColors.lightAccent),
-              _buildContainer(AppColors.primary, stars[index] / total),
-            ],
+        for (int i = stars.length; i > 0; --i)
+          SlideAnimator(
+            begin: Offset(0.2 + (stars.length + 1 - i) * 0.4, 0.0),
+            child: _buildBar(i),
           ),
-        ),
       ],
     );
   }
 
-  Widget _buildContainer(Color color, [double percent = 1.0]) {
-    return SizedBox(
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Container(
-            height: 8.0,
-            width: percent * constraints.maxWidth,
-            margin: const EdgeInsets.symmetric(vertical: 4.0),
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(8.0),
+  Widget _buildBar(int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1.0),
+      child: Row(
+        children: [
+          Text(
+            index.toString(),
+            style: AppTextStyles.extraSmall.bold,
+          ),
+          const SizedBox(width: 12.0),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return CustomPaint(
+                  size: Size(constraints.maxWidth, 6.0),
+                  painter: BarPainter(stars[index] / total * constraints.maxWidth),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
+  }
+}
+
+class BarPainter extends CustomPainter {
+  final double value;
+
+  BarPainter(this.value);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final width = size.width;
+    final hOffset = size.height / 2.0;
+
+    final barPaint = Paint()
+      ..style = PaintingStyle.fill
+      ..strokeWidth = size.height
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawLine(
+      Offset(0, hOffset),
+      Offset(width, hOffset),
+      barPaint..color = AppColors.lightAccent,
+    );
+    canvas.drawLine(
+      Offset(0, hOffset),
+      Offset(value, hOffset),
+      barPaint..color = AppColors.primary,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
