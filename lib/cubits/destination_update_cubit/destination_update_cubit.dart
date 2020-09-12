@@ -13,8 +13,11 @@ part 'destination_update_state.dart';
 
 class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
   final User user;
-  final Destination destination;
   final ApiService apiService;
+  final Destination destination;
+
+  int page = 1;
+  int total = 0;
 
   DestinationUpdateCubit({
     @required this.user,
@@ -24,6 +27,21 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
         assert(destination != null),
         super(const DestinationUpdateEmpty());
 
+  bool get hasMore => destination.updates.length < total;
+
+  Future<bool> loadMore() async {
+    page++;
+    try {
+      final updatesList = await apiService.fetchUpdates(destination.id, page);
+      final updates = updatesList.updates;
+      destination.updates.addAll(updates);
+      emit(DestinationUpdateLoaded(updates: destination.updates));
+      return true;
+    } on Failure {
+      return false;
+    }
+  }
+
   Future<void> fetchUpdates() async {
     if (destination.updates != null) {
       emit(DestinationUpdateLoaded(updates: destination.updates));
@@ -32,7 +50,10 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
 
     emit(const DestinationUpdateLoading());
     try {
-      final updates = await apiService.fetchUpdates(destination.id);
+      final updatesList = await apiService.fetchUpdates(destination.id, 1);
+      total = updatesList.total;
+      final updates = updatesList.updates;
+
       if (updates.isNotEmpty) {
         destination.updates = updates;
         emit(DestinationUpdateLoaded(updates: updates));
@@ -44,7 +65,7 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
     }
   }
 
-  Future<bool> postUpdate(double rating, String text) async {
+  Future<bool> postUpdate() async {
     if (user == null) return false;
     return false;
   }

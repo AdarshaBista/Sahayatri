@@ -57,14 +57,19 @@ class ApiService {
     }
   }
 
-  Future<List<DestinationUpdate>> fetchUpdates(String destId) async {
+  Future<DestinationUpdatesList> fetchUpdates(String destId, int page) async {
     try {
       final Response res = await Dio().get(
         '${ApiConfig.kApiBaseUrl}/destinations/$destId/updates',
+        queryParameters: {
+          'limit': ApiConfig.kPageLimit,
+          'page': page,
+        },
       );
       final body = res.data as Map<String, dynamic>;
-      final updates = body['data'] as List<dynamic>;
-      return updates
+      final total = body['count'] as int;
+      final updatesList = body['data'] as List<dynamic>;
+      final updates = updatesList
           .map((u) {
             try {
               return DestinationUpdate.fromMap(u as Map<String, dynamic>);
@@ -75,6 +80,10 @@ class ApiService {
           })
           .where((u) => u != null)
           .toList();
+      return DestinationUpdatesList(
+        total: total,
+        updates: updates,
+      );
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get updates.');
@@ -86,7 +95,7 @@ class ApiService {
       final Response res = await Dio().get(
         '${ApiConfig.kApiBaseUrl}/destinations/$destId/reviews',
         queryParameters: {
-          'limit': ApiConfig.kReviewsLimit,
+          'limit': ApiConfig.kPageLimit,
           'page': page,
         },
       );
@@ -181,7 +190,7 @@ class ApiService {
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
         queryParameters: {
-          'limit': ApiConfig.kReviewsLimit,
+          'limit': ApiConfig.kPageLimit,
           'page': page,
         },
       );

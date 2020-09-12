@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cub
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/buttons/view_more_button.dart';
 import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -51,7 +51,7 @@ class UpdateList extends StatelessWidget {
             onRetry: context.bloc<DestinationUpdateCubit>().fetchUpdates,
           );
         } else if (state is DestinationUpdateLoaded) {
-          return _buildList(state.updates);
+          return _buildList(context, state.updates);
         } else if (state is DestinationUpdateEmpty) {
           return EmptyIndicator(
             message: 'No updates yet.',
@@ -64,18 +64,24 @@ class UpdateList extends StatelessWidget {
     );
   }
 
-  Widget _buildList(List<DestinationUpdate> updates) {
-    return ListView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: updates.length,
-      itemBuilder: (context, index) {
-        return SlideAnimator(
-          begin: Offset(0.0, 0.2 + index * 0.4),
-          child: UpdateCard(update: updates[index]),
-        );
-      },
+  Widget _buildList(BuildContext context, List<DestinationUpdate> updates) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ListView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: updates.length,
+          itemBuilder: (context, index) {
+            return UpdateCard(update: updates[index]);
+          },
+        ),
+        ViewMoreButton(
+          hasMore: context.bloc<DestinationUpdateCubit>().hasMore,
+          onLoadMore: context.bloc<DestinationUpdateCubit>().loadMore,
+        ),
+      ],
     );
   }
 }

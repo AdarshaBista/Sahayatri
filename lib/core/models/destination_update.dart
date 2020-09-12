@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
 
-import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/user.dart';
+
 import 'package:sahayatri/core/utils/api_utils.dart';
 
 class DestinationUpdate {
@@ -95,4 +96,15 @@ class DestinationUpdate {
         tags.hashCode ^
         imageUrls.hashCode;
   }
+}
+
+class DestinationUpdatesList {
+  final int total;
+  final List<DestinationUpdate> updates;
+
+  DestinationUpdatesList({
+    @required this.total,
+    @required this.updates,
+  })  : assert(total != null),
+        assert(updates != null);
 }
