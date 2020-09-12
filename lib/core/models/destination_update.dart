@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -12,6 +14,8 @@ class DestinationUpdate {
   final DateTime dateUpdated;
   final List<String> tags;
   final List<String> imageUrls;
+
+  String get timeAgo => timeago.format(dateUpdated);
 
   const DestinationUpdate({
     @required this.id,

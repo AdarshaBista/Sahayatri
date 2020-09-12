@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/shared/widgets/user_avatar_small.dart';
 
 class ReviewCard extends StatefulWidget {
   final Review review;
@@ -41,7 +40,10 @@ class _ReviewCardState extends State<ReviewCard> {
             children: [
               Row(
                 children: [
-                  _buildUserAvatar(),
+                  UserAvatarSmall(
+                    username: widget.review.user.name,
+                    imageUrl: widget.review.user.imageUrl,
+                  ),
                   _buildTitle(),
                   const Spacer(),
                   _buildRating(),
@@ -97,32 +99,12 @@ class _ReviewCardState extends State<ReviewCard> {
 
   Widget _buildText() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Text(
         widget.review.text,
         style: AppTextStyles.small,
         overflow: TextOverflow.ellipsis,
         maxLines: isExpanded ? 100 : 2,
-      ),
-    );
-  }
-
-  Widget _buildUserAvatar() {
-    return Container(
-      width: 72.0,
-      height: 72.0,
-      child: ElevatedCard(
-        borderRadius: 8.0,
-        margin: const EdgeInsets.all(12.0),
-        color: AppColors.primaryLight,
-        child: widget.review.user.imageUrl != null
-            ? AdaptiveImage(widget.review.user.imageUrl)
-            : Center(
-                child: Text(
-                  widget.review.user.name[0],
-                  style: AppTextStyles.large.withColor(AppColors.primaryDark),
-                ),
-              ),
       ),
     );
   }

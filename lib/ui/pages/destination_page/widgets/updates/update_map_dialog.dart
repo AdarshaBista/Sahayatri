@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/lodge_marker.dart';
 
-class PlaceMapDialog extends StatelessWidget {
-  final Place place;
+class UpdateMapDialog extends StatelessWidget {
+  final Coord coord;
 
-  const PlaceMapDialog({
-    @required this.place,
-  }) : assert(place != null);
+  const UpdateMapDialog({
+    @required this.coord,
+  }) : assert(coord != null);
 
   @override
   Widget build(BuildContext context) {
@@ -34,41 +32,47 @@ class PlaceMapDialog extends StatelessWidget {
 
   Widget _buildMap(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final lodges = place.lodges;
-    final center = place.coord;
 
     return Container(
       width: size.width * 0.9,
       height: size.height * 0.7,
       child: CustomMap(
-        center: center,
+        center: coord,
         minZoom: 18.0,
         initialZoom: 18.5,
-        children: [if (lodges.isNotEmpty) _LodgeMarkersLayer(lodges: lodges)],
-        swPanBoundary: Coord(lat: center.lat - 0.005, lng: center.lng - 0.005),
-        nePanBoundary: Coord(lat: center.lat + 0.005, lng: center.lng + 0.005),
+        children: [_MarkerLayer(coord: coord)],
+        swPanBoundary: Coord(lat: coord.lat - 0.005, lng: coord.lng - 0.005),
+        nePanBoundary: Coord(lat: coord.lat + 0.005, lng: coord.lng + 0.005),
       ),
     );
   }
 }
 
-class _LodgeMarkersLayer extends StatelessWidget {
-  final List<Lodge> lodges;
+class _MarkerLayer extends StatelessWidget {
+  final Coord coord;
 
-  const _LodgeMarkersLayer({
-    @required this.lodges,
-  }) : assert(lodges != null);
+  const _MarkerLayer({
+    @required this.coord,
+  }) : assert(coord != null);
 
   @override
   Widget build(BuildContext context) {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          for (int i = 0; i < lodges.length; ++i)
-            LodgeMarker(
-              lodge: lodges[i],
-              color: AppColors.accentColors[i % AppColors.accentColors.length],
-            ),
+          Marker(
+            width: 32.0,
+            height: 32.0,
+            point: coord.toLatLng(),
+            anchorPos: AnchorPos.align(AnchorAlign.top),
+            builder: (context) {
+              return const Icon(
+                CommunityMaterialIcons.map_marker,
+                size: 32.0,
+                color: AppColors.secondary,
+              );
+            },
+          ),
         ],
       ),
     );

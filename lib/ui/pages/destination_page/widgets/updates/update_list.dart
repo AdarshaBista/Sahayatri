@@ -20,7 +20,7 @@ class UpdateList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -35,9 +35,8 @@ class UpdateList extends StatelessWidget {
   Widget _buildPostUpdateButton(BuildContext context) {
     return CustomButton(
       label: 'Post an update',
-      outlineOnly: true,
-      color: AppColors.dark,
-      backgroundColor: AppColors.barrier,
+      color: AppColors.primaryDark,
+      backgroundColor: AppColors.primaryLight,
       iconData: Icons.post_add_outlined,
       onTap: () {},
     );
@@ -66,12 +65,11 @@ class UpdateList extends StatelessWidget {
   }
 
   Widget _buildList(List<DestinationUpdate> updates) {
-    return ListView.separated(
+    return ListView.builder(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: updates.length,
-      separatorBuilder: (_, __) => const Divider(height: 2.0),
       itemBuilder: (context, index) {
         return SlideAnimator(
           begin: Offset(0.0, 0.2 + index * 0.4),
