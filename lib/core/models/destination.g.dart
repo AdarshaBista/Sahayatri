@@ -29,6 +29,7 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       imageUrls: (fields[9] as List)?.cast<String>(),
       bestMonths: (fields[10] as List)?.cast<String>(),
       places: (fields[13] as List)?.cast<Place>(),
+      updates: (fields[16] as List)?.cast<DestinationUpdate>(),
       reviewsList: fields[14] as ReviewsList,
       suggestedItineraries: (fields[15] as List)?.cast<Itinerary>(),
       createdItinerary: fields[12] as Itinerary,
@@ -39,7 +40,7 @@ class DestinationAdapter extends TypeAdapter<Destination> {
   @override
   void write(BinaryWriter writer, Destination obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -71,7 +72,9 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       ..writeByte(14)
       ..write(obj.reviewsList)
       ..writeByte(15)
-      ..write(obj.suggestedItineraries);
+      ..write(obj.suggestedItineraries)
+      ..writeByte(16)
+      ..write(obj.updates);
   }
 
   @override

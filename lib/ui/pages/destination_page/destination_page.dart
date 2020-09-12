@@ -23,6 +23,7 @@ import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/route_actions.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/best_months_chips.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_list.dart';
 
 class DestinationPage extends StatelessWidget {
   const DestinationPage();
@@ -100,11 +101,13 @@ class DestinationPage extends StatelessWidget {
     return NestedTabView(
       tabs: [
         NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
-        NestedTabData(label: 'Reviews', icon: Icons.star_outline)
+        NestedTabData(label: 'Reviews', icon: Icons.star_outline),
+        NestedTabData(label: 'Updates', icon: Icons.featured_play_list_outlined),
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),
         ReviewList(reviewCubit: context.bloc<ReviewCubit>() as DestinationReviewCubit),
+        const UpdateList(),
       ],
     );
   }

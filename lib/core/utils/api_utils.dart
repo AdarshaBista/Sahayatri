@@ -17,6 +17,8 @@ class ApiUtils {
   }
 
   static Coord parseCoord(String coordStr) {
+    if (coordStr == null || coordStr.isEmpty) return null;
+
     final List<String> values = coordStr.split(',');
     final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
 

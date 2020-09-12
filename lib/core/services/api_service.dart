@@ -8,6 +8,7 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/reviews_list.dart';
+import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
@@ -53,6 +54,30 @@ class ApiService {
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get destinations.');
+    }
+  }
+
+  Future<List<DestinationUpdate>> fetchUpdates(String destId) async {
+    try {
+      final Response res = await Dio().get(
+        '${ApiConfig.kApiBaseUrl}/destinations/$destId/updates',
+      );
+      final body = res.data as Map<String, dynamic>;
+      final updates = body['data'] as List<dynamic>;
+      return updates
+          .map((u) {
+            try {
+              return DestinationUpdate.fromMap(u as Map<String, dynamic>);
+            } catch (e) {
+              print(e.toString());
+              return null;
+            }
+          })
+          .where((u) => u != null)
+          .toList();
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to get updates.');
     }
   }
 

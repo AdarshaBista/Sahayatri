@@ -16,6 +16,7 @@ import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
 import 'package:sahayatri/ui/shared/animators/page_transition.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
@@ -57,6 +58,13 @@ class RootRouter {
                 apiService: context.repository<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchReviews(),
+            ),
+            BlocProvider<DestinationUpdateCubit>(
+              create: (context) => DestinationUpdateCubit(
+                user: context.bloc<UserCubit>().user,
+                apiService: context.repository<ApiService>(),
+                destination: settings.arguments as Destination,
+              )..fetchUpdates(),
             ),
             BlocProvider<PlacesCubit>(
               create: (context) => PlacesCubit(
