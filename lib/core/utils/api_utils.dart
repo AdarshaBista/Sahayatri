@@ -2,6 +2,8 @@ import 'package:sahayatri/core/models/coord.dart';
 
 class ApiUtils {
   static List<Coord> parseRoute(String routeStr) {
+    if (routeStr == null || routeStr.isEmpty) return [];
+
     final List<String> values = routeStr.split(',');
     final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
@@ -16,21 +18,24 @@ class ApiUtils {
     return route;
   }
 
-  static Coord parseCoord(String coordStr) {
-    if (coordStr == null || coordStr.isEmpty) return null;
+  static String routeToCsv(List<Coord> coords) {
+    if (coords == null || coords.isEmpty) return null;
 
-    final List<String> values = coordStr.split(',');
-    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
-
-    return Coord(
-      lat: points[0],
-      lng: points[1],
-      alt: points[2],
-    );
+    final StringBuffer routeStrBuffer = StringBuffer();
+    for (int i = 0; i < coords.length; ++i) {
+      routeStrBuffer.write(coords[i].toCsv());
+      if (i < coords.length - 1) routeStrBuffer.write(',');
+    }
+    return routeStrBuffer.toString();
   }
 
   static List<String> parseCsv(String csvStr) {
-    if (csvStr == null) return [];
+    if (csvStr == null || csvStr.isEmpty) return [];
     return csvStr.split(',');
+  }
+
+  static String toCsv(List<String> values) {
+    if (values == null || values.isEmpty) return null;
+    return values.join(',');
   }
 }

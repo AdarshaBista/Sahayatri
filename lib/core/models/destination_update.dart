@@ -11,9 +11,9 @@ class DestinationUpdate {
   final String id;
   final String text;
   final User user;
-  final Coord coord;
   final DateTime dateUpdated;
   final List<String> tags;
+  final List<Coord> coords;
   final List<String> imageUrls;
 
   String get timeAgo => timeago.format(dateUpdated);
@@ -22,9 +22,9 @@ class DestinationUpdate {
     @required this.id,
     @required this.text,
     @required this.user,
-    @required this.coord,
     @required this.dateUpdated,
     @required this.tags,
+    @required this.coords,
     @required this.imageUrls,
   })  : assert(id != null),
         assert(text != null),
@@ -36,9 +36,9 @@ class DestinationUpdate {
     String id,
     String text,
     User user,
-    Coord coord,
     DateTime dateUpdated,
     List<String> tags,
+    List<Coord> coords,
     List<String> imageUrls,
   }) {
     return DestinationUpdate(
@@ -46,7 +46,7 @@ class DestinationUpdate {
       text: text ?? this.text,
       tags: tags ?? this.tags,
       user: user ?? this.user,
-      coord: coord ?? this.coord,
+      coords: coords ?? this.coords,
       dateUpdated: dateUpdated ?? this.dateUpdated,
       imageUrls: imageUrls ?? this.imageUrls,
     );
@@ -59,7 +59,7 @@ class DestinationUpdate {
       id: map['id'] as String,
       text: map['text'] as String,
       tags: ApiUtils.parseCsv(map['tag'] as String),
-      coord: ApiUtils.parseCoord(map['coord'] as String),
+      coords: ApiUtils.parseRoute(map['coord'] as String),
       user: User.fromMap(map['user'] as Map<String, dynamic>),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
@@ -69,7 +69,7 @@ class DestinationUpdate {
 
   @override
   String toString() {
-    return 'DestinationUpdate(id: $id, text: $text, user: $user, coord: $coord, dateUpdated: $dateUpdated, tags: $tags, imageUrls: $imageUrls)';
+    return 'DestinationUpdate(id: $id, text: $text, user: $user, coords: $coords, dateUpdated: $dateUpdated, tags: $tags, imageUrls: $imageUrls)';
   }
 
   @override
@@ -80,7 +80,7 @@ class DestinationUpdate {
         o.id == id &&
         o.text == text &&
         o.user == user &&
-        o.coord == coord &&
+        o.coords == coords &&
         o.dateUpdated == dateUpdated &&
         listEquals(o.tags, tags) &&
         listEquals(o.imageUrls, imageUrls);
@@ -91,7 +91,7 @@ class DestinationUpdate {
     return id.hashCode ^
         text.hashCode ^
         user.hashCode ^
-        coord.hashCode ^
+        coords.hashCode ^
         dateUpdated.hashCode ^
         tags.hashCode ^
         imageUrls.hashCode;

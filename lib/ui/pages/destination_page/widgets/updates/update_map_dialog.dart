@@ -9,11 +9,11 @@ import 'package:sahayatri/ui/shared/map/custom_map.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
 
 class UpdateMapDialog extends StatelessWidget {
-  final Coord coord;
+  final List<Coord> coords;
 
   const UpdateMapDialog({
-    @required this.coord,
-  }) : assert(coord != null);
+    @required this.coords,
+  }) : assert(coords != null);
 
   @override
   Widget build(BuildContext context) {
@@ -37,43 +37,41 @@ class UpdateMapDialog extends StatelessWidget {
       width: size.width * 0.9,
       height: size.height * 0.7,
       child: CustomMap(
-        center: coord,
         minZoom: 18.0,
         initialZoom: 18.5,
-        children: [_MarkerLayer(coord: coord)],
-        swPanBoundary: Coord(lat: coord.lat - 0.005, lng: coord.lng - 0.005),
-        nePanBoundary: Coord(lat: coord.lat + 0.005, lng: coord.lng + 0.005),
+        center: coords.first,
+        children: [_MarkersLayer(coords: coords)],
       ),
     );
   }
 }
 
-class _MarkerLayer extends StatelessWidget {
-  final Coord coord;
+class _MarkersLayer extends StatelessWidget {
+  final List<Coord> coords;
 
-  const _MarkerLayer({
-    @required this.coord,
-  }) : assert(coord != null);
+  const _MarkersLayer({
+    @required this.coords,
+  }) : assert(coords != null);
 
   @override
   Widget build(BuildContext context) {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: [
-          Marker(
-            width: 32.0,
-            height: 32.0,
-            point: coord.toLatLng(),
-            anchorPos: AnchorPos.align(AnchorAlign.top),
-            builder: (context) {
-              return const Icon(
-                CommunityMaterialIcons.map_marker,
-                size: 32.0,
-                color: AppColors.secondary,
-              );
-            },
-          ),
-        ],
+        markers: coords
+            .map((c) => Marker(
+                  width: 32.0,
+                  height: 32.0,
+                  point: c.toLatLng(),
+                  anchorPos: AnchorPos.align(AnchorAlign.top),
+                  builder: (context) {
+                    return const Icon(
+                      CommunityMaterialIcons.map_marker,
+                      size: 32.0,
+                      color: AppColors.secondary,
+                    );
+                  },
+                ))
+            .toList(),
       ),
     );
   }

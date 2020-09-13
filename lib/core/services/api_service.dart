@@ -10,6 +10,8 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/reviews_list.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
+import 'package:sahayatri/core/utils/api_utils.dart';
+
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/api_keys.dart';
 
@@ -87,6 +89,31 @@ class ApiService {
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to get updates.');
+    }
+  }
+
+  Future<String> postUpdate(String text, List<Coord> coords, List<String> tags,
+      List<String> imageUrls, String destId, User user) async {
+    try {
+      final Response res = await Dio().post(
+        '${ApiConfig.kApiBaseUrl}/updates',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+        ),
+        data: {
+          "text": text,
+          "tag": ApiUtils.toCsv(tags),
+          "coord": ApiUtils.routeToCsv(coords),
+          "imageUrls": ApiUtils.toCsv(imageUrls),
+          "user": {"id": user.id},
+          "destination": {"id": destId}
+        },
+      );
+      final body = res.data as Map<String, dynamic>;
+      return body['id'] as String;
+    } catch (e) {
+      print(e.toString());
+      throw const Failure(message: 'Failed to post update.');
     }
   }
 

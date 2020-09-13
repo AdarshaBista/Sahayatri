@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
+
+import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
@@ -13,6 +16,7 @@ import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_card.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_form.dart';
 
 class UpdateList extends StatelessWidget {
   const UpdateList();
@@ -38,7 +42,10 @@ class UpdateList extends StatelessWidget {
       color: AppColors.primaryDark,
       backgroundColor: AppColors.primaryLight,
       iconData: Icons.post_add_outlined,
-      onTap: () {},
+      onTap: () => UpdateForm(
+        onSubmit: (text, coords, tags, imageUrls) =>
+            _postUpdate(context, text, coords, tags, imageUrls),
+      ).openModalBottomSheet(context),
     );
   }
 
@@ -83,5 +90,24 @@ class UpdateList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _postUpdate(
+    BuildContext context,
+    String text,
+    List<Coord> coords,
+    List<String> tags,
+    List<String> imageUrls,
+  ) async {
+    context.openSnackBar('Posting update...');
+    final bool success = await context
+        .bloc<DestinationUpdateCubit>()
+        .postUpdate(text, coords, tags, imageUrls);
+
+    if (success) {
+      context.openSnackBar('Update posted');
+    } else {
+      context.openSnackBar('Failed to post update!');
+    }
   }
 }

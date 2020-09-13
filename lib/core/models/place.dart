@@ -77,7 +77,7 @@ class Place {
       id: map['id'] as String,
       name: map['name'] as String,
       description: map['description'] as String,
-      coord: ApiUtils.parseCoord(map['coord'] as String),
+      coord: Coord.fromCsv(map['coord'] as String),
       isNetworkAvailable: map['isNetworkAvailable'] as bool,
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       lodges: List<Lodge>.from((map['lodges'] as List<dynamic>)

@@ -52,6 +52,24 @@ class Coord {
     );
   }
 
+  factory Coord.fromCsv(String coordStr) {
+    if (coordStr == null || coordStr.isEmpty) return null;
+
+    final List<String> values = coordStr.split(',');
+    if (values.length == 2) values.add('0.0');
+    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
+
+    return Coord(
+      lat: points[0],
+      lng: points[1],
+      alt: points[2],
+    );
+  }
+
+  String toCsv() {
+    return '$lat,$lng,$alt';
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'lat': lat,

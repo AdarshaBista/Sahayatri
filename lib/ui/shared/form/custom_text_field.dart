@@ -13,26 +13,24 @@ class CustomTextField extends StatelessWidget {
   final TextStyle labelStyle;
   final TextInputType keyboardType;
   final ValueChanged<String> onChanged;
+  final TextEditingController controller;
   final FormFieldValidator<String> validator;
   final List<TextInputFormatter> inputFormatters;
 
   const CustomTextField({
     @required this.label,
-    @required this.onChanged,
-    @required this.validator,
-    @required this.initialValue,
+    this.validator,
+    this.onChanged,
+    this.initialValue,
     this.icon,
     this.labelStyle,
+    this.controller,
     this.inputFormatters,
     this.iconGap = 32.0,
     this.obscureText = false,
     this.color = AppColors.lightAccent,
     this.keyboardType = TextInputType.text,
-  })  : assert(label != null),
-        assert(onChanged != null),
-        assert(validator != null),
-        assert(obscureText != null),
-        assert(initialValue != null);
+  }) : assert(label != null);
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +43,7 @@ class CustomTextField extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         TextFormField(
+          controller: controller,
           maxLines: obscureText ? 1 : null,
           validator: validator,
           onChanged: onChanged,
@@ -62,7 +61,7 @@ class CustomTextField extends StatelessWidget {
                     padding: EdgeInsets.only(left: 16.0, right: iconGap),
                     child: Icon(
                       icon,
-                      size: 22.0,
+                      size: 20.0,
                     ),
                   ),
           ),

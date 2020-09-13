@@ -8,7 +8,7 @@ import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
 import 'package:sahayatri/ui/shared/widgets/user_avatar_small.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_list.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/image_list.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 
@@ -31,18 +31,18 @@ class UpdateCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildUserInfo(),
+              if (update.tags.isNotEmpty) ...[
+                _buildTags(),
+                const SizedBox(height: 8.0),
+              ],
               _buildText(),
-              if (update.coord != null) ...[
+              if (update.coords != null) ...[
                 const SizedBox(height: 4.0),
                 _buildLocationButton(context),
               ],
               if (update.imageUrls.isNotEmpty) ...[
                 const SizedBox(height: 8.0),
                 ImageList(imageUrls: update.imageUrls),
-              ],
-              if (update.tags.isNotEmpty) ...[
-                const SizedBox(height: 12.0),
-                TagList(tags: update.tags),
               ],
             ],
           ),
@@ -80,6 +80,17 @@ class UpdateCard extends StatelessWidget {
     );
   }
 
+  Widget _buildTags() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: update.tags.map((t) => TagChip(label: t)).toList(),
+      ),
+    );
+  }
+
   Widget _buildText() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -98,7 +109,7 @@ class UpdateCard extends StatelessWidget {
         color: AppColors.secondary,
         backgroundColor: AppColors.secondary.withOpacity(0.25),
         iconData: Icons.map_outlined,
-        onTap: () => UpdateMapDialog(coord: update.coord).openDialog(context),
+        onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
       ),
     );
   }

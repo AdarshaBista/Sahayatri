@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
@@ -65,8 +66,33 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
     }
   }
 
-  Future<bool> postUpdate() async {
+  Future<bool> postUpdate(
+    String text,
+    List<Coord> coords,
+    List<String> tags,
+    List<String> imageUrls,
+  ) async {
     if (user == null) return false;
-    return false;
+
+    try {
+      final id = await apiService.postUpdate(
+          text, coords, tags, imageUrls, destination.id, user);
+      final update = DestinationUpdate(
+        id: id,
+        text: text,
+        user: user,
+        tags: tags,
+        coords: coords,
+        imageUrls: imageUrls,
+        dateUpdated: DateTime.now(),
+      );
+
+      destination.updates ??= [];
+      destination.updates.add(update);
+      emit(DestinationUpdateLoaded(updates: destination.updates));
+      return true;
+    } on Failure {
+      return false;
+    }
   }
 }
