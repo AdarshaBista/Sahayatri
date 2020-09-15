@@ -34,8 +34,8 @@ dependencies:
   hive: ^1.4.4
 
   # Map
-  flutter_map: ^0.10.1+1
   maps_toolkit: ^1.1.0+2
+  flutter_map: ^0.10.1+1
 
   # Tracker
   location: ^3.0.2

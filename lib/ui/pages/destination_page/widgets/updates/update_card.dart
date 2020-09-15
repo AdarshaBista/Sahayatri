@@ -36,7 +36,7 @@ class UpdateCard extends StatelessWidget {
                 const SizedBox(height: 8.0),
               ],
               _buildText(),
-              if (update.coords != null) ...[
+              if (update.coords.isNotEmpty) ...[
                 const SizedBox(height: 4.0),
                 _buildLocationButton(context),
               ],

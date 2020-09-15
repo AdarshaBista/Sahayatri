@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
+import 'package:latlong/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/layers_button.dart';
@@ -19,6 +20,7 @@ import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
 
 class CustomMap extends StatefulWidget {
+  final Size size;
   final Coord center;
   final Coord swPanBoundary;
   final Coord nePanBoundary;
@@ -26,11 +28,14 @@ class CustomMap extends StatefulWidget {
   final double maxZoom;
   final double initialZoom;
   final List<Widget> children;
+  final Function(Coord) onTap;
   final MapController mapController;
   final Function(MapPosition, bool) onPositionChanged;
 
   const CustomMap({
     @required this.center,
+    this.size,
+    this.onTap,
     this.mapController,
     this.swPanBoundary,
     this.nePanBoundary,
@@ -65,6 +70,11 @@ class _CustomMapState extends State<CustomMap> {
         shouldSimplifyRoute = false;
       });
     }
+  }
+
+  void onTap(LatLng latLng) {
+    if (widget.onTap == null) return;
+    widget.onTap(Coord(lat: latLng.latitude, lng: latLng.longitude));
   }
 
   void onPositionChanged(MapPosition pos, bool hasGesture) {
@@ -103,8 +113,10 @@ class _CustomMapState extends State<CustomMap> {
           zoom: widget.initialZoom,
           minZoom: widget.minZoom,
           maxZoom: widget.maxZoom,
+          screenSize: widget.size,
           center: widget.center.toLatLng(),
           controller: widget.mapController,
+          onTap: onTap,
           onPositionChanged: onPositionChanged,
           swPanBoundary: widget.swPanBoundary?.toLatLng() ??
               Coord(
