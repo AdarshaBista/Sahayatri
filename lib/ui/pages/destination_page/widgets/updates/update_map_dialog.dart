@@ -6,7 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/dialogs/map_dialog.dart';
 
 class UpdateMapDialog extends StatelessWidget {
   final List<Coord> coords;
@@ -17,28 +17,9 @@ class UpdateMapDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlideAnimator(
-      begin: const Offset(0.6, 0.0),
-      child: AlertDialog(
-        elevation: 12.0,
-        clipBehavior: Clip.antiAlias,
-        titlePadding: EdgeInsets.zero,
-        insetPadding: EdgeInsets.zero,
-        backgroundColor: AppColors.light,
-        title: _buildMap(context),
-      ),
-    );
-  }
-
-  Widget _buildMap(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return Container(
-      width: size.width * 0.9,
-      height: size.height * 0.7,
-      child: CustomMap(
-        minZoom: 18.0,
-        initialZoom: 18.5,
+    return MapDialog(
+      map: CustomMap(
+        initialZoom: 17.0,
         center: coords.first,
         children: [_MarkersLayer(coords: coords)],
       ),
@@ -57,22 +38,25 @@ class _MarkersLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: coords
-            .map((c) => Marker(
-                  width: 32.0,
-                  height: 32.0,
-                  point: c.toLatLng(),
-                  anchorPos: AnchorPos.align(AnchorAlign.top),
-                  builder: (context) {
-                    return const Icon(
-                      CommunityMaterialIcons.map_marker,
-                      size: 32.0,
-                      color: AppColors.secondary,
-                    );
-                  },
-                ))
-            .toList(),
+        markers: coords.map((c) => _buildMarker(c)).toList(),
       ),
+    );
+  }
+
+  Marker _buildMarker(Coord c) {
+    const double size = 24.0;
+
+    return Marker(
+      width: size,
+      height: size,
+      point: c.toLatLng(),
+      builder: (context) {
+        return const Icon(
+          CommunityMaterialIcons.circle_double,
+          size: size,
+          color: AppColors.secondary,
+        );
+      },
     );
   }
 }

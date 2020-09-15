@@ -42,7 +42,7 @@ class UpdateList extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       iconData: Icons.post_add_outlined,
       onTap: () => UpdateForm(
-        onSubmit: (update) => _postUpdate(context, update),
+        onSubmit: (update) async => _postUpdate(context, update),
       ).openModalBottomSheet(context),
     );
   }

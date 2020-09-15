@@ -7,7 +7,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/dialogs/map_dialog.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodge_marker.dart';
 
 class PlaceMapDialog extends StatelessWidget {
@@ -19,28 +19,11 @@ class PlaceMapDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlideAnimator(
-      begin: const Offset(0.6, 0.0),
-      child: AlertDialog(
-        elevation: 12.0,
-        clipBehavior: Clip.antiAlias,
-        titlePadding: EdgeInsets.zero,
-        insetPadding: EdgeInsets.zero,
-        backgroundColor: AppColors.light,
-        title: _buildMap(context),
-      ),
-    );
-  }
-
-  Widget _buildMap(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final lodges = place.lodges;
     final center = place.coord;
 
-    return Container(
-      width: size.width * 0.9,
-      height: size.height * 0.7,
-      child: CustomMap(
+    return MapDialog(
+      map: CustomMap(
         center: center,
         minZoom: 18.0,
         initialZoom: 18.5,

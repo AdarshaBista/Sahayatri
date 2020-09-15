@@ -10,45 +10,28 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/shared/dialogs/map_dialog.dart';
 
 class SelectLocationDialog extends StatelessWidget {
   const SelectLocationDialog();
 
   @override
   Widget build(BuildContext context) {
-    return ScaleAnimator(
-      child: AlertDialog(
-        elevation: 12.0,
-        clipBehavior: Clip.antiAlias,
-        titlePadding: EdgeInsets.zero,
-        insetPadding: EdgeInsets.zero,
-        backgroundColor: AppColors.light,
-        title: _buildMap(context),
-      ),
-    );
-  }
+    return MapDialog(
+      map: BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+        builder: (context, state) {
+          final center = state.coords.isNotEmpty
+              ? state.coords.first
+              : context.bloc<DestinationCubit>().destination.midPointCoord;
 
-  Widget _buildMap(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
-      builder: (context, state) {
-        final center = state.coords.isNotEmpty
-            ? state.coords.first
-            : context.bloc<DestinationCubit>().destination.midPointCoord;
-
-        return Container(
-          width: size.width * 0.9,
-          height: size.height * 0.7,
-          child: CustomMap(
+          return CustomMap(
             center: center,
             initialZoom: 17.0,
             children: [if (state.coords.isNotEmpty) const _MarkersLayer()],
             onTap: context.bloc<DestinationUpdatePostCubit>().updateCoords,
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

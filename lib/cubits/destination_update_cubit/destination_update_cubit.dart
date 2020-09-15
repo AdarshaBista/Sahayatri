@@ -69,10 +69,11 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
     if (user == null) return false;
 
     try {
-      final id = await apiService.postUpdate(destUpdate, destination.id);
-      final update = destUpdate.copyWith(id: id);
+      var update = destUpdate.copyWith(user: user);
+      final id = await apiService.postUpdate(update, destination.id);
+      update = update.copyWith(id: id);
       destination.updates ??= [];
-      destination.updates.add(update);
+      destination.updates.insert(0, update);
       emit(DestinationUpdateLoaded(updates: destination.updates));
       return true;
     } on Failure {
