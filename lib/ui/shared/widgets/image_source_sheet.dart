@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 
-class SourceSheet extends StatelessWidget {
+class ImageSourceSheet extends StatelessWidget {
   final void Function(ImageSource) onSelect;
 
-  const SourceSheet({
+  const ImageSourceSheet({
     @required this.onSelect,
   }) : assert(onSelect != null);
 
@@ -21,7 +21,7 @@ class SourceSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Update avatar',
+            'Select source',
             style: AppTextStyles.small.bold,
           ),
           const SizedBox(height: 8.0),

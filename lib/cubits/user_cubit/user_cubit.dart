@@ -46,8 +46,7 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<bool> updateAvatar(ImageSource source) async {
-    final ImagePicker imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.getImage(source: source);
+    final pickedImage = await ImagePicker().getImage(source: source);
     if (pickedImage == null) return false;
 
     final newUrl = await apiService.updateUserAvatar(user, pickedImage.path);

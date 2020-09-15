@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
@@ -43,8 +42,7 @@ class UpdateList extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       iconData: Icons.post_add_outlined,
       onTap: () => UpdateForm(
-        onSubmit: (text, coords, tags, imageUrls) =>
-            _postUpdate(context, text, coords, tags, imageUrls),
+        onSubmit: (update) => _postUpdate(context, update),
       ).openModalBottomSheet(context),
     );
   }
@@ -92,17 +90,9 @@ class UpdateList extends StatelessWidget {
     );
   }
 
-  Future<void> _postUpdate(
-    BuildContext context,
-    String text,
-    List<Coord> coords,
-    List<String> tags,
-    List<String> imageUrls,
-  ) async {
+  Future<void> _postUpdate(BuildContext context, DestinationUpdate update) async {
     context.openSnackBar('Posting update...');
-    final bool success = await context
-        .bloc<DestinationUpdateCubit>()
-        .postUpdate(text, coords, tags, imageUrls);
+    final bool success = await context.bloc<DestinationUpdateCubit>().postUpdate(update);
 
     if (success) {
       context.openSnackBar('Update posted');

@@ -92,20 +92,19 @@ class ApiService {
     }
   }
 
-  Future<String> postUpdate(String text, List<Coord> coords, List<String> tags,
-      List<String> imageUrls, String destId, User user) async {
+  Future<String> postUpdate(DestinationUpdate update, String destId) async {
     try {
       final Response res = await Dio().post(
         '${ApiConfig.kApiBaseUrl}/updates',
         options: Options(
-          headers: {'Authorization': 'Bearer ${user.accessToken}'},
+          headers: {'Authorization': 'Bearer ${update.user.accessToken}'},
         ),
         data: {
-          "text": text,
-          "tag": ApiUtils.toCsv(tags),
-          "coord": ApiUtils.routeToCsv(coords),
-          "imageUrls": ApiUtils.toCsv(imageUrls),
-          "user": {"id": user.id},
+          "text": update.text,
+          "tag": ApiUtils.toCsv(update.tags),
+          "coord": ApiUtils.routeToCsv(update.coords),
+          "imageUrls": ApiUtils.toCsv(update.imageUrls),
+          "user": {"id": update.user.id},
           "destination": {"id": destId}
         },
       );

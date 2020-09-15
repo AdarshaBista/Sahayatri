@@ -12,7 +12,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/header/source_sheet.dart';
+import 'package:sahayatri/ui/shared/widgets/image_source_sheet.dart';
 
 class UserAvatar extends StatelessWidget {
   static const double kRadius = 80.0;
@@ -24,7 +24,7 @@ class UserAvatar extends StatelessWidget {
     final user = context.watch<User>();
 
     return GestureDetector(
-      onTap: () => SourceSheet(
+      onTap: () => ImageSourceSheet(
         onSelect: (source) => _updateAvatar(context, source),
       ).openModalBottomSheet(context),
       child: ScaleAnimator(

@@ -19,16 +19,14 @@ class DestinationUpdate {
   String get timeAgo => timeago.format(dateUpdated);
 
   const DestinationUpdate({
-    @required this.id,
+    this.id,
+    this.user,
     @required this.text,
-    @required this.user,
     @required this.dateUpdated,
     @required this.tags,
     @required this.coords,
     @required this.imageUrls,
-  })  : assert(id != null),
-        assert(text != null),
-        assert(user != null),
+  })  : assert(text != null),
         assert(imageUrls != null),
         assert(dateUpdated != null);
 
