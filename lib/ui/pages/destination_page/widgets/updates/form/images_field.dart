@@ -4,6 +4,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
+import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
@@ -28,10 +29,15 @@ class ImagesField extends StatelessWidget {
               '${state.imageUrls.length} images selected',
               style: AppTextStyles.extraSmall.primaryDark,
             ),
+            const SizedBox(height: 4.0),
+            PhotoGallery(
+              imageUrls: state.imageUrls,
+              onDelete: context.bloc<DestinationUpdatePostCubit>().removeImageUrl,
+            ),
             CustomButton(
               label: 'Add Image',
-              color: AppColors.primaryDark,
-              backgroundColor: AppColors.primaryLight,
+              color: AppColors.dark,
+              backgroundColor: AppColors.lightAccent,
               iconData: Icons.add_photo_alternate_outlined,
               onTap: () => ImageSourceSheet(
                 onSelect: context.bloc<DestinationUpdatePostCubit>().selectImage,

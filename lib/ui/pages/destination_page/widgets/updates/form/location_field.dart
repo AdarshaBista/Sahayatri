@@ -31,8 +31,8 @@ class LocationField extends StatelessWidget {
             ),
             CustomButton(
               label: 'View / Select Locations',
-              color: AppColors.primaryDark,
-              backgroundColor: AppColors.primaryLight,
+              color: AppColors.dark,
+              backgroundColor: AppColors.lightAccent,
               iconData: CommunityMaterialIcons.map_marker_plus_outline,
               onTap: () => BlocProvider<DestinationUpdatePostCubit>.value(
                 value: context.bloc<DestinationUpdatePostCubit>(),
