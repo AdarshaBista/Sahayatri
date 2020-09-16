@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination_update.dart';
+import 'package:sahayatri/core/services/api_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_field.dart';
@@ -13,16 +16,15 @@ import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/locatio
 
 class UpdateForm extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final void Function(DestinationUpdate) onSubmit;
-
-  UpdateForm({
-    @required this.onSubmit,
-  }) : assert(onSubmit != null);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DestinationUpdatePostCubit>(
-      create: (_) => DestinationUpdatePostCubit(),
+      create: (context) => DestinationUpdatePostCubit(
+        apiService: context.repository<ApiService>(),
+        destination: context.bloc<DestinationCubit>().destination,
+        destinationUpdateCubit: context.bloc<DestinationUpdateCubit>(),
+      ),
       child: AnimatedPadding(
         curve: Curves.decelerate,
         padding: MediaQuery.of(context).viewInsets,
@@ -44,6 +46,8 @@ class UpdateForm extends StatelessWidget {
               const SizedBox(height: 12.0),
               const UpdateField(),
               const SizedBox(height: 4.0),
+              _buildMessage(),
+              const SizedBox(height: 4.0),
               _buildSubmitButton(),
             ],
           ),
@@ -52,22 +56,37 @@ class UpdateForm extends StatelessWidget {
     );
   }
 
+  Widget _buildMessage() {
+    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+      builder: (context, state) {
+        if (state.message == null) return const Offstage();
+        return Text(
+          state.message,
+          style: AppTextStyles.extraSmall.secondary,
+        );
+      },
+    );
+  }
+
   Widget _buildSubmitButton() {
-    return Builder(
-      builder: (context) {
+    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+      builder: (context, state) {
         return FloatingActionButton(
           mini: true,
           backgroundColor: AppColors.dark,
-          child: const Icon(
-            Icons.check,
-            size: 24.0,
-            color: AppColors.primary,
-          ),
-          onPressed: () {
+          child: state.isLoading
+              ? const SimpleBusyIndicator()
+              : const Icon(
+                  Icons.check,
+                  size: 24.0,
+                  color: AppColors.primary,
+                ),
+          onPressed: () async {
+            if (state.isLoading) return;
             if (!formKey.currentState.validate()) return;
 
-            onSubmit(context.bloc<DestinationUpdatePostCubit>().update);
-            Navigator.of(context).pop();
+            final success = await context.bloc<DestinationUpdatePostCubit>().postUpdate();
+            if (success) Navigator.of(context).pop();
           },
         );
       },

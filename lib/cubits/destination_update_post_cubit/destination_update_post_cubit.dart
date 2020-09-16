@@ -3,16 +3,30 @@ import 'package:meta/meta.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:bloc/bloc.dart';
+import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 part 'destination_update_post_state.dart';
 
 class DestinationUpdatePostCubit extends Cubit<DestinationUpdatePostState> {
-  DestinationUpdatePostCubit()
-      : super(
-          const DestinationUpdatePostState(
+  final ApiService apiService;
+  final Destination destination;
+  final DestinationUpdateCubit destinationUpdateCubit;
+
+  DestinationUpdatePostCubit({
+    @required this.apiService,
+    @required this.destination,
+    @required this.destinationUpdateCubit,
+  })  : assert(apiService != null),
+        assert(destination != null),
+        assert(destinationUpdateCubit != null),
+        super(
+          DestinationUpdatePostState(
             text: '',
             tags: [],
             coords: [],
@@ -64,5 +78,22 @@ class DestinationUpdatePostCubit extends Cubit<DestinationUpdatePostState> {
     final pickedImage = await ImagePicker().getImage(source: source);
     if (pickedImage == null) return false;
     addImageUrl(pickedImage.path);
+  }
+
+  Future<bool> postUpdate() async {
+    if (destinationUpdateCubit.user == null) return false;
+
+    try {
+      emit(state.copyWith(isLoading: true, message: 'Posting update...'));
+      var update = state.update.copyWith(user: destinationUpdateCubit.user);
+      update = await apiService.postUpdate(update, destination.id);
+      destination.updates ??= [];
+      destination.updates.insert(0, update);
+      destinationUpdateCubit.emit(DestinationUpdateLoaded(updates: destination.updates));
+      return true;
+    } on Failure {
+      emit(state.copyWith(isLoading: false, message: 'Failed to post update!'));
+      return false;
+    }
   }
 }

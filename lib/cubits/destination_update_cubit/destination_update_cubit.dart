@@ -64,19 +64,4 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
       emit(DestinationUpdateError(message: e.message));
     }
   }
-
-  Future<bool> postUpdate(DestinationUpdate destUpdate) async {
-    if (user == null) return false;
-
-    try {
-      var update = destUpdate.copyWith(user: user);
-      update = await apiService.postUpdate(update, destination.id);
-      destination.updates ??= [];
-      destination.updates.insert(0, update);
-      emit(DestinationUpdateLoaded(updates: destination.updates));
-      return true;
-    } on Failure {
-      return false;
-    }
-  }
 }

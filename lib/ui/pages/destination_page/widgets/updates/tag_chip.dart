@@ -24,11 +24,12 @@ class _TagChipState extends State<TagChip> {
     return ScaleAnimator(
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
           decoration: getDecoration(),
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
-          child: Text(
-            widget.label,
+          child: DefaultTextStyle(
+            child: Text(widget.label),
             style: isSelected ? AppTextStyles.extraSmall.light : AppTextStyles.extraSmall,
           ),
         ),

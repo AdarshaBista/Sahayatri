@@ -41,9 +41,7 @@ class UpdateList extends StatelessWidget {
       color: AppColors.primaryDark,
       backgroundColor: AppColors.primaryLight,
       iconData: Icons.post_add_outlined,
-      onTap: () => UpdateForm(
-        onSubmit: (update) async => _postUpdate(context, update),
-      ).openModalBottomSheet(context),
+      onTap: () => UpdateForm().openModalBottomSheet(context),
     );
   }
 
@@ -88,16 +86,5 @@ class UpdateList extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Future<void> _postUpdate(BuildContext context, DestinationUpdate update) async {
-    context.openSnackBar('Posting update...');
-    final bool success = await context.bloc<DestinationUpdateCubit>().postUpdate(update);
-
-    if (success) {
-      context.openSnackBar('Update posted');
-    } else {
-      context.openSnackBar('Failed to post update!');
-    }
   }
 }

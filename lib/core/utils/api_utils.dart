@@ -19,7 +19,7 @@ class ApiUtils {
   }
 
   static String routeToCsv(List<Coord> coords) {
-    if (coords == null || coords.isEmpty) return null;
+    if (coords == null || coords.isEmpty) return '';
 
     final StringBuffer routeStrBuffer = StringBuffer();
     for (int i = 0; i < coords.length; ++i) {
@@ -35,7 +35,7 @@ class ApiUtils {
   }
 
   static String toCsv(List<String> values) {
-    if (values == null || values.isEmpty) return null;
+    if (values == null || values.isEmpty) return '';
     return values.join(',');
   }
 }

@@ -11,6 +11,7 @@ import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 import 'package:sahayatri/ui/shared/widgets/image_source_sheet.dart';
 
 class ImagesField extends StatelessWidget {
+  static const int maxImages = 12;
   const ImagesField();
 
   @override
@@ -34,15 +35,16 @@ class ImagesField extends StatelessWidget {
               imageUrls: state.imageUrls,
               onDelete: context.bloc<DestinationUpdatePostCubit>().removeImageUrl,
             ),
-            CustomButton(
-              label: 'Add Image',
-              color: AppColors.dark,
-              backgroundColor: AppColors.lightAccent,
-              iconData: Icons.add_photo_alternate_outlined,
-              onTap: () => ImageSourceSheet(
-                onSelect: context.bloc<DestinationUpdatePostCubit>().selectImage,
-              ).openModalBottomSheet(context),
-            ),
+            if (state.imageUrls.length < maxImages)
+              CustomButton(
+                label: 'Add Image',
+                color: AppColors.dark,
+                backgroundColor: AppColors.lightAccent,
+                iconData: Icons.add_photo_alternate_outlined,
+                onTap: () => ImageSourceSheet(
+                  onSelect: context.bloc<DestinationUpdatePostCubit>().selectImage,
+                ).openModalBottomSheet(context),
+              ),
           ],
         );
       },
