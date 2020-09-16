@@ -92,7 +92,7 @@ class ApiService {
     }
   }
 
-  Future<String> postUpdate(DestinationUpdate update, String destId) async {
+  Future<DestinationUpdate> postUpdate(DestinationUpdate update, String destId) async {
     try {
       final Response res = await Dio().post(
         '${ApiConfig.kApiBaseUrl}/updates',
@@ -103,16 +103,47 @@ class ApiService {
           "text": update.text,
           "tag": ApiUtils.toCsv(update.tags),
           "coord": ApiUtils.routeToCsv(update.coords),
-          "imageUrls": ApiUtils.toCsv(update.imageUrls),
           "user": {"id": update.user.id},
           "destination": {"id": destId}
         },
       );
+
       final body = res.data as Map<String, dynamic>;
-      return body['id'] as String;
+      final id = body['id'] as String;
+      final updateWithId = update.copyWith(id: id);
+      if (updateWithId.imageUrls.isEmpty) return updateWithId;
+
+      final updateWithImages = await postUpdateImages(updateWithId);
+      if (updateWithImages == null) {
+        throw const Failure(message: 'Failed to post update.');
+      }
+      return updateWithImages;
     } catch (e) {
       print(e.toString());
       throw const Failure(message: 'Failed to post update.');
+    }
+  }
+
+  Future<DestinationUpdate> postUpdateImages(DestinationUpdate update) async {
+    try {
+      final List<MapEntry<String, MultipartFile>> entries = [];
+      for (final url in update.imageUrls) {
+        final image = await MultipartFile.fromFile(url, filename: url);
+        entries.add(MapEntry('images', image));
+      }
+
+      final Response res = await Dio().post(
+        '${ApiConfig.kApiBaseUrl}/updates/${update.id}/images',
+        options: Options(headers: {
+          'Authorization': 'Bearer ${update.user.accessToken}',
+        }),
+        data: FormData()..files.addAll(entries),
+      );
+      final body = res.data as Map<String, dynamic>;
+      return DestinationUpdate.fromMap(body);
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
