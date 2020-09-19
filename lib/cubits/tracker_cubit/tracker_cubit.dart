@@ -11,8 +11,8 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
+import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
 part 'tracker_state.dart';
@@ -110,7 +110,7 @@ class TrackerCubit extends Cubit<TrackerState> {
 
   void _updateTrackerData(TrackerUpdate trackerUpdate, List<Coord> route) {
     final userLocation = trackerUpdate.currentLocation;
-    nearbyService.broadcastLocation(userLocation);
+    nearbyService.messagesService.broadcastLocation(userLocation);
     offRouteAlertService.alert(userLocation.coord, route);
     smsService.send(userLocation.coord, trackerUpdate.nextCheckpoint?.checkpoint?.place);
 

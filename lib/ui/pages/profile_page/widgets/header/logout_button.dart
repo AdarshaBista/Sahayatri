@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
-import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
+import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';

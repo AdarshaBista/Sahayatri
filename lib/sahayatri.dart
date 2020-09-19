@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
@@ -11,6 +10,7 @@ import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/destinations_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
+import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';

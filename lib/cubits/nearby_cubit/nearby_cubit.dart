@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
-import 'package:sahayatri/core/services/nearby_service.dart';
+import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 
 part 'nearby_state.dart';
 
@@ -17,13 +17,13 @@ class NearbyCubit extends Cubit<NearbyState> {
   })  : assert(nearbyService != null),
         super(const NearbyInitial());
 
-  String get username => nearbyService.username;
+  String get username => nearbyService.connectionService.username;
 
-  void sendSos() => nearbyService.broadcastSos();
+  void sendSos() => nearbyService.messagesService.broadcastSos();
 
   Future<void> startNearby(String name) async {
     try {
-      emit(NearbyConnected(nearbyDevices: nearbyService.nearbyDevices));
+      emit(NearbyConnected(nearbyDevices: nearbyService.devices));
       nearbyService.onDeviceChanged = changeDevice;
       await nearbyService.stop();
       await nearbyService.start(name);
@@ -39,26 +39,26 @@ class NearbyCubit extends Cubit<NearbyState> {
   }
 
   Future<void> startScanning() async {
-    emit(NearbyConnected(nearbyDevices: nearbyService.nearbyDevices));
-    await nearbyService.startScanning();
+    emit(NearbyConnected(nearbyDevices: nearbyService.devices));
+    await nearbyService.connectionService.startScanning();
   }
 
   Future<void> stopScanning() async {
-    emit(NearbyConnected(isScanning: false, nearbyDevices: nearbyService.nearbyDevices));
-    await nearbyService.stopScanning();
+    emit(NearbyConnected(isScanning: false, nearbyDevices: nearbyService.devices));
+    await nearbyService.connectionService.stopScanning();
   }
 
   Future<void> changeDevice() async {
     emit(NearbyConnected(
-      nearbyDevices: nearbyService.nearbyDevices,
+      nearbyDevices: nearbyService.devices,
       isScanning: (state as NearbyConnected).isScanning,
     ));
   }
 
   Future<void> removeDevice(NearbyDevice device) async {
-    nearbyService.removeDevice(device);
+    nearbyService.devicesService.removeDevice(device);
     emit(NearbyConnected(
-      nearbyDevices: nearbyService.nearbyDevices,
+      nearbyDevices: nearbyService.devices,
       isScanning: (state as NearbyConnected).isScanning,
     ));
   }

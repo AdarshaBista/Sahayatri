@@ -7,10 +7,10 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/nearby_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
+import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
