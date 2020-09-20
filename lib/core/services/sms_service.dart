@@ -36,7 +36,7 @@ class SmsService {
   bool _shouldSend(Coord userLocation, Place place) {
     if (place == null || _sentList.contains(place?.id)) return false;
     final distance = GeoUtils.computeDistance(userLocation, place.coord);
-    return distance < Distances.kMinNearbyDistance;
+    return distance < GeoUtils.kMinNearbyDistance;
   }
 
   /// Send SMS to notify close contact of the user

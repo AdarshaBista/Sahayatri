@@ -24,13 +24,10 @@ class NearbyService {
   /// List of nearby devices.
   List<NearbyDevice> get devices => devicesService.devices;
 
-  /// Called when a devices list is changed in [devicesService].
-  void Function() onDeviceChanged;
-
   NearbyService({
     @required NotificationService notificationService,
   }) : assert(notificationService != null) {
-    devicesService = DevicesService(onDeviceChanged);
+    devicesService = DevicesService();
     messagesService = MessagesService(devicesService, notificationService);
     connectionService = ConnectionService(devicesService, messagesService);
   }

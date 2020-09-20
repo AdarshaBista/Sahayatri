@@ -6,17 +6,17 @@ import 'package:maps_toolkit/maps_toolkit.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 class GeoUtils {
+  static const double kMinNearbyDistance = 50.0;
+
   /// Determine if [coord] is in [path] within a given [tolerance].
   static bool isOnPath(Coord coord, List<Coord> path,
-      [double tolerance = Distances.kMinNearbyDistance]) {
+      [double tolerance = kMinNearbyDistance]) {
     return PolygonUtil.isLocationOnPath(
       LatLng(coord.lat, coord.lng),
       path.map((l) => LatLng(l.lat, l.lng)).toList(),
       false,
-      tolerance: Distances.kMinNearbyDistance,
+      tolerance: kMinNearbyDistance,
     );
   }
 

@@ -8,8 +8,6 @@ class DevicesService {
   /// Called when a device is added to or updated in [_devices].
   void Function() onDeviceChanged;
 
-  DevicesService(this.onDeviceChanged);
-
   /// Clears current list of devices.
   void clear() => _devices.clear();
 

@@ -24,7 +24,7 @@ class NearbyCubit extends Cubit<NearbyState> {
   Future<void> startNearby(String name) async {
     try {
       emit(NearbyConnected(nearbyDevices: nearbyService.devices));
-      nearbyService.onDeviceChanged = changeDevice;
+      nearbyService.devicesService.onDeviceChanged = changeDevice;
       await nearbyService.stop();
       await nearbyService.start(name);
     } on Failure catch (e) {
