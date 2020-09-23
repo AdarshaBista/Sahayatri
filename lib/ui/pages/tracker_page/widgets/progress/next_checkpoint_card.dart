@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
+import 'package:sahayatri/core/utils/image_utils.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -14,10 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/upcoming_lodges_list.dart';
 
 class NextCheckpointCard extends StatelessWidget {
   const NextCheckpointCard();
@@ -25,48 +24,29 @@ class NextCheckpointCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
+    if (nextCheckpoint == null) return const Offstage();
 
-    return nextCheckpoint == null
-        ? const Offstage()
-        : FadeAnimator(
-            child: Container(
-              height: 180.0,
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  _buildBackground(context),
-                  const FlipCard(
-                    speed: 300,
-                    back: _CardBack(),
-                    front: _CardFront(),
-                    direction: FlipDirection.VERTICAL,
-                  ),
-                ],
-              ),
+    final place = nextCheckpoint.checkpoint.place;
+    return FadeAnimator(
+      child: ElevatedCard(
+        elevation: 8.0,
+        borderRadius: 8.0,
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Container(
+          height: place.lodges.isEmpty ? 180.0 : 300.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: ImageUtils.getImageProvider(place.imageUrls.first),
+              colorFilter: ColorFilter.mode(AppColors.barrier, BlendMode.srcATop),
             ),
-          );
-  }
-
-  Widget _buildBackground(BuildContext context) {
-    final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
-
-    return ElevatedCard(
-      elevation: 8.0,
-      borderRadius: 8.0,
-      child: Hero(
-        tag: place.id,
-        child: GradientContainer(
-          gradientBegin: Alignment.bottomCenter,
-          gradientEnd: Alignment.topRight,
-          gradientColors: [
-            AppColors.dark.withOpacity(0.8),
-            AppColors.dark.withOpacity(0.6),
-            AppColors.dark.withOpacity(0.4),
-            AppColors.dark.withOpacity(0.2),
-            Colors.transparent,
-          ],
-          child: AdaptiveImage(place.imageUrls[0]),
+          ),
+          child: const FlipCard(
+            speed: 300,
+            back: _CardBack(),
+            front: _CardFront(),
+            direction: FlipDirection.VERTICAL,
+          ),
         ),
       ),
     );
@@ -78,7 +58,9 @@ class _CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
+    final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
+    final place = nextCheckpoint.checkpoint.place;
+    final lodges = place.lodges;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -86,47 +68,31 @@ class _CardFront extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildTitle(context, place),
+          Text('Next Checkpoint', style: AppTextStyles.small.light),
           const Spacer(),
-          Text(
-            place.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium.light,
-          ),
-          Divider(height: 10.0, color: AppColors.lightAccent.withOpacity(0.5)),
+          _buildTitle(context, place),
+          const SizedBox(height: 10.0),
           _buildStatus(context),
+          if (lodges.isNotEmpty) ...[
+            const Divider(height: 20.0, color: AppColors.lightAccent),
+            UpcomingLodgesList(lodges: lodges),
+          ],
         ],
       ),
     );
   }
 
   Widget _buildTitle(BuildContext context, Place place) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'NEXT CHECKPOINT',
-          style: AppTextStyles.small.light.bold,
-        ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () => context.repository<DestinationNavService>().pushNamed(
-                Routes.kPlacePageRoute,
-                arguments: place,
-              ),
-          child: const ScaleAnimator(
-            child: CircleAvatar(
-              radius: 16.0,
-              backgroundColor: AppColors.dark,
-              child: Icon(
-                Icons.keyboard_arrow_right,
-                color: AppColors.primary,
-              ),
-            ),
-          ),
-        ),
-      ],
+    return GestureDetector(
+      onTap: () => context
+          .repository<DestinationNavService>()
+          .pushNamed(Routes.kPlacePageRoute, arguments: place),
+      child: Text(
+        place.name.toUpperCase(),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: AppTextStyles.small.light.bold,
+      ),
     );
   }
 
@@ -163,10 +129,7 @@ class _CardBack extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Description',
-            style: AppTextStyles.small.primary.bold,
-          ),
+          _buildDateTime(checkpoint),
           const Divider(height: 12.0, color: AppColors.lightAccent),
           Expanded(
             child: SingleChildScrollView(
@@ -179,8 +142,6 @@ class _CardBack extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 8.0),
-          _buildDateTime(checkpoint),
         ],
       ),
     );

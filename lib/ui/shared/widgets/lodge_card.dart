@@ -24,12 +24,9 @@ class LodgeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.repository<DestinationNavService>().pushNamed(
-              Routes.kLodgePageRoute,
-              arguments: lodge,
-            );
-      },
+      onTap: () => context
+          .repository<DestinationNavService>()
+          .pushNamed(Routes.kLodgePageRoute, arguments: lodge),
       child: ElevatedCard(
         borderRadius: 8.0,
         child: Stack(

@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/lodges_list.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/lodges_list.dart';
 
 class CheckpointDetails extends StatelessWidget {
   final Checkpoint checkpoint;
