@@ -9,7 +9,7 @@ class ImageCard extends StatelessWidget {
   final double borderRadius;
 
   const ImageCard({
-    this.margin = const EdgeInsets.all(6.0),
+    this.margin = const EdgeInsets.all(4.0),
     @required this.imageUrl,
     this.borderRadius = 8.0,
   })  : assert(imageUrl != null),

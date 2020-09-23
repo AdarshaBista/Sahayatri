@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/widgets/image_card.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
@@ -30,40 +33,64 @@ class PhotoGallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: imageUrls.isEmpty
-          ? _getEmptyIndicator()
-          : GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: maxCrossAxisExtent,
-              ),
-              shrinkWrap: true,
-              padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: imageUrls.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  child: Hero(
-                    tag: imageUrls[index],
-                    child: _getImage(imageUrls[index]),
-                  ),
-                  onTap: () => context.repository<DestinationNavService>().pushNamed(
-                        Routes.kPhotoViewPageRoute,
-                        arguments: PhotoViewPageArgs(
-                          imageUrls: imageUrls,
-                          initialPageIndex: index,
-                        ),
-                      ),
-                );
-              },
-            ),
+          ? _buildEmptyIndicator()
+          : deletable
+              ? _buildGrid()
+              : _buildStaggeredGrid(),
     );
   }
 
-  Widget _getEmptyIndicator() {
+  Widget _buildEmptyIndicator() {
     if (deletable) return const Offstage();
     return const EmptyIndicator(message: 'No photos at the moment.');
   }
 
-  Widget _getImage(String imageUrl) {
+  Widget _buildStaggeredGrid() {
+    return StaggeredGridView.extentBuilder(
+      maxCrossAxisExtent: maxCrossAxisExtent,
+      shrinkWrap: true,
+      padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: imageUrls.length,
+      itemBuilder: _buildItem,
+      staggeredTileBuilder: (int index) {
+        final double r = Random().nextDouble();
+        final int count = r > 0.8 ? 2 : 1;
+        return StaggeredTile.count(count, count);
+      },
+    );
+  }
+
+  Widget _buildGrid() {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: maxCrossAxisExtent,
+      ),
+      shrinkWrap: true,
+      padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: imageUrls.length,
+      itemBuilder: _buildItem,
+    );
+  }
+
+  Widget _buildItem(BuildContext context, int index) {
+    return GestureDetector(
+      child: Hero(
+        tag: imageUrls[index],
+        child: _buildImage(imageUrls[index]),
+      ),
+      onTap: () => context.repository<DestinationNavService>().pushNamed(
+            Routes.kPhotoViewPageRoute,
+            arguments: PhotoViewPageArgs(
+              imageUrls: imageUrls,
+              initialPageIndex: index,
+            ),
+          ),
+    );
+  }
+
+  Widget _buildImage(String imageUrl) {
     if (!deletable) return ImageCard(imageUrl: imageUrl);
     return Stack(
       children: [

@@ -16,10 +16,10 @@ dependencies:
   dio: ^3.0.10
   intl: ^0.16.1
   timeago: ^2.0.27
-  url_launcher: ^5.5.3
-  path_provider: ^1.6.14
-  image_picker: ^0.6.7+7
+  url_launcher: ^5.7.0
   device_preview: ^0.4.8
+  path_provider: ^1.6.17
+  image_picker: ^0.6.7+10
   form_field_validator: ^1.0.1
 
   # Alert
@@ -48,7 +48,7 @@ dependencies:
   fl_chart: ^0.11.1
   flip_card: ^0.4.4
   photo_view: ^0.10.2
-  timeline_tile: ^0.1.2
+  timeline_tile: ^1.0.0
   auto_size_text: ^2.1.0
   flutter_swiper: ^1.1.6
   sliding_up_panel: ^1.0.2
@@ -57,6 +57,7 @@ dependencies:
   flutter_rating_bar: ^3.0.1+1
   flutter_datetime_picker: ^1.4.0
   community_material_icon: ^5.4.55
+  flutter_staggered_grid_view: ^0.3.2
 
 dev_dependencies:
   flutter_test:

@@ -66,7 +66,7 @@ class ItineraryTimeline extends StatelessWidget {
     Checkpoint checkpoint,
   ) {
     return TimelineTile(
-      lineX: 0.3,
+      lineXY: 0.3,
       isLast: isLast,
       isFirst: isFirst,
       alignment: TimelineAlign.manual,
@@ -83,16 +83,16 @@ class ItineraryTimeline extends StatelessWidget {
           child: AdaptiveImage(checkpoint.place.imageUrls[0]),
         ),
       ),
-      topLineStyle: const LineStyle(
-        width: 1.5,
+      beforeLineStyle: const LineStyle(
+        thickness: 1.5,
         color: AppColors.disabled,
       ),
-      bottomLineStyle: const LineStyle(
-        width: 1.5,
+      afterLineStyle: const LineStyle(
+        thickness: 1.5,
         color: AppColors.disabled,
       ),
-      leftChild: _buildDateTime(checkpoint),
-      rightChild: _buildPlace(context, checkpoint),
+      startChild: _buildDateTime(checkpoint),
+      endChild: _buildPlace(context, checkpoint),
     );
   }
 
