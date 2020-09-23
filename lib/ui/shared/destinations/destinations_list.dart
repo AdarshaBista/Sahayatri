@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/shared/destinations/destination_card.dart';
 
 class DestinationsList extends StatelessWidget {
@@ -18,6 +19,8 @@ class DestinationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (destinations.isEmpty) return const EmptyIndicator();
+
     return ListView.builder(
       shrinkWrap: true,
       padding: EdgeInsets.zero,

@@ -48,7 +48,7 @@ class DestinationsCubit extends Cubit<DestinationsState> {
         .toList();
 
     if (searchedDestinations.isEmpty) {
-      emit(const DestinationsEmpty());
+      emit(const DestinationsLoaded(destinations: []));
     } else {
       emit(DestinationsLoaded(destinations: searchedDestinations));
     }
