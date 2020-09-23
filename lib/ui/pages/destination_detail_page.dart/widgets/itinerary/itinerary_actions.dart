@@ -29,7 +29,6 @@ class ItineraryActions extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
-        color: AppColors.secondary,
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0)),
       ),
       child: _buildButtons(context),
@@ -74,11 +73,11 @@ class ItineraryActions extends StatelessWidget {
       child: Container(
         width: 32.0,
         height: 32.0,
-        color: color,
+        color: AppColors.barrier,
         child: Icon(
           icon,
           size: 16.0,
-          color: AppColors.lightAccent,
+          color: color,
         ),
       ),
     );
