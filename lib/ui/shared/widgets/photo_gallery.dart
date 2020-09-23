@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -27,7 +25,6 @@ class PhotoGallery extends StatelessWidget {
 
   bool get deletable => onDelete != null;
   double get padding => deletable ? 0.0 : 12.0;
-  double get maxCrossAxisExtent => deletable ? 64.0 : 100.0;
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +43,15 @@ class PhotoGallery extends StatelessWidget {
   }
 
   Widget _buildStaggeredGrid() {
-    return StaggeredGridView.extentBuilder(
-      maxCrossAxisExtent: maxCrossAxisExtent,
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: 4,
       shrinkWrap: true,
       padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
       physics: const NeverScrollableScrollPhysics(),
       itemCount: imageUrls.length,
       itemBuilder: _buildItem,
       staggeredTileBuilder: (int index) {
-        final double r = Random().nextDouble();
-        final int count = r > 0.8 ? 2 : 1;
+        final int count = index % 3 == 0 ? 2 : 1;
         return StaggeredTile.count(count, count);
       },
     );
@@ -63,8 +59,8 @@ class PhotoGallery extends StatelessWidget {
 
   Widget _buildGrid() {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: maxCrossAxisExtent,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 64.0,
       ),
       shrinkWrap: true,
       padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),

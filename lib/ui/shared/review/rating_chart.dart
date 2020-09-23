@@ -60,7 +60,7 @@ class RatingChart extends StatelessWidget {
       children: [
         for (int i = stars.length; i > 0; --i)
           SlideAnimator(
-            begin: Offset(0.2 + (stars.length + 1 - i) * 0.4, 0.0),
+            begin: Offset(0.2 + (stars.length + 1 - i) * 0.1, 0.0),
             child: _buildBar(i),
           ),
       ],
