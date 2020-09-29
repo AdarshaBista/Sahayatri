@@ -13,6 +13,7 @@ class AppThemes {
         fontFamily: AppConfig.kFontFamily,
         brightness: Brightness.light,
         accentColorBrightness: Brightness.light,
+        visualDensity: VisualDensity.standard,
         primaryColor: AppColors.primary,
         accentColor: AppColors.secondary,
         splashColor: AppColors.primary,
