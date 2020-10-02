@@ -11,14 +11,14 @@ import 'package:sahayatri/core/models/failure.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
-part 'destination_update_post_state.dart';
+part 'destination_update_form_state.dart';
 
-class DestinationUpdatePostCubit extends Cubit<DestinationUpdatePostState> {
+class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
   final ApiService apiService;
   final Destination destination;
   final DestinationUpdateCubit destinationUpdateCubit;
 
-  DestinationUpdatePostCubit({
+  DestinationUpdateFormCubit({
     @required this.apiService,
     @required this.destination,
     @required this.destinationUpdateCubit,
@@ -26,7 +26,7 @@ class DestinationUpdatePostCubit extends Cubit<DestinationUpdatePostState> {
         assert(destination != null),
         assert(destinationUpdateCubit != null),
         super(
-          DestinationUpdatePostState(
+          DestinationUpdateFormState(
             text: '',
             tags: [],
             coords: [],

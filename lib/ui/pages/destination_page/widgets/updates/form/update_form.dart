@@ -5,7 +5,7 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
-import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
@@ -19,8 +19,8 @@ class UpdateForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DestinationUpdatePostCubit>(
-      create: (context) => DestinationUpdatePostCubit(
+    return BlocProvider<DestinationUpdateFormCubit>(
+      create: (context) => DestinationUpdateFormCubit(
         apiService: context.repository<ApiService>(),
         destination: context.bloc<DestinationCubit>().destination,
         destinationUpdateCubit: context.bloc<DestinationUpdateCubit>(),
@@ -57,7 +57,7 @@ class UpdateForm extends StatelessWidget {
   }
 
   Widget _buildMessage() {
-    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+    return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
         if (state.message == null) return const Offstage();
         return Text(
@@ -69,7 +69,7 @@ class UpdateForm extends StatelessWidget {
   }
 
   Widget _buildSubmitButton() {
-    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+    return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
         return FloatingActionButton(
           mini: true,
@@ -85,7 +85,7 @@ class UpdateForm extends StatelessWidget {
             if (state.isLoading) return;
             if (!formKey.currentState.validate()) return;
 
-            final success = await context.bloc<DestinationUpdatePostCubit>().postUpdate();
+            final success = await context.bloc<DestinationUpdateFormCubit>().postUpdate();
             if (success) Navigator.of(context).pop();
           },
         );

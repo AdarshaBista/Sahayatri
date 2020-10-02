@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
-import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -18,7 +18,7 @@ class SelectLocationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MapDialog(
-      map: BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+      map: BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
         builder: (context, state) {
           final center = state.coords.isNotEmpty
               ? state.coords.first
@@ -28,7 +28,7 @@ class SelectLocationDialog extends StatelessWidget {
             center: center,
             initialZoom: 17.0,
             children: [if (state.coords.isNotEmpty) const _MarkersLayer()],
-            onTap: context.bloc<DestinationUpdatePostCubit>().updateCoords,
+            onTap: context.bloc<DestinationUpdateFormCubit>().updateCoords,
           );
         },
       ),
@@ -41,7 +41,7 @@ class _MarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+    return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
         return MarkerLayerWidget(
           options: MarkerLayerOptions(
@@ -61,7 +61,7 @@ class _MarkersLayer extends StatelessWidget {
       point: c.toLatLng(),
       builder: (context) {
         return GestureDetector(
-          onTap: () => context.bloc<DestinationUpdatePostCubit>().updateCoords(c),
+          onTap: () => context.bloc<DestinationUpdateFormCubit>().updateCoords(c),
           child: const Icon(
             CommunityMaterialIcons.circle_double,
             size: size,

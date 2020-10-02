@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
@@ -11,7 +11,7 @@ class TagsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final updateCubit = context.bloc<DestinationUpdatePostCubit>();
+    final updateCubit = context.bloc<DestinationUpdateFormCubit>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

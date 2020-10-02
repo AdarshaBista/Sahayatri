@@ -1,6 +1,6 @@
-part of 'destination_update_post_cubit.dart';
+part of 'destination_update_form_cubit.dart';
 
-class DestinationUpdatePostState {
+class DestinationUpdateFormState {
   String message;
   bool isLoading = false;
   final String text;
@@ -16,7 +16,7 @@ class DestinationUpdatePostState {
         dateUpdated: DateTime.now(),
       );
 
-  DestinationUpdatePostState({
+  DestinationUpdateFormState({
     this.message,
     this.isLoading = false,
     @required this.text,
@@ -28,7 +28,7 @@ class DestinationUpdatePostState {
         assert(coords != null),
         assert(imageUrls != null);
 
-  DestinationUpdatePostState copyWith({
+  DestinationUpdateFormState copyWith({
     String message,
     bool isLoading,
     String text,
@@ -36,7 +36,7 @@ class DestinationUpdatePostState {
     List<Coord> coords,
     List<String> imageUrls,
   }) {
-    return DestinationUpdatePostState(
+    return DestinationUpdateFormState(
       message: message ?? this.message,
       isLoading: isLoading ?? this.isLoading,
       text: text ?? this.text,

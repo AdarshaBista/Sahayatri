@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_update_post_cubit/destination_update_post_cubit.dart';
+import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -15,7 +15,7 @@ class LocationField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationUpdatePostCubit, DestinationUpdatePostState>(
+    return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,8 +34,8 @@ class LocationField extends StatelessWidget {
               color: AppColors.dark,
               backgroundColor: AppColors.lightAccent,
               iconData: CommunityMaterialIcons.map_marker_plus_outline,
-              onTap: () => BlocProvider<DestinationUpdatePostCubit>.value(
-                value: context.bloc<DestinationUpdatePostCubit>(),
+              onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
+                value: context.bloc<DestinationUpdateFormCubit>(),
                 child: const SelectLocationDialog(),
               ).openDialog(context),
             ),
