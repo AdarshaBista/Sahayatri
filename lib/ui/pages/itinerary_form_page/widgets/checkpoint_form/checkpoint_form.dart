@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
@@ -50,6 +51,7 @@ class CheckpointForm extends StatelessWidget {
                   _buildDateTimeField(state.dateTime, context),
                   const SizedBox(height: 16.0),
                   _buildDescriptionField(state.description, context),
+                  _buildSmsToggle(state.notifyContact, context),
                   const SizedBox(height: 16.0),
                   _buildSubmitButton(state, context),
                 ],
@@ -96,6 +98,26 @@ class CheckpointForm extends StatelessWidget {
       icon: Icons.description,
       initialValue: description,
       onChanged: (desc) => context.bloc<CheckpointFormCubit>().changeDescription(desc),
+    );
+  }
+
+  Widget _buildSmsToggle(bool shouldSendSms, BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      trailing: Switch.adaptive(
+        value: shouldSendSms,
+        activeColor: AppColors.primary,
+        onChanged: (value) =>
+            context.bloc<CheckpointFormCubit>().toggleNotifyContact(value),
+      ),
+      title: Text(
+        'Notify Contact',
+        style: AppTextStyles.small.bold,
+      ),
+      subtitle: Text(
+        'Notify close contact via SMS when you reach this checkpoint.',
+        style: AppTextStyles.extraSmall,
+      ),
     );
   }
 

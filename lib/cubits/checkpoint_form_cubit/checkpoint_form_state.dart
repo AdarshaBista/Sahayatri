@@ -4,31 +4,37 @@ class CheckpointFormState extends Equatable {
   final Place place;
   final String description;
   final DateTime dateTime;
+  final bool notifyContact;
 
   Checkpoint get checkpoint => Checkpoint(
         place: place,
         description: description.trim(),
         dateTime: dateTime,
+        notifyContact: notifyContact,
       );
 
   const CheckpointFormState({
     @required this.place,
     @required this.description,
     @required this.dateTime,
-  }) : assert(description != null);
+    @required this.notifyContact,
+  })  : assert(description != null),
+        assert(notifyContact != null);
 
   CheckpointFormState copyWith({
     Place place,
     String description,
     DateTime dateTime,
+    bool notifyContact,
   }) {
     return CheckpointFormState(
       place: place ?? this.place,
       description: description ?? this.description,
       dateTime: dateTime ?? this.dateTime,
+      notifyContact: notifyContact ?? this.notifyContact,
     );
   }
 
   @override
-  List<Object> get props => [place, description, dateTime];
+  List<Object> get props => [place, description, dateTime, notifyContact];
 }

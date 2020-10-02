@@ -21,13 +21,14 @@ class CheckpointAdapter extends TypeAdapter<Checkpoint> {
       dateTime: fields[2] as DateTime,
       description: fields[1] as String,
       day: fields[3] as int,
+      notifyContact: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Checkpoint obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.place)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class CheckpointAdapter extends TypeAdapter<Checkpoint> {
       ..writeByte(2)
       ..write(obj.dateTime)
       ..writeByte(3)
-      ..write(obj.day);
+      ..write(obj.day)
+      ..writeByte(4)
+      ..write(obj.notifyContact);
   }
 
   @override

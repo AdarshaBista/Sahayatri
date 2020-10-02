@@ -112,7 +112,7 @@ class TrackerCubit extends Cubit<TrackerState> {
     final userLocation = trackerUpdate.currentLocation;
     nearbyService.messagesService.broadcastLocation(userLocation);
     offRouteAlertService.alert(userLocation.coord, route);
-    smsService.send(userLocation.coord, trackerUpdate.nextCheckpoint?.checkpoint?.place);
+    smsService.send(userLocation.coord, trackerUpdate.nextCheckpoint?.checkpoint);
 
     emit(TrackerUpdating(update: trackerUpdate));
   }

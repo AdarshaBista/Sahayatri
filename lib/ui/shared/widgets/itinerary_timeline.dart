@@ -150,6 +150,27 @@ class ItineraryTimeline extends StatelessWidget {
               : checkpoint.description,
           style: AppTextStyles.extraSmall,
         ),
+        if (checkpoint.notifyContact) ...[
+          const SizedBox(height: 4.0),
+          _buildSmsStatus(),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildSmsStatus() {
+    return Row(
+      children: [
+        const Icon(
+          Icons.check_circle,
+          size: 12.0,
+          color: AppColors.primaryDark,
+        ),
+        const SizedBox(width: 4.0),
+        Text(
+          'Notify contact',
+          style: AppTextStyles.extraSmall.primaryDark,
+        ),
       ],
     );
   }

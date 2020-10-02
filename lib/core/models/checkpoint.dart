@@ -23,6 +23,9 @@ class Checkpoint {
   @HiveField(3)
   final int day;
 
+  @HiveField(4)
+  final bool notifyContact;
+
   bool get isTemplate => dateTime == null;
   String get date => isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime);
   String get time => isTemplate ? '' : DateFormat('h:mm a').format(dateTime);
@@ -32,19 +35,23 @@ class Checkpoint {
     @required this.dateTime,
     @required this.description,
     this.day = 0,
-  }) : assert(description != null);
+    this.notifyContact = true,
+  })  : assert(description != null),
+        assert(notifyContact != null);
 
   Checkpoint copyWith({
     int day,
     Place place,
     String description,
     DateTime dateTime,
+    bool notifyContact,
   }) {
     return Checkpoint(
       day: day ?? this.day,
       place: place ?? this.place,
       description: description ?? this.description,
       dateTime: dateTime ?? this.dateTime,
+      notifyContact: notifyContact ?? this.notifyContact,
     );
   }
 
@@ -67,16 +74,21 @@ class Checkpoint {
         o.place == place &&
         o.day == day &&
         o.description == description &&
-        o.dateTime == dateTime;
+        o.dateTime == dateTime &&
+        o.notifyContact == notifyContact;
   }
 
   @override
   int get hashCode {
-    return place.hashCode ^ day.hashCode ^ description.hashCode ^ dateTime.hashCode;
+    return place.hashCode ^
+        day.hashCode ^
+        description.hashCode ^
+        dateTime.hashCode ^
+        notifyContact.hashCode;
   }
 
   @override
   String toString() {
-    return 'Checkpoint(place: $place, day: $day, description: $description, dateTime: $dateTime)';
+    return 'Checkpoint(place: $place, day: $day, description: $description, dateTime: $dateTime, notifyContact: $notifyContact)';
   }
 }

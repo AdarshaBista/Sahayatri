@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:sms_maintained/sms.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
@@ -33,21 +33,24 @@ class SmsService {
         assert(notificationService != null);
 
   /// Returns true if sms should be sent on arrival to [place].
-  bool _shouldSend(Coord userLocation, Place place) {
-    if (place == null || _sentList.contains(place?.id)) return false;
-    final distance = GeoUtils.computeDistance(userLocation, place.coord);
+  bool _shouldSend(Coord userLocation, Checkpoint checkpoint) {
+    if (checkpoint == null ||
+        !checkpoint.notifyContact ||
+        _sentList.contains(checkpoint.place.id)) return false;
+    final distance = GeoUtils.computeDistance(userLocation, checkpoint.place.coord);
     return distance < GeoUtils.kMinNearbyDistance;
   }
 
   /// Send SMS to notify close contact of the user
   /// on his/her arrival at a [place].
-  Future<void> send(Coord userLocation, Place place) async {
+  Future<void> send(Coord userLocation, Checkpoint checkpoint) async {
     if (Platform.isWindows) return;
-    if (!_shouldSend(userLocation, place)) return;
+    if (!_shouldSend(userLocation, checkpoint)) return;
 
     contact ??= (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
 
+    final place = checkpoint.place;
     _alert('$contact has been notified on your arrival at ${place.name}');
     final smsMessage = SmsMessage(
       contact,

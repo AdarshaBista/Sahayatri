@@ -17,9 +17,12 @@ class CheckpointFormCubit extends Cubit<CheckpointFormState> {
           CheckpointFormState(
             place: checkpoint?.place,
             description: checkpoint?.description ?? '',
+            notifyContact: checkpoint?.notifyContact ?? true,
             dateTime: checkpoint == null
                 ? null
-                : checkpoint.isTemplate ? null : checkpoint.dateTime,
+                : checkpoint.isTemplate
+                    ? null
+                    : checkpoint.dateTime,
           ),
         );
 
@@ -33,5 +36,9 @@ class CheckpointFormCubit extends Cubit<CheckpointFormState> {
 
   void changeDateTime(DateTime dateTime) {
     emit(state.copyWith(dateTime: dateTime));
+  }
+
+  void toggleNotifyContact(bool notifyContact) {
+    emit(state.copyWith(notifyContact: notifyContact));
   }
 }
