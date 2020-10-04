@@ -24,14 +24,14 @@ dependencies:
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^1.4.4+4
+  flutter_local_notifications: ^1.5.0
 
   # State Management
   equatable: ^1.2.5
   flutter_bloc: ^6.0.5
 
   # Database
-  hive: ^1.4.4
+  hive: ^1.4.4+1
 
   # Map
   maps_toolkit: ^1.1.0+2

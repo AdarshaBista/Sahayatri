@@ -7,8 +7,8 @@ class NotificationService {
     const initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
     const initializationSettingsIOS = IOSInitializationSettings();
     const initializationSettings = InitializationSettings(
-      initializationSettingsAndroid,
-      initializationSettingsIOS,
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
     );
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -24,14 +24,14 @@ class NotificationService {
       channelId,
       channelName,
       channelDescription,
-      priority: Priority.Max,
-      importance: Importance.Max,
-      visibility: NotificationVisibility.Public,
+      priority: Priority.max,
+      importance: Importance.max,
+      visibility: NotificationVisibility.public,
     );
     const iOSPlatformChannelSpecifics = IOSNotificationDetails();
     final platformChannelSpecifics = NotificationDetails(
-      androidPlatformChannelSpecifics,
-      iOSPlatformChannelSpecifics,
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
     );
 
     await flutterLocalNotificationsPlugin.show(
