@@ -36,7 +36,7 @@ class CreatedItineraryCard extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context, Itinerary createdItinerary) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: CustomButton(
         color: AppColors.primaryDark,

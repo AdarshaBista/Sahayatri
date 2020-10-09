@@ -14,7 +14,7 @@ class CheckpointImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: kHeight,
       child: Stack(
         children: imageUrls.reversed

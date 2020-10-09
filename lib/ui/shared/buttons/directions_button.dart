@@ -59,7 +59,7 @@ class DirectionsButton extends StatelessWidget {
   }
 
   Widget _buildModesRow(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

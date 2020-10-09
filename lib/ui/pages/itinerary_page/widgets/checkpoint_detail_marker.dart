@@ -47,7 +47,7 @@ class _DateTimeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 60.0,
       child: Stack(
         alignment: Alignment.center,

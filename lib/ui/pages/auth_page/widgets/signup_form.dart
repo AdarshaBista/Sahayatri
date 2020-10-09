@@ -41,29 +41,34 @@ class _SignUpFormState extends State<SignUpForm> {
         key: formKey,
         child: Column(
           children: [
-            CustomCard(
-              margin: const EdgeInsets.all(20.0),
-              padding: const EdgeInsets.all(20.0),
-              color: AppColors.light.withOpacity(0.4),
-              child: Column(
-                children: [
-                  CustomTextField(
-                    label: 'Username',
-                    iconGap: 10.0,
-                    color: AppColors.light,
-                    initialValue: username,
-                    icon: Icons.account_circle_outlined,
-                    validator: FormValidators.requiredText(),
-                    onChanged: (value) => username = value,
+            Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500.0),
+                child: CustomCard(
+                  margin: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
+                  color: AppColors.light.withOpacity(0.4),
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        label: 'Username',
+                        iconGap: 10.0,
+                        color: AppColors.light,
+                        initialValue: username,
+                        icon: Icons.account_circle_outlined,
+                        validator: FormValidators.requiredText(),
+                        onChanged: (value) => username = value,
+                      ),
+                      const SizedBox(height: 20.0),
+                      AuthFields(
+                        initialEmail: email,
+                        initialPassword: password,
+                        onEmailChanged: (value) => email = value,
+                        onPasswordChanged: (value) => password = value,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20.0),
-                  AuthFields(
-                    initialEmail: email,
-                    initialPassword: password,
-                    onEmailChanged: (value) => email = value,
-                    onPasswordChanged: (value) => password = value,
-                  ),
-                ],
+                ),
               ),
             ),
             AuthButton(

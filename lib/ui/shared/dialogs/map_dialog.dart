@@ -22,7 +22,7 @@ class MapDialog extends StatelessWidget {
         titlePadding: EdgeInsets.zero,
         insetPadding: EdgeInsets.zero,
         backgroundColor: AppColors.light,
-        title: Container(
+        title: SizedBox(
           width: size.width * 0.9,
           height: size.height * 0.7,
           child: map,

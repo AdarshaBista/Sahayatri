@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/buttons/save_button.dart';
 import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
 import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
@@ -54,12 +55,16 @@ class _ContactFormState extends State<ContactForm> {
                   'A message will be automatically sent to this number once you reach a checkpoint.',
                   style: AppTextStyles.extraSmall,
                 ),
-                const SizedBox(height: 10.0),
-                _buildTextField(),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: _buildSubmitButton(context),
+                const SizedBox(height: 16.0),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(child: _buildTextField()),
+                    const SizedBox(width: 8.0),
+                    _buildSubmitButton(context),
+                  ],
                 ),
+                const SizedBox(height: 16.0),
                 _buildPreviewText(),
                 const SizedBox(height: 16.0),
               ],
@@ -91,11 +96,7 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return FlatButton(
-      child: Text(
-        'SAVE',
-        style: AppTextStyles.small.primary.bold,
-      ),
+    return SaveButton(
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
         context.bloc<PrefsCubit>().saveContact(contact);

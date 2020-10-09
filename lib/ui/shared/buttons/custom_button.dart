@@ -27,30 +27,33 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: outlineOnly
-          ? OutlineButton.icon(
-              onPressed: onTap,
-              splashColor: AppColors.primary,
-              highlightedBorderColor: backgroundColor,
-              borderSide: BorderSide(color: backgroundColor),
-              icon: Icon(iconData, color: color),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-              label: Text(
-                label,
-                style: AppTextStyles.small.withColor(color),
+      child: SizedBox(
+        height: 36.0,
+        child: outlineOnly
+            ? OutlineButton.icon(
+                onPressed: onTap,
+                splashColor: color.withOpacity(0.5),
+                highlightedBorderColor: backgroundColor,
+                borderSide: BorderSide(color: backgroundColor),
+                icon: Icon(iconData, color: color),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                label: Text(
+                  label,
+                  style: AppTextStyles.small.withColor(color),
+                ),
+              )
+            : FlatButton.icon(
+                onPressed: onTap,
+                color: backgroundColor,
+                icon: Icon(iconData, color: color),
+                splashColor: color.withOpacity(0.5),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                label: Text(
+                  label,
+                  style: AppTextStyles.small.withColor(color),
+                ),
               ),
-            )
-          : FlatButton.icon(
-              onPressed: onTap,
-              color: backgroundColor,
-              splashColor: AppColors.primary,
-              icon: Icon(iconData, color: color),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-              label: Text(
-                label,
-                style: AppTextStyles.small.withColor(color),
-              ),
-            ),
+      ),
     );
   }
 }

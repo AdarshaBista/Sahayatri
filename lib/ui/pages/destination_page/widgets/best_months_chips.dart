@@ -25,19 +25,15 @@ class BestMonthsChips extends StatelessWidget {
           const SizedBox(height: 8.0),
           Wrap(
             spacing: 8.0,
+            runSpacing: 8.0,
             children: bestMonths
-                .map(
-                  (m) => ScaleAnimator(
-                    child: Chip(
-                      backgroundColor: AppColors.lightAccent,
-                      visualDensity: VisualDensity.compact,
-                      label: Text(
-                        m,
-                        style: AppTextStyles.extraSmall,
+                .map((m) => ScaleAnimator(
+                      child: Chip(
+                        backgroundColor: AppColors.lightAccent,
+                        visualDensity: VisualDensity.compact,
+                        label: Text(m, style: AppTextStyles.extraSmall),
                       ),
-                    ),
-                  ),
-                )
+                    ))
                 .toList(),
           ),
         ],

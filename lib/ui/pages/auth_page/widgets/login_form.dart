@@ -40,9 +40,7 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 500.0,
-                ),
+                constraints: const BoxConstraints(maxWidth: 500.0),
                 child: CustomCard(
                   margin: const EdgeInsets.all(20.0),
                   padding: const EdgeInsets.all(20.0),

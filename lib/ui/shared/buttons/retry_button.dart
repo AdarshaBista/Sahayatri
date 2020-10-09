@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
 
 class RetryButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -11,17 +12,12 @@ class RetryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 20.0,
-      backgroundColor: AppColors.primaryLight,
-      child: IconButton(
-        onPressed: onTap,
-        splashRadius: 20.0,
-        icon: Icon(
-          Icons.refresh_outlined,
-          color: AppColors.barrier,
-        ),
-      ),
+    return CustomButton(
+      onTap: onTap,
+      label: 'Retry',
+      iconData: Icons.refresh,
+      color: AppColors.secondary,
+      backgroundColor: Colors.transparent,
     );
   }
 }

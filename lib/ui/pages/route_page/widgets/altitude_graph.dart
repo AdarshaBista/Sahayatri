@@ -28,7 +28,7 @@ class AltitudeGraph extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Text(
-            'Altitude Graph',
+            'Elevation Gain',
             textAlign: TextAlign.center,
             style: AppTextStyles.medium,
           ),
@@ -62,11 +62,20 @@ class AltitudeGraph extends StatelessWidget {
         maxY: maxY,
         minX: 0.0,
         maxX: xValues.length.toDouble(),
-        borderData: FlBorderData(show: false),
+        borderData: _buildBorderData(),
         lineTouchData: _buildTouchData(),
         gridData: _buildGrid(vInterval, hInterval),
         titlesData: _buildTitles(vInterval, hInterval, xValues.length),
         lineBarsData: [_buildLineData(xValues, altitudes, AppColors.primary)],
+      ),
+    );
+  }
+
+  FlBorderData _buildBorderData() {
+    return FlBorderData(
+      border: Border.all(
+        width: 0.5,
+        color: AppColors.barrier,
       ),
     );
   }
@@ -103,7 +112,7 @@ class AltitudeGraph extends StatelessWidget {
         margin: 8.0,
         interval: hInterval,
         reservedSize: 30.0,
-        textStyle: AppTextStyles.extraSmall.bold,
+        getTextStyles: (_) => AppTextStyles.extraSmall.bold,
         getTitles: (value) {
           final double percent = value / length;
           return '${(percent * routeLengthKm).round()} km';
@@ -114,7 +123,7 @@ class AltitudeGraph extends StatelessWidget {
         margin: 8.0,
         interval: vInterval,
         reservedSize: 30.0,
-        textStyle: AppTextStyles.extraSmall.bold,
+        getTextStyles: (_) => AppTextStyles.extraSmall.bold,
         getTitles: (value) => '${value.round()} m',
       ),
     );

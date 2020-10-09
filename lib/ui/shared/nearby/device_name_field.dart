@@ -7,7 +7,7 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/shared/buttons/save_button.dart';
 import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
 
 class DeviceNameField extends StatefulWidget {
@@ -26,11 +26,11 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _buildTextField(),
+          Expanded(child: _buildTextField()),
+          const SizedBox(width: 8.0),
           _buildSubmitButton(context),
         ],
       ),
@@ -59,11 +59,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return FlatButton(
-      child: Text(
-        'SAVE',
-        style: AppTextStyles.small.primary.bold,
-      ),
+    return SaveButton(
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
         context.bloc<PrefsCubit>().saveDeviceName(deviceName);

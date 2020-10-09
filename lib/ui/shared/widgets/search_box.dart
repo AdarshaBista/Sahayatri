@@ -27,20 +27,23 @@ class SearchBox extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0),
           width: double.infinity,
-          height: 50.0,
+          height: 44.0,
           child: ElevatedCard(
             elevation: elevation + 2.0,
-            child: TextField(
-              onChanged: onChanged,
-              style: AppTextStyles.small,
-              decoration: InputDecoration(
-                fillColor: AppColors.light,
-                border: InputBorder.none,
-                hintText: hintText,
-                prefixIcon: const ScaleAnimator(
-                  child: Icon(
-                    Icons.search,
-                    size: 20.0,
+            child: Center(
+              child: TextField(
+                onChanged: onChanged,
+                style: AppTextStyles.small,
+                decoration: InputDecoration(
+                  fillColor: AppColors.light,
+                  border: InputBorder.none,
+                  hintText: hintText,
+                  prefixIcon: const ScaleAnimator(
+                    child: Icon(
+                      Icons.search,
+                      size: 20.0,
+                      color: AppColors.dark,
+                    ),
                   ),
                 ),
               ),

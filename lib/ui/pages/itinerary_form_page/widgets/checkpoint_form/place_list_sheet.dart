@@ -23,7 +23,7 @@ class PlaceListSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
       child: Padding(
         padding: const EdgeInsets.all(20.0),

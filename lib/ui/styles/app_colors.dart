@@ -5,10 +5,10 @@ class AppColors {
 
   static const Color primary = Color(0xFF36C7CB);
   static const Color primaryDark = Color(0xFF009688);
-  static final Color primaryLight = primary.withOpacity(0.25);
+  static final Color primaryLight = primary.withOpacity(0.3);
 
   static const Color secondary = Color(0xFFD93636);
-  static final Color secondaryLight = secondary.withOpacity(0.25);
+  static final Color secondaryLight = secondary.withOpacity(0.3);
 
   static const Color dark = Color(0xFF181818);
   static const Color light = Color(0xFFFFFFFF);

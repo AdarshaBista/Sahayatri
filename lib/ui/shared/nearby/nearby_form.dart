@@ -88,6 +88,7 @@ class NearbyForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const DeviceNameField(),
+              const SizedBox(height: 12.0),
               _buildStartNearbyButton(context),
             ],
           );
@@ -99,6 +100,7 @@ class NearbyForm extends StatelessWidget {
   Widget _buildStartNearbyButton(BuildContext context) {
     return CustomButton(
       label: 'Start Nearby',
+      backgroundColor: AppColors.primaryDark,
       iconData: CommunityMaterialIcons.circle_double,
       onTap: () {
         final name = (context.bloc<PrefsCubit>().state as PrefsLoaded).prefs.deviceName;

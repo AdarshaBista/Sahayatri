@@ -19,7 +19,7 @@ class LodgesList extends StatelessWidget {
       children: [
         Text('Lodges', style: AppTextStyles.small.bold),
         const SizedBox(height: 12.0),
-        Container(
+        SizedBox(
           height: 160.0,
           child: ListView.separated(
             shrinkWrap: true,

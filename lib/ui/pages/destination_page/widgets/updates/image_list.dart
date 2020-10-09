@@ -20,7 +20,7 @@ class ImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 280.0,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -34,7 +34,7 @@ class ImageList extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, int index) {
-    return Container(
+    return SizedBox(
       width: 200.0,
       child: GestureDetector(
         onTap: () => context

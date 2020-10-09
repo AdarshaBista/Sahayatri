@@ -24,7 +24,7 @@ class UpcomingLodgesList extends StatelessWidget {
       children: [
         Text('Upcoming Lodges', style: AppTextStyles.small.light),
         const SizedBox(height: 12.0),
-        Container(
+        SizedBox(
           height: 80.0,
           child: ListView.separated(
             shrinkWrap: true,

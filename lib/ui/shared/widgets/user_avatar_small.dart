@@ -15,7 +15,7 @@ class UserAvatarSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 66.0,
       height: 66.0,
       child: ElevatedCard(

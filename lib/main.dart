@@ -87,13 +87,15 @@ class App extends StatelessWidget {
     return DevicePreview(
       enabled: Platform.isWindows,
       style: DevicePreviewStyle(
-        hasFrameShadow: true,
         background: const BoxDecoration(color: Color(0xFF24292E)),
         toolBar: DevicePreviewToolBarStyle.dark().copyWith(
           position: DevicePreviewToolBarPosition.left,
         ),
       ),
-      data: const DevicePreviewData(deviceIndex: 11, isFrameVisible: true),
+      data: const DevicePreviewData(
+        isDarkMode: true,
+        deviceIdentifier: 'Samsung Galaxy S20',
+      ),
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
