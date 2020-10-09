@@ -39,7 +39,7 @@ class _ContactFormState extends State<ContactForm> {
       duration: const Duration(milliseconds: 200),
       child: FadeAnimator(
         child: SlideAnimator(
-          begin: const Offset(0.0, 1.0),
+          begin: Offset(0.0, widget.isOnSettings ? 1.0 : 0.0),
           child: Form(
             key: _formKey,
             child: Column(

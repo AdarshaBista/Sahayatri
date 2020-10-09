@@ -21,10 +21,10 @@ class ImageSourceSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Select source',
+            'Select image from',
             style: AppTextStyles.small.bold,
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 16.0),
           CustomButton(
             label: 'GALLERY',
             color: AppColors.dark,
@@ -32,6 +32,7 @@ class ImageSourceSheet extends StatelessWidget {
             backgroundColor: AppColors.primaryLight,
             onTap: () => onSelect(ImageSource.gallery),
           ),
+          const SizedBox(height: 12.0),
           CustomButton(
             label: 'CAMERA',
             color: AppColors.dark,

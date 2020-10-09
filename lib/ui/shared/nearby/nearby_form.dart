@@ -30,10 +30,10 @@ class NearbyForm extends StatelessWidget {
       padding: MediaQuery.of(context).viewInsets,
       duration: const Duration(milliseconds: 200),
       child: FadeAnimator(
-        child: SlideAnimator(
-          begin: const Offset(0.0, 1.0),
-          child: isOnSettings
-              ? ConstrainedBox(
+        child: isOnSettings
+            ? SlideAnimator(
+                begin: const Offset(0.0, 1.0),
+                child: ConstrainedBox(
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height * 0.7,
                   ),
@@ -41,9 +41,9 @@ class NearbyForm extends StatelessWidget {
                     resizeToAvoidBottomInset: false,
                     body: _buildList(context),
                   ),
-                )
-              : _buildList(context),
-        ),
+                ),
+              )
+            : _buildList(context),
       ),
     );
   }
