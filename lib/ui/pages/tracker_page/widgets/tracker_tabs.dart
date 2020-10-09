@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/setup/setup_tab.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/nearby_tab.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
 class TrackerTabs extends StatefulWidget {
@@ -24,7 +24,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
             index: _selectedIndex,
             children: const [
               ProgressTab(),
-              SetupTab(),
+              NearbyTab(),
             ],
           ),
         ),
@@ -37,7 +37,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
           },
           icons: const [
             CommunityMaterialIcons.progress_clock,
-            CommunityMaterialIcons.cog_outline,
+            CommunityMaterialIcons.access_point_network,
           ],
         ),
       ],
