@@ -29,6 +29,7 @@ class ItineraryActions extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
+        color: AppColors.secondary,
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0)),
       ),
       child: _buildButtons(context),
@@ -48,7 +49,7 @@ class ItineraryActions extends StatelessWidget {
         ),
         if (deletable)
           _buildIcon(
-            color: Colors.redAccent,
+            color: AppColors.secondary,
             icon: Icons.close,
             onTap: () {
               if (context.repository<TrackerService>().isTracking) {
@@ -73,11 +74,11 @@ class ItineraryActions extends StatelessWidget {
       child: Container(
         width: 32.0,
         height: 32.0,
-        color: AppColors.barrier,
+        color: color,
         child: Icon(
           icon,
           size: 16.0,
-          color: color,
+          color: AppColors.light,
         ),
       ),
     );

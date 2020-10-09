@@ -55,8 +55,8 @@ class ItineraryCard extends StatelessWidget {
   Widget _buildBackground() {
     return GradientContainer(
       height: kCardHeight,
-      gradientEnd: Alignment.centerRight,
-      gradientBegin: Alignment.centerLeft,
+      gradientBegin: Alignment.topLeft,
+      gradientEnd: Alignment.bottomRight,
       gradientColors: [
         AppColors.dark.withOpacity(0.8),
         AppColors.dark.withOpacity(0.5),
