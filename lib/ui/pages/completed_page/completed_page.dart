@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:sahayatri/ui/shared/widgets/header.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/shared/widgets/unauthenticated_view.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
 
 class CompletedPage extends StatelessWidget {
   const CompletedPage();

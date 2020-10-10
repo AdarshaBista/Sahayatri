@@ -11,8 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
-import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
+import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
+import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
 
 class ItineraryActions extends StatelessWidget {
   final bool deletable;

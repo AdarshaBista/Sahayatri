@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/reviews_list.dart';
+import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -36,7 +36,7 @@ class Lodge {
   final List<String> contactNumbers;
 
   @HiveField(7)
-  ReviewsList reviewsList;
+  ReviewDetails reviewsList;
 
   Lodge({
     @required this.id,
@@ -63,7 +63,7 @@ class Lodge {
     double rating,
     LodgeFacility facility,
     List<String> imageUrls,
-    ReviewsList reviewsList,
+    ReviewDetails reviewsList,
     List<String> contactNumbers,
   }) {
     return Lodge(
@@ -91,8 +91,8 @@ class Lodge {
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
       reviewsList: !map.containsKey('reviews')
-          ? const ReviewsList()
-          : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>),
+          ? const ReviewDetails()
+          : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>),
     );
   }
 

@@ -28,7 +28,7 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/splash_view.dart';
+import 'package:sahayatri/ui/widgets/common/splash_view.dart';
 
 import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/home_page/home_page.dart';
@@ -128,7 +128,7 @@ class _App extends StatelessWidget {
         }
 
         return FutureBuilder(
-          future: context.bloc<UserCubit>().getUser(),
+          future: context.bloc<UserCubit>().isLoggedIn(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.hasData) {
               final bool isLoggedIn = snapshot.data;

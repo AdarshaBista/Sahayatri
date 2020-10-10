@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/dialogs/confirm_dialog.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton();

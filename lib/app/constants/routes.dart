@@ -1,18 +1,15 @@
 class Routes {
-  // App Routes
   static const String kHomePageRoute = '/home';
   static const String kAuthPageRoute = '/auth';
+  static const String kRoutePageRoute = '/route';
+  static const String kPlacePageRoute = '/place';
+  static const String kLodgePageRoute = '/lodge';
+  static const String kWeatherPageRoute = '/weather';
+  static const String kTrackerPageRoute = '/tracker';
+  static const String kPhotoViewPageRoute = '/photos';
+  static const String kItineraryPageRoute = '/itinerary';
+  static const String kLodgeRoomsPageRoute = '/lodge_rooms';
   static const String kDestinationPageRoute = '/destination';
-
-  // Destination Routes
-  static const String kRoutePageRoute = '$kDestinationPageRoute/route';
-  static const String kPlacePageRoute = '$kDestinationPageRoute/place';
-  static const String kLodgePageRoute = '$kDestinationPageRoute/lodge';
-  static const String kLodgeRoomsPageRoute = '$kDestinationPageRoute/lodge_rooms';
-  static const String kWeatherPageRoute = '$kDestinationPageRoute/weather';
-  static const String kTrackerPageRoute = '$kDestinationPageRoute/tracker';
-  static const String kPhotoViewPageRoute = '$kDestinationPageRoute/photos';
-  static const String kItineraryPageRoute = '$kDestinationPageRoute/itinerary';
-  static const String kDestinationDetailPageRoute = '$kDestinationPageRoute/detail';
-  static const String kItineraryFormPageRoute = '$kDestinationPageRoute/itinerary_form';
+  static const String kItineraryFormPageRoute = '/itinerary_form';
+  static const String kDestinationDetailPageRoute = '/destination_detail';
 }

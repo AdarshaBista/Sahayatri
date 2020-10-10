@@ -1,6 +1,6 @@
 import 'package:nearby_connections/nearby_connections.dart';
 
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/core/services/nearby/devices_service.dart';
@@ -31,7 +31,7 @@ class ConnectionService {
       }
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Please allow location permissions.');
+      throw const AppError(message: 'Please allow location permissions.');
     }
   }
 
@@ -40,7 +40,7 @@ class ConnectionService {
     try {
       await _startAdvertising();
       await _startDiscovery();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }
@@ -52,7 +52,7 @@ class ConnectionService {
       await Nearby().stopAdvertising();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Cannot initiate scanning.');
+      throw const AppError(message: 'Cannot initiate scanning.');
     }
   }
 
@@ -69,7 +69,7 @@ class ConnectionService {
       );
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Cannot start advertising.');
+      throw const AppError(message: 'Cannot start advertising.');
     }
   }
 
@@ -85,7 +85,7 @@ class ConnectionService {
       );
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Cannot start discovery.');
+      throw const AppError(message: 'Cannot start discovery.');
     }
   }
 

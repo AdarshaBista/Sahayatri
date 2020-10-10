@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class BestMonthsChips extends StatelessWidget {
   const BestMonthsChips();

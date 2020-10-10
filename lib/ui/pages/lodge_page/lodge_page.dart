@@ -7,10 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 
-import 'package:sahayatri/ui/shared/review/review_list.dart';
-import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
-import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/shared/widgets/collapsible_carousel.dart';
+import 'package:sahayatri/ui/widgets/review/review_list.dart';
+import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
+import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/common/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/header_tile.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/contacts_list.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/facalities_list.dart';

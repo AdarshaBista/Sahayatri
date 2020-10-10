@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/directions_service.dart';
@@ -34,7 +34,7 @@ class DirectionsCubit extends Cubit<DirectionsState> {
         // mode,
       );
       emit(const DirectionsInitial());
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(DirectionsError(message: e.message));
     }
   }

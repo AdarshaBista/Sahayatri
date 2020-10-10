@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 
@@ -30,7 +30,7 @@ class WeatherService {
       final List<Weather> forecasts = await apiService.fetchForecasts(coord);
       weatherDao.upsert(coord.toString(), forecasts);
       return forecasts;
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }

@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
@@ -43,7 +43,7 @@ class PlacesCubit extends Cubit<PlacesState> {
       } else {
         emit(const PlacesEmpty());
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(PlacesError(message: e.message));
     }
   }

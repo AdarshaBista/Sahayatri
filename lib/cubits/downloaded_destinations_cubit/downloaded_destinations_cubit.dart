@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/destinations_service.dart';
@@ -30,12 +30,12 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
       } else {
         emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(DownloadedDestinationsError(message: e.message));
     }
   }
 
-  Future<void> deleteDestination(Destination destination) async {
+  Future<void> delete(Destination destination) async {
     emit(DownloadedDestinationsMessage(message: 'Deleting ${destination.name}...'));
     await destinationsService.deleteDownloaded(destination.id);
     emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));

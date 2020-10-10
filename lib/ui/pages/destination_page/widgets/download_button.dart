@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/buttons/column_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
 
 class DownloadButton extends StatelessWidget {

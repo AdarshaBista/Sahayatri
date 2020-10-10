@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:location/location.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 class LocationService {
@@ -40,7 +40,7 @@ class LocationService {
   /// Get the stream of location as [UserLocation].
   Stream<UserLocation> getLocationStream() {
     if (!_hasPermission) {
-      throw const Failure(message: 'Location permission denied.');
+      throw const AppError(message: 'Location permission denied.');
     }
 
     return location.onLocationChanged
@@ -52,11 +52,11 @@ class LocationService {
   /// One time location query.
   Future<UserLocation> getLocation() async {
     if (Platform.isWindows) {
-      throw const Failure(message: 'Platform not supported.');
+      throw const AppError(message: 'Platform not supported.');
     }
 
     if (!_hasPermission) {
-      throw const Failure(message: 'Location permission denied.');
+      throw const AppError(message: 'Location permission denied.');
     }
 
     try {
@@ -64,7 +64,7 @@ class LocationService {
       return UserLocation.fromLocationData(locationData);
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Could not get your location.');
+      throw const AppError(message: 'Could not get your location.');
     }
   }
 

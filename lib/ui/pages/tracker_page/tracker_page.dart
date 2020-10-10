@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_panel.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_setup.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/incorrect_location_info.dart';

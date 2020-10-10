@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/settings/settings_list.dart';
-import 'package:sahayatri/ui/shared/dialogs/message_dialog.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/widgets/nested_tab_view.dart';
-import 'package:sahayatri/ui/shared/widgets/unauthenticated_view.dart';
+import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
+import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/downloaded/downloaded_list.dart';
 

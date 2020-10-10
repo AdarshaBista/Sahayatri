@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_button.dart';
 

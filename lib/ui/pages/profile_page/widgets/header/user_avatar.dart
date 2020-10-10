@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
-import 'package:sahayatri/ui/shared/widgets/image_source_sheet.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/common/image_source_sheet.dart';
 
 class UserAvatar extends StatelessWidget {
   static const double kRadius = 80.0;

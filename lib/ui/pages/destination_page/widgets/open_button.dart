@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
-import 'package:sahayatri/ui/shared/dialogs/unauthenticated_dialog.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unauthenticated_dialog.dart';
 
 class OpenButton extends StatelessWidget {
   const OpenButton();

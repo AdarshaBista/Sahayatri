@@ -9,11 +9,11 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/buttons/view_more_button.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/view_more_button.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_form.dart';
 

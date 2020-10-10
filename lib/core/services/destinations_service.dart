@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
@@ -32,7 +32,7 @@ class DestinationsService {
   Future<void> fetchDestinations() async {
     try {
       _destinations = await apiService.fetchDestinations();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }
@@ -40,7 +40,7 @@ class DestinationsService {
   Future<void> fetchDownloaded() async {
     try {
       _downloaded = await destinationDao.getAll();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }
@@ -57,7 +57,7 @@ class DestinationsService {
       await destinationDao.upsert(fullDestination);
       _updateDownloaded(fullDestination);
       if (onDownload != null) onDownload();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }

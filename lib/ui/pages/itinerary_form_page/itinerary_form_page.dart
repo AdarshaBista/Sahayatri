@@ -5,7 +5,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {

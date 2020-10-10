@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/star_rating_bar.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 
 class HeaderTile extends StatelessWidget {
   const HeaderTile();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/weather.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/weather_detail.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/curve_background.dart';

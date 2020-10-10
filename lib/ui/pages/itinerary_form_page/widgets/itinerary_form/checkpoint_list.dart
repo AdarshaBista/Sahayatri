@@ -9,9 +9,9 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/form/custom_form_field.dart';
-import 'package:sahayatri/ui/shared/widgets/itinerary_timeline.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
+import 'package:sahayatri/ui/widgets/common/itinerary_timeline.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
 
 class CheckpointList extends StatelessWidget {

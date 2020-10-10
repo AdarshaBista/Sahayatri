@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destination_update_form_cubit/destination_updat
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/select_location_dialog.dart';
 
 class LocationField extends StatelessWidget {

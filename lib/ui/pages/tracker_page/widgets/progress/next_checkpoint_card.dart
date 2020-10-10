@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/upcoming_lodges_list.dart';
 
 class NextCheckpointCard extends StatelessWidget {

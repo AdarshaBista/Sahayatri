@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 // import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/services/location_service.dart';
@@ -20,7 +20,7 @@ class DirectionsService {
   Future<UserLocation> getUserLocation() async {
     try {
       return await locationService.getLocation();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }

@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/core/services/nearby/nearby_service.dart';
@@ -27,7 +27,7 @@ class NearbyCubit extends Cubit<NearbyState> {
       nearbyService.devicesService.onDeviceChanged = changeDevice;
       await nearbyService.stop();
       await nearbyService.start(name);
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(NearbyError(message: e.message));
       emit(const NearbyInitial());
     }

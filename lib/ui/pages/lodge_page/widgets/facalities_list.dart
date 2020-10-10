@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 
 class FacilitiesList extends StatelessWidget {

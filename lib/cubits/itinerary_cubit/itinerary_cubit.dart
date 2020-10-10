@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
@@ -41,7 +41,7 @@ class ItineraryCubit extends Cubit<ItineraryState> {
       } else {
         emit(const ItineraryEmpty());
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(ItineraryError(message: e.message));
     }
   }

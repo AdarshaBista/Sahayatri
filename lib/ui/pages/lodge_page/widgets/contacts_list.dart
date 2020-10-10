@@ -8,7 +8,7 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class ContactList extends StatelessWidget {
   const ContactList();

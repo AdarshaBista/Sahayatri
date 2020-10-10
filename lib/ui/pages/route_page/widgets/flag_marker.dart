@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class FlagMarker extends Marker {
   FlagMarker({

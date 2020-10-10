@@ -9,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/image_card.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/common/image_card.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 class PlaceListSheet extends StatelessWidget {
   final void Function(Place) onSelect;

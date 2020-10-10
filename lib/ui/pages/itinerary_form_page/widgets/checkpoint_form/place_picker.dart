@@ -9,7 +9,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_list_sheet.dart';
 
 class PlacePicker extends StatefulWidget {

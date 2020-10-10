@@ -14,7 +14,7 @@ class ReviewLoading extends ReviewState {
 
 class ReviewLoaded extends ReviewState {
   final double average;
-  final ReviewsList reviewsList;
+  final ReviewDetails reviewsList;
 
   const ReviewLoaded({
     @required this.average,

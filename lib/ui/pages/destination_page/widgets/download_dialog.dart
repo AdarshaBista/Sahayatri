@@ -10,10 +10,10 @@ import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
-import 'package:sahayatri/ui/shared/indicators/icon_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 
 class DownloadDialog extends StatelessWidget {
   const DownloadDialog();

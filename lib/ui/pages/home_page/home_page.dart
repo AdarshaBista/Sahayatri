@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/widgets/bottom_nav_bar.dart';
+import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
 import 'package:sahayatri/ui/pages/completed_page/completed_page.dart';

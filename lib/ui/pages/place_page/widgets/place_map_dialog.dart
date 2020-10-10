@@ -6,8 +6,8 @@ import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/dialogs/map_dialog.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodge_marker.dart';
 
 class PlaceMapDialog extends StatelessWidget {
@@ -50,7 +50,7 @@ class _LodgeMarkersLayer extends StatelessWidget {
           for (int i = 0; i < lodges.length; ++i)
             LodgeMarker(
               lodge: lodges[i],
-              color: AppColors.accentColors[i % AppColors.accentColors.length],
+              color: AppColors.accents[i % AppColors.accents.length],
             ),
         ],
       ),

@@ -8,9 +8,9 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 
 class PlaceCard extends StatelessWidget {
   final Place place;

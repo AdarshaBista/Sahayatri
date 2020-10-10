@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/destinations_service.dart';
@@ -33,10 +33,8 @@ class DownloadCubit extends Cubit<DownloadState> {
       await destinationsService.download(destination, user);
       destinationCubit.emit(destination);
       emit(const DownloadCompleted(message: 'Download complete!'));
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(DownloadCompleted(message: e.message));
     }
   }
-
-  void cancelDownload() {}
 }

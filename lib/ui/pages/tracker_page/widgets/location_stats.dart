@@ -7,7 +7,7 @@ import 'package:sahayatri/app/constants/configs.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/stat_card.dart';
+import 'package:sahayatri/ui/widgets/common/stat_card.dart';
 
 class LocationStats extends StatelessWidget {
   const LocationStats();

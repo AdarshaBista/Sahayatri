@@ -4,10 +4,10 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/reviews_list.dart';
+import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -55,7 +55,7 @@ class ApiService {
           .toList();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get destinations.');
+      throw const AppError(message: 'Failed to get destinations.');
     }
   }
 
@@ -88,7 +88,7 @@ class ApiService {
       );
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get updates.');
+      throw const AppError(message: 'Failed to get updates.');
     }
   }
 
@@ -115,12 +115,12 @@ class ApiService {
 
       final updateWithImages = await postUpdateImages(updateWithId);
       if (updateWithImages == null) {
-        throw const Failure(message: 'Failed to post update.');
+        throw const AppError(message: 'Failed to post update.');
       }
       return updateWithImages;
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to post update.');
+      throw const AppError(message: 'Failed to post update.');
     }
   }
 
@@ -147,7 +147,7 @@ class ApiService {
     }
   }
 
-  Future<ReviewsList> fetchReviews(String destId, int page) async {
+  Future<ReviewDetails> fetchReviews(String destId, int page) async {
     try {
       final Response res = await Dio().get(
         '${ApiConfig.kApiBaseUrl}/destinations/$destId/reviews',
@@ -157,10 +157,10 @@ class ApiService {
         },
       );
       final body = res.data as Map<String, dynamic>;
-      return ReviewsList.fromMap(body);
+      return ReviewDetails.fromMap(body);
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get reviews.');
+      throw const AppError(message: 'Failed to get reviews.');
     }
   }
 
@@ -183,7 +183,7 @@ class ApiService {
       return body['review']['id'] as String;
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to post review.');
+      throw const AppError(message: 'Failed to post review.');
     }
   }
 
@@ -209,7 +209,7 @@ class ApiService {
           .toList();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get places.');
+      throw const AppError(message: 'Failed to get places.');
     }
   }
 
@@ -235,11 +235,11 @@ class ApiService {
           .toList();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get suggested itineraries.');
+      throw const AppError(message: 'Failed to get suggested itineraries.');
     }
   }
 
-  Future<ReviewsList> fetchLodgeReviews(String lodgeId, int page, User user) async {
+  Future<ReviewDetails> fetchLodgeReviews(String lodgeId, int page, User user) async {
     try {
       final Response res = await Dio().get(
         '${ApiConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
@@ -253,10 +253,10 @@ class ApiService {
       );
 
       final body = res.data as Map<String, dynamic>;
-      return ReviewsList.fromMap(body);
+      return ReviewDetails.fromMap(body);
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to get lodge reviews.');
+      throw const AppError(message: 'Failed to get lodge reviews.');
     }
   }
 
@@ -279,7 +279,7 @@ class ApiService {
       return body['review']['id'] as String;
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to post lodge review.');
+      throw const AppError(message: 'Failed to post lodge review.');
     }
   }
 
@@ -294,7 +294,7 @@ class ApiService {
       return Destination.fromMap(res.data as Map<String, dynamic>);
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Failed to download data.');
+      throw const AppError(message: 'Failed to download data.');
     }
   }
 
@@ -307,7 +307,7 @@ class ApiService {
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();
     } catch (e) {
       print(e.toString());
-      throw const Failure(message: 'Unable to get weather.');
+      throw const AppError(message: 'Unable to get weather.');
     }
   }
 }

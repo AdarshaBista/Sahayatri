@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
@@ -37,7 +37,7 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
       destination.updates.addAll(updates);
       emit(DestinationUpdateLoaded(updates: destination.updates));
       return true;
-    } on Failure {
+    } on AppError {
       return false;
     }
   }
@@ -60,7 +60,7 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
       } else {
         emit(const DestinationUpdateEmpty());
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(DestinationUpdateError(message: e.message));
     }
   }

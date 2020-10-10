@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
+import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
 class AuthFields extends StatelessWidget {
   final String initialEmail;

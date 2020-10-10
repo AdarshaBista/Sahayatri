@@ -17,6 +17,8 @@ class PrefsCubit extends Cubit<PrefsState> {
   })  : assert(prefsDao != null),
         super(const PrefsLoading());
 
+  Prefs get prefs => (state as PrefsLoaded).prefs;
+
   Future<void> initPrefs() async {
     final prefs = await prefsDao.get();
     emit(PrefsLoaded(prefs: prefs));
@@ -24,18 +26,20 @@ class PrefsCubit extends Cubit<PrefsState> {
 
   Future<void> changeMapLayer(String mapStyle) async {
     final newPrefs = (state as PrefsLoaded).prefs.copyWith(mapStyle: mapStyle);
-    prefsDao.upsert(newPrefs);
-    emit(PrefsLoaded(prefs: newPrefs));
+    _updatePrefs(newPrefs);
   }
 
   Future<void> saveContact(String contact) async {
     final newPrefs = (state as PrefsLoaded).prefs.copyWith(contact: contact);
-    prefsDao.upsert(newPrefs);
-    emit(PrefsLoaded(prefs: newPrefs));
+    _updatePrefs(newPrefs);
   }
 
   Future<void> saveDeviceName(String name) async {
     final newPrefs = (state as PrefsLoaded).prefs.copyWith(deviceName: name);
+    _updatePrefs(newPrefs);
+  }
+
+  void _updatePrefs(Prefs newPrefs) {
     prefsDao.upsert(newPrefs);
     emit(PrefsLoaded(prefs: newPrefs));
   }

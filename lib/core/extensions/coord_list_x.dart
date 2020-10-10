@@ -8,8 +8,8 @@ import 'package:sahayatri/app/constants/configs.dart';
 extension CoordListX on List<Coord> {
   double get minLat => map((c) => c.lat).reduce(math.min);
   double get maxLat => map((c) => c.lat).reduce(math.max);
-  double get minLong => map((c) => c.lng).reduce(math.min);
-  double get maxLong => map((c) => c.lng).reduce(math.max);
+  double get minLng => map((c) => c.lng).reduce(math.min);
+  double get maxLng => map((c) => c.lng).reduce(math.max);
 
   List<Coord> simplify(double zoom) {
     if (zoom > MapConfig.kRouteAccuracyZoomThreshold) return this;

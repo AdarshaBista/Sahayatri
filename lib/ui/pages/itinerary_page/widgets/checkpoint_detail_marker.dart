@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({

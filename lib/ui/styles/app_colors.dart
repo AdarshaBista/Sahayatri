@@ -19,7 +19,7 @@ class AppColors {
   static const Color disabled = Color(0xFF9496C1);
   static final Color barrier = dark.withOpacity(0.7);
 
-  static const List<Color> accentColors = [
+  static const List<Color> accents = [
     Color(0xFF7B1FA2),
     Color(0xFF512DA8),
     Color(0xFF303F9F),

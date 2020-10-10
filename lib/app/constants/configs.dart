@@ -7,7 +7,7 @@ class AppConfig {
 }
 
 class ApiConfig {
-  static const int kPageLimit = 5;
+  static const int kPageLimit = 10;
   static const String kApiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
   static const String kWeatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';
 }

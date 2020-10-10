@@ -5,10 +5,10 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
-import 'package:sahayatri/ui/shared/widgets/curved_appbar.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab_view.dart';
 
 class WeatherPage extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/services/weather_service.dart';
 
@@ -27,7 +27,7 @@ class WeatherCubit extends Cubit<WeatherState> {
     try {
       final List<Weather> forecasts = await weatherService.fetchForecasts(coord);
       emit(WeatherSuccess(forecasts: forecasts));
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(WeatherError(message: e.message));
     }
   }

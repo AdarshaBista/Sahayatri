@@ -5,7 +5,7 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/settings/settings_list.dart';
+import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
 
 class TrackerSetup extends StatelessWidget {
   const TrackerSetup();

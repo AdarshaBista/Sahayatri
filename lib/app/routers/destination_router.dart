@@ -28,8 +28,8 @@ import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 import 'package:sahayatri/ui/pages/lodge_rooms_page/lodge_rooms_page.dart';
 
-import 'package:sahayatri/ui/shared/animators/page_transition.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/animators/page_transition.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 import 'package:sahayatri/ui/pages/route_page/route_page.dart';
 import 'package:sahayatri/ui/pages/place_page/place_page.dart';

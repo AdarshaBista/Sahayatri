@@ -5,7 +5,7 @@ import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/review.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 
@@ -32,7 +32,7 @@ class LodgeReviewCubit extends ReviewCubit {
       lodge.reviewsList.reviews.addAll(reviewsList.reviews);
       emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
       return true;
-    } on Failure {
+    } on AppError {
       return false;
     }
   }
@@ -53,7 +53,7 @@ class LodgeReviewCubit extends ReviewCubit {
       } else {
         emit(const ReviewEmpty());
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(ReviewError(message: e.message));
     }
   }
@@ -78,7 +78,7 @@ class LodgeReviewCubit extends ReviewCubit {
       emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
 
       return true;
-    } on Failure {
+    } on AppError {
       return false;
     }
   }

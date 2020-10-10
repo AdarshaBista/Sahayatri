@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/lodge_card.dart';
+import 'package:sahayatri/ui/widgets/common/lodge_card.dart';
 
 class LodgesList extends StatelessWidget {
   final List<Lodge> lodges;

@@ -11,9 +11,9 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/map_animator.dart';
-import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/map/place_marker.dart';
+import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
@@ -141,7 +141,7 @@ class _RouteLayer extends StatelessWidget {
         polylines: [
           Polyline(
             strokeWidth: 6.0,
-            gradientColors: AppColors.accentColors.getRange(5, 7).toList(),
+            gradientColors: AppColors.accents.getRange(5, 7).toList(),
             points: [
               ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
               trackerUpdate.currentLocation.coord.toLatLng(),
@@ -171,7 +171,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
           for (int i = 0; i < remainingPlaces.length; ++i)
             PlaceMarker(
               place: remainingPlaces[i],
-              color: AppColors.accentColors[i % AppColors.accentColors.length],
+              color: AppColors.accents[i % AppColors.accents.length],
             ),
         ],
       ),

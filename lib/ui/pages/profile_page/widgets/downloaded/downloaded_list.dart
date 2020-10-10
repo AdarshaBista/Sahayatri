@@ -5,10 +5,10 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/shared/destinations/destinations_list.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/destinations/destinations_list.dart';
 
 class DownloadedList extends StatelessWidget {
   const DownloadedList();

@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/form/custom_text_field.dart';
+import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
 class UpdateField extends StatelessWidget {
   static const int kMaxLength = 500;

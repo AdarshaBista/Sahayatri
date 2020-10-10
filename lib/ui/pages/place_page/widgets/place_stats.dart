@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:provider/provider.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/shared/widgets/stat_tile.dart';
+import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
 
 class PlaceStats extends StatelessWidget {
   const PlaceStats();

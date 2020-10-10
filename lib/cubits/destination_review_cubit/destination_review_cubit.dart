@@ -4,7 +4,7 @@ import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/review.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
@@ -34,7 +34,7 @@ class DestinationReviewCubit extends ReviewCubit {
         average: destination.rating,
       ));
       return true;
-    } on Failure {
+    } on AppError {
       return false;
     }
   }
@@ -58,7 +58,7 @@ class DestinationReviewCubit extends ReviewCubit {
       } else {
         emit(const ReviewEmpty());
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(ReviewError(message: e.message));
     }
   }
@@ -86,7 +86,7 @@ class DestinationReviewCubit extends ReviewCubit {
       emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
 
       return true;
-    } on Failure {
+    } on AppError {
       return false;
     }
   }

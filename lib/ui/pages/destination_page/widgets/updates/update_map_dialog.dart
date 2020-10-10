@@ -5,8 +5,8 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/dialogs/map_dialog.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
 
 class UpdateMapDialog extends StatelessWidget {
   final List<Coord> coords;

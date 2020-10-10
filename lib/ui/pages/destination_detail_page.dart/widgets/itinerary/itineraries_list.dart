@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/header.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/created_itinerary_card.dart';
 

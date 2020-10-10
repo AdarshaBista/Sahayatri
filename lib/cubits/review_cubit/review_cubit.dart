@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/review.dart';
-import 'package:sahayatri/core/models/reviews_list.dart';
+import 'package:sahayatri/core/models/review_details.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 
@@ -27,7 +27,7 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   Future<void> fetchReviews();
   Future<bool> postReview(double rating, String text);
 
-  ReviewsList updateReviewsList(ReviewsList old, double rating, Review review) {
+  ReviewDetails updateReviewsList(ReviewDetails old, double rating, Review review) {
     if (old.isNotEmpty) {
       return old.copyWith(
         total: old.total + 1,
@@ -38,7 +38,7 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
 
     final Map<int, int> stars = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
     stars[rating.ceil()] = 1;
-    return ReviewsList(
+    return ReviewDetails(
       total: 1,
       stars: stars,
       reviews: [review],

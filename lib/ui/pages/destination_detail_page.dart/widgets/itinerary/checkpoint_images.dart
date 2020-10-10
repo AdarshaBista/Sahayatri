@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class CheckpointImages extends StatelessWidget {
   static const kHeight = 22.0;

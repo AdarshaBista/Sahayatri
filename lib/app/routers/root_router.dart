@@ -18,8 +18,8 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
-import 'package:sahayatri/ui/shared/animators/page_transition.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/animators/page_transition.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/home_page/home_page.dart';

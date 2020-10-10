@@ -7,10 +7,10 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/stat_tile.dart';
-import 'package:sahayatri/ui/shared/nearby/device_status_row.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
-import 'package:sahayatri/ui/shared/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
+import 'package:sahayatri/ui/widgets/nearby/device_status_row.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class DeviceDetails extends StatelessWidget {
   final String deviceId;

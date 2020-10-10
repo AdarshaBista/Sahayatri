@@ -4,9 +4,9 @@ import 'package:sahayatri/core/utils/image_utils.dart';
 
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:sahayatri/ui/shared/buttons/close_icon.dart';
-import 'package:sahayatri/ui/shared/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/shared/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 class PhotoViewPage extends StatelessWidget {
   final PhotoViewPageArgs args;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/shared/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stopwatch_tile.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_actions.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/distance_covered_bar.dart';

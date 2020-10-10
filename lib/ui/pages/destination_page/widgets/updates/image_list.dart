@@ -6,8 +6,8 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 

@@ -6,7 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
@@ -38,7 +38,7 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<bool> getUser() async {
+  Future<bool> isLoggedIn() async {
     final user = await userDao.get();
     if (user == null) return false;
     emit(Authenticated(user: user));
@@ -65,7 +65,7 @@ class UserCubit extends Cubit<UserState> {
       await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(AuthError(message: e.message));
       emit(const Unauthenticated());
       return false;
@@ -79,7 +79,7 @@ class UserCubit extends Cubit<UserState> {
       await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(AuthError(message: e.message));
       emit(const Unauthenticated());
       return false;
@@ -93,7 +93,7 @@ class UserCubit extends Cubit<UserState> {
       await authService.logout(user);
       await userDao.delete(user);
       emit(const Unauthenticated());
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(AuthError(message: e.message));
       emit(Authenticated(user: user));
     }

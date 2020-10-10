@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/core/services/notification_service.dart';
@@ -38,7 +38,7 @@ class NearbyService {
     try {
       await connectionService.checkLocationPermissions();
       await connectionService.startScanning();
-    } on Failure {
+    } on AppError {
       rethrow;
     }
     _isRunning = true;

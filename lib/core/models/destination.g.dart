@@ -30,7 +30,7 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       bestMonths: (fields[10] as List)?.cast<String>(),
       places: (fields[13] as List)?.cast<Place>(),
       updates: (fields[16] as List)?.cast<DestinationUpdate>(),
-      reviewsList: fields[14] as ReviewsList,
+      reviewsList: fields[14] as ReviewDetails,
       suggestedItineraries: (fields[15] as List)?.cast<Itinerary>(),
       createdItinerary: fields[12] as Itinerary,
       isDownloaded: fields[11] as bool,

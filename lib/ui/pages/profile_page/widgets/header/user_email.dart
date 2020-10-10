@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class UserEmail extends StatelessWidget {
   const UserEmail();

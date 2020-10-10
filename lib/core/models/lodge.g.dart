@@ -23,7 +23,7 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
       rating: fields[3] as double,
       facility: fields[4] as LodgeFacility,
       imageUrls: (fields[5] as List)?.cast<String>(),
-      reviewsList: fields[7] as ReviewsList,
+      reviewsList: fields[7] as ReviewDetails,
       contactNumbers: (fields[6] as List)?.cast<String>(),
     );
   }

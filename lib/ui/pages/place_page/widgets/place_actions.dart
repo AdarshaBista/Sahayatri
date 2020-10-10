@@ -13,7 +13,7 @@ import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_map_dialog.dart';
 
 class PlaceActions extends StatelessWidget {

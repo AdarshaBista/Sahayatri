@@ -5,7 +5,7 @@ import 'package:sahayatri/core/utils/debouncer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
-import 'package:sahayatri/ui/shared/widgets/search_box.dart';
+import 'package:sahayatri/ui/widgets/common/search_box.dart';
 
 class SearchCard extends StatelessWidget implements PreferredSizeWidget {
   final double elevation;

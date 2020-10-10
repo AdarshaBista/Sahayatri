@@ -120,8 +120,8 @@ class AppThemes {
           borderRadius: BorderRadius.circular(32.0),
           gradient: LinearGradient(
             colors: [
-              AppColors.accentColors[0],
-              AppColors.accentColors[1],
+              AppColors.accents[0],
+              AppColors.accents[1],
             ],
           ),
         ),

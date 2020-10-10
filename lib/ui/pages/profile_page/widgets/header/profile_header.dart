@@ -7,7 +7,7 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_avatar.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_email.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/logout_button.dart';

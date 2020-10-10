@@ -6,7 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
@@ -89,7 +89,7 @@ class TrackerCubit extends Cubit<TrackerState> {
       }
 
       emit(const TrackerSettingUp());
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(TrackerError(message: e.message));
     }
   }
@@ -103,7 +103,7 @@ class TrackerCubit extends Cubit<TrackerState> {
       _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {
         _updateTrackerData(trackerUpdate, destination.route);
       });
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(TrackerError(message: e.message));
     }
   }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class DateTimePicker extends StatefulWidget {
   final DateTime initialDateTime;

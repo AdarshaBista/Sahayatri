@@ -11,7 +11,7 @@ import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_item.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_background.dart';
 
@@ -27,7 +27,7 @@ class DestinationDrawer extends StatelessWidget {
           CustomPaint(
             foregroundPainter: DrawerBackground(),
             child: GradientContainer(
-              gradientColors: AppColors.accentColors.take(3).toList(),
+              gradientColors: AppColors.accents.take(3).toList(),
             ),
           ),
           Center(child: _buildMenuItems(context)),

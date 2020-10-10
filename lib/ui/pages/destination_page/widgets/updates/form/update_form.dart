@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cub
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/indicators/simple_busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_field.dart';

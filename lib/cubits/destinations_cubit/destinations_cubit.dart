@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/destinations_service.dart';
@@ -27,7 +27,7 @@ class DestinationsCubit extends Cubit<DestinationsState> {
       } else {
         emit(DestinationsLoaded(destinations: destinationsService.destinations));
       }
-    } on Failure catch (e) {
+    } on AppError catch (e) {
       emit(DestinationsError(message: e.message));
     }
   }

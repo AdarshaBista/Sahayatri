@@ -9,8 +9,8 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/map/custom_map.dart';
-import 'package:sahayatri/ui/shared/map/place_marker.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/flag_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
 
@@ -155,7 +155,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
           for (int i = 0; i < destination.places.length; ++i)
             PlaceMarker(
               place: destination.places[i],
-              color: AppColors.accentColors[i % AppColors.accentColors.length],
+              color: AppColors.accents[i % AppColors.accents.length],
             ),
         ],
       ),

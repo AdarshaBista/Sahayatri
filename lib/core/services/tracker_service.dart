@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/failure.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
@@ -44,7 +44,7 @@ class TrackerService {
   void start(Destination destination) {
     if (isTracking) {
       if (destination.id != _destination.id) {
-        throw const Failure(
+        throw const AppError(
           message: 'Tracking is already in progress for another destination.',
         );
       }
@@ -106,7 +106,7 @@ class TrackerService {
   Future<UserLocation> getUserLocation(Coord startingCoord) async {
     try {
       return await locationService.getMockLocation(startingCoord);
-    } on Failure {
+    } on AppError {
       rethrow;
     }
   }

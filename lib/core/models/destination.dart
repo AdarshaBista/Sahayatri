@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
-import 'package:sahayatri/core/models/reviews_list.dart';
+import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
@@ -60,7 +60,7 @@ class Destination {
   List<Place> places;
 
   @HiveField(14)
-  ReviewsList reviewsList;
+  ReviewDetails reviewsList;
 
   @HiveField(15)
   List<Itinerary> suggestedItineraries;
@@ -70,8 +70,8 @@ class Destination {
 
   double get minLat => route.minLat;
   double get maxLat => route.maxLat;
-  double get minLong => route.minLong;
-  double get maxLong => route.maxLong;
+  double get minLong => route.minLng;
+  double get maxLong => route.maxLng;
   Coord get midPointCoord => route[route.length ~/ 2];
 
   Destination({
@@ -121,7 +121,7 @@ class Destination {
     bool isDownloaded,
     Itinerary createdItinerary,
     List<Place> places,
-    ReviewsList reviewsList,
+    ReviewDetails reviewsList,
     List<DestinationUpdate> updates,
     List<Itinerary> suggestedItineraries,
   }) {
@@ -160,8 +160,8 @@ class Destination {
             ?.map((x) => DestinationUpdate.fromMap(x as Map<String, dynamic>)));
 
     final reviewsList = !map.containsKey('reviews')
-        ? const ReviewsList()
-        : ReviewsList.fromMap(map['reviews'] as Map<String, dynamic>);
+        ? const ReviewDetails()
+        : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>);
 
     final suggestedItineraries = !map.containsKey('itinenaries')
         ? null

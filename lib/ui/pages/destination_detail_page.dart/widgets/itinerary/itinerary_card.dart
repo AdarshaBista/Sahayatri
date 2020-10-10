@@ -8,9 +8,9 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/widgets/elevated_card.dart';
-import 'package:sahayatri/ui/shared/widgets/adaptive_image.dart';
-import 'package:sahayatri/ui/shared/widgets/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/checkpoint_images.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_actions.dart';
 

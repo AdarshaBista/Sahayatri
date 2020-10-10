@@ -4,11 +4,11 @@ import 'package:sahayatri/core/extensions/widget_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
-import 'package:sahayatri/ui/shared/widgets/photo_gallery.dart';
+import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/shared/buttons/custom_button.dart';
-import 'package:sahayatri/ui/shared/widgets/image_source_sheet.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/common/image_source_sheet.dart';
 
 class ImagesField extends StatelessWidget {
   static const int maxImages = 12;
