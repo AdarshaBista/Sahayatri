@@ -25,6 +25,7 @@ import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
@@ -54,14 +55,8 @@ void setStatusBarStyle() {
 
 Future<void> initHive() async {
   WidgetsFlutterBinding.ensureInitialized();
-  String hivePath;
-
-  if (Platform.isWindows) {
-    hivePath = 'db';
-  } else {
-    final appDir = await getApplicationDocumentsDirectory();
-    hivePath = appDir.path;
-  }
+  final appDir = await getApplicationDocumentsDirectory();
+  final hivePath = '${appDir.path}/${AppConfig.kAppName}';
 
   Hive
     ..init(hivePath)
@@ -86,13 +81,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return DevicePreview(
       enabled: Platform.isWindows,
+      onScreenshot: saveScreenshot,
       style: DevicePreviewStyle(
         background: const BoxDecoration(color: Color(0xFF24292E)),
-        toolBar: DevicePreviewToolBarStyle.dark().copyWith(
+        toolBar: DevicePreviewToolBarStyle.dark(
           position: DevicePreviewToolBarPosition.left,
         ),
       ),
-      data: const DevicePreviewData(isDarkMode: true, deviceIdentifier: 'samsung-s20'),
+      data: const DevicePreviewData(isDarkMode: true),
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => ApiService()),
@@ -111,4 +107,14 @@ class App extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<String> saveScreenshot(DeviceScreenshot ss) async {
+  final dir = await getDownloadsDirectory();
+  final fileName = DateTime.now().microsecondsSinceEpoch;
+  final savePath = '${dir.path}/$fileName.png';
+  await File(savePath).writeAsBytes(ss.bytes);
+
+  print('Saved image as $savePath');
+  return savePath;
 }
