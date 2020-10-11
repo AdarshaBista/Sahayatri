@@ -44,7 +44,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
 
         return CustomTextField(
           iconGap: 16.0,
-          icon: Icons.account_box,
+          icon: Icons.account_circle_outlined,
           label: 'Device name',
           onChanged: (value) => deviceName = value,
           validator: FormValidators.requiredText(),

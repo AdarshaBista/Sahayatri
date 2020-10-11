@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
-
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
-import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
-import 'package:sahayatri/ui/widgets/nearby/connection_info.dart';
-import 'package:sahayatri/ui/widgets/nearby/device_name_field.dart';
+import 'package:sahayatri/ui/widgets/translate/translated_card.dart';
+import 'package:sahayatri/ui/widgets/translate/translate_text_field.dart';
+import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
 
 class TranslateForm extends StatelessWidget {
   final bool isOnSettings;
@@ -58,51 +53,40 @@ class TranslateForm extends StatelessWidget {
       children: [
         Text('Translate', style: AppTextStyles.medium.bold),
         const SizedBox(height: 8.0),
-        _buildBody(),
+        const TranslateTextField(),
+        const SizedBox(height: 12.0),
+        _buildResult(),
       ],
     );
   }
 
-  Widget _buildBody() {
-    return BlocConsumer<NearbyCubit, NearbyState>(
-      listener: (context, state) {
-        if (state is NearbyError) context.openSnackBar(state.message);
-      },
+  Widget _buildResult() {
+    return BlocBuilder<TranslateCubit, TranslateState>(
       builder: (context, state) {
-        if (state is NearbyConnected) {
-          return Provider<NearbyConnected>.value(
-            value: state,
-            child: const ConnectionInfo(),
-          );
+        if (state is TranslateError) {
+          return Text(state.message, style: AppTextStyles.small.secondary);
+        } else if (state is TranslateLoading) {
+          return _buildLoading();
+        } else if (state is TranslateSuccess) {
+          return TranslatedCard(translation: state.translation);
         } else {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const DeviceNameField(),
-              const SizedBox(height: 12.0),
-              _buildStartNearbyButton(context),
-            ],
-          );
+          return const Offstage();
         }
       },
     );
   }
 
-  Widget _buildStartNearbyButton(BuildContext context) {
-    return CustomButton(
-      label: 'Start Nearby',
-      backgroundColor: AppColors.primaryDark,
-      iconData: CommunityMaterialIcons.circle_double,
-      onTap: () {
-        final name = context.bloc<PrefsCubit>().prefs.deviceName;
-        if (name.isNotEmpty) {
-          context.bloc<NearbyCubit>().startNearby(name);
-        } else {
-          const MessageDialog(message: 'Please set your device name first.')
-              .openDialog(context);
-        }
-      },
+  Widget _buildLoading() {
+    return Center(
+      child: Container(
+        width: 32.0,
+        height: 32.0,
+        margin: const EdgeInsets.all(12.0),
+        child: LoadingIndicator(
+          color: AppColors.primary,
+          indicatorType: Indicator.ballSpinFadeLoader,
+        ),
+      ),
     );
   }
 }

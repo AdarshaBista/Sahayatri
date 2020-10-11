@@ -6,6 +6,7 @@ import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
 import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
+import 'package:sahayatri/core/services/translate_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/destinations_service.dart';
@@ -25,6 +26,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -97,6 +99,11 @@ class Sahayatri extends StatelessWidget {
             BlocProvider<NearbyCubit>(
               create: (context) => NearbyCubit(
                 nearbyService: context.repository<NearbyService>(),
+              ),
+            ),
+            BlocProvider<TranslateCubit>(
+              create: (context) => TranslateCubit(
+                translateService: context.repository<TranslateService>(),
               ),
             ),
           ],

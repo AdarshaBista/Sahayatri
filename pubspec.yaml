@@ -43,6 +43,9 @@ dependencies:
   # Nearby
   nearby_connections: ^2.0.2
 
+  # Translate
+  translator: ^0.1.5
+
   # Widgets
   animator: ^2.0.1
   fl_chart: ^0.12.0

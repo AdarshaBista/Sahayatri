@@ -22,6 +22,7 @@ import 'package:sahayatri/core/models/lodge_facility.dart';
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
+import 'package:sahayatri/core/services/translate_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
@@ -91,17 +92,18 @@ class App extends StatelessWidget {
       data: const DevicePreviewData(isDarkMode: true),
       builder: (_) => MultiRepositoryProvider(
         providers: [
-          RepositoryProvider(create: (_) => ApiService()),
-          RepositoryProvider(create: (_) => AuthService()),
-          RepositoryProvider(create: (_) => RootNavService()),
-          RepositoryProvider(create: (_) => DestinationNavService()),
           RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
+          RepositoryProvider(create: (_) => ApiService()),
+          RepositoryProvider(create: (_) => AuthService()),
           RepositoryProvider(create: (_) => ItineraryDao()),
+          RepositoryProvider(create: (_) => RootNavService()),
           RepositoryProvider(create: (_) => DestinationDao()),
           RepositoryProvider(create: (_) => LocationService()),
+          RepositoryProvider(create: (_) => TranslateService()),
           RepositoryProvider(create: (_) => NotificationService()),
+          RepositoryProvider(create: (_) => DestinationNavService()),
         ],
         child: const Sahayatri(),
       ),

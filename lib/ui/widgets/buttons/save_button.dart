@@ -14,7 +14,7 @@ class SaveButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: 42.0,
+        height: 44.0,
         width: 72.0,
         decoration: BoxDecoration(
           color: AppColors.primaryLight,
