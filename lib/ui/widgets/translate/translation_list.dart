@@ -16,28 +16,18 @@ class TranslationList extends StatelessWidget {
       builder: (context, state) {
         if (state.translations.isEmpty) return const EmptyIndicator();
 
-        return ListView.builder(
-          padding: const EdgeInsets.only(top: 16.0, bottom: 72.0),
-          physics: const BouncingScrollPhysics(),
-          itemCount: state.translations.length,
-          itemBuilder: (context, index) {
-            final t = state.translations[index];
+        final length = state.translations.length;
+        final itemCount = state.isLoading ? length + 1 : length;
 
-            return Column(
-              children: [
-                TranslateBubble(
-                  isSelf: true,
-                  text: t.source,
-                  language: t.sourceLang,
-                ),
-                state.isLoading
-                    ? const CircularBusyIndicator()
-                    : TranslateBubble(
-                        isSelf: false,
-                        text: t.result,
-                        language: t.resultLang,
-                      ),
-              ],
+        return ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(top: 16.0, bottom: 72.0),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            if (index == state.translations.length) return const CircularBusyIndicator();
+            return TranslateBubble(
+              isQuery: index.isEven,
+              translation: state.translations[index],
             );
           },
         );

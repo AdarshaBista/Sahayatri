@@ -1,51 +1,34 @@
 import 'package:meta/meta.dart';
 
 class Translation {
-  final String source;
-  final String result;
-  final String sourceLang;
-  final String resultLang;
+  final String text;
+  final String language;
 
   Translation({
-    @required this.source,
-    @required this.result,
-    @required this.sourceLang,
-    @required this.resultLang,
-  })  : assert(source != null),
-        assert(sourceLang != null);
+    @required this.text,
+    this.language,
+  }) : assert(text != null);
 
   Translation copyWith({
-    String source,
-    String result,
-    String sourceLang,
-    String resultLang,
+    String text,
+    String language,
   }) {
     return Translation(
-      source: source ?? this.source,
-      result: result ?? this.result,
-      sourceLang: sourceLang ?? this.sourceLang,
-      resultLang: resultLang ?? this.resultLang,
+      text: text ?? this.text,
+      language: language ?? this.language,
     );
   }
 
   @override
-  String toString() {
-    return 'Translation(source: $source, result: $result, sourceLang: $sourceLang, resultLang: $resultLang)';
-  }
+  String toString() => 'Translation(text: $text, language: $language)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Translation &&
-        o.source == source &&
-        o.result == result &&
-        o.sourceLang == sourceLang &&
-        o.resultLang == resultLang;
+    return o is Translation && o.text == text && o.language == language;
   }
 
   @override
-  int get hashCode {
-    return source.hashCode ^ result.hashCode ^ sourceLang.hashCode ^ resultLang.hashCode;
-  }
+  int get hashCode => text.hashCode ^ language.hashCode;
 }

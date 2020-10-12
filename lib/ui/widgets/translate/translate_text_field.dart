@@ -14,7 +14,7 @@ class TranslateTextField extends StatefulWidget {
 }
 
 class _TranslateTextFieldState extends State<TranslateTextField> {
-  String source = '';
+  TextEditingController sourceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,8 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
     return Padding(
       padding: const EdgeInsets.only(top: 3.0),
       child: TextFormField(
-        initialValue: source,
         style: AppTextStyles.small,
-        onChanged: (value) => source = value,
+        controller: sourceController,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           fillColor: Colors.transparent,
@@ -49,7 +48,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
 
   Widget _buildTranslateButton(BuildContext context) {
     return Container(
-      color: AppColors.primary,
+      color: AppColors.primaryDark,
       child: IconButton(
         splashRadius: 24.0,
         icon: const Icon(
@@ -58,8 +57,10 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
           color: AppColors.light,
         ),
         onPressed: () {
-          if (source.trim().isEmpty) return;
-          context.bloc<TranslateCubit>().translate(source);
+          final source = sourceController.text.trim();
+          if (source.isEmpty) return;
+          setState(() => sourceController.clear());
+          context.bloc<TranslateCubit>().translate(source, 'English');
         },
       ),
     );

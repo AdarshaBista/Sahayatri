@@ -10,14 +10,12 @@ class TranslateService {
     try {
       final translation = await translator.translate(source, to: 'ne');
       return Translation(
-        result: translation.text,
-        source: translation.source,
-        sourceLang: translation.sourceLanguage.name,
-        resultLang: translation.targetLanguage.name,
+        text: translation.text,
+        language: translation.targetLanguage.name,
       );
     } catch (e) {
       print(e.toString());
-      throw const AppError(message: 'Could not perform transation!');
+      throw const AppError(message: 'An error occured!');
     }
   }
 }

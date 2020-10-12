@@ -17,25 +17,19 @@ class TranslateCubit extends Cubit<TranslateState> {
   })  : assert(translateService != null),
         super(TranslateState());
 
-  Future<void> translate(String source) async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> translate(String source, String language) async {
+    final query = Translation(text: source, language: language);
+    emit(TranslateState(
+      isLoading: true,
+      translations: [...state.translations, query],
+    ));
+
+    Translation translation;
     try {
-      final translation = await translateService.translate(source);
-      final newTranslations = [...state.translations, translation];
-      emit(state.copyWith(
-        translations: newTranslations,
-        isLoading: false,
-      ));
+      translation = await translateService.translate(source);
     } on AppError catch (e) {
-      state.translations.add(
-        Translation(
-          source: source,
-          result: e.message,
-          sourceLang: 'Nepali',
-          resultLang: 'English',
-        ),
-      );
-      emit(state.copyWith(isLoading: false));
+      translation = Translation(text: e.message);
     }
+    emit(TranslateState(translations: [...state.translations, translation]));
   }
 }
