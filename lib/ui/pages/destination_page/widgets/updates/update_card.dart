@@ -22,7 +22,7 @@ class UpdateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      borderRadius: 8.0,
+      radius: 8.0,
       margin: const EdgeInsets.only(bottom: 12.0),
       child: FadeAnimator(
         child: Container(

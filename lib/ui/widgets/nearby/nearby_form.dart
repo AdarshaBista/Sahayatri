@@ -56,11 +56,8 @@ class NearbyForm extends StatelessWidget {
           ? const BouncingScrollPhysics()
           : const NeverScrollableScrollPhysics(),
       children: [
-        Text(
-          'Nearby',
-          style: AppTextStyles.medium.bold,
-        ),
-        const SizedBox(height: 8.0),
+        Text('Nearby', style: AppTextStyles.medium.bold),
+        const SizedBox(height: 4.0),
         Text(
           'Stay connected with your friends and get notified when someone is disconnected.',
           style: AppTextStyles.extraSmall,

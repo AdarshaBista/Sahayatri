@@ -5,24 +5,26 @@ import 'package:sahayatri/ui/styles/styles.dart';
 class ElevatedCard extends StatelessWidget {
   final Widget child;
   final Color color;
+  final double radius;
   final Color shadowColor;
   final double elevation;
-  final double borderRadius;
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
+  final BorderRadius borderRadius;
 
   const ElevatedCard({
     @required this.child,
     this.color = AppColors.light,
     this.shadowColor = AppColors.dark,
     this.elevation = 2.0,
-    this.borderRadius = 4.0,
+    this.radius = 4.0,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
+    this.borderRadius,
   })  : assert(child != null),
         assert(color != null),
         assert(elevation != null),
-        assert(borderRadius != null),
+        assert(radius != null),
         assert(margin != null),
         assert(padding != null);
 
@@ -33,7 +35,7 @@ class ElevatedCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: borderRadius ?? BorderRadius.circular(radius),
         boxShadow: [
           BoxShadow(
             blurRadius: 12.0,
@@ -43,7 +45,7 @@ class ElevatedCard extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: borderRadius ?? BorderRadius.circular(radius),
         child: child,
       ),
     );

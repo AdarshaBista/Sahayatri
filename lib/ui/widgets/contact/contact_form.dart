@@ -46,11 +46,8 @@ class _ContactFormState extends State<ContactForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Assign a contact',
-                  style: AppTextStyles.medium.bold,
-                ),
-                const SizedBox(height: 8.0),
+                Text('Assign a contact', style: AppTextStyles.medium.bold),
+                const SizedBox(height: 4.0),
                 Text(
                   'A message will be automatically sent to this number once you reach a checkpoint.',
                   style: AppTextStyles.extraSmall,

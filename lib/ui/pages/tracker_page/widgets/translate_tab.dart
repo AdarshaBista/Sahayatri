@@ -7,17 +7,11 @@ class TranslateTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: ListView(
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        children: const [
-          Divider(height: 2.0),
-          SizedBox(height: 12.0),
-          TranslateForm(isOnSettings: false),
-        ],
-      ),
+    return Column(
+      children: const [
+        Divider(height: 2.0, indent: 24.0, endIndent: 24.0),
+        Expanded(child: TranslateForm(isOnSettings: false)),
+      ],
     );
   }
 }

@@ -28,7 +28,7 @@ class LodgeCard extends StatelessWidget {
           .repository<DestinationNavService>()
           .pushNamed(Routes.kLodgePageRoute, arguments: lodge),
       child: ElevatedCard(
-        borderRadius: 8.0,
+        radius: 8.0,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[

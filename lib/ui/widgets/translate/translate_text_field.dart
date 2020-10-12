@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/utils/form_validators.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
 class TranslateTextField extends StatefulWidget {
   const TranslateTextField();
@@ -17,18 +14,17 @@ class TranslateTextField extends StatefulWidget {
 }
 
 class _TranslateTextFieldState extends State<TranslateTextField> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String source = '';
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+    return ElevatedCard(
+      margin: const EdgeInsets.only(left: 24.0, bottom: 16.0, right: 24.0),
+      radius: 50.0,
+      child: Row(
         children: [
-          _buildTextField(),
-          const SizedBox(height: 12.0),
+          const SizedBox(width: 8.0),
+          Expanded(child: _buildTextField()),
           _buildTranslateButton(context),
         ],
       ),
@@ -36,13 +32,12 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
   }
 
   Widget _buildTextField() {
-    return ElevatedCard(
-      padding: const EdgeInsets.all(12.0),
+    return Padding(
+      padding: const EdgeInsets.only(top: 3.0),
       child: TextFormField(
-        validator: FormValidators.requiredText(),
-        onChanged: (value) => source = value,
         initialValue: source,
         style: AppTextStyles.small,
+        onChanged: (value) => source = value,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           fillColor: Colors.transparent,
@@ -53,18 +48,20 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
   }
 
   Widget _buildTranslateButton(BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      backgroundColor: AppColors.dark,
-      child: const Icon(
-        Icons.arrow_downward,
-        size: 24.0,
-        color: AppColors.primary,
+    return Container(
+      color: AppColors.primary,
+      child: IconButton(
+        splashRadius: 24.0,
+        icon: const Icon(
+          Icons.send,
+          size: 22.0,
+          color: AppColors.light,
+        ),
+        onPressed: () {
+          if (source.trim().isEmpty) return;
+          context.bloc<TranslateCubit>().translate(source);
+        },
       ),
-      onPressed: () {
-        if (!_formKey.currentState.validate()) return;
-        context.bloc<TranslateCubit>().translate(source);
-      },
     );
   }
 }

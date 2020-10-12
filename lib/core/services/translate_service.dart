@@ -10,10 +10,10 @@ class TranslateService {
     try {
       final translation = await translator.translate(source, to: 'ne');
       return Translation(
-        text: translation.text,
+        result: translation.text,
         source: translation.source,
         sourceLang: translation.sourceLanguage.name,
-        targetLang: translation.targetLanguage.name,
+        resultLang: translation.targetLanguage.name,
       );
     } catch (e) {
       print(e.toString());

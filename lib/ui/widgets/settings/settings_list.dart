@@ -32,9 +32,8 @@ class SettingsList extends StatelessWidget {
             title: 'Translate',
             subtitle: 'Translate English to Nepali with text to speech',
             icon: CommunityMaterialIcons.translate,
-            onTap: () => const Padding(
-              padding: EdgeInsets.all(24.0),
-              child: TranslateForm(isOnSettings: true),
+            onTap: () => const TranslateForm(
+              isOnSettings: true,
             ).openModalBottomSheet(context),
           ),
           const SizedBox(height: 12.0),

@@ -30,7 +30,7 @@ class NextCheckpointCard extends StatelessWidget {
     return FadeAnimator(
       child: ElevatedCard(
         elevation: 8.0,
-        borderRadius: 8.0,
+        radius: 8.0,
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Container(
           height: place.lodges.isEmpty ? 180.0 : 300.0,

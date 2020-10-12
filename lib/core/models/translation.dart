@@ -1,38 +1,36 @@
 import 'package:meta/meta.dart';
 
 class Translation {
-  final String text;
   final String source;
+  final String result;
   final String sourceLang;
-  final String targetLang;
+  final String resultLang;
 
-  const Translation({
-    @required this.text,
+  Translation({
     @required this.source,
+    @required this.result,
     @required this.sourceLang,
-    @required this.targetLang,
-  })  : assert(text != null),
-        assert(source != null),
-        assert(sourceLang != null),
-        assert(targetLang != null);
+    @required this.resultLang,
+  })  : assert(source != null),
+        assert(sourceLang != null);
 
   Translation copyWith({
-    String text,
     String source,
+    String result,
     String sourceLang,
-    String targetLang,
+    String resultLang,
   }) {
     return Translation(
-      text: text ?? this.text,
       source: source ?? this.source,
+      result: result ?? this.result,
       sourceLang: sourceLang ?? this.sourceLang,
-      targetLang: targetLang ?? this.targetLang,
+      resultLang: resultLang ?? this.resultLang,
     );
   }
 
   @override
   String toString() {
-    return 'Translation(text: $text, source: $source, sourceLang: $sourceLang, targetLang: $targetLang)';
+    return 'Translation(source: $source, result: $result, sourceLang: $sourceLang, resultLang: $resultLang)';
   }
 
   @override
@@ -40,14 +38,14 @@ class Translation {
     if (identical(this, o)) return true;
 
     return o is Translation &&
-        o.text == text &&
         o.source == source &&
+        o.result == result &&
         o.sourceLang == sourceLang &&
-        o.targetLang == targetLang;
+        o.resultLang == resultLang;
   }
 
   @override
   int get hashCode {
-    return text.hashCode ^ source.hashCode ^ sourceLang.hashCode ^ targetLang.hashCode;
+    return source.hashCode ^ result.hashCode ^ sourceLang.hashCode ^ resultLang.hashCode;
   }
 }

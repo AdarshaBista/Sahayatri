@@ -38,7 +38,7 @@ class ItineraryCard extends StatelessWidget {
             .repository<DestinationNavService>()
             .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
         child: ElevatedCard(
-          borderRadius: 8.0,
+          radius: 8.0,
           child: Stack(
             alignment: Alignment.topRight,
             children: [

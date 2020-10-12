@@ -29,7 +29,7 @@ class PlaceCard extends StatelessWidget {
             );
       },
       child: ElevatedCard(
-        borderRadius: 8.0,
+        radius: 8.0,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[

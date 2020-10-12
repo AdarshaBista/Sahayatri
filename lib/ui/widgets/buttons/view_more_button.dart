@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/widget_x.dart';
 
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class ViewMoreButton extends StatefulWidget {
   final bool hasMore;
@@ -26,7 +26,7 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
   @override
   Widget build(BuildContext context) {
     if (!widget.hasMore) return _buildFinished();
-    if (isLoading) return _buildLoading();
+    if (isLoading) return const CircularBusyIndicator();
     return _buildViewMore();
   }
 
@@ -37,20 +37,6 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
         child: Text(
           "That's it for now.",
           style: AppTextStyles.extraSmall.primaryDark,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoading() {
-    return Center(
-      child: Container(
-        width: 32.0,
-        height: 32.0,
-        margin: const EdgeInsets.all(12.0),
-        child: LoadingIndicator(
-          color: AppColors.primary,
-          indicatorType: Indicator.ballSpinFadeLoader,
         ),
       ),
     );

@@ -19,7 +19,7 @@ class ImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedCard(
       margin: margin,
-      borderRadius: borderRadius,
+      radius: borderRadius,
       child: AdaptiveImage(imageUrl),
     );
   }

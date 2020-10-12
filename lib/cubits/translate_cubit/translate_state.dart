@@ -1,38 +1,22 @@
 part of 'translate_cubit.dart';
 
-abstract class TranslateState extends Equatable {
-  const TranslateState();
+class TranslateState {
+  final List<Translation> translations;
+  bool isLoading = false;
 
-  @override
-  List<Object> get props => [];
-}
+  TranslateState({
+    this.translations = const [],
+    this.isLoading = false,
+  })  : assert(translations != null),
+        assert(isLoading != null);
 
-class TranslateEmpty extends TranslateState {
-  const TranslateEmpty();
-}
-
-class TranslateLoading extends TranslateState {
-  const TranslateLoading();
-}
-
-class TranslateSuccess extends TranslateState {
-  final Translation translation;
-
-  const TranslateSuccess({
-    @required this.translation,
-  }) : assert(translation != null);
-
-  @override
-  List<Object> get props => [translation];
-}
-
-class TranslateError extends TranslateState {
-  final String message;
-
-  const TranslateError({
-    @required this.message,
-  }) : assert(message != null);
-
-  @override
-  List<Object> get props => [message];
+  TranslateState copyWith({
+    List<Translation> translations,
+    bool isLoading,
+  }) {
+    return TranslateState(
+      translations: translations ?? this.translations,
+      isLoading: isLoading ?? this.isLoading,
+    );
+  }
 }
