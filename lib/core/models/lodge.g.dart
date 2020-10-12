@@ -23,7 +23,7 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
       rating: fields[3] as double,
       facility: fields[4] as LodgeFacility,
       imageUrls: (fields[5] as List)?.cast<String>(),
-      reviewsList: fields[7] as ReviewDetails,
+      reviewDetails: fields[7] as ReviewDetails,
       contactNumbers: (fields[6] as List)?.cast<String>(),
     );
   }
@@ -47,7 +47,7 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
       ..writeByte(6)
       ..write(obj.contactNumbers)
       ..writeByte(7)
-      ..write(obj.reviewsList);
+      ..write(obj.reviewDetails);
   }
 
   @override
@@ -56,7 +56,5 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LodgeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is LodgeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

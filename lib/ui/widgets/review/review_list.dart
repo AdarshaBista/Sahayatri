@@ -75,14 +75,14 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context, ReviewLoaded state) {
-    final reviewsList = state.reviewsList;
+    final reviewDetails = state.reviewDetails;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         RatingChart(
-          total: reviewsList.total,
-          stars: reviewsList.stars,
+          total: reviewDetails.total,
+          stars: reviewDetails.stars,
           average: state.average,
         ),
         const Divider(height: 0.0),
@@ -90,12 +90,12 @@ class ReviewList extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: reviewsList.reviews.length,
+          itemCount: reviewDetails.reviews.length,
           separatorBuilder: (_, __) => const Divider(height: 2.0),
           itemBuilder: (context, index) {
             return SlideAnimator(
               begin: Offset(0.0, 0.2 + index * 0.4),
-              child: ReviewCard(review: reviewsList.reviews[index]),
+              child: ReviewCard(review: reviewDetails.reviews[index]),
             );
           },
         ),

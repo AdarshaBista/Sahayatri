@@ -22,15 +22,15 @@ class LodgeReviewCubit extends ReviewCubit {
         super(user: user, apiService: apiService);
 
   @override
-  bool get hasMore => lodge.reviewsList.length < lodge.reviewsList.total;
+  bool get hasMore => lodge.reviewDetails.length < lodge.reviewDetails.total;
 
   @override
   Future<bool> loadMore() async {
     page++;
     try {
-      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, page, user);
-      lodge.reviewsList.reviews.addAll(reviewsList.reviews);
-      emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
+      final reviewDetails = await apiService.fetchLodgeReviews(lodge.id, page, user);
+      lodge.reviewDetails.reviews.addAll(reviewDetails.reviews);
+      emit(ReviewLoaded(reviewDetails: lodge.reviewDetails, average: lodge.rating));
       return true;
     } on AppError {
       return false;
@@ -39,17 +39,17 @@ class LodgeReviewCubit extends ReviewCubit {
 
   @override
   Future<void> fetchReviews() async {
-    if (lodge.reviewsList.isNotEmpty) {
-      emit(ReviewLoaded(reviewsList: lodge.reviewsList, average: lodge.rating));
+    if (lodge.reviewDetails.isNotEmpty) {
+      emit(ReviewLoaded(reviewDetails: lodge.reviewDetails, average: lodge.rating));
       return;
     }
 
     emit(const ReviewLoading());
     try {
-      final reviewsList = await apiService.fetchLodgeReviews(lodge.id, 1, user);
-      if (reviewsList.isNotEmpty) {
-        lodge.reviewsList = reviewsList;
-        emit(ReviewLoaded(reviewsList: reviewsList, average: lodge.rating));
+      final reviewDetails = await apiService.fetchLodgeReviews(lodge.id, 1, user);
+      if (reviewDetails.isNotEmpty) {
+        lodge.reviewDetails = reviewDetails;
+        emit(ReviewLoaded(reviewDetails: reviewDetails, average: lodge.rating));
       } else {
         emit(const ReviewEmpty());
       }
@@ -70,12 +70,12 @@ class LodgeReviewCubit extends ReviewCubit {
         dateUpdated: DateTime.now(),
       );
 
-      final updatedList = updateReviewsList(lodge.reviewsList, rating, review);
+      final updatedList = updatereviewDetails(lodge.reviewDetails, rating, review);
       final oldAverage =
           state is ReviewLoaded ? (state as ReviewLoaded).average : lodge.rating;
       final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);
-      lodge.reviewsList = updatedList;
-      emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
+      lodge.reviewDetails = updatedList;
+      emit(ReviewLoaded(reviewDetails: updatedList, average: updatedAverage));
 
       return true;
     } on AppError {

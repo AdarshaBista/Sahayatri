@@ -14,13 +14,13 @@ class ReviewLoading extends ReviewState {
 
 class ReviewLoaded extends ReviewState {
   final double average;
-  final ReviewDetails reviewsList;
+  final ReviewDetails reviewDetails;
 
   const ReviewLoaded({
     @required this.average,
-    @required this.reviewsList,
+    @required this.reviewDetails,
   })  : assert(average != null),
-        assert(reviewsList != null);
+        assert(reviewDetails != null);
 }
 
 class ReviewError extends ReviewState {

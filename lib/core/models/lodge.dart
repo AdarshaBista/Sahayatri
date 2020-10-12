@@ -36,7 +36,7 @@ class Lodge {
   final List<String> contactNumbers;
 
   @HiveField(7)
-  ReviewDetails reviewsList;
+  ReviewDetails reviewDetails;
 
   Lodge({
     @required this.id,
@@ -45,7 +45,7 @@ class Lodge {
     @required this.rating,
     @required this.facility,
     @required this.imageUrls,
-    @required this.reviewsList,
+    @required this.reviewDetails,
     @required this.contactNumbers,
   })  : assert(id != null),
         assert(name != null),
@@ -53,7 +53,7 @@ class Lodge {
         assert(coord != null),
         assert(facility != null),
         assert(imageUrls != null),
-        assert(reviewsList != null),
+        assert(reviewDetails != null),
         assert(contactNumbers != null);
 
   Lodge copyWith({
@@ -63,7 +63,7 @@ class Lodge {
     double rating,
     LodgeFacility facility,
     List<String> imageUrls,
-    ReviewDetails reviewsList,
+    ReviewDetails reviewDetails,
     List<String> contactNumbers,
   }) {
     return Lodge(
@@ -73,7 +73,7 @@ class Lodge {
       rating: rating ?? this.rating,
       facility: facility ?? this.facility,
       imageUrls: imageUrls ?? this.imageUrls,
-      reviewsList: reviewsList ?? this.reviewsList,
+      reviewDetails: reviewDetails ?? this.reviewDetails,
       contactNumbers: contactNumbers ?? this.contactNumbers,
     );
   }
@@ -90,7 +90,7 @@ class Lodge {
       facility: LodgeFacility.parse(map['facility'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
-      reviewsList: !map.containsKey('reviews')
+      reviewDetails: !map.containsKey('reviews')
           ? const ReviewDetails()
           : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>),
     );
@@ -98,7 +98,7 @@ class Lodge {
 
   @override
   String toString() {
-    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviewsList: $reviewsList)';
+    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviewDetails: $reviewDetails)';
   }
 
   @override
@@ -111,7 +111,7 @@ class Lodge {
         o.coord == coord &&
         o.rating == rating &&
         o.facility == facility &&
-        o.reviewsList == reviewsList &&
+        o.reviewDetails == reviewDetails &&
         listEquals(o.imageUrls, imageUrls) &&
         listEquals(o.contactNumbers, contactNumbers);
   }
@@ -124,7 +124,7 @@ class Lodge {
         rating.hashCode ^
         facility.hashCode ^
         imageUrls.hashCode ^
-        reviewsList.hashCode ^
+        reviewDetails.hashCode ^
         contactNumbers.hashCode;
   }
 }

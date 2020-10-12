@@ -58,7 +58,7 @@ class ReviewDetails {
   }
 
   @override
-  String toString() => 'ReviewsList(total: $total, stars: $stars, reviews: $reviews)';
+  String toString() => 'ReviewDetails(total: $total, stars: $stars, reviews: $reviews)';
 
   @override
   bool operator ==(Object o) {

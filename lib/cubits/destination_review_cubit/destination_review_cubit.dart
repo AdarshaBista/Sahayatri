@@ -21,16 +21,16 @@ class DestinationReviewCubit extends ReviewCubit {
         super(user: user, apiService: apiService);
 
   @override
-  bool get hasMore => destination.reviewsList.length < destination.reviewsList.total;
+  bool get hasMore => destination.reviewDetails.length < destination.reviewDetails.total;
 
   @override
   Future<bool> loadMore() async {
     page++;
     try {
-      final reviewsList = await apiService.fetchReviews(destination.id, page);
-      destination.reviewsList.reviews.addAll(reviewsList.reviews);
+      final reviewDetails = await apiService.fetchReviews(destination.id, page);
+      destination.reviewDetails.reviews.addAll(reviewDetails.reviews);
       emit(ReviewLoaded(
-        reviewsList: destination.reviewsList,
+        reviewDetails: destination.reviewDetails,
         average: destination.rating,
       ));
       return true;
@@ -41,9 +41,9 @@ class DestinationReviewCubit extends ReviewCubit {
 
   @override
   Future<void> fetchReviews() async {
-    if (destination.reviewsList.isNotEmpty) {
+    if (destination.reviewDetails.isNotEmpty) {
       emit(ReviewLoaded(
-        reviewsList: destination.reviewsList,
+        reviewDetails: destination.reviewDetails,
         average: destination.rating,
       ));
       return;
@@ -51,10 +51,10 @@ class DestinationReviewCubit extends ReviewCubit {
 
     emit(const ReviewLoading());
     try {
-      final reviewsList = await apiService.fetchReviews(destination.id, 1);
-      if (reviewsList.isNotEmpty) {
-        destination.reviewsList = reviewsList;
-        emit(ReviewLoaded(reviewsList: reviewsList, average: destination.rating));
+      final reviewDetails = await apiService.fetchReviews(destination.id, 1);
+      if (reviewDetails.isNotEmpty) {
+        destination.reviewDetails = reviewDetails;
+        emit(ReviewLoaded(reviewDetails: reviewDetails, average: destination.rating));
       } else {
         emit(const ReviewEmpty());
       }
@@ -78,12 +78,12 @@ class DestinationReviewCubit extends ReviewCubit {
         dateUpdated: DateTime.now(),
       );
 
-      final updatedList = updateReviewsList(destination.reviewsList, rating, review);
+      final updatedList = updatereviewDetails(destination.reviewDetails, rating, review);
       final oldAverage =
           state is ReviewLoaded ? (state as ReviewLoaded).average : destination.rating;
       final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);
-      destination.reviewsList = updatedList;
-      emit(ReviewLoaded(reviewsList: updatedList, average: updatedAverage));
+      destination.reviewDetails = updatedList;
+      emit(ReviewLoaded(reviewDetails: updatedList, average: updatedAverage));
 
       return true;
     } on AppError {

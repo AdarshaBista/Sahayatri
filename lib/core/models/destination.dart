@@ -60,7 +60,7 @@ class Destination {
   List<Place> places;
 
   @HiveField(14)
-  ReviewDetails reviewsList;
+  ReviewDetails reviewDetails;
 
   @HiveField(15)
   List<Itinerary> suggestedItineraries;
@@ -88,7 +88,7 @@ class Destination {
     @required this.bestMonths,
     @required this.places,
     @required this.updates,
-    @required this.reviewsList,
+    @required this.reviewDetails,
     @required this.suggestedItineraries,
     @required this.createdItinerary,
     @required this.isDownloaded,
@@ -100,7 +100,7 @@ class Destination {
         assert(route != null),
         assert(imageUrls != null),
         assert(bestMonths != null),
-        assert(reviewsList != null),
+        assert(reviewDetails != null),
         assert(description != null),
         assert(maxAltitude != null),
         assert(isDownloaded != null),
@@ -121,7 +121,7 @@ class Destination {
     bool isDownloaded,
     Itinerary createdItinerary,
     List<Place> places,
-    ReviewDetails reviewsList,
+    ReviewDetails reviewDetails,
     List<DestinationUpdate> updates,
     List<Itinerary> suggestedItineraries,
   }) {
@@ -141,7 +141,7 @@ class Destination {
       createdItinerary: createdItinerary ?? this.createdItinerary,
       places: places ?? this.places,
       updates: updates ?? this.updates,
-      reviewsList: reviewsList ?? this.reviewsList,
+      reviewDetails: reviewDetails ?? this.reviewDetails,
       suggestedItineraries: suggestedItineraries ?? this.suggestedItineraries,
     );
   }
@@ -159,7 +159,7 @@ class Destination {
         : List<DestinationUpdate>.from((map['updates'] as List<dynamic>)
             ?.map((x) => DestinationUpdate.fromMap(x as Map<String, dynamic>)));
 
-    final reviewsList = !map.containsKey('reviews')
+    final reviewDetails = !map.containsKey('reviews')
         ? const ReviewDetails()
         : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>);
 
@@ -185,14 +185,14 @@ class Destination {
       createdItinerary: null,
       places: places,
       updates: updates,
-      reviewsList: reviewsList,
+      reviewDetails: reviewDetails,
       suggestedItineraries: suggestedItineraries,
     );
   }
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, isDownloaded: $isDownloaded, createdItinerary: $createdItinerary, places: $places, updates: $updates, reviewsList: $reviewsList, suggestedItineraries: $suggestedItineraries)';
+    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, isDownloaded: $isDownloaded, createdItinerary: $createdItinerary, places: $places, updates: $updates, reviewDetails: $reviewDetails, suggestedItineraries: $suggestedItineraries)';
   }
 
   @override
@@ -215,7 +215,7 @@ class Destination {
         createdItinerary.hashCode ^
         places.hashCode ^
         updates.hashCode ^
-        reviewsList.hashCode ^
+        reviewDetails.hashCode ^
         suggestedItineraries.hashCode;
   }
 }
