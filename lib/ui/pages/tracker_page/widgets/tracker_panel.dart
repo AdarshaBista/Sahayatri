@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/widgets/common/sliding_panel.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/drag_indicator_pill.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/location_stats.dart';
@@ -39,14 +40,25 @@ class _TrackerPanelState extends State<TrackerPanel> {
   }
 
   Widget _buildPanel() {
-    return Column(
-      children: const [
-        SizedBox(height: 4.0),
-        DragIndicatorPill(),
-        LocationStats(),
-        SizedBox(height: 12.0),
-        Expanded(child: TrackerTabs()),
-      ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12.0),
+      child: Column(
+        children: [
+          ElevatedCard(
+            radius: 12.0,
+            elevation: 4.0,
+            child: Column(
+              children: const [
+                SizedBox(height: 4.0),
+                DragIndicatorPill(),
+                LocationStats(),
+                SizedBox(height: 12.0),
+              ],
+            ),
+          ),
+          const Expanded(child: TrackerTabs()),
+        ],
+      ),
     );
   }
 }
