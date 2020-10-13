@@ -59,7 +59,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
-          if (isInitial || !isLoading) _buildSkipButton(context),
+          if (isInitial && !isLoading) _buildSkipButton(context),
         ],
       ),
     );
