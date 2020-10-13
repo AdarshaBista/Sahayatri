@@ -10,6 +10,7 @@ class TranslateService {
     try {
       final translation = await translator.translate(source, to: 'ne');
       return Translation(
+        isQuery: false,
         text: translation.text,
         language: translation.targetLanguage.name,
       );

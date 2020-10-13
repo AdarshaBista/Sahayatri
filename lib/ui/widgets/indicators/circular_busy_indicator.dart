@@ -9,10 +9,9 @@ class CircularBusyIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 32.0,
         height: 32.0,
-        margin: const EdgeInsets.all(12.0),
         child: LoadingIndicator(
           color: AppColors.primary,
           indicatorType: Indicator.ballSpinFadeLoader,

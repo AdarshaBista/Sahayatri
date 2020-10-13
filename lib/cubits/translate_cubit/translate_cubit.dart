@@ -18,7 +18,12 @@ class TranslateCubit extends Cubit<TranslateState> {
         super(TranslateState());
 
   Future<void> translate(String source, String language) async {
-    final query = Translation(text: source, language: language);
+    if (source == 'cls') {
+      emit(TranslateState(translations: []));
+      return;
+    }
+
+    final query = Translation(isQuery: true, text: source, language: language);
     emit(TranslateState(
       isLoading: true,
       translations: [...state.translations, query],
@@ -28,7 +33,7 @@ class TranslateCubit extends Cubit<TranslateState> {
     try {
       translation = await translateService.translate(source);
     } on AppError catch (e) {
-      translation = Translation(text: e.message);
+      translation = Translation(isQuery: false, text: e.message);
     }
     emit(TranslateState(translations: [...state.translations, translation]));
   }

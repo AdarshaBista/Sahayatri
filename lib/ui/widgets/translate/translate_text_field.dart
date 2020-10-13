@@ -5,6 +5,7 @@ import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class TranslateTextField extends StatefulWidget {
   const TranslateTextField();
@@ -14,7 +15,21 @@ class TranslateTextField extends StatefulWidget {
 }
 
 class _TranslateTextFieldState extends State<TranslateTextField> {
+  FocusNode sourceNode;
   TextEditingController sourceController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    sourceNode = FocusNode();
+    sourceNode.requestFocus();
+  }
+
+  @override
+  void dispose() {
+    sourceNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +40,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
         children: [
           const SizedBox(width: 8.0),
           Expanded(child: _buildTextField()),
-          _buildTranslateButton(context),
+          _buildTranslateState(),
         ],
       ),
     );
@@ -35,6 +50,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
     return Padding(
       padding: const EdgeInsets.only(top: 3.0),
       child: TextFormField(
+        focusNode: sourceNode,
         style: AppTextStyles.small,
         controller: sourceController,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -43,6 +59,21 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
           hintText: 'Type Something...',
         ),
       ),
+    );
+  }
+
+  Widget _buildTranslateState() {
+    return BlocBuilder<TranslateCubit, TranslateState>(
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const SizedBox(
+            width: 44.0,
+            height: 44.0,
+            child: CircularBusyIndicator(),
+          );
+        }
+        return _buildTranslateButton(context);
+      },
     );
   }
 

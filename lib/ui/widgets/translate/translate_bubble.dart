@@ -6,18 +6,16 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class TranslateBubble extends StatelessWidget {
-  final bool isQuery;
   final Translation translation;
 
   const TranslateBubble({
-    @required this.isQuery,
     @required this.translation,
-  })  : assert(isQuery != null),
-        assert(translation != null);
+  }) : assert(translation != null);
 
   @override
   Widget build(BuildContext context) {
     const double radius = 16.0;
+    final isQuery = translation.isQuery;
 
     return Container(
       alignment: isQuery ? Alignment.centerRight : Alignment.centerLeft,
@@ -44,6 +42,8 @@ class TranslateBubble extends StatelessWidget {
   }
 
   Widget _buildText() {
+    final isQuery = translation.isQuery;
+
     return Column(
       crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
