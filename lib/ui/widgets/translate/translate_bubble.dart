@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/translation.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class TranslateBubble extends StatelessWidget {
   final Translation translation;
@@ -38,24 +37,24 @@ class TranslateBubble extends StatelessWidget {
     const double radius = 20.0;
     final isQuery = translation.isQuery;
 
-    return ElevatedCard(
-      color: isQuery ? AppColors.primaryDark : AppColors.light,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(isQuery ? radius : 0.0),
-        topRight: Radius.circular(isQuery ? 0.0 : radius),
-        bottomLeft: Radius.circular(isQuery ? radius : 0.0),
-        bottomRight: Radius.circular(isQuery ? 0.0 : radius),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-        child: Text(
-          translation.text,
-          style: isQuery
-              ? AppTextStyles.small.light
-              : translation.language != null
-                  ? AppTextStyles.small.dark
-                  : AppTextStyles.small.secondary,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      decoration: BoxDecoration(
+        color: isQuery ? AppColors.primaryDark : AppColors.lightAccent,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(isQuery ? radius : 0.0),
+          topRight: Radius.circular(isQuery ? 0.0 : radius),
+          bottomLeft: Radius.circular(isQuery ? radius : 0.0),
+          bottomRight: Radius.circular(isQuery ? 0.0 : radius),
         ),
+      ),
+      child: Text(
+        translation.text,
+        style: isQuery
+            ? AppTextStyles.small.light
+            : translation.language != null
+                ? AppTextStyles.small.dark
+                : AppTextStyles.small.secondary,
       ),
     );
   }
@@ -70,7 +69,7 @@ class TranslateBubble extends StatelessWidget {
           children: [
             Icon(
               Icons.volume_up_rounded,
-              size: 20.0,
+              size: 16.0,
               color: AppColors.barrier,
             ),
             if (translation.language != null) ...[

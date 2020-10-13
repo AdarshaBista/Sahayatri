@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
@@ -11,6 +13,7 @@ part 'translate_state.dart';
 
 class TranslateCubit extends Cubit<TranslateState> {
   final TranslateService translateService;
+  final ScrollController controller = ScrollController();
 
   TranslateCubit({
     @required this.translateService,
@@ -18,16 +21,12 @@ class TranslateCubit extends Cubit<TranslateState> {
         super(TranslateState());
 
   Future<void> translate(String source, String language) async {
-    if (source == 'cls') {
-      emit(TranslateState(translations: []));
-      return;
-    }
-
     final query = Translation(isQuery: true, text: source, language: language);
     emit(TranslateState(
       isLoading: true,
       translations: [...state.translations, query],
     ));
+    scrollToEnd();
 
     Translation translation;
     try {
@@ -36,5 +35,20 @@ class TranslateCubit extends Cubit<TranslateState> {
       translation = Translation(isQuery: false, text: e.message);
     }
     emit(TranslateState(translations: [...state.translations, translation]));
+    scrollToEnd();
+  }
+
+  void scrollToEnd() {
+    controller.animateTo(
+      0.0,
+      curve: Curves.decelerate,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
+
+  @override
+  Future<void> close() {
+    controller?.dispose();
+    return super.close();
   }
 }
