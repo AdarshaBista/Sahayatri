@@ -14,49 +14,41 @@ class TranslateBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double radius = 16.0;
     final isQuery = translation.isQuery;
 
     return Container(
       alignment: isQuery ? Alignment.centerRight : Alignment.centerLeft,
       margin: EdgeInsets.only(
-        top: 4.0,
-        bottom: 4.0,
+        top: 2.0,
+        bottom: 2.0,
         left: isQuery ? 50.0 : 0.0,
         right: isQuery ? 0.0 : 50.0,
       ),
-      child: ElevatedCard(
-        color: isQuery ? AppColors.primaryDark : AppColors.light,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(isQuery ? radius : 0.0),
-          topRight: Radius.circular(isQuery ? 0.0 : radius),
-          bottomLeft: Radius.circular(isQuery ? radius : 0.0),
-          bottomRight: Radius.circular(isQuery ? 0.0 : radius),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: _buildText(),
-        ),
+      child: Column(
+        crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          _buildAudioButton(),
+          _buildText(),
+        ],
       ),
     );
   }
 
   Widget _buildText() {
+    const double radius = 20.0;
     final isQuery = translation.isQuery;
 
-    return Column(
-      crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-      children: [
-        if (translation.language != null) ...[
-          Text(
-            translation.language,
-            style: isQuery
-                ? AppTextStyles.extraSmall.lightAccent
-                : AppTextStyles.extraSmall.darkAccent,
-          ),
-          const SizedBox(height: 4.0),
-        ],
-        Text(
+    return ElevatedCard(
+      color: isQuery ? AppColors.primaryDark : AppColors.light,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(isQuery ? radius : 0.0),
+        topRight: Radius.circular(isQuery ? 0.0 : radius),
+        bottomLeft: Radius.circular(isQuery ? radius : 0.0),
+        bottomRight: Radius.circular(isQuery ? 0.0 : radius),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        child: Text(
           translation.text,
           style: isQuery
               ? AppTextStyles.small.light
@@ -64,7 +56,33 @@ class TranslateBubble extends StatelessWidget {
                   ? AppTextStyles.small.dark
                   : AppTextStyles.small.secondary,
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildAudioButton() {
+    return GestureDetector(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.volume_up_rounded,
+              size: 20.0,
+              color: AppColors.barrier,
+            ),
+            if (translation.language != null) ...[
+              const SizedBox(width: 4.0),
+              Text(
+                translation.language,
+                style: AppTextStyles.extraSmall.darkAccent,
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
