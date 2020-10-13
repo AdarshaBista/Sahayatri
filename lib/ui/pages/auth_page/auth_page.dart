@@ -38,7 +38,7 @@ class AuthPage extends StatelessWidget {
                 Images.kAuthBackground,
                 color: AppColors.dark.withOpacity(0.5),
               ),
-              _buildForm(context),
+              _buildForm(context, state is AuthLoading),
             ],
           ),
         );
@@ -46,7 +46,7 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Widget _buildForm(BuildContext context) {
+  Widget _buildForm(BuildContext context, bool isLoading) {
     return Center(
       child: ListView(
         shrinkWrap: true,
@@ -59,7 +59,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
-          if (isInitial) _buildSkipButton(context),
+          if (isInitial || !isLoading) _buildSkipButton(context),
         ],
       ),
     );
