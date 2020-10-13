@@ -19,6 +19,7 @@ import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 
 class DestinationCard extends StatelessWidget {
+  static const double borderRadius = 6.0;
   final bool deletable;
   final Destination destination;
 
@@ -58,7 +59,7 @@ class DestinationCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return CustomCard(
-      borderRadius: 6.0,
+      borderRadius: borderRadius,
       child: GradientContainer(
         gradientEnd: Alignment.topCenter,
         gradientBegin: Alignment.bottomCenter,
@@ -156,8 +157,8 @@ class DestinationCard extends StatelessWidget {
           decoration: const BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(8.0),
               bottomLeft: Radius.circular(20.0),
+              topRight: Radius.circular(borderRadius),
             ),
           ),
           child: const Icon(

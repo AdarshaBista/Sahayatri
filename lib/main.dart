@@ -19,6 +19,7 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
+import 'package:sahayatri/core/services/tts_service.dart';
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/location_service.dart';
@@ -95,6 +96,7 @@ class App extends StatelessWidget {
           RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
+          RepositoryProvider(create: (_) => TtsService()),
           RepositoryProvider(create: (_) => ApiService()),
           RepositoryProvider(create: (_) => AuthService()),
           RepositoryProvider(create: (_) => ItineraryDao()),

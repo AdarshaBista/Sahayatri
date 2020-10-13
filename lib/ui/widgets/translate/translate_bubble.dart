@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/translation.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class TranslateBubble extends StatelessWidget {
@@ -26,7 +29,7 @@ class TranslateBubble extends StatelessWidget {
       child: Column(
         crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          _buildAudioButton(),
+          _buildAudioButton(context),
           _buildText(),
         ],
       ),
@@ -59,9 +62,9 @@ class TranslateBubble extends StatelessWidget {
     );
   }
 
-  Widget _buildAudioButton() {
+  Widget _buildAudioButton(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => context.bloc<TranslateCubit>().play(translation.text),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

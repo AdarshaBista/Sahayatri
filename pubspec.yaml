@@ -45,6 +45,7 @@ dependencies:
 
   # Translate
   translator: ^0.1.5
+  flutter_tts: ^1.2.7
 
   # Widgets
   animator: ^2.0.1

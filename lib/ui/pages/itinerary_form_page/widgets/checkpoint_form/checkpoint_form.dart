@@ -51,7 +51,6 @@ class CheckpointForm extends StatelessWidget {
                   _buildDateTimeField(state.dateTime, context),
                   const SizedBox(height: 16.0),
                   _buildDescriptionField(state.description, context),
-                  const SizedBox(height: 16.0),
                   _buildSmsToggle(state.notifyContact, context),
                   const SizedBox(height: 16.0),
                   _buildSubmitButton(state, context),

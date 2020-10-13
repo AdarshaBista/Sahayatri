@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
+import 'package:sahayatri/core/services/tts_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/weather_service.dart';
@@ -103,6 +104,7 @@ class Sahayatri extends StatelessWidget {
             ),
             BlocProvider<TranslateCubit>(
               create: (context) => TranslateCubit(
+                ttsService: context.repository<TtsService>(),
                 translateService: context.repository<TranslateService>(),
               ),
             ),
