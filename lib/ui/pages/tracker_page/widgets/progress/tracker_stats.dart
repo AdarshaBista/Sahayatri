@@ -16,7 +16,6 @@ class TrackerStats extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            SizedBox(height: 4.0),
             StopwatchTile(),
             SizedBox(height: 8.0),
             TrackerActions(),

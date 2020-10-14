@@ -13,7 +13,7 @@ class NearbyTab extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         children: const [
-          SizedBox(height: 12.0),
+          SizedBox(height: 8.0),
           NearbyForm(isOnSettings: false),
         ],
       ),

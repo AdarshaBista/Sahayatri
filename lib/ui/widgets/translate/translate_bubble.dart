@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class TranslateBubble extends StatelessWidget {
   final Translation translation;
@@ -18,20 +19,23 @@ class TranslateBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final isQuery = translation.isQuery;
 
-    return Container(
-      alignment: isQuery ? Alignment.centerRight : Alignment.centerLeft,
-      margin: EdgeInsets.only(
-        top: 2.0,
-        bottom: 2.0,
-        left: isQuery ? 50.0 : 0.0,
-        right: isQuery ? 0.0 : 50.0,
-      ),
-      child: Column(
-        crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          _buildAudioButton(context),
-          _buildText(),
-        ],
+    return SlideAnimator(
+      begin: Offset(isQuery ? 1.0 : -1.0, 0.0),
+      child: Container(
+        alignment: isQuery ? Alignment.centerRight : Alignment.centerLeft,
+        margin: EdgeInsets.only(
+          top: 2.0,
+          bottom: 2.0,
+          left: isQuery ? 50.0 : 0.0,
+          right: isQuery ? 0.0 : 50.0,
+        ),
+        child: Column(
+          crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            _buildAudioButton(context),
+            _buildText(),
+          ],
+        ),
       ),
     );
   }

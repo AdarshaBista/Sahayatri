@@ -35,22 +35,24 @@ class TranslateForm extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0),
-              child: Text('Translate', style: AppTextStyles.medium.bold),
-            ),
-            const SizedBox(height: 12.0),
-            const LanguageSelector(),
-            const Expanded(child: TranslationList()),
-          ],
+        if (isOnSettings) const SizedBox(height: 8.0),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0),
+          child: Text('Translate', style: AppTextStyles.medium.bold),
         ),
-        const TranslateTextField(),
+        Expanded(
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: const [
+              TranslationList(),
+              TranslateTextField(),
+              Align(alignment: Alignment.topCenter, child: LanguageSelector()),
+            ],
+          ),
+        ),
       ],
     );
   }

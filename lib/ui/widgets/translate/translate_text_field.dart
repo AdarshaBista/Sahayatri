@@ -5,6 +5,7 @@ import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class TranslateTextField extends StatefulWidget {
@@ -33,15 +34,18 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedCard(
-      margin: const EdgeInsets.only(left: 24.0, bottom: 16.0, right: 24.0),
-      radius: 50.0,
-      child: Row(
-        children: [
-          const SizedBox(width: 8.0),
-          Expanded(child: _buildTextField()),
-          _buildTranslateState(),
-        ],
+    return SlideAnimator(
+      begin: const Offset(0.0, 2.0),
+      child: ElevatedCard(
+        margin: const EdgeInsets.only(left: 24.0, bottom: 16.0, right: 24.0),
+        radius: 50.0,
+        child: Row(
+          children: [
+            const SizedBox(width: 8.0),
+            Expanded(child: _buildTextField()),
+            _buildTranslateState(),
+          ],
+        ),
       ),
     );
   }

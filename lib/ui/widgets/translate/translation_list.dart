@@ -24,7 +24,7 @@ class TranslationList extends StatelessWidget {
           controller: context.bloc<TranslateCubit>().controller,
           reverse: true,
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(top: 16.0, bottom: 72.0),
+          padding: const EdgeInsets.only(top: 50.0, bottom: 80.0),
           itemCount: translations.length,
           itemBuilder: (context, index) {
             return TranslateBubble(

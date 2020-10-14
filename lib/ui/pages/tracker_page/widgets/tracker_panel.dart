@@ -40,25 +40,15 @@ class _TrackerPanelState extends State<TrackerPanel> {
   }
 
   Widget _buildPanel() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12.0),
-      child: Column(
-        children: [
-          ElevatedCard(
-            radius: 12.0,
-            elevation: 4.0,
-            child: Column(
-              children: const [
-                SizedBox(height: 4.0),
-                DragIndicatorPill(),
-                LocationStats(),
-                SizedBox(height: 12.0),
-              ],
-            ),
-          ),
-          const Expanded(child: TrackerTabs()),
-        ],
-      ),
+    return Column(
+      children: const [
+        SizedBox(height: 4.0),
+        DragIndicatorPill(),
+        LocationStats(),
+        SizedBox(height: 8.0),
+        Divider(indent: 24.0, endIndent: 24.0),
+        Expanded(child: TrackerTabs()),
+      ],
     );
   }
 }
