@@ -1,35 +1,101 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/core/models/language.dart';
 
-class LanguageSelector extends StatelessWidget {
+import 'package:sahayatri/app/constants/languages.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
+
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+
+class LanguageSelector extends StatefulWidget {
   const LanguageSelector();
 
   @override
+  _LanguageSelectorState createState() => _LanguageSelectorState();
+}
+
+class _LanguageSelectorState extends State<LanguageSelector> {
+  @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _Painter(),
+      painter: const _Painter(),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('ENGLISH', style: AppTextStyles.small.bold),
-            const SizedBox(width: 16.0),
-            const Icon(
-              Icons.arrow_right_alt,
-              color: AppColors.primaryDark,
-            ),
-            const SizedBox(width: 16.0),
-            Text('NEPALI', style: AppTextStyles.small.bold),
+            _buildLanguageMenu(false, context.bloc<TranslateCubit>().sourceLang),
+            const SizedBox(width: 12.0),
+            _buildFlipButton(),
+            const SizedBox(width: 12.0),
+            _buildLanguageMenu(true, context.bloc<TranslateCubit>().targetLang),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildFlipButton() {
+    return GestureDetector(
+      onTap: () {
+        context.bloc<TranslateCubit>().flipLanguages();
+        setState(() {});
+      },
+      child: const Icon(
+        Icons.compare_arrows,
+        color: AppColors.primaryDark,
+      ),
+    );
+  }
+
+  Widget _buildLanguageMenu(bool isTarget, Language language) {
+    return ScaleAnimator(
+      duration: 600,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.25,
+        child: PopupMenuButton<Language>(
+          initialValue: language,
+          color: AppColors.light,
+          onSelected: (value) => _changeLanguage(isTarget, value),
+          child: Text(
+            language.title.toUpperCase(),
+            style: AppTextStyles.small.bold,
+            overflow: TextOverflow.ellipsis,
+            textAlign: isTarget ? TextAlign.left : TextAlign.right,
+          ),
+          itemBuilder: (context) {
+            return Languages.kAll
+                .map((l) => PopupMenuItem(
+                      value: l,
+                      child: Text(
+                        l.title,
+                        style: AppTextStyles.small.bold,
+                      ),
+                    ))
+                .toList();
+          },
+        ),
+      ),
+    );
+  }
+
+  void _changeLanguage(bool isTarget, Language language) {
+    if (isTarget) {
+      context.bloc<TranslateCubit>().targetLang = language;
+    } else {
+      context.bloc<TranslateCubit>().sourceLang = language;
+    }
+
+    setState(() {});
+  }
 }
 
 class _Painter extends CustomPainter {
+  const _Painter();
+
   @override
   void paint(Canvas canvas, Size size) {
     final width = size.width;

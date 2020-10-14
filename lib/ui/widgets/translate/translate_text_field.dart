@@ -95,7 +95,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
           final source = sourceController.text.trim();
           if (source.isEmpty) return;
           setState(() => sourceController.clear());
-          context.bloc<TranslateCubit>().translate(source, 'English');
+          context.bloc<TranslateCubit>().translate(source);
         },
       ),
     );

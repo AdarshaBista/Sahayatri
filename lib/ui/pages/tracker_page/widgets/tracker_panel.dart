@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/widgets/common/sliding_panel.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/drag_indicator_pill.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/location_stats.dart';
