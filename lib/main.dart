@@ -85,12 +85,16 @@ class App extends StatelessWidget {
       enabled: Platform.isWindows,
       onScreenshot: saveScreenshot,
       style: DevicePreviewStyle(
+        hasFrameShadow: false,
         background: const BoxDecoration(color: Color(0xFF24292E)),
         toolBar: DevicePreviewToolBarStyle.dark(
           position: DevicePreviewToolBarPosition.left,
         ),
       ),
-      data: const DevicePreviewData(isDarkMode: true),
+      data: const DevicePreviewData(
+        deviceIndex: 11,
+        isDarkMode: true,
+      ),
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => UserDao()),

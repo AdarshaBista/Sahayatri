@@ -16,15 +16,15 @@ dependencies:
   dio: ^3.0.10
   intl: ^0.16.1
   timeago: ^2.0.27
-  url_launcher: ^5.7.2
-  path_provider: ^1.6.18
-  image_picker: ^0.6.7+11
+  url_launcher: ^5.7.5
+  path_provider: ^1.6.21
+  device_preview: ^0.4.8
+  image_picker: ^0.6.7+12
   form_field_validator: ^1.0.1
-  device_preview: ^0.5.0-prerelease.10
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^2.0.0
+  flutter_local_notifications: ^2.0.1
 
   # State Management
   equatable: ^1.2.5
