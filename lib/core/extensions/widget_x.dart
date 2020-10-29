@@ -41,7 +41,7 @@ extension WidgetX on Widget {
 
 extension ContextX on BuildContext {
   void openSnackBar(String message, {int ms = 1000}) {
-    Scaffold.of(this)
+    ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
