@@ -88,7 +88,6 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> logout() async {
     final user = (state as Authenticated).user;
-    emit(const AuthLoading());
     try {
       await authService.logout(user);
       await userDao.delete(user);

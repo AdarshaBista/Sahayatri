@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flushbar/flushbar.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 extension WidgetX on Widget {
   void openDialog(BuildContext context, {bool barrierDismissible = true}) {
@@ -43,6 +45,27 @@ extension WidgetX on Widget {
 enum FlushBarType { info, success, error }
 
 extension ContextX on BuildContext {
+  Future<void> openLoadingFlushBar(String message, AsyncCallback callback) async {
+    final flushBar = Flushbar(
+      borderRadius: 8.0,
+      isDismissible: false,
+      blockBackgroundInteraction: true,
+      margin: const EdgeInsets.all(16.0),
+      backgroundColor: AppColors.darkAccent,
+      flushbarPosition: FlushbarPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      messageText: Text(message, style: AppTextStyles.small.light),
+      icon: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: CircularBusyIndicator(),
+      ),
+    );
+
+    flushBar.show(this);
+    await callback();
+    flushBar.dismiss();
+  }
+
   void openFlushBar(
     String message, {
     int ms = 2000,
@@ -57,14 +80,14 @@ extension ContextX on BuildContext {
         case FlushBarType.error:
           return Icons.error_outline;
         default:
-          return Icons.info_outline;
+          return Icons.circle;
       }
     }
 
     Color getColor() {
       switch (type) {
         case FlushBarType.info:
-          return AppColors.light;
+          return Colors.lightBlue;
         case FlushBarType.success:
           return AppColors.primaryDark;
         case FlushBarType.error:

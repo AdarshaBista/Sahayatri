@@ -9,8 +9,6 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
-import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
-import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
@@ -25,7 +23,7 @@ class ProfilePage extends StatelessWidget {
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           if (state is AuthError) {
-            MessageDialog(message: state.message).openDialog(context);
+            context.openFlushBar(state.message, type: FlushBarType.error);
           }
         },
         builder: (context, state) {
@@ -34,8 +32,6 @@ class ProfilePage extends StatelessWidget {
               value: state.user,
               child: _buildPage(),
             );
-          } else if (state is AuthLoading) {
-            return const BusyIndicator();
           }
 
           return const Center(child: UnauthenticatedView());
