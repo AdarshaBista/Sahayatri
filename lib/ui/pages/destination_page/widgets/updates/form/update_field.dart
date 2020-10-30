@@ -22,6 +22,7 @@ class UpdateField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             CustomTextField(
+              isLarge: true,
               label: 'Write something',
               initialValue: state.text,
               validator: FormValidators.requiredText(),

@@ -29,6 +29,7 @@ class LocationField extends StatelessWidget {
               '${state.coords.length} locations selected',
               style: AppTextStyles.extraSmall.primaryDark,
             ),
+            const SizedBox(height: 6.0),
             CustomButton(
               label: 'View / Select Locations',
               color: AppColors.dark,

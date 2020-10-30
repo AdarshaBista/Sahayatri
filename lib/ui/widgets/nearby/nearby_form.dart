@@ -30,20 +30,10 @@ class NearbyForm extends StatelessWidget {
       padding: MediaQuery.of(context).viewInsets,
       duration: const Duration(milliseconds: 200),
       child: FadeAnimator(
-        child: isOnSettings
-            ? SlideAnimator(
-                begin: const Offset(0.0, 1.0),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height * 0.7,
-                  ),
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    body: _buildList(context),
-                  ),
-                ),
-              )
-            : _buildList(context),
+        child: SlideAnimator(
+          begin: Offset(0.0, isOnSettings ? 1.0 : 0.0),
+          child: _buildList(context),
+        ),
       ),
     );
   }
@@ -71,7 +61,9 @@ class NearbyForm extends StatelessWidget {
   Widget _buildBody() {
     return BlocConsumer<NearbyCubit, NearbyState>(
       listener: (context, state) {
-        if (state is NearbyError) context.openSnackBar(state.message);
+        if (state is NearbyError) {
+          context.openFlushBar(state.message, type: FlushBarType.error);
+        }
       },
       builder: (context, state) {
         if (state is NearbyConnected) {

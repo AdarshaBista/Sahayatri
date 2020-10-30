@@ -20,7 +20,7 @@ class DownloadedList extends StatelessWidget {
       child: BlocConsumer<DownloadedDestinationsCubit, DownloadedDestinationsState>(
         listener: (context, state) {
           if (state is DownloadedDestinationsMessage) {
-            context.openSnackBar(state.message);
+            context.openFlushBar(state.message);
           }
         },
         builder: (context, state) {

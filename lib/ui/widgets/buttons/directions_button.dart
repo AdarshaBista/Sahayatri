@@ -41,10 +41,10 @@ class DirectionsButton extends StatelessWidget {
     return BlocListener<DirectionsCubit, DirectionsState>(
       listener: (context, state) {
         if (state is DirectionsError) {
-          context.openSnackBar(state.message);
+          context.openFlushBar(state.message, type: FlushBarType.error);
         }
         if (state is DirectionsLoading) {
-          context.openSnackBar('Loading Directions. Please wait...');
+          context.openFlushBar('Loading Directions. Please wait...');
         }
       },
       child: CustomButton(

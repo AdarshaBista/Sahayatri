@@ -30,7 +30,7 @@ class ImagesField extends StatelessWidget {
               '${state.imageUrls.length} images selected',
               style: AppTextStyles.extraSmall.primaryDark,
             ),
-            const SizedBox(height: 4.0),
+            const SizedBox(height: 6.0),
             PhotoGallery(
               imageUrls: state.imageUrls,
               onDelete: context.bloc<DestinationUpdateFormCubit>().removeImageUrl,

@@ -108,13 +108,14 @@ class ReviewList extends StatelessWidget {
   }
 
   Future<void> _postReview(BuildContext context, double rating, String text) async {
-    context.openSnackBar('Posting review...');
+    Navigator.of(context).pop();
+    context.openFlushBar('Posting review...');
     final bool success = await reviewCubit.postReview(rating, text);
 
     if (success) {
-      context.openSnackBar('Review posted');
+      context.openFlushBar('Review posted', type: FlushBarType.success);
     } else {
-      context.openSnackBar('Failed to post review!');
+      context.openFlushBar('Failed to post review!', type: FlushBarType.error);
     }
   }
 }

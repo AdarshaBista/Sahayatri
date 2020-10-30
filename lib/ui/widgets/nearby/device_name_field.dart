@@ -63,7 +63,10 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
         context.bloc<PrefsCubit>().saveDeviceName(deviceName);
-        context.openSnackBar('Device name saved: $deviceName');
+        context.openFlushBar(
+          'Device name saved: $deviceName',
+          type: FlushBarType.success,
+        );
       },
     );
   }

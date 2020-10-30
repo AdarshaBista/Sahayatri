@@ -25,7 +25,9 @@ class AuthButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
-        if (state is AuthError) context.openSnackBar(state.message);
+        if (state is AuthError) {
+          context.openFlushBar(state.message, type: FlushBarType.error);
+        }
       },
       builder: (context, state) {
         return FloatingActionButton.extended(

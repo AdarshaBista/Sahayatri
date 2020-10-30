@@ -98,11 +98,8 @@ class _ContactFormState extends State<ContactForm> {
         if (!_formKey.currentState.validate()) return;
         context.bloc<PrefsCubit>().saveContact(contact);
 
-        if (widget.isOnSettings) {
-          Navigator.of(context).pop();
-        } else {
-          context.openSnackBar('Contact saved: $contact');
-        }
+        if (widget.isOnSettings) Navigator.of(context).pop();
+        context.openFlushBar('Contact saved: $contact', type: FlushBarType.success);
       },
     );
   }

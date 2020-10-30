@@ -61,8 +61,9 @@ class _ReviewFormState extends State<ReviewForm> {
           'Rating',
           style: AppTextStyles.small.bold,
         ),
-        const SizedBox(height: 12.0),
+        const SizedBox(height: 6.0),
         StarRatingBar(
+          size: 32.0,
           rating: rating,
           onUpdate: (value) {
             setState(() {
@@ -81,6 +82,7 @@ class _ReviewFormState extends State<ReviewForm> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         CustomTextField(
+          isLarge: true,
           label: 'Review',
           initialValue: text,
           onChanged: (value) => setState(() => text = value),

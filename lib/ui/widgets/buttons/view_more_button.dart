@@ -58,7 +58,9 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
   Future<void> _loadMore() async {
     setState(() => isLoading = true);
     final bool success = await widget.onLoadMore();
-    if (!success) context.openSnackBar('Failed to load more reviews!');
+    if (!success) {
+      context.openFlushBar('Failed to load more reviews!', type: FlushBarType.error);
+    }
     setState(() => isLoading = false);
   }
 }

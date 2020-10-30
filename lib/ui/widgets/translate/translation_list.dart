@@ -14,8 +14,10 @@ class TranslationList extends StatelessWidget {
     return BlocBuilder<TranslateCubit, TranslateState>(
       builder: (context, state) {
         if (state.translations.isEmpty) {
-          return const EmptyIndicator(
-            message: 'No translations yet...',
+          return const Center(
+            child: EmptyIndicator(
+              message: 'No translations yet...',
+            ),
           );
         }
 

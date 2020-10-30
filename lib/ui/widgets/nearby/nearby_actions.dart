@@ -47,7 +47,7 @@ class NearbyActions extends StatelessWidget {
           color: Colors.red,
           icon: Icons.speaker_phone_outlined,
           onTap: () {
-            context.openSnackBar('SOS Sent');
+            context.openFlushBar('SOS Sent', type: FlushBarType.success);
             context.bloc<NearbyCubit>().sendSos();
           },
         ),

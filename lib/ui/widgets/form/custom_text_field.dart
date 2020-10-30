@@ -6,6 +6,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final Color color;
+  final bool isLarge;
   final IconData icon;
   final double iconGap;
   final bool obscureText;
@@ -26,6 +27,7 @@ class CustomTextField extends StatelessWidget {
     this.labelStyle,
     this.controller,
     this.inputFormatters,
+    this.isLarge = false,
     this.iconGap = 32.0,
     this.obscureText = false,
     this.color = AppColors.lightAccent,
@@ -34,6 +36,9 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int maxLines = obscureText ? 1 : null;
+    final int minLines = maxLines ?? (isLarge ? 4 : 1);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,7 +49,8 @@ class CustomTextField extends StatelessWidget {
         const SizedBox(height: 8.0),
         TextFormField(
           controller: controller,
-          maxLines: obscureText ? 1 : null,
+          minLines: minLines,
+          maxLines: maxLines,
           validator: validator,
           onChanged: onChanged,
           initialValue: initialValue,
