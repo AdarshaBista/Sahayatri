@@ -42,7 +42,7 @@ extension WidgetX on Widget {
   }
 }
 
-enum FlushBarType { info, success, error }
+enum FlushbarType { info, success, error }
 
 extension ContextX on BuildContext {
   Future<void> openLoadingFlushBar(String message, AsyncCallback callback) async {
@@ -69,15 +69,15 @@ extension ContextX on BuildContext {
   void openFlushBar(
     String message, {
     int ms = 2000,
-    FlushBarType type = FlushBarType.info,
+    FlushbarType type = FlushbarType.info,
   }) {
     IconData getIcon() {
       switch (type) {
-        case FlushBarType.info:
+        case FlushbarType.info:
           return Icons.info_outline;
-        case FlushBarType.success:
+        case FlushbarType.success:
           return Icons.check_circle_outline;
-        case FlushBarType.error:
+        case FlushbarType.error:
           return Icons.error_outline;
         default:
           return Icons.circle;
@@ -86,11 +86,11 @@ extension ContextX on BuildContext {
 
     Color getColor() {
       switch (type) {
-        case FlushBarType.info:
+        case FlushbarType.info:
           return Colors.lightBlue;
-        case FlushBarType.success:
+        case FlushbarType.success:
           return AppColors.primaryDark;
-        case FlushBarType.error:
+        case FlushbarType.error:
           return AppColors.secondary;
         default:
           return AppColors.light;

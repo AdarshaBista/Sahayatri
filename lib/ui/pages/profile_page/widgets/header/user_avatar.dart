@@ -60,9 +60,9 @@ class UserAvatar extends StatelessWidget {
     context.openFlushBar('Updating avatar...');
     final success = await context.bloc<UserCubit>().updateAvatar(source);
     if (success) {
-      context.openFlushBar('Avatar updated.', type: FlushBarType.success);
+      context.openFlushBar('Avatar updated.', type: FlushbarType.success);
     } else {
-      context.openFlushBar('Failed to update avatar.', type: FlushBarType.error);
+      context.openFlushBar('Failed to update avatar.', type: FlushbarType.error);
     }
   }
 }

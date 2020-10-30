@@ -99,7 +99,7 @@ class _ContactFormState extends State<ContactForm> {
         context.bloc<PrefsCubit>().saveContact(contact);
 
         if (widget.isOnSettings) Navigator.of(context).pop();
-        context.openFlushBar('Contact saved: $contact', type: FlushBarType.success);
+        context.openFlushBar('Contact saved: $contact', type: FlushbarType.success);
       },
     );
   }

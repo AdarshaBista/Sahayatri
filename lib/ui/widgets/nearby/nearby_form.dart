@@ -62,7 +62,7 @@ class NearbyForm extends StatelessWidget {
     return BlocConsumer<NearbyCubit, NearbyState>(
       listener: (context, state) {
         if (state is NearbyError) {
-          context.openFlushBar(state.message, type: FlushBarType.error);
+          context.openFlushBar(state.message, type: FlushbarType.error);
         }
       },
       builder: (context, state) {

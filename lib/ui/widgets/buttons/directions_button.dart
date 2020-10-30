@@ -41,7 +41,7 @@ class DirectionsButton extends StatelessWidget {
     return BlocListener<DirectionsCubit, DirectionsState>(
       listener: (context, state) {
         if (state is DirectionsError) {
-          context.openFlushBar(state.message, type: FlushBarType.error);
+          context.openFlushBar(state.message, type: FlushbarType.error);
         }
         if (state is DirectionsLoading) {
           context.openFlushBar('Loading Directions. Please wait...');

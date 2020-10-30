@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           if (state is AuthError) {
-            context.openFlushBar(state.message, type: FlushBarType.error);
+            context.openFlushBar(state.message, type: FlushbarType.error);
           }
         },
         builder: (context, state) {

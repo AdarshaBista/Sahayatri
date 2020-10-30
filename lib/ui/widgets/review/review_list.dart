@@ -113,9 +113,9 @@ class ReviewList extends StatelessWidget {
     final bool success = await reviewCubit.postReview(rating, text);
 
     if (success) {
-      context.openFlushBar('Review posted', type: FlushBarType.success);
+      context.openFlushBar('Review posted', type: FlushbarType.success);
     } else {
-      context.openFlushBar('Failed to post review!', type: FlushBarType.error);
+      context.openFlushBar('Failed to post review!', type: FlushbarType.error);
     }
   }
 }

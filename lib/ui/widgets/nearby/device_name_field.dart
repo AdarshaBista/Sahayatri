@@ -65,7 +65,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
         context.bloc<PrefsCubit>().saveDeviceName(deviceName);
         context.openFlushBar(
           'Device name saved: $deviceName',
-          type: FlushBarType.success,
+          type: FlushbarType.success,
         );
       },
     );
