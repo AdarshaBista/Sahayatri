@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/checkpoint.dart';
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';

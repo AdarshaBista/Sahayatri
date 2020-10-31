@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/settings/settings_card.dart';

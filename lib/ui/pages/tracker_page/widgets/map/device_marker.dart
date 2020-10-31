@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';

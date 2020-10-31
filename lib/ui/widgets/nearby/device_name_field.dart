@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/index.dart';
+
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/index.dart';
+
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
