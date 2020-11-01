@@ -15,6 +15,7 @@ class ItineraryHeader extends StatelessWidget {
 
     return ListTile(
       dense: true,
+      visualDensity: const VisualDensity(horizontal: -2.0, vertical: -4.0),
       title: Text(
         itinerary.name,
         textAlign: TextAlign.center,

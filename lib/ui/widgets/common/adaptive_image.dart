@@ -35,9 +35,12 @@ class AdaptiveImage extends StatelessWidget {
     return frame != null
         ? child
         : const Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2.0,
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.lightAccent),
+            child: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: CircularProgressIndicator(
+                strokeWidth: 2.0,
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.lightAccent),
+              ),
             ),
           );
   }

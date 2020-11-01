@@ -21,13 +21,16 @@ class _TagChipState extends State<TagChip> {
 
   @override
   Widget build(BuildContext context) {
+    final hPadding = widget.onSelect == null ? 8.0 : 12.0;
+    final vPadding = widget.onSelect == null ? 4.0 : 6.0;
+
     return ScaleAnimator(
       child: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           decoration: getDecoration(),
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
+          padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding),
           child: DefaultTextStyle(
             child: Text(widget.label),
             style: isSelected ? AppTextStyles.extraSmall.light : AppTextStyles.extraSmall,

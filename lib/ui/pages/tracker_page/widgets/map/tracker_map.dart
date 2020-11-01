@@ -141,7 +141,7 @@ class _RouteLayer extends StatelessWidget {
         polylines: [
           Polyline(
             strokeWidth: 6.0,
-            gradientColors: AppColors.accents.getRange(5, 7).toList(),
+            gradientColors: AppColors.userTrackGradient,
             points: [
               ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
               trackerUpdate.currentLocation.coord.toLatLng(),

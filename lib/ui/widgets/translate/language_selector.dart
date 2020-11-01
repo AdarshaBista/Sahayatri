@@ -55,7 +55,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     return ScaleAnimator(
       duration: 600,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.25,
+        width: MediaQuery.of(context).size.width * 0.24,
         child: PopupMenuButton<Language>(
           initialValue: language,
           color: AppColors.light,
@@ -110,14 +110,14 @@ class _Painter extends CustomPainter {
     final bottom = height;
 
     final leftStart = width * 0.1;
-    final leftEnd = leftStart + 32.0;
-    final leftCtrlTop = leftStart + 16.0;
-    final leftCtrlBottom = leftEnd - 16.0;
+    final leftEnd = leftStart + 40.0;
+    final leftCtrlTop = leftStart + 20.0;
+    final leftCtrlBottom = leftEnd - 20.0;
 
     final rightEnd = width * 0.9;
-    final rightStart = rightEnd - 32.0;
-    final rightCtrlTop = rightEnd - 16.0;
-    final rightCtrlBottom = rightStart + 16.0;
+    final rightStart = rightEnd - 40.0;
+    final rightCtrlTop = rightEnd - 20.0;
+    final rightCtrlBottom = rightStart + 20.0;
 
     final curve = Path()
       ..lineTo(0.0, top)

@@ -53,7 +53,7 @@ class _ContactFormState extends State<ContactForm> {
                   'A message will be automatically sent to this number once you reach a checkpoint.',
                   style: AppTextStyles.extraSmall,
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 12.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -64,7 +64,7 @@ class _ContactFormState extends State<ContactForm> {
                 ),
                 const SizedBox(height: 16.0),
                 _buildPreviewText(),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 8.0),
               ],
             ),
           ),
@@ -78,8 +78,7 @@ class _ContactFormState extends State<ContactForm> {
       contact = (state as PrefsLoaded).prefs.contact;
 
       return CustomTextField(
-        iconGap: 16.0,
-        icon: Icons.phone,
+        icon: Icons.phone_android,
         label: 'Phone number',
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,

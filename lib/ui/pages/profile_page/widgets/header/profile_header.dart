@@ -70,14 +70,9 @@ class ProfileHeader extends StatelessWidget {
 
   Widget _buildGradient() {
     return GradientContainer(
-      gradientColors: [
-        Colors.transparent,
-        Colors.transparent,
-        Colors.transparent,
-        AppColors.light.withOpacity(0.2),
-        AppColors.light.withOpacity(0.7),
-        AppColors.light,
-      ],
+      gradientBegin: Alignment.topCenter,
+      gradientEnd: Alignment.bottomCenter,
+      gradientColors: AppColors.collapsibleHeaderGradient,
     );
   }
 

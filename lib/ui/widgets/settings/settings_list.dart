@@ -23,7 +23,7 @@ class SettingsList extends StatelessWidget {
             subtitle: 'Setup a network to remain connected with your friends nearby.',
             icon: CommunityMaterialIcons.access_point_network,
             onTap: () => const Padding(
-              padding: EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(16.0),
               child: NearbyForm(isOnSettings: true),
             ).openModalBottomSheet(context),
           ),
@@ -42,7 +42,7 @@ class SettingsList extends StatelessWidget {
             subtitle: 'Setup close contact to notify them about your whereabouts.',
             icon: CommunityMaterialIcons.account_alert_outline,
             onTap: () => const Padding(
-              padding: EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(16.0),
               child: ContactForm(isOnSettings: true),
             ).openModalBottomSheet(context),
           ),

@@ -8,20 +8,24 @@ import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
 class DurationField extends StatelessWidget {
   final String label;
+  final IconData icon;
   final String initialValue;
   final ValueChanged<String> onChanged;
 
   const DurationField({
+    @required this.icon,
     @required this.label,
     @required this.onChanged,
     @required this.initialValue,
-  })  : assert(label != null),
+  })  : assert(icon != null),
+        assert(label != null),
         assert(onChanged != null),
         assert(initialValue != null);
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+      icon: icon,
       label: label,
       initialValue: initialValue,
       labelStyle: AppTextStyles.extraSmall,

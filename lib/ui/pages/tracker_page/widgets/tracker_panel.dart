@@ -45,7 +45,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
         DragIndicatorPill(),
         LocationStats(),
         SizedBox(height: 8.0),
-        Divider(indent: 24.0, endIndent: 24.0),
+        Divider(indent: 20.0, endIndent: 20.0),
         Expanded(child: TrackerTabs()),
       ],
     );

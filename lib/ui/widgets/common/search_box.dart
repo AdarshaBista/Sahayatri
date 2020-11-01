@@ -39,11 +39,7 @@ class SearchBox extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: hintText,
                   prefixIcon: const ScaleAnimator(
-                    child: Icon(
-                      Icons.search,
-                      size: 20.0,
-                      color: AppColors.dark,
-                    ),
+                    child: Icon(Icons.search, size: 20.0),
                   ),
                 ),
               ),

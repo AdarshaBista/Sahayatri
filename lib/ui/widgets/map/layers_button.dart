@@ -29,14 +29,14 @@ class LayersButton extends StatelessWidget {
           icon: CommunityMaterialIcons.google_street_view,
         ),
         const _MapLayerData(
-          title: 'Outdoors',
-          style: MapStyles.kOutdoors,
-          icon: CommunityMaterialIcons.hiking,
-        ),
-        const _MapLayerData(
           title: 'Satellite',
           style: MapStyles.kSatellite,
           icon: CommunityMaterialIcons.earth,
+        ),
+        const _MapLayerData(
+          title: 'Outdoors',
+          style: MapStyles.kOutdoors,
+          icon: CommunityMaterialIcons.hiking,
         ),
       ];
 
@@ -62,7 +62,7 @@ class LayersButton extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
-                    CommunityMaterialIcons.layers,
+                    CommunityMaterialIcons.layers_outline,
                     color: AppColors.primary,
                   ),
                 ),
@@ -84,6 +84,8 @@ class LayersButton extends StatelessWidget {
 
   Widget _buildTile(_MapLayerData layer) {
     return ListTile(
+      dense: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
       title: Text(
         layer.title,
         style: AppTextStyles.small.bold,

@@ -53,15 +53,9 @@ class CollapsibleCarousel extends StatelessWidget {
     return Hero(
       tag: heroId,
       child: GradientContainer(
-        gradientColors: [
-          Colors.transparent,
-          Colors.transparent,
-          Colors.transparent,
-          AppColors.light.withOpacity(0.2),
-          AppColors.light.withOpacity(0.5),
-          AppColors.light.withOpacity(0.8),
-          AppColors.light,
-        ],
+        gradientBegin: Alignment.topCenter,
+        gradientEnd: Alignment.bottomCenter,
+        gradientColors: AppColors.collapsibleHeaderGradient,
         child: Carousel(
           imageUrls: imageUrls,
           showPagination: false,

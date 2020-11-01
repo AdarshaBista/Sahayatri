@@ -54,6 +54,7 @@ class NearbyForm extends StatelessWidget {
         ),
         const SizedBox(height: 10.0),
         _buildBody(),
+        const SizedBox(height: 8.0),
       ],
     );
   }

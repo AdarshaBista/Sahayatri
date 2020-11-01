@@ -26,7 +26,7 @@ class TranslateForm extends StatelessWidget {
                 begin: const Offset(0.0, 1.0),
                 child: SizedBox(
                   child: _buildContent(context),
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.8,
                 ),
               )
             : _buildContent(context),
@@ -40,7 +40,7 @@ class TranslateForm extends StatelessWidget {
       children: [
         if (isOnSettings) const SizedBox(height: 8.0),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0),
+          padding: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
           child: Text('Translate', style: AppTextStyles.medium.bold),
         ),
         Expanded(

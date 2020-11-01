@@ -18,7 +18,7 @@ class ItineraryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SlidingPanel(
-        minHeight: 90.0,
+        minHeight: 80.0,
         body: const ItineraryMap(),
         panelBuilder: (sc) => _buildPanel(context, sc),
       ),
@@ -41,6 +41,7 @@ class ItineraryPage extends StatelessWidget {
             const SizedBox(height: 4.0),
             const DragIndicatorPill(),
             const ItineraryHeader(),
+            const SizedBox(height: 10.0),
             const Divider(),
             Expanded(
               child: ItineraryTimeline(

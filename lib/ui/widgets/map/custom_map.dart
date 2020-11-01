@@ -180,7 +180,7 @@ class _RouteLayer extends StatelessWidget {
           polylines: [
             Polyline(
               strokeWidth: 5.0,
-              gradientColors: AppColors.accents.take(4).toList(),
+              gradientColors: AppColors.routeGradient,
               points: route.simplify(zoom).map((c) => c.toLatLng()).toList(),
             ),
           ],

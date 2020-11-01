@@ -49,13 +49,8 @@ class LodgeCard extends StatelessWidget {
     return Hero(
       tag: lodge.id,
       child: GradientContainer(
-        gradientColors: [
-          Colors.transparent,
-          AppColors.dark.withOpacity(0.2),
-          AppColors.dark.withOpacity(0.6),
-          AppColors.dark.withOpacity(0.8),
-        ],
         child: AdaptiveImage(imageUrl),
+        gradientColors: AppColors.cardGradient,
       ),
     );
   }

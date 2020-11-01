@@ -11,7 +11,7 @@ class TranslateService {
       return translation.text;
     } catch (e) {
       print(e.toString());
-      throw const AppError(message: 'An unknown error occured!');
+      throw const AppError(message: 'An error has occured!');
     }
   }
 }

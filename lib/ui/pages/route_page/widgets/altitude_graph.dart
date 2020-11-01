@@ -30,7 +30,7 @@ class AltitudeGraph extends StatelessWidget {
           Text(
             'Elevation Gain',
             textAlign: TextAlign.center,
-            style: AppTextStyles.medium,
+            style: AppTextStyles.small.bold,
           ),
           const SizedBox(height: 24.0),
           Flexible(

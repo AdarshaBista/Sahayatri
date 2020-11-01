@@ -45,12 +45,7 @@ class PlaceCard extends StatelessWidget {
     return Hero(
       tag: place.id,
       child: GradientContainer(
-        gradientColors: [
-          Colors.transparent,
-          AppColors.dark.withOpacity(0.2),
-          AppColors.dark.withOpacity(0.6),
-          AppColors.dark.withOpacity(0.8),
-        ],
+        gradientColors: AppColors.cardGradient,
         child: AdaptiveImage(place.imageUrls[0]),
       ),
     );

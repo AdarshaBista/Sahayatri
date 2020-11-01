@@ -62,14 +62,7 @@ class DestinationCard extends StatelessWidget {
     return CustomCard(
       borderRadius: borderRadius,
       child: GradientContainer(
-        gradientEnd: Alignment.topCenter,
-        gradientBegin: Alignment.bottomCenter,
-        gradientColors: [
-          AppColors.dark.withOpacity(0.8),
-          AppColors.dark.withOpacity(0.5),
-          AppColors.dark.withOpacity(0.2),
-          Colors.transparent,
-        ],
+        gradientColors: AppColors.cardGradient,
         child: destination.imageUrls.isEmpty
             ? const AdaptiveImage(Images.kAuthBackground)
             : AdaptiveImage(destination.imageUrls.first),

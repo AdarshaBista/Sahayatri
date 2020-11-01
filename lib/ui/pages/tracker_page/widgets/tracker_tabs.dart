@@ -34,7 +34,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
         ElevatedCard(
           radius: 12.0,
           elevation: 4.0,
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 4.0),
           child: BottomNavBar(
             selectedIndex: _selectedIndex,
             onItemSelected: (index) {

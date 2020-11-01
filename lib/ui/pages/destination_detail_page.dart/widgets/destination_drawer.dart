@@ -27,7 +27,7 @@ class DestinationDrawer extends StatelessWidget {
           CustomPaint(
             foregroundPainter: DrawerBackground(),
             child: GradientContainer(
-              gradientColors: AppColors.accents.take(3).toList(),
+              gradientColors: AppColors.drawerGradient,
             ),
           ),
           Center(child: _buildMenuItems(context)),
@@ -68,12 +68,12 @@ class DestinationDrawer extends StatelessWidget {
           onTap: () {},
         ),
         DrawerItem(
-          icon: CommunityMaterialIcons.medical_bag,
+          icon: Icons.medical_services_outlined,
           label: 'Safety',
           onTap: () {},
         ),
         DrawerItem(
-          icon: CommunityMaterialIcons.bag_personal,
+          icon: Icons.shopping_bag_outlined,
           label: 'Gear',
           onTap: () {},
         ),

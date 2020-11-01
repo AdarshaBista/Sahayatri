@@ -8,7 +8,6 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
@@ -48,7 +47,7 @@ class CheckpointList extends StatelessWidget {
       label: 'Add a Checkpoint',
       color: AppColors.primaryDark,
       backgroundColor: AppColors.primaryLight,
-      iconData: CommunityMaterialIcons.map_marker_check,
+      iconData: Icons.add_location_alt_outlined,
       onTap: () {
         FocusScope.of(context).unfocus();
         CheckpointForm(

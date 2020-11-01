@@ -5,6 +5,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/duration_field.dart';
@@ -36,6 +37,7 @@ class ItineraryForm extends StatelessWidget {
     return CustomTextField(
       label: 'Name',
       initialValue: name,
+      icon: Icons.landscape_outlined,
       validator: FormValidators.requiredText('Please enter a name.'),
       onChanged: (name) => context.bloc<ItineraryFormCubit>().changeName(name),
     );
@@ -57,6 +59,7 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Days',
                 initialValue: state.days,
+                icon: CommunityMaterialIcons.weather_sunny,
                 onChanged: (days) => context.bloc<ItineraryFormCubit>().changeDays(days),
               ),
             ),
@@ -65,6 +68,7 @@ class ItineraryForm extends StatelessWidget {
               child: DurationField(
                 label: 'Nights',
                 initialValue: state.nights,
+                icon: CommunityMaterialIcons.weather_night,
                 onChanged: (nights) =>
                     context.bloc<ItineraryFormCubit>().changeNights(nights),
               ),

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_tile.dart';
 
 class DateTimePicker extends StatefulWidget {
   final DateTime initialDateTime;
@@ -30,34 +30,16 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Date & Time',
-          style: AppTextStyles.small.bold,
-        ),
-        const SizedBox(height: 8.0),
-        CustomCard(
-          child: ListTile(
-            dense: true,
-            title: Text(
-              selectedDateTime == null
-                  ? 'No date & time selected'
-                  : _formattedDate(selectedDateTime),
-              style: AppTextStyles.small,
-            ),
-            leading: const Icon(
-              Icons.date_range,
-              size: 22.0,
-            ),
-            onTap: () async {
-              FocusScope.of(context).unfocus();
-              _selectDateTime();
-            },
-          ),
-        ),
-      ],
+    return CustomTile(
+      title: 'Date & Time',
+      icon: Icons.date_range_outlined,
+      hintText: selectedDateTime == null
+          ? 'No date & time selected'
+          : _formattedDate(selectedDateTime),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        _selectDateTime();
+      },
     );
   }
 

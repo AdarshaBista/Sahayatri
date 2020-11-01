@@ -57,12 +57,7 @@ class ItineraryCard extends StatelessWidget {
       height: kCardHeight,
       gradientBegin: Alignment.topLeft,
       gradientEnd: Alignment.bottomRight,
-      gradientColors: [
-        AppColors.dark.withOpacity(0.8),
-        AppColors.dark.withOpacity(0.5),
-        AppColors.dark.withOpacity(0.2),
-        Colors.transparent,
-      ],
+      gradientColors: AppColors.cardGradient,
       child: AdaptiveImage(imageUrls.first),
     );
   }

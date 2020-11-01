@@ -27,7 +27,6 @@ class AuthFields extends StatelessWidget {
       children: [
         CustomTextField(
           label: 'Email',
-          iconGap: 10.0,
           color: AppColors.light,
           initialValue: initialEmail,
           onChanged: onEmailChanged,
@@ -38,7 +37,6 @@ class AuthFields extends StatelessWidget {
         const SizedBox(height: 20.0),
         CustomTextField(
           label: 'Password',
-          iconGap: 10.0,
           obscureText: true,
           color: AppColors.light,
           icon: Icons.lock_outline,

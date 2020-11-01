@@ -43,8 +43,14 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   List<NestedTabData> get _tabs => [
-        NestedTabData(label: 'Places', icon: CommunityMaterialIcons.map_marker_radius),
-        NestedTabData(label: 'Itinerary', icon: CommunityMaterialIcons.map_check_outline),
+        NestedTabData(
+          label: 'Places',
+          icon: CommunityMaterialIcons.map_marker_radius_outline,
+        ),
+        NestedTabData(
+          label: 'Itinerary',
+          icon: CommunityMaterialIcons.book_outline,
+        ),
       ];
 
   @override

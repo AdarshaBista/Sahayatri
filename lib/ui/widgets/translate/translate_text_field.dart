@@ -51,17 +51,14 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
   }
 
   Widget _buildTextField() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 3.0),
-      child: TextFormField(
-        focusNode: sourceNode,
-        style: AppTextStyles.small,
-        controller: sourceController,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        decoration: const InputDecoration(
-          fillColor: Colors.transparent,
-          hintText: 'Type Something...',
-        ),
+    return TextFormField(
+      focusNode: sourceNode,
+      style: AppTextStyles.small,
+      controller: sourceController,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: const InputDecoration(
+        hintText: 'Type Something...',
+        fillColor: Colors.transparent,
       ),
     );
   }
@@ -71,8 +68,8 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
       builder: (context, state) {
         if (state.isLoading) {
           return const SizedBox(
-            width: 44.0,
-            height: 44.0,
+            width: 40.0,
+            height: 40.0,
             child: CircularBusyIndicator(),
           );
         }
@@ -85,6 +82,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
     return Container(
       color: AppColors.primaryDark,
       child: IconButton(
+        visualDensity: VisualDensity.compact,
         splashRadius: 24.0,
         icon: const Icon(
           Icons.send,

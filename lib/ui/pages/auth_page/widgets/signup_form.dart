@@ -52,7 +52,6 @@ class _SignUpFormState extends State<SignUpForm> {
                     children: [
                       CustomTextField(
                         label: 'Username',
-                        iconGap: 10.0,
                         color: AppColors.light,
                         initialValue: username,
                         icon: Icons.account_circle_outlined,

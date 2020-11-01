@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
   final Color color;
   final bool isLarge;
   final IconData icon;
-  final double iconGap;
+  final String hintText;
   final bool obscureText;
   final String initialValue;
   final TextStyle labelStyle;
@@ -24,11 +24,11 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.icon,
+    this.hintText,
     this.labelStyle,
     this.controller,
     this.inputFormatters,
     this.isLarge = false,
-    this.iconGap = 32.0,
     this.obscureText = false,
     this.color = AppColors.lightAccent,
     this.keyboardType = TextInputType.text,
@@ -61,15 +61,16 @@ class CustomTextField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             fillColor: color,
+            hintText: hintText,
+            prefixIconConstraints: const BoxConstraints(
+              minHeight: 32.0,
+              minWidth: 32.0,
+            ),
             prefixIcon: icon == null
                 ? null
                 : Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: iconGap),
-                    child: Icon(
-                      icon,
-                      size: 20.0,
-                      color: AppColors.dark,
-                    ),
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Icon(icon, size: 20.0),
                   ),
           ),
         ),

@@ -15,8 +15,11 @@ class TranslationList extends StatelessWidget {
       builder: (context, state) {
         if (state.translations.isEmpty) {
           return const Center(
-            child: EmptyIndicator(
-              message: 'No translations yet...',
+            child: Padding(
+              padding: EdgeInsets.all(32.0),
+              child: EmptyIndicator(
+                message: 'No translations yet...',
+              ),
             ),
           );
         }

@@ -38,11 +38,11 @@ class UpdateCard extends StatelessWidget {
               ],
               _buildText(),
               if (update.coords.isNotEmpty) ...[
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 8.0),
                 _buildLocationButton(context),
               ],
               if (update.imageUrls.isNotEmpty) ...[
-                const SizedBox(height: 8.0),
+                const SizedBox(height: 10.0),
                 ImageList(imageUrls: update.imageUrls),
               ],
             ],

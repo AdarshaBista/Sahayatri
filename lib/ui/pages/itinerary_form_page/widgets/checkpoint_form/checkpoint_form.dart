@@ -94,8 +94,9 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildDescriptionField(String description, BuildContext context) {
     return CustomTextField(
       label: 'Description',
+      hintText: 'No description provided',
       validator: (_) => null,
-      icon: Icons.description,
+      icon: Icons.description_outlined,
       initialValue: description,
       onChanged: (desc) => context.bloc<CheckpointFormCubit>().changeDescription(desc),
     );

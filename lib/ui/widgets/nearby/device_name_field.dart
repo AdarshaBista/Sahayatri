@@ -44,7 +44,6 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
         deviceName = (state as PrefsLoaded).prefs.deviceName;
 
         return CustomTextField(
-          iconGap: 16.0,
           icon: Icons.account_circle_outlined,
           label: 'Device name',
           onChanged: (value) => deviceName = value,
