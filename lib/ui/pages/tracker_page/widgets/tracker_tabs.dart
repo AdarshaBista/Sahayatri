@@ -36,6 +36,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
           elevation: 4.0,
           padding: const EdgeInsets.only(top: 4.0),
           child: BottomNavBar(
+            iconSize: 20.0,
             selectedIndex: _selectedIndex,
             onItemSelected: (index) {
               setState(() {

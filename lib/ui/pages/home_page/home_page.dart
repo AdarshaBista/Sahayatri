@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomNavBar(
+          iconSize: 24.0,
           selectedIndex: _selectedIndex,
           onItemSelected: (index) {
             setState(() {

@@ -5,6 +5,7 @@ import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class BottomNavBar extends StatelessWidget {
+  final double iconSize;
   final int selectedIndex;
   final List<IconData> icons;
   final ValueChanged<int> onItemSelected;
@@ -12,8 +13,10 @@ class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     this.selectedIndex = 0,
     @required this.icons,
+    @required this.iconSize,
     @required this.onItemSelected,
   })  : assert(icons != null),
+        assert(iconSize != null),
         assert(onItemSelected != null),
         assert(icons.length >= 2 && icons.length <= 5);
 
@@ -23,7 +26,7 @@ class BottomNavBar extends StatelessWidget {
       top: false,
       child: Container(
         width: double.infinity,
-        height: 64.0,
+        height: 56.0,
         color: AppColors.light,
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         child: Row(
@@ -54,19 +57,20 @@ class BottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem(IconData icon, bool isSelected) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 6.0),
         Icon(
           icon,
-          size: 22.0,
-          color: isSelected ? AppColors.primary : AppColors.disabled,
+          size: iconSize,
+          color: isSelected ? AppColors.primary : AppColors.barrier,
         ),
         AnimatedContainer(
-          curve: Curves.bounceIn,
+          curve: Curves.easeOut,
           duration: const Duration(milliseconds: 120),
-          width: isSelected ? 6 : 0,
-          height: isSelected ? 6 : 0,
-          margin: const EdgeInsets.all(6),
+          width: isSelected ? 6.0 : 0.0,
+          height: isSelected ? 6.0 : 0.0,
+          margin:
+              isSelected ? const EdgeInsets.all(4.0) : const EdgeInsets.only(top: 16.0),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(3),
