@@ -146,12 +146,12 @@ class DestinationCard extends StatelessWidget {
               context.bloc<DownloadedDestinationsCubit>().delete(destination),
         ).openDialog(context),
         child: Container(
-          width: 44.0,
-          height: 44.0,
+          width: 40.0,
+          height: 40.0,
           decoration: const BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20.0),
+              bottomLeft: Radius.circular(16.0),
               topRight: Radius.circular(borderRadius),
             ),
           ),

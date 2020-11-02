@@ -24,7 +24,7 @@ dependencies:
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^3.0.1
+  flutter_local_notifications: ^3.0.1+2
 
   # State Management
   equatable: ^1.2.5

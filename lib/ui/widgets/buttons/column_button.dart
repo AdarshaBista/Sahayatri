@@ -4,6 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class ColumnButton extends StatelessWidget {
+  final Color color;
   final String label;
   final IconData icon;
   final VoidCallback onTap;
@@ -11,10 +12,11 @@ class ColumnButton extends StatelessWidget {
   const ColumnButton({
     @required this.icon,
     @required this.label,
-    @required this.onTap,
+    this.color = AppColors.dark,
+    this.onTap,
   })  : assert(icon != null),
-        assert(label != null),
-        assert(onTap != null);
+        assert(color != null),
+        assert(label != null);
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +30,13 @@ class ColumnButton extends StatelessWidget {
             Icon(
               icon,
               size: 24.0,
+              color: color,
             ),
             const SizedBox(height: 4.0),
             Text(
               label,
               textAlign: TextAlign.center,
-              style: AppTextStyles.extraSmall.bold,
+              style: AppTextStyles.extraSmall.bold.withColor(color),
             ),
           ],
         ),
