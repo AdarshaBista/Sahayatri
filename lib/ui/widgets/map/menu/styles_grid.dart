@@ -10,14 +10,14 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 
-class LayersGrid extends StatefulWidget {
-  const LayersGrid();
+class StylesGrid extends StatefulWidget {
+  const StylesGrid();
 
   @override
-  _LayersGridState createState() => _LayersGridState();
+  StylesGridState createState() => StylesGridState();
 }
 
-class _LayersGridState extends State<LayersGrid> {
+class StylesGridState extends State<StylesGrid> {
   String selectedStyle;
 
   @override
@@ -33,7 +33,7 @@ class _LayersGridState extends State<LayersGrid> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Layers',
+          'Map Style',
           style: AppTextStyles.small.bold.light,
         ),
         const SizedBox(height: 12.0),

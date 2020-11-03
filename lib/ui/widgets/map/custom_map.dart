@@ -15,9 +15,9 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/map_drawer.dart';
-import 'package:sahayatri/ui/widgets/map/layers_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
+import 'package:sahayatri/ui/widgets/map/menu/menu_button.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class CustomMap extends StatefulWidget {
@@ -92,14 +92,14 @@ class _CustomMapState extends State<CustomMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MapDrawer(),
+      drawer: const MenuDrawer(),
       drawerScrimColor: AppColors.barrier,
       drawerEnableOpenDragGesture: false,
       body: Stack(
         children: [
           RepaintBoundary(child: _buildMap()),
           const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: CloseIcon())),
-          const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: LayersButton())),
+          const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: MenuButton())),
         ],
       ),
     );

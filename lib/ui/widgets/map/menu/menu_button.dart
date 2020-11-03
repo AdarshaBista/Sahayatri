@@ -4,8 +4,8 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
-class LayersButton extends StatelessWidget {
-  const LayersButton();
+class MenuButton extends StatelessWidget {
+  const MenuButton();
 
   @override
   Widget build(BuildContext context) {
