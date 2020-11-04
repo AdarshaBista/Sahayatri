@@ -78,7 +78,7 @@ class DownloadDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         IconIndicator(
-          imageUrl: Images.kDownloaded,
+          imageUrl: Images.downloaded,
           title: Text(
             message,
             textAlign: TextAlign.center,

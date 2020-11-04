@@ -49,13 +49,13 @@ class DestinationDrawer extends StatelessWidget {
           label: 'Route',
           onTap: () => context
               .repository<DestinationNavService>()
-              .pushNamed(Routes.kRoutePageRoute),
+              .pushNamed(Routes.routePageRoute),
         ),
         DrawerItem(
           icon: CommunityMaterialIcons.weather_fog,
           label: 'Weather',
           onTap: () => context.repository<DestinationNavService>().pushNamed(
-                Routes.kWeatherPageRoute,
+                Routes.weatherPageRoute,
                 arguments: WeatherPageArgs(
                   name: destination.name,
                   coord: destination.route.first,

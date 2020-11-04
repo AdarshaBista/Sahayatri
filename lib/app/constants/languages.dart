@@ -1,10 +1,10 @@
 import 'package:sahayatri/core/models/language.dart';
 
 class Languages {
-  static const Language kEnglish = Language(code: 'en', title: 'English');
-  static const Language kDefaultSource = Language(code: 'en', title: 'English');
-  static const Language kDefaultTarget = Language(code: 'ne', title: 'Nepali');
-  static const List<Language> kAll = [
+  static const Language english = Language(code: 'en', title: 'English');
+  static const Language defaultSource = Language(code: 'en', title: 'English');
+  static const Language defaultTarget = Language(code: 'ne', title: 'Nepali');
+  static const List<Language> all = [
     Language(code: 'auto', title: 'Automatic'),
     Language(code: 'af', title: 'Afrikaans'),
     Language(code: 'sq', title: 'Albanian'),

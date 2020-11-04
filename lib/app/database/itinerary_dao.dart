@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/app/constants/hive_config.dart';
 
 class ItineraryDao {
-  final Future<Box<Itinerary>> _itineraryBox = Hive.openBox(HiveConfig.kItineraryBoxName);
+  final Future<Box<Itinerary>> _itineraryBox = Hive.openBox(HiveConfig.itineraryBoxName);
 
   Future<Itinerary> get(String id) async {
     final box = await _itineraryBox;

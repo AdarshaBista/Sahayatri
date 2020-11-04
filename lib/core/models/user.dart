@@ -6,7 +6,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'user.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kUser)
+@HiveType(typeId: HiveTypeIds.user)
 class User {
   @HiveField(0)
   final String id;

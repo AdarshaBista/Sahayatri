@@ -12,22 +12,22 @@ extension CoordListX on List<Coord> {
   double get maxLng => map((c) => c.lng).reduce(math.max);
 
   List<Coord> simplify(double zoom) {
-    if (zoom > MapConfig.kRouteAccuracyZoomThreshold) return this;
+    if (zoom > MapConfig.routeAccuracyZoomThreshold) return this;
 
     final double scaledZoom = MathUtils.mapRange(
       zoom,
-      MapConfig.kMinZoom,
-      MapConfig.kMaxZoom,
-      MapConfig.kRouteAccuracyZoomThreshold,
-      MapConfig.kMaxZoom,
+      MapConfig.minZoom,
+      MapConfig.maxZoom,
+      MapConfig.routeAccuracyZoomThreshold,
+      MapConfig.maxZoom,
     );
 
     final int accuracy = MathUtils.mapRangeInverse(
       scaledZoom,
-      MapConfig.kRouteAccuracyZoomThreshold,
-      MapConfig.kMaxZoom,
-      MapConfig.kMaxRouteAccuracy.toDouble(),
-      MapConfig.kMinRouteAccuracy.toDouble(),
+      MapConfig.routeAccuracyZoomThreshold,
+      MapConfig.maxZoom,
+      MapConfig.maxRouteAccuracy.toDouble(),
+      MapConfig.minRouteAccuracy.toDouble(),
     ).toInt();
 
     final List<Coord> simplified = [];

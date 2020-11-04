@@ -77,7 +77,7 @@ class PhotoGallery extends StatelessWidget {
         child: _buildImage(imageUrls[index]),
       ),
       onTap: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kPhotoViewPageRoute,
+            Routes.photoViewPageRoute,
             arguments: PhotoViewPageArgs(
               imageUrls: imageUrls,
               initialPageIndex: index,

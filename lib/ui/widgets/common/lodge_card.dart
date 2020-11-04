@@ -26,7 +26,7 @@ class LodgeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => context
           .repository<DestinationNavService>()
-          .pushNamed(Routes.kLodgePageRoute, arguments: lodge),
+          .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: ElevatedCard(
         radius: 8.0,
         child: Stack(
@@ -41,7 +41,7 @@ class LodgeCard extends StatelessWidget {
   }
 
   Widget _buildBackground() {
-    String imageUrl = Images.kSplash;
+    String imageUrl = Images.splash;
     if (lodge.imageUrls != null && lodge.imageUrls.isNotEmpty) {
       imageUrl = lodge.imageUrls.first;
     }

@@ -32,12 +32,12 @@ class FormValidators {
   }
 
   static MultiValidator duration([String message = 'Please enter a duration.']) {
-    const int kMaxLength = 3;
+    const int maxLength = 3;
     return MultiValidator([
       RequiredValidator(errorText: message),
       MaxLengthValidator(
-        kMaxLength,
-        errorText: 'Duration should be less than ${kMaxLength + 1} digits long.',
+        maxLength,
+        errorText: 'Duration should be less than ${maxLength + 1} digits long.',
       ),
       PatternValidator(
         r'^[0-9]{1,3}$',

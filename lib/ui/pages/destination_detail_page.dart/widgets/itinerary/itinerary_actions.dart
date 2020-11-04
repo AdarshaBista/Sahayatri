@@ -44,7 +44,7 @@ class ItineraryActions extends StatelessWidget {
           color: AppColors.primaryDark,
           icon: Icons.edit,
           onTap: () => context.repository<DestinationNavService>().pushNamed(
-                Routes.kItineraryFormPageRoute,
+                Routes.itineraryFormPageRoute,
                 arguments: itinerary,
               ),
         ),

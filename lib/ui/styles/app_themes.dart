@@ -10,7 +10,7 @@ class AppThemes {
   AppThemes._();
 
   static ThemeData get light => ThemeData(
-        fontFamily: AppConfig.kFontFamily,
+        fontFamily: AppConfig.fontFamily,
         brightness: Brightness.light,
         accentColorBrightness: Brightness.light,
         visualDensity: VisualDensity.standard,

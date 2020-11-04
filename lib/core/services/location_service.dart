@@ -8,10 +8,9 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
-class LocationService {
-  static const int kLocationIntervalMs = 2000;
-  static const double kLocationDistanceFilter = 10.0;
+import 'package:sahayatri/app/constants/configs.dart';
 
+class LocationService {
   final Location location = Location();
 
   /// Wheather the user has granted location permission
@@ -32,8 +31,8 @@ class LocationService {
     });
 
     location.changeSettings(
-      interval: kLocationIntervalMs,
-      distanceFilter: kLocationDistanceFilter,
+      interval: LocationConfig.interval,
+      distanceFilter: LocationConfig.distanceFilter,
     );
   }
 

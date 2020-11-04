@@ -56,7 +56,7 @@ class HeaderTile extends StatelessWidget {
       iconData: Icons.hotel_outlined,
       onTap: () => context
           .repository<DestinationNavService>()
-          .pushNamed(Routes.kLodgeRoomsPageRoute),
+          .pushNamed(Routes.lodgeRoomsPageRoute),
     );
   }
 }

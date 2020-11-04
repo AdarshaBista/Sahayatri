@@ -25,7 +25,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
     return Scaffold(
       body: SlidingPanel(
         margin: EdgeInsets.all(margin),
-        minHeight: UiConfig.kTrackerPanelHeight,
+        minHeight: UiConfig.trackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.8,
         body: const TrackerMap(),
         panel: _buildPanel(),

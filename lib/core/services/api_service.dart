@@ -19,7 +19,7 @@ class ApiService {
   Future<String> updateUserAvatar(User user, String imagePath) async {
     try {
       final Response res = await Dio().post(
-        '${ApiConfig.kApiBaseUrl}/users/${user.id}/images',
+        '${ApiConfig.apiBaseUrl}/users/${user.id}/images',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -39,7 +39,7 @@ class ApiService {
 
   Future<List<Destination>> fetchDestinations() async {
     try {
-      final Response res = await Dio().get('${ApiConfig.kApiBaseUrl}/destinations');
+      final Response res = await Dio().get('${ApiConfig.apiBaseUrl}/destinations');
       final body = res.data as Map<String, dynamic>;
       final destinations = body['data'] as List<dynamic>;
       return destinations
@@ -62,9 +62,9 @@ class ApiService {
   Future<DestinationUpdatesList> fetchUpdates(String destId, int page) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/destinations/$destId/updates',
+        '${ApiConfig.apiBaseUrl}/destinations/$destId/updates',
         queryParameters: {
-          'limit': ApiConfig.kPageLimit,
+          'limit': ApiConfig.pageLimit,
           'page': page,
         },
       );
@@ -95,7 +95,7 @@ class ApiService {
   Future<DestinationUpdate> postUpdate(DestinationUpdate update, String destId) async {
     try {
       final Response res = await Dio().post(
-        '${ApiConfig.kApiBaseUrl}/updates',
+        '${ApiConfig.apiBaseUrl}/updates',
         options: Options(
           headers: {'Authorization': 'Bearer ${update.user.accessToken}'},
         ),
@@ -133,7 +133,7 @@ class ApiService {
       }
 
       final Response res = await Dio().post(
-        '${ApiConfig.kApiBaseUrl}/updates/${update.id}/images',
+        '${ApiConfig.apiBaseUrl}/updates/${update.id}/images',
         options: Options(headers: {
           'Authorization': 'Bearer ${update.user.accessToken}',
         }),
@@ -150,9 +150,9 @@ class ApiService {
   Future<ReviewDetails> fetchReviews(String destId, int page) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/destinations/$destId/reviews',
+        '${ApiConfig.apiBaseUrl}/destinations/$destId/reviews',
         queryParameters: {
-          'limit': ApiConfig.kPageLimit,
+          'limit': ApiConfig.pageLimit,
           'page': page,
         },
       );
@@ -168,7 +168,7 @@ class ApiService {
       double rating, String text, String destId, User user) async {
     try {
       final Response res = await Dio().post(
-        '${ApiConfig.kApiBaseUrl}/reviews',
+        '${ApiConfig.apiBaseUrl}/reviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -190,7 +190,7 @@ class ApiService {
   Future<List<Place>> fetchPlaces(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/destinations/$destId/places',
+        '${ApiConfig.apiBaseUrl}/destinations/$destId/places',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -216,7 +216,7 @@ class ApiService {
   Future<List<Itinerary>> fetchItineraries(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/destinations/$destId/itineraries',
+        '${ApiConfig.apiBaseUrl}/destinations/$destId/itineraries',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -242,12 +242,12 @@ class ApiService {
   Future<ReviewDetails> fetchLodgeReviews(String lodgeId, int page, User user) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/lodges/$lodgeId/reviews',
+        '${ApiConfig.apiBaseUrl}/lodges/$lodgeId/reviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
         queryParameters: {
-          'limit': ApiConfig.kPageLimit,
+          'limit': ApiConfig.pageLimit,
           'page': page,
         },
       );
@@ -264,7 +264,7 @@ class ApiService {
       double rating, String text, String lodgeId, User user) async {
     try {
       final Response res = await Dio().post(
-        '${ApiConfig.kApiBaseUrl}/lodgereviews',
+        '${ApiConfig.apiBaseUrl}/lodgereviews',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -286,7 +286,7 @@ class ApiService {
   Future<Destination> download(String destId, User user) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kApiBaseUrl}/destinations/$destId/download',
+        '${ApiConfig.apiBaseUrl}/destinations/$destId/download',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
@@ -301,7 +301,7 @@ class ApiService {
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.kWeatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.kOpenWeatherMapKey}',
+        '${ApiConfig.weatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.openWeatherMapKey}',
       );
       final resList = res.data['daily'] as List<dynamic>;
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();

@@ -4,7 +4,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'lodge_facility.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kLodgeFacility)
+@HiveType(typeId: HiveTypeIds.lodgeFacility)
 class LodgeFacility {
   @HiveField(0)
   final bool wifi;

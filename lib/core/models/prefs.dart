@@ -5,7 +5,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'prefs.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kPrefs)
+@HiveType(typeId: HiveTypeIds.prefs)
 class Prefs {
   @HiveField(0)
   final String contact;
@@ -18,7 +18,7 @@ class Prefs {
 
   const Prefs({
     this.contact = '',
-    this.mapStyle = MapStyles.kOutdoors,
+    this.mapStyle = MapStyles.outdoors,
     this.deviceName = '',
   })  : assert(contact != null),
         assert(mapStyle != null),

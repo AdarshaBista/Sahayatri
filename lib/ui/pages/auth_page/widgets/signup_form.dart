@@ -81,7 +81,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   if (widget.isInitial) {
                     context
                         .repository<RootNavService>()
-                        .pushReplacementNamed(Routes.kHomePageRoute);
+                        .pushReplacementNamed(Routes.homePageRoute);
                   } else {
                     Navigator.of(context).pop();
                   }

@@ -38,7 +38,7 @@ class SmsService {
         !checkpoint.notifyContact ||
         _sentList.contains(checkpoint.place.id)) return false;
     final distance = GeoUtils.computeDistance(userLocation, checkpoint.place.coord);
-    return distance < GeoUtils.kMinNearbyDistance;
+    return distance < LocationConfig.minNearbyDistance;
   }
 
   /// Send SMS to notify close contact of the user
@@ -54,7 +54,7 @@ class SmsService {
     _alert('$contact has been notified on your arrival at ${place.name}');
     final smsMessage = SmsMessage(
       contact,
-      '${AppConfig.kSmsMessagePrefix} ${place.name}',
+      '${AppConfig.smsMessagePrefix} ${place.name}',
     );
 
     smsMessage.onStateChanged.listen((state) {
@@ -77,11 +77,11 @@ class SmsService {
   /// Show notification to user on status of sms.
   Future<void> _alert(String message) async {
     await notificationService.show(
-      NotificationChannels.kSmsSentId,
+      NotificationChannels.smsSentId,
       message,
-      channelId: NotificationChannels.kSmsSentChannelId,
-      channelName: NotificationChannels.kSmsSentChannelName,
-      channelDescription: NotificationChannels.kSmsSentChannelDesc,
+      channelId: NotificationChannels.smsSentChannelId,
+      channelName: NotificationChannels.smsSentChannelName,
+      channelDescription: NotificationChannels.smsSentChannelDesc,
     );
   }
 

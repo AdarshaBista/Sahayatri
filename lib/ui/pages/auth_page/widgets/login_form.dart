@@ -65,7 +65,7 @@ class _LoginFormState extends State<LoginForm> {
                   if (widget.isInitial) {
                     context
                         .repository<RootNavService>()
-                        .pushReplacementNamed(Routes.kHomePageRoute);
+                        .pushReplacementNamed(Routes.homePageRoute);
                   } else {
                     Navigator.of(context).pop();
                   }

@@ -11,7 +11,7 @@ class UnauthenticatedIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Images.kUnauthenticated,
+      imageUrl: Images.unauthenticated,
       title: Text(
         'Your are not logged in.',
         textAlign: TextAlign.center,

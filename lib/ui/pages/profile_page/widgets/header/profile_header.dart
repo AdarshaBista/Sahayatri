@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -13,8 +15,6 @@ import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_email.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/logout_button.dart';
 
 class ProfileHeader extends StatelessWidget {
-  static const double kHeaderHeight = 290.0;
-
   const ProfileHeader();
 
   @override
@@ -24,7 +24,7 @@ class ProfileHeader extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       elevation: 8.0,
-      expandedHeight: kHeaderHeight,
+      expandedHeight: UiConfig.profileHeaderHeight,
       automaticallyImplyLeading: false,
       actions: const [
         Padding(

@@ -15,7 +15,7 @@ class MessageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Images.kMessage,
+      imageUrl: Images.message,
       title: Text(
         message,
         textAlign: TextAlign.center,

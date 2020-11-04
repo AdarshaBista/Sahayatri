@@ -9,7 +9,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'checkpoint.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kCheckpoint)
+@HiveType(typeId: HiveTypeIds.checkpoint)
 class Checkpoint {
   @HiveField(0)
   final Place place;

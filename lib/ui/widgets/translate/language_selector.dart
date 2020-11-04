@@ -67,7 +67,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             textAlign: isTarget ? TextAlign.left : TextAlign.right,
           ),
           itemBuilder: (context) {
-            return Languages.kAll
+            return Languages.all
                 .map((l) => PopupMenuItem(
                       value: l,
                       child: Text(

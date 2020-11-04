@@ -51,7 +51,7 @@ class DestinationRouter {
         _page = const DestinationPage();
         break;
 
-      case Routes.kDestinationDetailPageRoute:
+      case Routes.destinationDetailPageRoute:
         _page = BlocProvider<ItineraryCubit>(
           create: (context) => ItineraryCubit(
             user: context.bloc<UserCubit>().user,
@@ -62,18 +62,18 @@ class DestinationRouter {
         );
         break;
 
-      case Routes.kRoutePageRoute:
+      case Routes.routePageRoute:
         _page = const RoutePage();
         break;
 
-      case Routes.kPlacePageRoute:
+      case Routes.placePageRoute:
         _page = Provider<Place>.value(
           value: settings.arguments as Place,
           child: const PlacePage(),
         );
         break;
 
-      case Routes.kLodgePageRoute:
+      case Routes.lodgePageRoute:
         _page = Provider<Lodge>.value(
           value: settings.arguments as Lodge,
           child: BlocProvider<ReviewCubit>(
@@ -87,18 +87,18 @@ class DestinationRouter {
         );
         break;
 
-      case Routes.kLodgeRoomsPageRoute:
+      case Routes.lodgeRoomsPageRoute:
         _page = const LodgeRoomsPage();
         break;
 
-      case Routes.kItineraryPageRoute:
+      case Routes.itineraryPageRoute:
         _page = Provider<Itinerary>.value(
           value: settings.arguments as Itinerary,
           child: const ItineraryPage(),
         );
         break;
 
-      case Routes.kItineraryFormPageRoute:
+      case Routes.itineraryFormPageRoute:
         _page = BlocProvider<ItineraryFormCubit>(
           create: (_) => ItineraryFormCubit(
             itinerary: settings.arguments as Itinerary,
@@ -107,7 +107,7 @@ class DestinationRouter {
         );
         break;
 
-      case Routes.kTrackerPageRoute:
+      case Routes.trackerPageRoute:
         _page = MultiBlocProvider(
           providers: [
             BlocProvider<TrackerCubit>(
@@ -128,7 +128,7 @@ class DestinationRouter {
         );
         break;
 
-      case Routes.kWeatherPageRoute:
+      case Routes.weatherPageRoute:
         final weatherPageArgs = settings.arguments as WeatherPageArgs;
         _page = BlocProvider<WeatherCubit>(
           create: (context) => WeatherCubit(
@@ -139,7 +139,7 @@ class DestinationRouter {
         );
         break;
 
-      case Routes.kPhotoViewPageRoute:
+      case Routes.photoViewPageRoute:
         _page = PhotoViewPage(args: settings.arguments as PhotoViewPageArgs);
         break;
 

@@ -21,7 +21,7 @@ class EmptyIndicator extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconIndicator(
-          imageUrl: Images.kEmpty,
+          imageUrl: Images.empty,
           title: Text(
             message,
             textAlign: TextAlign.center,

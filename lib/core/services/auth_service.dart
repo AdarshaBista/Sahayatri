@@ -6,12 +6,12 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 
 class AuthService {
-  static const String kAuthBaseUrl = '${ApiConfig.kApiBaseUrl}/auth';
+  static const String authBaseUrl = '${ApiConfig.apiBaseUrl}/auth';
 
   Future<User> login(String email, String password) async {
     try {
       final Response res = await Dio().post(
-        '$kAuthBaseUrl/login',
+        '$authBaseUrl/login',
         options: Options(contentType: Headers.jsonContentType),
         data: {
           "email": email,
@@ -28,7 +28,7 @@ class AuthService {
   Future<User> signUp(String username, String email, String password) async {
     try {
       final Response res = await Dio().post(
-        '$kAuthBaseUrl/signup',
+        '$authBaseUrl/signup',
         options: Options(contentType: Headers.jsonContentType),
         data: {
           "email": email,
@@ -46,7 +46,7 @@ class AuthService {
   Future<void> logout(User user) async {
     try {
       await Dio().get(
-        '$kAuthBaseUrl/logout/${user.id}',
+        '$authBaseUrl/logout/${user.id}',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),

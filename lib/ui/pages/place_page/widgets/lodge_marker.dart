@@ -26,7 +26,7 @@ class LodgeMarker extends Marker {
           builder: (context) => GestureDetector(
             onTap: () {
               context.repository<DestinationNavService>().pushNamed(
-                    Routes.kLodgePageRoute,
+                    Routes.lodgePageRoute,
                     arguments: lodge,
                   );
             },

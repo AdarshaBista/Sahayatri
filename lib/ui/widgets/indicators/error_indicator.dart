@@ -21,7 +21,7 @@ class ErrorIndicator extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconIndicator(
-          imageUrl: Images.kError,
+          imageUrl: Images.error,
           title: Text(
             message,
             textAlign: TextAlign.center,

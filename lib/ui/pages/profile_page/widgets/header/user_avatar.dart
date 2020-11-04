@@ -15,7 +15,7 @@ import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/common/image_source_sheet.dart';
 
 class UserAvatar extends StatelessWidget {
-  static const double kRadius = 80.0;
+  static const double radius = 80.0;
 
   const UserAvatar();
 
@@ -29,10 +29,10 @@ class UserAvatar extends StatelessWidget {
       ).openModalBottomSheet(context),
       child: ScaleAnimator(
         child: CircleAvatar(
-          radius: kRadius + 2.0,
+          radius: radius + 2.0,
           backgroundColor: user.imageUrl == null ? AppColors.barrier : AppColors.light,
           child: CircleAvatar(
-            radius: kRadius,
+            radius: radius,
             backgroundColor: AppColors.primary,
             child: _buildImage(user),
           ),
@@ -49,7 +49,7 @@ class UserAvatar extends StatelessWidget {
             color: AppColors.darkAccent,
           )
         : ClipRRect(
-            borderRadius: BorderRadius.circular(kRadius),
+            borderRadius: BorderRadius.circular(radius),
             child: AdaptiveImage(user.imageUrl),
           );
   }

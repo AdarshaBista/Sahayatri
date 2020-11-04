@@ -17,7 +17,7 @@ class SplashView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              Images.kSplash,
+              Images.splash,
               width: 160.0,
               height: 160.0,
             ),

@@ -11,7 +11,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'place.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kPlace)
+@HiveType(typeId: HiveTypeIds.place)
 class Place {
   @HiveField(0)
   final String id;

@@ -12,7 +12,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'lodge.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kLodge)
+@HiveType(typeId: HiveTypeIds.lodge)
 class Lodge {
   @HiveField(0)
   final String id;

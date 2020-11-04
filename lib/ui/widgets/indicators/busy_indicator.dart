@@ -11,7 +11,7 @@ class BusyIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const IconIndicator(
-      imageUrl: Images.kLoading,
+      imageUrl: Images.loading,
       title: Center(
         child: SimpleBusyIndicator(),
       ),

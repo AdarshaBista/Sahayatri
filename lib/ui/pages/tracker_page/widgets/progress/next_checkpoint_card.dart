@@ -86,7 +86,7 @@ class _CardFront extends StatelessWidget {
     return GestureDetector(
       onTap: () => context
           .repository<DestinationNavService>()
-          .pushNamed(Routes.kPlacePageRoute, arguments: place),
+          .pushNamed(Routes.placePageRoute, arguments: place),
       child: Text(
         place.name.toUpperCase(),
         maxLines: 1,

@@ -43,7 +43,7 @@ class UpcomingLodgesList extends StatelessWidget {
     return GestureDetector(
       onTap: () => context
           .repository<DestinationNavService>()
-          .pushNamed(Routes.kLodgePageRoute, arguments: lodge),
+          .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: Container(
         width: 180.0,
         padding: const EdgeInsets.all(12.0),

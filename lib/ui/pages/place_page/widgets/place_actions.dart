@@ -43,7 +43,7 @@ class PlaceActions extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       iconData: CommunityMaterialIcons.weather_fog,
       onTap: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kWeatherPageRoute,
+            Routes.weatherPageRoute,
             arguments: WeatherPageArgs(
               name: place.name,
               coord: place.coord,

@@ -1,55 +1,64 @@
 class AppConfig {
-  static const String kAppName = 'Sahayatri';
-  static const String kPackageName = 'com.adrsh.sahayatri';
-  static const String kFontFamily = 'Sen';
-  static const String kFontFamilySerif = 'RobotoSlab';
-  static const String kSmsMessagePrefix = 'I have safely reached';
+  static const String appName = 'Sahayatri';
+  static const String packageName = 'com.adrsh.sahayatri';
+  static const String fontFamily = 'Sen';
+  static const String fontFamilySerif = 'RobotoSlab';
+  static const String smsMessagePrefix = 'I have safely reached';
 }
 
 class ApiConfig {
-  static const int kPageLimit = 10;
-  static const String kApiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
-  static const String kWeatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';
+  static const int pageLimit = 10;
+  static const int maxImages = 12;
+  static const int maxTextLength = 500;
+  static const String apiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
+  static const String weatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';
 }
 
 class UiConfig {
-  static const int kAnimatorDuration = 500;
-  static const double kTrackerPanelHeight = 90.0;
+  static const int animatorDuration = 500;
+  static const double trackerPanelHeight = 90.0;
+  static const double profileHeaderHeight = 290.0;
 }
 
 class Images {
-  static const String kSplash = 'assets/icons/splash.png';
-  static const String kAuthBackground = 'assets/images/backgrounds/auth.png';
-  static const String kUnauthenticated = 'assets/images/indicators/unauthenticated.png';
-  static const String kMarker = 'assets/images/markers/marker.png';
-  static const String kUserMarker = 'assets/images/markers/user.png';
-  static const String kError = 'assets/images/indicators/error.png';
-  static const String kEmpty = 'assets/images/indicators/empty.png';
-  static const String kLoading = 'assets/images/indicators/loading.png';
-  static const String kMessage = 'assets/images/indicators/message.png';
-  static const String kDownloaded = 'assets/images/indicators/downloaded.png';
-  static const String kLocationError = 'assets/images/indicators/location_error.png';
+  static const String splash = 'assets/icons/splash.png';
+  static const String authBackground = 'assets/images/backgrounds/auth.png';
+  static const String unauthenticated = 'assets/images/indicators/unauthenticated.png';
+  static const String marker = 'assets/images/markers/marker.png';
+  static const String userMarker = 'assets/images/markers/user.png';
+  static const String error = 'assets/images/indicators/error.png';
+  static const String empty = 'assets/images/indicators/empty.png';
+  static const String loading = 'assets/images/indicators/loading.png';
+  static const String message = 'assets/images/indicators/message.png';
+  static const String downloaded = 'assets/images/indicators/downloaded.png';
+  static const String locationError = 'assets/images/indicators/location_error.png';
+}
+
+class LocationConfig {
+  static const int interval = 2000;
+  static const double distanceFilter = 10.0;
+  static const double minNearbyDistance = 50.0;
 }
 
 class MapConfig {
-  static const double kMinZoom = 10.0;
-  static const double kMaxZoom = 19.0;
-  static const double kDefaultZoom = 14.0;
-  static const int kMaxRouteAccuracy = 1;
-  static const int kMinRouteAccuracy = 15;
-  static const double kRouteAccuracyZoomThreshold = 16.0;
+  static const double minZoom = 10.0;
+  static const double maxZoom = 19.0;
+  static const double defaultZoom = 14.0;
+  static const int maxRouteAccuracy = 1;
+  static const int minRouteAccuracy = 15;
+  static const double routeAccuracyZoomThreshold = 16.0;
 }
 
 class MapStyles {
-  static const String kDark = 'mapbox/dark-v10';
-  static const String kLight = 'mapbox/light-v10';
-  static const String kStreets = 'mapbox/streets-v11';
-  static const String kOutdoors = 'mapbox/outdoors-v11';
-  static const String kSatellite = 'mapbox/satellite-v9';
+  static const String dark = 'mapbox/dark-v10';
+  static const String light = 'mapbox/light-v10';
+  static const String streets = 'mapbox/streets-v11';
+  static const String outdoors = 'mapbox/outdoors-v11';
+  static const String satellite = 'mapbox/satellite-v9';
 }
 
 class NearbyMessageType {
-  static const String kSos = 'sos';
-  static const String kLocation = 'location';
-  static const String kSeparator = '::';
+  static const String sos = 'sos';
+  static const String location = 'location';
+  static const String separator = '::';
 }

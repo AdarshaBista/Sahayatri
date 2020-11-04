@@ -35,7 +35,7 @@ class AuthPage extends StatelessWidget {
           body: Stack(
             children: [
               AdaptiveImage(
-                Images.kAuthBackground,
+                Images.authBackground,
                 color: AppColors.dark.withOpacity(0.5),
               ),
               _buildForm(context, state is AuthLoading),
@@ -53,7 +53,7 @@ class AuthPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           Image.asset(
-            Images.kSplash,
+            Images.splash,
             width: 120.0,
             height: 120.0,
           ),
@@ -93,9 +93,7 @@ class AuthPage extends StatelessWidget {
           style: AppTextStyles.extraSmall.lightAccent,
         ),
         onPressed: () {
-          context
-              .repository<RootNavService>()
-              .pushReplacementNamed(Routes.kHomePageRoute);
+          context.repository<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
         },
       ),
     );

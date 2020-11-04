@@ -51,7 +51,7 @@ class CheckpointDetails extends StatelessWidget {
         const Spacer(),
         GestureDetector(
           onTap: () => context.repository<DestinationNavService>().pushNamed(
-                Routes.kPlacePageRoute,
+                Routes.placePageRoute,
                 arguments: checkpoint.place,
               ),
           onDoubleTap: () => Navigator.of(context).pop(),

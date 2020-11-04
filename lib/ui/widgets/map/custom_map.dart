@@ -42,9 +42,9 @@ class CustomMap extends StatefulWidget {
     this.nePanBoundary,
     this.onPositionChanged,
     this.children = const [],
-    this.minZoom = MapConfig.kMinZoom,
-    this.maxZoom = MapConfig.kMaxZoom,
-    this.initialZoom = MapConfig.kDefaultZoom,
+    this.minZoom = MapConfig.minZoom,
+    this.maxZoom = MapConfig.maxZoom,
+    this.initialZoom = MapConfig.defaultZoom,
   })  : assert(center != null),
         assert(minZoom != null),
         assert(maxZoom != null),
@@ -161,7 +161,7 @@ class _TileLayer extends StatelessWidget {
             tileFadeInDuration: 300,
             overrideTilesWhenUrlChanges: true,
             urlTemplate:
-                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.kMapBoxAccessToken}',
+                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.mapBoxAccessToken}',
           ),
         );
       },

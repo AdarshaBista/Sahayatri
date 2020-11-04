@@ -94,27 +94,27 @@ class _MapLayerData {
   static const List<_MapLayerData> layers = [
     _MapLayerData(
       title: 'Dark',
-      style: MapStyles.kDark,
+      style: MapStyles.dark,
       icon: CommunityMaterialIcons.weather_night,
     ),
     _MapLayerData(
       title: 'Light',
-      style: MapStyles.kLight,
+      style: MapStyles.light,
       icon: CommunityMaterialIcons.weather_sunny,
     ),
     _MapLayerData(
       title: 'Streets',
-      style: MapStyles.kStreets,
+      style: MapStyles.streets,
       icon: CommunityMaterialIcons.google_street_view,
     ),
     _MapLayerData(
       title: 'Satellite',
-      style: MapStyles.kSatellite,
+      style: MapStyles.satellite,
       icon: CommunityMaterialIcons.earth,
     ),
     _MapLayerData(
       title: 'Outdoors',
-      style: MapStyles.kOutdoors,
+      style: MapStyles.outdoors,
       icon: CommunityMaterialIcons.hiking,
     ),
   ];

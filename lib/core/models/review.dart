@@ -9,7 +9,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'review.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kReview)
+@HiveType(typeId: HiveTypeIds.review)
 class Review {
   @HiveField(0)
   final String id;

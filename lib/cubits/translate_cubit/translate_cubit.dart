@@ -20,8 +20,8 @@ class TranslateCubit extends Cubit<TranslateState> {
   final TranslateService translateService;
 
   final ScrollController controller = ScrollController();
-  Language sourceLang = Languages.kDefaultSource;
-  Language targetLang = Languages.kDefaultTarget;
+  Language sourceLang = Languages.defaultSource;
+  Language targetLang = Languages.defaultTarget;
 
   TranslateCubit({
     @required this.ttsService,
@@ -50,7 +50,7 @@ class TranslateCubit extends Cubit<TranslateState> {
       translation = Translation(
         isError: true,
         text: e.message,
-        language: Languages.kEnglish,
+        language: Languages.english,
       );
     }
     emit(TranslateState(translations: [...state.translations, translation]));

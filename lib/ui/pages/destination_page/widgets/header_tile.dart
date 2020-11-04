@@ -60,7 +60,7 @@ class HeaderTile extends StatelessWidget {
       label: 'Weather',
       icon: CommunityMaterialIcons.weather_fog,
       onTap: () => context.repository<DestinationNavService>().pushNamed(
-            Routes.kWeatherPageRoute,
+            Routes.weatherPageRoute,
             arguments: WeatherPageArgs(
               name: destination.name,
               coord: destination.route.first,

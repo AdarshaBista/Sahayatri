@@ -16,7 +16,7 @@ extension TextStyleX on TextStyle {
   TextStyle get lightAccent => copyWith(color: AppColors.lightAccent);
   TextStyle get dark => copyWith(color: AppColors.dark);
   TextStyle get darkAccent => copyWith(color: AppColors.barrier);
-  TextStyle get serif => copyWith(fontFamily: AppConfig.kFontFamilySerif);
+  TextStyle get serif => copyWith(fontFamily: AppConfig.fontFamilySerif);
   TextStyle withColor(Color color) => copyWith(color: color);
   TextStyle withSize(double size) => copyWith(fontSize: size);
 }

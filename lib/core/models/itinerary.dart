@@ -8,7 +8,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'itinerary.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kItinerary)
+@HiveType(typeId: HiveTypeIds.itinerary)
 class Itinerary {
   @HiveField(0)
   final String name;

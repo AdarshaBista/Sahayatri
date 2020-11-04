@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
@@ -76,8 +78,6 @@ class _ReviewFormState extends State<ReviewForm> {
   }
 
   Widget _buildTextField() {
-    const int kMaxLength = 500;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -88,14 +88,14 @@ class _ReviewFormState extends State<ReviewForm> {
           onChanged: (value) => setState(() => text = value),
           validator: FormValidators.requiredText(),
           inputFormatters: [
-            LengthLimitingTextInputFormatter(kMaxLength),
+            LengthLimitingTextInputFormatter(ApiConfig.maxTextLength),
           ],
         ),
         const SizedBox(height: 6.0),
         Padding(
           padding: const EdgeInsets.only(right: 4.0),
           child: Text(
-            '${text.length} / $kMaxLength',
+            '${text.length} / ${ApiConfig.maxTextLength}',
             style: AppTextStyles.extraSmall,
           ),
         ),

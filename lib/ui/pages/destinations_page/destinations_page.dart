@@ -34,13 +34,13 @@ class _DestinationsPageState extends State<DestinationsPage> {
   }
 
   void _elevateSearchBar() {
-    const double kMaxScrollPos = 100.0;
-    const double kScaleFactor = 10.0;
+    const double maxScrollPos = 100.0;
+    const double scaleFactor = 10.0;
     final double scrollPos = scrollController.position.pixels;
 
-    if (scrollPos < kMaxScrollPos && scrollPos > 0.0 && mounted) {
+    if (scrollPos < maxScrollPos && scrollPos > 0.0 && mounted) {
       setState(() {
-        searchElevation = scrollPos / kScaleFactor;
+        searchElevation = scrollPos / scaleFactor;
       });
     }
   }

@@ -121,7 +121,7 @@ class _ContactFormState extends State<ContactForm> {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Text(
-            '${AppConfig.kSmsMessagePrefix} .......',
+            '${AppConfig.smsMessagePrefix} .......',
             style: AppTextStyles.extraSmall.light,
           ),
         ),

@@ -31,11 +31,11 @@ class OffRouteAlertService {
         'You seem to be going off route. Please re-evaluate your course.';
 
     await notificationService.show(
-      NotificationChannels.kOffRouteId,
+      NotificationChannels.offRouteId,
       alertMessage,
-      channelId: NotificationChannels.kOffRouteChannelId,
-      channelName: NotificationChannels.kOffRouteChannelName,
-      channelDescription: NotificationChannels.kOffRouteChannelDesc,
+      channelId: NotificationChannels.offRouteChannelId,
+      channelName: NotificationChannels.offRouteChannelName,
+      channelDescription: NotificationChannels.offRouteChannelDesc,
     );
   }
 }

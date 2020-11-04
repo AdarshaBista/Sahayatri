@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
@@ -11,7 +13,6 @@ import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/common/image_source_sheet.dart';
 
 class ImagesField extends StatelessWidget {
-  static const int maxImages = 12;
   const ImagesField();
 
   @override
@@ -35,7 +36,7 @@ class ImagesField extends StatelessWidget {
               imageUrls: state.imageUrls,
               onDelete: context.bloc<DestinationUpdateFormCubit>().removeImageUrl,
             ),
-            if (state.imageUrls.length < maxImages)
+            if (state.imageUrls.length < ApiConfig.maxImages)
               CustomButton(
                 label: 'Add Image',
                 color: AppColors.dark,

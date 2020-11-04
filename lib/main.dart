@@ -59,7 +59,7 @@ void setStatusBarStyle() {
 Future<void> initHive() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDir = await getApplicationDocumentsDirectory();
-  final hivePath = '${appDir.path}/${AppConfig.kAppName}';
+  final hivePath = '${appDir.path}/${AppConfig.appName}';
 
   Hive
     ..init(hivePath)

@@ -25,11 +25,11 @@ class MessagesService {
     final message = _parseRawMessage(payloadStr);
 
     switch (message.type) {
-      case NearbyMessageType.kSos:
+      case NearbyMessageType.sos:
         _showSosNotification(id);
         break;
 
-      case NearbyMessageType.kLocation:
+      case NearbyMessageType.location:
         _handleIncomingLocation(id, message.body);
         break;
 
@@ -44,10 +44,10 @@ class MessagesService {
 
   /// Parses the raw message string into [NearbyMessage].
   NearbyMessage _parseRawMessage(String payloadStr) {
-    final payloadChunks = payloadStr.trim().split(NearbyMessageType.kSeparator);
+    final payloadChunks = payloadStr.trim().split(NearbyMessageType.separator);
     final messageType = payloadChunks[0];
     payloadChunks.removeAt(0);
-    final messageBody = payloadChunks.join(NearbyMessageType.kSeparator);
+    final messageBody = payloadChunks.join(NearbyMessageType.separator);
 
     return NearbyMessage(
       type: messageType,
@@ -59,7 +59,7 @@ class MessagesService {
   void broadcastLocation(UserLocation userLocation) {
     final String locationJson = jsonEncode(userLocation.toMap());
     final String payload =
-        NearbyMessageType.kLocation + NearbyMessageType.kSeparator + locationJson;
+        NearbyMessageType.location + NearbyMessageType.separator + locationJson;
 
     for (final device in devicesService.devices) {
       Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
@@ -79,7 +79,7 @@ class MessagesService {
 
   /// Send SOS signal to connected devices.
   void broadcastSos() {
-    const String payload = NearbyMessageType.kSos;
+    const String payload = NearbyMessageType.sos;
     for (final device in devicesService.devices) {
       Nearby().sendBytesPayload(
         device.id,
@@ -95,11 +95,11 @@ class MessagesService {
     final alertMessage = '${device.name} has sent a SOS signal.';
 
     notificationService.show(
-      NotificationChannels.kSosId,
+      NotificationChannels.sosId,
       alertMessage,
-      channelId: NotificationChannels.kSosChannelId,
-      channelName: NotificationChannels.kSosChannelName,
-      channelDescription: NotificationChannels.kSosChannelDesc,
+      channelId: NotificationChannels.sosChannelId,
+      channelName: NotificationChannels.sosChannelName,
+      channelDescription: NotificationChannels.sosChannelDesc,
     );
   }
 
@@ -109,11 +109,11 @@ class MessagesService {
     final alertMessage = '$deviceName has disconnected from network.';
 
     notificationService.show(
-      NotificationChannels.kDeviceDisconnectedId,
+      NotificationChannels.deviceDisconnectedId,
       alertMessage,
-      channelId: NotificationChannels.kDeviceDisconnectedChannelId,
-      channelName: NotificationChannels.kDeviceDisconnectedChannelName,
-      channelDescription: NotificationChannels.kDeviceDisconnectedChannelDesc,
+      channelId: NotificationChannels.deviceDisconnectedChannelId,
+      channelName: NotificationChannels.deviceDisconnectedChannelName,
+      channelDescription: NotificationChannels.deviceDisconnectedChannelDesc,
     );
   }
 }

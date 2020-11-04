@@ -44,7 +44,7 @@ class CreatedItineraryCard extends StatelessWidget {
         iconData: CommunityMaterialIcons.pencil_circle_outline,
         label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
         onTap: () => context.repository<DestinationNavService>().pushNamed(
-              Routes.kItineraryFormPageRoute,
+              Routes.itineraryFormPageRoute,
               arguments: context.bloc<DestinationCubit>().destination.createdItinerary,
             ),
       ),

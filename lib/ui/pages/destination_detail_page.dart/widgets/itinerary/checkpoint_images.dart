@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class CheckpointImages extends StatelessWidget {
-  static const kHeight = 22.0;
+  static const double height = 22.0;
 
   final List<String> imageUrls;
 
@@ -15,15 +15,15 @@ class CheckpointImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: kHeight,
+      height: height,
       child: Stack(
         children: imageUrls.reversed
             .map(
               (url) => Positioned(
                 left: imageUrls.indexOf(url) * 16.0,
                 child: Container(
-                  width: kHeight,
-                  height: kHeight,
+                  width: height,
+                  height: height,
                   clipBehavior: Clip.antiAlias,
                   child: AdaptiveImage(url),
                   decoration: const BoxDecoration(

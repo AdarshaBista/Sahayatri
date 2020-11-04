@@ -43,7 +43,7 @@ class RouteActions extends StatelessWidget {
       backgroundColor: AppColors.darkAccent,
       iconData: CommunityMaterialIcons.chart_line_variant,
       onTap: () =>
-          context.repository<DestinationNavService>().pushNamed(Routes.kRoutePageRoute),
+          context.repository<DestinationNavService>().pushNamed(Routes.routePageRoute),
     );
   }
 }

@@ -6,17 +6,17 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 // TODO: Replace with secure storage
 class UserDao {
-  static const int kUserKey = 0;
-  final Future<Box<User>> _userBox = Hive.openBox(HiveConfig.kUserBoxName);
+  static const int userKey = 0;
+  final Future<Box<User>> _userBox = Hive.openBox(HiveConfig.userBoxName);
 
   Future<User> get() async {
     final box = await _userBox;
-    return box.get(kUserKey);
+    return box.get(userKey);
   }
 
   Future<void> upsert(User user) async {
     final box = await _userBox;
-    box.put(kUserKey, user);
+    box.put(userKey, user);
   }
 
   Future<void> delete(User user) async {

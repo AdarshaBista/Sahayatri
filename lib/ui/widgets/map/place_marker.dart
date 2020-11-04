@@ -22,13 +22,13 @@ class PlaceMarker extends Marker {
           builder: (context) => GestureDetector(
             onTap: () {
               context.repository<DestinationNavService>().pushNamed(
-                    Routes.kPlacePageRoute,
+                    Routes.placePageRoute,
                     arguments: place,
                   );
             },
             child: ScaleAnimator(
               child: Image.asset(
-                Images.kMarker,
+                Images.marker,
                 width: 24.0,
                 height: 24.0,
                 color: color,

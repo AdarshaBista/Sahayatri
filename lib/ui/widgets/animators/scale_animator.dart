@@ -10,7 +10,7 @@ class ScaleAnimator extends StatelessWidget {
 
   const ScaleAnimator({
     @required this.child,
-    this.duration = UiConfig.kAnimatorDuration,
+    this.duration = UiConfig.animatorDuration,
   }) : assert(child != null);
 
   @override

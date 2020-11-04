@@ -30,7 +30,7 @@ class RootRouter {
     Widget _page;
 
     switch (settings.name) {
-      case Routes.kAuthPageRoute:
+      case Routes.authPageRoute:
         if (settings.arguments != null) {
           _page = AuthPage(isInitial: settings.arguments as bool);
         } else {
@@ -38,11 +38,11 @@ class RootRouter {
         }
         break;
 
-      case Routes.kHomePageRoute:
+      case Routes.homePageRoute:
         _page = const HomePage();
         break;
 
-      case Routes.kDestinationPageRoute:
+      case Routes.destinationPageRoute:
         _page = MultiBlocProvider(
           providers: [
             BlocProvider<DestinationCubit>(

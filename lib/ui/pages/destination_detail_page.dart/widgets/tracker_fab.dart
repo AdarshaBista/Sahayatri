@@ -47,7 +47,7 @@ class TrackerFab extends StatelessWidget {
         }
 
         context.repository<DestinationNavService>().pushNamed(
-              Routes.kTrackerPageRoute,
+              Routes.trackerPageRoute,
               arguments: context.bloc<DestinationCubit>().destination,
             );
       },

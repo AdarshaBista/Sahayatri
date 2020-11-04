@@ -9,7 +9,7 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 
 class WeatherService {
-  static const int kCacheDuration = 20;
+  static const int cacheDuration = 20;
 
   final ApiService apiService;
   final WeatherDao weatherDao;
@@ -42,6 +42,6 @@ class WeatherService {
 
     final createdAt = forecasts.first.createdAt;
     final now = DateTime.now();
-    return now.difference(createdAt) < const Duration(minutes: kCacheDuration);
+    return now.difference(createdAt) < const Duration(minutes: cacheDuration);
   }
 }

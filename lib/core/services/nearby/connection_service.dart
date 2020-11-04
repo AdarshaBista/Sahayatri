@@ -13,7 +13,7 @@ class ConnectionService {
   final MessagesService messagesService;
 
   /// Topology of the network.
-  final Strategy _kStrategy = Strategy.P2P_CLUSTER;
+  final Strategy _strategy = Strategy.P2P_CLUSTER;
 
   /// Username identifying this device.
   String username;
@@ -61,8 +61,8 @@ class ConnectionService {
     try {
       await Nearby().startAdvertising(
         username,
-        _kStrategy,
-        serviceId: AppConfig.kPackageName,
+        _strategy,
+        serviceId: AppConfig.packageName,
         onDisconnected: _onDisconnected,
         onConnectionResult: _onConnectionResult,
         onConnectionInitiated: _onConnectionInit,
@@ -78,8 +78,8 @@ class ConnectionService {
     try {
       await Nearby().startDiscovery(
         username,
-        _kStrategy,
-        serviceId: AppConfig.kPackageName,
+        _strategy,
+        serviceId: AppConfig.packageName,
         onEndpointLost: _onEndpointLost,
         onEndpointFound: _onEndpointFound,
       );

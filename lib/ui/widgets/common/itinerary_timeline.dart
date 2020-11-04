@@ -199,7 +199,7 @@ class ItineraryTimeline extends StatelessWidget {
       ).openModalBottomSheet(context);
     } else {
       context.repository<DestinationNavService>().pushNamed(
-            Routes.kPlacePageRoute,
+            Routes.placePageRoute,
             arguments: checkpoint.place,
           );
     }

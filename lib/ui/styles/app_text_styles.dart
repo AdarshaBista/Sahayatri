@@ -9,7 +9,7 @@ class AppTextStyles {
 
   static const TextStyle _base = TextStyle(
     color: AppColors.dark,
-    fontFamily: AppConfig.kFontFamily,
+    fontFamily: AppConfig.fontFamily,
   );
 
   static final TextStyle huge = _base.copyWith(

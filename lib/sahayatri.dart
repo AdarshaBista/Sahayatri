@@ -49,7 +49,7 @@ class Sahayatri extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppThemes.light,
-            title: AppConfig.kAppName,
+            title: AppConfig.appName,
             builder: DevicePreview.appBuilder,
             locale: DevicePreview.of(context).locale,
             onGenerateRoute: RootRouter.onGenerateRoute,

@@ -8,7 +8,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 part 'coord.g.dart';
 
-@HiveType(typeId: HiveTypeIds.kCoord)
+@HiveType(typeId: HiveTypeIds.coord)
 class Coord {
   @HiveField(0)
   final double lat;

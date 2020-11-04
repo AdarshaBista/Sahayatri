@@ -85,7 +85,7 @@ class PlaceListSheet extends StatelessWidget {
       ),
       trailing: GestureDetector(
         onTap: () => context.repository<DestinationNavService>().pushNamed(
-              Routes.kPlacePageRoute,
+              Routes.placePageRoute,
               arguments: place,
             ),
         child: Text(

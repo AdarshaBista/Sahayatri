@@ -13,6 +13,8 @@ import 'package:sahayatri/core/models/next_checkpoint.dart';
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 class TrackerService {
   /// Location updates from GPS.
   final LocationService locationService;
@@ -114,7 +116,7 @@ class TrackerService {
   /// Check if user is near the trail.
   /// Tracking is only started if this returns true.
   bool isNearTrail(Coord userCoord, List<Coord> route) {
-    return GeoUtils.isOnPath(userCoord, route, GeoUtils.kMinNearbyDistance * 2.0);
+    return GeoUtils.isOnPath(userCoord, route, LocationConfig.minNearbyDistance * 2.0);
   }
 
   /// Time since tracking started.

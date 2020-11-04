@@ -15,7 +15,7 @@ import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerar
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_actions.dart';
 
 class ItineraryCard extends StatelessWidget {
-  static const double kCardHeight = 128.0;
+  static const double cardHeight = 128.0;
 
   final bool deletable;
   final Itinerary itinerary;
@@ -36,7 +36,7 @@ class ItineraryCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context
             .repository<DestinationNavService>()
-            .pushNamed(Routes.kItineraryPageRoute, arguments: itinerary),
+            .pushNamed(Routes.itineraryPageRoute, arguments: itinerary),
         child: ElevatedCard(
           radius: 8.0,
           child: Stack(
@@ -54,7 +54,7 @@ class ItineraryCard extends StatelessWidget {
 
   Widget _buildBackground() {
     return GradientContainer(
-      height: kCardHeight,
+      height: cardHeight,
       gradientBegin: Alignment.topLeft,
       gradientEnd: Alignment.bottomRight,
       gradientColors: AppColors.cardGradient,
@@ -64,7 +64,7 @@ class ItineraryCard extends StatelessWidget {
 
   Widget _buildDetails() {
     return Container(
-      height: kCardHeight,
+      height: cardHeight,
       padding: const EdgeInsets.all(12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

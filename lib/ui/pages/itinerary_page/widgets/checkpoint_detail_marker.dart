@@ -90,7 +90,7 @@ class _PlaceInfo extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => context.repository<DestinationNavService>().pushNamed(
-              Routes.kPlacePageRoute,
+              Routes.placePageRoute,
               arguments: checkpoint.place,
             ),
         child: Column(

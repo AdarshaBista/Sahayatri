@@ -35,7 +35,7 @@ class OpenButton extends StatelessWidget {
 
             context
                 .repository<DestinationNavService>()
-                .pushNamed(Routes.kDestinationDetailPageRoute);
+                .pushNamed(Routes.destinationDetailPageRoute);
           },
         ),
       ),

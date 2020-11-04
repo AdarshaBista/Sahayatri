@@ -39,7 +39,7 @@ class ImageList extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context
             .repository<DestinationNavService>()
-            .pushNamed(Routes.kPhotoViewPageRoute,
+            .pushNamed(Routes.photoViewPageRoute,
                 arguments: PhotoViewPageArgs(
                   imageUrls: imageUrls,
                   initialPageIndex: index,

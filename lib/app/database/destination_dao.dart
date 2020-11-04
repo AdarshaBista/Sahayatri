@@ -6,7 +6,7 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 class DestinationDao {
   final Future<Box<Destination>> _destinationBox =
-      Hive.openBox(HiveConfig.kDestinationBoxName);
+      Hive.openBox(HiveConfig.destinationBoxName);
 
   Future<List<Destination>> getAll() async {
     final box = await _destinationBox;

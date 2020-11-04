@@ -15,7 +15,7 @@ class UserMarker extends Marker {
           height: 24.0,
           point: point.toLatLng(),
           builder: (_) => Image.asset(
-            Images.kUserMarker,
+            Images.userMarker,
             width: 24.0,
             height: 24.0,
           ),
