@@ -32,7 +32,7 @@ class UnauthenticatedView extends StatelessWidget {
             if (onLogin != null) onLogin();
 
             context
-                .repository<RootNavService>()
+                .read<RootNavService>()
                 .pushNamed(Routes.authPageRoute, arguments: false);
           },
         ),

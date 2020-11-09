@@ -11,21 +11,23 @@ class ItineraryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itinerary = Provider.of<Itinerary>(context, listen: false);
+    final itinerary = context.watch<Itinerary>();
 
-    return ListTile(
-      dense: true,
-      visualDensity: const VisualDensity(horizontal: -2.0, vertical: -4.0),
-      title: Text(
-        itinerary.name,
-        textAlign: TextAlign.center,
-        style: AppTextStyles.large.bold,
-      ),
-      subtitle: Text(
-        '${itinerary.days} days ${itinerary.nights} nights',
-        textAlign: TextAlign.center,
-        style: AppTextStyles.small.bold,
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          itinerary.name,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.large.bold,
+        ),
+        const SizedBox(height: 2.0),
+        Text(
+          '${itinerary.days} days ${itinerary.nights} nights',
+          textAlign: TextAlign.center,
+          style: AppTextStyles.small.bold,
+        ),
+      ],
     );
   }
 }

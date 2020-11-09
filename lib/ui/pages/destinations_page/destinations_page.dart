@@ -66,7 +66,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
 
   Widget _buildBody() {
     return RefreshIndicator(
-      onRefresh: context.bloc<DestinationsCubit>().fetchDestinations,
+      onRefresh: () => context.read<DestinationsCubit>().fetchDestinations(),
       child: ListView(
         controller: scrollController,
         physics: const BouncingScrollPhysics(
@@ -80,7 +80,7 @@ class _DestinationsPageState extends State<DestinationsPage> {
               if (state is DestinationsError) {
                 return ErrorIndicator(
                   message: state.message,
-                  onRetry: context.bloc<DestinationsCubit>().fetchDestinations,
+                  onRetry: () => context.read<DestinationsCubit>().fetchDestinations(),
                 );
               } else if (state is DestinationsLoading) {
                 return const BusyIndicator();

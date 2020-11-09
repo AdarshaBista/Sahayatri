@@ -178,7 +178,8 @@ class _RouteLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route = context.bloc<DestinationCubit>().destination.route;
+    final route =
+        context.select<DestinationCubit, List<Coord>>((dc) => dc.destination.route);
 
     return ScaleAnimator(
       child: PolylineLayerWidget(

@@ -37,9 +37,8 @@ class ImageList extends StatelessWidget {
     return SizedBox(
       width: 200.0,
       child: GestureDetector(
-        onTap: () => context
-            .repository<DestinationNavService>()
-            .pushNamed(Routes.photoViewPageRoute,
+        onTap: () =>
+            context.read<DestinationNavService>().pushNamed(Routes.photoViewPageRoute,
                 arguments: PhotoViewPageArgs(
                   imageUrls: imageUrls,
                   initialPageIndex: index,

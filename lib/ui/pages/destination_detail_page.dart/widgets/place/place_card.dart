@@ -23,7 +23,7 @@ class PlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.repository<DestinationNavService>().pushNamed(
+        context.read<DestinationNavService>().pushNamed(
               Routes.placePageRoute,
               arguments: place,
             );

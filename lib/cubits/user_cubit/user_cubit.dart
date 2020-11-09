@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -46,6 +48,8 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<bool> updateAvatar(ImageSource source) async {
+    if (Platform.isWindows) return false;
+
     final pickedImage = await ImagePicker().getImage(source: source);
     if (pickedImage == null) return false;
 

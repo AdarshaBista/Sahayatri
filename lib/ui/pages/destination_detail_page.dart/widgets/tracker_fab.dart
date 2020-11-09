@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
-
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -29,7 +29,9 @@ class TrackerFab extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
+
     return FloatingActionButton(
       mini: true,
       backgroundColor: AppColors.dark,
@@ -46,9 +48,9 @@ class TrackerFab extends StatelessWidget {
           return;
         }
 
-        context.repository<DestinationNavService>().pushNamed(
+        context.read<DestinationNavService>().pushNamed(
               Routes.trackerPageRoute,
-              arguments: context.bloc<DestinationCubit>().destination,
+              arguments: context.read<DestinationCubit>().destination,
             );
       },
     );

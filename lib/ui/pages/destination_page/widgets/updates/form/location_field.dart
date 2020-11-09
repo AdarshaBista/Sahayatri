@@ -36,7 +36,7 @@ class LocationField extends StatelessWidget {
               backgroundColor: AppColors.lightAccent,
               iconData: CommunityMaterialIcons.map_marker_plus_outline,
               onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
-                value: context.bloc<DestinationUpdateFormCubit>(),
+                value: context.read<DestinationUpdateFormCubit>(),
                 child: const SelectLocationDialog(),
               ).openDialog(context),
             ),

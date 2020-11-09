@@ -43,7 +43,7 @@ class ItineraryActions extends StatelessWidget {
         _buildIcon(
           color: AppColors.primaryDark,
           icon: Icons.edit,
-          onTap: () => context.repository<DestinationNavService>().pushNamed(
+          onTap: () => context.read<DestinationNavService>().pushNamed(
                 Routes.itineraryFormPageRoute,
                 arguments: itinerary,
               ),
@@ -53,7 +53,7 @@ class ItineraryActions extends StatelessWidget {
             color: AppColors.secondary,
             icon: Icons.close,
             onTap: () {
-              if (context.repository<TrackerService>().isTracking) {
+              if (context.read<TrackerService>().isTracking) {
                 const MessageDialog(
                   message: 'Cannot delete when tracker is running.',
                 ).openDialog(context);
@@ -61,7 +61,7 @@ class ItineraryActions extends StatelessWidget {
               }
               ConfirmDialog(
                 message: 'Do you want to delete this itinerary?',
-                onConfirm: context.bloc<DestinationCubit>().deleteItinerary,
+                onConfirm: () => context.read<DestinationCubit>().deleteItinerary(),
               ).openDialog(context);
             },
           ),

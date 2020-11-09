@@ -32,7 +32,8 @@ class ReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.bloc<UserCubit>().isAuthenticated) _buildWriteReviewButton(context),
+          if (context.watch<UserCubit>().isAuthenticated)
+            _buildWriteReviewButton(context),
           const SizedBox(height: 8.0),
           _buildReviews(context),
         ],
@@ -47,7 +48,7 @@ class ReviewList extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       iconData: CommunityMaterialIcons.pencil_outline,
       onTap: () => ReviewForm(
-        onSubmit: (rating, text) async => _postReview(context, rating, text),
+        onSubmit: (rating, text) => _postReview(context, rating, text),
       ).openModalBottomSheet(context),
     );
   }
@@ -58,14 +59,14 @@ class ReviewList extends StatelessWidget {
         if (state is ReviewError) {
           return ErrorIndicator(
             message: state.message,
-            onRetry: context.bloc<ReviewCubit>().fetchReviews,
+            onRetry: () => context.read<ReviewCubit>().fetchReviews(),
           );
         } else if (state is ReviewLoaded) {
           return _buildList(context, state);
         } else if (state is ReviewEmpty) {
           return EmptyIndicator(
             message: 'No reviews yet.',
-            onRetry: context.bloc<ReviewCubit>().fetchReviews,
+            onRetry: () => context.read<ReviewCubit>().fetchReviews(),
           );
         } else {
           return const BusyIndicator();
@@ -109,9 +110,7 @@ class ReviewList extends StatelessWidget {
 
   Future<void> _postReview(BuildContext context, double rating, String text) async {
     Navigator.of(context).pop();
-    context.openFlushBar('Posting review...');
-    final bool success = await reviewCubit.postReview(rating, text);
-
+    final success = await reviewCubit.postReview(rating, text);
     if (success) {
       context.openFlushBar('Review posted', type: FlushbarType.success);
     } else {

@@ -11,7 +11,10 @@ class DistanceCoveredBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
+    final distanceCovered =
+        context.select<TrackerUpdate, double>((u) => u.distanceCovered);
+    final distanceRemaining =
+        context.select<TrackerUpdate, double>((u) => u.distanceRemaining);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -31,17 +34,17 @@ class DistanceCoveredBar extends StatelessWidget {
               ),
             ),
             child: Slider(
-              max: trackerUpdate.distanceRemaining + trackerUpdate.distanceCovered,
-              value: trackerUpdate.distanceCovered,
+              max: distanceRemaining + distanceCovered,
+              value: distanceCovered,
               onChanged: (_) {},
             ),
           ),
           const SizedBox(height: 10.0),
           Row(
             children: [
-              _buildStat(trackerUpdate.distanceCovered, 'covered', true),
+              _buildStat(distanceCovered, 'covered', true),
               const Spacer(),
-              _buildStat(trackerUpdate.distanceRemaining, 'remaining', false),
+              _buildStat(distanceRemaining, 'remaining', false),
             ],
           ),
         ],

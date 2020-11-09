@@ -95,7 +95,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   PreferredSizeWidget _buildAppBar() {
-    final name = context.bloc<DestinationCubit>().destination.name;
+    final name = context.select<DestinationCubit, String>((dc) => dc.destination.name);
+
     return CurvedAppbar(
       elevation: 4.0,
       title: name,

@@ -27,14 +27,14 @@ class PlacesGrid extends StatelessWidget {
             if (state is PlacesError) {
               return ErrorIndicator(
                 message: state.message,
-                onRetry: context.bloc<PlacesCubit>().fetchPlaces,
+                onRetry: () => context.read<PlacesCubit>().fetchPlaces(),
               );
             } else if (state is PlacesLoaded) {
               return _buildGrid(state.places);
             } else if (state is PlacesEmpty) {
               return EmptyIndicator(
                 message: 'No places found.',
-                onRetry: context.bloc<PlacesCubit>().fetchPlaces,
+                onRetry: () => context.read<PlacesCubit>().fetchPlaces(),
               );
             } else {
               return const BusyIndicator();

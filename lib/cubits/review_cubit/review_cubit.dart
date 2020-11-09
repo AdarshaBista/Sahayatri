@@ -27,7 +27,7 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   Future<void> fetchReviews();
   Future<bool> postReview(double rating, String text);
 
-  ReviewDetails updatereviewDetails(ReviewDetails old, double rating, Review review) {
+  ReviewDetails updateReviewDetails(ReviewDetails old, double rating, Review review) {
     if (old.isNotEmpty) {
       return old.copyWith(
         total: old.total + 1,

@@ -22,13 +22,14 @@ class SelectLocationDialog extends StatelessWidget {
         builder: (context, state) {
           final center = state.coords.isNotEmpty
               ? state.coords.first
-              : context.bloc<DestinationCubit>().destination.midPointCoord;
+              : context.watch<DestinationCubit>().destination.midPointCoord;
 
           return CustomMap(
             center: center,
             initialZoom: 17.0,
             children: [if (state.coords.isNotEmpty) const _MarkersLayer()],
-            onTap: context.bloc<DestinationUpdateFormCubit>().updateCoords,
+            onTap: (coord) =>
+                context.read<DestinationUpdateFormCubit>().updateCoords(coord),
           );
         },
       ),
@@ -61,7 +62,7 @@ class _MarkersLayer extends StatelessWidget {
       point: c.toLatLng(),
       builder: (context) {
         return GestureDetector(
-          onTap: () => context.bloc<DestinationUpdateFormCubit>().updateCoords(c),
+          onTap: () => context.read<DestinationUpdateFormCubit>().updateCoords(c),
           child: const Icon(
             CommunityMaterialIcons.circle_double,
             size: size,

@@ -28,13 +28,13 @@ class OpenButton extends StatelessWidget {
           backgroundColor: AppColors.primaryLight,
           iconData: Icons.keyboard_arrow_right,
           onTap: () {
-            if (!context.bloc<UserCubit>().isAuthenticated) {
+            if (!context.read<UserCubit>().isAuthenticated) {
               const UnauthenticatedDialog().openDialog(context);
               return;
             }
 
             context
-                .repository<DestinationNavService>()
+                .read<DestinationNavService>()
                 .pushNamed(Routes.destinationDetailPageRoute);
           },
         ),

@@ -70,7 +70,7 @@ class LodgeReviewCubit extends ReviewCubit {
         dateUpdated: DateTime.now(),
       );
 
-      final updatedList = updatereviewDetails(lodge.reviewDetails, rating, review);
+      final updatedList = updateReviewDetails(lodge.reviewDetails, rating, review);
       final oldAverage =
           state is ReviewLoaded ? (state as ReviewLoaded).average : lodge.rating;
       final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);

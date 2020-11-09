@@ -93,15 +93,7 @@ class Place {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-
-    return o is Place &&
-        o.id == id &&
-        o.name == name &&
-        o.coord == coord &&
-        o.description == description &&
-        o.isNetworkAvailable == isNetworkAvailable &&
-        listEquals(o.imageUrls, imageUrls) &&
-        listEquals(o.lodges, lodges);
+    return o is Place && o.id == id;
   }
 
   @override

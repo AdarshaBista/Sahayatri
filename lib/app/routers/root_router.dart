@@ -48,34 +48,34 @@ class RootRouter {
             BlocProvider<DestinationCubit>(
               create: (context) => DestinationCubit(
                 destination: settings.arguments as Destination,
-                itineraryDao: context.repository<ItineraryDao>(),
-                destinationDao: context.repository<DestinationDao>(),
+                itineraryDao: context.read<ItineraryDao>(),
+                destinationDao: context.read<DestinationDao>(),
               ),
             ),
             BlocProvider<ReviewCubit>(
               create: (context) => DestinationReviewCubit(
-                user: context.bloc<UserCubit>().user,
-                apiService: context.repository<ApiService>(),
+                user: context.read<UserCubit>().user,
+                apiService: context.read<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchReviews(),
             ),
             BlocProvider<DestinationUpdateCubit>(
               create: (context) => DestinationUpdateCubit(
-                user: context.bloc<UserCubit>().user,
-                apiService: context.repository<ApiService>(),
+                user: context.read<UserCubit>().user,
+                apiService: context.read<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchUpdates(),
             ),
             BlocProvider<PlacesCubit>(
               create: (context) => PlacesCubit(
-                user: context.bloc<UserCubit>().user,
-                apiService: context.repository<ApiService>(),
-                destination: context.bloc<DestinationCubit>().destination,
+                user: context.read<UserCubit>().user,
+                apiService: context.read<ApiService>(),
+                destination: context.read<DestinationCubit>().destination,
               )..fetchPlaces(),
             ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(
-                directionsService: context.repository<DirectionsService>(),
+                directionsService: context.read<DirectionsService>(),
               ),
             ),
           ],

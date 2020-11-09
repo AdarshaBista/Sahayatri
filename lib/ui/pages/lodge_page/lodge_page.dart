@@ -51,7 +51,7 @@ class LodgePage extends StatelessWidget {
   }
 
   Widget _buildTabView(BuildContext context) {
-    final lodge = context.watch<Lodge>();
+    final imageUrls = context.select<Lodge, List<String>>((l) => l.imageUrls);
 
     return NestedTabView(
       tabs: [
@@ -59,8 +59,8 @@ class LodgePage extends StatelessWidget {
         NestedTabData(label: 'Reviews', icon: Icons.star_outline),
       ],
       children: [
-        PhotoGallery(imageUrls: lodge.imageUrls),
-        ReviewList(reviewCubit: context.bloc<ReviewCubit>() as LodgeReviewCubit),
+        PhotoGallery(imageUrls: imageUrls),
+        ReviewList(reviewCubit: context.watch<ReviewCubit>() as LodgeReviewCubit),
       ],
     );
   }

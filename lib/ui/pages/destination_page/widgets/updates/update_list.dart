@@ -27,7 +27,7 @@ class UpdateList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.bloc<UserCubit>().isAuthenticated) _buildPostUpdateButton(context),
+          if (context.watch<UserCubit>().isAuthenticated) _buildPostUpdateButton(context),
           const SizedBox(height: 12.0),
           _buildUpdates(context),
         ],
@@ -51,14 +51,14 @@ class UpdateList extends StatelessWidget {
         if (state is DestinationUpdateError) {
           return ErrorIndicator(
             message: state.message,
-            onRetry: context.bloc<DestinationUpdateCubit>().fetchUpdates,
+            onRetry: () => context.read<DestinationUpdateCubit>().fetchUpdates(),
           );
         } else if (state is DestinationUpdateLoaded) {
           return _buildList(context, state.updates);
         } else if (state is DestinationUpdateEmpty) {
           return EmptyIndicator(
             message: 'No updates yet.',
-            onRetry: context.bloc<DestinationUpdateCubit>().fetchUpdates,
+            onRetry: () => context.read<DestinationUpdateCubit>().fetchUpdates(),
           );
         } else {
           return const BusyIndicator();
@@ -81,8 +81,8 @@ class UpdateList extends StatelessWidget {
           },
         ),
         ViewMoreButton(
-          hasMore: context.bloc<DestinationUpdateCubit>().hasMore,
-          onLoadMore: context.bloc<DestinationUpdateCubit>().loadMore,
+          hasMore: context.watch<DestinationUpdateCubit>().hasMore,
+          onLoadMore: () => context.read<DestinationUpdateCubit>().loadMore(),
         ),
       ],
     );

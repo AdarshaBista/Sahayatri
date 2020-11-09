@@ -71,7 +71,7 @@ class CheckpointForm extends StatelessWidget {
         initialPlace: place,
         onSelect: (selectedPlace) {
           field.didChange(selectedPlace);
-          context.bloc<CheckpointFormCubit>().changePlace(selectedPlace);
+          context.read<CheckpointFormCubit>().changePlace(selectedPlace);
         },
       ),
     );
@@ -85,7 +85,7 @@ class CheckpointForm extends StatelessWidget {
         initialDateTime: dateTime,
         onSelect: (selectedDateTime) {
           field.didChange(selectedDateTime);
-          context.bloc<CheckpointFormCubit>().changeDateTime(selectedDateTime);
+          context.read<CheckpointFormCubit>().changeDateTime(selectedDateTime);
         },
       ),
     );
@@ -98,7 +98,7 @@ class CheckpointForm extends StatelessWidget {
       validator: (_) => null,
       icon: Icons.description_outlined,
       initialValue: description,
-      onChanged: (desc) => context.bloc<CheckpointFormCubit>().changeDescription(desc),
+      onChanged: (desc) => context.read<CheckpointFormCubit>().changeDescription(desc),
     );
   }
 
@@ -109,7 +109,7 @@ class CheckpointForm extends StatelessWidget {
         value: shouldSendSms,
         activeColor: AppColors.primary,
         onChanged: (value) =>
-            context.bloc<CheckpointFormCubit>().toggleNotifyContact(value),
+            context.read<CheckpointFormCubit>().toggleNotifyContact(value),
       ),
       title: Text(
         'Notify Contact',

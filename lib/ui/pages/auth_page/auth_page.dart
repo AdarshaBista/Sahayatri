@@ -93,7 +93,7 @@ class AuthPage extends StatelessWidget {
           style: AppTextStyles.extraSmall.lightAccent,
         ),
         onPressed: () {
-          context.repository<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
+          context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
         },
       ),
     );

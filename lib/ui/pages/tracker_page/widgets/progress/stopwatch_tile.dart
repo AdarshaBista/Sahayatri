@@ -34,7 +34,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
 
   @override
   Widget build(BuildContext context) {
-    final elapsed = context.bloc<TrackerCubit>().elapsed;
+    final elapsed = context.select<TrackerCubit, Duration>((u) => u.elapsed);
 
     return Row(
       children: [

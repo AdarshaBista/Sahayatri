@@ -55,7 +55,7 @@ class ItineraryFormPage extends StatelessWidget {
   void _saveItinerary(BuildContext context, ItineraryFormState state) {
     if (!_formKey.currentState.validate()) return;
 
-    context.bloc<DestinationCubit>().createItinerary(state.itinerary);
+    context.read<DestinationCubit>().createItinerary(state.itinerary);
     Navigator.of(context).pop();
   }
 }

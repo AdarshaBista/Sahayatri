@@ -57,8 +57,13 @@ class UserAvatar extends StatelessWidget {
   Future<void> _updateAvatar(BuildContext context, ImageSource source) async {
     Navigator.of(context).pop();
 
-    context.openFlushBar('Updating avatar...');
-    final success = await context.bloc<UserCubit>().updateAvatar(source);
+    bool success;
+    await context.openLoadingFlushBar(
+      'Updating avatar...',
+      callback: () async {
+        success = await context.read<UserCubit>().updateAvatar(source);
+      },
+    );
     if (success) {
       context.openFlushBar('Avatar updated.', type: FlushbarType.success);
     } else {

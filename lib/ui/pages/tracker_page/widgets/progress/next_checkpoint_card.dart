@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:sahayatri/core/models/next_checkpoint.dart';
 
 import 'package:sahayatri/core/utils/image_utils.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -23,7 +24,8 @@ class NextCheckpointCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
+    final nextCheckpoint =
+        context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
     if (nextCheckpoint == null) return const Offstage();
 
     final place = nextCheckpoint.checkpoint.place;
@@ -58,7 +60,8 @@ class _CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
+    final nextCheckpoint =
+        context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
     final place = nextCheckpoint.checkpoint.place;
     final lodges = place.lodges;
 
@@ -85,7 +88,7 @@ class _CardFront extends StatelessWidget {
   Widget _buildTitle(BuildContext context, Place place) {
     return GestureDetector(
       onTap: () => context
-          .repository<DestinationNavService>()
+          .read<DestinationNavService>()
           .pushNamed(Routes.placePageRoute, arguments: place),
       child: Text(
         place.name.toUpperCase(),
@@ -97,7 +100,8 @@ class _CardFront extends StatelessWidget {
   }
 
   Widget _buildStatus(BuildContext context) {
-    final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
+    final nextCheckpoint =
+        context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
 
     return Row(
       children: [
@@ -122,7 +126,8 @@ class _CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final checkpoint = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint;
+    final checkpoint =
+        context.select<TrackerUpdate, Checkpoint>((u) => u.nextCheckpoint.checkpoint);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),

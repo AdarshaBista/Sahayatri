@@ -53,7 +53,7 @@ class Sahayatri extends StatelessWidget {
             builder: DevicePreview.appBuilder,
             locale: DevicePreview.of(context).locale,
             onGenerateRoute: RootRouter.onGenerateRoute,
-            navigatorKey: context.repository<RootNavService>().navigatorKey,
+            navigatorKey: context.watch<RootNavService>().navigatorKey,
             home: BlocBuilder<PrefsCubit, PrefsState>(
               builder: (context, state) {
                 if (state is PrefsLoading) {
@@ -61,7 +61,7 @@ class Sahayatri extends StatelessWidget {
                 }
 
                 return FutureBuilder(
-                  future: context.bloc<UserCubit>().isLoggedIn(),
+                  future: context.watch<UserCubit>().isLoggedIn(),
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.hasData) {
                       final bool isLoggedIn = snapshot.data;
@@ -82,40 +82,40 @@ class Sahayatri extends StatelessWidget {
   List<RepositoryProvider> _getServiceProviders(BuildContext context) => [
         RepositoryProvider<WeatherService>(
           create: (context) => WeatherService(
-            apiService: context.repository<ApiService>(),
-            weatherDao: context.repository<WeatherDao>(),
+            apiService: context.read<ApiService>(),
+            weatherDao: context.read<WeatherDao>(),
           ),
         ),
         RepositoryProvider<DirectionsService>(
           create: (context) => DirectionsService(
-            locationService: context.repository<LocationService>(),
+            locationService: context.read<LocationService>(),
           ),
         ),
         RepositoryProvider<OffRouteAlertService>(
           create: (context) => OffRouteAlertService(
-            notificationService: context.repository<NotificationService>(),
+            notificationService: context.read<NotificationService>(),
           ),
         ),
         RepositoryProvider<SmsService>(
           create: (context) => SmsService(
-            prefsDao: context.repository<PrefsDao>(),
-            notificationService: context.repository<NotificationService>(),
+            prefsDao: context.read<PrefsDao>(),
+            notificationService: context.read<NotificationService>(),
           ),
         ),
         RepositoryProvider<NearbyService>(
           create: (context) => NearbyService(
-            notificationService: context.repository<NotificationService>(),
+            notificationService: context.read<NotificationService>(),
           ),
         ),
         RepositoryProvider<TrackerService>(
           create: (context) => TrackerService(
-            locationService: context.repository<LocationService>(),
+            locationService: context.read<LocationService>(),
           ),
         ),
         RepositoryProvider<DestinationsService>(
           create: (context) => DestinationsService(
-            apiService: context.repository<ApiService>(),
-            destinationDao: context.repository<DestinationDao>(),
+            apiService: context.read<ApiService>(),
+            destinationDao: context.read<DestinationDao>(),
           ),
         ),
       ];
@@ -124,25 +124,25 @@ class Sahayatri extends StatelessWidget {
     return [
       BlocProvider<PrefsCubit>(
         create: (context) => PrefsCubit(
-          prefsDao: context.repository<PrefsDao>(),
+          prefsDao: context.read<PrefsDao>(),
         )..initPrefs(),
       ),
       BlocProvider<UserCubit>(
         create: (context) => UserCubit(
-          userDao: context.repository<UserDao>(),
-          apiService: context.repository<ApiService>(),
-          authService: context.repository<AuthService>(),
+          userDao: context.read<UserDao>(),
+          apiService: context.read<ApiService>(),
+          authService: context.read<AuthService>(),
         ),
       ),
       BlocProvider<NearbyCubit>(
         create: (context) => NearbyCubit(
-          nearbyService: context.repository<NearbyService>(),
+          nearbyService: context.read<NearbyService>(),
         ),
       ),
       BlocProvider<TranslateCubit>(
         create: (context) => TranslateCubit(
-          ttsService: context.repository<TtsService>(),
-          translateService: context.repository<TranslateService>(),
+          ttsService: context.read<TtsService>(),
+          translateService: context.read<TranslateService>(),
         ),
       ),
     ];

@@ -30,8 +30,8 @@ class TrackerSetup extends StatelessWidget {
         style: AppTextStyles.small.primary.bold,
       ),
       onPressed: () => context
-          .bloc<TrackerCubit>()
-          .startTracking(context.bloc<DestinationCubit>().destination),
+          .read<TrackerCubit>()
+          .startTracking(context.read<DestinationCubit>().destination),
     );
   }
 }

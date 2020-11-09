@@ -30,7 +30,8 @@ class DestinationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     return Scaffold(
       appBar: CurvedAppbar(
@@ -39,13 +40,13 @@ class DestinationPage extends StatelessWidget {
           IconButton(
             splashRadius: 20.0,
             icon: const Icon(Icons.close),
-            onPressed: () => context.repository<RootNavService>().pop(),
+            onPressed: () => context.read<RootNavService>().pop(),
           ),
         ],
       ),
-      body: context.bloc<UserCubit>().isAuthenticated
+      body: context.watch<UserCubit>().isAuthenticated
           ? FutureBuilder(
-              future: context.bloc<DestinationCubit>().open(),
+              future: context.watch<DestinationCubit>().open(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) return _buildList(context);
                 return const BusyIndicator();
@@ -56,7 +57,8 @@ class DestinationPage extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     return ListView(
       shrinkWrap: true,
@@ -106,7 +108,7 @@ class DestinationPage extends StatelessWidget {
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),
-        ReviewList(reviewCubit: context.bloc<ReviewCubit>() as DestinationReviewCubit),
+        ReviewList(reviewCubit: context.watch<ReviewCubit>() as DestinationReviewCubit),
         const UpdateList(),
       ],
     );

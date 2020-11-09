@@ -43,9 +43,9 @@ class CreatedItineraryCard extends StatelessWidget {
         backgroundColor: AppColors.primaryLight,
         iconData: CommunityMaterialIcons.pencil_circle_outline,
         label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
-        onTap: () => context.repository<DestinationNavService>().pushNamed(
+        onTap: () => context.read<DestinationNavService>().pushNamed(
               Routes.itineraryFormPageRoute,
-              arguments: context.bloc<DestinationCubit>().destination.createdItinerary,
+              arguments: context.read<DestinationCubit>().destination.createdItinerary,
             ),
       ),
     );

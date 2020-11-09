@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -37,7 +38,8 @@ class DestinationDrawer extends StatelessWidget {
   }
 
   Widget _buildMenuItems(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     return ListView(
       shrinkWrap: true,
@@ -47,14 +49,13 @@ class DestinationDrawer extends StatelessWidget {
         DrawerItem(
           icon: CommunityMaterialIcons.chart_line_variant,
           label: 'Route',
-          onTap: () => context
-              .repository<DestinationNavService>()
-              .pushNamed(Routes.routePageRoute),
+          onTap: () =>
+              context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
         ),
         DrawerItem(
           icon: CommunityMaterialIcons.weather_fog,
           label: 'Weather',
-          onTap: () => context.repository<DestinationNavService>().pushNamed(
+          onTap: () => context.read<DestinationNavService>().pushNamed(
                 Routes.weatherPageRoute,
                 arguments: WeatherPageArgs(
                   name: destination.name,

@@ -51,7 +51,7 @@ class ItinerariesList extends StatelessWidget {
             if (state is ItineraryError) {
               return ErrorIndicator(
                 message: state.message,
-                onRetry: context.bloc<ItineraryCubit>().fetchItineraries,
+                onRetry: () => context.read<ItineraryCubit>().fetchItineraries(),
               );
             } else if (state is ItineraryLoaded) {
               return ListView.builder(
@@ -66,7 +66,7 @@ class ItinerariesList extends StatelessWidget {
             } else if (state is ItineraryEmpty) {
               return EmptyIndicator(
                 message: 'No itineraries found.',
-                onRetry: context.bloc<ItineraryCubit>().fetchItineraries,
+                onRetry: () => context.read<ItineraryCubit>().fetchItineraries(),
               );
             } else {
               return const BusyIndicator();

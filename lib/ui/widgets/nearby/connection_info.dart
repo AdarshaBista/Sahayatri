@@ -14,17 +14,18 @@ class ConnectionInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<NearbyConnected>();
+    final username = context.select<NearbyCubit, String>((c) => c.username);
+    final isScanning = context.select<NearbyConnected, bool>((state) => state.isScanning);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Your Name : ${context.bloc<NearbyCubit>().username}',
+          'Your Name : $username',
           style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 10.0),
-        if (state.isScanning) _buildScanIndicator(),
+        if (isScanning) _buildScanIndicator(),
         const SizedBox(height: 10.0),
         const NearbyActions(),
         const SizedBox(height: 20.0),

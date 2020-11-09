@@ -23,7 +23,7 @@ class SearchCard extends StatelessWidget implements PreferredSizeWidget {
           elevation: elevation,
           hintText: 'Where do you want to go?',
           onChanged: (query) => Debouncer().run(
-            () => context.bloc<DestinationsCubit>().search(query),
+            () => context.read<DestinationsCubit>().search(query),
           ),
         ),
       ],

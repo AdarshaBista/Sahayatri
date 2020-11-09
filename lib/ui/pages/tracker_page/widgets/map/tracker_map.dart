@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
@@ -71,8 +73,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
-    final center = trackerUpdate.currentLocation.coord;
+    final center = context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
 
     if (isTracking) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -82,13 +83,13 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
     return Stack(
       children: [
-        _buildMap(center, trackerUpdate.userIndex),
+        _buildMap(center),
         _buildTrackLocationButton(),
       ],
     );
   }
 
-  Widget _buildMap(Coord center, int userIndex) {
+  Widget _buildMap(Coord center) {
     return Listener(
       onPointerUp: (_) => onPointerUp(),
       child: CustomMap(
@@ -133,8 +134,9 @@ class _RouteLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
-    final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
+    final center = context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
+    final userPath = context.select<TrackerUpdate, List<Coord>>(
+        (u) => u.userTrack.map((t) => t.coord).toList());
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(
@@ -144,7 +146,7 @@ class _RouteLayer extends StatelessWidget {
             gradientColors: AppColors.userTrackGradient,
             points: [
               ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
-              trackerUpdate.currentLocation.coord.toLatLng(),
+              center.toLatLng(),
             ],
           ),
         ],
@@ -158,7 +160,8 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
     final places = destination.places;
     final checkpoints = destination.createdItinerary.checkpoints;
     final checkpointPlaces = checkpoints.map((c) => c.place).toList();
@@ -184,7 +187,8 @@ class _UserMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userCoord = context.watch<TrackerUpdate>().currentLocation.coord;
+    final userCoord =
+        context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
 
     return RepaintBoundary(
       child: MarkerLayerWidget(
@@ -201,15 +205,16 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
+    final currentLocation =
+        context.select<TrackerUpdate, UserLocation>((u) => u.currentLocation);
 
     return CircleLayerWidget(
       options: CircleLayerOptions(
         circles: [
           AccuracyCircle(
             color: AppColors.primaryDark,
-            point: trackerUpdate.currentLocation.coord,
-            radius: trackerUpdate.currentLocation.accuracy,
+            point: currentLocation.coord,
+            radius: currentLocation.accuracy,
           ),
         ],
       ),
@@ -223,7 +228,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: context.bloc<NearbyCubit>(),
+      cubit: context.watch<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
           return RepaintBoundary(
@@ -249,7 +254,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: context.bloc<NearbyCubit>(),
+      cubit: context.watch<NearbyCubit>(),
       builder: (context, state) {
         if (state is NearbyConnected) {
           return RepaintBoundary(

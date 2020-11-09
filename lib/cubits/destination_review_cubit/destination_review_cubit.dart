@@ -66,7 +66,6 @@ class DestinationReviewCubit extends ReviewCubit {
   @override
   Future<bool> postReview(double rating, String text) async {
     if (user == null) return false;
-
     try {
       final id =
           await apiService.postDestinationReview(rating, text, destination.id, user);
@@ -78,7 +77,7 @@ class DestinationReviewCubit extends ReviewCubit {
         dateUpdated: DateTime.now(),
       );
 
-      final updatedList = updatereviewDetails(destination.reviewDetails, rating, review);
+      final updatedList = updateReviewDetails(destination.reviewDetails, rating, review);
       final oldAverage =
           state is ReviewLoaded ? (state as ReviewLoaded).average : destination.rating;
       final updatedAverage = updateAverage(oldAverage, rating, updatedList.total);

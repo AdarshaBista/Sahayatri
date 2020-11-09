@@ -50,7 +50,7 @@ class CheckpointDetails extends StatelessWidget {
         Text(checkpoint.place.name, style: AppTextStyles.medium.bold),
         const Spacer(),
         GestureDetector(
-          onTap: () => context.repository<DestinationNavService>().pushNamed(
+          onTap: () => context.read<DestinationNavService>().pushNamed(
                 Routes.placePageRoute,
                 arguments: checkpoint.place,
               ),

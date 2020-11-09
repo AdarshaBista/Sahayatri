@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/app_error.dart';
@@ -34,6 +36,8 @@ class NearbyService {
 
   /// Start nearby service.
   Future<void> start(String name) async {
+    if (Platform.isWindows) throw const AppError(message: 'Platform not supported!');
+
     connectionService.username = name;
     try {
       await connectionService.checkLocationPermissions();

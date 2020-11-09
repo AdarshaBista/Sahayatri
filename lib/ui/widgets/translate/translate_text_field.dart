@@ -83,7 +83,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
       color: AppColors.primaryDark,
       child: IconButton(
         visualDensity: VisualDensity.compact,
-        splashRadius: 24.0,
+        splashRadius: 20.0,
         icon: const Icon(
           Icons.send,
           size: 22.0,
@@ -93,7 +93,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
           final source = sourceController.text.trim();
           if (source.isEmpty) return;
           setState(() => sourceController.clear());
-          context.bloc<TranslateCubit>().translate(source);
+          context.read<TranslateCubit>().translate(source);
         },
       ),
     );

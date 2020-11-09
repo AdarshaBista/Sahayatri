@@ -10,7 +10,8 @@ class PermitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final permit = context.bloc<DestinationCubit>().destination.permit;
+    final permit =
+        context.select<DestinationCubit, String>((dc) => dc.destination.permit);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),

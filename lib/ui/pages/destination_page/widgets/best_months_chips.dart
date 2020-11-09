@@ -11,7 +11,8 @@ class BestMonthsChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bestMonths = context.bloc<DestinationCubit>().destination.bestMonths;
+    final bestMonths =
+        context.select<DestinationCubit, List<String>>((dc) => dc.destination.bestMonths);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),

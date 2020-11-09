@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/destination.dart';
+
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +30,8 @@ class _RoutePageState extends State<RoutePage> {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     return Scaffold(
       floatingActionButton: Builder(
@@ -56,7 +60,8 @@ class _RoutePageState extends State<RoutePage> {
   }
 
   Future<void> _openAltitudeSheet(BuildContext context) async {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     setState(() {
       isSheetOpen = !isSheetOpen;
@@ -92,7 +97,8 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final route =
+        context.select<DestinationCubit, List<Coord>>((dc) => dc.destination.route);
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
@@ -100,7 +106,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
           Marker(
             width: 32.0,
             height: 32.0,
-            point: destination.route[index].toLatLng(),
+            point: route[index].toLatLng(),
             anchorPos: AnchorPos.align(AnchorAlign.top),
             builder: (context) {
               return const Icon(
@@ -121,7 +127,8 @@ class _FlagMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route = context.bloc<DestinationCubit>().destination.route;
+    final route =
+        context.select<DestinationCubit, List<Coord>>((dc) => dc.destination.route);
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
@@ -147,14 +154,15 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final places =
+        context.select<DestinationCubit, List<Place>>((dc) => dc.destination.places);
 
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          for (int i = 0; i < destination.places.length; ++i)
+          for (int i = 0; i < places.length; ++i)
             PlaceMarker(
-              place: destination.places[i],
+              place: places[i],
               color: AppColors.accents[i % AppColors.accents.length],
             ),
         ],

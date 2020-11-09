@@ -21,7 +21,7 @@ class PlaceMarker extends Marker {
           point: place.coord.toLatLng(),
           builder: (context) => GestureDetector(
             onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
+              context.read<DestinationNavService>().pushNamed(
                     Routes.placePageRoute,
                     arguments: place,
                   );

@@ -38,6 +38,7 @@ class LodgeRoomsPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 4.0),
                         Row(
+                          textBaseline: TextBaseline.alphabetic,
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           children: [
                             Text(

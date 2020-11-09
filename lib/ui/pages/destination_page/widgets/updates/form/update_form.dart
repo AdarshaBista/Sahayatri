@@ -21,9 +21,9 @@ class UpdateForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<DestinationUpdateFormCubit>(
       create: (context) => DestinationUpdateFormCubit(
-        apiService: context.repository<ApiService>(),
-        destination: context.bloc<DestinationCubit>().destination,
-        destinationUpdateCubit: context.bloc<DestinationUpdateCubit>(),
+        apiService: context.read<ApiService>(),
+        destination: context.read<DestinationCubit>().destination,
+        destinationUpdateCubit: context.read<DestinationUpdateCubit>(),
       ),
       child: AnimatedPadding(
         curve: Curves.decelerate,
@@ -85,7 +85,7 @@ class UpdateForm extends StatelessWidget {
             if (state.isLoading) return;
             if (!formKey.currentState.validate()) return;
 
-            final success = await context.bloc<DestinationUpdateFormCubit>().postUpdate();
+            final success = await context.read<DestinationUpdateFormCubit>().postUpdate();
             if (success) Navigator.of(context).pop();
           },
         );

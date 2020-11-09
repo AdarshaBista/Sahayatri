@@ -35,7 +35,7 @@ class ItineraryCard extends StatelessWidget {
       tag: itinerary,
       child: GestureDetector(
         onTap: () => context
-            .repository<DestinationNavService>()
+            .read<DestinationNavService>()
             .pushNamed(Routes.itineraryPageRoute, arguments: itinerary),
         child: ElevatedCard(
           radius: 8.0,

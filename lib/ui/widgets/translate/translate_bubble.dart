@@ -65,7 +65,7 @@ class TranslateBubble extends StatelessWidget {
 
   Widget _buildAudioButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.bloc<TranslateCubit>().play(translation.text),
+      onTap: () => context.read<TranslateCubit>().play(translation.text),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

@@ -25,7 +25,7 @@ class LodgeMarker extends Marker {
           anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (context) => GestureDetector(
             onTap: () {
-              context.repository<DestinationNavService>().pushNamed(
+              context.read<DestinationNavService>().pushNamed(
                     Routes.lodgePageRoute,
                     arguments: lodge,
                   );

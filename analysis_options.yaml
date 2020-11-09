@@ -14,4 +14,5 @@ linter:
     sort_pub_dependencies: false
     sort_child_properties_last: false
     avoid_positional_boolean_parameters: false
+    prefer_constructors_over_static_methods: false
     prefer_if_elements_to_conditional_expressions: false

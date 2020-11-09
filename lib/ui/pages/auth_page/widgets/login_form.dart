@@ -60,11 +60,11 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () async {
                 if (!formKey.currentState.validate()) return;
 
-                final success = await context.bloc<UserCubit>().login(email, password);
+                final success = await context.read<UserCubit>().login(email, password);
                 if (success) {
                   if (widget.isInitial) {
                     context
-                        .repository<RootNavService>()
+                        .read<RootNavService>()
                         .pushReplacementNamed(Routes.homePageRoute);
                   } else {
                     Navigator.of(context).pop();

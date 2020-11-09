@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -35,6 +37,7 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
         );
 
   DestinationUpdate get update => state.update;
+  List<String> get tags => ['fun', 'alert', 'disaster', 'danger', 'general'];
 
   void changeText(String text) {
     emit(state.copyWith(text: text));
@@ -75,6 +78,8 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
   }
 
   Future<void> selectImage(ImageSource source) async {
+    if (Platform.isWindows) return false;
+
     final pickedImage = await ImagePicker().getImage(source: source);
     if (pickedImage == null) return false;
     addImageUrl(pickedImage.path);

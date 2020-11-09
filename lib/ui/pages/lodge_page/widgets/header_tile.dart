@@ -31,7 +31,7 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildRating(BuildContext context) {
-    final rating = context.watch<Lodge>().rating;
+    final rating = context.select<Lodge, double>((l) => l.rating);
 
     return Row(
       children: [
@@ -54,9 +54,8 @@ class HeaderTile extends StatelessWidget {
       color: AppColors.dark,
       backgroundColor: AppColors.primaryLight,
       iconData: Icons.hotel_outlined,
-      onTap: () => context
-          .repository<DestinationNavService>()
-          .pushNamed(Routes.lodgeRoomsPageRoute),
+      onTap: () =>
+          context.read<DestinationNavService>().pushNamed(Routes.lodgeRoomsPageRoute),
     );
   }
 }

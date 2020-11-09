@@ -28,7 +28,9 @@ class PhotoViewPage extends StatelessWidget {
             scrollPhysics: const ClampingScrollPhysics(),
             loadingBuilder: (context, event) => const BusyIndicator(),
             pageController: PageController(initialPage: args.initialPageIndex),
-            loadFailedChild: const ErrorIndicator(message: "Couldn't load photo"),
+            loadFailedChild: const Center(
+              child: ErrorIndicator(message: "Couldn't load photo!"),
+            ),
             itemCount: args.imageUrls.length,
             builder: (context, index) {
               return PhotoViewGalleryPageOptions(

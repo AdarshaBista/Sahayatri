@@ -82,7 +82,7 @@ class DeviceDetails extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).pop();
-              context.bloc<NearbyCubit>().removeDevice(device);
+              context.read<NearbyCubit>().removeDevice(device);
             },
             child: ScaleAnimator(
               child: Container(

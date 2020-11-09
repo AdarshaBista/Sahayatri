@@ -51,7 +51,7 @@ class _PlacePickerState extends State<PlacePicker> {
 
   GestureDetector _buildViewButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.repository<DestinationNavService>().pushNamed(
+      onTap: () => context.read<DestinationNavService>().pushNamed(
             Routes.placePageRoute,
             arguments: selectedPlace,
           ),

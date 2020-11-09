@@ -13,12 +13,12 @@ class DestinationNavPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (!context.repository<DestinationNavService>().canPop()) return true;
-        context.repository<DestinationNavService>().pop();
+        if (!context.read<DestinationNavService>().canPop()) return true;
+        context.read<DestinationNavService>().pop();
         return false;
       },
       child: Navigator(
-        key: context.repository<DestinationNavService>().navigatorKey,
+        key: context.watch<DestinationNavService>().navigatorKey,
         observers: [HeroController()],
         onGenerateRoute: DestinationRouter.onGenerateRoute,
       ),

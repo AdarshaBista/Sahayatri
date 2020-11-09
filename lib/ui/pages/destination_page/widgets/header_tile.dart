@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -35,7 +36,8 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildRating(BuildContext context) {
-    final rating = context.bloc<DestinationCubit>().destination.rating;
+    final rating =
+        context.select<DestinationCubit, double>((dc) => dc.destination.rating);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,12 +56,13 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildWeatherButton(BuildContext context) {
-    final destination = context.bloc<DestinationCubit>().destination;
+    final destination =
+        context.select<DestinationCubit, Destination>((dc) => dc.destination);
 
     return ColumnButton(
       label: 'Weather',
       icon: CommunityMaterialIcons.weather_fog,
-      onTap: () => context.repository<DestinationNavService>().pushNamed(
+      onTap: () => context.read<DestinationNavService>().pushNamed(
             Routes.weatherPageRoute,
             arguments: WeatherPageArgs(
               name: destination.name,

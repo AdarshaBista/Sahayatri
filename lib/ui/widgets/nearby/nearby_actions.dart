@@ -15,7 +15,7 @@ class NearbyActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isScanning = context.watch<NearbyConnected>().isScanning;
+    final isScanning = context.select<NearbyConnected, bool>((state) => state.isScanning);
 
     return Wrap(
       spacing: 8.0,
@@ -29,8 +29,8 @@ class NearbyActions extends StatelessWidget {
               : CommunityMaterialIcons.account_search_outline,
           onTap: () {
             isScanning
-                ? context.bloc<NearbyCubit>().stopScanning()
-                : context.bloc<NearbyCubit>().startScanning();
+                ? context.read<NearbyCubit>().stopScanning()
+                : context.read<NearbyCubit>().startScanning();
           },
         ),
         NearbyButton(
@@ -39,7 +39,7 @@ class NearbyActions extends StatelessWidget {
           icon: Icons.exit_to_app_outlined,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
-            onConfirm: () => context.bloc<NearbyCubit>().stopNearby(),
+            onConfirm: () => context.read<NearbyCubit>().stopNearby(),
           ).openDialog(context),
         ),
         NearbyButton(
@@ -48,7 +48,7 @@ class NearbyActions extends StatelessWidget {
           icon: Icons.speaker_phone_outlined,
           onTap: () {
             context.openFlushBar('SOS Sent', type: FlushbarType.success);
-            context.bloc<NearbyCubit>().sendSos();
+            context.read<NearbyCubit>().sendSos();
           },
         ),
       ],

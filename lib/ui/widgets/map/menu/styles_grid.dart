@@ -23,7 +23,7 @@ class StylesGridState extends State<StylesGrid> {
   @override
   void initState() {
     super.initState();
-    selectedStyle = context.bloc<PrefsCubit>().prefs.mapStyle;
+    selectedStyle = context.read<PrefsCubit>().prefs.mapStyle;
   }
 
   @override
@@ -55,7 +55,7 @@ class StylesGridState extends State<StylesGrid> {
 
     return GestureDetector(
       onTap: () {
-        context.bloc<PrefsCubit>().changeMapLayer(layer.style);
+        context.read<PrefsCubit>().changeMapLayer(layer.style);
         setState(() {
           selectedStyle = layer.style;
         });

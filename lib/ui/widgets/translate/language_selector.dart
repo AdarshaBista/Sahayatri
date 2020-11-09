@@ -27,11 +27,11 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildLanguageMenu(false, context.bloc<TranslateCubit>().sourceLang),
+            _buildLanguageMenu(false, context.watch<TranslateCubit>().sourceLang),
             const SizedBox(width: 12.0),
             _buildFlipButton(),
             const SizedBox(width: 12.0),
-            _buildLanguageMenu(true, context.bloc<TranslateCubit>().targetLang),
+            _buildLanguageMenu(true, context.watch<TranslateCubit>().targetLang),
           ],
         ),
       ),
@@ -41,7 +41,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
   Widget _buildFlipButton() {
     return GestureDetector(
       onTap: () {
-        context.bloc<TranslateCubit>().flipLanguages();
+        context.read<TranslateCubit>().flipLanguages();
         setState(() {});
       },
       child: const Icon(
@@ -84,9 +84,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 
   void _changeLanguage(bool isTarget, Language language) {
     if (isTarget) {
-      context.bloc<TranslateCubit>().targetLang = language;
+      context.read<TranslateCubit>().targetLang = language;
     } else {
-      context.bloc<TranslateCubit>().sourceLang = language;
+      context.read<TranslateCubit>().sourceLang = language;
     }
 
     setState(() {});

@@ -25,7 +25,7 @@ class LodgeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context
-          .repository<DestinationNavService>()
+          .read<DestinationNavService>()
           .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: ElevatedCard(
         radius: 8.0,

@@ -76,11 +76,11 @@ class _SignUpFormState extends State<SignUpForm> {
               onPressed: () async {
                 if (!formKey.currentState.validate()) return;
                 final success =
-                    await context.bloc<UserCubit>().signUp(username, email, password);
+                    await context.read<UserCubit>().signUp(username, email, password);
                 if (success) {
                   if (widget.isInitial) {
                     context
-                        .repository<RootNavService>()
+                        .read<RootNavService>()
                         .pushReplacementNamed(Routes.homePageRoute);
                   } else {
                     Navigator.of(context).pop();

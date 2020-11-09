@@ -39,7 +39,7 @@ class DestinationCard extends StatelessWidget {
           onTap: () {
             FocusScope.of(context).unfocus();
             context
-                .repository<RootNavService>()
+                .read<RootNavService>()
                 .pushNamed(Routes.destinationPageRoute, arguments: destination);
           },
           child: Container(
@@ -143,7 +143,7 @@ class DestinationCard extends StatelessWidget {
         onTap: () => ConfirmDialog(
           message: 'Do you want to delete\n${destination.name}',
           onConfirm: () =>
-              context.bloc<DownloadedDestinationsCubit>().delete(destination),
+              context.read<DownloadedDestinationsCubit>().delete(destination),
         ).openDialog(context),
         child: Container(
           width: 40.0,

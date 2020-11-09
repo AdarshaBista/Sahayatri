@@ -39,7 +39,7 @@ class ItineraryForm extends StatelessWidget {
       initialValue: name,
       icon: Icons.landscape_outlined,
       validator: FormValidators.requiredText('Please enter a name.'),
-      onChanged: (name) => context.bloc<ItineraryFormCubit>().changeName(name),
+      onChanged: (name) => context.read<ItineraryFormCubit>().changeName(name),
     );
   }
 
@@ -60,7 +60,7 @@ class ItineraryForm extends StatelessWidget {
                 label: 'Days',
                 initialValue: state.days,
                 icon: CommunityMaterialIcons.weather_sunny,
-                onChanged: (days) => context.bloc<ItineraryFormCubit>().changeDays(days),
+                onChanged: (days) => context.read<ItineraryFormCubit>().changeDays(days),
               ),
             ),
             const SizedBox(width: 12.0),
@@ -70,7 +70,7 @@ class ItineraryForm extends StatelessWidget {
                 initialValue: state.nights,
                 icon: CommunityMaterialIcons.weather_night,
                 onChanged: (nights) =>
-                    context.bloc<ItineraryFormCubit>().changeNights(nights),
+                    context.read<ItineraryFormCubit>().changeNights(nights),
               ),
             ),
           ],

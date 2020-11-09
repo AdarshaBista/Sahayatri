@@ -34,7 +34,8 @@ class ImagesField extends StatelessWidget {
             const SizedBox(height: 6.0),
             PhotoGallery(
               imageUrls: state.imageUrls,
-              onDelete: context.bloc<DestinationUpdateFormCubit>().removeImageUrl,
+              onDelete: (url) =>
+                  context.read<DestinationUpdateFormCubit>().removeImageUrl(url),
             ),
             if (state.imageUrls.length < ApiConfig.maxImages)
               CustomButton(
@@ -43,7 +44,7 @@ class ImagesField extends StatelessWidget {
                 backgroundColor: AppColors.lightAccent,
                 iconData: Icons.add_photo_alternate_outlined,
                 onTap: () => ImageSourceSheet(
-                  onSelect: context.bloc<DestinationUpdateFormCubit>().selectImage,
+                  onSelect: context.read<DestinationUpdateFormCubit>().selectImage,
                 ).openModalBottomSheet(context),
               ),
           ],

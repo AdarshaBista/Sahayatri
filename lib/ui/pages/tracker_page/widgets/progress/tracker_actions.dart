@@ -17,30 +17,31 @@ class TrackerActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
+    final trackingState =
+        context.select<TrackerUpdate, TrackingState>((u) => u.trackingState);
 
-    return trackerUpdate.trackingState == TrackingState.stopped
+    return trackingState == TrackingState.stopped
         ? const Offstage()
         : Row(
             children: [
-              if (trackerUpdate.trackingState == TrackingState.paused)
+              if (trackingState == TrackingState.paused)
                 Expanded(
                   child: CustomButton(
                     label: 'Resume',
                     color: Colors.teal,
                     backgroundColor: Colors.teal.withOpacity(0.2),
                     iconData: CommunityMaterialIcons.play_circle_outline,
-                    onTap: context.repository<TrackerCubit>().resumeTracking,
+                    onTap: () => context.read<TrackerCubit>().resumeTracking(),
                   ),
                 ),
-              if (trackerUpdate.trackingState == TrackingState.updating)
+              if (trackingState == TrackingState.updating)
                 Expanded(
                   child: CustomButton(
                     label: 'Pause',
                     color: Colors.blue,
                     backgroundColor: Colors.blue.withOpacity(0.2),
                     iconData: CommunityMaterialIcons.pause_circle_outline,
-                    onTap: context.repository<TrackerCubit>().pauseTracking,
+                    onTap: () => context.read<TrackerCubit>().pauseTracking(),
                   ),
                 ),
               const SizedBox(width: 8.0),
@@ -52,7 +53,7 @@ class TrackerActions extends StatelessWidget {
                   iconData: CommunityMaterialIcons.stop_circle_outline,
                   onTap: () => ConfirmDialog(
                     message: 'Are you sure you want to stop the tracking process.',
-                    onConfirm: () => context.repository<TrackerCubit>().stopTracking(),
+                    onConfirm: () => context.read<TrackerCubit>().stopTracking(),
                   ).openDialog(context),
                 ),
               ),

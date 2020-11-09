@@ -29,12 +29,12 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider<DestinationsCubit>(
           create: (context) => DestinationsCubit(
-            destinationsService: context.repository<DestinationsService>(),
+            destinationsService: context.read<DestinationsService>(),
           )..fetchDestinations(),
         ),
         BlocProvider<DownloadedDestinationsCubit>(
           create: (context) => DownloadedDestinationsCubit(
-            destinationsService: context.repository<DestinationsService>(),
+            destinationsService: context.read<DestinationsService>(),
           )..fetchDownloaded(),
         ),
       ],

@@ -7,11 +7,9 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
 
 class TagsField extends StatelessWidget {
-  List<String> get tags => ['fun', 'alert', 'disaster', 'danger', 'general'];
-
   @override
   Widget build(BuildContext context) {
-    final updateCubit = context.bloc<DestinationUpdateFormCubit>();
+    final tags = context.select<DestinationUpdateFormCubit, List<String>>((c) => c.tags);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -25,7 +23,11 @@ class TagsField extends StatelessWidget {
           spacing: 8.0,
           runSpacing: 8.0,
           children: tags
-              .map((t) => TagChip(label: t, onSelect: updateCubit.updateTags))
+              .map((t) => TagChip(
+                    label: t,
+                    onSelect: (tag) =>
+                        context.read<DestinationUpdateFormCubit>().updateTags(tag),
+                  ))
               .toList(),
         ),
       ],

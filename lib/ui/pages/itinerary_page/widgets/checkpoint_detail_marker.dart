@@ -89,7 +89,7 @@ class _PlaceInfo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () => context.repository<DestinationNavService>().pushNamed(
+        onTap: () => context.read<DestinationNavService>().pushNamed(
               Routes.placePageRoute,
               arguments: checkpoint.place,
             ),

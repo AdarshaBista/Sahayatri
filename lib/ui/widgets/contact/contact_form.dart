@@ -96,7 +96,7 @@ class _ContactFormState extends State<ContactForm> {
     return SaveButton(
       onPressed: () {
         if (!_formKey.currentState.validate()) return;
-        context.bloc<PrefsCubit>().saveContact(contact);
+        context.read<PrefsCubit>().saveContact(contact);
 
         if (widget.isOnSettings) Navigator.of(context).pop();
         context.openFlushBar('Contact saved: $contact', type: FlushbarType.success);

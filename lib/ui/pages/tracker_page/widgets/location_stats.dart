@@ -5,6 +5,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:provider/provider.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_card.dart';
@@ -14,7 +15,8 @@ class LocationStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trackerUpdate = context.watch<TrackerUpdate>();
+    final currentLocation =
+        context.select<TrackerUpdate, UserLocation>((u) => u.currentLocation);
 
     return Container(
       height: UiConfig.trackerPanelHeight - 32.0,
@@ -24,17 +26,17 @@ class LocationStats extends StatelessWidget {
         children: <Widget>[
           StatCard(
             label: 'Altitude',
-            count: '${trackerUpdate.currentLocation.altitude.floor()} m',
+            count: '${currentLocation.altitude.floor()} m',
             color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Speed',
-            count: '${trackerUpdate.currentLocation.speed.toStringAsFixed(1)} m/s',
+            count: '${currentLocation.speed.toStringAsFixed(1)} m/s',
             color: AppColors.primaryDark,
           ),
           StatCard(
             label: 'Accuracy',
-            count: '${trackerUpdate.currentLocation.accuracy.toStringAsFixed(1)} m',
+            count: '${currentLocation.accuracy.toStringAsFixed(1)} m',
             color: AppColors.primaryDark,
           ),
         ],

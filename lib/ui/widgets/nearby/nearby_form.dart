@@ -93,9 +93,9 @@ class NearbyForm extends StatelessWidget {
       backgroundColor: AppColors.primaryDark,
       iconData: CommunityMaterialIcons.circle_double,
       onTap: () {
-        final name = context.bloc<PrefsCubit>().prefs.deviceName;
+        final name = context.read<PrefsCubit>().prefs.deviceName;
         if (name.isNotEmpty) {
-          context.bloc<NearbyCubit>().startNearby(name);
+          context.read<NearbyCubit>().startNearby(name);
         } else {
           const MessageDialog(message: 'Please set your device name first.')
               .openDialog(context);

@@ -12,7 +12,7 @@ class UserEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<User>();
+    final email = context.select<User, String>((u) => u.email);
 
     return SlideAnimator(
       begin: const Offset(0.0, 0.5),
@@ -27,7 +27,7 @@ class UserEmail extends StatelessWidget {
           ),
         ),
         child: Text(
-          user.email,
+          email,
           style: AppTextStyles.extraSmall,
         ),
       ),

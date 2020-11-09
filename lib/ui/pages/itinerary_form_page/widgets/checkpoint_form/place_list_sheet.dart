@@ -39,14 +39,14 @@ class PlaceListSheet extends StatelessWidget {
                 if (state is PlacesError) {
                   return ErrorIndicator(
                     message: state.message,
-                    onRetry: context.bloc<PlacesCubit>().fetchPlaces,
+                    onRetry: () => context.read<PlacesCubit>().fetchPlaces(),
                   );
                 } else if (state is PlacesLoaded) {
                   return _buildList(state.places);
                 } else if (state is PlacesEmpty) {
                   return EmptyIndicator(
                     message: 'No places found.',
-                    onRetry: context.bloc<PlacesCubit>().fetchPlaces,
+                    onRetry: () => context.read<PlacesCubit>().fetchPlaces(),
                   );
                 } else {
                   return const BusyIndicator();
@@ -84,7 +84,7 @@ class PlaceListSheet extends StatelessWidget {
         child: ImageCard(imageUrl: place.imageUrls[0]),
       ),
       trailing: GestureDetector(
-        onTap: () => context.repository<DestinationNavService>().pushNamed(
+        onTap: () => context.read<DestinationNavService>().pushNamed(
               Routes.placePageRoute,
               arguments: place,
             ),

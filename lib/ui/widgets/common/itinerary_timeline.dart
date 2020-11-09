@@ -177,7 +177,7 @@ class ItineraryTimeline extends StatelessWidget {
 
   GestureDetector _buildDeleteIcon(BuildContext context, Checkpoint checkpoint) {
     return GestureDetector(
-      onTap: () => context.bloc<ItineraryFormCubit>().removeCheckpoint(checkpoint),
+      onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: const Icon(
@@ -194,11 +194,11 @@ class ItineraryTimeline extends StatelessWidget {
       CheckpointForm(
         checkpoint: checkpoint,
         onSubmit: (updatedCheckpoint) => context
-            .bloc<ItineraryFormCubit>()
+            .read<ItineraryFormCubit>()
             .updateCheckpoint(checkpoint, updatedCheckpoint),
       ).openModalBottomSheet(context);
     } else {
-      context.repository<DestinationNavService>().pushNamed(
+      context.read<DestinationNavService>().pushNamed(
             Routes.placePageRoute,
             arguments: checkpoint.place,
           );

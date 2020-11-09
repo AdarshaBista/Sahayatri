@@ -54,9 +54,9 @@ class DestinationRouter {
       case Routes.destinationDetailPageRoute:
         _page = BlocProvider<ItineraryCubit>(
           create: (context) => ItineraryCubit(
-            user: context.bloc<UserCubit>().user,
-            apiService: context.repository<ApiService>(),
-            destination: context.bloc<DestinationCubit>().destination,
+            user: context.read<UserCubit>().user,
+            apiService: context.read<ApiService>(),
+            destination: context.read<DestinationCubit>().destination,
           )..fetchItineraries(),
           child: const DestinationDetailPage(),
         );
@@ -79,8 +79,8 @@ class DestinationRouter {
           child: BlocProvider<ReviewCubit>(
             create: (context) => LodgeReviewCubit(
               lodge: settings.arguments as Lodge,
-              user: context.bloc<UserCubit>().user,
-              apiService: context.repository<ApiService>(),
+              user: context.read<UserCubit>().user,
+              apiService: context.read<ApiService>(),
             )..fetchReviews(),
             child: const LodgePage(),
           ),
@@ -112,15 +112,15 @@ class DestinationRouter {
           providers: [
             BlocProvider<TrackerCubit>(
               create: (context) => TrackerCubit(
-                smsService: context.repository<SmsService>(),
-                nearbyService: context.repository<NearbyService>(),
-                trackerService: context.repository<TrackerService>(),
-                offRouteAlertService: context.repository<OffRouteAlertService>(),
+                smsService: context.read<SmsService>(),
+                nearbyService: context.read<NearbyService>(),
+                trackerService: context.read<TrackerService>(),
+                offRouteAlertService: context.read<OffRouteAlertService>(),
               )..attemptTracking(settings.arguments as Destination),
             ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(
-                directionsService: context.repository<DirectionsService>(),
+                directionsService: context.read<DirectionsService>(),
               ),
             ),
           ],
@@ -133,7 +133,7 @@ class DestinationRouter {
         _page = BlocProvider<WeatherCubit>(
           create: (context) => WeatherCubit(
             title: weatherPageArgs.name,
-            weatherService: context.repository<WeatherService>(),
+            weatherService: context.read<WeatherService>(),
           )..fetchWeather(weatherPageArgs.coord),
           child: const WeatherPage(),
         );

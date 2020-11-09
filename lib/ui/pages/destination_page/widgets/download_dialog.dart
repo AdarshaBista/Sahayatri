@@ -24,10 +24,10 @@ class DownloadDialog extends StatelessWidget {
       onWillPop: () => Future.value(false),
       child: BlocProvider<DownloadCubit>(
         create: (context) => DownloadCubit(
-          user: context.bloc<UserCubit>().user,
-          destinationCubit: context.bloc<DestinationCubit>(),
-          destinationsService: context.repository<DestinationsService>(),
-        )..startDownload(context.bloc<DestinationCubit>().destination),
+          user: context.read<UserCubit>().user,
+          destinationCubit: context.read<DestinationCubit>(),
+          destinationsService: context.read<DestinationsService>(),
+        )..startDownload(context.read<DestinationCubit>().destination),
         child: Builder(
           builder: (context) {
             return ScaleAnimator(
