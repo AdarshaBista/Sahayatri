@@ -22,10 +22,11 @@ class StarRatingBar extends StatelessWidget {
     final color = rating < 3.0 ? AppColors.secondary : AppColors.primary;
 
     return FadeAnimator(
-      child: RatingBar(
+      child: RatingBar.builder(
         maxRating: 5.0,
         itemSize: size,
         glowColor: color,
+        updateOnDrag: true,
         allowHalfRating: true,
         initialRating: rating,
         unratedColor: AppColors.lightAccent,
