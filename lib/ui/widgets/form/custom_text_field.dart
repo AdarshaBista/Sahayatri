@@ -70,7 +70,7 @@ class CustomTextField extends StatelessWidget {
                 ? null
                 : Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Icon(icon, size: 20.0),
+                    child: Icon(icon, size: 20.0, color: AppColors.barrier),
                   ),
           ),
         ),

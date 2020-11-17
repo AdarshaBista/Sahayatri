@@ -38,6 +38,8 @@ import 'package:sahayatri/app/constants/configs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/sahayatri.dart';
+
+import 'package:device_preview/plugins.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
@@ -84,26 +86,20 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return DevicePreview(
       enabled: Platform.isWindows,
-      onScreenshot: (ss) async {
-        final dir = await getDownloadsDirectory();
-        final fileName = DateTime.now().microsecondsSinceEpoch;
-        final savePath = '${dir.path}/$fileName.png';
-        await File(savePath).writeAsBytes(ss.bytes);
+      storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
+      plugins: [
+        ScreenshotPlugin(
+          processor: (ss) async {
+            final dir = await getDownloadsDirectory();
+            final fileName = DateTime.now().microsecondsSinceEpoch;
+            final savePath = '${dir.path}/$fileName.png';
+            await File(savePath).writeAsBytes(ss.bytes);
 
-        print('Saved image as $savePath');
-        return savePath;
-      },
-      style: DevicePreviewStyle(
-        hasFrameShadow: false,
-        background: const BoxDecoration(color: Color(0xFF24292E)),
-        toolBar: DevicePreviewToolBarStyle.dark(
-          position: DevicePreviewToolBarPosition.left,
+            print('Saved image as $savePath');
+            return savePath;
+          },
         ),
-      ),
-      data: const DevicePreviewData(
-        deviceIndex: 11,
-        isDarkMode: true,
-      ),
+      ],
       builder: (_) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (_) => UserDao()),

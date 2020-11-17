@@ -1,6 +1,5 @@
 # Temp directories
-db/
-notes/
+temp/
 
 # Secrets
 lib/app/constants/api_keys.dart

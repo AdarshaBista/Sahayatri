@@ -17,18 +17,18 @@ dependencies:
   timeago: ^2.0.28
   url_launcher: ^5.7.10
   path_provider: ^1.6.24
-  device_preview: ^0.4.8
+  device_preview: ^0.5.4
   image_picker: ^0.6.7+14
   intl: ^0.17.0-nullsafety.2
   form_field_validator: ^1.0.1
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^3.0.1+2
+  flutter_local_notifications: ^3.0.1+4
 
   # State Management
   equatable: ^1.2.5
-  flutter_bloc: ^6.1.0
+  flutter_bloc: ^6.1.1
 
   # Database
   hive: ^1.4.4+1
@@ -52,7 +52,7 @@ dependencies:
   fl_chart: ^0.12.0
   flushbar: ^1.10.4
   flip_card: ^0.4.4
-  photo_view: ^0.10.2
+  photo_view: ^0.10.3
   timeline_tile: ^1.0.0
   auto_size_text: ^2.1.0
   flutter_swiper: ^1.1.6

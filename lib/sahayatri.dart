@@ -49,9 +49,10 @@ class Sahayatri extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppThemes.light,
+            darkTheme: AppThemes.light,
             title: AppConfig.appName,
             builder: DevicePreview.appBuilder,
-            locale: DevicePreview.of(context).locale,
+            locale: DevicePreview.locale(context),
             onGenerateRoute: RootRouter.onGenerateRoute,
             navigatorKey: context.watch<RootNavService>().navigatorKey,
             home: BlocBuilder<PrefsCubit, PrefsState>(

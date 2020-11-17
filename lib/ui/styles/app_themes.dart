@@ -44,6 +44,21 @@ class AppThemes {
         bottomSheetTheme: _bottomSheetTheme,
         inputDecorationTheme: _inputDecorationTheme,
         floatingActionButtonTheme: _floatingActionButtonTheme,
+        colorScheme: ColorScheme(
+          brightness: Brightness.light,
+          primary: AppColors.primary,
+          primaryVariant: AppColors.primaryDark,
+          onPrimary: AppColors.dark,
+          secondary: AppColors.secondary,
+          secondaryVariant: AppColors.secondaryLight,
+          onSecondary: AppColors.light,
+          error: AppColors.secondary,
+          onError: AppColors.light,
+          surface: AppColors.light,
+          onSurface: AppColors.dark,
+          background: AppColors.light,
+          onBackground: AppColors.dark,
+        ),
       );
 
   static IconThemeData get darkIconTheme => const IconThemeData(

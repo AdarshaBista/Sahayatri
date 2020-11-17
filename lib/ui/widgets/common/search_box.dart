@@ -38,8 +38,8 @@ class SearchBox extends StatelessWidget {
                   fillColor: AppColors.light,
                   border: InputBorder.none,
                   hintText: hintText,
-                  prefixIcon: const ScaleAnimator(
-                    child: Icon(Icons.search, size: 20.0),
+                  prefixIcon: ScaleAnimator(
+                    child: Icon(Icons.search, size: 20.0, color: AppColors.barrier),
                   ),
                 ),
               ),
