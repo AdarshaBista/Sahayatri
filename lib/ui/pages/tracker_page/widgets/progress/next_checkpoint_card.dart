@@ -62,6 +62,7 @@ class _CardFront extends StatelessWidget {
   Widget build(BuildContext context) {
     final nextCheckpoint =
         context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
+    if (nextCheckpoint == null) return const Offstage();
     final place = nextCheckpoint.checkpoint.place;
     final lodges = place.lodges;
 
@@ -126,8 +127,11 @@ class _CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final checkpoint =
-        context.select<TrackerUpdate, Checkpoint>((u) => u.nextCheckpoint.checkpoint);
+    final nextCheckpoint =
+        context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
+
+    if (nextCheckpoint == null) return const Offstage();
+    final checkpoint = nextCheckpoint.checkpoint;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
