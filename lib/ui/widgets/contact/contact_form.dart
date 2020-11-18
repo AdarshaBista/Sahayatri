@@ -78,8 +78,8 @@ class _ContactFormState extends State<ContactForm> {
       contact = (state as PrefsLoaded).prefs.contact;
 
       return CustomTextField(
-        icon: Icons.phone_android,
         label: 'Phone number',
+        icon: Icons.phone_outlined,
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
         initialValue: (state as PrefsLoaded).prefs.contact,

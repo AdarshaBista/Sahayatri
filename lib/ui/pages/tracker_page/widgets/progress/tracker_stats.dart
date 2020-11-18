@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stopwatch_tile.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_actions.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/distance_covered_bar.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/distance_indicator.dart';
 
 class TrackerStats extends StatelessWidget {
   const TrackerStats();
@@ -15,12 +15,20 @@ class TrackerStats extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            StopwatchTile(),
-            SizedBox(height: 8.0),
-            TrackerActions(),
-            SizedBox(height: 16.0),
-            DistanceCoveredBar(),
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.bottomCenter,
+              children: const [
+                DistanceIndicator(),
+                Positioned(
+                  bottom: -34.0,
+                  child: StopwatchTile(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 44.0),
+            const TrackerActions(),
           ],
         ),
       ),

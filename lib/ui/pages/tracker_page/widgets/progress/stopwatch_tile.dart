@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class StopwatchTile extends StatefulWidget {
@@ -36,19 +35,21 @@ class _StopwatchTileState extends State<StopwatchTile> {
   Widget build(BuildContext context) {
     final elapsed = context.select<TrackerCubit, Duration>((u) => u.elapsed);
 
-    return Row(
-      children: [
-        Icon(
-          CommunityMaterialIcons.clock_outline,
-          color: AppColors.barrier,
-          size: 20.0,
-        ),
-        const SizedBox(width: 8.0),
-        Text(
-          _formatDuration(elapsed),
-          style: AppTextStyles.extraLarge.thin,
-        ),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          Icon(
+            Icons.timer_outlined,
+            size: 24.0,
+            color: AppColors.barrier,
+          ),
+          const SizedBox(height: 2.0),
+          Text(
+            _formatDuration(elapsed),
+            style: AppTextStyles.extraLarge.thin,
+          ),
+        ],
+      ),
     );
   }
 
