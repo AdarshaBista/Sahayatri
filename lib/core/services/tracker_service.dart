@@ -28,6 +28,9 @@ class TrackerService {
   /// If destination is null, there is no tracking in progress.
   bool get isTracking => _destination != null;
 
+  /// Called when user finishes the trail
+  void Function() onCompleted;
+
   /// Track covered by user.
   final Set<UserLocation> _userTrack = {};
 
@@ -65,6 +68,8 @@ class TrackerService {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
     _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
       (userLocation) {
+        if (_checkCompleted(userLocation.coord)) onCompleted();
+
         _userTrack.add(userLocation);
         final index = _userIndex(userLocation.coord);
         return TrackerUpdate(
@@ -79,6 +84,12 @@ class TrackerService {
     ).listen((trackerUpdate) {
       _trackerStreamController.add(trackerUpdate);
     });
+  }
+
+  /// Check wheather the user has reached the end of trail
+  bool _checkCompleted(Coord userCoord) {
+    final distance = GeoUtils.computeDistance(userCoord, _destination.route.last);
+    return distance < LocationConfig.minNearbyDistance;
   }
 
   /// Stop the tracking process and reset fields.

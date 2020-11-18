@@ -33,7 +33,9 @@ class TrackerCubit extends Cubit<TrackerState> {
         assert(nearbyService != null),
         assert(trackerService != null),
         assert(offRouteAlertService != null),
-        super(const TrackerLoading());
+        super(const TrackerLoading()) {
+    trackerService.onCompleted = stopTracking;
+  }
 
   @override
   Future<void> close() async {
