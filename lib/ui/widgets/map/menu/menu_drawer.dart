@@ -11,6 +11,7 @@ class MenuDrawer extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: ListView(
+        shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 100.0),
         children: [
