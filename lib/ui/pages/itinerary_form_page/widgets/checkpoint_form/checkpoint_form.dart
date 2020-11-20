@@ -11,9 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 
@@ -162,12 +162,7 @@ class CheckpointForm extends StatelessWidget {
 
   void _handleBackButton(BuildContext context) {
     if (context.read<CheckpointFormCubit>().isDirty) {
-      ConfirmDialog(
-        cancelText: 'BACK',
-        confirmText: 'EXIT',
-        message: 'Changes you made will not be saved!',
-        onConfirm: Navigator.of(context).pop,
-      ).openDialog(context);
+      const UnsavedDialog().openDialog(context);
       return;
     }
     Navigator.of(context).pop();

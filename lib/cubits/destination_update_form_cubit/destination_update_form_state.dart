@@ -45,4 +45,11 @@ class DestinationUpdateFormState {
       imageUrls: imageUrls ?? this.imageUrls,
     );
   }
+
+  bool isDirty() {
+    return text.isNotEmpty ||
+        tags.isNotEmpty ||
+        imageUrls.isNotEmpty ||
+        coords.isNotEmpty;
+  }
 }

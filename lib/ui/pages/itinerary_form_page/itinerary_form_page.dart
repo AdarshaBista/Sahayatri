@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
-import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {
@@ -64,12 +64,7 @@ class ItineraryFormPage extends StatelessWidget {
 
   Future<bool> _handleBackButton(BuildContext context) {
     if (context.read<ItineraryFormCubit>().isDirty) {
-      ConfirmDialog(
-        cancelText: 'BACK',
-        confirmText: 'EXIT',
-        message: 'Changes you made will not be saved!',
-        onConfirm: Navigator.of(context).pop,
-      ).openDialog(context);
+      const UnsavedDialog().openDialog(context);
       return Future.value(false);
     }
     return Future.value(true);

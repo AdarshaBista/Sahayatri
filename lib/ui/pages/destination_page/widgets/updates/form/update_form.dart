@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
@@ -36,7 +39,7 @@ class UpdateForm extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.all(20.0),
             children: [
-              Text('Post an Update', style: AppTextStyles.medium.bold),
+              _buildHeader(),
               const Divider(height: 16.0),
               const TagsField(),
               const SizedBox(height: 16.0),
@@ -53,6 +56,26 @@ class UpdateForm extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text('Post an update', style: AppTextStyles.medium.bold),
+        Builder(
+          builder: (context) {
+            return GestureDetector(
+              onTap: () => _handleBackButton(context),
+              child: const Icon(
+                Icons.close,
+                color: AppColors.secondary,
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -91,5 +114,13 @@ class UpdateForm extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _handleBackButton(BuildContext context) {
+    if (context.read<DestinationUpdateFormCubit>().isDirty) {
+      const UnsavedDialog().openDialog(context);
+      return;
+    }
+    Navigator.of(context).pop();
   }
 }

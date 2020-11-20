@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 
@@ -39,10 +41,7 @@ class _ReviewFormState extends State<ReviewForm> {
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.all(20.0),
           children: [
-            Text(
-              'Write a Review',
-              style: AppTextStyles.medium.bold,
-            ),
+            _buildHeader(context),
             const Divider(height: 16.0),
             _buildRatingField(),
             const SizedBox(height: 16.0),
@@ -52,6 +51,22 @@ class _ReviewFormState extends State<ReviewForm> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text('Write a review', style: AppTextStyles.medium.bold),
+        GestureDetector(
+          onTap: () => _handleBackButton(context),
+          child: const Icon(
+            Icons.close,
+            color: AppColors.secondary,
+          ),
+        ),
+      ],
     );
   }
 
@@ -119,5 +134,13 @@ class _ReviewFormState extends State<ReviewForm> {
         Navigator.of(context).pop();
       },
     );
+  }
+
+  void _handleBackButton(BuildContext context) {
+    if (text.isNotEmpty) {
+      const UnsavedDialog().openDialog(context);
+      return;
+    }
+    Navigator.of(context).pop();
   }
 }

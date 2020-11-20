@@ -38,6 +38,7 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
         );
 
   DestinationUpdate get update => state.update;
+  bool get isDirty => state.isDirty();
 
   void changeText(String text) {
     emit(state.copyWith(text: text));
