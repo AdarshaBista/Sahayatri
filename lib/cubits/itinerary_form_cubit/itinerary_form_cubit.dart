@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/core/models/itinerary.dart';
@@ -21,6 +23,8 @@ class ItineraryFormCubit extends Cubit<ItineraryFormState> {
                 itinerary == null ? [] : List<Checkpoint>.from(itinerary.checkpoints),
           ),
         );
+
+  bool get isDirty => state.isDirty(itinerary);
 
   void changeName(String name) {
     emit(state.copyWith(name: name));

@@ -36,4 +36,15 @@ class ItineraryFormState {
       checkpoints: checkpoints ?? this.checkpoints,
     );
   }
+
+  bool isDirty(Itinerary initial) {
+    if (initial == null) {
+      return name != '' || days != '' || nights != '' || checkpoints.isNotEmpty;
+    }
+
+    return initial.name != name ||
+        initial.days != days ||
+        initial.nights != nights ||
+        !listEquals(initial.checkpoints, checkpoints);
+  }
 }

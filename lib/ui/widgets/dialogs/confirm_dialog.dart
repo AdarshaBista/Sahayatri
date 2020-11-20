@@ -7,13 +7,19 @@ import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String message;
+  final String cancelText;
+  final String confirmText;
   final VoidCallback onConfirm;
 
   const ConfirmDialog({
     @required this.message,
     @required this.onConfirm,
+    this.cancelText = 'NO',
+    this.confirmText = 'YES',
   })  : assert(message != null),
-        assert(onConfirm != null);
+        assert(onConfirm != null),
+        assert(cancelText != null),
+        assert(confirmText != null);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +61,7 @@ class ConfirmDialog extends StatelessWidget {
 
   Widget _buildConfirmButton(BuildContext context) {
     return CustomButton(
-      label: 'YES',
+      label: confirmText,
       iconData: Icons.check,
       color: AppColors.secondary,
       backgroundColor: AppColors.secondaryLight,
@@ -68,7 +74,7 @@ class ConfirmDialog extends StatelessWidget {
 
   Widget _buildRejectButton(BuildContext context) {
     return CustomButton(
-      label: 'NO',
+      label: cancelText,
       iconData: Icons.close,
       color: AppColors.primaryDark,
       backgroundColor: AppColors.primaryLight,
