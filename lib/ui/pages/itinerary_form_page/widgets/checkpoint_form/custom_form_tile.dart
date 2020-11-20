@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
 
-class CustomTile extends StatelessWidget {
+class CustomFormTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final String hintText;
   final Widget trailing;
   final VoidCallback onTap;
 
-  const CustomTile({
+  const CustomFormTile({
     @required this.icon,
     @required this.onTap,
     @required this.title,
@@ -31,27 +31,11 @@ class CustomTile extends StatelessWidget {
           style: AppTextStyles.small.bold,
         ),
         const SizedBox(height: 8.0),
-        CustomCard(
-          child: ListTile(
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            onTap: onTap,
-            trailing: trailing,
-            title: Row(
-              children: [
-                Icon(
-                  icon,
-                  size: 20.0,
-                  color: Colors.black45,
-                ),
-                const SizedBox(width: 16.0),
-                Text(
-                  hintText,
-                  style: AppTextStyles.small,
-                ),
-              ],
-            ),
-          ),
+        CustomTile(
+          icon: icon,
+          title: hintText,
+          onTap: onTap,
+          trailing: trailing,
         ),
       ],
     );

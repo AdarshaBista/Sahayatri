@@ -10,8 +10,8 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_tile.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_list_sheet.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
 
 class PlacePicker extends StatefulWidget {
   final Place initialPlace;
@@ -37,7 +37,7 @@ class _PlacePickerState extends State<PlacePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTile(
+    return CustomFormTile(
       title: 'Place',
       icon: Icons.place_outlined,
       hintText: selectedPlace?.name ?? 'No place selected',

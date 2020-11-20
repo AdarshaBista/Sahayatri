@@ -55,6 +55,7 @@ class _TagsFieldState extends State<TagsField> {
       label: 'Tags',
       icon: Icons.tag,
       onChanged: addTag,
+      hintText: 'Add a tag',
       controller: controller,
       validator: (_) => null,
       showField: tagsLength < ApiConfig.maxTags,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_tile.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
 
 class DateTimePicker extends StatefulWidget {
   final DateTime initialDateTime;
@@ -29,7 +29,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTile(
+    return CustomFormTile(
       title: 'Date & Time',
       icon: Icons.date_range_outlined,
       hintText: selectedDateTime == null

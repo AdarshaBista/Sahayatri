@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/common/image_source_sheet.dart';
 
@@ -44,11 +44,9 @@ class ImagesField extends StatelessWidget {
             if (state.imageUrls.length < ApiConfig.maxImages)
               ScaleAnimator(
                 duration: 200,
-                child: CustomButton(
-                  label: 'Add Images',
-                  color: AppColors.barrier,
-                  backgroundColor: AppColors.lightAccent,
-                  iconData: Icons.add_photo_alternate_outlined,
+                child: CustomTile(
+                  title: 'Add Images',
+                  icon: Icons.add_photo_alternate_outlined,
                   onTap: () => ImageSourceSheet(
                     onSelect: context.read<DestinationUpdateFormCubit>().selectImage,
                   ).openModalBottomSheet(context),
