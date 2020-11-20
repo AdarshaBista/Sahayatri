@@ -35,16 +35,13 @@ class ItineraryFormPage extends StatelessWidget {
   Widget _buildFab(BuildContext context) {
     return BlocBuilder<ItineraryFormCubit, ItineraryFormState>(
       builder: (context, state) {
-        return FloatingActionButton.extended(
+        return FloatingActionButton(
+          mini: true,
           backgroundColor: AppColors.dark,
-          icon: const Icon(
-            Icons.save,
-            size: 20.0,
+          child: const Icon(
+            Icons.check,
+            size: 24.0,
             color: AppColors.primary,
-          ),
-          label: Text(
-            'Save Itinerary',
-            style: AppTextStyles.small.primary,
           ),
           onPressed: () => _saveItinerary(context, state),
         );

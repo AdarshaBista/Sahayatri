@@ -42,7 +42,7 @@ class CheckpointForm extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 children: [
                   Text(
-                    checkpoint == null ? 'Create a Checkpoint' : 'Edit this checkpoint',
+                    checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
                     style: AppTextStyles.medium.bold,
                   ),
                   const Divider(height: 24.0),
@@ -106,7 +106,7 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildSmsToggle(bool shouldSendSms, BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      trailing: Switch.adaptive(
+      trailing: Checkbox(
         value: shouldSendSms,
         activeColor: AppColors.primary,
         onChanged: (value) =>

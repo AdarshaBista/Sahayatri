@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_tile.dart';
 
@@ -47,7 +46,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
     final DateTime pickedDate = await _showDatePicker(context);
     if (pickedDate == null) return;
 
-    final DateTime pickedTime = await _showTimePicker(context);
+    final TimeOfDay pickedTime = await _showTimePicker(context);
     if (pickedTime == null) return;
 
     setState(() {
@@ -63,30 +62,50 @@ class _DateTimePickerState extends State<DateTimePicker> {
   }
 
   Future<DateTime> _showDatePicker(BuildContext context) {
-    return DatePicker.showDatePicker(
-      context,
-      theme: _dateTimePickerTheme,
-      currentTime: selectedDateTime ?? DateTime.now(),
-      minTime: DateTime.now(),
-      maxTime: DateTime.now().add(const Duration(days: 5 * 365)),
+    final now = DateTime.now();
+    final firstDate = (selectedDateTime == null || selectedDateTime.isAfter(now))
+        ? now
+        : selectedDateTime;
+
+    return showDatePicker(
+      builder: _getTheme,
+      context: context,
+      firstDate: firstDate,
+      initialDate: selectedDateTime ?? now,
+      lastDate: DateTime.now().add(const Duration(days: 5 * 365)),
     );
   }
 
-  Future<DateTime> _showTimePicker(BuildContext context) {
-    return DatePicker.showTime12hPicker(
-      context,
-      theme: _dateTimePickerTheme,
-      currentTime: selectedDateTime ?? DateTime.now(),
+  Future<TimeOfDay> _showTimePicker(BuildContext context) {
+    final initialTime = selectedDateTime == null
+        ? TimeOfDay.now()
+        : TimeOfDay(
+            hour: selectedDateTime.hour,
+            minute: selectedDateTime.minute,
+          );
+
+    return showTimePicker(
+      builder: _getTheme,
+      context: context,
+      initialTime: initialTime,
     );
   }
 
-  DatePickerTheme get _dateTimePickerTheme => DatePickerTheme(
-        itemStyle: AppTextStyles.medium,
-        doneStyle: AppTextStyles.small.primary,
-        cancelStyle: AppTextStyles.small.secondary,
-      );
+  Widget _getTheme(BuildContext context, Widget child) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: colorScheme.copyWith(
+          primary: AppColors.primaryDark,
+          onPrimary: AppColors.light,
+        ),
+      ),
+      child: child,
+    );
+  }
 
   String _formattedDate(DateTime date) {
-    return DateFormat('MMM dd y h:mm a').format(date);
+    return DateFormat('MMM dd y, h:mm a').format(date);
   }
 }

@@ -19,8 +19,8 @@ class AppThemes {
         splashColor: AppColors.primary,
         disabledColor: AppColors.disabled,
         backgroundColor: AppColors.light,
+        dialogBackgroundColor: AppColors.light,
         scaffoldBackgroundColor: AppColors.light,
-        dialogBackgroundColor: AppColors.lightAccent,
         canvasColor: AppColors.light,
         dividerColor: AppColors.barrier,
         buttonColor: AppColors.secondary,
@@ -181,7 +181,7 @@ class AppThemes {
   static DialogTheme get _dialogTheme => DialogTheme(
         elevation: 16.0,
         shape: _circularBorderRadius,
-        backgroundColor: AppColors.lightAccent,
+        backgroundColor: AppColors.light,
         contentTextStyle: AppTextStyles.medium,
       );
 

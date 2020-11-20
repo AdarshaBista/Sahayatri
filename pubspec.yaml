@@ -60,7 +60,6 @@ dependencies:
   loading_indicator: ^1.2.0
   flutter_rating_bar: ^3.2.0
   flutter_zoom_drawer: ^1.0.4
-  flutter_datetime_picker: ^1.4.0
   community_material_icon: ^5.4.55
   sleek_circular_slider: ^1.2.0+web
   flutter_staggered_grid_view: ^0.3.2
