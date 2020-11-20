@@ -7,8 +7,9 @@ class AppConfig {
 }
 
 class ApiConfig {
+  static const int maxTags = 10;
   static const int pageLimit = 10;
-  static const int maxImages = 12;
+  static const int maxImages = 10;
   static const int maxTextLength = 500;
   static const String apiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
   static const String weatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';

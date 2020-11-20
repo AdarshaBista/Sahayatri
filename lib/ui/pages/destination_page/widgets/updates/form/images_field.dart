@@ -18,6 +18,7 @@ class ImagesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
+      buildWhen: (p, c) => p.imageUrls.length != c.imageUrls.length,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -28,8 +29,10 @@ class ImagesField extends StatelessWidget {
             ),
             const SizedBox(height: 4.0),
             Text(
-              '${state.imageUrls.length} images selected',
-              style: AppTextStyles.extraSmall.primaryDark,
+              '${state.imageUrls.length} / ${ApiConfig.maxImages} images',
+              style: state.imageUrls.length == ApiConfig.maxImages
+                  ? AppTextStyles.extraSmall.secondary
+                  : AppTextStyles.extraSmall.primaryDark,
             ),
             const SizedBox(height: 6.0),
             PhotoGallery(
@@ -39,8 +42,8 @@ class ImagesField extends StatelessWidget {
             ),
             if (state.imageUrls.length < ApiConfig.maxImages)
               CustomButton(
-                label: 'Add Image',
-                color: AppColors.dark,
+                label: 'Add Images',
+                color: AppColors.barrier,
                 backgroundColor: AppColors.lightAccent,
                 iconData: Icons.add_photo_alternate_outlined,
                 onTap: () => ImageSourceSheet(

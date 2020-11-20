@@ -38,7 +38,7 @@ class UpdateForm extends StatelessWidget {
             children: [
               Text('Post an Update', style: AppTextStyles.medium.bold),
               const Divider(height: 16.0),
-              TagsField(),
+              const TagsField(),
               const SizedBox(height: 16.0),
               const LocationField(),
               const SizedBox(height: 12.0),

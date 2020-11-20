@@ -5,13 +5,14 @@ import 'package:meta/meta.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
+
+import 'package:sahayatri/core/services/api_service.dart';
 
 part 'destination_update_form_state.dart';
 
@@ -37,21 +38,21 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
         );
 
   DestinationUpdate get update => state.update;
-  List<String> get tags => ['fun', 'alert', 'disaster', 'danger', 'general'];
 
   void changeText(String text) {
     emit(state.copyWith(text: text));
   }
 
-  void updateTags(String tag) {
+  void addTag(String tag) {
     final tags = List<String>.from(state.tags);
-    if (tags.contains(tag)) {
-      tags.remove(tag);
-      emit(state.copyWith(tags: tags));
-    } else {
-      tags.add(tag);
-      emit(state.copyWith(tags: tags));
-    }
+    tags.add(tag);
+    emit(state.copyWith(tags: tags));
+  }
+
+  void removeTag(String tag) {
+    final tags = List<String>.from(state.tags);
+    tags.remove(tag);
+    emit(state.copyWith(tags: tags));
   }
 
   void updateCoords(Coord coord) {

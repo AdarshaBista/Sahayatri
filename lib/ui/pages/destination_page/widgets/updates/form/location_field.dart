@@ -16,23 +16,24 @@ class LocationField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
+      buildWhen: (p, c) => p.coords.length != c.coords.length,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Location',
+              'Locations',
               style: AppTextStyles.small.bold,
             ),
             const SizedBox(height: 4.0),
             Text(
-              '${state.coords.length} locations selected',
+              '${state.coords.length} locations',
               style: AppTextStyles.extraSmall.primaryDark,
             ),
             const SizedBox(height: 6.0),
             CustomButton(
               label: 'View / Select Locations',
-              color: AppColors.dark,
+              color: AppColors.barrier,
               backgroundColor: AppColors.lightAccent,
               iconData: CommunityMaterialIcons.map_marker_plus_outline,
               onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
