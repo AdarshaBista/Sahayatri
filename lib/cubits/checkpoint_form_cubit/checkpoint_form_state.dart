@@ -35,6 +35,20 @@ class CheckpointFormState extends Equatable {
     );
   }
 
+  bool isDirty(Checkpoint initial) {
+    if (initial == null) {
+      return place != null ||
+          description != '' ||
+          dateTime != null ||
+          notifyContact == false;
+    }
+
+    return initial.place != place ||
+        initial.description != description ||
+        initial.notifyContact != notifyContact ||
+        initial.dateTime != dateTime;
+  }
+
   @override
   List<Object> get props => [place, description, dateTime, notifyContact];
 }

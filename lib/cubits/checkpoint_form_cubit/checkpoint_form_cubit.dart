@@ -26,6 +26,8 @@ class CheckpointFormCubit extends Cubit<CheckpointFormState> {
           ),
         );
 
+  bool get isDirty => state.isDirty(checkpoint);
+
   void changePlace(Place place) {
     emit(state.copyWith(place: place));
   }

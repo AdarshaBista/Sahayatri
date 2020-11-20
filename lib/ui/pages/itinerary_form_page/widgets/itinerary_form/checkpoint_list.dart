@@ -54,7 +54,7 @@ class CheckpointList extends StatelessWidget {
           checkpoint: null,
           onSubmit: (checkpoint) =>
               context.read<ItineraryFormCubit>().addCheckpoint(checkpoint),
-        ).openModalBottomSheet(context);
+        ).openModalBottomSheet(context, isDismissible: false);
       },
     );
   }

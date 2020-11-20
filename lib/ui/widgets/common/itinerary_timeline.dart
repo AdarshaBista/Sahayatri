@@ -196,7 +196,7 @@ class ItineraryTimeline extends StatelessWidget {
         onSubmit: (updatedCheckpoint) => context
             .read<ItineraryFormCubit>()
             .updateCheckpoint(checkpoint, updatedCheckpoint),
-      ).openModalBottomSheet(context);
+      ).openModalBottomSheet(context, isDismissible: false);
     } else {
       context.read<DestinationNavService>().pushNamed(
             Routes.placePageRoute,

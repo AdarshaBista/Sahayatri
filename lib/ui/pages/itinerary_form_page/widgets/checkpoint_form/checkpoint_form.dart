@@ -3,12 +3,15 @@ import 'package:flutter/rendering.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
+
+import 'package:sahayatri/core/extensions/widget_x.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
@@ -41,10 +44,7 @@ class CheckpointForm extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(20.0),
                 children: [
-                  Text(
-                    checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
-                    style: AppTextStyles.medium.bold,
-                  ),
+                  _buildHeader(context),
                   const Divider(height: 24.0),
                   _buildPlaceField(state.place, context),
                   const SizedBox(height: 16.0),
@@ -61,6 +61,25 @@ class CheckpointForm extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
+          style: AppTextStyles.medium.bold,
+        ),
+        GestureDetector(
+          onTap: () => _handleBackButton(context),
+          child: const Icon(
+            Icons.close,
+            color: AppColors.secondary,
+          ),
+        ),
+      ],
     );
   }
 
@@ -139,5 +158,18 @@ class CheckpointForm extends StatelessWidget {
         Navigator.of(context).pop();
       },
     );
+  }
+
+  void _handleBackButton(BuildContext context) {
+    if (context.read<CheckpointFormCubit>().isDirty) {
+      ConfirmDialog(
+        cancelText: 'BACK',
+        confirmText: 'EXIT',
+        message: 'Changes you made will not be saved!',
+        onConfirm: Navigator.of(context).pop,
+      ).openDialog(context);
+      return;
+    }
+    Navigator.of(context).pop();
   }
 }
