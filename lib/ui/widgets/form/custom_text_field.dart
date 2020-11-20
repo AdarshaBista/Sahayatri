@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -69,9 +69,8 @@ class CustomTextField extends StatelessWidget {
     final int maxLines = obscureText ? 1 : null;
     final int minLines = maxLines ?? (isLarge ? 4 : 1);
 
-    return SlideAnimator(
-      duration: 300,
-      begin: const Offset(0.0, 1.0),
+    return ScaleAnimator(
+      duration: 200,
       child: TextFormField(
         controller: controller,
         minLines: minLines,

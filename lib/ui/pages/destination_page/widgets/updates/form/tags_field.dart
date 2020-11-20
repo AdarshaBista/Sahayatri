@@ -80,6 +80,7 @@ class _TagsFieldState extends State<TagsField> {
       runSpacing: 8.0,
       children: tags
           .map((t) => TagChip(
+                key: ValueKey(t),
                 label: t,
                 onDelete: (tag) =>
                     context.read<DestinationUpdateFormCubit>().removeTag(tag),

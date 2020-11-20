@@ -44,6 +44,8 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
   }
 
   void addTag(String tag) {
+    if (state.tags.contains(tag)) return;
+
     final tags = List<String>.from(state.tags);
     tags.add(tag);
     emit(state.copyWith(tags: tags));
