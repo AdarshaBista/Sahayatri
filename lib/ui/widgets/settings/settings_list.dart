@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
+
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/widgets/settings/settings_card.dart';
 import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
 import 'package:sahayatri/ui/widgets/contact/contact_form.dart';
+import 'package:sahayatri/ui/widgets/settings/settings_card.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
 
 class SettingsList extends StatelessWidget {
@@ -30,7 +33,7 @@ class SettingsList extends StatelessWidget {
           const SizedBox(height: 12.0),
           SettingsCard(
             title: 'Translate',
-            subtitle: 'Translate English to Nepali with text to speech',
+            subtitle: 'Translate from one language to another with text to speech.',
             icon: CommunityMaterialIcons.translate,
             onTap: () => const TranslateForm(
               isOnSettings: true,
@@ -45,6 +48,13 @@ class SettingsList extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: ContactForm(isOnSettings: true),
             ).openModalBottomSheet(context),
+          ),
+          const SizedBox(height: 12.0),
+          SettingsCard(
+            title: 'Toggle Theme',
+            subtitle: 'Toggle between light and dark theme.',
+            icon: CommunityMaterialIcons.theme_light_dark,
+            onTap: () => context.read<ThemeCubit>().changeTheme(),
           ),
         ],
       ),

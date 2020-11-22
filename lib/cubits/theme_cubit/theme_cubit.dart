@@ -8,8 +8,8 @@ part 'theme_state.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(const ThemeState(ThemeMode.dark));
 
-  void changeTheme(bool isDark) {
-    if (isDark) {
+  void changeTheme() {
+    if (state.themeMode == ThemeMode.light) {
       emit(const ThemeState(ThemeMode.dark));
     } else {
       emit(const ThemeState(ThemeMode.light));
