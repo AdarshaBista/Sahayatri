@@ -11,12 +11,18 @@ extension TextStyleX on TextStyle {
   TextStyle get primaryDark => copyWith(color: AppColors.primaryDark);
   TextStyle get primaryLight => withColor(AppColors.primary.withOpacity(0.25));
   TextStyle get secondary => copyWith(color: AppColors.secondary);
+  TextStyle get secondaryDark => copyWith(color: AppColors.secondaryDark);
   TextStyle get secondaryLight => withColor(AppColors.secondary.withOpacity(0.25));
   TextStyle get light => copyWith(color: AppColors.light);
   TextStyle get lightAccent => copyWith(color: AppColors.lightAccent);
   TextStyle get dark => copyWith(color: AppColors.dark);
-  TextStyle get darkAccent => copyWith(color: AppColors.barrier);
+  TextStyle get darkAccent => copyWith(color: AppColors.darkFaded);
   TextStyle get serif => copyWith(fontFamily: AppConfig.fontFamilySerif);
   TextStyle withColor(Color color) => copyWith(color: color);
   TextStyle withSize(double size) => copyWith(fontSize: size);
+}
+
+extension ContextStyles on BuildContext {
+  TextTheme get t => Theme.of(this).textTheme;
+  ColorScheme get c => Theme.of(this).colorScheme;
 }

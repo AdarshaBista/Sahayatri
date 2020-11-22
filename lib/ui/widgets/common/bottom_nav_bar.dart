@@ -62,7 +62,7 @@ class BottomNavBar extends StatelessWidget {
         Icon(
           icon,
           size: iconSize,
-          color: isSelected ? AppColors.primary : AppColors.barrier,
+          color: isSelected ? AppColors.primary : AppColors.darkFaded,
         ),
         AnimatedContainer(
           curve: Curves.easeOut,

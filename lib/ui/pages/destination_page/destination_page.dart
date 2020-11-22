@@ -39,7 +39,7 @@ class DestinationPage extends StatelessWidget {
         actions: [
           IconButton(
             splashRadius: 20.0,
-            icon: const Icon(Icons.close),
+            icon: const Icon(Icons.close, color: AppColors.dark),
             onPressed: () => context.read<RootNavService>().pop(),
           ),
         ],

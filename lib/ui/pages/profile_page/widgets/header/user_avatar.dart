@@ -30,7 +30,7 @@ class UserAvatar extends StatelessWidget {
       child: ScaleAnimator(
         child: CircleAvatar(
           radius: radius + 2.0,
-          backgroundColor: user.imageUrl == null ? AppColors.barrier : AppColors.light,
+          backgroundColor: user.imageUrl == null ? AppColors.darkFaded : AppColors.light,
           child: CircleAvatar(
             radius: radius,
             backgroundColor: AppColors.primary,

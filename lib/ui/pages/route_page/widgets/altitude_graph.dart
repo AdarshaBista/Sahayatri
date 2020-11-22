@@ -75,7 +75,7 @@ class AltitudeGraph extends StatelessWidget {
     return FlBorderData(
       border: Border.all(
         width: 0.5,
-        color: AppColors.barrier,
+        color: AppColors.darkFaded,
       ),
     );
   }

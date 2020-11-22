@@ -74,7 +74,7 @@ class TranslateBubble extends StatelessWidget {
             Icon(
               Icons.volume_up_rounded,
               size: 16.0,
-              color: AppColors.barrier,
+              color: AppColors.darkFaded,
             ),
             const SizedBox(width: 4.0),
             Text(

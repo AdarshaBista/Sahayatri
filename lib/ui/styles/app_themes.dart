@@ -9,68 +9,93 @@ import 'package:sahayatri/ui/styles/app_text_styles.dart';
 class AppThemes {
   AppThemes._();
 
-  static ThemeData get light => ThemeData(
+  static ThemeData get _base => ThemeData(
         fontFamily: AppConfig.fontFamily,
-        brightness: Brightness.light,
-        accentColorBrightness: Brightness.light,
-        visualDensity: VisualDensity.standard,
         primaryColor: AppColors.primary,
+        primaryColorDark: AppColors.primaryDark,
+        primaryColorLight: AppColors.primaryLight,
         accentColor: AppColors.secondary,
         splashColor: AppColors.primary,
-        disabledColor: AppColors.disabled,
-        backgroundColor: AppColors.light,
-        dialogBackgroundColor: AppColors.light,
-        scaffoldBackgroundColor: AppColors.light,
-        canvasColor: AppColors.light,
-        dividerColor: AppColors.barrier,
-        buttonColor: AppColors.secondary,
-        cardColor: AppColors.lightAccent,
-        bottomAppBarColor: AppColors.light,
-        hintColor: AppColors.primary,
         errorColor: AppColors.secondary,
         indicatorColor: AppColors.primary,
-        iconTheme: darkIconTheme,
-        accentIconTheme: darkIconTheme,
-        primaryIconTheme: darkIconTheme,
-        bottomAppBarTheme: _bottomAppBarTheme,
-        appBarTheme: _appBarTheme,
-        tabBarTheme: _tabBarTheme,
-        cardTheme: _cardTheme,
-        buttonTheme: _buttonTheme,
-        dialogTheme: _dialogTheme,
-        dividerTheme: _dividerTheme,
-        snackBarTheme: _snackBarTheme,
-        popupMenuTheme: _popupMenuTheme,
-        bottomSheetTheme: _bottomSheetTheme,
-        inputDecorationTheme: _inputDecorationTheme,
-        floatingActionButtonTheme: _floatingActionButtonTheme,
-        colorScheme: ColorScheme(
-          brightness: Brightness.light,
-          primary: AppColors.primary,
-          primaryVariant: AppColors.primaryDark,
-          onPrimary: AppColors.dark,
-          secondary: AppColors.secondary,
-          secondaryVariant: AppColors.secondaryLight,
-          onSecondary: AppColors.light,
-          error: AppColors.secondary,
-          onError: AppColors.light,
-          surface: AppColors.light,
-          onSurface: AppColors.dark,
-          background: AppColors.light,
-          onBackground: AppColors.dark,
-        ),
+        visualDensity: VisualDensity.standard,
+        accentColorBrightness: Brightness.dark,
+        primaryColorBrightness: Brightness.light,
       );
 
-  static ThemeData get dark => light.copyWith(primaryColor: AppColors.secondary);
+  static ThemeData get light => _base.copyWith(
+        brightness: Brightness.light,
+        backgroundColor: AppColors.light,
+        scaffoldBackgroundColor: AppColors.light,
+        colorScheme: _lightColorScheme,
+        iconTheme: _darkIconTheme,
+        accentIconTheme: _darkIconTheme,
+        primaryIconTheme: _darkIconTheme,
+        cardTheme: _lightCardTheme,
+        appBarTheme: _lightAppBarTheme,
+        tabBarTheme: _lightTabBarTheme,
+        dialogTheme: _lightDialogTheme,
+        dividerTheme: _lightDividerTheme,
+        popupMenuTheme: _lightPopupMenuTheme,
+        bottomSheetTheme: _lightBottomSheetTheme,
+        bottomAppBarTheme: _lightBottomAppBarTheme,
+        inputDecorationTheme: _lightInputDecorationTheme,
+        floatingActionButtonTheme: _lightFloatingActionButtonTheme,
+      );
 
-  static IconThemeData get darkIconTheme => const IconThemeData(
+  static ThemeData get dark => _base.copyWith(
+        brightness: Brightness.dark,
+        backgroundColor: AppColors.dark,
+        scaffoldBackgroundColor: AppColors.dark,
+        applyElevationOverlayColor: true,
+        colorScheme: _darkColorScheme,
+        iconTheme: _lightIconTheme,
+        accentIconTheme: _lightIconTheme,
+        primaryIconTheme: _lightIconTheme,
+        cardTheme: _darkCardTheme,
+        appBarTheme: _darkAppBarTheme,
+        tabBarTheme: _darkTabBarTheme,
+        dialogTheme: _darkDialogTheme,
+        dividerTheme: _darkDividerTheme,
+        popupMenuTheme: _darkPopupMenuTheme,
+        bottomSheetTheme: _darkBottomSheetTheme,
+        bottomAppBarTheme: _darkBottomAppBarTheme,
+        inputDecorationTheme: _darkInputDecorationTheme,
+        floatingActionButtonTheme: _darkFloatingActionButtonTheme,
+      );
+
+  static ColorScheme get _lightColorScheme => const ColorScheme(
+        brightness: Brightness.light,
+        primary: AppColors.primary,
+        onPrimary: AppColors.dark,
+        primaryVariant: AppColors.primaryDark,
+        secondary: AppColors.secondary,
+        onSecondary: AppColors.light,
+        secondaryVariant: AppColors.secondaryDark,
+        error: AppColors.secondary,
+        onError: AppColors.light,
+        surface: AppColors.lightAccent,
+        onSurface: AppColors.dark,
+        background: AppColors.light,
+        onBackground: AppColors.dark,
+      );
+
+  static ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
+        brightness: Brightness.dark,
+        surface: AppColors.darkAccent,
+        onSurface: AppColors.light,
+        background: AppColors.dark,
+        onBackground: AppColors.light,
+      );
+
+  static IconThemeData get _lightIconTheme => const IconThemeData(
         size: 20.0,
         opacity: 1.0,
-        color: AppColors.dark,
+        color: AppColors.light,
       );
 
-  static IconThemeData get lightIconTheme => darkIconTheme.copyWith(
-        color: AppColors.light,
+  static IconThemeData get _darkIconTheme => _lightIconTheme.copyWith(
+        color: AppColors.dark,
       );
 
   static RoundedRectangleBorder get _circularBorderRadius => RoundedRectangleBorder(
@@ -82,7 +107,7 @@ class AppThemes {
         borderRadius: BorderRadius.circular(4.0),
       );
 
-  static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
+  static InputDecorationTheme get _lightInputDecorationTheme => InputDecorationTheme(
         filled: true,
         isDense: true,
         errorMaxLines: 2,
@@ -106,30 +131,60 @@ class AppThemes {
         focusedErrorBorder: _inputBorder,
       );
 
-  static FloatingActionButtonThemeData get _floatingActionButtonTheme =>
+  static InputDecorationTheme get _darkInputDecorationTheme =>
+      _lightInputDecorationTheme.copyWith(
+        fillColor: AppColors.darkAccent,
+        focusColor: AppColors.darkAccent,
+        hintStyle: AppTextStyles.small.light,
+        labelStyle: AppTextStyles.small.light,
+        helperStyle: AppTextStyles.small.light,
+        prefixStyle: AppTextStyles.small.light,
+        suffixStyle: AppTextStyles.small.light,
+        counterStyle: AppTextStyles.small.light,
+        errorStyle: AppTextStyles.extraSmall.secondary,
+      );
+
+  static FloatingActionButtonThemeData get _lightFloatingActionButtonTheme =>
       const FloatingActionButtonThemeData(
         elevation: 8.0,
         disabledElevation: 0.0,
         backgroundColor: AppColors.dark,
-        splashColor: AppColors.secondary,
+        splashColor: AppColors.darkAccent,
         foregroundColor: AppColors.primary,
       );
 
-  static AppBarTheme get _appBarTheme => AppBarTheme(
+  static FloatingActionButtonThemeData get _darkFloatingActionButtonTheme =>
+      _lightFloatingActionButtonTheme.copyWith(
+        backgroundColor: AppColors.darkAccent,
+        splashColor: AppColors.dark,
+      );
+
+  static AppBarTheme get _lightAppBarTheme => AppBarTheme(
         elevation: 0.0,
         color: AppColors.light,
         brightness: Brightness.light,
-        iconTheme: darkIconTheme,
-        actionsIconTheme: darkIconTheme,
+        iconTheme: _darkIconTheme,
+        actionsIconTheme: _darkIconTheme,
       );
 
-  static BottomAppBarTheme get _bottomAppBarTheme => const BottomAppBarTheme(
+  static AppBarTheme get _darkAppBarTheme => _lightAppBarTheme.copyWith(
+        color: AppColors.dark,
+        brightness: Brightness.dark,
+        iconTheme: _lightIconTheme,
+        actionsIconTheme: _lightIconTheme,
+      );
+
+  static BottomAppBarTheme get _lightBottomAppBarTheme => const BottomAppBarTheme(
         elevation: 0.0,
         color: AppColors.light,
         shape: CircularNotchedRectangle(),
       );
 
-  static TabBarTheme get _tabBarTheme => TabBarTheme(
+  static BottomAppBarTheme get _darkBottomAppBarTheme => _lightBottomAppBarTheme.copyWith(
+        color: AppColors.dark,
+      );
+
+  static TabBarTheme get _lightTabBarTheme => TabBarTheme(
         labelColor: AppColors.dark,
         labelStyle: AppTextStyles.medium,
         indicatorSize: TabBarIndicatorSize.tab,
@@ -144,29 +199,34 @@ class AppThemes {
         ),
       );
 
-  static ButtonThemeData get _buttonTheme => ButtonThemeData(
-        alignedDropdown: true,
-        shape: _circularBorderRadius,
-        buttonColor: AppColors.primary,
-        splashColor: AppColors.secondary,
+  static TabBarTheme get _darkTabBarTheme => _lightTabBarTheme.copyWith(
+        labelColor: AppColors.light,
+        labelStyle: AppTextStyles.medium.light,
       );
 
-  static CardTheme get _cardTheme => CardTheme(
+  static CardTheme get _lightCardTheme => CardTheme(
         elevation: 8.0,
         margin: EdgeInsets.zero,
         color: AppColors.lightAccent,
-        shadowColor: AppColors.darkAccent,
         clipBehavior: Clip.antiAlias,
         shape: _circularBorderRadius,
       );
 
-  static DividerThemeData get _dividerTheme => DividerThemeData(
+  static CardTheme get _darkCardTheme => _lightCardTheme.copyWith(
+        color: AppColors.darkAccent,
+      );
+
+  static DividerThemeData get _lightDividerTheme => DividerThemeData(
         space: 8.0,
         thickness: 0.5,
         color: AppColors.dark.withOpacity(0.3),
       );
 
-  static BottomSheetThemeData get _bottomSheetTheme => const BottomSheetThemeData(
+  static DividerThemeData get _darkDividerTheme => _lightDividerTheme.copyWith(
+        color: AppColors.light.withOpacity(0.3),
+      );
+
+  static BottomSheetThemeData get _lightBottomSheetTheme => const BottomSheetThemeData(
         elevation: 12.0,
         modalElevation: 12.0,
         clipBehavior: Clip.antiAlias,
@@ -179,27 +239,33 @@ class AppThemes {
           ),
         ),
       );
+  static BottomSheetThemeData get _darkBottomSheetTheme =>
+      _lightBottomSheetTheme.copyWith(
+        backgroundColor: AppColors.darkAccent,
+        modalBackgroundColor: AppColors.darkAccent,
+      );
 
-  static DialogTheme get _dialogTheme => DialogTheme(
+  static DialogTheme get _lightDialogTheme => DialogTheme(
         elevation: 16.0,
         shape: _circularBorderRadius,
         backgroundColor: AppColors.light,
         contentTextStyle: AppTextStyles.medium,
       );
 
-  static PopupMenuThemeData get _popupMenuTheme => PopupMenuThemeData(
+  static DialogTheme get _darkDialogTheme => _lightDialogTheme.copyWith(
+        backgroundColor: AppColors.dark,
+        contentTextStyle: AppTextStyles.medium.light,
+      );
+
+  static PopupMenuThemeData get _lightPopupMenuTheme => PopupMenuThemeData(
         elevation: 8.0,
         shape: _circularBorderRadius,
         color: AppColors.lightAccent,
         textStyle: AppTextStyles.small,
       );
 
-  static SnackBarThemeData get _snackBarTheme => SnackBarThemeData(
-        elevation: 8.0,
-        shape: _circularBorderRadius,
-        backgroundColor: AppColors.dark,
-        actionTextColor: AppColors.primary,
-        behavior: SnackBarBehavior.floating,
-        contentTextStyle: AppTextStyles.small.light,
+  static PopupMenuThemeData get _darkPopupMenuTheme => _lightPopupMenuTheme.copyWith(
+        color: AppColors.darkAccent,
+        textStyle: AppTextStyles.small.light,
       );
 }

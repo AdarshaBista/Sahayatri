@@ -54,7 +54,7 @@ class _DateTimeInfo extends StatelessWidget {
         children: [
           AdaptiveImage(
             checkpoint.place.imageUrls[0],
-            color: AppColors.barrier,
+            color: AppColors.darkFaded,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

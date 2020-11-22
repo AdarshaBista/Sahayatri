@@ -83,13 +83,13 @@ class ItineraryTimeline extends StatelessWidget {
           child: AdaptiveImage(checkpoint.place.imageUrls[0]),
         ),
       ),
-      beforeLineStyle: const LineStyle(
+      beforeLineStyle: LineStyle(
         thickness: 1.5,
-        color: AppColors.disabled,
+        color: AppColors.darkFaded,
       ),
-      afterLineStyle: const LineStyle(
+      afterLineStyle: LineStyle(
         thickness: 1.5,
-        color: AppColors.disabled,
+        color: AppColors.darkFaded,
       ),
       startChild: _buildDateTime(checkpoint),
       endChild: _buildPlace(context, checkpoint),

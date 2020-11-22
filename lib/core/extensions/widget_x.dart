@@ -8,7 +8,7 @@ extension WidgetX on Widget {
       context: context,
       useSafeArea: true,
       useRootNavigator: false,
-      barrierColor: AppColors.barrier,
+      barrierColor: AppColors.darkFaded,
       barrierDismissible: barrierDismissible,
       builder: (_) => this,
     );
@@ -32,7 +32,7 @@ extension WidgetX on Widget {
       isScrollControlled: true,
       enableDrag: isDismissible,
       isDismissible: isDismissible,
-      barrierColor: AppColors.barrier,
+      barrierColor: AppColors.darkFaded,
       backgroundColor: AppColors.light,
       builder: (_) => this,
     );

@@ -29,7 +29,7 @@ class CheckpointDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTopRow(context),
-            const Divider(height: 16.0, color: AppColors.disabled),
+            const Divider(height: 16.0),
             _buildDescription(),
             const SizedBox(height: 16.0),
             _buildDateTime(),

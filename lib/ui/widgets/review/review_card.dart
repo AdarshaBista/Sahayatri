@@ -85,7 +85,7 @@ class _ReviewCardState extends State<ReviewCard> {
       children: [
         Text(
           widget.review.rating.toStringAsFixed(1),
-          style: AppTextStyles.medium.bold.withColor(AppColors.barrier),
+          style: AppTextStyles.medium.bold.withColor(AppColors.darkFaded),
         ),
         const SizedBox(height: 4.0),
         Text(

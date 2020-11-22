@@ -35,13 +35,13 @@ class AppTextStyles {
 
   static final TextStyle small = _base.copyWith(
     fontSize: 14.0,
-    color: AppColors.barrier,
+    color: AppColors.darkFaded,
     fontWeight: FontWeight.w300,
   );
 
   static final TextStyle extraSmall = _base.copyWith(
     fontSize: 10.0,
-    color: AppColors.barrier,
+    color: AppColors.darkFaded,
     fontWeight: FontWeight.w200,
   );
 }

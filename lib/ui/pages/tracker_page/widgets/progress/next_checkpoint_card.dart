@@ -40,7 +40,7 @@ class NextCheckpointCard extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: ImageUtils.getImageProvider(place.imageUrls.first),
-              colorFilter: ColorFilter.mode(AppColors.barrier, BlendMode.srcATop),
+              colorFilter: ColorFilter.mode(AppColors.darkFaded, BlendMode.srcATop),
             ),
           ),
           child: const FlipCard(

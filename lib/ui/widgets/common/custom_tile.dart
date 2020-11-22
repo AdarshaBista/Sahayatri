@@ -31,7 +31,7 @@ class CustomTile extends StatelessWidget {
             Icon(
               icon,
               size: 20.0,
-              color: AppColors.barrier,
+              color: AppColors.darkFaded,
             ),
             const SizedBox(width: 16.0),
             Text(

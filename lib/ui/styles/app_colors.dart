@@ -7,17 +7,17 @@ class AppColors {
   static const Color primaryDark = Color(0xFF009688);
   static final Color primaryLight = primary.withOpacity(0.3);
 
-  static const Color secondary = Color(0xFFD93636);
+  static const Color secondary = Color(0xFFBA262B);
+  static const Color secondaryDark = Color(0xFF810020);
   static final Color secondaryLight = secondary.withOpacity(0.3);
 
-  static const Color dark = Color(0xFF181818);
+  static const Color dark = Color(0xFF222222);
+  static const Color darkAccent = Color(0xFF313131);
+  static final Color darkFaded = dark.withOpacity(0.7);
+
   static const Color light = Color(0xFFFFFFFF);
-
-  static const Color darkAccent = Color(0xFF24292E);
   static const Color lightAccent = Color(0xFFDFDFE5);
-
-  static const Color disabled = Color(0xFF9496C1);
-  static final Color barrier = dark.withOpacity(0.7);
+  static final Color lightFaded = light.withOpacity(0.7);
 
   static const List<Color> accents = [
     Color(0xFF7B1FA2),
@@ -33,10 +33,6 @@ class AppColors {
     Color(0xFFFFA000),
     Color(0xFFF57C00),
   ];
-
-  static final drawerGradient = AppColors.accents.take(3).toList();
-  static final routeGradient = AppColors.accents.take(4).toList();
-  static final userTrackGradient = AppColors.accents.getRange(5, 7).toList();
 
   static final List<Color> cardGradient = [
     AppColors.dark.withOpacity(0.8),
@@ -54,4 +50,8 @@ class AppColors {
     AppColors.light.withOpacity(0.8),
     AppColors.light,
   ];
+
+  static final drawerGradient = AppColors.accents.take(3).toList();
+  static final routeGradient = AppColors.accents.take(4).toList();
+  static final userTrackGradient = AppColors.accents.getRange(5, 7).toList();
 }

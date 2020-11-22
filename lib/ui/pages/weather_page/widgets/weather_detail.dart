@@ -63,14 +63,14 @@ class WeatherDetail extends StatelessWidget {
               StatCard(
                 label: 'Min',
                 count: '${weather.minTemp}°',
-                color: AppColors.barrier,
+                color: AppColors.darkFaded,
                 countStyle: AppTextStyles.small,
               ),
               const SizedBox(width: 16.0),
               StatCard(
                 label: 'Max',
                 count: '${weather.maxTemp}°',
-                color: AppColors.barrier,
+                color: AppColors.darkFaded,
                 countStyle: AppTextStyles.small,
               ),
             ],

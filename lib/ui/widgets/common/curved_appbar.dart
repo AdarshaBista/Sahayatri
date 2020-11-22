@@ -42,9 +42,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0.0,
       centerTitle: true,
       backgroundColor: Colors.transparent,
-      iconTheme: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-          ? AppThemes.lightIconTheme
-          : AppThemes.darkIconTheme,
+      iconTheme: const IconThemeData(color: AppColors.light),
       title: SlideAnimator(
         begin: const Offset(0.0, -0.2),
         child: FadeAnimator(
@@ -52,9 +50,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-                ? AppTextStyles.medium.light.serif
-                : AppTextStyles.medium.serif,
+            style: AppTextStyles.medium.serif,
           ),
         ),
       ),
@@ -87,7 +83,7 @@ class _CurvePainter extends CustomPainter {
       ..lineTo(width, 0.0)
       ..lineTo(0.0, 0.0);
 
-    canvas.drawShadow(curve, AppColors.barrier, elevation, false);
+    canvas.drawShadow(curve, AppColors.darkFaded, elevation, false);
     canvas.drawPath(curve, paint);
   }
 

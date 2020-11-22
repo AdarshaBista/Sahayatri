@@ -41,7 +41,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
           Icon(
             Icons.timer_outlined,
             size: 24.0,
-            color: AppColors.barrier,
+            color: AppColors.darkFaded,
           ),
           const SizedBox(height: 2.0),
           Text(

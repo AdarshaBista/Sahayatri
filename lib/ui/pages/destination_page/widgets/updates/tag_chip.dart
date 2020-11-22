@@ -49,7 +49,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
           borderRadius: BorderRadius.circular(32.0),
           border: Border.all(
             width: 0.5,
-            color: AppColors.barrier,
+            color: AppColors.darkFaded,
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
@@ -70,7 +70,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
                 child: Icon(
                   Icons.close,
                   size: 12.0,
-                  color: AppColors.barrier,
+                  color: AppColors.darkFaded,
                 ),
               ),
             ],
