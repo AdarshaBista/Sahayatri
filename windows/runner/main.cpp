@@ -28,8 +28,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
   FlutterWindow window(&run_loop, project);
-  Win32Window::Point origin(250, 80);
-  Win32Window::Size size(800, 600);
+  Win32Window::Point origin(400, 70);
+  Win32Window::Size size(600, 600);
   if (!window.CreateAndShow(L"Sahayatri", origin, size)) {
     return EXIT_FAILURE;
   }

@@ -61,6 +61,8 @@ class AppThemes {
         ),
       );
 
+  static ThemeData get dark => light.copyWith(primaryColor: AppColors.secondary);
+
   static IconThemeData get darkIconTheme => const IconThemeData(
         size: 20.0,
         opacity: 1.0,

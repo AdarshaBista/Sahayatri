@@ -26,6 +26,7 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
@@ -46,34 +47,39 @@ class Sahayatri extends StatelessWidget {
       child: Builder(
         builder: (context) => MultiBlocProvider(
           providers: _getBlocProviders(context),
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppThemes.light,
-            darkTheme: AppThemes.light,
-            title: AppConfig.appName,
-            builder: DevicePreview.appBuilder,
-            locale: DevicePreview.locale(context),
-            onGenerateRoute: RootRouter.onGenerateRoute,
-            navigatorKey: context.watch<RootNavService>().navigatorKey,
-            home: BlocBuilder<PrefsCubit, PrefsState>(
-              builder: (context, state) {
-                if (state is PrefsLoading) {
-                  return const SplashView();
-                }
-
-                return FutureBuilder(
-                  future: context.watch<UserCubit>().isLoggedIn(),
-                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.hasData) {
-                      final bool isLoggedIn = snapshot.data;
-                      if (isLoggedIn) return const HomePage();
-                      return const AuthPage();
+          child: BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: AppThemes.light,
+                darkTheme: AppThemes.dark,
+                themeMode: state.themeMode,
+                title: AppConfig.appName,
+                builder: DevicePreview.appBuilder,
+                locale: DevicePreview.locale(context),
+                onGenerateRoute: RootRouter.onGenerateRoute,
+                navigatorKey: context.watch<RootNavService>().navigatorKey,
+                home: BlocBuilder<PrefsCubit, PrefsState>(
+                  builder: (context, state) {
+                    if (state is PrefsLoading) {
+                      return const SplashView();
                     }
-                    return const SplashView();
+
+                    return FutureBuilder(
+                      future: context.watch<UserCubit>().isLoggedIn(),
+                      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                        if (snapshot.hasData) {
+                          final bool isLoggedIn = snapshot.data;
+                          if (isLoggedIn) return const HomePage();
+                          return const AuthPage();
+                        }
+                        return const SplashView();
+                      },
+                    );
                   },
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -123,6 +129,7 @@ class Sahayatri extends StatelessWidget {
 
   List<BlocProvider> _getBlocProviders(BuildContext context) {
     return [
+      BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
       BlocProvider<PrefsCubit>(
         create: (context) => PrefsCubit(
           prefsDao: context.read<PrefsDao>(),
