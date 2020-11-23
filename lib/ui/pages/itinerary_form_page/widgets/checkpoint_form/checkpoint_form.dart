@@ -70,7 +70,7 @@ class CheckpointForm extends StatelessWidget {
       children: [
         Text(
           checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
-          style: AppTextStyles.medium.bold,
+          style: AppTextStyles.headline4.bold,
         ),
         GestureDetector(
           onTap: () => _handleBackButton(context),
@@ -133,11 +133,11 @@ class CheckpointForm extends StatelessWidget {
       ),
       title: Text(
         'Notify Contact',
-        style: AppTextStyles.small.bold,
+        style: AppTextStyles.headline5.bold,
       ),
       subtitle: Text(
         'Notify close contact via SMS when you reach this checkpoint.',
-        style: AppTextStyles.extraSmall,
+        style: AppTextStyles.headline6,
       ),
     );
   }

@@ -21,7 +21,7 @@ class FacilitiesList extends StatelessWidget {
         children: [
           Text(
             'Facilities',
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.headline5.bold,
           ),
           const SizedBox(height: 10.0),
           _buildFacilities(context),
@@ -36,7 +36,7 @@ class FacilitiesList extends StatelessWidget {
     if (facility.isEmpty) {
       return Text(
         'N/A',
-        style: AppTextStyles.extraSmall,
+        style: AppTextStyles.headline6,
       );
     }
 

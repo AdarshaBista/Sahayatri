@@ -67,7 +67,7 @@ class LodgeCard extends StatelessWidget {
               lodge.name,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.small.bold.light,
+              style: AppTextStyles.headline5.bold.light,
             ),
           ),
           Divider(height: 12.0, color: AppColors.lightAccent.withOpacity(0.5)),

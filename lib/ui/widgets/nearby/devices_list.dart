@@ -20,7 +20,7 @@ class DevicesList extends StatelessWidget {
     return connectedDevices.isEmpty
         ? Text(
             'No devices found yet.',
-            style: AppTextStyles.extraSmall.secondary,
+            style: AppTextStyles.headline6.secondary,
           )
         : ListView.builder(
             shrinkWrap: true,

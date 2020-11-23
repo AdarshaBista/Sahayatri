@@ -38,7 +38,7 @@ class AuthButton extends StatelessWidget {
               ? const SimpleBusyIndicator()
               : Text(
                   label,
-                  style: AppTextStyles.small.bold.primary,
+                  style: AppTextStyles.headline5.bold.primary,
                 ),
         );
       },

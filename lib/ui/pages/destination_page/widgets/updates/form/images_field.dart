@@ -26,14 +26,14 @@ class ImagesField extends StatelessWidget {
           children: [
             Text(
               'Images',
-              style: AppTextStyles.small.bold,
+              style: AppTextStyles.headline5.bold,
             ),
             const SizedBox(height: 4.0),
             Text(
               '${state.imageUrls.length} / ${ApiConfig.maxImages} images',
               style: state.imageUrls.length == ApiConfig.maxImages
-                  ? AppTextStyles.extraSmall.secondary
-                  : AppTextStyles.extraSmall.primaryDark,
+                  ? AppTextStyles.headline6.secondary
+                  : AppTextStyles.headline6.primaryDark,
             ),
             const SizedBox(height: 6.0),
             PhotoGallery(

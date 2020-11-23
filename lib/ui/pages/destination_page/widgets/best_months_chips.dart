@@ -21,7 +21,7 @@ class BestMonthsChips extends StatelessWidget {
         children: [
           Text(
             'Best Months',
-            style: AppTextStyles.medium.bold,
+            style: AppTextStyles.headline4.bold,
           ),
           const SizedBox(height: 8.0),
           Wrap(
@@ -32,7 +32,7 @@ class BestMonthsChips extends StatelessWidget {
                       child: Chip(
                         backgroundColor: AppColors.lightAccent,
                         visualDensity: VisualDensity.compact,
-                        label: Text(m, style: AppTextStyles.extraSmall),
+                        label: Text(m, style: AppTextStyles.headline6),
                       ),
                     ))
                 .toList(),

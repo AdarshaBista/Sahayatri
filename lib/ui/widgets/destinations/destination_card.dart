@@ -81,7 +81,7 @@ class DestinationCard extends StatelessWidget {
             destination.name.toUpperCase(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium.bold.light,
+            style: AppTextStyles.headline4.bold.light,
           ),
           const SizedBox(height: 6.0),
           Padding(
@@ -90,7 +90,7 @@ class DestinationCard extends StatelessWidget {
               destination.description,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.extraSmall.lightAccent,
+              style: AppTextStyles.headline6.lightAccent,
             ),
           ),
           Divider(
@@ -114,17 +114,17 @@ class DestinationCard extends StatelessWidget {
       children: [
         Text(
           '${destination.length} km',
-          style: AppTextStyles.extraSmall.primary,
+          style: AppTextStyles.headline6.primary,
         ),
         ...separator,
         Text(
           '${destination.maxAltitude} m',
-          style: AppTextStyles.extraSmall.primary,
+          style: AppTextStyles.headline6.primary,
         ),
         ...separator,
         Text(
           '${destination.estimatedDuration} days',
-          style: AppTextStyles.extraSmall.primary,
+          style: AppTextStyles.headline6.primary,
         ),
         const Spacer(),
         StarRatingBar(

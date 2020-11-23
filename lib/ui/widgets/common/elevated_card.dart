@@ -14,7 +14,7 @@ class ElevatedCard extends StatelessWidget {
 
   const ElevatedCard({
     @required this.child,
-    this.color = AppColors.light,
+    this.color,
     this.shadowColor = AppColors.dark,
     this.elevation = 2.0,
     this.radius = 4.0,
@@ -22,11 +22,11 @@ class ElevatedCard extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.borderRadius,
   })  : assert(child != null),
-        assert(color != null),
         assert(elevation != null),
         assert(radius != null),
         assert(margin != null),
-        assert(padding != null);
+        assert(padding != null),
+        assert(shadowColor != null);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ElevatedCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? context.c.background,
         borderRadius: borderRadius ?? BorderRadius.circular(radius),
         boxShadow: [
           BoxShadow(

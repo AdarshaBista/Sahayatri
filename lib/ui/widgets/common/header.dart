@@ -38,9 +38,8 @@ class Header extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: padding),
               child: Text(
                 title,
-                style: isSerif
-                    ? AppTextStyles.extraLarge.thin.serif
-                    : AppTextStyles.extraLarge.thin,
+                style:
+                    isSerif ? context.t.headline2.thin.serif : context.t.headline2.thin,
               ),
             ),
           if (boldTitle != null)
@@ -52,7 +51,8 @@ class Header extends StatelessWidget {
               ),
               child: Text(
                 boldTitle,
-                style: isSerif ? AppTextStyles.huge.thin.serif : AppTextStyles.huge.thin,
+                style:
+                    isSerif ? context.t.headline1.thin.serif : context.t.headline1.thin,
               ),
             ),
         ],

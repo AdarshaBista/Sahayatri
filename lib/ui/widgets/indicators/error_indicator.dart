@@ -25,7 +25,7 @@ class ErrorIndicator extends StatelessWidget {
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.small.bold,
+            style: context.t.headline5.bold,
           ),
         ),
         if (onRetry != null) RetryButton(onTap: onRetry),

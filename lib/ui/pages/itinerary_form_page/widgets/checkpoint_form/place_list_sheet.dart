@@ -32,7 +32,7 @@ class PlaceListSheet extends StatelessWidget {
           children: [
             Text(
               'Select a place',
-              style: AppTextStyles.medium.bold,
+              style: AppTextStyles.headline4.bold,
             ),
             const Divider(height: 16.0),
             BlocBuilder<PlacesCubit, PlacesState>(
@@ -78,7 +78,7 @@ class PlaceListSheet extends StatelessWidget {
         onSelect(place);
         Navigator.of(context).pop();
       },
-      title: Text(place.name, style: AppTextStyles.medium),
+      title: Text(place.name, style: AppTextStyles.headline4),
       leading: SizedBox(
         height: 50.0,
         width: 50.0,
@@ -91,7 +91,7 @@ class PlaceListSheet extends StatelessWidget {
             ),
         child: Text(
           'View',
-          style: AppTextStyles.small.primary,
+          style: AppTextStyles.headline5.primary,
         ),
       ),
     );

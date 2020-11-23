@@ -27,7 +27,7 @@ class BottomNavBar extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 56.0,
-        color: AppColors.light,
+        color: context.c.background,
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         child: Row(
           children: icons.map((icon) {
@@ -43,7 +43,7 @@ class BottomNavBar extends StatelessWidget {
                   child: FadeAnimator(
                     child: SlideAnimator(
                       begin: Offset(0.0, 0.2 + index * 0.4),
-                      child: _buildNavItem(icon, isSelected),
+                      child: _buildNavItem(context, icon, isSelected),
                     ),
                   ),
                 ),
@@ -55,14 +55,14 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, bool isSelected) {
+  Widget _buildNavItem(BuildContext context, IconData icon, bool isSelected) {
     return Column(
       children: [
         const SizedBox(height: 6.0),
         Icon(
           icon,
           size: iconSize,
-          color: isSelected ? AppColors.primary : AppColors.darkFaded,
+          color: isSelected ? AppColors.primary : context.c.onSurface,
         ),
         AnimatedContainer(
           curve: Curves.easeOut,

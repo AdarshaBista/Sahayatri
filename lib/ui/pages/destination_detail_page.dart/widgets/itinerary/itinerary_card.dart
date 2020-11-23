@@ -73,12 +73,12 @@ class ItineraryCard extends StatelessWidget {
             itinerary.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.small.bold.light,
+            style: AppTextStyles.headline5.bold.light,
           ),
           const SizedBox(height: 4.0),
           Text(
             '${itinerary.days} days / ${itinerary.nights} nights',
-            style: AppTextStyles.extraSmall.light,
+            style: AppTextStyles.headline6.light,
           ),
           const Divider(
             height: 10.0,
@@ -87,7 +87,7 @@ class ItineraryCard extends StatelessWidget {
           ),
           Text(
             '${itinerary.checkpoints.length} checkpoints',
-            style: AppTextStyles.extraSmall.light,
+            style: AppTextStyles.headline6.light,
           ),
           const SizedBox(height: 6.0),
           CheckpointImages(imageUrls: imageUrls),
@@ -95,7 +95,7 @@ class ItineraryCard extends StatelessWidget {
           if (!itinerary.isTemplate)
             Text(
               '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
-              style: AppTextStyles.extraSmall.primary.bold,
+              style: AppTextStyles.headline6.primary.bold,
             ),
         ],
       ),

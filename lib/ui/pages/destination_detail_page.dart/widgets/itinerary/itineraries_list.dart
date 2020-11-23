@@ -42,7 +42,7 @@ class ItinerariesList extends StatelessWidget {
       children: [
         Text(
           'Our Suggested Itineraries',
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.headline5.bold,
         ),
         const Divider(height: 16.0),
         const SizedBox(height: 8.0),
@@ -84,7 +84,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 16.0),
         Text(
           'Create Your Own',
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.headline5.bold,
         ),
         const Divider(height: 16.0),
         const CreatedItineraryCard(),

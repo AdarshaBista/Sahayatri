@@ -49,7 +49,7 @@ class HeaderTile extends StatelessWidget {
         const SizedBox(height: 4.0),
         Text(
           rating.toString(),
-          style: AppTextStyles.large.bold,
+          style: AppTextStyles.headline3.bold,
         ),
       ],
     );

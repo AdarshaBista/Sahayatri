@@ -57,12 +57,12 @@ class DistanceIndicator extends StatelessWidget {
       children: [
         Text(
           _formatDistance(distance),
-          style: AppTextStyles.medium.bold.withColor(color),
+          style: AppTextStyles.headline4.bold.withColor(color),
         ),
         const SizedBox(height: 2.0),
         Text(
           label,
-          style: AppTextStyles.extraSmall,
+          style: AppTextStyles.headline6,
         ),
       ],
     );

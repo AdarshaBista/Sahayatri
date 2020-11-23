@@ -35,8 +35,8 @@ class LogoutButton extends StatelessWidget {
       child: ScaleAnimator(
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          decoration: const BoxDecoration(
-            color: AppColors.light,
+          decoration: BoxDecoration(
+            color: context.c.background,
             shape: BoxShape.circle,
           ),
           child: const Icon(

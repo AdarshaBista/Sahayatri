@@ -14,8 +14,10 @@ extension TextStyleX on TextStyle {
   TextStyle get secondaryDark => copyWith(color: AppColors.secondaryDark);
   TextStyle get secondaryLight => withColor(AppColors.secondary.withOpacity(0.25));
   TextStyle get light => copyWith(color: AppColors.light);
+  TextStyle get lightFaded => copyWith(color: AppColors.lightFaded);
   TextStyle get lightAccent => copyWith(color: AppColors.lightAccent);
   TextStyle get dark => copyWith(color: AppColors.dark);
+  TextStyle get darkFaded => copyWith(color: AppColors.darkFaded);
   TextStyle get darkAccent => copyWith(color: AppColors.darkFaded);
   TextStyle get serif => copyWith(fontFamily: AppConfig.fontFamilySerif);
   TextStyle withColor(Color color) => copyWith(color: color);
@@ -23,6 +25,7 @@ extension TextStyleX on TextStyle {
 }
 
 extension ContextStyles on BuildContext {
+  ThemeData get theme => Theme.of(this);
   TextTheme get t => Theme.of(this).textTheme;
   ColorScheme get c => Theme.of(this).colorScheme;
 }

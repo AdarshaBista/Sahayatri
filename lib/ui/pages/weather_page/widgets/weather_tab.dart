@@ -31,7 +31,7 @@ class WeatherTab extends StatelessWidget {
             isToday
                 ? 'TODAY'
                 : DateFormat(DateFormat.ABBR_WEEKDAY).format(weather.date).toUpperCase(),
-            style: AppTextStyles.medium.withColor(color),
+            style: AppTextStyles.headline4.withColor(color),
           ),
           const SizedBox(height: 10.0),
           Icon(
@@ -42,7 +42,7 @@ class WeatherTab extends StatelessWidget {
           const SizedBox(height: 10.0),
           Text(
             '${weather.temp}°',
-            style: AppTextStyles.medium.bold.withColor(color),
+            style: AppTextStyles.headline4.bold.withColor(color),
           ),
         ],
       ),

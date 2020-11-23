@@ -52,7 +52,7 @@ class PlacePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Text(
         place.description,
-        style: AppTextStyles.small.serif,
+        style: AppTextStyles.headline5.serif,
       ),
     );
   }

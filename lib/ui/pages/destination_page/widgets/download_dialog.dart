@@ -65,7 +65,7 @@ class DownloadDialog extends StatelessWidget {
           child: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.headline5.bold,
           ),
         ),
         const SizedBox(height: 24.0),
@@ -82,7 +82,7 @@ class DownloadDialog extends StatelessWidget {
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.headline5.bold,
           ),
         ),
         CustomButton(

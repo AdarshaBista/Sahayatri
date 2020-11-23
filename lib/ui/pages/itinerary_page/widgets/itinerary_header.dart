@@ -19,13 +19,13 @@ class ItineraryHeader extends StatelessWidget {
         Text(
           itinerary.name,
           textAlign: TextAlign.center,
-          style: AppTextStyles.large.bold,
+          style: AppTextStyles.headline3.bold,
         ),
         const SizedBox(height: 2.0),
         Text(
           '${itinerary.days} days ${itinerary.nights} nights',
           textAlign: TextAlign.center,
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.headline5.bold,
         ),
       ],
     );

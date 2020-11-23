@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
 class AuthFields extends StatelessWidget {
@@ -27,7 +26,6 @@ class AuthFields extends StatelessWidget {
       children: [
         CustomTextField(
           label: 'Email',
-          color: AppColors.light,
           initialValue: initialEmail,
           onChanged: onEmailChanged,
           icon: Icons.email_outlined,
@@ -38,7 +36,6 @@ class AuthFields extends StatelessWidget {
         CustomTextField(
           label: 'Password',
           obscureText: true,
-          color: AppColors.light,
           icon: Icons.lock_outline,
           initialValue: initialPassword,
           onChanged: onPasswordChanged,

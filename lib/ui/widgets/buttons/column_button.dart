@@ -36,7 +36,7 @@ class ColumnButton extends StatelessWidget {
             Text(
               label,
               textAlign: TextAlign.center,
-              style: AppTextStyles.extraSmall.bold.withColor(color),
+              style: AppTextStyles.headline6.bold.withColor(color),
             ),
           ],
         ),

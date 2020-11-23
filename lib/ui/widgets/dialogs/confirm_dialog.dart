@@ -28,7 +28,6 @@ class ConfirmDialog extends StatelessWidget {
       child: AlertDialog(
         elevation: 12.0,
         clipBehavior: Clip.antiAlias,
-        backgroundColor: AppColors.light,
         contentPadding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
         title: const Icon(
           CommunityMaterialIcons.alert_rhombus,
@@ -41,7 +40,7 @@ class ConfirmDialog extends StatelessWidget {
           children: [
             Text(
               message,
-              style: AppTextStyles.small,
+              style: context.t.headline5,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16.0),

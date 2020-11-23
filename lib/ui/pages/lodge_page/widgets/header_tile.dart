@@ -42,7 +42,7 @@ class HeaderTile extends StatelessWidget {
         const SizedBox(width: 8.0),
         Text(
           '($rating)',
-          style: AppTextStyles.small.darkAccent,
+          style: AppTextStyles.headline5.darkAccent,
         ),
       ],
     );

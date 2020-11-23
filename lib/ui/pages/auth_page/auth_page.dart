@@ -31,12 +31,13 @@ class AuthPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             automaticallyImplyLeading: state is! AuthLoading,
+            iconTheme: const IconThemeData(color: AppColors.light),
           ),
           body: Stack(
             children: [
               AdaptiveImage(
                 Images.authBackground,
-                color: AppColors.dark.withOpacity(0.5),
+                color: AppColors.dark.withOpacity(0.6),
               ),
               _buildForm(context, state is AuthLoading),
             ],
@@ -90,7 +91,7 @@ class AuthPage extends StatelessWidget {
         highlightColor: Colors.transparent,
         child: Text(
           'Continue without signing in...',
-          style: AppTextStyles.extraSmall.lightAccent,
+          style: AppTextStyles.headline6.lightAccent,
         ),
         onPressed: () {
           context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute);

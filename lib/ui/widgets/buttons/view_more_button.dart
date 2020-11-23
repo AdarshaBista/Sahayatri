@@ -36,7 +36,7 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           "That's it for now.",
-          style: AppTextStyles.extraSmall.primaryDark,
+          style: AppTextStyles.headline6.primaryDark,
         ),
       ),
     );

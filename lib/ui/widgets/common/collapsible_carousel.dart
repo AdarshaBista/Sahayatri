@@ -36,26 +36,26 @@ class CollapsibleCarousel extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: false,
-        background: _buildCarousel(),
+        background: _buildCarousel(context),
         collapseMode: CollapseMode.pin,
         titlePadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         title: Text(
           title,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.medium.serif,
+          style: AppTextStyles.headline4.serif,
         ),
       ),
     );
   }
 
-  Widget _buildCarousel() {
+  Widget _buildCarousel(BuildContext context) {
     return Hero(
       tag: heroId,
       child: GradientContainer(
         gradientBegin: Alignment.topCenter,
         gradientEnd: Alignment.bottomCenter,
-        gradientColors: AppColors.collapsibleHeaderGradient,
+        gradientColors: AppColors.getCollapsibleHeaderGradient(context),
         child: Carousel(
           imageUrls: imageUrls,
           showPagination: false,

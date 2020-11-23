@@ -27,6 +27,7 @@ class SettingsCard extends StatelessWidget {
       child: SlideAnimator(
         begin: const Offset(0.0, 0.5),
         child: ElevatedCard(
+          color: context.theme.cardColor,
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
@@ -44,13 +45,13 @@ class SettingsCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: AppTextStyles.small.bold,
+                      style: context.t.headline5.bold,
                     ),
                     const SizedBox(height: 4.0),
                     Text(
                       subtitle,
                       maxLines: 2,
-                      style: AppTextStyles.extraSmall,
+                      style: context.t.headline6,
                     ),
                   ],
                 ),

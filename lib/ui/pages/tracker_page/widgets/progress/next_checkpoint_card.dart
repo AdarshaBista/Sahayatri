@@ -72,7 +72,7 @@ class _CardFront extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Next Checkpoint', style: AppTextStyles.small.light),
+          Text('Next Checkpoint', style: AppTextStyles.headline5.light),
           const Spacer(),
           _buildTitle(context, place),
           const SizedBox(height: 10.0),
@@ -95,7 +95,7 @@ class _CardFront extends StatelessWidget {
         place.name.toUpperCase(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.small.light.bold,
+        style: AppTextStyles.headline5.light.bold,
       ),
     );
   }
@@ -108,14 +108,14 @@ class _CardFront extends StatelessWidget {
       children: [
         Text(
           '${nextCheckpoint.distance.toStringAsFixed(0)} m away',
-          style: AppTextStyles.small.primary.bold,
+          style: AppTextStyles.headline5.primary.bold,
         ),
         const Spacer(),
         Text(
           nextCheckpoint.eta != null
               ? 'ETA: ${nextCheckpoint.eta.inHours} hr ${nextCheckpoint.eta.inMinutes.remainder(60)} min'
               : '-',
-          style: AppTextStyles.small.primary.bold,
+          style: AppTextStyles.headline5.primary.bold,
         ),
       ],
     );
@@ -147,7 +147,7 @@ class _CardBack extends StatelessWidget {
                 checkpoint.description.isEmpty
                     ? 'No description provided.'
                     : checkpoint.description,
-                style: AppTextStyles.small.light,
+                style: AppTextStyles.headline5.light,
               ),
             ),
           ),
@@ -161,14 +161,14 @@ class _CardBack extends StatelessWidget {
       children: [
         Text(
           checkpoint.time,
-          style: AppTextStyles.small.primary.bold,
+          style: AppTextStyles.headline5.primary.bold,
         ),
         const SizedBox(width: 8.0),
         const CircleAvatar(radius: 2.0),
         const SizedBox(width: 8.0),
         Text(
           checkpoint.date,
-          style: AppTextStyles.extraSmall.primary,
+          style: AppTextStyles.headline6.primary,
         ),
       ],
     );

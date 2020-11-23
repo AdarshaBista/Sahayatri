@@ -21,7 +21,7 @@ class DeviceTile extends StatelessWidget {
       dense: true,
       title: Text(
         device.name,
-        style: AppTextStyles.medium,
+        style: AppTextStyles.headline4,
       ),
       subtitle: DeviceStatusRow(status: device.status),
       leading: CircleAvatar(
@@ -29,7 +29,7 @@ class DeviceTile extends StatelessWidget {
         backgroundColor: AppColors.primaryLight,
         child: Text(
           '${index + 1}',
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.headline5.bold,
         ),
       ),
     );

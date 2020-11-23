@@ -63,7 +63,7 @@ class UpdateForm extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Post an update', style: AppTextStyles.medium.bold),
+        Text('Post an update', style: AppTextStyles.headline4.bold),
         Builder(
           builder: (context) {
             return GestureDetector(
@@ -85,7 +85,7 @@ class UpdateForm extends StatelessWidget {
         if (state.message == null) return const Offstage();
         return Text(
           state.message,
-          style: AppTextStyles.extraSmall.secondary,
+          style: AppTextStyles.headline6.secondary,
         );
       },
     );

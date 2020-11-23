@@ -26,7 +26,7 @@ class CheckpointList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Checkpoints', style: AppTextStyles.small.bold),
+        Text('Checkpoints', style: AppTextStyles.headline5.bold),
         const SizedBox(height: 8.0),
         CustomFormField<List<Checkpoint>>(
           initialValue: checkpoints,

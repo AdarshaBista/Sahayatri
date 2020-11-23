@@ -19,7 +19,6 @@ extension WidgetX on Widget {
       context: context,
       elevation: 12.0,
       clipBehavior: Clip.antiAlias,
-      backgroundColor: AppColors.light,
       builder: (_) => this,
     );
   }
@@ -33,7 +32,6 @@ extension WidgetX on Widget {
       enableDrag: isDismissible,
       isDismissible: isDismissible,
       barrierColor: AppColors.darkFaded,
-      backgroundColor: AppColors.light,
       builder: (_) => this,
     );
   }

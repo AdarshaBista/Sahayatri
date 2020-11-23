@@ -14,43 +14,44 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     @required this.label,
     this.color = AppColors.light,
-    this.backgroundColor = AppColors.dark,
+    this.backgroundColor,
     this.outlineOnly = false,
     @required this.iconData,
     @required this.onTap,
   })  : assert(label != null),
         assert(color != null),
-        assert(backgroundColor != null),
         assert(outlineOnly != null),
         assert(iconData != null);
 
   @override
   Widget build(BuildContext context) {
+    final bgColor = backgroundColor ?? context.c.onBackground;
+
     return FadeAnimator(
       child: SizedBox(
         height: 36.0,
         child: outlineOnly
             ? OutlineButton.icon(
                 onPressed: onTap,
-                splashColor: color.withOpacity(0.5),
-                highlightedBorderColor: backgroundColor,
-                borderSide: BorderSide(color: backgroundColor),
+                splashColor: color.withOpacity(0.3),
+                highlightedBorderColor: bgColor,
+                borderSide: BorderSide(color: bgColor),
                 icon: Icon(iconData, color: color),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                 label: Text(
                   label,
-                  style: AppTextStyles.small.withColor(color),
+                  style: AppTextStyles.headline5.withColor(color),
                 ),
               )
             : FlatButton.icon(
                 onPressed: onTap,
-                color: backgroundColor,
+                color: bgColor,
                 icon: Icon(iconData, color: color),
-                splashColor: color.withOpacity(0.5),
+                splashColor: color.withOpacity(0.3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                 label: Text(
                   label,
-                  style: AppTextStyles.small.withColor(color),
+                  style: AppTextStyles.headline5.withColor(color),
                 ),
               ),
       ),

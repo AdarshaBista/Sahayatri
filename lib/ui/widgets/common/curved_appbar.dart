@@ -50,7 +50,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.medium.serif,
+            style: AppTextStyles.headline4.serif,
           ),
         ),
       ),

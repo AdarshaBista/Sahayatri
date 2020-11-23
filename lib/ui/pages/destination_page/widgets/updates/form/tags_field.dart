@@ -69,8 +69,8 @@ class _TagsFieldState extends State<TagsField> {
       child: Text(
         '$tagsLength / ${ApiConfig.maxTags} tags',
         style: tagsLength == ApiConfig.maxTags
-            ? AppTextStyles.extraSmall.secondary
-            : AppTextStyles.extraSmall.primaryDark,
+            ? AppTextStyles.headline6.secondary
+            : AppTextStyles.headline6.primaryDark,
       ),
     );
   }

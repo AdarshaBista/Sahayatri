@@ -37,6 +37,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
     return SlideAnimator(
       begin: const Offset(0.0, 2.0),
       child: ElevatedCard(
+        color: context.theme.cardColor,
         margin: const EdgeInsets.only(left: 24.0, bottom: 16.0, right: 24.0),
         radius: 50.0,
         child: Row(
@@ -53,7 +54,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
   Widget _buildTextField() {
     return TextFormField(
       focusNode: sourceNode,
-      style: AppTextStyles.small,
+      style: context.t.headline5,
       controller: sourceController,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
@@ -84,10 +85,10 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
       child: IconButton(
         visualDensity: VisualDensity.compact,
         splashRadius: 20.0,
-        icon: const Icon(
+        icon: Icon(
           Icons.send,
           size: 22.0,
-          color: AppColors.light,
+          color: context.c.background,
         ),
         onPressed: () {
           final source = sourceController.text.trim();

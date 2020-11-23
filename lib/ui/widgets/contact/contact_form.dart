@@ -47,11 +47,11 @@ class _ContactFormState extends State<ContactForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Assign a contact', style: AppTextStyles.medium.bold),
+                Text('Assign a contact', style: context.t.headline4.bold),
                 const SizedBox(height: 4.0),
                 Text(
                   'A message will be automatically sent to this number once you reach a checkpoint.',
-                  style: AppTextStyles.extraSmall,
+                  style: context.t.headline6,
                 ),
                 const SizedBox(height: 12.0),
                 Row(
@@ -111,7 +111,7 @@ class _ContactFormState extends State<ContactForm> {
         Text(
           'Message Preview',
           textAlign: TextAlign.left,
-          style: AppTextStyles.small.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 8.0),
         Container(
@@ -122,7 +122,7 @@ class _ContactFormState extends State<ContactForm> {
           ),
           child: Text(
             '${AppConfig.smsMessagePrefix} .......',
-            style: AppTextStyles.extraSmall.light,
+            style: AppTextStyles.headline6.light,
           ),
         ),
       ],

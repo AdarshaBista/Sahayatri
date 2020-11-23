@@ -17,12 +17,12 @@ class ImageSourceSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             'Select image from',
-            style: AppTextStyles.small.bold,
+            style: context.t.headline5.bold,
           ),
           const SizedBox(height: 16.0),
           CustomButton(

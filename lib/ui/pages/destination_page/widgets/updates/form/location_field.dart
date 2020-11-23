@@ -23,12 +23,12 @@ class LocationField extends StatelessWidget {
           children: [
             Text(
               'Locations',
-              style: AppTextStyles.small.bold,
+              style: AppTextStyles.headline5.bold,
             ),
             const SizedBox(height: 4.0),
             Text(
               '${state.coords.length} locations',
-              style: AppTextStyles.extraSmall.primaryDark,
+              style: AppTextStyles.headline6.primaryDark,
             ),
             const SizedBox(height: 6.0),
             CustomTile(

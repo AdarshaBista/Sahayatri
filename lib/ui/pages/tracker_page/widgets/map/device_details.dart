@@ -75,7 +75,7 @@ class DeviceDetails extends StatelessWidget {
       children: [
         Text(
           device.name.toUpperCase(),
-          style: AppTextStyles.large.bold,
+          style: AppTextStyles.headline3.bold,
         ),
         const SizedBox(width: 16.0),
         if (device.status == DeviceStatus.disconnected)

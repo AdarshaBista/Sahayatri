@@ -57,7 +57,7 @@ class _PlacePickerState extends State<PlacePicker> {
           ),
       child: Text(
         'View',
-        style: AppTextStyles.small.primary,
+        style: AppTextStyles.headline5.primary,
       ),
     );
   }

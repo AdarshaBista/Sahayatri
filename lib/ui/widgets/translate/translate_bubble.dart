@@ -30,13 +30,13 @@ class TranslateBubble extends StatelessWidget {
         crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           _buildAudioButton(context),
-          _buildText(),
+          _buildText(context),
         ],
       ),
     );
   }
 
-  Widget _buildText() {
+  Widget _buildText(BuildContext context) {
     const double radius = 20.0;
     final isQuery = translation.isQuery;
     final isError = translation.isError;
@@ -44,7 +44,7 @@ class TranslateBubble extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
       decoration: BoxDecoration(
-        color: isQuery ? AppColors.primaryDark : AppColors.lightAccent,
+        color: isQuery ? AppColors.primaryDark : context.c.surface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(isQuery ? radius : 0.0),
           topRight: Radius.circular(isQuery ? 0.0 : radius),
@@ -55,10 +55,10 @@ class TranslateBubble extends StatelessWidget {
       child: Text(
         translation.text,
         style: isQuery
-            ? AppTextStyles.small.light
+            ? AppTextStyles.headline5.light
             : isError
-                ? AppTextStyles.small.secondary
-                : AppTextStyles.small.dark,
+                ? AppTextStyles.headline5.secondary
+                : context.t.headline5,
       ),
     );
   }
@@ -74,12 +74,12 @@ class TranslateBubble extends StatelessWidget {
             Icon(
               Icons.volume_up_rounded,
               size: 16.0,
-              color: AppColors.darkFaded,
+              color: context.c.onSurface,
             ),
             const SizedBox(width: 4.0),
             Text(
               translation.language.title,
-              style: AppTextStyles.extraSmall.darkAccent,
+              style: context.t.headline6,
             ),
           ],
         ),

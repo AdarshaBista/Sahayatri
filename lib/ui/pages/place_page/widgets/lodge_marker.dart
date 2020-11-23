@@ -45,7 +45,7 @@ class LodgeMarker extends Marker {
                         lodge.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.extraSmall.bold.light,
+                        style: AppTextStyles.headline6.bold.light,
                       ),
                     ),
                   ),

@@ -34,7 +34,7 @@ class StylesGridState extends State<StylesGrid> {
       children: [
         Text(
           'Map Style',
-          style: AppTextStyles.small.bold.light,
+          style: AppTextStyles.headline5.bold.light,
         ),
         const SizedBox(height: 12.0),
         Flexible(child: _buildGrid(context)),

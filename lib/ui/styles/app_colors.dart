@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/ui/styles/style_x.dart';
+
 class AppColors {
   AppColors._();
 
-  static const Color primary = Color(0xFF36C7CB);
-  static const Color primaryDark = Color(0xFF009688);
-  static final Color primaryLight = primary.withOpacity(0.3);
+  static const primary = Color(0xFF36C7CB);
+  static const primaryDark = Color(0xFF009688);
+  static const primaryLight = Color(0xFFAEE8EA);
 
-  static const Color secondary = Color(0xFFBA262B);
-  static const Color secondaryDark = Color(0xFF810020);
-  static final Color secondaryLight = secondary.withOpacity(0.3);
+  static const secondary = Color(0xFFD93636);
+  static const secondaryDark = Color(0xFF8F0000);
+  static const secondaryLight = Color(0xFFFFADAD);
 
-  static const Color dark = Color(0xFF222222);
-  static const Color darkAccent = Color(0xFF313131);
-  static final Color darkFaded = dark.withOpacity(0.7);
+  static const dark = Color(0xFF222222);
+  static const darkAccent = Color(0xFF3C3C3C);
+  static final darkFaded = dark.withOpacity(0.7);
 
-  static const Color light = Color(0xFFFFFFFF);
-  static const Color lightAccent = Color(0xFFDFDFE5);
-  static final Color lightFaded = light.withOpacity(0.7);
+  static const light = Color(0xFFFFFFFF);
+  static const lightAccent = Color(0xFFDFDFE5);
+  static final lightFaded = light.withOpacity(0.7);
 
-  static const List<Color> accents = [
+  static const accents = [
     Color(0xFF7B1FA2),
     Color(0xFF512DA8),
     Color(0xFF303F9F),
@@ -34,22 +36,25 @@ class AppColors {
     Color(0xFFF57C00),
   ];
 
-  static final List<Color> cardGradient = [
+  static final cardGradient = [
     AppColors.dark.withOpacity(0.8),
     AppColors.dark.withOpacity(0.5),
     AppColors.dark.withOpacity(0.2),
     Colors.transparent,
   ];
 
-  static final List<Color> collapsibleHeaderGradient = [
-    Colors.transparent,
-    Colors.transparent,
-    Colors.transparent,
-    AppColors.light.withOpacity(0.2),
-    AppColors.light.withOpacity(0.5),
-    AppColors.light.withOpacity(0.8),
-    AppColors.light,
-  ];
+  static List<Color> getCollapsibleHeaderGradient(BuildContext context) {
+    final bgColor = context.c.background;
+    return [
+      Colors.transparent,
+      Colors.transparent,
+      Colors.transparent,
+      bgColor.withOpacity(0.2),
+      bgColor.withOpacity(0.5),
+      bgColor.withOpacity(0.8),
+      bgColor,
+    ];
+  }
 
   static final drawerGradient = AppColors.accents.take(3).toList();
   static final routeGradient = AppColors.accents.take(4).toList();

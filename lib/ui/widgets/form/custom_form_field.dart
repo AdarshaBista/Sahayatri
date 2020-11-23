@@ -40,7 +40,7 @@ class CustomFormField<T> extends StatelessWidget {
         begin: const Offset(0.0, -1.0),
         child: Text(
           message,
-          style: AppTextStyles.extraSmall.secondary,
+          style: AppTextStyles.headline6.secondary,
         ),
       ),
     );

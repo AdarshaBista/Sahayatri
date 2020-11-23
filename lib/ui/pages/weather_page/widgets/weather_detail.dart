@@ -39,7 +39,7 @@ class WeatherDetail extends StatelessWidget {
         children: [
           Text(
             DateFormat(DateFormat.ABBR_MONTH_WEEKDAY_DAY).format(weather.date),
-            style: AppTextStyles.medium,
+            style: AppTextStyles.headline4,
           ),
           const SizedBox(height: 16.0),
           Icon(
@@ -49,12 +49,12 @@ class WeatherDetail extends StatelessWidget {
           const SizedBox(height: 8.0),
           Text(
             weather.label.toUpperCase(),
-            style: AppTextStyles.large.bold,
+            style: AppTextStyles.headline3.bold,
           ),
           _buildTemp(),
           Text(
             'Feels like ${weather.feelsLikeTemp}°c',
-            style: AppTextStyles.small,
+            style: AppTextStyles.headline5,
           ),
           const Divider(height: 24.0),
           Row(
@@ -64,14 +64,14 @@ class WeatherDetail extends StatelessWidget {
                 label: 'Min',
                 count: '${weather.minTemp}°',
                 color: AppColors.darkFaded,
-                countStyle: AppTextStyles.small,
+                countStyle: AppTextStyles.headline5,
               ),
               const SizedBox(width: 16.0),
               StatCard(
                 label: 'Max',
                 count: '${weather.maxTemp}°',
                 color: AppColors.darkFaded,
-                countStyle: AppTextStyles.small,
+                countStyle: AppTextStyles.headline5,
               ),
             ],
           ),
@@ -86,20 +86,20 @@ class WeatherDetail extends StatelessWidget {
       children: [
         Text(
           '${weather.temp}',
-          style: AppTextStyles.large.serif.withSize(96.0),
+          style: AppTextStyles.headline3.serif.withSize(96.0),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
             '°',
-            style: AppTextStyles.large.withSize(50.0),
+            style: AppTextStyles.headline3.withSize(50.0),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Text(
             'C',
-            style: AppTextStyles.extraLarge.withSize(40.0),
+            style: AppTextStyles.headline2.withSize(40.0),
           ),
         ),
       ],
@@ -117,7 +117,7 @@ class WeatherDetail extends StatelessWidget {
             label: 'Sunrise',
             count: DateFormat(DateFormat.HOUR_MINUTE).format(weather.sunrise),
             color: AppColors.primaryDark,
-            countStyle: AppTextStyles.small,
+            countStyle: AppTextStyles.headline5,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
           const SizedBox(height: 16.0),
@@ -125,7 +125,7 @@ class WeatherDetail extends StatelessWidget {
             label: 'Sunset',
             count: DateFormat(DateFormat.HOUR_MINUTE).format(weather.sunset),
             color: AppColors.primaryDark,
-            countStyle: AppTextStyles.small,
+            countStyle: AppTextStyles.headline5,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
           const SizedBox(height: 16.0),
@@ -133,7 +133,7 @@ class WeatherDetail extends StatelessWidget {
             label: 'Pressure',
             count: '${weather.pressure} hPa',
             color: AppColors.primaryDark,
-            countStyle: AppTextStyles.small,
+            countStyle: AppTextStyles.headline5,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
           const SizedBox(height: 16.0),
@@ -141,7 +141,7 @@ class WeatherDetail extends StatelessWidget {
             label: 'Humidity',
             count: '${weather.humidity}%',
             color: AppColors.primaryDark,
-            countStyle: AppTextStyles.small,
+            countStyle: AppTextStyles.headline5,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
           const SizedBox(height: 16.0),
@@ -149,7 +149,7 @@ class WeatherDetail extends StatelessWidget {
             label: 'Wind Speed',
             count: '${weather.windSpeed} m/s',
             color: AppColors.primaryDark,
-            countStyle: AppTextStyles.small,
+            countStyle: AppTextStyles.headline5,
             crossAxisAlignment: CrossAxisAlignment.end,
           ),
         ],

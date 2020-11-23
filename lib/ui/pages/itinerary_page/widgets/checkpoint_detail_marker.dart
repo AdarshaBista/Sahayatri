@@ -61,12 +61,12 @@ class _DateTimeInfo extends StatelessWidget {
             children: [
               Text(
                 checkpoint.date,
-                style: AppTextStyles.small.light.bold,
+                style: AppTextStyles.headline5.light.bold,
               ),
               const SizedBox(height: 4.0),
               Text(
                 checkpoint.time,
-                style: AppTextStyles.extraSmall.light,
+                style: AppTextStyles.headline6.light,
               ),
             ],
           ),
@@ -102,7 +102,7 @@ class _PlaceInfo extends StatelessWidget {
                 checkpoint.place.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.small.bold,
+                style: AppTextStyles.headline5.bold,
               ),
             ),
             const SizedBox(height: 4.0),
@@ -113,7 +113,7 @@ class _PlaceInfo extends StatelessWidget {
                     : checkpoint.description,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.extraSmall,
+                style: AppTextStyles.headline6,
               ),
             ),
           ],

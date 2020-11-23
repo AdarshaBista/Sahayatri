@@ -25,7 +25,7 @@ extension ContextX on BuildContext {
       blockBackgroundInteraction: !isInteractive,
       leftBarIndicatorColor: AppColors.primaryDark,
       animationDuration: const Duration(milliseconds: 300),
-      messageText: Text(message, style: AppTextStyles.small.light),
+      messageText: Text(message, style: AppTextStyles.headline5.light),
       icon: const Padding(
         padding: EdgeInsets.all(8.0),
         child: CircularBusyIndicator(),
@@ -82,7 +82,7 @@ extension ContextX on BuildContext {
       icon: Icon(icon, color: color, size: 24.0),
       animationDuration: const Duration(milliseconds: 300),
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-      messageText: Text(message, style: AppTextStyles.small.withColor(color)),
+      messageText: Text(message, style: AppTextStyles.headline5.withColor(color)),
     );
     _flushbar.show(this);
   }

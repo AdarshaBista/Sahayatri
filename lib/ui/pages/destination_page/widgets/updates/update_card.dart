@@ -66,14 +66,14 @@ class UpdateCard extends StatelessWidget {
               update.user.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.small.bold,
+              style: AppTextStyles.headline5.bold,
             ),
             const SizedBox(height: 2.0),
             Text(
               update.timeAgo,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.extraSmall,
+              style: AppTextStyles.headline6,
             ),
           ],
         ),
@@ -97,7 +97,7 @@ class UpdateCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Text(
         update.text,
-        style: AppTextStyles.small,
+        style: AppTextStyles.headline5,
       ),
     );
   }

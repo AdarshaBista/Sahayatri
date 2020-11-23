@@ -22,13 +22,13 @@ class UserEmail extends StatelessWidget {
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: AppColors.dark,
+            color: context.c.onBackground,
             width: 0.5,
           ),
         ),
         child: Text(
           email,
-          style: AppTextStyles.extraSmall,
+          style: context.t.headline6,
         ),
       ),
     );

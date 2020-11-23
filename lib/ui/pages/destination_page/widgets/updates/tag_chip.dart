@@ -58,7 +58,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
           children: [
             Text(
               widget.label,
-              style: AppTextStyles.extraSmall,
+              style: AppTextStyles.headline6,
             ),
             if (widget.onDelete != null) ...[
               const SizedBox(width: 2.0),

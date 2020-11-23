@@ -24,7 +24,7 @@ class ContactList extends StatelessWidget {
         children: [
           Text(
             'Contact Numbers',
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.headline5.bold,
           ),
           const SizedBox(height: 16.0),
           ElevatedCard(
@@ -42,20 +42,20 @@ class ContactList extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity.compact,
-      leading: CircleAvatar(
+      leading: const CircleAvatar(
         radius: 14.0,
         backgroundColor: AppColors.primaryLight,
-        child: const Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
+        child: Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
       ),
       title: Text(
         number,
-        style: AppTextStyles.small.bold.serif,
+        style: AppTextStyles.headline5.bold.serif,
       ),
       trailing: GestureDetector(
         onTap: () => _launchPhone(context, number),
         child: Text(
           'Call',
-          style: AppTextStyles.small.primary,
+          style: AppTextStyles.headline5.primary,
         ),
       ),
     );

@@ -21,7 +21,10 @@ class _LanguageSelectorState extends State<LanguageSelector> {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: const _Painter(),
+      painter: _Painter(
+        color: context.c.background,
+        shadowColor: context.c.onSurface,
+      ),
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
         child: Row(
@@ -58,11 +61,10 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         width: MediaQuery.of(context).size.width * 0.24,
         child: PopupMenuButton<Language>(
           initialValue: language,
-          color: AppColors.light,
           onSelected: (value) => _changeLanguage(isTarget, value),
           child: Text(
             language.title.toUpperCase(),
-            style: AppTextStyles.small.bold,
+            style: context.t.headline5.bold,
             overflow: TextOverflow.ellipsis,
             textAlign: isTarget ? TextAlign.left : TextAlign.right,
           ),
@@ -72,7 +74,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                       value: l,
                       child: Text(
                         l.title,
-                        style: AppTextStyles.small.bold,
+                        style: context.t.headline5.bold,
                       ),
                     ))
                 .toList();
@@ -94,13 +96,19 @@ class _LanguageSelectorState extends State<LanguageSelector> {
 }
 
 class _Painter extends CustomPainter {
-  const _Painter();
+  final Color color;
+  final Color shadowColor;
+
+  const _Painter({
+    @required this.color,
+    @required this.shadowColor,
+  })  : assert(color != null),
+        assert(shadowColor != null);
 
   @override
   void paint(Canvas canvas, Size size) {
     final width = size.width;
     final height = size.height;
-    const color = AppColors.light;
 
     final paint = Paint()
       ..color = color
@@ -129,7 +137,7 @@ class _Painter extends CustomPainter {
       ..lineTo(width, 0.0)
       ..lineTo(0.0, 0.0);
 
-    canvas.drawShadow(curve, AppColors.dark.withOpacity(0.3), 3.0, false);
+    canvas.drawShadow(curve, shadowColor.withOpacity(0.2), 3.0, false);
     canvas.drawPath(curve, paint);
   }
 

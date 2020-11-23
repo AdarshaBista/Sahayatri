@@ -30,7 +30,7 @@ class AltitudeGraph extends StatelessWidget {
           Text(
             'Elevation Gain',
             textAlign: TextAlign.center,
-            style: AppTextStyles.small.bold,
+            style: AppTextStyles.headline5.bold,
           ),
           const SizedBox(height: 24.0),
           Flexible(
@@ -112,7 +112,7 @@ class AltitudeGraph extends StatelessWidget {
         margin: 8.0,
         interval: hInterval,
         reservedSize: 30.0,
-        getTextStyles: (_) => AppTextStyles.extraSmall.bold,
+        getTextStyles: (_) => AppTextStyles.headline6.bold,
         getTitles: (value) {
           final double percent = value / length;
           return '${(percent * routeLengthKm).round()} km';
@@ -123,7 +123,7 @@ class AltitudeGraph extends StatelessWidget {
         margin: 8.0,
         interval: vInterval,
         reservedSize: 30.0,
-        getTextStyles: (_) => AppTextStyles.extraSmall.bold,
+        getTextStyles: (_) => AppTextStyles.headline6.bold,
         getTitles: (value) => '${value.round()} m',
       ),
     );

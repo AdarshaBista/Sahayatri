@@ -34,21 +34,21 @@ class ProfileHeader extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        background: _buildContent(user),
+        background: _buildContent(context, user),
         collapseMode: CollapseMode.pin,
         title: Text(
           user.name.toUpperCase(),
-          style: AppTextStyles.medium.bold,
+          style: context.t.headline4.bold,
         ),
       ),
     );
   }
 
-  Widget _buildContent(User user) {
+  Widget _buildContent(BuildContext context, User user) {
     return Stack(
       children: [
         if (user.imageUrl != null) _buildBlurredImage(user.imageUrl),
-        if (user.imageUrl != null) _buildGradient(),
+        if (user.imageUrl != null) _buildGradient(context),
         _buildForeground(),
       ],
     );
@@ -68,11 +68,11 @@ class ProfileHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildGradient() {
+  Widget _buildGradient(BuildContext context) {
     return GradientContainer(
       gradientBegin: Alignment.topCenter,
       gradientEnd: Alignment.bottomCenter,
-      gradientColors: AppColors.collapsibleHeaderGradient,
+      gradientColors: AppColors.getCollapsibleHeaderGradient(context),
     );
   }
 

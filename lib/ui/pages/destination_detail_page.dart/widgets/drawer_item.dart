@@ -28,7 +28,7 @@ class DrawerItem extends StatelessWidget {
       ),
       title: Text(
         label,
-        style: AppTextStyles.small.light.bold,
+        style: AppTextStyles.headline5.light.bold,
       ),
     );
   }

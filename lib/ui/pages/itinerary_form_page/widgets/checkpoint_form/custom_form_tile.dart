@@ -28,7 +28,7 @@ class CustomFormTile extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTextStyles.small.bold,
+          style: AppTextStyles.headline5.bold,
         ),
         const SizedBox(height: 8.0),
         CustomTile(

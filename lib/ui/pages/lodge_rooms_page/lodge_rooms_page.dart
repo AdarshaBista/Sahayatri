@@ -34,7 +34,7 @@ class LodgeRoomsPage extends StatelessWidget {
                       children: [
                         Text(
                           'Deluxe Room',
-                          style: AppTextStyles.small.bold.serif,
+                          style: AppTextStyles.headline5.bold.serif,
                         ),
                         const SizedBox(height: 4.0),
                         Row(
@@ -43,12 +43,12 @@ class LodgeRoomsPage extends StatelessWidget {
                           children: [
                             Text(
                               'Rs. 4000',
-                              style: AppTextStyles.large.serif,
+                              style: AppTextStyles.headline3.serif,
                             ),
                             const SizedBox(width: 8.0),
                             Text(
                               '/ per night',
-                              style: AppTextStyles.extraSmall,
+                              style: AppTextStyles.headline6,
                             ),
                           ],
                         ),

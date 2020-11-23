@@ -17,7 +17,7 @@ class LodgesList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Lodges', style: AppTextStyles.small.bold),
+        Text('Lodges', style: AppTextStyles.headline5.bold),
         const SizedBox(height: 12.0),
         SizedBox(
           height: 160.0,

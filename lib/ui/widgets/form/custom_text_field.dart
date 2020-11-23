@@ -6,7 +6,6 @@ import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
-  final Color color;
   final bool isLarge;
   final bool showField;
   final IconData icon;
@@ -35,10 +34,8 @@ class CustomTextField extends StatelessWidget {
     this.isLarge = false,
     this.showField = true,
     this.obscureText = false,
-    this.color = AppColors.lightAccent,
     this.keyboardType = TextInputType.text,
   })  : assert(label != null),
-        assert(color != null),
         assert(isLarge != null),
         assert(showField != null),
         assert(obscureText != null);
@@ -48,24 +45,24 @@ class CustomTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLabel(),
+        _buildLabel(context),
         if (middleChild != null) middleChild,
         if (showField) ...[
           if (middleChild == null) const SizedBox(height: 8.0),
-          _buildField(),
+          _buildField(context),
         ],
       ],
     );
   }
 
-  Widget _buildLabel() {
+  Widget _buildLabel(BuildContext context) {
     return Text(
       label,
-      style: labelStyle ?? AppTextStyles.small.bold,
+      style: labelStyle ?? context.t.headline5.bold,
     );
   }
 
-  Widget _buildField() {
+  Widget _buildField(BuildContext context) {
     final int maxLines = obscureText ? 1 : null;
     final int minLines = maxLines ?? (isLarge ? 4 : 1);
 
@@ -80,11 +77,11 @@ class CustomTextField extends StatelessWidget {
         initialValue: initialValue,
         keyboardType: keyboardType,
         obscureText: obscureText,
-        style: AppTextStyles.small,
+        style: context.t.headline5,
         inputFormatters: inputFormatters,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          fillColor: color,
+          fillColor: context.c.surface,
           hintText: hintText,
           prefixIconConstraints: const BoxConstraints(
             minHeight: 32.0,
@@ -94,7 +91,7 @@ class CustomTextField extends StatelessWidget {
               ? null
               : Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Icon(icon, size: 20.0, color: AppColors.darkFaded),
+                  child: Icon(icon, size: 20.0, color: context.c.onSurface),
                 ),
         ),
       ),

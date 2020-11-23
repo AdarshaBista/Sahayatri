@@ -142,9 +142,31 @@ class ThemePlugin extends DevicePreviewPlugin {
     Map<String, dynamic> data,
     DevicePreviewPluginDataUpdater updateData,
   ) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ThemeCubit>().changeTheme();
-    });
-    return const Offstage();
+    return const _ThemeInfoBox();
+  }
+}
+
+class _ThemeInfoBox extends StatefulWidget {
+  const _ThemeInfoBox();
+
+  @override
+  _ThemeInfoBoxState createState() => _ThemeInfoBoxState();
+}
+
+class _ThemeInfoBoxState extends State<_ThemeInfoBox> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ThemeCubit>().changeTheme();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.watch<ThemeCubit>().state.themeMode;
+    final themeStr = theme == ThemeMode.dark ? 'Dark' : 'Light';
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Changed to $themeStr theme'),
+    );
   }
 }

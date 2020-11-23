@@ -27,7 +27,7 @@ class UnauthenticatedView extends StatelessWidget {
           label: 'Login / Sign Up',
           outlineOnly: true,
           iconData: Icons.account_box,
-          color: AppColors.dark,
+          color: context.c.onBackground,
           onTap: () {
             if (onLogin != null) onLogin();
 

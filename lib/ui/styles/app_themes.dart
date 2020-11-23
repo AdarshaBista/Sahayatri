@@ -27,41 +27,47 @@ class AppThemes {
         brightness: Brightness.light,
         backgroundColor: AppColors.light,
         scaffoldBackgroundColor: AppColors.light,
+        cardColor: AppColors.light,
+        dividerColor: AppColors.darkFaded,
+        textTheme: _darkTextTheme,
         colorScheme: _lightColorScheme,
         iconTheme: _darkIconTheme,
         accentIconTheme: _darkIconTheme,
         primaryIconTheme: _darkIconTheme,
         cardTheme: _lightCardTheme,
+        dividerTheme: _dividerTheme,
         appBarTheme: _lightAppBarTheme,
         tabBarTheme: _lightTabBarTheme,
         dialogTheme: _lightDialogTheme,
-        dividerTheme: _lightDividerTheme,
         popupMenuTheme: _lightPopupMenuTheme,
         bottomSheetTheme: _lightBottomSheetTheme,
         bottomAppBarTheme: _lightBottomAppBarTheme,
         inputDecorationTheme: _lightInputDecorationTheme,
-        floatingActionButtonTheme: _lightFloatingActionButtonTheme,
+        floatingActionButtonTheme: _floatingActionButtonTheme,
       );
 
   static ThemeData get dark => _base.copyWith(
         brightness: Brightness.dark,
         backgroundColor: AppColors.dark,
         scaffoldBackgroundColor: AppColors.dark,
+        cardColor: AppColors.darkAccent,
+        dividerColor: AppColors.lightFaded,
         applyElevationOverlayColor: true,
+        textTheme: _lightTextTheme,
         colorScheme: _darkColorScheme,
         iconTheme: _lightIconTheme,
         accentIconTheme: _lightIconTheme,
         primaryIconTheme: _lightIconTheme,
         cardTheme: _darkCardTheme,
+        dividerTheme: _dividerTheme,
         appBarTheme: _darkAppBarTheme,
         tabBarTheme: _darkTabBarTheme,
         dialogTheme: _darkDialogTheme,
-        dividerTheme: _darkDividerTheme,
         popupMenuTheme: _darkPopupMenuTheme,
         bottomSheetTheme: _darkBottomSheetTheme,
         bottomAppBarTheme: _darkBottomAppBarTheme,
         inputDecorationTheme: _darkInputDecorationTheme,
-        floatingActionButtonTheme: _darkFloatingActionButtonTheme,
+        floatingActionButtonTheme: _floatingActionButtonTheme,
       );
 
   static ColorScheme get _lightColorScheme => const ColorScheme(
@@ -75,7 +81,7 @@ class AppThemes {
         error: AppColors.secondary,
         onError: AppColors.light,
         surface: AppColors.lightAccent,
-        onSurface: AppColors.dark,
+        onSurface: AppColors.darkAccent,
         background: AppColors.light,
         onBackground: AppColors.dark,
       );
@@ -83,9 +89,27 @@ class AppThemes {
   static ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
         brightness: Brightness.dark,
         surface: AppColors.darkAccent,
-        onSurface: AppColors.light,
+        onSurface: AppColors.lightAccent,
         background: AppColors.dark,
         onBackground: AppColors.light,
+      );
+
+  static TextTheme get _lightTextTheme => TextTheme(
+        headline1: AppTextStyles.headline1.light,
+        headline2: AppTextStyles.headline2.light,
+        headline3: AppTextStyles.headline3.light,
+        headline4: AppTextStyles.headline4.light,
+        headline5: AppTextStyles.headline5.lightFaded,
+        headline6: AppTextStyles.headline6.lightFaded,
+      );
+
+  static TextTheme get _darkTextTheme => TextTheme(
+        headline1: AppTextStyles.headline1,
+        headline2: AppTextStyles.headline2,
+        headline3: AppTextStyles.headline3,
+        headline4: AppTextStyles.headline4,
+        headline5: AppTextStyles.headline5,
+        headline6: AppTextStyles.headline6,
       );
 
   static IconThemeData get _lightIconTheme => const IconThemeData(
@@ -116,13 +140,13 @@ class AppThemes {
         contentPadding: const EdgeInsets.all(12.0),
         fillColor: AppColors.lightAccent,
         focusColor: AppColors.lightAccent,
-        hintStyle: AppTextStyles.small,
-        labelStyle: AppTextStyles.small,
-        helperStyle: AppTextStyles.small,
-        prefixStyle: AppTextStyles.small,
-        suffixStyle: AppTextStyles.small,
-        counterStyle: AppTextStyles.small,
-        errorStyle: AppTextStyles.extraSmall.secondary,
+        hintStyle: AppTextStyles.headline5,
+        labelStyle: AppTextStyles.headline5,
+        helperStyle: AppTextStyles.headline5,
+        prefixStyle: AppTextStyles.headline5,
+        suffixStyle: AppTextStyles.headline5,
+        counterStyle: AppTextStyles.headline5,
+        errorStyle: AppTextStyles.headline6.secondary,
         border: _inputBorder,
         errorBorder: _inputBorder,
         enabledBorder: _inputBorder,
@@ -135,28 +159,22 @@ class AppThemes {
       _lightInputDecorationTheme.copyWith(
         fillColor: AppColors.darkAccent,
         focusColor: AppColors.darkAccent,
-        hintStyle: AppTextStyles.small.light,
-        labelStyle: AppTextStyles.small.light,
-        helperStyle: AppTextStyles.small.light,
-        prefixStyle: AppTextStyles.small.light,
-        suffixStyle: AppTextStyles.small.light,
-        counterStyle: AppTextStyles.small.light,
-        errorStyle: AppTextStyles.extraSmall.secondary,
+        hintStyle: AppTextStyles.headline5.lightFaded,
+        labelStyle: AppTextStyles.headline5.lightFaded,
+        helperStyle: AppTextStyles.headline5.lightFaded,
+        prefixStyle: AppTextStyles.headline5.lightFaded,
+        suffixStyle: AppTextStyles.headline5.lightFaded,
+        counterStyle: AppTextStyles.headline5.lightFaded,
+        errorStyle: AppTextStyles.headline6.secondary,
       );
 
-  static FloatingActionButtonThemeData get _lightFloatingActionButtonTheme =>
+  static FloatingActionButtonThemeData get _floatingActionButtonTheme =>
       const FloatingActionButtonThemeData(
         elevation: 8.0,
         disabledElevation: 0.0,
         backgroundColor: AppColors.dark,
         splashColor: AppColors.darkAccent,
         foregroundColor: AppColors.primary,
-      );
-
-  static FloatingActionButtonThemeData get _darkFloatingActionButtonTheme =>
-      _lightFloatingActionButtonTheme.copyWith(
-        backgroundColor: AppColors.darkAccent,
-        splashColor: AppColors.dark,
       );
 
   static AppBarTheme get _lightAppBarTheme => AppBarTheme(
@@ -186,22 +204,13 @@ class AppThemes {
 
   static TabBarTheme get _lightTabBarTheme => TabBarTheme(
         labelColor: AppColors.dark,
-        labelStyle: AppTextStyles.medium,
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(32.0),
-          gradient: LinearGradient(
-            colors: [
-              AppColors.accents[0],
-              AppColors.accents[1],
-            ],
-          ),
-        ),
+        labelStyle: AppTextStyles.headline4,
+        indicatorSize: TabBarIndicatorSize.label,
       );
 
   static TabBarTheme get _darkTabBarTheme => _lightTabBarTheme.copyWith(
         labelColor: AppColors.light,
-        labelStyle: AppTextStyles.medium.light,
+        labelStyle: AppTextStyles.headline4.light,
       );
 
   static CardTheme get _lightCardTheme => CardTheme(
@@ -216,22 +225,17 @@ class AppThemes {
         color: AppColors.darkAccent,
       );
 
-  static DividerThemeData get _lightDividerTheme => DividerThemeData(
+  static DividerThemeData get _dividerTheme => const DividerThemeData(
         space: 8.0,
         thickness: 0.5,
-        color: AppColors.dark.withOpacity(0.3),
-      );
-
-  static DividerThemeData get _darkDividerTheme => _lightDividerTheme.copyWith(
-        color: AppColors.light.withOpacity(0.3),
       );
 
   static BottomSheetThemeData get _lightBottomSheetTheme => const BottomSheetThemeData(
         elevation: 12.0,
         modalElevation: 12.0,
         clipBehavior: Clip.antiAlias,
-        backgroundColor: AppColors.lightAccent,
-        modalBackgroundColor: AppColors.lightAccent,
+        backgroundColor: AppColors.light,
+        modalBackgroundColor: AppColors.light,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8.0),
@@ -239,33 +243,34 @@ class AppThemes {
           ),
         ),
       );
+
   static BottomSheetThemeData get _darkBottomSheetTheme =>
       _lightBottomSheetTheme.copyWith(
-        backgroundColor: AppColors.darkAccent,
-        modalBackgroundColor: AppColors.darkAccent,
+        backgroundColor: AppColors.dark,
+        modalBackgroundColor: AppColors.dark,
       );
 
   static DialogTheme get _lightDialogTheme => DialogTheme(
         elevation: 16.0,
         shape: _circularBorderRadius,
         backgroundColor: AppColors.light,
-        contentTextStyle: AppTextStyles.medium,
+        contentTextStyle: AppTextStyles.headline4,
       );
 
   static DialogTheme get _darkDialogTheme => _lightDialogTheme.copyWith(
-        backgroundColor: AppColors.dark,
-        contentTextStyle: AppTextStyles.medium.light,
+        backgroundColor: AppColors.darkAccent,
+        contentTextStyle: AppTextStyles.headline4.light,
       );
 
   static PopupMenuThemeData get _lightPopupMenuTheme => PopupMenuThemeData(
         elevation: 8.0,
         shape: _circularBorderRadius,
-        color: AppColors.lightAccent,
-        textStyle: AppTextStyles.small,
+        color: AppColors.light,
+        textStyle: AppTextStyles.headline5,
       );
 
   static PopupMenuThemeData get _darkPopupMenuTheme => _lightPopupMenuTheme.copyWith(
         color: AppColors.darkAccent,
-        textStyle: AppTextStyles.small.light,
+        textStyle: AppTextStyles.headline5.lightFaded,
       );
 }

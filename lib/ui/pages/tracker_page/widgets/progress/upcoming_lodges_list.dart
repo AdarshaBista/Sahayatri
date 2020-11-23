@@ -22,7 +22,7 @@ class UpcomingLodgesList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Upcoming Lodges', style: AppTextStyles.small.light),
+        Text('Upcoming Lodges', style: AppTextStyles.headline5.light),
         const SizedBox(height: 12.0),
         SizedBox(
           height: 80.0,
@@ -61,7 +61,7 @@ class UpcomingLodgesList extends StatelessWidget {
                 lodge.name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.small.bold.light,
+                style: AppTextStyles.headline5.bold.light,
               ),
             ),
             const SizedBox(height: 8.0),

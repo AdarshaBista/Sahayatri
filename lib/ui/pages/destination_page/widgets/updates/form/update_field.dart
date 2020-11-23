@@ -37,7 +37,7 @@ class UpdateField extends StatelessWidget {
               padding: const EdgeInsets.only(right: 4.0),
               child: Text(
                 '${state.text.length} / ${ApiConfig.maxTextLength}',
-                style: AppTextStyles.extraSmall,
+                style: AppTextStyles.headline6,
               ),
             ),
           ],

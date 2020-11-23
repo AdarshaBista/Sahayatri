@@ -74,7 +74,7 @@ class _NestedTabViewState extends State<NestedTabView>
   Widget _buildTabBar(BuildContext context) {
     final height = widget.isTabFilled ? 38.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
-    final color = widget.isTabFilled ? AppColors.light : Colors.transparent;
+    final color = widget.isTabFilled ? context.c.background : Colors.transparent;
     final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
     return Theme(
@@ -94,22 +94,11 @@ class _NestedTabViewState extends State<NestedTabView>
         child: TabBar(
           isScrollable: true,
           controller: _tabController,
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(32.0),
-            color: AppColors.primaryLight,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 10.0,
-                spreadRadius: 3.0,
-                color: AppColors.primary.withOpacity(0.12),
-              ),
-            ],
-          ),
           tabs: [
             for (int i = 0; i < widget.tabs.length; ++i)
               NestedTab(
                 tab: widget.tabs[i],
-                color: AppColors.dark,
+                color: context.c.onBackground,
               )
           ],
         ),
@@ -155,7 +144,7 @@ class NestedTab extends StatelessWidget {
             AnimatedDefaultTextStyle(
               child: Text(tab.label),
               duration: const Duration(milliseconds: 200),
-              style: AppTextStyles.small.bold.withColor(color),
+              style: AppTextStyles.headline5.bold.withColor(color),
             ),
           ],
         ),

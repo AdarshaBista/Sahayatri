@@ -30,7 +30,7 @@ class FlagMarker extends Marker {
                   ),
                   child: Text(
                     label,
-                    style: AppTextStyles.extraSmall.bold.light,
+                    style: AppTextStyles.headline6.bold.light,
                   ),
                 ),
                 const SizedBox(height: 2.0),

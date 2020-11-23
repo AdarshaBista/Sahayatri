@@ -41,7 +41,7 @@ class TranslateForm extends StatelessWidget {
         if (isOnSettings) const SizedBox(height: 8.0),
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
-          child: Text('Translate', style: AppTextStyles.medium.bold),
+          child: Text('Translate', style: context.t.headline4.bold),
         ),
         Expanded(
           child: Stack(

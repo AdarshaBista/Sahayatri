@@ -47,12 +47,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: CustomCard(
                   margin: const EdgeInsets.all(20.0),
                   padding: const EdgeInsets.all(20.0),
-                  color: AppColors.light.withOpacity(0.4),
+                  color: context.c.background,
                   child: Column(
                     children: [
                       CustomTextField(
                         label: 'Username',
-                        color: AppColors.light,
                         initialValue: username,
                         icon: Icons.account_circle_outlined,
                         validator: FormValidators.requiredText(),

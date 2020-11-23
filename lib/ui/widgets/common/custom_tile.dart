@@ -36,7 +36,7 @@ class CustomTile extends StatelessWidget {
             const SizedBox(width: 16.0),
             Text(
               title,
-              style: AppTextStyles.small,
+              style: AppTextStyles.headline5,
             ),
           ],
         ),
