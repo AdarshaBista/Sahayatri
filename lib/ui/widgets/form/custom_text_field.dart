@@ -81,7 +81,6 @@ class CustomTextField extends StatelessWidget {
         inputFormatters: inputFormatters,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          fillColor: context.c.surface,
           hintText: hintText,
           prefixIconConstraints: const BoxConstraints(
             minHeight: 32.0,

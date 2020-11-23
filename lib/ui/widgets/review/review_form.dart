@@ -58,7 +58,7 @@ class _ReviewFormState extends State<ReviewForm> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Write a review', style: AppTextStyles.headline4.bold),
+        Text('Write a review', style: context.t.headline4.bold),
         GestureDetector(
           onTap: () => _handleBackButton(context),
           child: const Icon(
@@ -76,7 +76,7 @@ class _ReviewFormState extends State<ReviewForm> {
       children: [
         Text(
           'Rating',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 6.0),
         StarRatingBar(
@@ -111,7 +111,7 @@ class _ReviewFormState extends State<ReviewForm> {
           padding: const EdgeInsets.only(right: 4.0),
           child: Text(
             '${text.length} / ${ApiConfig.maxTextLength}',
-            style: AppTextStyles.headline6,
+            style: context.t.headline6,
           ),
         ),
       ],

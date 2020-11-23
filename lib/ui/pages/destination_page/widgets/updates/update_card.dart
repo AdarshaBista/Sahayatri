@@ -31,12 +31,12 @@ class UpdateCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildUserInfo(),
+              _buildUserInfo(context),
               if (update.tags.isNotEmpty) ...[
                 _buildTags(),
                 const SizedBox(height: 8.0),
               ],
-              _buildText(),
+              _buildText(context),
               if (update.coords.isNotEmpty) ...[
                 const SizedBox(height: 8.0),
                 _buildLocationButton(context),
@@ -52,7 +52,7 @@ class UpdateCard extends StatelessWidget {
     );
   }
 
-  Widget _buildUserInfo() {
+  Widget _buildUserInfo(BuildContext context) {
     return Row(
       children: [
         UserAvatarSmall(
@@ -66,14 +66,14 @@ class UpdateCard extends StatelessWidget {
               update.user.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.headline5.bold,
+              style: context.t.headline5.bold,
             ),
             const SizedBox(height: 2.0),
             Text(
               update.timeAgo,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.headline6,
+              style: context.t.headline6,
             ),
           ],
         ),
@@ -92,12 +92,12 @@ class UpdateCard extends StatelessWidget {
     );
   }
 
-  Widget _buildText() {
+  Widget _buildText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Text(
         update.text,
-        style: AppTextStyles.headline5,
+        style: context.t.headline5,
       ),
     );
   }

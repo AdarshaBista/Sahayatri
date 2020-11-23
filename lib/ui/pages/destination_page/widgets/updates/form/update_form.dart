@@ -39,7 +39,7 @@ class UpdateForm extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.all(20.0),
             children: [
-              _buildHeader(),
+              _buildHeader(context),
               const Divider(height: 16.0),
               const TagsField(),
               const SizedBox(height: 16.0),
@@ -59,11 +59,11 @@ class UpdateForm extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Post an update', style: AppTextStyles.headline4.bold),
+        Text('Post an update', style: context.t.headline4.bold),
         Builder(
           builder: (context) {
             return GestureDetector(

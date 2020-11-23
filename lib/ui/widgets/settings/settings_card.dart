@@ -27,7 +27,6 @@ class SettingsCard extends StatelessWidget {
       child: SlideAnimator(
         begin: const Offset(0.0, 0.5),
         child: ElevatedCard(
-          color: context.theme.cardColor,
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [

@@ -35,6 +35,7 @@ class AppThemes {
         accentIconTheme: _darkIconTheme,
         primaryIconTheme: _darkIconTheme,
         cardTheme: _lightCardTheme,
+        chipTheme: _lightChipTheme,
         dividerTheme: _dividerTheme,
         appBarTheme: _lightAppBarTheme,
         tabBarTheme: _lightTabBarTheme,
@@ -50,15 +51,16 @@ class AppThemes {
         brightness: Brightness.dark,
         backgroundColor: AppColors.dark,
         scaffoldBackgroundColor: AppColors.dark,
-        cardColor: AppColors.darkAccent,
+        cardColor: AppColors.darkSurface,
         dividerColor: AppColors.lightFaded,
-        applyElevationOverlayColor: true,
+        applyElevationOverlayColor: false,
         textTheme: _lightTextTheme,
         colorScheme: _darkColorScheme,
         iconTheme: _lightIconTheme,
         accentIconTheme: _lightIconTheme,
         primaryIconTheme: _lightIconTheme,
         cardTheme: _darkCardTheme,
+        chipTheme: _darkChipTheme,
         dividerTheme: _dividerTheme,
         appBarTheme: _darkAppBarTheme,
         tabBarTheme: _darkTabBarTheme,
@@ -99,7 +101,7 @@ class AppThemes {
         headline2: AppTextStyles.headline2.light,
         headline3: AppTextStyles.headline3.light,
         headline4: AppTextStyles.headline4.light,
-        headline5: AppTextStyles.headline5.lightFaded,
+        headline5: AppTextStyles.headline5.lightAccent,
         headline6: AppTextStyles.headline6.lightFaded,
       );
 
@@ -159,21 +161,21 @@ class AppThemes {
       _lightInputDecorationTheme.copyWith(
         fillColor: AppColors.darkAccent,
         focusColor: AppColors.darkAccent,
-        hintStyle: AppTextStyles.headline5.lightFaded,
-        labelStyle: AppTextStyles.headline5.lightFaded,
-        helperStyle: AppTextStyles.headline5.lightFaded,
-        prefixStyle: AppTextStyles.headline5.lightFaded,
-        suffixStyle: AppTextStyles.headline5.lightFaded,
-        counterStyle: AppTextStyles.headline5.lightFaded,
+        hintStyle: AppTextStyles.headline5.lightAccent,
+        labelStyle: AppTextStyles.headline5.lightAccent,
+        helperStyle: AppTextStyles.headline5.lightAccent,
+        prefixStyle: AppTextStyles.headline5.lightAccent,
+        suffixStyle: AppTextStyles.headline5.lightAccent,
+        counterStyle: AppTextStyles.headline5.lightAccent,
         errorStyle: AppTextStyles.headline6.secondary,
       );
 
   static FloatingActionButtonThemeData get _floatingActionButtonTheme =>
       const FloatingActionButtonThemeData(
-        elevation: 8.0,
+        elevation: 4.0,
         disabledElevation: 0.0,
         backgroundColor: AppColors.dark,
-        splashColor: AppColors.darkAccent,
+        splashColor: AppColors.darkSurface,
         foregroundColor: AppColors.primary,
       );
 
@@ -222,12 +224,12 @@ class AppThemes {
       );
 
   static CardTheme get _darkCardTheme => _lightCardTheme.copyWith(
-        color: AppColors.darkAccent,
+        color: AppColors.darkSurface,
       );
 
   static DividerThemeData get _dividerTheme => const DividerThemeData(
         space: 8.0,
-        thickness: 0.5,
+        thickness: 0.25,
       );
 
   static BottomSheetThemeData get _lightBottomSheetTheme => const BottomSheetThemeData(
@@ -246,8 +248,8 @@ class AppThemes {
 
   static BottomSheetThemeData get _darkBottomSheetTheme =>
       _lightBottomSheetTheme.copyWith(
-        backgroundColor: AppColors.dark,
-        modalBackgroundColor: AppColors.dark,
+        backgroundColor: AppColors.darkSurface,
+        modalBackgroundColor: AppColors.darkSurface,
       );
 
   static DialogTheme get _lightDialogTheme => DialogTheme(
@@ -258,7 +260,7 @@ class AppThemes {
       );
 
   static DialogTheme get _darkDialogTheme => _lightDialogTheme.copyWith(
-        backgroundColor: AppColors.darkAccent,
+        backgroundColor: AppColors.darkSurface,
         contentTextStyle: AppTextStyles.headline4.light,
       );
 
@@ -270,7 +272,26 @@ class AppThemes {
       );
 
   static PopupMenuThemeData get _darkPopupMenuTheme => _lightPopupMenuTheme.copyWith(
-        color: AppColors.darkAccent,
-        textStyle: AppTextStyles.headline5.lightFaded,
+        color: AppColors.darkSurface,
+        textStyle: AppTextStyles.headline5.lightAccent,
+      );
+
+  static ChipThemeData get _lightChipTheme => ChipThemeData(
+        padding: EdgeInsets.zero,
+        brightness: Brightness.light,
+        selectedColor: AppColors.primaryDark,
+        secondarySelectedColor: AppColors.primaryDark,
+        disabledColor: AppColors.lightFaded,
+        backgroundColor: AppColors.lightAccent,
+        labelStyle: AppTextStyles.headline6,
+        secondaryLabelStyle: AppTextStyles.headline6,
+      );
+
+  static ChipThemeData get _darkChipTheme => _lightChipTheme.copyWith(
+        brightness: Brightness.dark,
+        disabledColor: AppColors.darkFaded,
+        backgroundColor: AppColors.darkAccent,
+        labelStyle: AppTextStyles.headline6.darkFaded,
+        secondaryLabelStyle: AppTextStyles.headline6.darkFaded,
       );
 }

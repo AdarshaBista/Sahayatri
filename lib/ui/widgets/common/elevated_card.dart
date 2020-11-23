@@ -34,7 +34,7 @@ class ElevatedCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: color ?? context.c.background,
+        color: color ?? context.theme.cardColor,
         borderRadius: borderRadius ?? BorderRadius.circular(radius),
         boxShadow: [
           BoxShadow(

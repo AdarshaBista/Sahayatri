@@ -44,12 +44,11 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
         parent: controller,
       ),
       child: Container(
-        key: ValueKey(widget.label),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32.0),
           border: Border.all(
             width: 0.5,
-            color: AppColors.darkFaded,
+            color: context.c.onSurface,
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
@@ -58,7 +57,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
           children: [
             Text(
               widget.label,
-              style: AppTextStyles.headline6,
+              style: context.t.headline6,
             ),
             if (widget.onDelete != null) ...[
               const SizedBox(width: 2.0),
@@ -70,7 +69,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
                 child: Icon(
                   Icons.close,
                   size: 12.0,
-                  color: AppColors.darkFaded,
+                  color: AppColors.secondary,
                 ),
               ),
             ],

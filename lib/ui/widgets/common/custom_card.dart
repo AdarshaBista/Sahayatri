@@ -12,13 +12,12 @@ class CustomCard extends StatelessWidget {
 
   const CustomCard({
     @required this.child,
-    this.color = AppColors.lightAccent,
+    this.color,
     this.borderRadius = 4.0,
     this.elevation = 0.0,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
   })  : assert(child != null),
-        assert(color != null),
         assert(elevation != null),
         assert(borderRadius != null),
         assert(margin != null),
@@ -27,11 +26,11 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color,
       margin: margin,
       elevation: elevation,
       borderOnForeground: false,
       clipBehavior: Clip.antiAlias,
+      color: color ?? context.c.surface,
       shadowColor: AppColors.dark.withOpacity(0.4),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
       child: Padding(

@@ -31,12 +31,12 @@ class CustomTile extends StatelessWidget {
             Icon(
               icon,
               size: 20.0,
-              color: AppColors.darkFaded,
+              color: context.c.onSurface,
             ),
             const SizedBox(width: 16.0),
             Text(
               title,
-              style: AppTextStyles.headline5,
+              style: context.t.headline5,
             ),
           ],
         ),

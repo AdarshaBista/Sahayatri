@@ -67,13 +67,13 @@ class _ReviewCardState extends State<ReviewCard> {
             widget.review.user.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
         ),
         const SizedBox(height: 2.0),
         StarRatingBar(
-          rating: widget.review.rating,
           size: 15.0,
+          rating: widget.review.rating,
         ),
       ],
     );
@@ -90,7 +90,7 @@ class _ReviewCardState extends State<ReviewCard> {
         const SizedBox(height: 4.0),
         Text(
           widget.review.date,
-          style: AppTextStyles.headline6,
+          style: context.t.headline6,
         ),
         const SizedBox(height: 6.0),
       ],
@@ -102,7 +102,7 @@ class _ReviewCardState extends State<ReviewCard> {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Text(
         widget.review.text,
-        style: AppTextStyles.headline5,
+        style: context.t.headline5,
         overflow: TextOverflow.ellipsis,
         maxLines: isExpanded ? 100 : 2,
       ),

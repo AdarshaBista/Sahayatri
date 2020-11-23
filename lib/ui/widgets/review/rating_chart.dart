@@ -23,7 +23,7 @@ class RatingChart extends StatelessWidget {
       padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
       child: Row(
         children: [
-          _buildDetails(),
+          _buildDetails(context),
           const SizedBox(width: 16.0),
           Expanded(child: _buildBars()),
         ],
@@ -31,14 +31,14 @@ class RatingChart extends StatelessWidget {
     );
   }
 
-  Widget _buildDetails() {
+  Widget _buildDetails(BuildContext context) {
     return SlideAnimator(
       begin: const Offset(-0.4, 0.0),
       child: Column(
         children: [
           Text(
             average.toStringAsFixed(1),
-            style: AppTextStyles.headline1.darkAccent,
+            style: context.t.headline1,
           ),
           StarRatingBar(
             size: 12.0,
@@ -47,7 +47,7 @@ class RatingChart extends StatelessWidget {
           const SizedBox(height: 6.0),
           Text(
             '$total reviews',
-            style: AppTextStyles.headline6,
+            style: context.t.headline6,
           ),
         ],
       ),
@@ -82,7 +82,10 @@ class RatingChart extends StatelessWidget {
               builder: (context, constraints) {
                 return CustomPaint(
                   size: Size(constraints.maxWidth, 6.0),
-                  painter: BarPainter(stars[index] / total * constraints.maxWidth),
+                  painter: BarPainter(
+                    value: stars[index] / total * constraints.maxWidth,
+                    backgroundColor: context.c.surface,
+                  ),
                 );
               },
             ),
@@ -95,8 +98,13 @@ class RatingChart extends StatelessWidget {
 
 class BarPainter extends CustomPainter {
   final double value;
+  final Color backgroundColor;
 
-  BarPainter(this.value);
+  BarPainter({
+    @required this.value,
+    @required this.backgroundColor,
+  })  : assert(value != null),
+        assert(backgroundColor != null);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -111,7 +119,7 @@ class BarPainter extends CustomPainter {
     canvas.drawLine(
       Offset(0, hOffset),
       Offset(width, hOffset),
-      barPaint..color = AppColors.lightAccent,
+      barPaint..color = backgroundColor,
     );
 
     if (value > 0.0) {

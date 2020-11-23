@@ -13,6 +13,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
 import 'package:sahayatri/ui/widgets/common/carousel.dart';
 import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
@@ -39,7 +40,7 @@ class DestinationPage extends StatelessWidget {
         actions: [
           IconButton(
             splashRadius: 20.0,
-            icon: const Icon(Icons.close, color: AppColors.dark),
+            icon: const Icon(Icons.close),
             onPressed: () => context.read<RootNavService>().pop(),
           ),
         ],
@@ -68,33 +69,45 @@ class DestinationPage extends StatelessWidget {
         const SizedBox(height: 16.0),
         const HeaderTile(),
         const SizedBox(height: 8.0),
+        _buildDescription(context, destination),
+        const SizedBox(height: 12.0),
         const OpenButton(),
-        const SizedBox(height: 8.0),
-        _buildDescription(destination),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 12.0),
         const RouteActions(),
         const SizedBox(height: 8.0),
         const DestinationStats(),
-        const Divider(height: 16.0, indent: 20.0, endIndent: 20.0),
-        const PermitCard(),
-        const SizedBox(height: 16.0),
-        const BestMonthsChips(),
         const SizedBox(height: 8.0),
-        const Divider(height: 8.0, indent: 20.0, endIndent: 20.0),
+        _buildPermitCard(),
+        const SizedBox(height: 4.0),
         _buildTabView(context, destination),
       ],
     );
   }
 
-  Widget _buildDescription(Destination destination) {
+  Widget _buildDescription(BuildContext context, Destination destination) {
     return FadeAnimator(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
           destination.description,
           textAlign: TextAlign.left,
-          style: AppTextStyles.headline5.serif,
+          style: context.t.headline5.serif,
         ),
+      ),
+    );
+  }
+
+  Widget _buildPermitCard() {
+    return ElevatedCard(
+      padding: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          PermitCard(),
+          Divider(height: 16.0),
+          BestMonthsChips(),
+        ],
       ),
     );
   }

@@ -14,31 +14,27 @@ class BestMonthsChips extends StatelessWidget {
     final bestMonths =
         context.select<DestinationCubit, List<String>>((dc) => dc.destination.bestMonths);
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Best Months',
-            style: AppTextStyles.headline4.bold,
-          ),
-          const SizedBox(height: 8.0),
-          Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
-            children: bestMonths
-                .map((m) => ScaleAnimator(
-                      child: Chip(
-                        backgroundColor: AppColors.lightAccent,
-                        visualDensity: VisualDensity.compact,
-                        label: Text(m, style: AppTextStyles.headline6),
-                      ),
-                    ))
-                .toList(),
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Best Months',
+          style: context.t.headline5.bold,
+        ),
+        const SizedBox(height: 8.0),
+        Wrap(
+          spacing: 8.0,
+          runSpacing: 8.0,
+          children: bestMonths
+              .map((m) => ScaleAnimator(
+                    child: Chip(
+                      visualDensity: VisualDensity.compact,
+                      label: Text(m, style: context.t.headline6),
+                    ),
+                  ))
+              .toList(),
+        ),
+      ],
     );
   }
 }

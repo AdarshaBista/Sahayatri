@@ -62,7 +62,7 @@ class ConfirmDialog extends StatelessWidget {
     return CustomButton(
       label: confirmText,
       iconData: Icons.check,
-      color: AppColors.secondary,
+      color: AppColors.secondaryDark,
       backgroundColor: AppColors.secondaryLight,
       onTap: () {
         Navigator.of(context).pop();

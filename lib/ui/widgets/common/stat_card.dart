@@ -34,14 +34,14 @@ class StatCard extends StatelessWidget {
             child: AutoSizeText(
               label,
               textAlign: TextAlign.center,
-              style: AppTextStyles.headline6.bold,
+              style: context.t.headline6.bold,
             ),
           ),
           const SizedBox(height: 3.0),
           Container(
             height: 1.0,
             width: 24.0,
-            color: AppColors.lightAccent,
+            color: context.c.surface,
           ),
           const SizedBox(height: 6.0),
           Flexible(

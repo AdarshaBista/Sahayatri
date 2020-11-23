@@ -5,7 +5,6 @@ import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final Color color;
   final String title;
   final Widget leading;
   final double elevation;
@@ -14,11 +13,9 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CurvedAppbar({
     @required this.title,
     this.leading,
-    this.elevation = 8.0,
-    this.color = AppColors.light,
     this.actions,
-  })  : assert(color != null),
-        assert(title != null),
+    this.elevation = 8.0,
+  })  : assert(title != null),
         assert(elevation != null);
 
   @override
@@ -28,21 +25,20 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _CurvePainter(
-        color: color,
         elevation: elevation,
+        color: context.c.background,
       ),
-      child: _buildAppbar(),
+      child: _buildAppbar(context),
     );
   }
 
-  AppBar _buildAppbar() {
+  AppBar _buildAppbar(BuildContext context) {
     return AppBar(
       leading: leading,
       actions: actions,
       elevation: 0.0,
       centerTitle: true,
       backgroundColor: Colors.transparent,
-      iconTheme: const IconThemeData(color: AppColors.light),
       title: SlideAnimator(
         begin: const Offset(0.0, -0.2),
         child: FadeAnimator(
@@ -50,7 +46,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.headline4.serif,
+            style: context.t.headline4.serif,
           ),
         ),
       ),

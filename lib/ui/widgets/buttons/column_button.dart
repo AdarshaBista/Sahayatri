@@ -12,14 +12,15 @@ class ColumnButton extends StatelessWidget {
   const ColumnButton({
     @required this.icon,
     @required this.label,
-    this.color = AppColors.dark,
+    this.color,
     this.onTap,
   })  : assert(icon != null),
-        assert(color != null),
         assert(label != null);
 
   @override
   Widget build(BuildContext context) {
+    final effectiveColor = color ?? context.c.onBackground;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -30,13 +31,13 @@ class ColumnButton extends StatelessWidget {
             Icon(
               icon,
               size: 24.0,
-              color: color,
+              color: effectiveColor,
             ),
             const SizedBox(height: 4.0),
             Text(
               label,
               textAlign: TextAlign.center,
-              style: AppTextStyles.headline6.bold.withColor(color),
+              style: AppTextStyles.headline6.bold.withColor(effectiveColor),
             ),
           ],
         ),

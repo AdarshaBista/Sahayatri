@@ -29,7 +29,7 @@ class StarRatingBar extends StatelessWidget {
         updateOnDrag: true,
         allowHalfRating: true,
         initialRating: rating,
-        unratedColor: AppColors.lightAccent,
+        unratedColor: context.c.surface,
         itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,

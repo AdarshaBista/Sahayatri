@@ -13,22 +13,19 @@ class PermitCard extends StatelessWidget {
     final permit =
         context.select<DestinationCubit, String>((dc) => dc.destination.permit);
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Permits',
-            style: AppTextStyles.headline4.bold,
-          ),
-          const SizedBox(height: 8.0),
-          Text(
-            permit,
-            style: AppTextStyles.headline5,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Permits',
+          style: context.t.headline5.bold,
+        ),
+        const SizedBox(height: 8.0),
+        Text(
+          permit,
+          style: context.t.headline5,
+        ),
+      ],
     );
   }
 }

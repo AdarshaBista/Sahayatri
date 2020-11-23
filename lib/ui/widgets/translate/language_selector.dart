@@ -22,7 +22,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _Painter(
-        color: context.c.background,
+        color: context.theme.cardColor,
         shadowColor: context.c.onSurface,
       ),
       child: Padding(
@@ -137,7 +137,7 @@ class _Painter extends CustomPainter {
       ..lineTo(width, 0.0)
       ..lineTo(0.0, 0.0);
 
-    canvas.drawShadow(curve, shadowColor.withOpacity(0.2), 3.0, false);
+    canvas.drawShadow(curve, AppColors.dark.withOpacity(0.2), 3.0, false);
     canvas.drawPath(curve, paint);
   }
 

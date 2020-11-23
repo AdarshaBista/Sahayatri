@@ -33,13 +33,17 @@ class SearchBox extends StatelessWidget {
             child: Center(
               child: TextField(
                 onChanged: onChanged,
-                style: AppTextStyles.headline5,
+                style: context.t.headline5,
                 decoration: InputDecoration(
-                  fillColor: AppColors.light,
+                  fillColor: Colors.transparent,
                   border: InputBorder.none,
                   hintText: hintText,
                   prefixIcon: ScaleAnimator(
-                    child: Icon(Icons.search, size: 20.0, color: AppColors.darkFaded),
+                    child: Icon(
+                      Icons.search,
+                      size: 20.0,
+                      color: context.c.onSurface,
+                    ),
                   ),
                 ),
               ),
