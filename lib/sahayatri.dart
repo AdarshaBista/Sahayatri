@@ -47,13 +47,13 @@ class Sahayatri extends StatelessWidget {
       child: Builder(
         builder: (context) => MultiBlocProvider(
           providers: _getBlocProviders(context),
-          child: BlocBuilder<ThemeCubit, ThemeState>(
+          child: BlocBuilder<ThemeCubit, ThemeMode>(
             builder: (context, state) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
+                themeMode: state,
                 theme: AppThemes.light,
                 darkTheme: AppThemes.dark,
-                themeMode: state.themeMode,
                 title: AppConfig.appName,
                 builder: DevicePreview.appBuilder,
                 locale: DevicePreview.locale(context),

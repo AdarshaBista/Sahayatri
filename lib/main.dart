@@ -162,11 +162,11 @@ class _ThemeInfoBoxState extends State<_ThemeInfoBox> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.watch<ThemeCubit>().state.themeMode;
-    final themeStr = theme == ThemeMode.dark ? 'Dark' : 'Light';
+    final themeMode = context.watch<ThemeCubit>().state;
+    final theme = themeMode == ThemeMode.dark ? 'Dark' : 'Light';
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text('Changed to $themeStr theme'),
+      child: Text('Changed to $theme theme'),
     );
   }
 }

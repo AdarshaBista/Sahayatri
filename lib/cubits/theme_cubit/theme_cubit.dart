@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
-part 'theme_state.dart';
-
-class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(const ThemeState(ThemeMode.dark));
+class ThemeCubit extends Cubit<ThemeMode> {
+  ThemeCubit() : super(ThemeMode.dark);
 
   void changeTheme() {
-    if (state.themeMode == ThemeMode.light) {
-      emit(const ThemeState(ThemeMode.dark));
+    if (state == ThemeMode.light) {
+      emit(ThemeMode.dark);
     } else {
-      emit(const ThemeState(ThemeMode.light));
+      emit(ThemeMode.light);
     }
   }
 }
