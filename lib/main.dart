@@ -36,6 +36,7 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:sahayatri/sahayatri.dart';
 
@@ -45,7 +46,10 @@ import 'package:device_preview/device_preview.dart';
 Future<void> main() async {
   setStatusBarStyle();
   await initHive();
-  runApp(const App());
+  runApp(BlocProvider(
+    create: (context) => ThemeCubit(),
+    child: const App(),
+  ));
 }
 
 void setStatusBarStyle() {
@@ -88,6 +92,7 @@ class App extends StatelessWidget {
       enabled: Platform.isWindows,
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
       plugins: [
+        const ThemePlugin(),
         ScreenshotPlugin(
           processor: (ss) async {
             final dir = await getDownloadsDirectory();
@@ -119,5 +124,27 @@ class App extends StatelessWidget {
         child: const Sahayatri(),
       ),
     );
+  }
+}
+
+class ThemePlugin extends DevicePreviewPlugin {
+  const ThemePlugin()
+      : super(
+          identifier: 'theme',
+          name: 'Change Theme',
+          icon: Icons.lightbulb_outline,
+          windowSize: const Size(220, 220),
+        );
+
+  @override
+  Widget buildData(
+    BuildContext context,
+    Map<String, dynamic> data,
+    DevicePreviewPluginDataUpdater updateData,
+  ) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ThemeCubit>().changeTheme();
+    });
+    return const Offstage();
   }
 }

@@ -129,7 +129,6 @@ class Sahayatri extends StatelessWidget {
 
   List<BlocProvider> _getBlocProviders(BuildContext context) {
     return [
-      BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
       BlocProvider<PrefsCubit>(
         create: (context) => PrefsCubit(
           prefsDao: context.read<PrefsDao>(),
