@@ -31,8 +31,9 @@ class NextCheckpointCard extends StatelessWidget {
     final place = nextCheckpoint.checkpoint.place;
     return FadeAnimator(
       child: ElevatedCard(
-        elevation: 8.0,
         radius: 8.0,
+        elevation: 8.0,
+        color: AppColors.darkFaded,
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Container(
           height: place.lodges.isEmpty ? 180.0 : 300.0,
@@ -40,7 +41,10 @@ class NextCheckpointCard extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: ImageUtils.getImageProvider(place.imageUrls.first),
-              colorFilter: ColorFilter.mode(AppColors.darkFaded, BlendMode.srcATop),
+              colorFilter: ColorFilter.mode(
+                AppColors.dark.withOpacity(0.85),
+                BlendMode.srcATop,
+              ),
             ),
           ),
           child: const FlipCard(

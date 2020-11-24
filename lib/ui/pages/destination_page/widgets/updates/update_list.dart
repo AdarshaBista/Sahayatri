@@ -38,9 +38,7 @@ class UpdateList extends StatelessWidget {
   Widget _buildPostUpdateButton(BuildContext context) {
     return CustomButton(
       label: 'Post an update',
-      color: AppColors.primaryDark,
-      backgroundColor: AppColors.primaryLight,
-      iconData: Icons.post_add_outlined,
+      icon: Icons.post_add_outlined,
       onTap: () => UpdateForm().openModalBottomSheet(context, isDismissible: false),
     );
   }

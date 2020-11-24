@@ -90,8 +90,7 @@ class NearbyForm extends StatelessWidget {
   Widget _buildStartNearbyButton(BuildContext context) {
     return CustomButton(
       label: 'Start Nearby',
-      backgroundColor: AppColors.primaryDark,
-      iconData: CommunityMaterialIcons.circle_double,
+      icon: CommunityMaterialIcons.circle_double,
       onTap: () {
         final name = context.read<PrefsCubit>().prefs.deviceName;
         if (name.isNotEmpty) {

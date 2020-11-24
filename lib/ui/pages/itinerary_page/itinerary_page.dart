@@ -40,7 +40,6 @@ class ItineraryPage extends StatelessWidget {
           children: [
             const SizedBox(height: 4.0),
             const DragIndicatorPill(),
-            const SizedBox(height: 4.0),
             const ItineraryHeader(),
             const SizedBox(height: 10.0),
             const Divider(),

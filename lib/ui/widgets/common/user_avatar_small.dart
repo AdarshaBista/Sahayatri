@@ -21,13 +21,13 @@ class UserAvatarSmall extends StatelessWidget {
       child: ElevatedCard(
         radius: 8.0,
         margin: const EdgeInsets.all(12.0),
-        color: AppColors.primaryLight,
+        color: AppColors.primaryDark,
         child: imageUrl != null
-            ? AdaptiveImage(imageUrl)
+            ? AdaptiveImage(imageUrl, showLoading: false)
             : Center(
                 child: Text(
                   username[0].toUpperCase(),
-                  style: AppTextStyles.headline3,
+                  style: AppTextStyles.headline3.serif.light,
                 ),
               ),
       ),

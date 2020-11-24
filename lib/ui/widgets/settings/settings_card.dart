@@ -34,7 +34,7 @@ class SettingsCard extends StatelessWidget {
                 backgroundColor: AppColors.primaryLight,
                 child: Icon(
                   icon,
-                  color: AppColors.primaryDark,
+                  color: context.c.primaryVariant,
                 ),
               ),
               const SizedBox(width: 16.0),

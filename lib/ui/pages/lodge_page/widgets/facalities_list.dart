@@ -43,14 +43,14 @@ class FacilitiesList extends StatelessWidget {
     return Wrap(
       spacing: 8.0,
       children: [
-        if (facility.wifi) _buildIcon(CommunityMaterialIcons.wifi),
-        if (facility.toilet) _buildIcon(CommunityMaterialIcons.toilet),
-        if (facility.shower) _buildIcon(CommunityMaterialIcons.shower_head),
+        if (facility.wifi) _buildIcon(context, CommunityMaterialIcons.wifi),
+        if (facility.toilet) _buildIcon(context, CommunityMaterialIcons.toilet),
+        if (facility.shower) _buildIcon(context, CommunityMaterialIcons.shower_head),
       ],
     );
   }
 
-  Widget _buildIcon(IconData icon) {
+  Widget _buildIcon(BuildContext context, IconData icon) {
     return ScaleAnimator(
       child: Container(
         width: 48,
@@ -62,7 +62,7 @@ class FacilitiesList extends StatelessWidget {
         child: Center(
           child: Icon(
             icon,
-            color: AppColors.primaryDark,
+            color: context.c.primaryVariant,
           ),
         ),
       ),

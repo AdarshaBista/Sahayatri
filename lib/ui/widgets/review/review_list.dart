@@ -44,9 +44,7 @@ class ReviewList extends StatelessWidget {
   Widget _buildWriteReviewButton(BuildContext context) {
     return CustomButton(
       label: 'Write a review',
-      color: AppColors.primaryDark,
-      backgroundColor: AppColors.primaryLight,
-      iconData: CommunityMaterialIcons.pencil_outline,
+      icon: CommunityMaterialIcons.pencil_outline,
       onTap: () => ReviewForm(
         onSubmit: (rating, text) => _postReview(context, rating, text),
       ).openModalBottomSheet(context, isDismissible: false),

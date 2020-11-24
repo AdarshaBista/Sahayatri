@@ -41,8 +41,8 @@ class CreatedItineraryCard extends StatelessWidget {
       child: CustomButton(
         color: AppColors.primaryDark,
         backgroundColor: AppColors.primaryLight,
-        iconData: CommunityMaterialIcons.pencil_circle_outline,
-        label: createdItinerary == null ? 'Create an itinerary' : 'Edit itinerary',
+        icon: CommunityMaterialIcons.pencil_circle_outline,
+        label: 'Create an itinerary',
         onTap: () => context.read<DestinationNavService>().pushNamed(
               Routes.itineraryFormPageRoute,
               arguments: context.read<DestinationCubit>().destination.createdItinerary,

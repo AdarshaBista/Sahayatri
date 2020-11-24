@@ -51,9 +51,7 @@ class HeaderTile extends StatelessWidget {
   Widget _buildViewRoomsButton(BuildContext context) {
     return CustomButton(
       label: 'View Rooms',
-      color: AppColors.dark,
-      backgroundColor: AppColors.primaryLight,
-      iconData: Icons.hotel_outlined,
+      icon: Icons.hotel_outlined,
       onTap: () =>
           context.read<DestinationNavService>().pushNamed(Routes.lodgeRoomsPageRoute),
     );

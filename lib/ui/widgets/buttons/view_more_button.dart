@@ -49,7 +49,7 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
         label: 'View More',
         color: AppColors.primaryDark,
         backgroundColor: AppColors.primaryLight,
-        iconData: Icons.arrow_right_alt_outlined,
+        icon: Icons.arrow_right_alt_outlined,
         onTap: _loadMore,
       ),
     );

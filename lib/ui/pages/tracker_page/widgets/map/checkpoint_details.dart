@@ -30,7 +30,7 @@ class CheckpointDetails extends StatelessWidget {
           children: [
             _buildTopRow(context),
             const Divider(height: 16.0),
-            _buildDescription(),
+            _buildDescription(context),
             const SizedBox(height: 16.0),
             _buildDateTime(),
             if (checkpoint.place.lodges.isNotEmpty) ...[
@@ -47,7 +47,7 @@ class CheckpointDetails extends StatelessWidget {
   Widget _buildTopRow(BuildContext context) {
     return Row(
       children: [
-        Text(checkpoint.place.name, style: AppTextStyles.headline4.bold),
+        Text(checkpoint.place.name, style: context.t.headline4.serif),
         const Spacer(),
         GestureDetector(
           onTap: () => context.read<DestinationNavService>().pushNamed(
@@ -57,20 +57,20 @@ class CheckpointDetails extends StatelessWidget {
           onDoubleTap: () => Navigator.of(context).pop(),
           child: Text(
             'VIEW',
-            style: AppTextStyles.headline5.primary,
+            style: AppTextStyles.headline5.primaryDark,
           ),
         ),
       ],
     );
   }
 
-  Text _buildDescription() {
+  Text _buildDescription(BuildContext context) {
     return Text(
       checkpoint.description.isEmpty
           ? 'No description provided.'
           : checkpoint.description,
       overflow: TextOverflow.ellipsis,
-      style: AppTextStyles.headline5,
+      style: context.t.headline5,
     );
   }
 

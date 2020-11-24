@@ -42,10 +42,14 @@ class ContactList extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity.compact,
-      leading: const CircleAvatar(
+      leading: CircleAvatar(
         radius: 14.0,
         backgroundColor: AppColors.primaryLight,
-        child: Icon(Icons.phone, size: 14.0, color: AppColors.primaryDark),
+        child: Icon(
+          Icons.phone,
+          size: 14.0,
+          color: context.c.primaryVariant,
+        ),
       ),
       title: Text(
         number,

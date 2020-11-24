@@ -21,7 +21,11 @@ class DistanceIndicator extends StatelessWidget {
       child: SleekCircularSlider(
         initialValue: distanceCovered,
         max: distanceRemaining + distanceCovered,
-        innerWidget: (_) => _buildDistanceInfo(distanceCovered, distanceRemaining),
+        innerWidget: (_) => _buildDistanceInfo(
+          context,
+          distanceCovered,
+          distanceRemaining,
+        ),
         appearance: CircularSliderAppearance(
           size: 180.0,
           startAngle: 120.0,
@@ -41,28 +45,28 @@ class DistanceIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildDistanceInfo(double covered, double remaining) {
+  Widget _buildDistanceInfo(BuildContext context, double covered, double remaining) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildStat(covered, 'covered', AppColors.primaryDark),
+        _buildStat(context, covered, 'covered', AppColors.primaryDark),
         const SizedBox(height: 16.0),
-        _buildStat(remaining, 'remaining', AppColors.secondary),
+        _buildStat(context, remaining, 'remaining', AppColors.secondary),
       ],
     );
   }
 
-  Widget _buildStat(double distance, String label, Color color) {
+  Widget _buildStat(BuildContext context, double distance, String label, Color color) {
     return Column(
       children: [
         Text(
           _formatDistance(distance),
-          style: AppTextStyles.headline4.bold.withColor(color),
+          style: context.t.headline4.bold.withColor(color),
         ),
         const SizedBox(height: 2.0),
         Text(
           label,
-          style: AppTextStyles.headline6,
+          style: context.t.headline6,
         ),
       ],
     );

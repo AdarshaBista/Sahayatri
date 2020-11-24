@@ -84,6 +84,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       bottomNavigationBar: BottomAppBar(
         elevation: 8.0,
         notchMargin: 6.0,
+        color: context.theme.cardColor,
         child: _buildBottomNavBar(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

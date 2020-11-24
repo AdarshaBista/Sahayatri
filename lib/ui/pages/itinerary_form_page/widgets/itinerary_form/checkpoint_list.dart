@@ -45,9 +45,7 @@ class CheckpointList extends StatelessWidget {
   Widget _buildAddCheckpointButton(BuildContext context) {
     return CustomButton(
       label: 'Add a Checkpoint',
-      color: AppColors.primaryDark,
-      backgroundColor: AppColors.primaryLight,
-      iconData: Icons.add_location_alt_outlined,
+      icon: Icons.add_location_alt_outlined,
       onTap: () {
         FocusScope.of(context).unfocus();
         CheckpointForm(

@@ -61,8 +61,8 @@ class ConfirmDialog extends StatelessWidget {
   Widget _buildConfirmButton(BuildContext context) {
     return CustomButton(
       label: confirmText,
-      iconData: Icons.check,
-      color: AppColors.secondaryDark,
+      icon: Icons.check,
+      color: context.c.secondaryVariant,
       backgroundColor: AppColors.secondaryLight,
       onTap: () {
         Navigator.of(context).pop();
@@ -74,9 +74,7 @@ class ConfirmDialog extends StatelessWidget {
   Widget _buildRejectButton(BuildContext context) {
     return CustomButton(
       label: cancelText,
-      iconData: Icons.close,
-      color: AppColors.primaryDark,
-      backgroundColor: AppColors.primaryLight,
+      icon: Icons.close,
       onTap: () => Navigator.of(context).pop(),
     );
   }

@@ -25,8 +25,8 @@ class UnauthenticatedView extends StatelessWidget {
         const UnauthenticatedIndicator(),
         CustomButton(
           label: 'Login / Sign Up',
-          outlineOnly: true,
-          iconData: Icons.account_box,
+          outline: true,
+          icon: Icons.account_box,
           color: context.c.onBackground,
           onTap: () {
             if (onLogin != null) onLogin();

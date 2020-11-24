@@ -26,9 +26,9 @@ class BottomNavBar extends StatelessWidget {
       top: false,
       child: Container(
         width: double.infinity,
-        height: 56.0,
+        height: 60.0,
         color: context.c.background,
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         child: Row(
           children: icons.map((icon) {
             final int index = icons.indexOf(icon);

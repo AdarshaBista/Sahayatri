@@ -37,11 +37,10 @@ class RouteActions extends StatelessWidget {
 
   Widget _buildViewRouteButton(BuildContext context) {
     return CustomButton(
+      outline: true,
       label: 'View Route',
-      outlineOnly: true,
       color: context.c.onSurface,
-      backgroundColor: context.c.onSurface,
-      iconData: CommunityMaterialIcons.chart_line_variant,
+      icon: CommunityMaterialIcons.chart_line_variant,
       onTap: () => context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
     );
   }

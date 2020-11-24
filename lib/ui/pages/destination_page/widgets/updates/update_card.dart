@@ -107,9 +107,9 @@ class UpdateCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: CustomButton(
         label: 'View Location',
+        outline: true,
         color: AppColors.secondary,
-        backgroundColor: AppColors.secondary.withOpacity(0.25),
-        iconData: Icons.map_outlined,
+        icon: Icons.map_outlined,
         onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
       ),
     );

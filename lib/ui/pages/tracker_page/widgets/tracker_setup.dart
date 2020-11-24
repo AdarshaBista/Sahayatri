@@ -15,7 +15,7 @@ class TrackerSetup extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Review your settings', style: AppTextStyles.headline4.serif),
+        title: Text('Review your settings', style: context.t.headline4.serif),
       ),
       floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -23,7 +23,7 @@ class SaveButton extends StatelessWidget {
         child: Center(
             child: Text(
           'SAVE',
-          style: AppTextStyles.headline5.primaryDark.bold,
+          style: context.t.headline5.bold,
         )),
       ),
     );

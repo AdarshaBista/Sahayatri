@@ -89,6 +89,8 @@ class AppThemes {
       );
 
   static ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
+        primaryVariant: AppColors.light,
+        secondaryVariant: AppColors.light,
         brightness: Brightness.dark,
         surface: AppColors.darkAccent,
         onSurface: AppColors.lightAccent,

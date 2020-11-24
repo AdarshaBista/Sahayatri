@@ -39,9 +39,7 @@ class PlaceActions extends StatelessWidget {
   Widget _buildWeatherButton(BuildContext context, Place place) {
     return CustomButton(
       label: 'Weather',
-      color: AppColors.dark,
-      backgroundColor: AppColors.primaryLight,
-      iconData: CommunityMaterialIcons.weather_fog,
+      icon: CommunityMaterialIcons.weather_fog,
       onTap: () => context.read<DestinationNavService>().pushNamed(
             Routes.weatherPageRoute,
             arguments: WeatherPageArgs(
@@ -55,9 +53,7 @@ class PlaceActions extends StatelessWidget {
   Widget _buildViewMapButton(BuildContext context, Place place) {
     return CustomButton(
       label: 'View Map',
-      color: AppColors.dark,
-      iconData: Icons.map_outlined,
-      backgroundColor: AppColors.primaryLight,
+      icon: Icons.map_outlined,
       onTap: () => PlaceMapDialog(place: place).openDialog(context),
     );
   }

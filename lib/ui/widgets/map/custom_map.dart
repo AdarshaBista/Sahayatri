@@ -93,8 +93,8 @@ class _CustomMapState extends State<CustomMap> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const MenuDrawer(),
-      drawerScrimColor: AppColors.darkFaded,
       drawerEnableOpenDragGesture: false,
+      drawerScrimColor: AppColors.dark.withOpacity(0.8),
       body: Stack(
         children: [
           RepaintBoundary(child: _buildMap()),

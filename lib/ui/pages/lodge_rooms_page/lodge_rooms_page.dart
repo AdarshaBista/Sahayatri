@@ -58,7 +58,7 @@ class LodgeRoomsPage extends StatelessWidget {
                       label: 'BOOK',
                       color: AppColors.dark,
                       backgroundColor: AppColors.primaryLight,
-                      iconData: Icons.bookmark_outline,
+                      icon: Icons.bookmark_outline,
                       onTap: () {},
                     ),
                   ],

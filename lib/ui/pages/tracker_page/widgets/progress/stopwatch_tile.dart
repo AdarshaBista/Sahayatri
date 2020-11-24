@@ -41,12 +41,12 @@ class _StopwatchTileState extends State<StopwatchTile> {
           Icon(
             Icons.timer_outlined,
             size: 24.0,
-            color: AppColors.darkFaded,
+            color: context.c.onSurface,
           ),
           const SizedBox(height: 2.0),
           Text(
             _formatDuration(elapsed),
-            style: AppTextStyles.headline2.thin,
+            style: context.t.headline2.thin,
           ),
         ],
       ),
