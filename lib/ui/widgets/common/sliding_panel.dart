@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class SlidingPanel extends StatelessWidget {
   final Widget body;
@@ -37,9 +38,10 @@ class SlidingPanel extends StatelessWidget {
 
     return SlidingUpPanel(
       snapPoint: snapPoint,
+      parallaxOffset: 0.5,
       backdropOpacity: 0.6,
       backdropEnabled: true,
-      parallaxOffset: 0.5,
+      color: context.theme.cardColor,
       parallaxEnabled: parallaxEnabled,
       borderRadius: BorderRadius.only(
         topLeft: radius,

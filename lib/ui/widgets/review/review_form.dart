@@ -121,7 +121,6 @@ class _ReviewFormState extends State<ReviewForm> {
   Widget _buildSubmitButton(BuildContext context) {
     return FloatingActionButton(
       mini: true,
-      backgroundColor: AppColors.dark,
       child: const Icon(
         Icons.check,
         size: 24.0,

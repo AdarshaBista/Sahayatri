@@ -5,6 +5,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/widgets/checkpoint_detail_marker.dart';
 
@@ -25,10 +26,14 @@ class ItineraryMap extends StatelessWidget {
 
   Widget _buildMarkers(BuildContext context) {
     final checkpoints = Provider.of<Itinerary>(context, listen: false).checkpoints;
-
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: checkpoints.map((c) => CheckpointDetailMarker(checkpoint: c)).toList(),
+        markers: checkpoints
+            .map((c) => CheckpointDetailMarker(
+                  checkpoint: c,
+                  color: context.c.background,
+                ))
+            .toList(),
       ),
     );
   }

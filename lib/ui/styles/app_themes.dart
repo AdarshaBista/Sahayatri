@@ -44,7 +44,7 @@ class AppThemes {
         bottomSheetTheme: _lightBottomSheetTheme,
         bottomAppBarTheme: _lightBottomAppBarTheme,
         inputDecorationTheme: _lightInputDecorationTheme,
-        floatingActionButtonTheme: _floatingActionButtonTheme,
+        floatingActionButtonTheme: _lightFloatingActionButtonTheme,
       );
 
   static ThemeData get dark => _base.copyWith(
@@ -69,7 +69,7 @@ class AppThemes {
         bottomSheetTheme: _darkBottomSheetTheme,
         bottomAppBarTheme: _darkBottomAppBarTheme,
         inputDecorationTheme: _darkInputDecorationTheme,
-        floatingActionButtonTheme: _floatingActionButtonTheme,
+        floatingActionButtonTheme: _darkFloatingActionButtonTheme,
       );
 
   static ColorScheme get _lightColorScheme => const ColorScheme(
@@ -170,13 +170,23 @@ class AppThemes {
         errorStyle: AppTextStyles.headline6.secondary,
       );
 
-  static FloatingActionButtonThemeData get _floatingActionButtonTheme =>
+  static FloatingActionButtonThemeData get _lightFloatingActionButtonTheme =>
       const FloatingActionButtonThemeData(
         elevation: 4.0,
+        hoverElevation: 4.0,
+        focusElevation: 4.0,
         disabledElevation: 0.0,
+        highlightElevation: 4.0,
         backgroundColor: AppColors.dark,
         splashColor: AppColors.darkSurface,
         foregroundColor: AppColors.primary,
+      );
+
+  static FloatingActionButtonThemeData get _darkFloatingActionButtonTheme =>
+      _lightFloatingActionButtonTheme.copyWith(
+        backgroundColor: AppColors.light,
+        splashColor: AppColors.lightAccent,
+        foregroundColor: AppColors.primaryDark,
       );
 
   static AppBarTheme get _lightAppBarTheme => AppBarTheme(

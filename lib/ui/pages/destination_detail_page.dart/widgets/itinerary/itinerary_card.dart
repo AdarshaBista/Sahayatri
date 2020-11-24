@@ -39,6 +39,7 @@ class ItineraryCard extends StatelessWidget {
             .pushNamed(Routes.itineraryPageRoute, arguments: itinerary),
         child: ElevatedCard(
           radius: 8.0,
+          color: context.c.surface,
           child: Stack(
             alignment: Alignment.topRight,
             children: [

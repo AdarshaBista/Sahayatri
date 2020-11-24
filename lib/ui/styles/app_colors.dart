@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/style_x.dart';
-
 class AppColors {
   AppColors._();
 
@@ -44,20 +42,27 @@ class AppColors {
     Colors.transparent,
   ];
 
-  static List<Color> getCollapsibleHeaderGradient(BuildContext context) {
-    final bgColor = context.c.background;
+  static List<Color> getCollapsibleHeaderGradient(Color color) {
     return [
       Colors.transparent,
       Colors.transparent,
       Colors.transparent,
-      bgColor.withOpacity(0.2),
-      bgColor.withOpacity(0.5),
-      bgColor.withOpacity(0.8),
-      bgColor,
+      color.withOpacity(0.2),
+      color.withOpacity(0.5),
+      color.withOpacity(0.8),
+      color,
     ];
   }
 
-  static final drawerGradient = AppColors.accents.take(3).toList();
+  static List<Color> getDrawerGradient(bool isDark) {
+    if (!isDark) return AppColors.accents.take(3).toList();
+    return [
+      AppColors.darkSurface,
+      AppColors.darkAccent,
+      AppColors.darkFaded,
+    ];
+  }
+
   static final routeGradient = AppColors.accents.take(4).toList();
   static final userTrackGradient = AppColors.accents.getRange(5, 7).toList();
 }

@@ -32,7 +32,7 @@ class PlaceListSheet extends StatelessWidget {
           children: [
             Text(
               'Select a place',
-              style: AppTextStyles.headline4.bold,
+              style: context.t.headline4.bold,
             ),
             const Divider(height: 16.0),
             BlocBuilder<PlacesCubit, PlacesState>(
@@ -78,11 +78,15 @@ class PlaceListSheet extends StatelessWidget {
         onSelect(place);
         Navigator.of(context).pop();
       },
-      title: Text(place.name, style: AppTextStyles.headline4),
+      title: Text(place.name, style: context.t.headline5),
       leading: SizedBox(
         height: 50.0,
         width: 50.0,
-        child: ImageCard(imageUrl: place.imageUrls[0]),
+        child: ImageCard(
+          showLoading: false,
+          imageUrl: place.imageUrls[0],
+          backgroundColor: context.c.surface,
+        ),
       ),
       trailing: GestureDetector(
         onTap: () => context.read<DestinationNavService>().pushNamed(
@@ -90,8 +94,8 @@ class PlaceListSheet extends StatelessWidget {
               arguments: place,
             ),
         child: Text(
-          'View',
-          style: AppTextStyles.headline5.primary,
+          'VIEW',
+          style: AppTextStyles.headline5.primaryDark,
         ),
       ),
     );

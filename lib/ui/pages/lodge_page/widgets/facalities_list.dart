@@ -21,9 +21,9 @@ class FacilitiesList extends StatelessWidget {
         children: [
           Text(
             'Facilities',
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 8.0),
           _buildFacilities(context),
         ],
       ),

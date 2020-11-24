@@ -29,7 +29,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 12.0),
         _buildSuggestedItineraries(context),
         const SizedBox(height: 12.0),
-        _buildCreatedItinerary(),
+        _buildCreatedItinerary(context),
         const SizedBox(height: 72.0),
       ],
     );
@@ -42,7 +42,7 @@ class ItinerariesList extends StatelessWidget {
       children: [
         Text(
           'Our Suggested Itineraries',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const Divider(height: 16.0),
         const SizedBox(height: 8.0),
@@ -77,14 +77,14 @@ class ItinerariesList extends StatelessWidget {
     );
   }
 
-  Widget _buildCreatedItinerary() {
+  Widget _buildCreatedItinerary(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16.0),
         Text(
           'Create Your Own',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const Divider(height: 16.0),
         const CreatedItineraryCard(),

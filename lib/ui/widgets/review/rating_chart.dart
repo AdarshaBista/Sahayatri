@@ -25,7 +25,7 @@ class RatingChart extends StatelessWidget {
         children: [
           _buildDetails(context),
           const SizedBox(width: 16.0),
-          Expanded(child: _buildBars()),
+          Expanded(child: _buildBars(context)),
         ],
       ),
     );
@@ -54,27 +54,27 @@ class RatingChart extends StatelessWidget {
     );
   }
 
-  Widget _buildBars() {
+  Widget _buildBars(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (int i = stars.length; i > 0; --i)
           SlideAnimator(
             begin: Offset(0.2 + (stars.length + 1 - i) * 0.1, 0.0),
-            child: _buildBar(i),
+            child: _buildBar(context, i),
           ),
       ],
     );
   }
 
-  Widget _buildBar(int index) {
+  Widget _buildBar(BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1.0),
       child: Row(
         children: [
           Text(
             index.toString(),
-            style: AppTextStyles.headline6.bold,
+            style: context.t.headline6.bold,
           ),
           const SizedBox(width: 12.0),
           Expanded(

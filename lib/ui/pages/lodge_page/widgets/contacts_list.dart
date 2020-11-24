@@ -24,9 +24,9 @@ class ContactList extends StatelessWidget {
         children: [
           Text(
             'Contact Numbers',
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 8.0),
           ElevatedCard(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -49,13 +49,13 @@ class ContactList extends StatelessWidget {
       ),
       title: Text(
         number,
-        style: AppTextStyles.headline5.bold.serif,
+        style: context.t.headline5.bold.serif,
       ),
       trailing: GestureDetector(
         onTap: () => _launchPhone(context, number),
         child: Text(
           'Call',
-          style: AppTextStyles.headline5.primary,
+          style: context.t.headline5.primary,
         ),
       ),
     );

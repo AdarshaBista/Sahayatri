@@ -30,13 +30,13 @@ class AltitudeGraph extends StatelessWidget {
           Text(
             'Elevation Gain',
             textAlign: TextAlign.center,
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
           const SizedBox(height: 24.0),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0, bottom: 16.0),
-              child: _buildGraph(),
+              child: _buildGraph(context),
             ),
           ),
         ],
@@ -44,7 +44,7 @@ class AltitudeGraph extends StatelessWidget {
     );
   }
 
-  LineChart _buildGraph() {
+  LineChart _buildGraph(BuildContext context) {
     const double vInterval = 1000.0;
     final double hInterval = altitudes.length / 4.0;
 
@@ -62,20 +62,20 @@ class AltitudeGraph extends StatelessWidget {
         maxY: maxY,
         minX: 0.0,
         maxX: xValues.length.toDouble(),
-        borderData: _buildBorderData(),
+        borderData: _buildBorderData(context),
         lineTouchData: _buildTouchData(),
         gridData: _buildGrid(vInterval, hInterval),
-        titlesData: _buildTitles(vInterval, hInterval, xValues.length),
+        titlesData: _buildTitles(context, vInterval, hInterval, xValues.length),
         lineBarsData: [_buildLineData(xValues, altitudes, AppColors.primary)],
       ),
     );
   }
 
-  FlBorderData _buildBorderData() {
+  FlBorderData _buildBorderData(BuildContext context) {
     return FlBorderData(
       border: Border.all(
         width: 0.5,
-        color: AppColors.darkFaded,
+        color: context.c.onSurface,
       ),
     );
   }
@@ -105,14 +105,15 @@ class AltitudeGraph extends StatelessWidget {
     );
   }
 
-  FlTitlesData _buildTitles(double vInterval, double hInterval, int length) {
+  FlTitlesData _buildTitles(
+      BuildContext context, double vInterval, double hInterval, int length) {
     return FlTitlesData(
       bottomTitles: SideTitles(
         showTitles: true,
         margin: 8.0,
         interval: hInterval,
         reservedSize: 30.0,
-        getTextStyles: (_) => AppTextStyles.headline6.bold,
+        getTextStyles: (_) => context.t.headline6.bold,
         getTitles: (value) {
           final double percent = value / length;
           return '${(percent * routeLengthKm).round()} km';
@@ -123,7 +124,7 @@ class AltitudeGraph extends StatelessWidget {
         margin: 8.0,
         interval: vInterval,
         reservedSize: 30.0,
-        getTextStyles: (_) => AppTextStyles.headline6.bold,
+        getTextStyles: (_) => context.t.headline6.bold,
         getTitles: (value) => '${value.round()} m',
       ),
     );

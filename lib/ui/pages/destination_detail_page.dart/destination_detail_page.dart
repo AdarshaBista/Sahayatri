@@ -69,7 +69,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         controller: _drawerController,
         closeCurve: Curves.easeInOut,
         openCurve: Curves.fastLinearToSlowEaseIn,
-        backgroundColor: AppColors.light.withOpacity(0.5),
+        backgroundColor: context.c.background.withOpacity(0.5),
         slideWidth: MediaQuery.of(context).size.width * 0.7,
         mainScreen: _buildPage(),
         menuScreen: const DestinationDrawer(),
@@ -84,8 +84,6 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       bottomNavigationBar: BottomAppBar(
         elevation: 8.0,
         notchMargin: 6.0,
-        color: AppColors.light,
-        shape: const CircularNotchedRectangle(),
         child: _buildBottomNavBar(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -128,7 +126,9 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
             for (int i = 0; i < _tabs.length; ++i)
               NestedTab(
                 tab: _tabs[i],
-                color: _tabController.index == i ? AppColors.primary : AppColors.dark,
+                color: _tabController.index == i
+                    ? AppColors.primary
+                    : context.c.onBackground,
               ),
           ],
         ),

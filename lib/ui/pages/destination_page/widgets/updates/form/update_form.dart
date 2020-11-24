@@ -96,7 +96,6 @@ class UpdateForm extends StatelessWidget {
       builder: (context, state) {
         return FloatingActionButton(
           mini: true,
-          backgroundColor: AppColors.dark,
           child: state.isLoading
               ? const SimpleBusyIndicator()
               : const Icon(

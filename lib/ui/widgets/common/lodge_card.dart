@@ -29,6 +29,7 @@ class LodgeCard extends StatelessWidget {
           .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: ElevatedCard(
         radius: 8.0,
+        color: context.c.surface,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[

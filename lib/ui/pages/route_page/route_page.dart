@@ -60,8 +60,7 @@ class _RoutePageState extends State<RoutePage> {
   }
 
   Future<void> _openAltitudeSheet(BuildContext context) async {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
+    final destination = context.read<DestinationCubit>().destination;
 
     setState(() {
       isSheetOpen = !isSheetOpen;

@@ -66,7 +66,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
                   await controller.reverse();
                   widget.onDelete(widget.label);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   size: 12.0,
                   color: AppColors.secondary,

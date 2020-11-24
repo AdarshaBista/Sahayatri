@@ -25,12 +25,12 @@ class CollapsibleCarousel extends StatelessWidget {
       elevation: 8.0,
       expandedHeight: 280.0,
       automaticallyImplyLeading: false,
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.only(right: 12.0),
+          padding: const EdgeInsets.only(right: 12.0),
           child: CloseIcon(
-            backgroundColor: AppColors.light,
-            iconColor: AppColors.dark,
+            iconColor: context.c.onBackground,
+            backgroundColor: context.c.background,
           ),
         ),
       ],
@@ -43,7 +43,7 @@ class CollapsibleCarousel extends StatelessWidget {
           title,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.headline4.serif,
+          style: context.t.headline4.serif,
         ),
       ),
     );
@@ -55,7 +55,7 @@ class CollapsibleCarousel extends StatelessWidget {
       child: GradientContainer(
         gradientBegin: Alignment.topCenter,
         gradientEnd: Alignment.bottomCenter,
-        gradientColors: AppColors.getCollapsibleHeaderGradient(context),
+        gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.background),
         child: Carousel(
           imageUrls: imageUrls,
           showPagination: false,

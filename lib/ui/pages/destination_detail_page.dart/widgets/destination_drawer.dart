@@ -7,6 +7,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
@@ -28,7 +29,8 @@ class DestinationDrawer extends StatelessWidget {
           CustomPaint(
             foregroundPainter: DrawerBackground(),
             child: GradientContainer(
-              gradientColors: AppColors.drawerGradient,
+              gradientColors:
+                  AppColors.getDrawerGradient(context.watch<ThemeCubit>().isDark),
             ),
           ),
           Center(child: _buildMenuItems(context)),

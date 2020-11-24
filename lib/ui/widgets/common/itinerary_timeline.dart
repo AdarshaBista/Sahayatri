@@ -85,18 +85,18 @@ class ItineraryTimeline extends StatelessWidget {
       ),
       beforeLineStyle: LineStyle(
         thickness: 1.5,
-        color: AppColors.darkFaded,
+        color: context.c.surface,
       ),
       afterLineStyle: LineStyle(
         thickness: 1.5,
-        color: AppColors.darkFaded,
+        color: context.c.surface,
       ),
-      startChild: _buildDateTime(checkpoint),
+      startChild: _buildDateTime(context, checkpoint),
       endChild: _buildPlace(context, checkpoint),
     );
   }
 
-  Widget _buildDateTime(Checkpoint checkpoint) {
+  Widget _buildDateTime(BuildContext context, Checkpoint checkpoint) {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 80.0),
       child: Column(
@@ -105,13 +105,13 @@ class ItineraryTimeline extends StatelessWidget {
         children: [
           Text(
             checkpoint.date,
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
           if (!checkpoint.isTemplate) const SizedBox(height: 4.0),
           if (!checkpoint.isTemplate)
             Text(
               checkpoint.time,
-              style: AppTextStyles.headline6,
+              style: context.t.headline6,
             ),
         ],
       ),
@@ -120,13 +120,15 @@ class ItineraryTimeline extends StatelessWidget {
 
   Widget _buildPlace(BuildContext context, Checkpoint checkpoint) {
     return InkWell(
+      splashColor: context.c.surface,
+      borderRadius: BorderRadius.circular(8.0),
       onTap: () => _handlePlaceTap(context, checkpoint),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: _buildCheckpointText(checkpoint)),
+            Expanded(child: _buildCheckpointText(context, checkpoint)),
+            const SizedBox(width: 8.0),
             if (isEditable) _buildDeleteIcon(context, checkpoint),
           ],
         ),
@@ -134,21 +136,21 @@ class ItineraryTimeline extends StatelessWidget {
     );
   }
 
-  Column _buildCheckpointText(Checkpoint checkpoint) {
+  Column _buildCheckpointText(BuildContext context, Checkpoint checkpoint) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           checkpoint.place.name.toUpperCase(),
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 4.0),
         Text(
           checkpoint.description.isEmpty
               ? 'No description provided.'
               : checkpoint.description,
-          style: AppTextStyles.headline6,
+          style: context.t.headline6,
         ),
         if (checkpoint.notifyContact) ...[
           const SizedBox(height: 4.0),
@@ -179,10 +181,14 @@ class ItineraryTimeline extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: context.c.surface,
+        ),
         child: const Icon(
           Icons.close,
-          size: 22.0,
+          size: 16.0,
           color: AppColors.secondary,
         ),
       ),

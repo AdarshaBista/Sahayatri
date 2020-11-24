@@ -35,7 +35,6 @@ class DownloadDialog extends StatelessWidget {
               child: AlertDialog(
                 elevation: 12.0,
                 clipBehavior: Clip.antiAlias,
-                backgroundColor: AppColors.light,
                 title: BlocBuilder<DownloadCubit, DownloadState>(
                   builder: (context, state) {
                     if (state is DownloadCompleted) {
@@ -65,7 +64,7 @@ class DownloadDialog extends StatelessWidget {
           child: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
         ),
         const SizedBox(height: 24.0),
@@ -82,7 +81,7 @@ class DownloadDialog extends StatelessWidget {
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style: AppTextStyles.headline5.bold,
+            style: context.t.headline5.bold,
           ),
         ),
         CustomButton(

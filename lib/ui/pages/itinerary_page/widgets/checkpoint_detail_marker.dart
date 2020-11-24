@@ -9,11 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/image_card.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
+    @required Color color,
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
@@ -25,6 +26,7 @@ class CheckpointDetailMarker extends Marker {
             tag: checkpoint.place.id,
             child: ElevatedCard(
               child: Material(
+                color: color,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -52,9 +54,14 @@ class _DateTimeInfo extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          AdaptiveImage(
-            checkpoint.place.imageUrls[0],
-            color: AppColors.darkFaded,
+          ElevatedCard(
+            color: AppColors.darkSurface,
+            child: ImageCard(
+              showLoading: false,
+              margin: EdgeInsets.zero,
+              backgroundColor: AppColors.darkAccent,
+              imageUrl: checkpoint.place.imageUrls[0],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +109,7 @@ class _PlaceInfo extends StatelessWidget {
                 checkpoint.place.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.headline5.bold,
+                style: context.t.headline5.bold,
               ),
             ),
             const SizedBox(height: 4.0),
@@ -113,7 +120,7 @@ class _PlaceInfo extends StatelessWidget {
                     : checkpoint.description,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.headline6,
+                style: context.t.headline6,
               ),
             ),
           ],

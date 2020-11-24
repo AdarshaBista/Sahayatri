@@ -27,7 +27,7 @@ class UserAvatarSmall extends StatelessWidget {
             : Center(
                 child: Text(
                   username[0].toUpperCase(),
-                  style: AppTextStyles.headline3.withColor(AppColors.primaryDark),
+                  style: AppTextStyles.headline3,
                 ),
               ),
       ),

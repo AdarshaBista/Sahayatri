@@ -42,7 +42,7 @@ class LodgePage extends StatelessWidget {
             const FacilitiesList(),
             const SizedBox(height: 16.0),
             const ContactList(),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 8.0),
             _buildTabView(context),
           ],
         ),

@@ -49,7 +49,7 @@ class ItineraryForm extends StatelessWidget {
       children: [
         Text(
           'Duration',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 8.0),
         Row(

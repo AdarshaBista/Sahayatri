@@ -34,7 +34,6 @@ class TrackerFab extends StatelessWidget {
 
     return FloatingActionButton(
       mini: true,
-      backgroundColor: AppColors.dark,
       child: const Icon(
         Icons.play_arrow_outlined,
         size: 24.0,

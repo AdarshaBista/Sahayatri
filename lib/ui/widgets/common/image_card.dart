@@ -5,13 +5,17 @@ import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class ImageCard extends StatelessWidget {
   final String imageUrl;
+  final bool showLoading;
   final EdgeInsets margin;
   final double borderRadius;
+  final Color backgroundColor;
 
   const ImageCard({
-    this.margin = const EdgeInsets.all(4.0),
     @required this.imageUrl,
+    this.backgroundColor,
     this.borderRadius = 8.0,
+    this.showLoading = true,
+    this.margin = const EdgeInsets.all(4.0),
   })  : assert(imageUrl != null),
         assert(borderRadius != null);
 
@@ -20,7 +24,11 @@ class ImageCard extends StatelessWidget {
     return ElevatedCard(
       margin: margin,
       radius: borderRadius,
-      child: AdaptiveImage(imageUrl),
+      color: backgroundColor,
+      child: AdaptiveImage(
+        imageUrl,
+        showLoading: showLoading,
+      ),
     );
   }
 }

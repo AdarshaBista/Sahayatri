@@ -68,8 +68,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
         : selectedDateTime;
 
     return showDatePicker(
-      builder: _getTheme,
       context: context,
+      helpText: '',
+      fieldLabelText: '',
+      builder: _getTheme,
       firstDate: firstDate,
       initialDate: selectedDateTime ?? now,
       lastDate: DateTime.now().add(const Duration(days: 5 * 365)),
@@ -85,20 +87,22 @@ class _DateTimePickerState extends State<DateTimePicker> {
           );
 
     return showTimePicker(
-      builder: _getTheme,
       context: context,
+      helpText: '',
+      builder: _getTheme,
       initialTime: initialTime,
     );
   }
 
   Widget _getTheme(BuildContext context, Widget child) {
     final colorScheme = Theme.of(context).colorScheme;
-
     return Theme(
       data: Theme.of(context).copyWith(
+        textTheme: TextTheme(subtitle1: context.t.headline5),
         colorScheme: colorScheme.copyWith(
-          primary: AppColors.primaryDark,
           onPrimary: AppColors.light,
+          primary: AppColors.primaryDark,
+          surface: context.theme.cardColor,
         ),
       ),
       child: child,

@@ -8,13 +8,16 @@ class AdaptiveImage extends StatelessWidget {
   final double width;
   final double height;
   final String imageUrl;
+  final bool showLoading;
 
   const AdaptiveImage(
     this.imageUrl, {
-    this.color = Colors.transparent,
     this.width,
     this.height,
-  }) : assert(color != null);
+    this.showLoading = true,
+    this.color = Colors.transparent,
+  })  : assert(color != null),
+        assert(showLoading != null);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,8 @@ class AdaptiveImage extends StatelessWidget {
       width: width ?? double.infinity,
       height: height ?? double.infinity,
       colorBlendMode: BlendMode.srcATop,
-      errorBuilder: _buildError,
-      frameBuilder: _buildFrame,
+      errorBuilder: showLoading ? _buildError : null,
+      frameBuilder: showLoading ? _buildFrame : null,
     );
   }
 
@@ -34,23 +37,23 @@ class AdaptiveImage extends StatelessWidget {
     if (isSync) return child;
     return frame != null
         ? child
-        : const Center(
+        : Center(
             child: Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: CircularProgressIndicator(
                 strokeWidth: 2.0,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.lightAccent),
+                valueColor: AlwaysStoppedAnimation<Color>(context.c.surface),
               ),
             ),
           );
   }
 
   Widget _buildError(BuildContext context, Object exception, StackTrace stackTrace) {
-    return const Center(
+    return Center(
       child: Icon(
         Icons.error_outline,
         size: 32.0,
-        color: AppColors.lightAccent,
+        color: context.c.surface,
       ),
     );
   }

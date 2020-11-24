@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit() : super(ThemeMode.dark);
 
+  bool get isDark => state == ThemeMode.dark;
+
   void changeTheme() {
     if (state == ThemeMode.light) {
       emit(ThemeMode.dark);

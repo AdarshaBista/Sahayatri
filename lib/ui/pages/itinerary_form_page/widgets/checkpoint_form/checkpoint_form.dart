@@ -70,7 +70,7 @@ class CheckpointForm extends StatelessWidget {
       children: [
         Text(
           checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
-          style: AppTextStyles.headline4.bold,
+          style: context.t.headline4.bold,
         ),
         GestureDetector(
           onTap: () => _handleBackButton(context),
@@ -127,17 +127,18 @@ class CheckpointForm extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       trailing: Checkbox(
         value: shouldSendSms,
-        activeColor: AppColors.primary,
+        checkColor: context.c.background,
+        fillColor: MaterialStateProperty.all(AppColors.primaryDark),
         onChanged: (value) =>
             context.read<CheckpointFormCubit>().toggleNotifyContact(value),
       ),
       title: Text(
         'Notify Contact',
-        style: AppTextStyles.headline5.bold,
+        style: context.t.headline5.bold,
       ),
       subtitle: Text(
         'Notify close contact via SMS when you reach this checkpoint.',
-        style: AppTextStyles.headline6,
+        style: context.t.headline6,
       ),
     );
   }
@@ -145,7 +146,6 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildSubmitButton(CheckpointFormState state, BuildContext context) {
     return FloatingActionButton(
       mini: true,
-      backgroundColor: AppColors.dark,
       child: const Icon(
         Icons.check,
         size: 24.0,

@@ -34,7 +34,7 @@ class PlacePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           physics: const BouncingScrollPhysics(),
           children: [
-            if (place.description.isNotEmpty) _buildDescription(place),
+            if (place.description.isNotEmpty) _buildDescription(context, place),
             if (place.description.isNotEmpty) const SizedBox(height: 12.0),
             const PlaceActions(),
             const SizedBox(height: 8.0),
@@ -47,12 +47,12 @@ class PlacePage extends StatelessWidget {
     );
   }
 
-  Widget _buildDescription(Place place) {
+  Widget _buildDescription(BuildContext context, Place place) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Text(
         place.description,
-        style: AppTextStyles.headline5.serif,
+        style: context.t.headline5.serif,
       ),
     );
   }

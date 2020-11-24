@@ -33,6 +33,7 @@ class AuthButton extends StatelessWidget {
         return FloatingActionButton.extended(
           heroTag: '$label Tag',
           icon: Icon(icon),
+          backgroundColor: AppColors.dark,
           onPressed: (state is AuthLoading) ? null : onPressed,
           label: (state is AuthLoading)
               ? const SimpleBusyIndicator()

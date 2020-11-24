@@ -30,6 +30,7 @@ class PlaceCard extends StatelessWidget {
       },
       child: ElevatedCard(
         radius: 8.0,
+        color: context.c.surface,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: <Widget>[

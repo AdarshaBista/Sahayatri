@@ -43,7 +43,6 @@ class ItineraryFormPage extends StatelessWidget {
       builder: (context, state) {
         return FloatingActionButton(
           mini: true,
-          backgroundColor: AppColors.dark,
           child: const Icon(
             Icons.check,
             size: 24.0,
