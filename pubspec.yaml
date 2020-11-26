@@ -24,7 +24,7 @@ dependencies:
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^3.0.1+5
+  flutter_local_notifications: ^3.0.1+6
 
   # State Management
   equatable: ^1.2.5
@@ -38,7 +38,7 @@ dependencies:
   flutter_map: ^0.10.1+1
 
   # Tracker
-  location: ^3.0.2
+  location: ^3.1.0
 
   # Nearby
   nearby_connections: ^2.0.2
@@ -54,7 +54,6 @@ dependencies:
   flip_card: ^0.4.4
   photo_view: ^0.10.3
   timeline_tile: ^1.0.0
-  auto_size_text: ^2.1.0
   flutter_swiper: ^1.1.6
   sliding_up_panel: ^1.0.2
   loading_indicator: ^1.2.0

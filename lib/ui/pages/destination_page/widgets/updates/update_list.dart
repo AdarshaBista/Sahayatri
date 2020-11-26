@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/view_more_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';

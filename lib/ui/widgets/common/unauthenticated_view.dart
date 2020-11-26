@@ -6,6 +6,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/unauthenticated_indicator.dart';
@@ -25,9 +26,10 @@ class UnauthenticatedView extends StatelessWidget {
         const UnauthenticatedIndicator(),
         CustomButton(
           label: 'Login / Sign Up',
-          outline: true,
-          icon: Icons.account_box,
-          color: context.c.onBackground,
+          expanded: false,
+          icon: Icons.login_outlined,
+          color: AppColors.primaryDark,
+          backgroundColor: Colors.transparent,
           onTap: () {
             if (onLogin != null) onLogin();
 

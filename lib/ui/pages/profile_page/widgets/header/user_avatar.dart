@@ -34,7 +34,7 @@ class UserAvatar extends StatelessWidget {
               user.imageUrl == null ? AppColors.darkFaded : context.c.background,
           child: CircleAvatar(
             radius: radius,
-            backgroundColor: AppColors.primary,
+            backgroundColor: AppColors.primaryLight,
             child: _buildImage(user),
           ),
         ),

@@ -7,15 +7,19 @@ import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 
 class MessageIndicator extends StatelessWidget {
   final String message;
+  final String imageUrl;
 
   const MessageIndicator({
     @required this.message,
-  }) : assert(message != null);
+    this.imageUrl = Images.alert,
+  })  : assert(message != null),
+        assert(imageUrl != null);
 
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Images.message,
+      padding: 0.0,
+      imageUrl: imageUrl,
       title: Text(
         message,
         textAlign: TextAlign.center,

@@ -9,27 +9,32 @@ import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 class ErrorIndicator extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
+  final String imageUrl;
 
   const ErrorIndicator({
     this.onRetry,
+    this.imageUrl = Images.generalError,
     this.message = 'An error has occured!',
-  }) : assert(message != null);
+  })  : assert(message != null),
+        assert(imageUrl != null);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconIndicator(
-          imageUrl: Images.error,
-          title: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: context.t.headline5.bold,
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconIndicator(
+            imageUrl: imageUrl,
+            title: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: context.t.headline5.bold,
+            ),
           ),
-        ),
-        if (onRetry != null) RetryButton(onTap: onRetry),
-      ],
+          if (onRetry != null) RetryButton(onTap: onRetry),
+        ],
+      ),
     );
   }
 }

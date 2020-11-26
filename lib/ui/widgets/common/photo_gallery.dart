@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,7 +40,10 @@ class PhotoGallery extends StatelessWidget {
 
   Widget _buildEmptyIndicator() {
     if (deletable) return const Offstage();
-    return const EmptyIndicator(message: 'No photos at the moment.');
+    return const EmptyIndicator(
+      imageUrl: Images.imagesEmpty,
+      message: 'No photos at the moment.',
+    );
   }
 
   Widget _buildStaggeredGrid() {

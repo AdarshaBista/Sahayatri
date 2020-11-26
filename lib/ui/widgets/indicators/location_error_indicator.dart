@@ -15,7 +15,8 @@ class LocationErrorIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconIndicator(
-      imageUrl: Images.error,
+      padding: 32.0,
+      imageUrl: Images.trackerUnavailable,
       title: Text(
         message,
         textAlign: TextAlign.center,

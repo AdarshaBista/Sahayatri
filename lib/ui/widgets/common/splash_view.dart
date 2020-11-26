@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 
-import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView();
@@ -22,7 +22,7 @@ class SplashView extends StatelessWidget {
               height: 160.0,
             ),
             const SizedBox(height: 32.0),
-            const SimpleBusyIndicator(color: AppColors.light),
+            const CircularBusyIndicator(color: AppColors.light),
           ],
         ),
       ),

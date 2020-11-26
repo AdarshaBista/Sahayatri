@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
@@ -31,7 +30,7 @@ class StatCard extends StatelessWidget {
         crossAxisAlignment: crossAxisAlignment,
         children: <Widget>[
           Flexible(
-            child: AutoSizeText(
+            child: Text(
               label,
               textAlign: TextAlign.center,
               style: context.t.headline6.bold,
@@ -45,7 +44,7 @@ class StatCard extends StatelessWidget {
           ),
           const SizedBox(height: 6.0),
           Flexible(
-            child: AutoSizeText(
+            child: Text(
               count,
               textAlign: TextAlign.center,
               style: countStyle?.withColor(color) ??

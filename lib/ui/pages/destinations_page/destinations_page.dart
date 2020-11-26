@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
@@ -79,15 +81,22 @@ class _DestinationsPageState extends State<DestinationsPage> {
             builder: (context, state) {
               if (state is DestinationsError) {
                 return ErrorIndicator(
+                  imageUrl: Images.destinationsError,
                   message: state.message,
                   onRetry: () => context.read<DestinationsCubit>().fetchDestinations(),
                 );
               } else if (state is DestinationsLoading) {
-                return const BusyIndicator();
+                return const BusyIndicator(imageUrl: Images.destinationsLoading);
               } else if (state is DestinationsLoaded) {
-                return DestinationsList(destinations: state.destinations);
+                return DestinationsList(
+                  isSearching: state.isSearching,
+                  destinations: state.destinations,
+                );
               } else {
-                return const EmptyIndicator(message: 'No destinations found!');
+                return const EmptyIndicator(
+                  imageUrl: Images.destinationsEmpty,
+                  message: 'No destinations found.',
+                );
               }
             },
           ),

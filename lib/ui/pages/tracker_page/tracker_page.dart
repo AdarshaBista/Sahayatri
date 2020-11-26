@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/core/models/tracker_update.dart';
 
@@ -22,7 +23,10 @@ class TrackerPage extends StatelessWidget {
         if (state is TrackerLoading) {
           return Scaffold(
             appBar: AppBar(),
-            body: const BusyIndicator(),
+            body: const BusyIndicator(
+              padding: 32.0,
+              imageUrl: Images.trackerLoading,
+            ),
           );
         } else if (state is TrackerSettingUp) {
           return const TrackerSetup();
@@ -34,7 +38,10 @@ class TrackerPage extends StatelessWidget {
         } else if (state is TrackerError) {
           return Scaffold(
             appBar: AppBar(),
-            body: ErrorIndicator(message: state.message),
+            body: ErrorIndicator(
+              message: state.message,
+              imageUrl: Images.trackerError,
+            ),
           );
         } else {
           return const IncorrectLocationInfo();

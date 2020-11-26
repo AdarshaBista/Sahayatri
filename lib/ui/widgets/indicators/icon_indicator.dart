@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class IconIndicator extends StatelessWidget {
   final Widget title;
+  final double padding;
   final String imageUrl;
 
   const IconIndicator({
     @required this.title,
     @required this.imageUrl,
+    this.padding = 64.0,
   })  : assert(title != null),
+        assert(padding != null),
         assert(imageUrl != null);
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimator(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: padding, vertical: 12.0),
+        child: ScaleAnimator(
+          duration: 200,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -25,7 +29,7 @@ class IconIndicator extends StatelessWidget {
                 imageUrl,
                 width: MediaQuery.of(context).size.width,
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 20.0),
               title,
             ],
           ),

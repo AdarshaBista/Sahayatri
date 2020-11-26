@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
@@ -29,7 +31,10 @@ class CompletedPage extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: const [
         Header(boldTitle: 'Completed'),
-        EmptyIndicator(message: 'No completed destinations.'),
+        EmptyIndicator(
+          imageUrl: Images.destinationsEmpty,
+          message: 'No completed destinations.',
+        ),
       ],
     );
   }

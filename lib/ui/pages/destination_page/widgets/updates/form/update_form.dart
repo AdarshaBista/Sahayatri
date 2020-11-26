@@ -11,7 +11,7 @@ import 'package:sahayatri/cubits/destination_update_form_cubit/destination_updat
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
-import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_field.dart';
@@ -97,7 +97,7 @@ class UpdateForm extends StatelessWidget {
         return FloatingActionButton(
           mini: true,
           child: state.isLoading
-              ? const SimpleBusyIndicator()
+              ? const CircularBusyIndicator()
               : const Icon(
                   Icons.check,
                   size: 24.0,

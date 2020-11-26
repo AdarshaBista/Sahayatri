@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
@@ -21,7 +23,9 @@ class TranslationList extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(32.0),
                 child: EmptyIndicator(
-                  message: 'No translations yet...',
+                  padding: 16.0,
+                  imageUrl: Images.translationEmpty,
+                  message: 'No translations yet.',
                 ),
               ),
             );

@@ -16,14 +16,17 @@ class DestinationsEmpty extends DestinationsState {
 }
 
 class DestinationsLoaded extends DestinationsState {
+  final bool isSearching;
   final List<Destination> destinations;
 
   const DestinationsLoaded({
+    this.isSearching = false,
     @required this.destinations,
-  }) : assert(destinations != null);
+  })  : assert(isSearching != null),
+        assert(destinations != null);
 
   @override
-  List<Object> get props => [destinations];
+  List<Object> get props => [isSearching, destinations];
 }
 
 class DestinationsError extends DestinationsState {

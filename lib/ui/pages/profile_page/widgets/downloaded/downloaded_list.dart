@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
@@ -26,19 +28,22 @@ class DownloadedList extends StatelessWidget {
         builder: (context, state) {
           if (state is DownloadedDestinationsError) {
             return ErrorIndicator(
+              imageUrl: Images.destinationsError,
               message: state.message,
               onRetry: () =>
                   context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
             );
           } else if (state is DownloadedDestinationsLoading) {
-            return const BusyIndicator();
+            return const BusyIndicator(imageUrl: Images.destinationsLoading);
           } else if (state is DownloadedDestinationsLoaded) {
             return DestinationsList(
               deletable: true,
+              isSearching: false,
               destinations: state.destinations,
             );
           } else {
             return EmptyIndicator(
+              imageUrl: Images.destinationsEmpty,
               message: 'No downloaded destinations!',
               onRetry: () =>
                   context.read<DownloadedDestinationsCubit>().fetchDownloaded(),

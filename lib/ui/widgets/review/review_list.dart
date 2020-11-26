@@ -7,7 +7,6 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_form.dart';
 import 'package:sahayatri/ui/widgets/review/review_card.dart';
 import 'package:sahayatri/ui/widgets/review/rating_chart.dart';

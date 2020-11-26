@@ -58,7 +58,10 @@ class DownloadDialog extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BusyIndicator(),
+        const BusyIndicator(
+          padding: 16.0,
+          imageUrl: Images.downloadLoading,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
@@ -77,7 +80,8 @@ class DownloadDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         IconIndicator(
-          imageUrl: Images.downloaded,
+          padding: 16.0,
+          imageUrl: Images.downloadComplete,
           title: Text(
             message,
             textAlign: TextAlign.center,

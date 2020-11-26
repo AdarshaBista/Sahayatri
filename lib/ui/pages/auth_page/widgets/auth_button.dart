@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/indicators/simple_busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class AuthButton extends StatelessWidget {
   final String label;
@@ -36,7 +36,7 @@ class AuthButton extends StatelessWidget {
           backgroundColor: AppColors.dark,
           onPressed: (state is AuthLoading) ? null : onPressed,
           label: (state is AuthLoading)
-              ? const SimpleBusyIndicator()
+              ? const CircularBusyIndicator()
               : Text(
                   label,
                   style: AppTextStyles.headline5.bold.primary,

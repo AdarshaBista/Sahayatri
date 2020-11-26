@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
@@ -25,11 +27,14 @@ class WeatherPage extends StatelessWidget {
       body: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, state) {
           if (state is WeatherLoading) {
-            return const BusyIndicator();
+            return const BusyIndicator(imageUrl: Images.weatherLoading);
           } else if (state is WeatherSuccess) {
             return WeatherTabView(forecasts: state.forecasts);
           } else if (state is WeatherError) {
-            return ErrorIndicator(message: state.message);
+            return ErrorIndicator(
+              message: state.message,
+              imageUrl: Images.weatherError,
+            );
           } else {
             return const EmptyIndicator();
           }

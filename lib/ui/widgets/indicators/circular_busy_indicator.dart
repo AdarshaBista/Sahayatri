@@ -4,7 +4,11 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class CircularBusyIndicator extends StatelessWidget {
-  const CircularBusyIndicator();
+  final Color color;
+
+  const CircularBusyIndicator({
+    this.color = AppColors.primaryDark,
+  }) : assert(color != null);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class CircularBusyIndicator extends StatelessWidget {
         width: 32.0,
         height: 32.0,
         child: LoadingIndicator(
-          color: AppColors.primary,
+          color: color,
           indicatorType: Indicator.ballSpinFadeLoader,
         ),
       ),
