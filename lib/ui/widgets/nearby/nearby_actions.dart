@@ -24,7 +24,7 @@ class NearbyActions extends StatelessWidget {
       children: [
         NearbyButton(
           label: isScanning ? 'Stop\nScanning' : 'Start\nScanning',
-          color: isScanning ? Colors.blue : Colors.green,
+          color: isScanning ? Colors.deepPurple : Colors.green,
           icon: isScanning
               ? Icons.search_off_outlined
               : CommunityMaterialIcons.account_search_outline,
@@ -37,7 +37,7 @@ class NearbyActions extends StatelessWidget {
         NearbyButton(
           label: 'Stop\n Nearby',
           color: AppColors.secondaryLight,
-          icon: Icons.exit_to_app_outlined,
+          icon: CommunityMaterialIcons.access_point_network_off,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
             onConfirm: () => context.read<NearbyCubit>().stopNearby(),

@@ -46,7 +46,7 @@ class DeviceDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTitle(context, device),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 6.0),
         DeviceStatusRow(status: device.status),
         const SizedBox(height: 16.0),
         StatTile(
@@ -85,16 +85,9 @@ class DeviceDetails extends StatelessWidget {
               context.read<NearbyCubit>().removeDevice(device);
             },
             child: ScaleAnimator(
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: const BoxDecoration(
-                  color: AppColors.dark,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.secondary,
-                ),
+              child: Text(
+                'REMOVE',
+                style: AppTextStyles.headline5.secondary,
               ),
             ),
           ),

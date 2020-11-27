@@ -36,9 +36,9 @@ class NearbyService {
 
   /// Start nearby service.
   Future<void> start(String name) async {
+    connectionService.username = name;
     if (Platform.isWindows) throw const AppError(message: 'Platform not supported!');
 
-    connectionService.username = name;
     try {
       await connectionService.checkLocationPermissions();
       await connectionService.startScanning();
