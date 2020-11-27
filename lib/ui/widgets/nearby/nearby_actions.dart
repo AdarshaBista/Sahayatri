@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/nearby/nearby_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 
@@ -35,7 +36,7 @@ class NearbyActions extends StatelessWidget {
         ),
         NearbyButton(
           label: 'Stop\n Nearby',
-          color: Colors.orange,
+          color: AppColors.secondaryLight,
           icon: Icons.exit_to_app_outlined,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
@@ -44,7 +45,7 @@ class NearbyActions extends StatelessWidget {
         ),
         NearbyButton(
           label: 'Send\n SOS',
-          color: Colors.red,
+          color: AppColors.primaryLight,
           icon: Icons.speaker_phone_outlined,
           onTap: () {
             context.openFlushBar('SOS Sent', type: FlushbarType.success);

@@ -22,7 +22,7 @@ class ConnectionInfo extends StatelessWidget {
       children: [
         Text(
           'Your Name : $username',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 10.0),
         if (isScanning) _buildScanIndicator(),
@@ -31,7 +31,7 @@ class ConnectionInfo extends StatelessWidget {
         const SizedBox(height: 20.0),
         Text(
           'CONNECTED DEVIECS',
-          style: AppTextStyles.headline5.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 8.0),
         const DevicesList(),

@@ -19,7 +19,7 @@ class DeviceStatusRow extends StatelessWidget {
         const SizedBox(width: 2.0),
         Text(
           _getStatusText(),
-          style: AppTextStyles.headline6,
+          style: context.t.headline6,
         ),
       ],
     );

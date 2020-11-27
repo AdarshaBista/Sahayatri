@@ -15,7 +15,6 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_item.dart';
-import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_background.dart';
 
 class DestinationDrawer extends StatelessWidget {
   const DestinationDrawer();
@@ -27,7 +26,7 @@ class DestinationDrawer extends StatelessWidget {
       body: Stack(
         children: [
           CustomPaint(
-            foregroundPainter: DrawerBackground(),
+            foregroundPainter: const _DrawerBackground(),
             child: GradientContainer(
               gradientColors:
                   AppColors.getDrawerGradient(context.watch<ThemeCubit>().isDark),
@@ -82,5 +81,24 @@ class DestinationDrawer extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class _DrawerBackground extends CustomPainter {
+  const _DrawerBackground();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.fill
+      ..color = AppColors.light.withOpacity(0.1);
+
+    canvas.drawCircle(Offset.zero, 220.0, paint);
+    canvas.drawCircle(Offset.zero, 130.0, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

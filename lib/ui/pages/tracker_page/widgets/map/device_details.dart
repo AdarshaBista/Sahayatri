@@ -21,7 +21,7 @@ class DeviceDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
+    return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
         final deviceReactive = (state as NearbyConnected)
             .trackingDevices
@@ -75,7 +75,7 @@ class DeviceDetails extends StatelessWidget {
       children: [
         Text(
           device.name.toUpperCase(),
-          style: AppTextStyles.headline3.bold,
+          style: context.t.headline3.bold,
         ),
         const SizedBox(width: 16.0),
         if (device.status == DeviceStatus.disconnected)
