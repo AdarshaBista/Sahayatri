@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 
-import 'package:sahayatri/core/extensions/widget_x.dart';
+import 'package:sahayatri/core/extensions/dialog_x.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

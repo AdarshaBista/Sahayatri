@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/images.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';

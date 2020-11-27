@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/images.dart';
 
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';

@@ -2,24 +2,24 @@ class MathUtils {
   // Map input range [ix, iy] to output range [ox, oy]
   static double mapRange(
     double value,
-    double minInput,
-    double maxInput,
-    double minOutput,
-    double maxOutput,
+    double iMin,
+    double iMax,
+    double oMin,
+    double oMax,
   ) {
-    final double slope = (maxOutput + 1.0 - minOutput) / (maxInput - minInput);
-    return minOutput + slope * (value - minInput);
+    final double slope = (oMax + 1.0 - oMin) / (iMax - iMin);
+    return oMin + slope * (value - iMin);
   }
 
   // Map input range [ix, iy] to output range [oy, ox]
   static double mapRangeInverse(
     double value,
-    double minInput,
-    double maxInput,
-    double minOutput,
-    double maxOutput,
+    double iMin,
+    double iMax,
+    double oMin,
+    double oMax,
   ) {
-    final double output = mapRange(value, minInput, maxInput, minOutput, maxOutput);
-    return minOutput + maxOutput - output;
+    final double output = mapRange(value, iMin, iMax, oMin, oMax);
+    return oMin + oMax - output;
   }
 }

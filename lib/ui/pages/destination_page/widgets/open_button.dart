@@ -10,8 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/dialogs/custom_dialog.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
-import 'package:sahayatri/ui/widgets/dialogs/unauthenticated_dialog.dart';
+import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
 
 class OpenButton extends StatelessWidget {
   const OpenButton();
@@ -26,7 +27,11 @@ class OpenButton extends StatelessWidget {
           icon: Icons.keyboard_arrow_right,
           onTap: () {
             if (!context.read<UserCubit>().isAuthenticated) {
-              const UnauthenticatedDialog().openDialog(context);
+              CustomDialog(
+                child: UnauthenticatedView(
+                  onLogin: () => Navigator.of(context).pop(),
+                ),
+              ).openDialog(context);
               return;
             }
 

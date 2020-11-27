@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/services/destinations_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/app/constants/images.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
@@ -11,7 +11,7 @@ import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/dialogs/custom_dialog.dart';
 import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 
@@ -30,22 +30,17 @@ class DownloadDialog extends StatelessWidget {
         )..startDownload(context.read<DestinationCubit>().destination),
         child: Builder(
           builder: (context) {
-            return ScaleAnimator(
-              duration: 200,
-              child: AlertDialog(
-                elevation: 12.0,
-                clipBehavior: Clip.antiAlias,
-                title: BlocBuilder<DownloadCubit, DownloadState>(
-                  builder: (context, state) {
-                    if (state is DownloadCompleted) {
-                      return _buildCompleted(context, state.message);
-                    } else if (state is DownloadInProgress) {
-                      return _buildProgress(context, state.message);
-                    } else {
-                      return const Offstage();
-                    }
-                  },
-                ),
+            return CustomDialog(
+              child: BlocBuilder<DownloadCubit, DownloadState>(
+                builder: (context, state) {
+                  if (state is DownloadCompleted) {
+                    return _buildCompleted(context, state.message);
+                  } else if (state is DownloadInProgress) {
+                    return _buildProgress(context, state.message);
+                  } else {
+                    return const Offstage();
+                  }
+                },
               ),
             );
           },

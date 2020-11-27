@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
-extension WidgetX on Widget {
+extension DialogX on Widget {
   void openDialog(BuildContext context, {bool barrierDismissible = true}) {
     showDialog(
       context: context,

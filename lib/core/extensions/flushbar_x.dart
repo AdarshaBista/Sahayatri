@@ -8,7 +8,7 @@ import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 enum FlushbarType { info, success, error }
 Flushbar _flushbar;
 
-extension ContextX on BuildContext {
+extension FlushbarX on BuildContext {
   Future<void> openLoadingFlushBar(
     String message, {
     AsyncCallback callback,

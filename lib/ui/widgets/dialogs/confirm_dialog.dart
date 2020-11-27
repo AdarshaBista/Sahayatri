@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/dialogs/custom_dialog.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String message;
@@ -23,37 +23,32 @@ class ConfirmDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaleAnimator(
-      duration: 200,
-      child: AlertDialog(
-        elevation: 12.0,
-        clipBehavior: Clip.antiAlias,
-        contentPadding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
-        title: const Icon(
-          CommunityMaterialIcons.alert_rhombus,
-          color: AppColors.secondary,
-          size: 80.0,
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              message,
-              style: context.t.headline5,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16.0),
-            Row(
-              children: [
-                Expanded(child: _buildRejectButton(context)),
-                const SizedBox(width: 12.0),
-                Expanded(child: _buildConfirmButton(context)),
-              ],
-            ),
-            const SizedBox(height: 20.0),
-          ],
-        ),
+    return CustomDialog(
+      padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
+      child: const Icon(
+        CommunityMaterialIcons.alert_rhombus,
+        color: AppColors.secondary,
+        size: 80.0,
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            message,
+            style: context.t.headline5,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16.0),
+          Row(
+            children: [
+              Expanded(child: _buildRejectButton(context)),
+              const SizedBox(width: 12.0),
+              Expanded(child: _buildConfirmButton(context)),
+            ],
+          ),
+          const SizedBox(height: 20.0),
+        ],
       ),
     );
   }
