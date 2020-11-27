@@ -55,7 +55,7 @@ class StylesGridState extends State<StylesGrid> {
 
     return GestureDetector(
       onTap: () {
-        context.read<PrefsCubit>().changeMapLayer(layer.style);
+        context.read<PrefsCubit>().saveMapLayer(layer.style);
         setState(() {
           selectedStyle = layer.style;
         });

@@ -43,50 +43,7 @@ class Sahayatri extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: _getServiceProviders(context),
-      child: Builder(
-        builder: (context) => MultiBlocProvider(
-          providers: _getBlocProviders(context),
-          child: BlocBuilder<ThemeCubit, ThemeMode>(
-            builder: (context, state) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                themeMode: state,
-                theme: AppThemes.light,
-                darkTheme: AppThemes.dark,
-                title: AppConfig.appName,
-                builder: DevicePreview.appBuilder,
-                locale: DevicePreview.locale(context),
-                onGenerateRoute: RootRouter.onGenerateRoute,
-                navigatorKey: context.watch<RootNavService>().navigatorKey,
-                home: BlocBuilder<PrefsCubit, PrefsState>(
-                  builder: (context, state) {
-                    if (state is PrefsLoading) {
-                      return const SplashView();
-                    }
-
-                    return FutureBuilder(
-                      future: context.watch<UserCubit>().isLoggedIn(),
-                      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                        if (snapshot.hasData) {
-                          final bool isLoggedIn = snapshot.data;
-                          if (isLoggedIn) return const HomePage();
-                          return const AuthPage();
-                        }
-                        return const SplashView();
-                      },
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  List<RepositoryProvider> _getServiceProviders(BuildContext context) => [
+      providers: [
         RepositoryProvider<WeatherService>(
           create: (context) => WeatherService(
             apiService: context.read<ApiService>(),
@@ -125,33 +82,77 @@ class Sahayatri extends StatelessWidget {
             destinationDao: context.read<DestinationDao>(),
           ),
         ),
-      ];
+      ],
+      child: Builder(
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => ThemeCubit()),
+            BlocProvider<PrefsCubit>(
+              create: (context) => PrefsCubit(
+                prefsDao: context.read<PrefsDao>(),
+              )..initPrefs(),
+            ),
+            BlocProvider<UserCubit>(
+              create: (context) => UserCubit(
+                userDao: context.read<UserDao>(),
+                apiService: context.read<ApiService>(),
+                authService: context.read<AuthService>(),
+              ),
+            ),
+            BlocProvider<NearbyCubit>(
+              create: (context) => NearbyCubit(
+                nearbyService: context.read<NearbyService>(),
+              ),
+            ),
+            BlocProvider<TranslateCubit>(
+              create: (context) => TranslateCubit(
+                ttsService: context.read<TtsService>(),
+                translateService: context.read<TranslateService>(),
+              ),
+            ),
+          ],
+          child: BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, state) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                themeMode: state,
+                theme: AppThemes.light,
+                darkTheme: AppThemes.dark,
+                title: AppConfig.appName,
+                builder: DevicePreview.appBuilder,
+                locale: DevicePreview.locale(context),
+                onGenerateRoute: RootRouter.onGenerateRoute,
+                navigatorKey: context.watch<RootNavService>().navigatorKey,
+                home: BlocBuilder<PrefsCubit, PrefsState>(
+                  builder: (context, state) {
+                    if (state is PrefsLoading) {
+                      return const SplashView();
+                    }
 
-  List<BlocProvider> _getBlocProviders(BuildContext context) {
-    return [
-      BlocProvider<PrefsCubit>(
-        create: (context) => PrefsCubit(
-          prefsDao: context.read<PrefsDao>(),
-        )..initPrefs(),
-      ),
-      BlocProvider<UserCubit>(
-        create: (context) => UserCubit(
-          userDao: context.read<UserDao>(),
-          apiService: context.read<ApiService>(),
-          authService: context.read<AuthService>(),
+                    return FutureBuilder(
+                      future: _init(context),
+                      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                        if (snapshot.hasData) {
+                          final bool isLoggedIn = snapshot.data;
+                          if (isLoggedIn) return const HomePage();
+                          return const AuthPage();
+                        }
+                        return const SplashView();
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
-      BlocProvider<NearbyCubit>(
-        create: (context) => NearbyCubit(
-          nearbyService: context.read<NearbyService>(),
-        ),
-      ),
-      BlocProvider<TranslateCubit>(
-        create: (context) => TranslateCubit(
-          ttsService: context.read<TtsService>(),
-          translateService: context.read<TranslateService>(),
-        ),
-      ),
-    ];
+    );
+  }
+
+  Future<bool> _init(BuildContext context) {
+    final isDark = context.watch<PrefsCubit>().prefs.isDarkTheme;
+    context.watch<ThemeCubit>().changeTheme(isDark);
+    return context.watch<UserCubit>().isLoggedIn();
   }
 }

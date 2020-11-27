@@ -36,7 +36,6 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:sahayatri/sahayatri.dart';
 
@@ -46,10 +45,7 @@ import 'package:device_preview/device_preview.dart';
 Future<void> main() async {
   setStatusBarStyle();
   await initHive();
-  runApp(BlocProvider(
-    create: (context) => ThemeCubit(),
-    child: const App(),
-  ));
+  runApp(const App());
 }
 
 void setStatusBarStyle() {
@@ -88,7 +84,6 @@ class App extends StatelessWidget {
       enabled: Platform.isWindows,
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
       plugins: [
-        const ThemePlugin(),
         ScreenshotPlugin(
           processor: (ss) async {
             final dir = await getDownloadsDirectory();
@@ -119,50 +114,6 @@ class App extends StatelessWidget {
         ],
         child: const Sahayatri(),
       ),
-    );
-  }
-}
-
-class ThemePlugin extends DevicePreviewPlugin {
-  const ThemePlugin()
-      : super(
-          identifier: 'theme',
-          name: 'Change Theme',
-          icon: Icons.lightbulb_outline,
-          windowSize: const Size(220, 220),
-        );
-
-  @override
-  Widget buildData(
-    BuildContext context,
-    Map<String, dynamic> data,
-    DevicePreviewPluginDataUpdater updateData,
-  ) {
-    return const _ThemeInfoBox();
-  }
-}
-
-class _ThemeInfoBox extends StatefulWidget {
-  const _ThemeInfoBox();
-
-  @override
-  _ThemeInfoBoxState createState() => _ThemeInfoBoxState();
-}
-
-class _ThemeInfoBoxState extends State<_ThemeInfoBox> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<ThemeCubit>().changeTheme();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final themeMode = context.watch<ThemeCubit>().state;
-    final theme = themeMode == ThemeMode.dark ? 'Dark' : 'Light';
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('Changed to $theme theme'),
     );
   }
 }

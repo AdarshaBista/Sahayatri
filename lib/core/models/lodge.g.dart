@@ -56,5 +56,7 @@ class LodgeAdapter extends TypeAdapter<Lodge> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LodgeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is LodgeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

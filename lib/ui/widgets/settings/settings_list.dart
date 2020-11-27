@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/widgets/common/theme_sheet.dart';
 import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
 import 'package:sahayatri/ui/widgets/contact/contact_form.dart';
 import 'package:sahayatri/ui/widgets/settings/settings_card.dart';
@@ -51,10 +53,15 @@ class SettingsList extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           SettingsCard(
-            title: 'Toggle Theme',
+            title: 'Change Theme',
             subtitle: 'Toggle between light and dark theme.',
             icon: CommunityMaterialIcons.theme_light_dark,
-            onTap: () => context.read<ThemeCubit>().changeTheme(),
+            onTap: () => ThemeSheet(
+              onSelect: (value) {
+                context.read<ThemeCubit>().changeTheme(value);
+                context.read<PrefsCubit>().saveTheme(value);
+              },
+            ).openModalBottomSheet(context),
           ),
         ],
       ),

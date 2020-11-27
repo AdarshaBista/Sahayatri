@@ -16,23 +16,30 @@ class Prefs {
   @HiveField(2)
   final String deviceName;
 
+  @HiveField(3)
+  final bool isDarkTheme;
+
   const Prefs({
     this.contact = '',
-    this.mapStyle = MapStyles.outdoors,
     this.deviceName = '',
+    this.isDarkTheme = true,
+    this.mapStyle = MapStyles.outdoors,
   })  : assert(contact != null),
         assert(mapStyle != null),
-        assert(deviceName != null);
+        assert(deviceName != null),
+        assert(isDarkTheme != null);
 
   Prefs copyWith({
     String contact,
     String mapStyle,
+    bool isDarkTheme,
     String deviceName,
   }) {
     return Prefs(
       contact: contact ?? this.contact,
       mapStyle: mapStyle ?? this.mapStyle,
       deviceName: deviceName ?? this.deviceName,
+      isDarkTheme: isDarkTheme ?? this.isDarkTheme,
     );
   }
 
@@ -41,6 +48,7 @@ class Prefs {
       'contact': contact,
       'mapStyle': mapStyle,
       'deviceName': deviceName,
+      'isDarkTheme': isDarkTheme,
     };
   }
 
@@ -51,12 +59,13 @@ class Prefs {
       contact: map['contact'] as String,
       mapStyle: map['mapLayer'] as String,
       deviceName: map['deviceName'] as String,
+      isDarkTheme: map['isDarkTheme'] as bool,
     );
   }
 
   @override
   String toString() =>
-      'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName)';
+      'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName, isDarkTheme: $isDarkTheme)';
 
   @override
   bool operator ==(Object o) {
@@ -65,9 +74,11 @@ class Prefs {
     return o is Prefs &&
         o.contact == contact &&
         o.mapStyle == mapStyle &&
-        o.deviceName == deviceName;
+        o.deviceName == deviceName &&
+        o.isDarkTheme == isDarkTheme;
   }
 
   @override
-  int get hashCode => contact.hashCode ^ mapStyle.hashCode ^ deviceName.hashCode;
+  int get hashCode =>
+      contact.hashCode ^ mapStyle.hashCode ^ deviceName.hashCode ^ isDarkTheme.hashCode;
 }

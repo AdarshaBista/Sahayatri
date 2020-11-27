@@ -20,19 +20,22 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
       contact: fields[0] as String,
       mapStyle: fields[1] as String,
       deviceName: fields[2] as String,
+      isDarkTheme: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Prefs obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.contact)
       ..writeByte(1)
       ..write(obj.mapStyle)
       ..writeByte(2)
-      ..write(obj.deviceName);
+      ..write(obj.deviceName)
+      ..writeByte(3)
+      ..write(obj.isDarkTheme);
   }
 
   @override
