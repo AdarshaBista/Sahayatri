@@ -5,10 +5,10 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_small.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/image_list.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
@@ -37,10 +37,6 @@ class UpdateCard extends StatelessWidget {
                 const SizedBox(height: 8.0),
               ],
               _buildText(context),
-              if (update.coords.isNotEmpty) ...[
-                const SizedBox(height: 8.0),
-                _buildLocationButton(context),
-              ],
               if (update.imageUrls.isNotEmpty) ...[
                 const SizedBox(height: 10.0),
                 ImageList(imageUrls: update.imageUrls),
@@ -77,6 +73,10 @@ class UpdateCard extends StatelessWidget {
             ),
           ],
         ),
+        if (update.coords.isNotEmpty) ...[
+          const Spacer(),
+          _buildLocationButton(context),
+        ],
       ],
     );
   }
@@ -103,14 +103,22 @@ class UpdateCard extends StatelessWidget {
   }
 
   Widget _buildLocationButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: CustomButton(
-        label: 'View Location',
-        outline: true,
-        color: AppColors.secondary,
-        icon: Icons.map_outlined,
-        onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
+    return GestureDetector(
+      onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
+      child: ScaleAnimator(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.all(6.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: context.c.surface,
+          ),
+          child: const Icon(
+            Icons.location_on_outlined,
+            size: 18.0,
+            color: AppColors.secondary,
+          ),
+        ),
       ),
     );
   }

@@ -9,6 +9,8 @@ class ConfirmDialog extends StatelessWidget {
   final String message;
   final String cancelText;
   final String confirmText;
+  final IconData cancelIcon;
+  final IconData confirmIcon;
   final VoidCallback onConfirm;
 
   const ConfirmDialog({
@@ -16,10 +18,14 @@ class ConfirmDialog extends StatelessWidget {
     @required this.onConfirm,
     this.cancelText = 'NO',
     this.confirmText = 'YES',
+    this.cancelIcon = Icons.close,
+    this.confirmIcon = Icons.check,
   })  : assert(message != null),
         assert(onConfirm != null),
         assert(cancelText != null),
-        assert(confirmText != null);
+        assert(confirmText != null),
+        assert(cancelIcon != null),
+        assert(confirmIcon != null);
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +61,8 @@ class ConfirmDialog extends StatelessWidget {
 
   Widget _buildConfirmButton(BuildContext context) {
     return CustomButton(
+      icon: confirmIcon,
       label: confirmText,
-      icon: Icons.check,
       color: context.c.secondaryVariant,
       backgroundColor: AppColors.secondaryLight,
       onTap: () {
@@ -68,8 +74,8 @@ class ConfirmDialog extends StatelessWidget {
 
   Widget _buildRejectButton(BuildContext context) {
     return CustomButton(
+      icon: cancelIcon,
       label: cancelText,
-      icon: Icons.close,
       onTap: () => Navigator.of(context).pop(),
     );
   }
