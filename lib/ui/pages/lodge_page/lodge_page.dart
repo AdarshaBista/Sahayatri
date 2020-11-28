@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
+import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
@@ -51,15 +53,17 @@ class LodgePage extends StatelessWidget {
   }
 
   Widget _buildTabView(BuildContext context) {
-    final imageUrls = context.select<Lodge, List<String>>((l) => l.imageUrls);
-
     return NestedTabView(
       tabs: [
         NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
         NestedTabData(label: 'Reviews', icon: Icons.star_outline),
       ],
       children: [
-        PhotoGallery(imageUrls: imageUrls),
+        BlocBuilder<DestinationCubit, Destination>(
+          builder: (context, destination) {
+            return PhotoGallery(imageUrls: destination.imageUrls);
+          },
+        ),
         ReviewList(reviewCubit: context.watch<ReviewCubit>() as LodgeReviewCubit),
       ],
     );

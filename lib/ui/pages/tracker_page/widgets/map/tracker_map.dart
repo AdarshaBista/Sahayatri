@@ -227,8 +227,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      cubit: context.watch<NearbyCubit>(),
+    return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
         if (state is NearbyConnected) {
           return RepaintBoundary(
@@ -253,8 +252,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      cubit: context.watch<NearbyCubit>(),
+    return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
         if (state is NearbyConnected) {
           return RepaintBoundary(

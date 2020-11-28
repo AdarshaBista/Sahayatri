@@ -36,39 +36,41 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildRating(BuildContext context) {
-    final rating =
-        context.select<DestinationCubit, double>((dc) => dc.destination.rating);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        StarRatingBar(
-          rating: rating,
-          size: 20.0,
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          rating.toString(),
-          style: context.t.headline3.bold,
-        ),
-      ],
+    return BlocBuilder<DestinationCubit, Destination>(
+      builder: (context, destination) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            StarRatingBar(
+              rating: destination.rating,
+              size: 20.0,
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              destination.rating.toString(),
+              style: context.t.headline3.bold,
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildWeatherButton(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
-
-    return ColumnButton(
-      label: 'Weather',
-      icon: CommunityMaterialIcons.weather_fog,
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.weatherPageRoute,
-            arguments: WeatherPageArgs(
-              name: destination.name,
-              coord: destination.route.first,
-            ),
-          ),
+    return BlocBuilder<DestinationCubit, Destination>(
+      builder: (context, destination) {
+        return ColumnButton(
+          label: 'Weather',
+          icon: CommunityMaterialIcons.weather_fog,
+          onTap: () => context.read<DestinationNavService>().pushNamed(
+                Routes.weatherPageRoute,
+                arguments: WeatherPageArgs(
+                  name: destination.name,
+                  coord: destination.route.first,
+                ),
+              ),
+        );
+      },
     );
   }
 }

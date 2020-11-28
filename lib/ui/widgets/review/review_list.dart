@@ -12,7 +12,6 @@ import 'package:sahayatri/ui/widgets/review/review_card.dart';
 import 'package:sahayatri/ui/widgets/review/rating_chart.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/view_more_button.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -91,10 +90,7 @@ class ReviewList extends StatelessWidget {
           itemCount: reviewDetails.reviews.length,
           separatorBuilder: (_, __) => const Divider(height: 2.0),
           itemBuilder: (context, index) {
-            return SlideAnimator(
-              begin: Offset(0.0, 0.2 + index * 0.4),
-              child: ReviewCard(review: reviewDetails.reviews[index]),
-            );
+            return ReviewCard(review: reviewDetails.reviews[index]);
           },
         ),
         ViewMoreButton(

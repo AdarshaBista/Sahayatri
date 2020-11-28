@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 
 class RatingChart extends StatelessWidget {
   final int total;
@@ -19,38 +19,37 @@ class RatingChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
-      child: Row(
-        children: [
-          _buildDetails(context),
-          const SizedBox(width: 16.0),
-          Expanded(child: _buildBars(context)),
-        ],
+    return FadeAnimator(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
+        child: Row(
+          children: [
+            _buildDetails(context),
+            const SizedBox(width: 16.0),
+            Expanded(child: _buildBars(context)),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildDetails(BuildContext context) {
-    return SlideAnimator(
-      begin: const Offset(-0.4, 0.0),
-      child: Column(
-        children: [
-          Text(
-            average.toStringAsFixed(1),
-            style: context.t.headline1,
-          ),
-          StarRatingBar(
-            size: 12.0,
-            rating: average,
-          ),
-          const SizedBox(height: 6.0),
-          Text(
-            '$total reviews',
-            style: context.t.headline6,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Text(
+          average.toStringAsFixed(1),
+          style: context.t.headline1,
+        ),
+        StarRatingBar(
+          size: 12.0,
+          rating: average,
+        ),
+        const SizedBox(height: 6.0),
+        Text(
+          '$total reviews',
+          style: context.t.headline6,
+        ),
+      ],
     );
   }
 
@@ -58,11 +57,7 @@ class RatingChart extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = stars.length; i > 0; --i)
-          SlideAnimator(
-            begin: Offset(0.2 + (stars.length + 1 - i) * 0.1, 0.0),
-            child: _buildBar(context, i),
-          ),
+        for (int i = stars.length; i > 0; --i) _buildBar(context, i),
       ],
     );
   }

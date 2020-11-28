@@ -39,47 +39,48 @@ class DestinationDrawer extends StatelessWidget {
   }
 
   Widget _buildMenuItems(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
-
-    return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.only(left: 32.0),
-      children: [
-        DrawerItem(
-          icon: CommunityMaterialIcons.chart_line_variant,
-          label: 'Route',
-          onTap: () =>
-              context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
-        ),
-        DrawerItem(
-          icon: CommunityMaterialIcons.weather_fog,
-          label: 'Weather',
-          onTap: () => context.read<DestinationNavService>().pushNamed(
-                Routes.weatherPageRoute,
-                arguments: WeatherPageArgs(
-                  name: destination.name,
-                  coord: destination.route.first,
-                ),
-              ),
-        ),
-        DrawerItem(
-          icon: CommunityMaterialIcons.book_open_outline,
-          label: 'Guide Book',
-          onTap: () {},
-        ),
-        DrawerItem(
-          icon: Icons.medical_services_outlined,
-          label: 'Safety',
-          onTap: () {},
-        ),
-        DrawerItem(
-          icon: Icons.shopping_bag_outlined,
-          label: 'Gear',
-          onTap: () {},
-        ),
-      ],
+    return BlocBuilder<DestinationCubit, Destination>(
+      builder: (context, destination) {
+        return ListView(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(left: 32.0),
+          children: [
+            DrawerItem(
+              icon: CommunityMaterialIcons.chart_line_variant,
+              label: 'Route',
+              onTap: () =>
+                  context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
+            ),
+            DrawerItem(
+              icon: CommunityMaterialIcons.weather_fog,
+              label: 'Weather',
+              onTap: () => context.read<DestinationNavService>().pushNamed(
+                    Routes.weatherPageRoute,
+                    arguments: WeatherPageArgs(
+                      name: destination.name,
+                      coord: destination.route.first,
+                    ),
+                  ),
+            ),
+            DrawerItem(
+              icon: CommunityMaterialIcons.book_open_outline,
+              label: 'Guide Book',
+              onTap: () {},
+            ),
+            DrawerItem(
+              icon: Icons.medical_services_outlined,
+              label: 'Safety',
+              onTap: () {},
+            ),
+            DrawerItem(
+              icon: Icons.shopping_bag_outlined,
+              label: 'Gear',
+              onTap: () {},
+            ),
+          ],
+        );
+      },
     );
   }
 }

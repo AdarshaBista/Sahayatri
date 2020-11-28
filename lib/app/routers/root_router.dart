@@ -70,7 +70,7 @@ class RootRouter {
               create: (context) => PlacesCubit(
                 user: context.read<UserCubit>().user,
                 apiService: context.read<ApiService>(),
-                destination: context.read<DestinationCubit>().destination,
+                destination: settings.arguments as Destination,
               )..fetchPlaces(),
             ),
             BlocProvider<DirectionsCubit>(

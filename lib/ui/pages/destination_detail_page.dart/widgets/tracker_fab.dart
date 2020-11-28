@@ -29,28 +29,29 @@ class TrackerFab extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
+    return BlocBuilder<DestinationCubit, Destination>(
+      builder: (context, destination) {
+        return FloatingActionButton(
+          mini: true,
+          child: const Icon(
+            Icons.play_arrow_outlined,
+            size: 24.0,
+            color: AppColors.primary,
+          ),
+          onPressed: () {
+            if (destination.createdItinerary == null) {
+              const MessageDialog(
+                message: 'You must create an itinerary before starting tracker.',
+              ).openDialog(context);
+              return;
+            }
 
-    return FloatingActionButton(
-      mini: true,
-      child: const Icon(
-        Icons.play_arrow_outlined,
-        size: 24.0,
-        color: AppColors.primary,
-      ),
-      onPressed: () {
-        if (destination.createdItinerary == null) {
-          const MessageDialog(
-            message: 'You must create an itinerary before starting tracker.',
-          ).openDialog(context);
-          return;
-        }
-
-        context.read<DestinationNavService>().pushNamed(
-              Routes.trackerPageRoute,
-              arguments: context.read<DestinationCubit>().destination,
-            );
+            context.read<DestinationNavService>().pushNamed(
+                  Routes.trackerPageRoute,
+                  arguments: context.read<DestinationCubit>().destination,
+                );
+          },
+        );
       },
     );
   }

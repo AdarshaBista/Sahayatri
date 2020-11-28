@@ -13,30 +13,31 @@ class DestinationStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          StatCard(
-            label: 'Length',
-            count: '${destination.length} km',
-            color: AppColors.primaryDark,
-          ),
-          StatCard(
-            label: 'Altitude',
-            count: '${destination.maxAltitude} m',
-            color: AppColors.primaryDark,
-          ),
-          StatCard(
-            label: 'Duration',
-            count: '${destination.estimatedDuration} days',
-            color: AppColors.primaryDark,
-          ),
-        ],
+      child: BlocBuilder<DestinationCubit, Destination>(
+        builder: (context, destination) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              StatCard(
+                label: 'Length',
+                count: '${destination.length} km',
+                color: AppColors.primaryDark,
+              ),
+              StatCard(
+                label: 'Altitude',
+                count: '${destination.maxAltitude} m',
+                color: AppColors.primaryDark,
+              ),
+              StatCard(
+                label: 'Duration',
+                count: '${destination.estimatedDuration} days',
+                color: AppColors.primaryDark,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

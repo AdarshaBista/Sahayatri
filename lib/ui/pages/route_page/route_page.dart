@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
@@ -30,9 +29,6 @@ class _RoutePageState extends State<RoutePage> {
 
   @override
   Widget build(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
-
     return Scaffold(
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton(
@@ -40,21 +36,25 @@ class _RoutePageState extends State<RoutePage> {
           onPressed: () => _openAltitudeSheet(context),
         ),
       ),
-      body: CustomMap(
-        center: destination.midPointCoord,
-        children: [
-          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
-          const _FlagMarkersLayer(),
-          if (destination.places != null) const _PlaceMarkersLayer(),
-        ],
-        swPanBoundary: Coord(
-          lat: destination.minLat - 0.15,
-          lng: destination.minLong - 0.15,
-        ),
-        nePanBoundary: Coord(
-          lat: destination.maxLat + 0.15,
-          lng: destination.maxLong + 0.15,
-        ),
+      body: BlocBuilder<DestinationCubit, Destination>(
+        builder: (context, destination) {
+          return CustomMap(
+            center: destination.midPointCoord,
+            children: [
+              if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
+              const _FlagMarkersLayer(),
+              if (destination.places != null) const _PlaceMarkersLayer(),
+            ],
+            swPanBoundary: Coord(
+              lat: destination.minLat - 0.15,
+              lng: destination.minLong - 0.15,
+            ),
+            nePanBoundary: Coord(
+              lat: destination.maxLat + 0.15,
+              lng: destination.maxLong + 0.15,
+            ),
+          );
+        },
       ),
     );
   }
@@ -96,27 +96,29 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route =
-        context.select<DestinationCubit, List<Coord>>((dc) => dc.destination.route);
-
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          Marker(
-            width: 32.0,
-            height: 32.0,
-            point: route[index].toLatLng(),
-            anchorPos: AnchorPos.align(AnchorAlign.top),
-            builder: (context) {
-              return const Icon(
-                CommunityMaterialIcons.map_marker,
-                size: 32.0,
-                color: AppColors.secondary,
-              );
-            },
+    return BlocBuilder<DestinationCubit, Destination>(
+      buildWhen: (_, __) => false,
+      builder: (context, destination) {
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              Marker(
+                width: 32.0,
+                height: 32.0,
+                point: destination.route[index].toLatLng(),
+                anchorPos: AnchorPos.align(AnchorAlign.top),
+                builder: (context) {
+                  return const Icon(
+                    CommunityMaterialIcons.map_marker,
+                    size: 32.0,
+                    color: AppColors.secondary,
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -126,24 +128,26 @@ class _FlagMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route =
-        context.select<DestinationCubit, List<Coord>>((dc) => dc.destination.route);
-
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          FlagMarker(
-            label: 'START',
-            coord: route.first,
-            color: Colors.green,
+    return BlocBuilder<DestinationCubit, Destination>(
+      buildWhen: (_, __) => false,
+      builder: (context, destination) {
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              FlagMarker(
+                label: 'START',
+                coord: destination.route.first,
+                color: Colors.green,
+              ),
+              FlagMarker(
+                label: 'FINISH',
+                coord: destination.route.last,
+                color: Colors.red,
+              ),
+            ],
           ),
-          FlagMarker(
-            label: 'FINISH',
-            coord: route.last,
-            color: Colors.red,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -153,19 +157,21 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final places =
-        context.select<DestinationCubit, List<Place>>((dc) => dc.destination.places);
-
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          for (int i = 0; i < places.length; ++i)
-            PlaceMarker(
-              place: places[i],
-              color: AppColors.accents[i % AppColors.accents.length],
-            ),
-        ],
-      ),
+    return BlocBuilder<DestinationCubit, Destination>(
+      buildWhen: (_, __) => false,
+      builder: (context, destination) {
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              for (int i = 0; i < destination.places.length; ++i)
+                PlaceMarker(
+                  place: destination.places[i],
+                  color: AppColors.accents[i % AppColors.accents.length],
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

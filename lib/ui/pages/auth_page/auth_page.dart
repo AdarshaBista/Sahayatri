@@ -93,9 +93,8 @@ class AuthPage extends StatelessWidget {
           'Continue without signing in...',
           style: AppTextStyles.headline6.lightAccent,
         ),
-        onPressed: () {
-          context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
-        },
+        onPressed: () =>
+            context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
       ),
     );
   }
