@@ -4,9 +4,7 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -16,7 +14,6 @@ import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
-import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
@@ -29,35 +26,21 @@ class DestinationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return Scaffold(
-            appBar: CurvedAppbar(
-              title: destination.name,
-              actions: [
-                IconButton(
-                  splashRadius: 20.0,
-                  icon: const Icon(Icons.close),
-                  onPressed: () => context.read<RootNavService>().pop(),
-                ),
-              ],
-            ),
-            body: BlocBuilder<UserCubit, UserState>(
-              builder: (context, state) {
-                if (state is Authenticated) {
-                  final dc = BlocProvider.of<DestinationCubit>(context);
-                  return FutureBuilder(
-                    future: dc.open(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) return _buildList(context, destination);
-                      return const BusyIndicator();
-                    },
-                  );
-                }
-                return _buildList(context, destination);
-              },
-            ));
-      },
+    final destination = context.watch<Destination>();
+
+    return Scaffold(
+      appBar: CurvedAppbar(
+        title: destination.name,
+        actions: [
+          IconButton(
+            splashRadius: 20.0,
+            icon: const Icon(Icons.close),
+            onPressed: () => context.read<RootNavService>().pop(),
+          ),
+        ],
+      ),
+      // TODO: Check for downlaod status and itinerary
+      body: _buildList(context, destination),
     );
   }
 

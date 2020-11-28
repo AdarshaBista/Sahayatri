@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -160,8 +159,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination =
-        context.select<DestinationCubit, Destination>((dc) => dc.destination);
+    final destination = context.watch<Destination>();
     final places = destination.places;
     final checkpoints = destination.createdItinerary.checkpoints;
     final checkpointPlaces = checkpoints.map((c) => c.place).toList();

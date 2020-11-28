@@ -11,7 +11,6 @@ import 'package:sahayatri/app/constants/api_keys.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:latlong/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -179,23 +178,19 @@ class _RouteLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final destination = context.watch<Destination>();
+
     return ScaleAnimator(
-      child: BlocBuilder<DestinationCubit, Destination>(
-        buildWhen: (_, __) => false,
-        builder: (context, destination) {
-          return PolylineLayerWidget(
-            options: PolylineLayerOptions(
-              polylines: [
-                Polyline(
-                  strokeWidth: 5.0,
-                  gradientColors: AppColors.routeGradient,
-                  points:
-                      destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
-                ),
-              ],
+      child: PolylineLayerWidget(
+        options: PolylineLayerOptions(
+          polylines: [
+            Polyline(
+              strokeWidth: 5.0,
+              gradientColors: AppColors.routeGradient,
+              points: destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

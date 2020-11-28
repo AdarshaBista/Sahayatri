@@ -4,17 +4,17 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
+import 'package:sahayatri/core/services/destinations_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/database/itinerary_dao.dart';
-import 'package:sahayatri/app/database/destination_dao.dart';
 
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
+import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
@@ -45,12 +45,12 @@ class RootRouter {
       case Routes.destinationPageRoute:
         _page = MultiBlocProvider(
           providers: [
-            BlocProvider<DestinationCubit>(
-              create: (context) => DestinationCubit(
+            BlocProvider<DownloadCubit>(
+              create: (context) => DownloadCubit(
+                user: context.read<UserCubit>().user,
                 destination: settings.arguments as Destination,
-                itineraryDao: context.read<ItineraryDao>(),
-                destinationDao: context.read<DestinationDao>(),
-              ),
+                destinationsService: context.read<DestinationsService>(),
+              )..checkDownloaded(),
             ),
             BlocProvider<ReviewCubit>(
               create: (context) => DestinationReviewCubit(
@@ -79,7 +79,10 @@ class RootRouter {
               ),
             ),
           ],
-          child: const DestinationNavPage(),
+          child: Provider<Destination>(
+            create: (_) => settings.arguments as Destination,
+            child: const DestinationNavPage(),
+          ),
         );
         break;
 

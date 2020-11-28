@@ -196,7 +196,10 @@ class Destination {
   }
 
   @override
-  bool operator ==(Object o) => false;
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+    return o is Destination && o.id == id;
+  }
 
   @override
   int get hashCode {

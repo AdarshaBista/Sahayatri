@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -22,7 +22,7 @@ class SelectLocationDialog extends StatelessWidget {
         builder: (context, state) {
           final center = state.coords.isNotEmpty
               ? state.coords.first
-              : context.watch<DestinationCubit>().destination.midPointCoord;
+              : context.watch<Destination>().midPointCoord;
 
           return CustomMap(
             center: center,

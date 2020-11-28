@@ -6,7 +6,6 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -29,38 +28,37 @@ class _RoutePageState extends State<RoutePage> {
 
   @override
   Widget build(BuildContext context) {
+    final destination = context.watch<Destination>();
+
     return Scaffold(
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton(
+          mini: true,
           child: const Icon(CommunityMaterialIcons.chart_bell_curve),
           onPressed: () => _openAltitudeSheet(context),
         ),
       ),
-      body: BlocBuilder<DestinationCubit, Destination>(
-        builder: (context, destination) {
-          return CustomMap(
-            center: destination.midPointCoord,
-            children: [
-              if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
-              const _FlagMarkersLayer(),
-              if (destination.places != null) const _PlaceMarkersLayer(),
-            ],
-            swPanBoundary: Coord(
-              lat: destination.minLat - 0.15,
-              lng: destination.minLong - 0.15,
-            ),
-            nePanBoundary: Coord(
-              lat: destination.maxLat + 0.15,
-              lng: destination.maxLong + 0.15,
-            ),
-          );
-        },
+      body: CustomMap(
+        center: destination.midPointCoord,
+        children: [
+          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
+          const _FlagMarkersLayer(),
+          if (destination.places != null) const _PlaceMarkersLayer(),
+        ],
+        swPanBoundary: Coord(
+          lat: destination.minLat - 0.15,
+          lng: destination.minLong - 0.15,
+        ),
+        nePanBoundary: Coord(
+          lat: destination.maxLat + 0.15,
+          lng: destination.maxLong + 0.15,
+        ),
       ),
     );
   }
 
   Future<void> _openAltitudeSheet(BuildContext context) async {
-    final destination = context.read<DestinationCubit>().destination;
+    final destination = context.read<Destination>();
 
     setState(() {
       isSheetOpen = !isSheetOpen;
@@ -96,29 +94,26 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      buildWhen: (_, __) => false,
-      builder: (context, destination) {
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              Marker(
-                width: 32.0,
-                height: 32.0,
-                point: destination.route[index].toLatLng(),
-                anchorPos: AnchorPos.align(AnchorAlign.top),
-                builder: (context) {
-                  return const Icon(
-                    CommunityMaterialIcons.map_marker,
-                    size: 32.0,
-                    color: AppColors.secondary,
-                  );
-                },
-              ),
-            ],
+    final destination = context.watch<Destination>();
+
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          Marker(
+            width: 32.0,
+            height: 32.0,
+            point: destination.route[index].toLatLng(),
+            anchorPos: AnchorPos.align(AnchorAlign.top),
+            builder: (context) {
+              return const Icon(
+                CommunityMaterialIcons.map_marker,
+                size: 32.0,
+                color: AppColors.secondary,
+              );
+            },
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
@@ -128,26 +123,23 @@ class _FlagMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      buildWhen: (_, __) => false,
-      builder: (context, destination) {
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              FlagMarker(
-                label: 'START',
-                coord: destination.route.first,
-                color: Colors.green,
-              ),
-              FlagMarker(
-                label: 'FINISH',
-                coord: destination.route.last,
-                color: Colors.red,
-              ),
-            ],
+    final destination = context.watch<Destination>();
+
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          FlagMarker(
+            label: 'START',
+            coord: destination.route.first,
+            color: Colors.green,
           ),
-        );
-      },
+          FlagMarker(
+            label: 'FINISH',
+            coord: destination.route.last,
+            color: Colors.red,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -157,21 +149,18 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      buildWhen: (_, __) => false,
-      builder: (context, destination) {
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              for (int i = 0; i < destination.places.length; ++i)
-                PlaceMarker(
-                  place: destination.places[i],
-                  color: AppColors.accents[i % AppColors.accents.length],
-                ),
-            ],
-          ),
-        );
-      },
+    final destination = context.watch<Destination>();
+
+    return MarkerLayerWidget(
+      options: MarkerLayerOptions(
+        markers: [
+          for (int i = 0; i < destination.places.length; ++i)
+            PlaceMarker(
+              place: destination.places[i],
+              color: AppColors.accents[i % AppColors.accents.length],
+            ),
+        ],
+      ),
     );
   }
 }

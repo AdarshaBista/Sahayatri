@@ -23,7 +23,6 @@ import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 import 'package:sahayatri/ui/pages/lodge_rooms_page/lodge_rooms_page.dart';
@@ -56,7 +55,7 @@ class DestinationRouter {
           create: (context) => ItineraryCubit(
             user: context.read<UserCubit>().user,
             apiService: context.read<ApiService>(),
-            destination: context.read<DestinationCubit>().destination,
+            destination: context.read<Destination>(),
           )..fetchItineraries(),
           child: const DestinationDetailPage(),
         );

@@ -23,9 +23,13 @@ class DownloadInProgress extends DownloadState {
 }
 
 class DownloadCompleted extends DownloadState {
+  const DownloadCompleted();
+}
+
+class DownloadError extends DownloadState {
   final String message;
 
-  const DownloadCompleted({
+  const DownloadError({
     @required this.message,
   }) : assert(message != null);
 

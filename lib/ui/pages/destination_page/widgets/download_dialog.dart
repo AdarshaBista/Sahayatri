@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/services/destinations_service.dart';
-
 import 'package:sahayatri/app/constants/images.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
@@ -22,29 +18,22 @@ class DownloadDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.value(false),
-      child: BlocProvider<DownloadCubit>(
-        create: (context) => DownloadCubit(
-          user: context.read<UserCubit>().user,
-          destinationCubit: context.read<DestinationCubit>(),
-          destinationsService: context.read<DestinationsService>(),
-        )..startDownload(context.read<DestinationCubit>().destination),
-        child: Builder(
-          builder: (context) {
-            return CustomDialog(
-              child: BlocBuilder<DownloadCubit, DownloadState>(
-                builder: (context, state) {
-                  if (state is DownloadCompleted) {
-                    return _buildCompleted(context, state.message);
-                  } else if (state is DownloadInProgress) {
-                    return _buildProgress(context, state.message);
-                  } else {
-                    return const Offstage();
-                  }
-                },
-              ),
-            );
-          },
-        ),
+      child: Builder(
+        builder: (context) {
+          return CustomDialog(
+            child: BlocBuilder<DownloadCubit, DownloadState>(
+              builder: (context, state) {
+                if (state is DownloadCompleted) {
+                  return _buildCompleted(context);
+                } else if (state is DownloadInProgress) {
+                  return _buildProgress(context, state.message);
+                } else {
+                  return const Offstage();
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }
@@ -70,7 +59,7 @@ class DownloadDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildCompleted(BuildContext context, String message) {
+  Widget _buildCompleted(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -78,7 +67,7 @@ class DownloadDialog extends StatelessWidget {
           padding: 16.0,
           imageUrl: Images.downloadComplete,
           title: Text(
-            message,
+            'Download Complete!',
             textAlign: TextAlign.center,
             style: context.t.headline5.bold,
           ),

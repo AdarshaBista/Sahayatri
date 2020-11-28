@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -70,7 +70,8 @@ class DirectionsButton extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   final directionsCubit = context.read<DirectionsCubit>();
-                  final destination = context.read<DestinationCubit>().destination;
+                  final destination = context.watch<Destination>();
+
                   directionsCubit.startNavigation(
                     destination.name,
                     destination.route.first,

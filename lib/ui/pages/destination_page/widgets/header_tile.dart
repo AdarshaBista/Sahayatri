@@ -6,7 +6,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
@@ -36,41 +35,37 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildRating(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            StarRatingBar(
-              rating: destination.rating,
-              size: 20.0,
-            ),
-            const SizedBox(height: 4.0),
-            Text(
-              destination.rating.toString(),
-              style: context.t.headline3.bold,
-            ),
-          ],
-        );
-      },
+    final destination = context.watch<Destination>();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        StarRatingBar(
+          rating: destination.rating,
+          size: 20.0,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          destination.rating.toString(),
+          style: context.t.headline3.bold,
+        ),
+      ],
     );
   }
 
   Widget _buildWeatherButton(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return ColumnButton(
-          label: 'Weather',
-          icon: CommunityMaterialIcons.weather_fog,
-          onTap: () => context.read<DestinationNavService>().pushNamed(
-                Routes.weatherPageRoute,
-                arguments: WeatherPageArgs(
-                  name: destination.name,
-                  coord: destination.route.first,
-                ),
-              ),
-        );
-      },
+    final destination = context.watch<Destination>();
+
+    return ColumnButton(
+      label: 'Weather',
+      icon: CommunityMaterialIcons.weather_fog,
+      onTap: () => context.read<DestinationNavService>().pushNamed(
+            Routes.weatherPageRoute,
+            arguments: WeatherPageArgs(
+              name: destination.name,
+              coord: destination.route.first,
+            ),
+          ),
     );
   }
 }

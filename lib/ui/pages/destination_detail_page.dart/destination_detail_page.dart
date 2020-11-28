@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/destination.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -94,7 +95,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   }
 
   PreferredSizeWidget _buildAppBar() {
-    final name = context.select<DestinationCubit, String>((dc) => dc.destination.name);
+    final name = context.watch<Destination>().name;
 
     return CurvedAppbar(
       elevation: 4.0,

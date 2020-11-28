@@ -32,6 +32,7 @@ class DestinationsService {
   Future<void> fetchDestinations() async {
     try {
       _destinations = await apiService.fetchDestinations();
+      _destinations.forEach(setDownloadState);
     } on AppError {
       rethrow;
     }
@@ -55,23 +56,28 @@ class DestinationsService {
       destination.suggestedItineraries = fullDestination.suggestedItineraries;
 
       await destinationDao.upsert(fullDestination);
-      _updateDownloaded(fullDestination);
-      if (onDownload != null) onDownload();
+      _downloaded.add(fullDestination);
+      onDownload?.call();
     } on AppError {
       rethrow;
     }
   }
 
-  void _updateDownloaded(Destination destination) {
-    final downloadedIds = _downloaded.map((d) => d.id).toList();
-    for (int i = 0; i < downloadedIds.length; ++i) {
-      if (downloadedIds[i] == destination.id) _downloaded.removeAt(i);
-    }
-    _downloaded.add(destination);
+  Future<void> deleteDownloaded(String id) async {
+    destinationDao.delete(id);
+    _downloaded.removeWhere((d) => d.id == id);
+    revertDownloadState(id);
   }
 
-  Future<void> deleteDownloaded(String id) async {
-    _downloaded.removeWhere((d) => d.id == id);
-    await destinationDao.delete(id);
+  void setDownloadState(Destination destination) {
+    if (_downloaded.contains(destination)) {
+      destination.isDownloaded = true;
+    }
+  }
+
+  void revertDownloadState(String id) {
+    final destination = _destinations.firstWhere((d) => d.id == id, orElse: () => null);
+    if (destination == null) return;
+    destination.isDownloaded = false;
   }
 }

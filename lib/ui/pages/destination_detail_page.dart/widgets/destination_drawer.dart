@@ -6,7 +6,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
@@ -39,48 +38,47 @@ class DestinationDrawer extends StatelessWidget {
   }
 
   Widget _buildMenuItems(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return ListView(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(left: 32.0),
-          children: [
-            DrawerItem(
-              icon: CommunityMaterialIcons.chart_line_variant,
-              label: 'Route',
-              onTap: () =>
-                  context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
-            ),
-            DrawerItem(
-              icon: CommunityMaterialIcons.weather_fog,
-              label: 'Weather',
-              onTap: () => context.read<DestinationNavService>().pushNamed(
-                    Routes.weatherPageRoute,
-                    arguments: WeatherPageArgs(
-                      name: destination.name,
-                      coord: destination.route.first,
-                    ),
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(left: 32.0),
+      children: [
+        DrawerItem(
+          icon: CommunityMaterialIcons.chart_line_variant,
+          label: 'Route',
+          onTap: () =>
+              context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
+        ),
+        DrawerItem(
+          icon: CommunityMaterialIcons.weather_fog,
+          label: 'Weather',
+          onTap: () {
+            final destination = context.read<Destination>();
+            return context.read<DestinationNavService>().pushNamed(
+                  Routes.weatherPageRoute,
+                  arguments: WeatherPageArgs(
+                    name: destination.name,
+                    coord: destination.route.first,
                   ),
-            ),
-            DrawerItem(
-              icon: CommunityMaterialIcons.book_open_outline,
-              label: 'Guide Book',
-              onTap: () {},
-            ),
-            DrawerItem(
-              icon: Icons.medical_services_outlined,
-              label: 'Safety',
-              onTap: () {},
-            ),
-            DrawerItem(
-              icon: Icons.shopping_bag_outlined,
-              label: 'Gear',
-              onTap: () {},
-            ),
-          ],
-        );
-      },
+                );
+          },
+        ),
+        DrawerItem(
+          icon: CommunityMaterialIcons.book_open_outline,
+          label: 'Guide Book',
+          onTap: () {},
+        ),
+        DrawerItem(
+          icon: Icons.medical_services_outlined,
+          label: 'Safety',
+          onTap: () {},
+        ),
+        DrawerItem(
+          icon: Icons.shopping_bag_outlined,
+          label: 'Gear',
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

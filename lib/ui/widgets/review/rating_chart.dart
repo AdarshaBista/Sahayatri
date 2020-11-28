@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
-import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class RatingChart extends StatelessWidget {
   final int total;
@@ -19,16 +19,14 @@ class RatingChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimator(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
-        child: Row(
-          children: [
-            _buildDetails(context),
-            const SizedBox(width: 16.0),
-            Expanded(child: _buildBars(context)),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
+      child: Row(
+        children: [
+          _buildDetails(context),
+          const SizedBox(width: 16.0),
+          Expanded(child: _buildBars(context)),
+        ],
       ),
     );
   }
@@ -57,7 +55,10 @@ class RatingChart extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = stars.length; i > 0; --i) _buildBar(context, i),
+        for (int i = stars.length; i > 0; --i)
+          ScaleAnimator(
+            child: _buildBar(context, i),
+          ),
       ],
     );
   }

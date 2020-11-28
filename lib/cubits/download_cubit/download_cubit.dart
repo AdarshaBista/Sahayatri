@@ -9,32 +9,36 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/destinations_service.dart';
 
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
-
 part 'download_state.dart';
 
 class DownloadCubit extends Cubit<DownloadState> {
   final User user;
-  final DestinationCubit destinationCubit;
+  final Destination destination;
   final DestinationsService destinationsService;
 
   DownloadCubit({
     @required this.user,
-    @required this.destinationCubit,
+    @required this.destination,
     @required this.destinationsService,
   })  : assert(user != null),
-        assert(destinationCubit != null),
+        assert(destination != null),
         assert(destinationsService != null),
         super(const DownloadInitial());
 
-  Future<void> startDownload(Destination destination) async {
+  void checkDownloaded() {
+    if (destination.isDownloaded) {
+      emit(const DownloadCompleted());
+    }
+  }
+
+  Future<void> startDownload() async {
     emit(DownloadInProgress(message: 'Downloading ${destination.name}'));
     try {
       await destinationsService.download(destination, user);
-      destinationCubit.emit(destination);
-      emit(const DownloadCompleted(message: 'Download complete!'));
+      emit(const DownloadCompleted());
     } on AppError catch (e) {
-      emit(DownloadCompleted(message: e.message));
+      emit(DownloadError(message: e.message));
+      emit(const DownloadInitial());
     }
   }
 }

@@ -8,7 +8,6 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
-import 'package:sahayatri/cubits/destination_cubit/destination_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
@@ -29,29 +28,26 @@ class TrackerFab extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    return BlocBuilder<DestinationCubit, Destination>(
-      builder: (context, destination) {
-        return FloatingActionButton(
-          mini: true,
-          child: const Icon(
-            Icons.play_arrow_outlined,
-            size: 24.0,
-            color: AppColors.primary,
-          ),
-          onPressed: () {
-            if (destination.createdItinerary == null) {
-              const MessageDialog(
-                message: 'You must create an itinerary before starting tracker.',
-              ).openDialog(context);
-              return;
-            }
+    return FloatingActionButton(
+      mini: true,
+      child: const Icon(
+        Icons.play_arrow_outlined,
+        size: 24.0,
+        color: AppColors.primary,
+      ),
+      onPressed: () {
+        final destination = context.read<Destination>();
+        if (destination.createdItinerary == null) {
+          const MessageDialog(
+            message: 'You must create an itinerary before starting tracker.',
+          ).openDialog(context);
+          return;
+        }
 
-            context.read<DestinationNavService>().pushNamed(
-                  Routes.trackerPageRoute,
-                  arguments: context.read<DestinationCubit>().destination,
-                );
-          },
-        );
+        context.read<DestinationNavService>().pushNamed(
+              Routes.trackerPageRoute,
+              arguments: destination,
+            );
       },
     );
   }
