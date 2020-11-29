@@ -32,7 +32,6 @@ class DestinationsService {
   Future<void> fetchDestinations() async {
     try {
       _destinations = await apiService.fetchDestinations();
-      _destinations.forEach(setDownloadState);
     } on AppError {
       rethrow;
     }
@@ -66,18 +65,9 @@ class DestinationsService {
   Future<void> deleteDownloaded(String id) async {
     destinationDao.delete(id);
     _downloaded.removeWhere((d) => d.id == id);
-    revertDownloadState(id);
   }
 
-  void setDownloadState(Destination destination) {
-    if (_downloaded.contains(destination)) {
-      destination.isDownloaded = true;
-    }
-  }
-
-  void revertDownloadState(String id) {
-    final destination = _destinations.firstWhere((d) => d.id == id, orElse: () => null);
-    if (destination == null) return;
-    destination.isDownloaded = false;
+  bool isDownloaded(Destination destination) {
+    return _downloaded.contains(destination);
   }
 }

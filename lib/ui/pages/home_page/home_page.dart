@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
           )..fetchDestinations(),
         ),
         BlocProvider<DownloadedDestinationsCubit>(
+          lazy: false,
           create: (context) => DownloadedDestinationsCubit(
             destinationsService: context.read<DestinationsService>(),
           )..fetchDownloaded(),
