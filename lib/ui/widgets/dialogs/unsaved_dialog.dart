@@ -8,11 +8,9 @@ class UnsavedDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConfirmDialog(
-      cancelText: 'BACK',
-      confirmText: 'EXIT',
       confirmIcon: Icons.close,
       cancelIcon: Icons.keyboard_arrow_left,
-      message: 'Changes you made will not be saved!',
+      message: 'You have unsaved changes! Are you sure you want to go back?',
       onConfirm: Navigator.of(context).pop,
     );
   }

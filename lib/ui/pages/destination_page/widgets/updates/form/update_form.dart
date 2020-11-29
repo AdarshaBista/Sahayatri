@@ -9,6 +9,7 @@ import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cub
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
@@ -38,8 +39,7 @@ class UpdateForm extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.all(20.0),
             children: [
-              _buildHeader(context),
-              const Divider(height: 16.0),
+              _buildHeader(),
               const TagsField(),
               const SizedBox(height: 16.0),
               const ImagesField(),
@@ -58,23 +58,14 @@ class UpdateForm extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('Post an update', style: context.t.headline4.bold),
-        Builder(
-          builder: (context) {
-            return GestureDetector(
-              onTap: () => _handleBackButton(context),
-              child: const Icon(
-                Icons.close,
-                color: AppColors.secondary,
-              ),
-            );
-          },
-        ),
-      ],
+  Widget _buildHeader() {
+    return Builder(
+      builder: (context) {
+        return SheetHeader(
+          title: 'Post an update',
+          onClose: () => _handleBackButton(context),
+        );
+      },
     );
   }
 

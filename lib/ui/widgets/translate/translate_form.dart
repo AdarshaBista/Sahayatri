@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/translate/translation_list.dart';
@@ -38,11 +38,15 @@ class TranslateForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (isOnSettings) const SizedBox(height: 8.0),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
-          child: Text('Translate', style: context.t.headline4.bold),
-        ),
+        if (isOnSettings)
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+            child: SheetHeader(
+              title: 'Translate',
+              showDivider: false,
+              onClose: Navigator.of(context).pop,
+            ),
+          ),
         Expanded(
           child: Stack(
             alignment: Alignment.bottomCenter,

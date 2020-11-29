@@ -63,6 +63,7 @@ class DestinationRouter {
               )..fetchItineraries(),
             ),
             BlocProvider(
+              lazy: false,
               create: (context) => UserItineraryCubit(
                 destination: context.read<Destination>(),
                 itineraryDao: context.read<ItineraryDao>(),

@@ -18,9 +18,9 @@ class PlacesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.zero,
       children: [
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 12.0),
         const Header(
           title: 'Places',
           slideDirection: SlideDirection.right,
@@ -59,7 +59,7 @@ class PlacesGrid extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.only(
-        top: 20.0,
+        top: 12.0,
         left: 20.0,
         right: 20.0,
         bottom: 80.0,

@@ -8,7 +8,6 @@ import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart'
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
@@ -24,12 +23,9 @@ class ItineraryFormPage extends StatelessWidget {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: _buildFab(context),
-        appBar: const CurvedAppbar(
-          elevation: 0.0,
-          title: 'Create an Itinerary',
-        ),
+        appBar: AppBar(),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
             key: _formKey,
             child: const ItineraryForm(),

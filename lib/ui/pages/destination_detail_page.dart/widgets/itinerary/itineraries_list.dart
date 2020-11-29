@@ -19,12 +19,12 @@ class ItinerariesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       children: [
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 12.0),
         const Header(
-          title: 'Itinerary',
           padding: 0.0,
+          title: 'Itinerary',
           slideDirection: SlideDirection.right,
         ),
         const SizedBox(height: 12.0),

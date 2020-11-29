@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 
 class ImageSourceSheet extends StatelessWidget {
@@ -20,9 +20,10 @@ class ImageSourceSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Select image from',
-            style: context.t.headline5.bold,
+          SheetHeader(
+            title: 'Select image from',
+            showDivider: false,
+            onClose: Navigator.of(context).pop,
           ),
           const SizedBox(height: 12.0),
           Row(

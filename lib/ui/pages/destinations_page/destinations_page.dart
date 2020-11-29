@@ -75,7 +75,12 @@ class _DestinationsPageState extends State<DestinationsPage> {
           parent: AlwaysScrollableScrollPhysics(),
         ),
         children: [
-          const Header(padding: 12.0, boldTitle: 'Destinations'),
+          const SizedBox(height: 8.0),
+          const Header(
+            title: 'Destinations',
+            padding: 12.0,
+            fontSize: 32.0,
+          ),
           const SizedBox(height: 8.0),
           BlocBuilder<DestinationsCubit, DestinationsState>(
             builder: (context, state) {

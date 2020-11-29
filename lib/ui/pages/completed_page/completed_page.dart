@@ -30,7 +30,12 @@ class CompletedPage extends StatelessWidget {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: const [
-        Header(boldTitle: 'Completed'),
+        Header(
+          title: 'Completed',
+          padding: 12.0,
+          fontSize: 32.0,
+        ),
+        SizedBox(height: 50.0),
         EmptyIndicator(
           imageUrl: Images.destinationsEmpty,
           message: 'No completed destinations.',

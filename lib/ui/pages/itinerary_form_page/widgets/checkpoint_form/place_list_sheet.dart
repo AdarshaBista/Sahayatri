@@ -10,6 +10,7 @@ import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/image_card.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -30,11 +31,7 @@ class PlaceListSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Select a place',
-              style: context.t.headline4.bold,
-            ),
-            const Divider(height: 16.0),
+            const SheetHeader(title: 'Select a place'),
             BlocBuilder<PlacesCubit, PlacesState>(
               builder: (context, state) {
                 if (state is PlacesError) {

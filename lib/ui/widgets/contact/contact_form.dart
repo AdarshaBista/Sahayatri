@@ -12,6 +12,7 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/save_button.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
@@ -47,8 +48,12 @@ class _ContactFormState extends State<ContactForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Assign a contact', style: context.t.headline4.bold),
-                const SizedBox(height: 4.0),
+                SheetHeader(
+                  title: 'Assign a contact',
+                  showDivider: false,
+                  onClose: Navigator.of(context).pop,
+                ),
+                const SizedBox(height: 6.0),
                 Text(
                   'A message will be automatically sent to this number once you reach a checkpoint.',
                   style: context.t.headline6,

@@ -98,8 +98,8 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     final name = context.watch<Destination>().name;
 
     return CurvedAppbar(
-      elevation: 4.0,
       title: name,
+      elevation: 0.0,
       leading: const DrawerIcon(),
       actions: [
         IconButton(

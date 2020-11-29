@@ -7,6 +7,7 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
@@ -41,8 +42,10 @@ class _ReviewFormState extends State<ReviewForm> {
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.all(20.0),
           children: [
-            _buildHeader(context),
-            const Divider(height: 16.0),
+            SheetHeader(
+              title: 'Write a review',
+              onClose: () => _handleBackButton(context),
+            ),
             _buildRatingField(),
             const SizedBox(height: 16.0),
             _buildTextField(),
@@ -54,22 +57,6 @@ class _ReviewFormState extends State<ReviewForm> {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('Write a review', style: context.t.headline4.bold),
-        GestureDetector(
-          onTap: () => _handleBackButton(context),
-          child: const Icon(
-            Icons.close,
-            color: AppColors.secondary,
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildRatingField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,15 +65,26 @@ class _ReviewFormState extends State<ReviewForm> {
           'Rating',
           style: context.t.headline5.bold,
         ),
-        const SizedBox(height: 6.0),
-        StarRatingBar(
-          size: 32.0,
-          rating: rating,
-          onUpdate: (value) {
-            setState(() {
-              rating = value;
-            });
-          },
+        const SizedBox(height: 8.0),
+        Row(
+          children: [
+            StarRatingBar(
+              size: 32.0,
+              rating: rating,
+              onUpdate: (value) {
+                setState(() {
+                  rating = value;
+                });
+              },
+            ),
+            const Spacer(),
+            const SizedBox(width: 12.0),
+            Text(
+              rating.toStringAsFixed(1),
+              style: context.t.headline3,
+            ),
+            const SizedBox(width: 12.0),
+          ],
         ),
       ],
     );

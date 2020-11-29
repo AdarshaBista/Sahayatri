@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
@@ -44,8 +45,10 @@ class CheckpointForm extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(20.0),
                 children: [
-                  _buildHeader(context),
-                  const Divider(height: 24.0),
+                  SheetHeader(
+                    onClose: () => _handleBackButton(context),
+                    title: checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
+                  ),
                   _buildPlaceField(state.place, context),
                   const SizedBox(height: 16.0),
                   _buildDateTimeField(state.dateTime, context),
@@ -61,25 +64,6 @@ class CheckpointForm extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
-          style: context.t.headline4.bold,
-        ),
-        GestureDetector(
-          onTap: () => _handleBackButton(context),
-          child: const Icon(
-            Icons.close,
-            color: AppColors.secondary,
-          ),
-        ),
-      ],
     );
   }
 
