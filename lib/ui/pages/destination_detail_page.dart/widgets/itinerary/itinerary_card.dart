@@ -8,9 +8,8 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/carousel.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
-import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/checkpoint_images.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_actions.dart';
 
@@ -39,12 +38,11 @@ class ItineraryCard extends StatelessWidget {
             .pushNamed(Routes.itineraryPageRoute, arguments: itinerary),
         child: ElevatedCard(
           radius: 8.0,
-          color: context.c.surface,
-          child: Stack(
-            alignment: Alignment.topRight,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildBackground(),
-              _buildDetails(),
+              _buildImage(),
+              Expanded(child: _buildDetails(context)),
               ItineraryActions(itinerary: itinerary, deletable: deletable),
             ],
           ),
@@ -53,17 +51,7 @@ class ItineraryCard extends StatelessWidget {
     );
   }
 
-  Widget _buildBackground() {
-    return GradientContainer(
-      height: cardHeight,
-      gradientBegin: Alignment.topLeft,
-      gradientEnd: Alignment.bottomRight,
-      gradientColors: AppColors.cardGradient,
-      child: AdaptiveImage(imageUrls.first),
-    );
-  }
-
-  Widget _buildDetails() {
+  Widget _buildDetails(BuildContext context) {
     return Container(
       height: cardHeight,
       padding: const EdgeInsets.all(12.0),
@@ -74,21 +62,17 @@ class ItineraryCard extends StatelessWidget {
             itinerary.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.headline5.bold.light,
+            style: context.t.headline5.bold,
           ),
           const SizedBox(height: 4.0),
           Text(
             '${itinerary.days} days / ${itinerary.nights} nights',
-            style: AppTextStyles.headline6.light,
+            style: context.t.headline6,
           ),
-          const Divider(
-            height: 10.0,
-            endIndent: 80.0,
-            color: AppColors.lightAccent,
-          ),
+          const Divider(height: 10.0, endIndent: 80.0),
           Text(
             '${itinerary.checkpoints.length} checkpoints',
-            style: AppTextStyles.headline6.light,
+            style: context.t.headline6,
           ),
           const SizedBox(height: 6.0),
           CheckpointImages(imageUrls: imageUrls),
@@ -96,9 +80,22 @@ class ItineraryCard extends StatelessWidget {
           if (!itinerary.isTemplate)
             Text(
               '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
-              style: AppTextStyles.headline6.primary.bold,
+              style: AppTextStyles.headline6.primaryDark.bold,
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    return ElevatedCard(
+      radius: 8.0,
+      elevation: 0.0,
+      child: Carousel(
+        width: 100.0,
+        height: cardHeight,
+        imageUrls: imageUrls,
+        showPagination: false,
       ),
     );
   }

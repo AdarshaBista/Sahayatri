@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
+import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/header.dart';
@@ -82,9 +83,19 @@ class ItinerariesList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16.0),
-        Text(
-          'Create Your Own',
-          style: context.t.headline5.bold,
+        BlocBuilder<UserItineraryCubit, UserItineraryState>(
+          builder: (context, state) {
+            if (state is UserItineraryLoaded) {
+              return Text(
+                'Your Itinerary',
+                style: context.t.headline5.bold,
+              );
+            }
+            return Text(
+              'Create Your Own',
+              style: context.t.headline5.bold,
+            );
+          },
         ),
         const Divider(height: 16.0),
         const CreatedItineraryCard(),
