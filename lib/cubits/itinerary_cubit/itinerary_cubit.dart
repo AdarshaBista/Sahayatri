@@ -2,9 +2,9 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:sahayatri/core/models/app_error.dart';
 
 import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 

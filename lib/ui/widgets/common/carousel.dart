@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 
 class Carousel extends StatelessWidget {
@@ -29,11 +30,11 @@ class Carousel extends StatelessWidget {
         itemCount: imageUrls.length,
         itemBuilder: (context, index) => AdaptiveImage(imageUrls[index]),
         pagination: showPagination
-            ? const SwiperPagination(
+            ? SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                   size: 6.0,
                   activeSize: 8.0,
-                  color: Colors.white70,
+                  color: context.c.surface,
                 ),
               )
             : null,

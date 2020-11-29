@@ -20,12 +20,13 @@ class CustomDialog extends StatelessWidget {
     return ScaleAnimator(
       duration: 200,
       child: AlertDialog(
+        title: child,
+        content: content,
         elevation: 12.0,
+        titlePadding: padding,
         contentPadding: padding,
         clipBehavior: Clip.antiAlias,
         backgroundColor: context.theme.cardColor,
-        title: child,
-        content: content,
       ),
     );
   }

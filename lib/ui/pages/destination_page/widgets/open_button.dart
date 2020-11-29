@@ -28,6 +28,7 @@ class OpenButton extends StatelessWidget {
           onTap: () {
             if (!context.read<UserCubit>().isAuthenticated) {
               CustomDialog(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
                 child: UnauthenticatedView(
                   onLogin: () => Navigator.of(context).pop(),
                 ),

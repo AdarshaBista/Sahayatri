@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/dialog_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -47,16 +49,16 @@ class ItineraryFormPage extends StatelessWidget {
             size: 24.0,
             color: AppColors.primary,
           ),
-          onPressed: () => _saveItinerary(context, state),
+          onPressed: () => _saveItinerary(context, state.itinerary),
         );
       },
     );
   }
 
-  void _saveItinerary(BuildContext context, ItineraryFormState state) {
+  void _saveItinerary(BuildContext context, Itinerary itinerary) {
     if (!_formKey.currentState.validate()) return;
 
-    // TODO: Save itinerary
+    context.read<UserItineraryCubit>().createItinerary(itinerary);
     Navigator.of(context).pop();
   }
 

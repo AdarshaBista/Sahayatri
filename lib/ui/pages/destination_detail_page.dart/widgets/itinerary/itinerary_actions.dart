@@ -9,6 +9,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
@@ -43,9 +44,12 @@ class ItineraryActions extends StatelessWidget {
           color: AppColors.primaryDark,
           icon: Icons.edit,
           onTap: () => context.read<DestinationNavService>().pushNamed(
-                Routes.itineraryFormPageRoute,
-                arguments: itinerary,
-              ),
+            Routes.itineraryFormPageRoute,
+            arguments: [
+              itinerary,
+              context.read<UserItineraryCubit>(),
+            ],
+          ),
         ),
         if (deletable)
           _buildIcon(
@@ -60,8 +64,7 @@ class ItineraryActions extends StatelessWidget {
               }
               ConfirmDialog(
                 message: 'Do you want to delete this itinerary?',
-                // TODO: Delete itinerary
-                onConfirm: () {},
+                onConfirm: () => context.read<UserItineraryCubit>().deleteItinerary(),
               ).openDialog(context);
             },
           ),

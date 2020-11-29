@@ -39,7 +39,6 @@ class DestinationPage extends StatelessWidget {
           ),
         ],
       ),
-      // TODO: Check for downlaod status and itinerary
       body: _buildList(context, destination),
     );
   }
