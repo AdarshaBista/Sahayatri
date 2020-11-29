@@ -21,12 +21,12 @@ class LogoutButton extends StatelessWidget {
       onTap: () => ConfirmDialog(
         message: 'Do you want to log out?',
         onConfirm: () async {
-          context.read<TrackerService>().stop();
-          context.read<NearbyCubit>().stopNearby();
           context.openLoadingFlushBar(
             'Logging out...',
             isInteractive: false,
             callback: () async {
+              context.read<TrackerService>().stop();
+              await context.read<NearbyCubit>().stopNearby();
               await context.read<UserCubit>().logout();
             },
           );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 
 class ImageSourceSheet extends StatelessWidget {
   final void Function(ImageSource) onSelect;
@@ -24,17 +24,21 @@ class ImageSourceSheet extends StatelessWidget {
             'Select image from',
             style: context.t.headline5.bold,
           ),
-          const SizedBox(height: 16.0),
-          CustomButton(
-            label: 'GALLERY',
-            icon: Icons.photo_album_outlined,
-            onTap: () => onSelect(ImageSource.gallery),
-          ),
           const SizedBox(height: 12.0),
-          CustomButton(
-            label: 'CAMERA',
-            icon: Icons.camera_alt_outlined,
-            onTap: () => onSelect(ImageSource.camera),
+          Row(
+            children: [
+              SquareButton(
+                label: 'GALLERY',
+                icon: Icons.photo_album_outlined,
+                onTap: () => onSelect(ImageSource.gallery),
+              ),
+              const SizedBox(width: 12.0),
+              SquareButton(
+                label: 'CAMERA',
+                icon: Icons.camera_alt_outlined,
+                onTap: () => onSelect(ImageSource.camera),
+              ),
+            ],
           ),
         ],
       ),

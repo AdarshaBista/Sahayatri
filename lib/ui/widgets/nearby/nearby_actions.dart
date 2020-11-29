@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/nearby/nearby_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 
 class NearbyActions extends StatelessWidget {
@@ -22,9 +22,11 @@ class NearbyActions extends StatelessWidget {
       spacing: 8.0,
       runSpacing: 8.0,
       children: [
-        NearbyButton(
+        SquareButton(
           label: isScanning ? 'Stop\nScanning' : 'Start\nScanning',
-          color: isScanning ? Colors.deepPurple : Colors.green,
+          backgroundColor: isScanning
+              ? Colors.deepPurple.withOpacity(0.3)
+              : Colors.green.withOpacity(0.3),
           icon: isScanning
               ? Icons.search_off_outlined
               : CommunityMaterialIcons.account_search_outline,
@@ -34,18 +36,18 @@ class NearbyActions extends StatelessWidget {
                 : context.read<NearbyCubit>().startScanning();
           },
         ),
-        NearbyButton(
+        SquareButton(
           label: 'Stop\n Nearby',
-          color: AppColors.secondaryLight,
+          backgroundColor: AppColors.secondaryLight,
           icon: CommunityMaterialIcons.access_point_network_off,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
             onConfirm: () => context.read<NearbyCubit>().stopNearby(),
           ).openDialog(context),
         ),
-        NearbyButton(
+        SquareButton(
           label: 'Send\n SOS',
-          color: AppColors.primaryLight,
+          backgroundColor: AppColors.primaryLight,
           icon: Icons.speaker_phone_outlined,
           onTap: () {
             context.openFlushBar('SOS Sent', type: FlushbarType.success);

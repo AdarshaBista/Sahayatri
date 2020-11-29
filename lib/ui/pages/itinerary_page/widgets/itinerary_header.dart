@@ -18,7 +18,9 @@ class ItineraryHeader extends StatelessWidget {
       children: [
         Text(
           itinerary.name,
+          maxLines: 1,
           textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
           style: context.t.headline4.serif.bold,
         ),
         const SizedBox(height: 6.0),
