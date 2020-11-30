@@ -12,7 +12,7 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/save_button.dart';
-import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
@@ -48,10 +48,9 @@ class _ContactFormState extends State<ContactForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SheetHeader(
+                const Header(
                   title: 'Assign a contact',
-                  showDivider: false,
-                  onClose: Navigator.of(context).pop,
+                  fontSize: 20.0,
                 ),
                 const SizedBox(height: 6.0),
                 Text(

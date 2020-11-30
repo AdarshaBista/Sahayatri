@@ -141,7 +141,7 @@ class AppThemes {
         errorMaxLines: 2,
         helperMaxLines: 2,
         alignLabelWithHint: true,
-        contentPadding: const EdgeInsets.all(12.0),
+        contentPadding: const EdgeInsets.all(14.0),
         fillColor: AppColors.lightAccent,
         focusColor: AppColors.lightAccent,
         hintStyle: AppTextStyles.headline5,

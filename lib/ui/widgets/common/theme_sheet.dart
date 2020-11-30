@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 
 class ThemeSheet extends StatelessWidget {
@@ -20,10 +20,9 @@ class ThemeSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SheetHeader(
+          const Header(
             title: 'Change theme to',
-            showDivider: false,
-            onClose: Navigator.of(context).pop,
+            fontSize: 20.0,
           ),
           const SizedBox(height: 12.0),
           Row(

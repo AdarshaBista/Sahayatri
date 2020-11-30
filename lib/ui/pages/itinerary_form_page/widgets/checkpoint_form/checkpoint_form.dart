@@ -47,7 +47,7 @@ class CheckpointForm extends StatelessWidget {
                 children: [
                   SheetHeader(
                     onClose: () => _handleBackButton(context),
-                    title: checkpoint == null ? 'Create checkpoint' : 'Edit checkpoint',
+                    title: checkpoint == null ? 'Add a checkpoint' : 'Edit checkpoint',
                   ),
                   _buildPlaceField(state.place, context),
                   const SizedBox(height: 16.0),

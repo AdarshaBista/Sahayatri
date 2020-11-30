@@ -24,7 +24,6 @@ class ItineraryForm extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 64.0),
           children: [
             const Header(
-              padding: 0.0,
               title: 'Create an Itinerary',
             ),
             const SizedBox(height: 16.0),

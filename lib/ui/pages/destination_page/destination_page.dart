@@ -48,7 +48,10 @@ class DestinationPage extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
-        Carousel(imageUrls: destination.imageUrls),
+        Hero(
+          tag: destination.id,
+          child: Carousel(imageUrls: destination.imageUrls),
+        ),
         const SizedBox(height: 16.0),
         const HeaderTile(),
         const SizedBox(height: 8.0),

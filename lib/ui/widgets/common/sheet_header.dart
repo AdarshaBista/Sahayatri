@@ -19,16 +19,16 @@ class SheetHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (onClose != null) ...[
+        if (onClose != null)
           GestureDetector(
             onTap: onClose,
-            child: const Icon(Icons.keyboard_backspace),
+            child: const Padding(
+              padding: EdgeInsets.only(bottom: 8.0, right: 8.0),
+              child: Icon(Icons.keyboard_backspace),
+            ),
           ),
-          const SizedBox(height: 10.0),
-        ],
         Header(
           title: title,
-          padding: 0.0,
           fontSize: 20.0,
         ),
         if (showDivider) const Divider(height: 20.0),

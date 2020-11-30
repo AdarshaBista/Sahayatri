@@ -8,15 +8,12 @@ import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class SearchBox extends StatelessWidget {
   final String hintText;
-  final double elevation;
   final Function(String) onChanged;
 
   const SearchBox({
     this.hintText = 'Search',
-    this.elevation = 4.0,
     @required this.onChanged,
   })  : assert(hintText != null),
-        assert(elevation != null),
         assert(onChanged != null);
 
   @override
@@ -24,20 +21,19 @@ class SearchBox extends StatelessWidget {
     return SlideAnimator(
       begin: const Offset(0.0, -0.2),
       child: FadeAnimator(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SizedBox(
           width: double.infinity,
-          height: 44.0,
+          height: 42.0,
           child: ElevatedCard(
-            elevation: elevation + 2.0,
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Center(
               child: TextField(
                 onChanged: onChanged,
                 style: context.t.headline5,
                 decoration: InputDecoration(
-                  fillColor: Colors.transparent,
-                  border: InputBorder.none,
                   hintText: hintText,
+                  border: InputBorder.none,
+                  fillColor: Colors.transparent,
                   prefixIcon: ScaleAnimator(
                     child: Icon(
                       Icons.search,

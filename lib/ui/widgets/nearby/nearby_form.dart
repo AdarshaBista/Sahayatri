@@ -9,7 +9,7 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
@@ -47,13 +47,10 @@ class NearbyForm extends StatelessWidget {
           ? const BouncingScrollPhysics()
           : const NeverScrollableScrollPhysics(),
       children: [
-        isOnSettings
-            ? SheetHeader(
-                title: 'Nearby',
-                showDivider: false,
-                onClose: Navigator.of(context).pop,
-              )
-            : Text('Nearby', style: context.t.headline4.bold),
+        const Header(
+          title: 'Nearby',
+          fontSize: 20.0,
+        ),
         const SizedBox(height: 6.0),
         Text(
           'Stay connected with your friends and get notified when someone is disconnected.',

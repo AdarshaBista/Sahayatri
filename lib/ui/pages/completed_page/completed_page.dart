@@ -32,7 +32,7 @@ class CompletedPage extends StatelessWidget {
       children: const [
         Header(
           title: 'Completed',
-          padding: 12.0,
+          padding: 16.0,
           fontSize: 32.0,
         ),
         SizedBox(height: 50.0),

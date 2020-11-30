@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
 
   const Header({
     @required this.title,
-    this.padding = 20.0,
+    this.padding = 0.0,
     this.fontSize = 25.0,
     this.slideDirection = SlideDirection.left,
   })  : assert(title != null),
