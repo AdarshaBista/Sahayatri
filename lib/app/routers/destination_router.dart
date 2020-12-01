@@ -39,7 +39,6 @@ import 'package:sahayatri/ui/pages/tracker_page/tracker_page.dart';
 import 'package:sahayatri/ui/pages/itinerary_page/itinerary_page.dart';
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 import 'package:sahayatri/ui/pages/destination_page/destination_page.dart';
-import 'package:sahayatri/ui/pages/lodge_rooms_page/lodge_rooms_page.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/itinerary_form_page.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/destination_detail_page.dart';
 
@@ -97,10 +96,6 @@ class DestinationRouter {
             child: const LodgePage(),
           ),
         );
-        break;
-
-      case Routes.lodgeRoomsPageRoute:
-        _page = const LodgeRoomsPage();
         break;
 
       case Routes.itineraryPageRoute:

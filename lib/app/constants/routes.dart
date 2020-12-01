@@ -8,7 +8,6 @@ class Routes {
   static const String trackerPageRoute = '/tracker';
   static const String photoViewPageRoute = '/photos';
   static const String itineraryPageRoute = '/itinerary';
-  static const String lodgeRoomsPageRoute = '/lodge_rooms';
   static const String destinationPageRoute = '/destination';
   static const String itineraryFormPageRoute = '/itinerary_form';
   static const String destinationDetailPageRoute = '/destination_detail';

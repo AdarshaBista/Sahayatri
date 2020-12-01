@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 
 class HeaderTile extends StatelessWidget {
@@ -19,14 +15,7 @@ class HeaderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildRating(context),
-          const SizedBox(height: 8.0),
-          _buildViewRoomsButton(context),
-        ],
-      ),
+      child: _buildRating(context),
     );
   }
 
@@ -45,15 +34,6 @@ class HeaderTile extends StatelessWidget {
           style: context.t.headline5,
         ),
       ],
-    );
-  }
-
-  Widget _buildViewRoomsButton(BuildContext context) {
-    return CustomButton(
-      label: 'View Rooms',
-      icon: Icons.hotel_outlined,
-      onTap: () =>
-          context.read<DestinationNavService>().pushNamed(Routes.lodgeRoomsPageRoute),
     );
   }
 }

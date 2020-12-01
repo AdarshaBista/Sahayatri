@@ -38,7 +38,7 @@ class LodgePage extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: [
             const HeaderTile(),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 16.0),
             const FacilitiesList(),
             const SizedBox(height: 16.0),
             const ContactList(),

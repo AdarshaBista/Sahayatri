@@ -29,7 +29,11 @@ class ItineraryFormPage extends StatelessWidget {
             return [
               CollapsibleAppbar(
                 title: 'Create an itinerary',
-                onBack: () => _handleBackButton(context),
+                onBack: () async {
+                  if (await _handleBackButton(context)) {
+                    Navigator.of(context).pop();
+                  }
+                },
               ),
             ];
           },
