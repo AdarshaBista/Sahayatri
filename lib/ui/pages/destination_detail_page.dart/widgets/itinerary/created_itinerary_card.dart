@@ -32,12 +32,9 @@ class CreatedItineraryCard extends StatelessWidget {
   }
 
   Widget _buildItineraryCard(Itinerary itinerary) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: ItineraryCard(
-        deletable: true,
-        itinerary: itinerary,
-      ),
+    return ItineraryCard(
+      deletable: true,
+      itinerary: itinerary,
     );
   }
 

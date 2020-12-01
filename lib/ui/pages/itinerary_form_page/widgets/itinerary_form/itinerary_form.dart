@@ -23,9 +23,7 @@ class ItineraryForm extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(bottom: 64.0),
           children: [
-            const Header(
-              title: 'Create an Itinerary',
-            ),
+            const Header(title: 'Create an Itinerary'),
             const SizedBox(height: 16.0),
             _buildNameField(state.name, context),
             const SizedBox(height: 16.0),

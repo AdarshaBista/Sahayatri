@@ -97,6 +97,7 @@ class ItinerariesList extends StatelessWidget {
           },
         ),
         const Divider(height: 16.0),
+        const SizedBox(height: 8.0),
         const CreatedItineraryCard(),
       ],
     );

@@ -14,6 +14,7 @@ import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
@@ -31,13 +32,11 @@ class DestinationPage extends StatelessWidget {
     return Scaffold(
       appBar: CurvedAppbar(
         title: destination.name,
-        actions: [
-          IconButton(
-            splashRadius: 20.0,
-            icon: const Icon(Icons.close),
-            onPressed: () => context.read<RootNavService>().pop(),
-          ),
-        ],
+        leading: IconButton(
+          splashRadius: 20.0,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.read<RootNavService>().pop(),
+        ),
       ),
       body: _buildList(context, destination),
     );
@@ -48,10 +47,7 @@ class DestinationPage extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
-        Hero(
-          tag: destination.id,
-          child: Carousel(imageUrls: destination.imageUrls),
-        ),
+        Carousel(imageUrls: destination.imageUrls),
         const SizedBox(height: 16.0),
         const HeaderTile(),
         const SizedBox(height: 8.0),

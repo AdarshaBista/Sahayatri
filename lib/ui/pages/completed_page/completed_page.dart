@@ -30,6 +30,7 @@ class CompletedPage extends StatelessWidget {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: const [
+        SizedBox(height: 12.0),
         Header(
           title: 'Completed',
           padding: 16.0,

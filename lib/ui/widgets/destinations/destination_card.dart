@@ -42,18 +42,15 @@ class DestinationCard extends StatelessWidget {
                 .read<RootNavService>()
                 .pushNamed(Routes.destinationPageRoute, arguments: destination);
           },
-          child: Hero(
-            tag: destination.id,
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 20.0),
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  _buildBackground(),
-                  _buildDetails(),
-                  if (deletable) _buildDeleteIcon(context),
-                ],
-              ),
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 20.0),
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                _buildBackground(),
+                _buildDetails(),
+                if (deletable) _buildDeleteIcon(context),
+              ],
             ),
           ),
         ),
