@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -21,25 +21,39 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.cardColor,
-      appBar: CurvedAppbar(
-        title: context.watch<WeatherCubit>().title,
+      appBar: AppBar(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Header(
+            padding: 20.0,
+            title: context.watch<WeatherCubit>().title,
+          ),
+          const SizedBox(height: 4.0),
+          Expanded(
+            child: _buildWeatherState(),
+          ),
+        ],
       ),
-      body: BlocBuilder<WeatherCubit, WeatherState>(
-        builder: (context, state) {
-          if (state is WeatherLoading) {
-            return const BusyIndicator(imageUrl: Images.weatherLoading);
-          } else if (state is WeatherSuccess) {
-            return WeatherTabView(forecasts: state.forecasts);
-          } else if (state is WeatherError) {
-            return ErrorIndicator(
-              message: state.message,
-              imageUrl: Images.weatherError,
-            );
-          } else {
-            return const EmptyIndicator();
-          }
-        },
-      ),
+    );
+  }
+
+  Widget _buildWeatherState() {
+    return BlocBuilder<WeatherCubit, WeatherState>(
+      builder: (context, state) {
+        if (state is WeatherLoading) {
+          return const BusyIndicator(imageUrl: Images.weatherLoading);
+        } else if (state is WeatherSuccess) {
+          return WeatherTabView(forecasts: state.forecasts);
+        } else if (state is WeatherError) {
+          return ErrorIndicator(
+            message: state.message,
+            imageUrl: Images.weatherError,
+          );
+        } else {
+          return const EmptyIndicator();
+        }
+      },
     );
   }
 }

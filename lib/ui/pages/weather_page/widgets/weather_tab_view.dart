@@ -40,15 +40,11 @@ class _WeatherTabViewState extends State<WeatherTabView>
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: CurveBackground(),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildTabView(),
-          _buildTabBar(),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildTabView(),
+        _buildTabBar(),
+      ],
     );
   }
 
@@ -74,25 +70,31 @@ class _WeatherTabViewState extends State<WeatherTabView>
 
   Widget _buildTabBar() {
     return Expanded(
-      flex: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          physics: const BouncingScrollPhysics(),
-          indicator: const BoxDecoration(color: Colors.transparent),
-          tabs: [
-            for (int i = 0; i < widget.forecasts.length; ++i)
-              SlideAnimator(
-                begin: Offset(0.0, 0.4 + i * 0.2),
-                child: WeatherTab(
-                  isToday: i == 0,
-                  weather: widget.forecasts[i],
-                  color: _tabController.index == i ? AppColors.primary : AppColors.light,
-                ),
-              )
-          ],
+      flex: 2,
+      child: CustomPaint(
+        painter: const CurveBackground(),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              physics: const BouncingScrollPhysics(),
+              indicator: const BoxDecoration(color: Colors.transparent),
+              tabs: [
+                for (int i = 0; i < widget.forecasts.length; ++i)
+                  SlideAnimator(
+                    begin: Offset(0.0, 0.4 + i * 0.2),
+                    child: WeatherTab(
+                      isToday: i == 0,
+                      weather: widget.forecasts[i],
+                      color:
+                          _tabController.index == i ? AppColors.primary : AppColors.light,
+                    ),
+                  )
+              ],
+            ),
+          ),
         ),
       ),
     );
