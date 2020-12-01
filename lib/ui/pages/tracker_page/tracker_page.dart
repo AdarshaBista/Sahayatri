@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
+import 'package:sahayatri/ui/widgets/appbars/empty_appbar.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_panel.dart';
@@ -22,9 +23,9 @@ class TrackerPage extends StatelessWidget {
     return BlocBuilder<TrackerCubit, TrackerState>(
       builder: (context, state) {
         if (state is TrackerLoading) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: const BusyIndicator(
+          return const Scaffold(
+            appBar: EmptyAppbar(),
+            body: BusyIndicator(
               padding: 32.0,
               imageUrl: Images.trackerLoading,
             ),

@@ -16,6 +16,7 @@ class ApiConfig {
 }
 
 class UiConfig {
+  static const double buttonHeight = 40.0;
   static const int animatorDuration = 500;
   static const double trackerPanelHeight = 90.0;
   static const double profileHeaderHeight = 290.0;

@@ -30,6 +30,7 @@ class StatTile extends StatelessWidget {
         leading: Icon(
           icon,
           size: 20.0,
+          color: context.c.onSurface,
         ),
         trailing: Text(
           stat,

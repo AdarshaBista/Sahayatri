@@ -7,6 +7,7 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class TrackerSetup extends StatelessWidget {
   const TrackerSetup();
@@ -14,13 +15,14 @@ class TrackerSetup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Review your settings', style: context.t.headline4.serif),
-      ),
       floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: const SettingsList(),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, _) {
+          return [const CollapsibleAppbar(title: 'Review your settings')];
+        },
+        body: const SettingsList(),
+      ),
     );
   }
 

@@ -26,7 +26,12 @@ class ItineraryFormPage extends StatelessWidget {
         floatingActionButton: _buildFab(context),
         body: NestedScrollView(
           headerSliverBuilder: (context, _) {
-            return [const CollapsibleAppbar(title: 'Create an itinerary')];
+            return [
+              CollapsibleAppbar(
+                title: 'Create an itinerary',
+                onBack: () => _handleBackButton(context),
+              ),
+            ];
           },
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),

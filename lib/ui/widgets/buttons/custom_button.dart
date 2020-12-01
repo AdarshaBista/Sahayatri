@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 
@@ -51,7 +53,7 @@ class CustomButton extends StatelessWidget {
     final bgColor = backgroundColor ?? AppColors.primaryLight;
 
     return Container(
-      height: 36.0,
+      height: UiConfig.buttonHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4.0),
         color: outline ? Colors.transparent : bgColor,

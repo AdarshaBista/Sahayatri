@@ -24,7 +24,7 @@ class SheetHeader extends StatelessWidget {
             onTap: onClose,
             child: const Padding(
               padding: EdgeInsets.only(bottom: 8.0, right: 8.0),
-              child: Icon(Icons.keyboard_backspace),
+              child: Icon(Icons.keyboard_backspace, size: 20.0),
             ),
           ),
         Header(

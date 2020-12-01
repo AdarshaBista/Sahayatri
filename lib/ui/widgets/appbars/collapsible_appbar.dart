@@ -8,6 +8,8 @@ class CollapsibleAppbar extends StatelessWidget {
   final String title;
   final double height;
   final double offset;
+  final Widget leading;
+  final Widget trailing;
   final Widget background;
   final double leftPadding;
   final VoidCallback onBack;
@@ -16,8 +18,10 @@ class CollapsibleAppbar extends StatelessWidget {
     @required this.title,
     this.onBack,
     this.offset,
+    this.leading,
+    this.trailing,
     this.background,
-    this.height = 110.0,
+    this.height = 100.0,
     this.leftPadding = 20.0,
   })  : assert(title != null),
         assert(height != null),
@@ -30,15 +34,18 @@ class CollapsibleAppbar extends StatelessWidget {
       elevation: 6.0,
       expandedHeight: height,
       automaticallyImplyLeading: false,
-      leading: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: CloseIcon(
-          onTap: onBack,
-          iconData: Icons.arrow_back,
-          iconColor: context.c.onBackground,
-          backgroundColor: context.c.background,
-        ),
-      ),
+      actions: trailing == null ? [] : [trailing],
+      leading: leading ??
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: CloseIcon(
+              size: 20.0,
+              onTap: onBack,
+              iconData: Icons.keyboard_backspace,
+              iconColor: context.c.onBackground,
+              backgroundColor: context.c.background,
+            ),
+          ),
       flexibleSpace: CustomFlexibleSpace(
         title: title,
         offset: offset,

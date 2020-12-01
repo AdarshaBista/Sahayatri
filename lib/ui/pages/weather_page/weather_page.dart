@@ -9,6 +9,7 @@ import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/appbars/empty_appbar.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -21,7 +22,7 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.cardColor,
-      appBar: AppBar(),
+      appBar: const EmptyAppbar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

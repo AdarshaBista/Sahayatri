@@ -25,7 +25,7 @@ class DestinationsHeader extends StatelessWidget implements PreferredSizeWidget 
             fontSize: 32.0,
             padding: 16.0,
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 12.0),
           BlocBuilder<DestinationsCubit, DestinationsState>(
             builder: (context, state) {
               if (state is DestinationsLoaded) {
@@ -45,5 +45,5 @@ class DestinationsHeader extends StatelessWidget implements PreferredSizeWidget 
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(101.0);
+  Size get preferredSize => const Size.fromHeight(112.0);
 }

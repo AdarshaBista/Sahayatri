@@ -43,7 +43,7 @@ class DestinationCard extends StatelessWidget {
                 .pushNamed(Routes.destinationPageRoute, arguments: destination);
           },
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 20.0),
+            margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: [

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
@@ -69,8 +71,8 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
       builder: (context, state) {
         if (state.isLoading) {
           return const SizedBox(
-            width: 40.0,
-            height: 40.0,
+            width: UiConfig.buttonHeight,
+            height: UiConfig.buttonHeight,
             child: CircularBusyIndicator(),
           );
         }
