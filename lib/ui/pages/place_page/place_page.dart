@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/common/collapsible_carousel.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_actions.dart';

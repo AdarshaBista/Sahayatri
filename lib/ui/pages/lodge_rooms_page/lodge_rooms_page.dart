@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/appbars/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 

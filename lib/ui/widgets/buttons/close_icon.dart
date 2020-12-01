@@ -7,9 +7,11 @@ class CloseIcon extends StatelessWidget {
   final double size;
   final Color iconColor;
   final IconData iconData;
+  final VoidCallback onTap;
   final Color backgroundColor;
 
   const CloseIcon({
+    this.onTap,
     this.size = 18.0,
     this.iconData = Icons.close,
     this.iconColor = AppColors.light,
@@ -22,7 +24,7 @@ class CloseIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pop(),
+      onTap: onTap ?? () => Navigator.of(context).pop(),
       child: ScaleAnimator(
         child: Container(
           padding: const EdgeInsets.all(8.0),

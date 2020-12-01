@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,7 @@ import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/common/collapsible_carousel.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/header_tile.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/contacts_list.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/facalities_list.dart';
@@ -58,7 +57,7 @@ class LodgePage extends StatelessWidget {
         NestedTabData(label: 'Reviews', icon: Icons.star_outline),
       ],
       children: [
-        PhotoGallery(imageUrls: context.watch<Destination>().imageUrls),
+        PhotoGallery(imageUrls: context.watch<Lodge>().imageUrls),
         ReviewList(reviewCubit: context.watch<ReviewCubit>() as LodgeReviewCubit),
       ],
     );

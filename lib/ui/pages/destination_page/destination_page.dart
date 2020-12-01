@@ -9,12 +9,10 @@ import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cub
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
-import 'package:sahayatri/ui/widgets/common/carousel.dart';
-import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
@@ -30,25 +28,27 @@ class DestinationPage extends StatelessWidget {
     final destination = context.watch<Destination>();
 
     return Scaffold(
-      appBar: CurvedAppbar(
-        title: destination.name,
-        leading: IconButton(
-          splashRadius: 20.0,
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.read<RootNavService>().pop(),
-        ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, _) {
+          return [
+            CollapsibleCarousel(
+              title: destination.name,
+              imageUrls: destination.imageUrls,
+              onBack: () => context.read<RootNavService>().pop(),
+            ),
+          ];
+        },
+        body: _buildList(context, destination),
       ),
-      body: _buildList(context, destination),
     );
   }
 
   Widget _buildList(BuildContext context, Destination destination) {
     return ListView(
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
       children: [
-        Carousel(imageUrls: destination.imageUrls),
-        const SizedBox(height: 16.0),
         const HeaderTile(),
         const SizedBox(height: 8.0),
         _buildDescription(context, destination),

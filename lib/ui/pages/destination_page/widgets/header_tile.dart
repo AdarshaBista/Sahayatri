@@ -21,7 +21,7 @@ class HeaderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: [
           _buildRating(context),
@@ -29,6 +29,7 @@ class HeaderTile extends StatelessWidget {
           const DownloadButton(),
           const SizedBox(width: 12.0),
           _buildWeatherButton(context),
+          const SizedBox(width: 4.0),
         ],
       ),
     );
@@ -45,9 +46,12 @@ class HeaderTile extends StatelessWidget {
           size: 20.0,
         ),
         const SizedBox(height: 4.0),
-        Text(
-          destination.rating.toString(),
-          style: context.t.headline3.bold,
+        Padding(
+          padding: const EdgeInsets.only(left: 4.0),
+          child: Text(
+            destination.rating.toString(),
+            style: context.t.headline3.bold,
+          ),
         ),
       ],
     );

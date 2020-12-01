@@ -73,9 +73,13 @@ class CustomButton extends StatelessWidget {
               color: effectiveColor,
             ),
             const SizedBox(width: 8.0),
-            Text(
-              label,
-              style: AppTextStyles.headline5.withColor(effectiveColor),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.headline5.withColor(effectiveColor),
+              ),
             ),
             const SizedBox(width: 12.0),
           ],

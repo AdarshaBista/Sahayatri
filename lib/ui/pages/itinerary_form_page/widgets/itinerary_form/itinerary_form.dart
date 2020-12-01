@@ -7,7 +7,6 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/duration_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/checkpoint_list.dart';
@@ -23,8 +22,6 @@ class ItineraryForm extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(bottom: 64.0),
           children: [
-            const Header(title: 'Create an Itinerary'),
-            const SizedBox(height: 16.0),
             _buildNameField(state.name, context),
             const SizedBox(height: 16.0),
             _buildDurationField(state, context),

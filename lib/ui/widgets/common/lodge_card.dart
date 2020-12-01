@@ -63,6 +63,11 @@ class LodgeCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          StarRatingBar(
+            rating: lodge.rating,
+            size: 12.0,
+          ),
+          Divider(height: 8.0, color: AppColors.lightFaded),
           Flexible(
             child: Text(
               lodge.name,
@@ -70,11 +75,6 @@ class LodgeCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.headline5.bold.light,
             ),
-          ),
-          Divider(height: 12.0, color: AppColors.lightAccent.withOpacity(0.5)),
-          StarRatingBar(
-            rating: lodge.rating,
-            size: 14.0,
           ),
         ],
       ),

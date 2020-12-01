@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/curved_appbar.dart';
+import 'package:sahayatri/ui/widgets/appbars/curved_appbar.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_icon.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/tracker_fab.dart';
