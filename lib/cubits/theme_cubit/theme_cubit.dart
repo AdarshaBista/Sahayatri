@@ -6,12 +6,19 @@ class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit() : super(ThemeMode.dark);
 
   bool get isDark => state == ThemeMode.dark;
+  String get themeStr => state.toString().split('.').last;
 
-  void changeTheme(bool isDark) {
-    if (isDark) {
+  void changeTheme(ThemeMode mode) {
+    if (state != mode) emit(mode);
+  }
+
+  void init(String theme) {
+    if (theme == 'dark') {
       emit(ThemeMode.dark);
-    } else {
+    } else if (theme == 'light') {
       emit(ThemeMode.light);
+    } else {
+      emit(ThemeMode.system);
     }
   }
 }

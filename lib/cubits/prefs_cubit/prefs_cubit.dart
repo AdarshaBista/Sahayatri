@@ -39,8 +39,8 @@ class PrefsCubit extends Cubit<PrefsState> {
     _updatePrefs(newPrefs);
   }
 
-  void saveTheme(bool isDark) {
-    final newPrefs = (state as PrefsLoaded).prefs.copyWith(isDarkTheme: isDark);
+  void saveTheme(String theme) {
+    final newPrefs = (state as PrefsLoaded).prefs.copyWith(theme: theme);
     _updatePrefs(newPrefs);
   }
 

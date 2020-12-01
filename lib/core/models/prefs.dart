@@ -17,38 +17,38 @@ class Prefs {
   final String deviceName;
 
   @HiveField(3)
-  final bool isDarkTheme;
+  final String theme;
 
   const Prefs({
     this.contact = '',
     this.deviceName = '',
-    this.isDarkTheme = true,
+    this.theme = 'system',
     this.mapStyle = MapStyles.outdoors,
-  })  : assert(contact != null),
+  })  : assert(theme != null),
+        assert(contact != null),
         assert(mapStyle != null),
-        assert(deviceName != null),
-        assert(isDarkTheme != null);
+        assert(deviceName != null);
 
   Prefs copyWith({
+    String theme,
     String contact,
     String mapStyle,
-    bool isDarkTheme,
     String deviceName,
   }) {
     return Prefs(
+      theme: theme ?? this.theme,
       contact: contact ?? this.contact,
       mapStyle: mapStyle ?? this.mapStyle,
       deviceName: deviceName ?? this.deviceName,
-      isDarkTheme: isDarkTheme ?? this.isDarkTheme,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'theme': theme,
       'contact': contact,
       'mapStyle': mapStyle,
       'deviceName': deviceName,
-      'isDarkTheme': isDarkTheme,
     };
   }
 
@@ -56,16 +56,16 @@ class Prefs {
     if (map == null) return null;
 
     return Prefs(
+      theme: map['theme'] as String,
       contact: map['contact'] as String,
       mapStyle: map['mapLayer'] as String,
       deviceName: map['deviceName'] as String,
-      isDarkTheme: map['isDarkTheme'] as bool,
     );
   }
 
   @override
   String toString() =>
-      'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName, isDarkTheme: $isDarkTheme)';
+      'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName, theme: $theme)';
 
   @override
   bool operator ==(Object o) {
@@ -75,10 +75,10 @@ class Prefs {
         o.contact == contact &&
         o.mapStyle == mapStyle &&
         o.deviceName == deviceName &&
-        o.isDarkTheme == isDarkTheme;
+        o.theme == theme;
   }
 
   @override
   int get hashCode =>
-      contact.hashCode ^ mapStyle.hashCode ^ deviceName.hashCode ^ isDarkTheme.hashCode;
+      contact.hashCode ^ mapStyle.hashCode ^ deviceName.hashCode ^ theme.hashCode;
 }

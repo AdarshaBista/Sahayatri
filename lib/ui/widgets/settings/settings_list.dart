@@ -59,7 +59,7 @@ class SettingsList extends StatelessWidget {
             onTap: () => ThemeSheet(
               onSelect: (value) {
                 context.read<ThemeCubit>().changeTheme(value);
-                context.read<PrefsCubit>().saveTheme(value);
+                context.read<PrefsCubit>().saveTheme(context.read<ThemeCubit>().themeStr);
               },
             ).openModalBottomSheet(context),
           ),

@@ -6,7 +6,7 @@ import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 
 class ThemeSheet extends StatelessWidget {
-  final void Function(bool) onSelect;
+  final void Function(ThemeMode) onSelect;
 
   const ThemeSheet({
     @required this.onSelect,
@@ -34,7 +34,7 @@ class ThemeSheet extends StatelessWidget {
                 icon: CommunityMaterialIcons.weather_sunny,
                 onTap: () {
                   Navigator.of(context).pop();
-                  onSelect(false);
+                  onSelect(ThemeMode.light);
                 },
               ),
               const SizedBox(width: 12.0),
@@ -45,7 +45,16 @@ class ThemeSheet extends StatelessWidget {
                 icon: CommunityMaterialIcons.weather_night,
                 onTap: () {
                   Navigator.of(context).pop();
-                  onSelect(true);
+                  onSelect(ThemeMode.dark);
+                },
+              ),
+              const SizedBox(width: 12.0),
+              SquareButton(
+                label: 'SYSTEM',
+                icon: CommunityMaterialIcons.theme_light_dark,
+                onTap: () {
+                  Navigator.of(context).pop();
+                  onSelect(ThemeMode.system);
                 },
               ),
             ],

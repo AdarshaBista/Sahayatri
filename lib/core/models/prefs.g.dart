@@ -18,9 +18,9 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
     };
     return Prefs(
       contact: fields[0] as String,
-      mapStyle: fields[1] as String,
       deviceName: fields[2] as String,
-      isDarkTheme: fields[3] as bool,
+      theme: fields[3] as String,
+      mapStyle: fields[1] as String,
     );
   }
 
@@ -35,7 +35,7 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
       ..writeByte(2)
       ..write(obj.deviceName)
       ..writeByte(3)
-      ..write(obj.isDarkTheme);
+      ..write(obj.theme);
   }
 
   @override

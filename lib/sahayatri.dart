@@ -151,8 +151,8 @@ class Sahayatri extends StatelessWidget {
   }
 
   Future<bool> _init(BuildContext context) {
-    final isDark = context.watch<PrefsCubit>().prefs.isDarkTheme;
-    context.watch<ThemeCubit>().changeTheme(isDark);
+    final theme = context.watch<PrefsCubit>().prefs.theme;
+    context.watch<ThemeCubit>().init(theme);
     return context.watch<UserCubit>().isLoggedIn();
   }
 }
