@@ -67,7 +67,6 @@ class LocationService {
     }
   }
 
-  // TODO: Remove this
   Future<UserLocation> getMockLocation(Coord fakeStartingPoint) async {
     await Future.delayed(const Duration(milliseconds: 200));
     return UserLocation(
@@ -80,7 +79,6 @@ class LocationService {
     );
   }
 
-  // TODO: Remove this
   Stream<UserLocation> getMockLocationStream(List<Coord> route) {
     final period = Random().nextInt(500) + 500;
     double _randomOffset(double start, double end) {

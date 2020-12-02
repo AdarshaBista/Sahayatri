@@ -63,21 +63,6 @@ class DestinationDrawer extends StatelessWidget {
                 );
           },
         ),
-        DrawerItem(
-          icon: CommunityMaterialIcons.book_open_outline,
-          label: 'Guide Book',
-          onTap: () {},
-        ),
-        DrawerItem(
-          icon: Icons.medical_services_outlined,
-          label: 'Safety',
-          onTap: () {},
-        ),
-        DrawerItem(
-          icon: Icons.shopping_bag_outlined,
-          label: 'Gear',
-          onTap: () {},
-        ),
       ],
     );
   }

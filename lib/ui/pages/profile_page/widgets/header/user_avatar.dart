@@ -31,7 +31,7 @@ class UserAvatar extends StatelessWidget {
         child: CircleAvatar(
           radius: radius + 2.0,
           backgroundColor:
-              user.imageUrl == null ? AppColors.darkFaded : context.c.background,
+              user.imageUrl == null ? context.c.surface : context.c.background,
           child: CircleAvatar(
             radius: radius,
             backgroundColor: AppColors.primaryLight,
