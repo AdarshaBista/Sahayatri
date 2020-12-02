@@ -45,7 +45,7 @@ class ReviewList extends StatelessWidget {
       icon: CommunityMaterialIcons.pencil_outline,
       onTap: () => ReviewForm(
         onSubmit: (rating, text) => _postReview(context, rating, text),
-      ).openModalBottomSheet(context, isDismissible: false),
+      ).openModalBottomSheet(context, enableDrag: false),
     );
   }
 

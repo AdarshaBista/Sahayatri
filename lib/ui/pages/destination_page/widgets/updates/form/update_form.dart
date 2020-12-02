@@ -32,39 +32,44 @@ class UpdateForm extends StatelessWidget {
         curve: Curves.decelerate,
         padding: MediaQuery.of(context).viewInsets,
         duration: const Duration(milliseconds: 200),
-        child: Form(
-          key: formKey,
-          child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(20.0),
-            children: [
-              _buildHeader(),
-              const TagsField(),
-              const SizedBox(height: 16.0),
-              const ImagesField(),
-              const SizedBox(height: 12.0),
-              const LocationField(),
-              const SizedBox(height: 12.0),
-              const UpdateField(),
-              const SizedBox(height: 4.0),
-              _buildMessage(),
-              const SizedBox(height: 4.0),
-              _buildSubmitButton(),
-            ],
+        child: Builder(
+          builder: (context) => WillPopScope(
+            onWillPop: () => _handleBackButton(context),
+            child: Form(
+              key: formKey,
+              child: ListView(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(20.0),
+                children: [
+                  _buildHeader(context),
+                  const TagsField(),
+                  const SizedBox(height: 16.0),
+                  const ImagesField(),
+                  const SizedBox(height: 12.0),
+                  const LocationField(),
+                  const SizedBox(height: 12.0),
+                  const UpdateField(),
+                  const SizedBox(height: 4.0),
+                  _buildMessage(),
+                  const SizedBox(height: 4.0),
+                  _buildSubmitButton(),
+                ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildHeader() {
-    return Builder(
-      builder: (context) {
-        return SheetHeader(
-          title: 'Post an update',
-          onClose: () => _handleBackButton(context),
-        );
+  Widget _buildHeader(BuildContext context) {
+    return SheetHeader(
+      title: 'Post an update',
+      onClose: () async {
+        if (await _handleBackButton(context)) {
+          Navigator.of(context).pop();
+        }
       },
     );
   }
@@ -105,11 +110,11 @@ class UpdateForm extends StatelessWidget {
     );
   }
 
-  void _handleBackButton(BuildContext context) {
+  Future<bool> _handleBackButton(BuildContext context) async {
     if (context.read<DestinationUpdateFormCubit>().isDirty) {
       const UnsavedDialog().openDialog(context);
-      return;
+      return Future.value(false);
     }
-    Navigator.of(context).pop();
+    return Future.value(true);
   }
 }

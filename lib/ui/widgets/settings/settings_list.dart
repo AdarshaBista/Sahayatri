@@ -54,7 +54,7 @@ class SettingsList extends StatelessWidget {
           const SizedBox(height: 12.0),
           SettingsCard(
             title: 'Change Theme',
-            subtitle: 'Toggle between light and dark theme.',
+            subtitle: 'Toggle between light, dark or system theme.',
             icon: CommunityMaterialIcons.theme_light_dark,
             onTap: () => ThemeSheet(
               onSelect: (value) {

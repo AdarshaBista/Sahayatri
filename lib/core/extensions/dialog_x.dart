@@ -23,14 +23,14 @@ extension DialogX on Widget {
     );
   }
 
-  void openModalBottomSheet(BuildContext context, {bool isDismissible = true}) {
+  void openModalBottomSheet(BuildContext context, {bool enableDrag = true}) {
     showModalBottomSheet(
       context: context,
       elevation: 12.0,
+      isDismissible: true,
+      enableDrag: enableDrag,
       useRootNavigator: false,
       isScrollControlled: true,
-      enableDrag: isDismissible,
-      isDismissible: isDismissible,
       barrierColor: AppColors.darkFaded,
       builder: (_) => this,
     );

@@ -38,7 +38,7 @@ class UpdateList extends StatelessWidget {
     return CustomButton(
       label: 'Post an update',
       icon: Icons.post_add_outlined,
-      onTap: () => UpdateForm().openModalBottomSheet(context, isDismissible: false),
+      onTap: () => UpdateForm().openModalBottomSheet(context, enableDrag: false),
     );
   }
 

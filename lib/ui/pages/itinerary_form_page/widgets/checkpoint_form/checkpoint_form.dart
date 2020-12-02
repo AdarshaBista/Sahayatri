@@ -38,27 +38,34 @@ class CheckpointForm extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         child: BlocBuilder<CheckpointFormCubit, CheckpointFormState>(
           builder: (context, state) {
-            return Form(
-              key: _formKey,
-              child: ListView(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(20.0),
-                children: [
-                  SheetHeader(
-                    onClose: () => _handleBackButton(context),
-                    title: checkpoint == null ? 'Add a checkpoint' : 'Edit checkpoint',
-                  ),
-                  _buildPlaceField(state.place, context),
-                  const SizedBox(height: 16.0),
-                  _buildDateTimeField(state.dateTime, context),
-                  const SizedBox(height: 16.0),
-                  _buildDescriptionField(state.description, context),
-                  const SizedBox(height: 12.0),
-                  _buildSmsToggle(state.notifyContact, context),
-                  const SizedBox(height: 16.0),
-                  _buildSubmitButton(state, context),
-                ],
+            return WillPopScope(
+              onWillPop: () => _handleBackButton(context),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(20.0),
+                  children: [
+                    SheetHeader(
+                      onClose: () async {
+                        if (await _handleBackButton(context)) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      title: checkpoint == null ? 'Add a checkpoint' : 'Edit checkpoint',
+                    ),
+                    _buildPlaceField(state.place, context),
+                    const SizedBox(height: 16.0),
+                    _buildDateTimeField(state.dateTime, context),
+                    const SizedBox(height: 16.0),
+                    _buildDescriptionField(state.description, context),
+                    const SizedBox(height: 12.0),
+                    _buildSmsToggle(state.notifyContact, context),
+                    const SizedBox(height: 16.0),
+                    _buildSubmitButton(state, context),
+                  ],
+                ),
               ),
             );
           },
@@ -144,11 +151,11 @@ class CheckpointForm extends StatelessWidget {
     );
   }
 
-  void _handleBackButton(BuildContext context) {
+  Future<bool> _handleBackButton(BuildContext context) async {
     if (context.read<CheckpointFormCubit>().isDirty) {
       const UnsavedDialog().openDialog(context);
-      return;
+      return Future.value(false);
     }
-    Navigator.of(context).pop();
+    return Future.value(true);
   }
 }

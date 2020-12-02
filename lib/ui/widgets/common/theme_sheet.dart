@@ -28,6 +28,15 @@ class ThemeSheet extends StatelessWidget {
           Row(
             children: [
               SquareButton(
+                label: 'SYSTEM',
+                icon: CommunityMaterialIcons.theme_light_dark,
+                onTap: () {
+                  Navigator.of(context).pop();
+                  onSelect(ThemeMode.system);
+                },
+              ),
+              const SizedBox(width: 12.0),
+              SquareButton(
                 label: 'LIGHT',
                 color: AppColors.dark,
                 backgroundColor: AppColors.lightAccent,
@@ -46,15 +55,6 @@ class ThemeSheet extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   onSelect(ThemeMode.dark);
-                },
-              ),
-              const SizedBox(width: 12.0),
-              SquareButton(
-                label: 'SYSTEM',
-                icon: CommunityMaterialIcons.theme_light_dark,
-                onTap: () {
-                  Navigator.of(context).pop();
-                  onSelect(ThemeMode.system);
                 },
               ),
             ],

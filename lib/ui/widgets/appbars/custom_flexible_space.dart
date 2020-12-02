@@ -88,18 +88,17 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
         final opacity = settings.toolbarOpacity;
         if (opacity > 0.0) {
           final width = MediaQuery.of(context).size.width;
-          const bottomPadding = 18.0;
 
           final startPadding = (width - getTitleWidth()) / 2.0;
           final effectiveStartPadding = math.max(startPadding, 56.0);
 
           final expandedPadding = EdgeInsets.only(
             left: widget.leftPadding,
-            bottom: bottomPadding,
+            bottom: 12.0,
           );
           final collapsedPadding = EdgeInsets.only(
             left: effectiveStartPadding,
-            bottom: bottomPadding,
+            bottom: 18.0,
           );
           final paddingTween = EdgeInsetsTween(
             begin: expandedPadding,

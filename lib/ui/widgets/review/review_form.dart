@@ -31,27 +31,34 @@ class _ReviewFormState extends State<ReviewForm> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      curve: Curves.decelerate,
-      padding: MediaQuery.of(context).viewInsets,
-      duration: const Duration(milliseconds: 200),
-      child: Form(
-        key: formKey,
-        child: ListView(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(20.0),
-          children: [
-            SheetHeader(
-              title: 'Write a review',
-              onClose: () => _handleBackButton(context),
-            ),
-            _buildRatingField(),
-            const SizedBox(height: 16.0),
-            _buildTextField(),
-            const SizedBox(height: 16.0),
-            _buildSubmitButton(context),
-          ],
+    return WillPopScope(
+      onWillPop: () => _handleBackButton(context),
+      child: AnimatedPadding(
+        curve: Curves.decelerate,
+        padding: MediaQuery.of(context).viewInsets,
+        duration: const Duration(milliseconds: 200),
+        child: Form(
+          key: formKey,
+          child: ListView(
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(20.0),
+            children: [
+              SheetHeader(
+                title: 'Write a review',
+                onClose: () async {
+                  if (await _handleBackButton(context)) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+              _buildRatingField(),
+              const SizedBox(height: 16.0),
+              _buildTextField(),
+              const SizedBox(height: 16.0),
+              _buildSubmitButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -133,11 +140,11 @@ class _ReviewFormState extends State<ReviewForm> {
     );
   }
 
-  void _handleBackButton(BuildContext context) {
+  Future<bool> _handleBackButton(BuildContext context) async {
     if (text.isNotEmpty) {
       const UnsavedDialog().openDialog(context);
-      return;
+      return Future.value(false);
     }
-    Navigator.of(context).pop();
+    return Future.value(true);
   }
 }
