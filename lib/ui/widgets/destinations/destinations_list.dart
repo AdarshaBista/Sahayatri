@@ -39,7 +39,9 @@ class DestinationsList extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: destinations.length,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: deletable
+          ? const BouncingScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => SlideAnimator(
         begin: Offset(0.0, 0.2 + index * 0.4),
         child: DestinationCard(

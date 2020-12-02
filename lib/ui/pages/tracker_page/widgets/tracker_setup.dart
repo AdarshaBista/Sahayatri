@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
+import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class TrackerSetup extends StatelessWidget {
@@ -19,9 +19,9 @@ class TrackerSetup extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: NestedScrollView(
         headerSliverBuilder: (context, _) {
-          return [const CollapsibleAppbar(title: 'Review your settings')];
+          return [const CollapsibleAppbar(title: 'Review your tools')];
         },
-        body: const SettingsList(),
+        body: const ToolsList(),
       ),
     );
   }

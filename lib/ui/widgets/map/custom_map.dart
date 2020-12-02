@@ -94,7 +94,7 @@ class _CustomMapState extends State<CustomMap> {
     return Scaffold(
       drawer: const MenuDrawer(),
       drawerEnableOpenDragGesture: false,
-      drawerScrimColor: AppColors.dark.withOpacity(0.8),
+      drawerScrimColor: AppColors.darkFaded,
       body: Stack(
         children: [
           RepaintBoundary(child: _buildMap()),

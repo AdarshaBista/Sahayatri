@@ -7,12 +7,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/widgets/settings/settings_list.dart';
+import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/settings_list.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/downloaded/downloaded_list.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage();
@@ -58,17 +57,17 @@ class ProfilePage extends StatelessWidget {
     return NestedTabView(
       tabs: [
         NestedTabData(
+          label: 'Tools',
+          icon: Icons.handyman_outlined,
+        ),
+        NestedTabData(
           label: 'Settings',
           icon: Icons.settings_outlined,
         ),
-        NestedTabData(
-          label: 'Downloaded',
-          icon: CommunityMaterialIcons.cloud_check_outline,
-        ),
       ],
       children: const [
+        ToolsList(),
         SettingsList(),
-        DownloadedList(),
       ],
     );
   }

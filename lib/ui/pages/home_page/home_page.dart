@@ -10,7 +10,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
-import 'package:sahayatri/ui/pages/completed_page/completed_page.dart';
+import 'package:sahayatri/ui/pages/downloaded_page/downloaded_page.dart';
 import 'package:sahayatri/ui/pages/destinations_page/destinations_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           index: _selectedIndex,
           children: const [
             DestinationsPage(),
-            CompletedPage(),
+            DownloadedPage(),
             ProfilePage(),
           ],
         ),

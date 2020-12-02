@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 
-class SettingsCard extends StatelessWidget {
+class ToolsCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
   final VoidCallback onTap;
 
-  const SettingsCard({
+  const ToolsCard({
     @required this.title,
     @required this.subtitle,
     @required this.icon,
@@ -24,8 +24,7 @@ class SettingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: SlideAnimator(
-        begin: const Offset(0.0, 0.5),
+      child: FadeAnimator(
         child: ElevatedCard(
           padding: const EdgeInsets.all(16.0),
           child: Row(
