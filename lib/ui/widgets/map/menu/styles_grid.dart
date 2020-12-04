@@ -7,115 +7,47 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/widgets/common/toggle_grid.dart';
 
-class StylesGrid extends StatefulWidget {
+class StylesGrid extends StatelessWidget {
   const StylesGrid();
 
   @override
-  StylesGridState createState() => StylesGridState();
-}
-
-class StylesGridState extends State<StylesGrid> {
-  String selectedStyle;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedStyle = context.read<PrefsCubit>().prefs.mapStyle;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Map Style',
-          style: AppTextStyles.headline5.bold.light,
+    return ToggleGrid<String>(
+      title: 'Map Style',
+      iconColor: AppColors.light,
+      backgroundColor: AppColors.darkAccent,
+      titleStyle: AppTextStyles.headline5.bold.light,
+      initialValue: BlocProvider.of<PrefsCubit>(context).prefs.mapStyle,
+      onSelected: (style) => context.read<PrefsCubit>().saveMapLayer(style),
+      items: [
+        ToggleItem(
+          label: 'Dark',
+          value: MapStyles.dark,
+          icon: CommunityMaterialIcons.weather_night,
         ),
-        const SizedBox(height: 12.0),
-        Flexible(child: _buildGrid(context)),
+        ToggleItem(
+          label: 'Light',
+          value: MapStyles.light,
+          icon: CommunityMaterialIcons.weather_sunny,
+        ),
+        ToggleItem(
+          label: 'Streets',
+          value: MapStyles.streets,
+          icon: CommunityMaterialIcons.google_street_view,
+        ),
+        ToggleItem(
+          label: 'Satellite',
+          value: MapStyles.satellite,
+          icon: CommunityMaterialIcons.earth,
+        ),
+        ToggleItem(
+          label: 'Outdoors',
+          value: MapStyles.outdoors,
+          icon: CommunityMaterialIcons.hiking,
+        ),
       ],
     );
   }
-
-  Widget _buildGrid(BuildContext context) {
-    return Wrap(
-      spacing: 12.0,
-      runSpacing: 12.0,
-      children: _MapLayerData.layers.map((l) => _buildLayer(l)).toList(),
-    );
-  }
-
-  Widget _buildLayer(_MapLayerData layer) {
-    final isSelected = selectedStyle == layer.style;
-
-    return GestureDetector(
-      onTap: () {
-        context.read<PrefsCubit>().saveMapLayer(layer.style);
-        setState(() {
-          selectedStyle = layer.style;
-        });
-      },
-      child: SizedBox(
-        width: 72.0,
-        height: 72.0,
-        child: ElevatedCard(
-          color: isSelected ? AppColors.primaryDark : AppColors.light,
-          child: Center(
-            child: ColumnButton(
-              label: layer.title,
-              icon: layer.icon,
-              color: isSelected ? AppColors.light : AppColors.dark,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _MapLayerData {
-  final String title;
-  final String style;
-  final IconData icon;
-
-  const _MapLayerData({
-    @required this.title,
-    @required this.style,
-    @required this.icon,
-  })  : assert(title != null),
-        assert(style != null),
-        assert(icon != null);
-
-  static const List<_MapLayerData> layers = [
-    _MapLayerData(
-      title: 'Dark',
-      style: MapStyles.dark,
-      icon: CommunityMaterialIcons.weather_night,
-    ),
-    _MapLayerData(
-      title: 'Light',
-      style: MapStyles.light,
-      icon: CommunityMaterialIcons.weather_sunny,
-    ),
-    _MapLayerData(
-      title: 'Streets',
-      style: MapStyles.streets,
-      icon: CommunityMaterialIcons.google_street_view,
-    ),
-    _MapLayerData(
-      title: 'Satellite',
-      style: MapStyles.satellite,
-      icon: CommunityMaterialIcons.earth,
-    ),
-    _MapLayerData(
-      title: 'Outdoors',
-      style: MapStyles.outdoors,
-      icon: CommunityMaterialIcons.hiking,
-    ),
-  ];
 }

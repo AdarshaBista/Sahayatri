@@ -10,8 +10,8 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/settings_list.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/preferences_list.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage();
@@ -61,13 +61,13 @@ class ProfilePage extends StatelessWidget {
           icon: Icons.handyman_outlined,
         ),
         NestedTabData(
-          label: 'Settings',
+          label: 'Preferences',
           icon: Icons.settings_outlined,
         ),
       ],
       children: const [
         ToolsList(),
-        SettingsList(),
+        PreferencesList(),
       ],
     );
   }

@@ -6,12 +6,14 @@ import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 class SquareButton extends StatelessWidget {
   final String label;
   final Color color;
+  final double size;
   final IconData icon;
   final VoidCallback onTap;
   final Color backgroundColor;
 
   const SquareButton({
     this.color,
+    this.size = 80.0,
     this.backgroundColor,
     @required this.icon,
     @required this.label,
@@ -25,8 +27,8 @@ class SquareButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 80,
-        height: 80,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryLight,
           borderRadius: BorderRadius.circular(8.0),
