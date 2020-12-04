@@ -22,6 +22,7 @@ import 'package:sahayatri/app/routers/root_router.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/tracker_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
@@ -66,6 +67,7 @@ class Sahayatri extends StatelessWidget {
         RepositoryProvider<SmsService>(
           create: (context) => SmsService(
             prefsDao: context.read<PrefsDao>(),
+            trackerDao: context.read<TrackerDao>(),
             notificationService: context.read<NotificationService>(),
           ),
         ),
@@ -76,6 +78,7 @@ class Sahayatri extends StatelessWidget {
         ),
         RepositoryProvider<TrackerService>(
           create: (context) => TrackerService(
+            trackerDao: context.read<TrackerDao>(),
             locationService: context.read<LocationService>(),
           ),
         ),
@@ -167,6 +170,7 @@ class Sahayatri extends StatelessWidget {
 
   void onAuthenticated(BuildContext context, User user) {
     RepositoryProvider.of<PrefsDao>(context).init(user.id);
+    RepositoryProvider.of<TrackerDao>(context).init(user.id);
     RepositoryProvider.of<ItineraryDao>(context).init(user.id);
     RepositoryProvider.of<DestinationDao>(context).init(user.id);
 

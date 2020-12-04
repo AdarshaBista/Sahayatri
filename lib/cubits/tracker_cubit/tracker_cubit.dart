@@ -84,8 +84,7 @@ class TrackerCubit extends Cubit<TrackerState> {
 
     emit(const TrackerLoading());
     try {
-      final userLocation = await trackerService.getUserLocation(destination.route.first);
-      if (!trackerService.isNearTrail(userLocation.coord, destination.route)) {
+      if (!await trackerService.isNearTrail(destination.route)) {
         emit(const TrackerLocationError());
         return;
       }
@@ -99,7 +98,7 @@ class TrackerCubit extends Cubit<TrackerState> {
   Future<void> startTracking(Destination destination) async {
     emit(const TrackerLoading());
     try {
-      trackerService.start(destination);
+      await trackerService.start(destination);
 
       _trackerUpdateSub?.cancel();
       _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {

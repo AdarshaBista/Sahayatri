@@ -4,6 +4,7 @@ class HiveConfig {
   static const String weatherBoxName = 'weather_box';
   static const String itineraryBoxName = 'itinerary_box';
   static const String destinationBoxName = 'destination_box';
+  static const String trackerDataBoxName = 'tracker_data_box';
 }
 
 class HiveTypeIds {
@@ -19,4 +20,5 @@ class HiveTypeIds {
   static const int place = 9;
   static const int review = 10;
   static const int reviewDetails = 11;
+  static const int trackerData = 12;
 }

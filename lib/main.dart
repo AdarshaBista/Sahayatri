@@ -16,6 +16,7 @@ import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/lodge_facility.dart';
 
@@ -29,6 +30,7 @@ import 'package:sahayatri/core/services/notification_service.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/tracker_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
 import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
@@ -74,6 +76,7 @@ Future<void> initHive() async {
     ..registerAdapter(ItineraryAdapter())
     ..registerAdapter(CheckpointAdapter())
     ..registerAdapter(DestinationAdapter())
+    ..registerAdapter(TrackerDataAdapter())
     ..registerAdapter(ReviewDetailsAdapter())
     ..registerAdapter(LodgeFacilityAdapter());
 }
@@ -103,6 +106,7 @@ class App extends StatelessWidget {
         providers: [
           RepositoryProvider(create: (_) => UserDao()),
           RepositoryProvider(create: (_) => PrefsDao()),
+          RepositoryProvider(create: (_) => TrackerDao()),
           RepositoryProvider(create: (_) => WeatherDao()),
           RepositoryProvider(create: (_) => TtsService()),
           RepositoryProvider(create: (_) => ApiService()),

@@ -99,7 +99,7 @@ class UserCubit extends Cubit<UserState> {
     final user = (state as Authenticated).user;
     try {
       await authService.logout(user);
-      await userDao.delete(user);
+      await userDao.delete();
       emit(const Unauthenticated());
     } on AppError catch (e) {
       emit(AuthError(message: e.message));

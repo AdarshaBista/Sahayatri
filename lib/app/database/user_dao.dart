@@ -19,7 +19,7 @@ class UserDao {
     box.put(_userKey, user);
   }
 
-  Future<void> delete(User user) async {
+  Future<void> delete() async {
     final box = await _userBox;
     box.clear();
   }

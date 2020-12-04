@@ -14,13 +14,15 @@ import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/constants/notification_channels.dart';
 
 import 'package:sahayatri/app/database/prefs_dao.dart';
+import 'package:sahayatri/app/database/tracker_dao.dart';
 
 class SmsService {
   final PrefsDao prefsDao;
+  final TrackerDao trackerDao;
   final SmsSender sender = SmsSender();
   final NotificationService notificationService;
 
-  /// List of ids of [Place] for which sms has already been sent.
+  /// List of ids of [Place] for which sms has already been sent in this session.
   final List<String> _sentList = [];
 
   /// Phone number of close contact.
@@ -28,24 +30,32 @@ class SmsService {
 
   SmsService({
     @required this.prefsDao,
+    @required this.trackerDao,
     @required this.notificationService,
   })  : assert(prefsDao != null),
+        assert(trackerDao != null),
         assert(notificationService != null);
 
-  /// Returns true if sms should be sent on arrival to [place].
-  bool _shouldSend(Coord userLocation, Checkpoint checkpoint) {
+  /// Returns true if sms should be sent on arrival to [checkpoint].
+  Future<bool> _shouldSend(Coord userLocation, Checkpoint checkpoint) async {
     if (checkpoint == null ||
         !checkpoint.notifyContact ||
-        _sentList.contains(checkpoint.place.id)) return false;
+        _sentList.contains(checkpoint.place.id)) {
+      return false;
+    }
+
     final distance = GeoUtils.computeDistance(userLocation, checkpoint.place.coord);
-    return distance < LocationConfig.minNearbyDistance;
+    if (distance > LocationConfig.minNearbyDistance) return false;
+
+    final trackerData = await trackerDao.get();
+    return !trackerData.smsSentList.contains(checkpoint.place.id);
   }
 
   /// Send SMS to notify close contact of the user
-  /// on his/her arrival at a [place].
+  /// on his/her arrival at a [checkpoint].
   Future<void> send(Coord userLocation, Checkpoint checkpoint) async {
     if (Platform.isWindows) return;
-    if (!_shouldSend(userLocation, checkpoint)) return;
+    if (!await _shouldSend(userLocation, checkpoint)) return;
 
     contact ??= (await prefsDao.get()).contact;
     if (contact.isEmpty) return;
@@ -71,7 +81,12 @@ class SmsService {
       print(e.toString());
       return;
     }
+
     _sentList.add(place.id);
+    final trackerData = await trackerDao.get();
+    trackerDao.upsert(trackerData.copyWith(
+      smsSentList: [...trackerData.smsSentList, place.id],
+    ));
   }
 
   /// Show notification to user on status of sms.
