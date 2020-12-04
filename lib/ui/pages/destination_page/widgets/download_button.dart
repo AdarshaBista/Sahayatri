@@ -41,7 +41,7 @@ class DownloadButton extends StatelessWidget {
   }
 
   Widget _buildDownloaded() {
-    return ColumnButton(
+    return VerticalButton(
       label: 'Downloaded',
       icon: CommunityMaterialIcons.cloud_check_outline,
       onTap: () {},
@@ -49,7 +49,7 @@ class DownloadButton extends StatelessWidget {
   }
 
   Widget _buildDownload(BuildContext context) {
-    return ColumnButton(
+    return VerticalButton(
       label: 'Download',
       icon: CommunityMaterialIcons.cloud_download_outline,
       onTap: () {

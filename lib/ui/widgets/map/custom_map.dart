@@ -15,7 +15,7 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_button.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
@@ -98,7 +98,7 @@ class _CustomMapState extends State<CustomMap> {
       body: Stack(
         children: [
           RepaintBoundary(child: _buildMap()),
-          const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: CloseIcon())),
+          const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: ExitButton())),
           const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: MenuButton())),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
 
 class EmptyAppbar extends StatelessWidget implements PreferredSizeWidget {
   const EmptyAppbar();
@@ -12,11 +12,11 @@ class EmptyAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       leading: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: CloseIcon(
+        child: ExitButton(
           size: 20.0,
-          iconColor: context.c.onBackground,
+          color: context.c.onBackground,
+          icon: Icons.keyboard_backspace,
           backgroundColor: Colors.transparent,
-          iconData: Icons.keyboard_backspace,
         ),
       ),
     );

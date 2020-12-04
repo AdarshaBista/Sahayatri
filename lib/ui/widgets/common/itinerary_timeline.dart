@@ -13,6 +13,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
@@ -177,21 +178,14 @@ class ItineraryTimeline extends StatelessWidget {
     );
   }
 
-  GestureDetector _buildDeleteIcon(BuildContext context, Checkpoint checkpoint) {
-    return GestureDetector(
+  Widget _buildDeleteIcon(BuildContext context, Checkpoint checkpoint) {
+    return CircularButton(
+      size: 14.0,
+      padding: 5.0,
+      icon: Icons.close,
+      color: AppColors.secondary,
+      backgroundColor: context.c.surface,
       onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
-      child: Container(
-        padding: const EdgeInsets.all(5.0),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: context.c.surface,
-        ),
-        child: const Icon(
-          Icons.close,
-          size: 16.0,
-          color: AppColors.secondary,
-        ),
-      ),
     );
   }
 

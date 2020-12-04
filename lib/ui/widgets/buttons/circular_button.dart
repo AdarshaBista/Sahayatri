@@ -3,39 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
-class CloseIcon extends StatelessWidget {
+class CircularButton extends StatelessWidget {
   final double size;
-  final Color iconColor;
-  final IconData iconData;
+  final Color color;
+  final IconData icon;
+  final double padding;
   final VoidCallback onTap;
   final Color backgroundColor;
 
-  const CloseIcon({
-    this.onTap,
+  const CircularButton({
+    @required this.onTap,
+    @required this.icon,
     this.size = 18.0,
-    this.iconData = Icons.close,
-    this.iconColor = AppColors.light,
+    this.padding = 8.0,
+    this.color = AppColors.light,
     this.backgroundColor = AppColors.dark,
   })  : assert(size != null),
-        assert(iconData != null),
-        assert(iconColor != null),
+        assert(icon != null),
+        assert(color != null),
         assert(backgroundColor != null);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () => Navigator.of(context).pop(),
+      onTap: onTap,
       child: ScaleAnimator(
         child: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
             color: backgroundColor,
             shape: BoxShape.circle,
           ),
           child: Icon(
-            iconData,
+            icon,
             size: size,
-            color: iconColor,
+            color: color,
           ),
         ),
       ),

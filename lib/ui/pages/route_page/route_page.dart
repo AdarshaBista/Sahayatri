@@ -41,8 +41,8 @@ class _RoutePageState extends State<RoutePage> {
       body: CustomMap(
         center: destination.midPointCoord,
         children: [
-          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
           const _FlagMarkersLayer(),
+          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
           if (destination.places != null) const _PlaceMarkersLayer(),
         ],
         swPanBoundary: Coord(
@@ -108,7 +108,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
               return const Icon(
                 CommunityMaterialIcons.map_marker,
                 size: 32.0,
-                color: AppColors.secondary,
+                color: Colors.blue,
               );
             },
           ),

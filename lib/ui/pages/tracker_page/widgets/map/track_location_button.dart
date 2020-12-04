@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class TrackLocationButton extends StatelessWidget {
   final bool isTracking;
@@ -15,22 +15,10 @@ class TrackLocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlideAnimator(
-      begin: const Offset(2.0, 0.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: const BoxDecoration(
-            color: AppColors.dark,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            isTracking ? Icons.my_location : Icons.location_disabled,
-            color: AppColors.primary,
-          ),
-        ),
-      ),
+    return CircularButton(
+      onTap: onTap,
+      color: AppColors.primary,
+      icon: isTracking ? Icons.my_location : Icons.location_disabled,
     );
   }
 }

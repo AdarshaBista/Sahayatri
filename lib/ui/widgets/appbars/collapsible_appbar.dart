@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/close_icon.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/appbars/custom_flexible_space.dart';
 
 class CollapsibleAppbar extends StatelessWidget {
@@ -37,11 +37,11 @@ class CollapsibleAppbar extends StatelessWidget {
       leading: leading ??
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: CloseIcon(
+            child: CircularButton(
               size: 20.0,
               onTap: onBack,
-              iconData: Icons.keyboard_backspace,
-              iconColor: context.c.onBackground,
+              icon: Icons.keyboard_backspace,
+              color: context.c.onBackground,
               backgroundColor: context.c.background,
             ),
           ),

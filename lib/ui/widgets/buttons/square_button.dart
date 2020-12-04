@@ -34,7 +34,7 @@ class SquareButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Center(
-          child: ColumnButton(
+          child: VerticalButton(
             label: label,
             icon: icon,
             color: color,

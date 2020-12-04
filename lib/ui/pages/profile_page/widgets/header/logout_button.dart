@@ -10,14 +10,17 @@ import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton();
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return CircularButton(
+      color: AppColors.secondary,
+      icon: Icons.exit_to_app_outlined,
+      backgroundColor: context.c.background,
       onTap: () => ConfirmDialog(
         message: 'Do you want to log out?',
         onConfirm: () async {
@@ -32,20 +35,6 @@ class LogoutButton extends StatelessWidget {
           );
         },
       ).openDialog(context),
-      child: ScaleAnimator(
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: context.c.background,
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(
-            Icons.exit_to_app,
-            size: 18.0,
-            color: AppColors.secondary,
-          ),
-        ),
-      ),
     );
   }
 }

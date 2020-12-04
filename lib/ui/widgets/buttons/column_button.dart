@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
-class ColumnButton extends StatelessWidget {
+class VerticalButton extends StatelessWidget {
   final Color color;
   final String label;
   final IconData icon;
   final VoidCallback onTap;
 
-  const ColumnButton({
+  const VerticalButton({
     @required this.icon,
     @required this.label,
     this.color,

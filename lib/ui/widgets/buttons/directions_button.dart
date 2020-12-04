@@ -64,7 +64,7 @@ class DirectionsButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: _directionsModesData
             .map(
-              (m) => ColumnButton(
+              (m) => VerticalButton(
                 label: m.title,
                 icon: m.icon,
                 onTap: () {

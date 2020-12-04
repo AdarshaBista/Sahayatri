@@ -60,7 +60,7 @@ class HeaderTile extends StatelessWidget {
   Widget _buildWeatherButton(BuildContext context) {
     final destination = context.watch<Destination>();
 
-    return ColumnButton(
+    return VerticalButton(
       label: 'Weather',
       icon: CommunityMaterialIcons.weather_fog,
       onTap: () => context.read<DestinationNavService>().pushNamed(
