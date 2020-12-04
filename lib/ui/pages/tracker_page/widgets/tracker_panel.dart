@@ -26,7 +26,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
       body: SlidingPanel(
         margin: EdgeInsets.all(margin),
         minHeight: UiConfig.trackerPanelHeight,
-        maxHeight: MediaQuery.of(context).size.height * 0.8,
+        maxHeight: MediaQuery.of(context).size.height * 0.85,
         body: const TrackerMap(),
         panel: _buildPanel(),
         onPanelSlide: (value) {

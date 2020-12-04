@@ -26,7 +26,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
             index: _selectedIndex,
             children: const [
               ProgressTab(),
-              Expanded(child: TranslateForm(isOnSettings: false)),
+              TranslateForm(isOnSettings: false),
               NearbyTab(),
             ],
           ),
