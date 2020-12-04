@@ -7,6 +7,7 @@ import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
+import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class TrackerSetup extends StatelessWidget {
@@ -17,11 +18,9 @@ class TrackerSetup extends StatelessWidget {
     return Scaffold(
       floatingActionButton: _buildStartButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: NestedScrollView(
-        headerSliverBuilder: (context, _) {
-          return [const CollapsibleAppbar(title: 'Review your tools')];
-        },
-        body: const ToolsList(),
+      body: const CollapsibleView(
+        collapsible: CollapsibleAppbar(title: 'Setup your tools'),
+        child: ToolsList(),
       ),
     );
   }

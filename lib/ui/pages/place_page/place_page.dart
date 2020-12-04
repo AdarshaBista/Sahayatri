@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
@@ -20,17 +21,13 @@ class PlacePage extends StatelessWidget {
     final place = context.watch<Place>();
 
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, _) {
-          return [
-            CollapsibleCarousel(
-              title: place.name,
-              heroId: place.id,
-              imageUrls: place.imageUrls,
-            ),
-          ];
-        },
-        body: ListView(
+      body: CollapsibleView(
+        collapsible: CollapsibleCarousel(
+          title: place.name,
+          heroId: place.id,
+          imageUrls: place.imageUrls,
+        ),
+        child: ListView(
           padding: EdgeInsets.zero,
           physics: const BouncingScrollPhysics(),
           children: [

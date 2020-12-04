@@ -9,6 +9,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/common/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/preferences_list.dart';
@@ -40,9 +41,9 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildPage() {
-    return NestedScrollView(
-      headerSliverBuilder: (context, _) => [const ProfileHeader()],
-      body: ListView(
+    return CollapsibleView(
+      collapsible: const ProfileHeader(),
+      child: ListView(
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(top: 8.0),

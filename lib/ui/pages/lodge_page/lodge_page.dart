@@ -10,6 +10,7 @@ import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/header_tile.dart';
 import 'package:sahayatri/ui/pages/lodge_page/widgets/contacts_list.dart';
@@ -23,17 +24,13 @@ class LodgePage extends StatelessWidget {
     final lodge = context.watch<Lodge>();
 
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, _) {
-          return [
-            CollapsibleCarousel(
-              title: lodge.name,
-              heroId: lodge.id,
-              imageUrls: lodge.imageUrls,
-            ),
-          ];
-        },
-        body: ListView(
+      body: CollapsibleView(
+        collapsible: CollapsibleCarousel(
+          title: lodge.name,
+          heroId: lodge.id,
+          imageUrls: lodge.imageUrls,
+        ),
+        child: ListView(
           padding: EdgeInsets.zero,
           physics: const BouncingScrollPhysics(),
           children: [
