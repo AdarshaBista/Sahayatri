@@ -5,12 +5,11 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/appbars/curved_appbar.dart';
-import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_icon.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/tracker_fab.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/bottom_navbar.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/destination_drawer.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
@@ -24,14 +23,14 @@ class DestinationDetailPage extends StatefulWidget {
 
 class _DestinationDetailPageState extends State<DestinationDetailPage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  ZoomDrawerController _drawerController;
+  TabController tabController;
+  ZoomDrawerController drawerController;
 
   @override
   void initState() {
     super.initState();
-    _drawerController = ZoomDrawerController();
-    _tabController = TabController(length: _tabs.length, vsync: this)
+    drawerController = ZoomDrawerController();
+    tabController = TabController(length: 2, vsync: this)
       ..addListener(() {
         setState(() {});
       });
@@ -39,39 +38,28 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    tabController.dispose();
     super.dispose();
   }
-
-  List<NestedTabData> get _tabs => [
-        NestedTabData(
-          label: 'Places',
-          icon: CommunityMaterialIcons.map_marker_radius_outline,
-        ),
-        NestedTabData(
-          label: 'Itinerary',
-          icon: CommunityMaterialIcons.book_outline,
-        ),
-      ];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => _drawerController.close(),
+      onTap: () => drawerController.close(),
       onPanUpdate: (details) {
-        if (details.delta.dx > 6.0) _drawerController.open();
-        if (details.delta.dx < -6.0) _drawerController.close();
+        if (details.delta.dx < -6.0) drawerController.open();
+        if (details.delta.dx > 6.0) drawerController.close();
       },
       child: ZoomDrawer(
         angle: 0.0,
         showShadow: true,
         borderRadius: 24.0,
-        controller: _drawerController,
+        controller: drawerController,
         closeCurve: Curves.easeInOut,
         openCurve: Curves.fastLinearToSlowEaseIn,
         backgroundColor: context.c.background.withOpacity(0.5),
-        slideWidth: MediaQuery.of(context).size.width * 0.7,
+        slideWidth: MediaQuery.of(context).size.width * 0.45,
         mainScreen: _buildPage(),
         menuScreen: const DestinationDrawer(),
       ),
@@ -86,7 +74,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
         elevation: 8.0,
         notchMargin: 6.0,
         color: context.theme.cardColor,
-        child: _buildBottomNavBar(),
+        child: BottomNavbar(tabController: tabController),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const TrackerFab(),
@@ -100,47 +88,19 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
     return CurvedAppbar(
       title: name,
       elevation: 0.0,
-      leading: const DrawerIcon(),
-      actions: [
-        IconButton(
-          splashRadius: 20.0,
-          icon: const Icon(Icons.home_outlined),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return Container(
-      height: 50.0,
-      padding: const EdgeInsets.all(8.0),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: TabBar(
-          controller: _tabController,
-          indicator: const BoxDecoration(color: Colors.transparent),
-          tabs: [
-            for (int i = 0; i < _tabs.length; ++i)
-              NestedTab(
-                tab: _tabs[i],
-                color: _tabController.index == i
-                    ? AppColors.primary
-                    : context.c.onBackground,
-              ),
-          ],
-        ),
+      actions: const [DrawerIcon()],
+      leading: IconButton(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onPressed: Navigator.of(context).pop,
+        icon: const Icon(Icons.keyboard_backspace, size: 20.0),
       ),
     );
   }
 
   Widget _buildTabViews() {
     return TabBarView(
-      controller: _tabController,
+      controller: tabController,
       physics: const BouncingScrollPhysics(),
       children: const [
         PlacesGrid(),

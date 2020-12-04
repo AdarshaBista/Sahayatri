@@ -33,7 +33,12 @@ class CollapsibleAppbar extends StatelessWidget {
       pinned: true,
       elevation: 6.0,
       expandedHeight: height,
-      actions: trailing == null ? [] : [trailing],
+      actions: trailing == null
+          ? []
+          : [
+              trailing,
+              const SizedBox(width: 8.0),
+            ],
       leading: leading ??
           Padding(
             padding: const EdgeInsets.all(10.0),

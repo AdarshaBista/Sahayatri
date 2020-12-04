@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destination_update_form_cubit/destination_updat
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 
 class TagsField extends StatefulWidget {
   const TagsField();

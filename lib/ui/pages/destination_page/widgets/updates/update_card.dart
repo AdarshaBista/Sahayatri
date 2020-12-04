@@ -9,7 +9,7 @@ import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_small.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/tag_chip.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/image_list.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 

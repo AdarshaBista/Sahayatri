@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 
 class BestMonthsChips extends StatelessWidget {
   const BestMonthsChips();
@@ -27,10 +28,7 @@ class BestMonthsChips extends StatelessWidget {
           runSpacing: 8.0,
           children: destination.bestMonths
               .map((m) => ScaleAnimator(
-                    child: Chip(
-                      visualDensity: VisualDensity.compact,
-                      label: Text(m, style: context.t.headline6),
-                    ),
+                    child: TagChip(label: m),
                   ))
               .toList(),
         ),

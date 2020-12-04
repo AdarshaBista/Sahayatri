@@ -17,18 +17,32 @@ class DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
+    return GestureDetector(
       onTap: onTap,
-      leading: Icon(
-        icon,
-        size: 20.0,
-        color: AppColors.light,
-      ),
-      title: Text(
-        label,
-        style: AppTextStyles.headline5.light.bold,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              label,
+              style: AppTextStyles.headline5.light.bold,
+            ),
+            const SizedBox(width: 16.0),
+            Container(
+              padding: const EdgeInsets.all(6.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.0),
+                color: AppColors.light,
+              ),
+              child: Icon(
+                icon,
+                size: 18.0,
+                color: AppColors.dark,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
