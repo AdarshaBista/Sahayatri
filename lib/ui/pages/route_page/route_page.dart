@@ -11,6 +11,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/flag_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
@@ -32,10 +33,9 @@ class _RoutePageState extends State<RoutePage> {
 
     return Scaffold(
       floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
-          mini: true,
-          child: const Icon(CommunityMaterialIcons.chart_bell_curve),
-          onPressed: () => _openAltitudeSheet(context),
+        builder: (context) => MiniFab(
+          icon: CommunityMaterialIcons.chart_bell_curve,
+          onTap: () => _openAltitudeSheet(context),
         ),
       ),
       body: CustomMap(

@@ -22,7 +22,7 @@ class LodgesGrid extends StatelessWidget {
         : GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 10 / 13,
+              childAspectRatio: 0.8,
               crossAxisSpacing: 12.0,
               mainAxisSpacing: 12.0,
             ),

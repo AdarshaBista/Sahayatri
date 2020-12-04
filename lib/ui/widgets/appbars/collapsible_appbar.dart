@@ -39,10 +39,10 @@ class CollapsibleAppbar extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: CircularButton(
               size: 20.0,
-              onTap: onBack,
               icon: Icons.keyboard_backspace,
               color: context.c.onBackground,
               backgroundColor: context.c.background,
+              onTap: onBack ?? Navigator.of(context).pop,
             ),
           ),
       flexibleSpace: CustomFlexibleSpace(

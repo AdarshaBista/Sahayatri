@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
@@ -52,14 +52,8 @@ class ItineraryFormPage extends StatelessWidget {
   Widget _buildFab(BuildContext context) {
     return BlocBuilder<ItineraryFormCubit, ItineraryFormState>(
       builder: (context, state) {
-        return FloatingActionButton(
-          mini: true,
-          child: const Icon(
-            Icons.check,
-            size: 24.0,
-            color: AppColors.primary,
-          ),
-          onPressed: () => _saveItinerary(context, state.itinerary),
+        return MiniFab(
+          onTap: () => _saveItinerary(context, state.itinerary),
         );
       },
     );

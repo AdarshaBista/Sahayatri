@@ -8,7 +8,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 
 class TrackerFab extends StatelessWidget {
   const TrackerFab();
@@ -26,14 +26,9 @@ class TrackerFab extends StatelessWidget {
   }
 
   Widget _buildFab(BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      child: const Icon(
-        Icons.play_arrow_outlined,
-        size: 24.0,
-        color: AppColors.primary,
-      ),
-      onPressed: () {
+    return MiniFab(
+      icon: Icons.play_arrow_outlined,
+      onTap: () {
         final destination = context.read<Destination>();
         context.read<DestinationNavService>().pushNamed(
               Routes.trackerPageRoute,

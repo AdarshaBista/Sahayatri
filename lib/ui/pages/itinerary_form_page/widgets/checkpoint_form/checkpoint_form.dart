@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
@@ -135,14 +136,8 @@ class CheckpointForm extends StatelessWidget {
   }
 
   Widget _buildSubmitButton(CheckpointFormState state, BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      child: const Icon(
-        Icons.check,
-        size: 24.0,
-        color: AppColors.primary,
-      ),
-      onPressed: () {
+    return MiniFab(
+      onTap: () {
         if (!_formKey.currentState.validate()) return;
 
         onSubmit(state.checkpoint);

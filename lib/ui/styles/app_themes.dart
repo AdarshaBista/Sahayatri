@@ -186,9 +186,9 @@ class AppThemes {
 
   static FloatingActionButtonThemeData get _darkFloatingActionButtonTheme =>
       _lightFloatingActionButtonTheme.copyWith(
-        backgroundColor: AppColors.light,
-        splashColor: AppColors.lightAccent,
-        foregroundColor: AppColors.primaryDark,
+        backgroundColor: AppColors.primary,
+        splashColor: AppColors.primaryDark,
+        foregroundColor: AppColors.dark,
       );
 
   static AppBarTheme get _lightAppBarTheme => AppBarTheme(

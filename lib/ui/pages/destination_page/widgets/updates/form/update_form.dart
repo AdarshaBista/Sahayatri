@@ -96,7 +96,6 @@ class UpdateForm extends StatelessWidget {
               : const Icon(
                   Icons.check,
                   size: 24.0,
-                  color: AppColors.primary,
                 ),
           onPressed: () async {
             if (state.isLoading) return;

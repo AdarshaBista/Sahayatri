@@ -7,6 +7,7 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
@@ -124,14 +125,8 @@ class _ReviewFormState extends State<ReviewForm> {
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      child: const Icon(
-        Icons.check,
-        size: 24.0,
-        color: AppColors.primary,
-      ),
-      onPressed: () {
+    return MiniFab(
+      onTap: () {
         if (!formKey.currentState.validate()) return;
 
         widget.onSubmit(rating, text);
