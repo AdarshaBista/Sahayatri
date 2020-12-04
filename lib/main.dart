@@ -43,12 +43,15 @@ import 'package:device_preview/plugins.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
-  setStatusBarStyle();
+  setSystemPreferences();
   await initHive();
   runApp(const App());
 }
 
-void setStatusBarStyle() {
+void setSystemPreferences() {
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );

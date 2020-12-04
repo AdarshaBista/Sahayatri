@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/user.dart';
+
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/tts_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
@@ -21,6 +23,7 @@ import 'package:sahayatri/app/routers/root_router.dart';
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/weather_dao.dart';
+import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,76 +86,94 @@ class Sahayatri extends StatelessWidget {
           ),
         ),
       ],
-      child: Builder(
-        builder: (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => ThemeCubit()),
-            BlocProvider<PrefsCubit>(
-              create: (context) => PrefsCubit(
-                prefsDao: context.read<PrefsDao>(),
-              )..initPrefs(),
-            ),
-            BlocProvider<UserCubit>(
-              create: (context) => UserCubit(
-                userDao: context.read<UserDao>(),
-                apiService: context.read<ApiService>(),
-                authService: context.read<AuthService>(),
-              ),
-            ),
-            BlocProvider<NearbyCubit>(
-              create: (context) => NearbyCubit(
-                nearbyService: context.read<NearbyService>(),
-              ),
-            ),
-            BlocProvider<TranslateCubit>(
-              create: (context) => TranslateCubit(
-                ttsService: context.read<TtsService>(),
-                translateService: context.read<TranslateService>(),
-              ),
-            ),
-          ],
-          child: BlocBuilder<ThemeCubit, ThemeMode>(
-            builder: (context, state) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                themeMode: state,
-                theme: AppThemes.light,
-                darkTheme: AppThemes.dark,
-                title: AppConfig.appName,
-                builder: DevicePreview.appBuilder,
-                locale: DevicePreview.locale(context),
-                onGenerateRoute: RootRouter.onGenerateRoute,
-                navigatorKey: context.watch<RootNavService>().navigatorKey,
-                home: BlocBuilder<PrefsCubit, PrefsState>(
-                  builder: (context, state) {
-                    if (state is PrefsLoading) {
-                      return const SplashView();
-                    }
-
-                    return FutureBuilder(
-                      future: _init(context),
-                      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                        if (snapshot.hasData) {
-                          final bool isLoggedIn = snapshot.data;
-                          if (isLoggedIn) return const HomePage();
-                          return const AuthPage();
-                        }
-                        return const SplashView();
-                      },
-                    );
-                  },
-                ),
-              );
-            },
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => ThemeCubit(),
           ),
-        ),
+          BlocProvider<PrefsCubit>(
+            create: (context) => PrefsCubit(
+              prefsDao: context.read<PrefsDao>(),
+            ),
+          ),
+          BlocProvider<NearbyCubit>(
+            create: (context) => NearbyCubit(
+              nearbyService: context.read<NearbyService>(),
+            ),
+          ),
+          BlocProvider<TranslateCubit>(
+            create: (context) => TranslateCubit(
+              ttsService: context.read<TtsService>(),
+              translateService: context.read<TranslateService>(),
+            ),
+          ),
+          BlocProvider<UserCubit>(
+            create: (context) => UserCubit(
+              userDao: context.read<UserDao>(),
+              apiService: context.read<ApiService>(),
+              authService: context.read<AuthService>(),
+              onAuthenticated: (user) => onAuthenticated(context, user),
+            )..isLoggedIn(),
+          ),
+        ],
+        child: _buildApp(),
       ),
     );
   }
 
-  Future<bool> _init(BuildContext context) {
-    final theme = context.watch<PrefsCubit>().prefs.theme;
-    context.watch<ThemeCubit>().init(theme);
-    return context.watch<UserCubit>().isLoggedIn();
+  Widget _buildApp() {
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, themeMode) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeMode,
+          theme: AppThemes.light,
+          darkTheme: AppThemes.dark,
+          title: AppConfig.appName,
+          builder: DevicePreview.appBuilder,
+          locale: DevicePreview.locale(context),
+          onGenerateRoute: RootRouter.onGenerateRoute,
+          navigatorKey: RepositoryProvider.of<RootNavService>(context).navigatorKey,
+          home: _buildUserState(),
+        );
+      },
+    );
+  }
+
+  Widget _buildUserState() {
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is Authenticated) {
+          return _buildPrefsState(context, state);
+        } else if (state is AuthLoading) {
+          return const SplashView();
+        } else {
+          return const AuthPage();
+        }
+      },
+    );
+  }
+
+  Widget _buildPrefsState(BuildContext context, Authenticated state) {
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      builder: (context, state) {
+        if (state is PrefsLoaded) {
+          return const HomePage();
+        }
+        return const SplashView();
+      },
+    );
+  }
+
+  void onAuthenticated(BuildContext context, User user) {
+    RepositoryProvider.of<PrefsDao>(context).init(user.id);
+    RepositoryProvider.of<ItineraryDao>(context).init(user.id);
+    RepositoryProvider.of<DestinationDao>(context).init(user.id);
+
+    final prefsCubit = BlocProvider.of<PrefsCubit>(context);
+    prefsCubit.initPrefs().then((_) {
+      final prefs = prefsCubit.prefs;
+      BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
+    });
   }
 }

@@ -18,7 +18,7 @@ class DestinationNavPage extends StatelessWidget {
         return false;
       },
       child: Navigator(
-        key: context.watch<DestinationNavService>().navigatorKey,
+        key: RepositoryProvider.of<DestinationNavService>(context).navigatorKey,
         observers: [HeroController()],
         onGenerateRoute: DestinationRouter.onGenerateRoute,
       ),

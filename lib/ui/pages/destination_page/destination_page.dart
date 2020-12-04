@@ -88,7 +88,9 @@ class DestinationPage extends StatelessWidget {
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),
-        ReviewList(reviewCubit: context.watch<ReviewCubit>() as DestinationReviewCubit),
+        ReviewList(
+          reviewCubit: BlocProvider.of<ReviewCubit>(context) as DestinationReviewCubit,
+        ),
         const UpdateList(),
       ],
     );

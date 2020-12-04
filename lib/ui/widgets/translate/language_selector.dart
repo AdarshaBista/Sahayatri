@@ -30,11 +30,17 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildLanguageMenu(false, context.watch<TranslateCubit>().sourceLang),
+            _buildLanguageMenu(
+              false,
+              BlocProvider.of<TranslateCubit>(context).sourceLang,
+            ),
             const SizedBox(width: 12.0),
             _buildFlipButton(),
             const SizedBox(width: 12.0),
-            _buildLanguageMenu(true, context.watch<TranslateCubit>().targetLang),
+            _buildLanguageMenu(
+              true,
+              BlocProvider.of<TranslateCubit>(context).targetLang,
+            ),
           ],
         ),
       ),

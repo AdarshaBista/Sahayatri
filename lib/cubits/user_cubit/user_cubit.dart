@@ -21,15 +21,18 @@ class UserCubit extends Cubit<UserState> {
   final UserDao userDao;
   final ApiService apiService;
   final AuthService authService;
+  final Function(User) onAuthenticated;
 
   UserCubit({
     @required this.userDao,
     @required this.apiService,
     @required this.authService,
+    @required this.onAuthenticated,
   })  : assert(userDao != null),
         assert(apiService != null),
         assert(authService != null),
-        super(const Unauthenticated());
+        assert(onAuthenticated != null),
+        super(const AuthLoading());
 
   bool get isAuthenticated => state is Authenticated;
   User get user {
@@ -40,11 +43,13 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<bool> isLoggedIn() async {
+  Future<void> isLoggedIn() async {
     final user = await userDao.get();
-    if (user == null) return false;
-    emit(Authenticated(user: user));
-    return true;
+    if (user == null) {
+      emit(const Unauthenticated());
+    } else {
+      emit(Authenticated(user: user));
+    }
   }
 
   Future<bool> updateAvatar(ImageSource source) async {
@@ -99,6 +104,16 @@ class UserCubit extends Cubit<UserState> {
     } on AppError catch (e) {
       emit(AuthError(message: e.message));
       emit(Authenticated(user: user));
+    }
+  }
+
+  @override
+  void onChange(Change<UserState> change) {
+    super.onChange(change);
+
+    final nextState = change.nextState;
+    if (nextState is Authenticated) {
+      onAuthenticated(nextState.user);
     }
   }
 }

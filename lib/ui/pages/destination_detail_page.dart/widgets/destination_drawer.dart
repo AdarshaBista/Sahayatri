@@ -27,8 +27,8 @@ class DestinationDrawer extends StatelessWidget {
           CustomPaint(
             foregroundPainter: const _DrawerBackground(),
             child: GradientContainer(
-              gradientColors:
-                  AppColors.getDrawerGradient(context.watch<ThemeCubit>().isDark),
+              gradientColors: AppColors.getDrawerGradient(
+                  BlocProvider.of<ThemeCubit>(context).isDark),
             ),
           ),
           Center(child: _buildMenuItems(context)),

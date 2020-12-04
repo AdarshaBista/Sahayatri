@@ -28,7 +28,7 @@ class WeatherPage extends StatelessWidget {
         children: [
           Header(
             padding: 20.0,
-            title: context.watch<WeatherCubit>().title,
+            title: BlocProvider.of<WeatherCubit>(context).title,
           ),
           const SizedBox(height: 4.0),
           Expanded(

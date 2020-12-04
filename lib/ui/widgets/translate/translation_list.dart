@@ -33,7 +33,7 @@ class TranslationList extends StatelessWidget {
 
           final translations = state.translations.reversed.toList();
           return ListView.builder(
-            controller: context.watch<TranslateCubit>().controller,
+            controller: BlocProvider.of<TranslateCubit>(context).controller,
             reverse: true,
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(top: 50.0, bottom: 80.0),

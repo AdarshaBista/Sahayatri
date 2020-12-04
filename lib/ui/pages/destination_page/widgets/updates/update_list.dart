@@ -78,7 +78,7 @@ class UpdateList extends StatelessWidget {
           },
         ),
         ViewMoreButton(
-          hasMore: context.watch<DestinationUpdateCubit>().hasMore,
+          hasMore: BlocProvider.of<DestinationUpdateCubit>(context).hasMore,
           onLoadMore: () => context.read<DestinationUpdateCubit>().loadMore(),
         ),
       ],
