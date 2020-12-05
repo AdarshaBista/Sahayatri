@@ -43,7 +43,7 @@ class TrackerService {
   final Set<UserLocation> _userTrack = {};
 
   /// Tracker update subscription.
-  StreamSubscription<TrackerUpdate> _trackerStreamSub;
+  StreamSubscription<Future<TrackerUpdate>> _trackerStreamSub;
 
   /// Continuous tracker updates.
   StreamController<TrackerUpdate> _trackerStreamController;
@@ -94,12 +94,14 @@ class TrackerService {
   void _initTrackerStream() {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
     _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
-      (userLocation) {
+      (userLocation) async {
         if (_checkCompleted(userLocation.coord)) onCompleted();
 
         _userTrack.add(userLocation);
         final index = _userIndex(userLocation.coord);
         final elapsed = elapsedDuration();
+
+        trackerData = await trackerDao.get();
         trackerDao.upsert(trackerData.copyWith(elapsed: elapsed.inSeconds));
 
         return TrackerUpdate(
@@ -111,7 +113,8 @@ class TrackerService {
           distanceRemaining: _distanceRemaining(index),
         );
       },
-    ).listen((trackerUpdate) {
+    ).listen((trackerUpdateFuture) async {
+      final trackerUpdate = await trackerUpdateFuture;
       _trackerStreamController.add(trackerUpdate);
     });
   }
@@ -123,16 +126,16 @@ class TrackerService {
   }
 
   /// Stop the tracking process and reset fields.
-  void stop() {
+  Future<void> stop() async {
     if (!isTracking) return;
 
     _destination = null;
-    trackerDao.delete();
+    await trackerDao.delete();
 
     _stopwatch?.stop();
     _userTrack?.clear();
-    _trackerStreamSub?.cancel();
-    _trackerStreamController?.close();
+    await _trackerStreamSub?.cancel();
+    await _trackerStreamController?.close();
   }
 
   /// Pause the tracking process

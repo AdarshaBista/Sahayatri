@@ -25,14 +25,14 @@ class TrackerData {
         assert(smsSentList != null);
 
   TrackerData copyWith({
-    String destinationId,
     int elapsed,
+    String destinationId,
     List<String> smsSentList,
   }) {
     return TrackerData(
-      destinationId: destinationId ?? this.destinationId,
       elapsed: elapsed ?? this.elapsed,
       smsSentList: smsSentList ?? this.smsSentList,
+      destinationId: destinationId ?? this.destinationId,
     );
   }
 

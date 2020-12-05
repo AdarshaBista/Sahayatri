@@ -67,7 +67,7 @@ class TrackerCubit extends Cubit<TrackerState> {
 
   Future<void> stopTracking() async {
     smsService.stop();
-    trackerService.stop();
+    await trackerService.stop();
 
     emit(TrackerUpdating(
       update: (state as TrackerUpdating)

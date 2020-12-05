@@ -28,7 +28,7 @@ class LogoutButton extends StatelessWidget {
             'Logging out...',
             isInteractive: false,
             callback: () async {
-              context.read<TrackerService>().stop();
+              await context.read<TrackerService>().stop();
               await context.read<NearbyCubit>().stopNearby();
               await context.read<UserCubit>().logout();
             },

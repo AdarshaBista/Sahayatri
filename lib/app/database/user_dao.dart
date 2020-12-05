@@ -21,6 +21,6 @@ class UserDao {
 
   Future<void> delete() async {
     final box = await _userBox;
-    box.clear();
+    await box.clear();
   }
 }

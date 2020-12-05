@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 import 'package:sms_maintained/sms.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/core/models/tracker_data.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
@@ -28,6 +30,9 @@ class SmsService {
   /// Phone number of close contact.
   String contact;
 
+  /// Persisted tracker data.
+  TrackerData trackerData;
+
   SmsService({
     @required this.prefsDao,
     @required this.trackerDao,
@@ -38,6 +43,8 @@ class SmsService {
 
   /// Returns true if sms should be sent on arrival to [checkpoint].
   Future<bool> _shouldSend(Coord userLocation, Checkpoint checkpoint) async {
+    if (Platform.isWindows) return false;
+
     if (checkpoint == null ||
         !checkpoint.notifyContact ||
         _sentList.contains(checkpoint.place.id)) {
@@ -47,14 +54,13 @@ class SmsService {
     final distance = GeoUtils.computeDistance(userLocation, checkpoint.place.coord);
     if (distance > LocationConfig.minNearbyDistance) return false;
 
-    final trackerData = await trackerDao.get();
+    trackerData = await trackerDao.get();
     return !trackerData.smsSentList.contains(checkpoint.place.id);
   }
 
   /// Send SMS to notify close contact of the user
   /// on his/her arrival at a [checkpoint].
   Future<void> send(Coord userLocation, Checkpoint checkpoint) async {
-    if (Platform.isWindows) return;
     if (!await _shouldSend(userLocation, checkpoint)) return;
 
     contact ??= (await prefsDao.get()).contact;
@@ -83,10 +89,14 @@ class SmsService {
     }
 
     _sentList.add(place.id);
-    final trackerData = await trackerDao.get();
-    trackerDao.upsert(trackerData.copyWith(
+    await _updateTrackerData(place);
+  }
+
+  Future<void> _updateTrackerData(Place place) async {
+    trackerData = trackerData.copyWith(
       smsSentList: [...trackerData.smsSentList, place.id],
-    ));
+    );
+    await trackerDao.upsert(trackerData);
   }
 
   /// Show notification to user on status of sms.

@@ -24,6 +24,6 @@ class TrackerDao {
 
   Future<void> delete() async {
     final box = await _trackerDataBox;
-    box.clear();
+    await box.clear();
   }
 }

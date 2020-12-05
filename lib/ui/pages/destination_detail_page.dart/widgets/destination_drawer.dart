@@ -6,7 +6,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
