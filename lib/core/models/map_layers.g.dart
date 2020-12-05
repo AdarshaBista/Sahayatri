@@ -1,44 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'prefs.dart';
+part of 'map_layers.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PrefsAdapter extends TypeAdapter<Prefs> {
+class MapLayersAdapter extends TypeAdapter<MapLayers> {
   @override
-  final int typeId = 0;
+  final int typeId = 13;
 
   @override
-  Prefs read(BinaryReader reader) {
+  MapLayers read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Prefs(
-      contact: fields[0] as String,
-      deviceName: fields[2] as String,
-      theme: fields[3] as String,
-      mapStyle: fields[1] as String,
-      mapLayers: fields[4] as MapLayers,
+    return MapLayers(
+      route: fields[0] as bool,
+      flags: fields[1] as bool,
+      places: fields[2] as bool,
+      checkpoints: fields[3] as bool,
+      nearbyDevices: fields[4] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Prefs obj) {
+  void write(BinaryWriter writer, MapLayers obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.contact)
+      ..write(obj.route)
       ..writeByte(1)
-      ..write(obj.mapStyle)
+      ..write(obj.flags)
       ..writeByte(2)
-      ..write(obj.deviceName)
+      ..write(obj.places)
       ..writeByte(3)
-      ..write(obj.theme)
+      ..write(obj.checkpoints)
       ..writeByte(4)
-      ..write(obj.mapLayers);
+      ..write(obj.nearbyDevices);
   }
 
   @override
@@ -47,7 +47,7 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PrefsAdapter &&
+      other is MapLayersAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

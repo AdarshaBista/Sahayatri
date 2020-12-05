@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/extensions/coord_list_x.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -97,11 +98,12 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
         mapController: mapController,
         onPositionChanged: onPositionChanged,
         children: [
-          _RouteLayer(zoom: zoom),
+          _UserTrackLayer(zoom: zoom),
           const _DevicesAccuracyCircleLayer(),
           const _UserAccuracyCircleLayer(),
           const _UserMarkerLayer(),
           const _PlaceMarkersLayer(),
+          const _CheckpointMarkersLayer(),
           const _DevicesMarkersLayer(),
         ],
       ),
@@ -111,7 +113,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   Widget _buildTrackLocationButton() {
     return Positioned(
       top: 64.0,
-      left: 16.0,
+      right: 16.0,
       child: SafeArea(
         child: TrackLocationButton(
           isTracking: isTracking,
@@ -124,10 +126,10 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   }
 }
 
-class _RouteLayer extends StatelessWidget {
+class _UserTrackLayer extends StatelessWidget {
   final double zoom;
 
-  const _RouteLayer({
+  const _UserTrackLayer({
     @required this.zoom,
   }) : assert(zoom != null);
 
@@ -159,23 +161,58 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.watch<Destination>();
-    final places = destination.places;
-    final checkpoints = destination.createdItinerary.checkpoints;
-    final checkpointPlaces = checkpoints.map((c) => c.place).toList();
-    final remainingPlaces = places.where((p) => !checkpointPlaces.contains(p)).toList();
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapLayers.places != c.value.mapLayers.places,
+      builder: (context, state) {
+        final enabled = state.value.mapLayers.places;
+        if (!enabled) return const Offstage();
 
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          for (final checkpoint in checkpoints) CheckpointMarker(checkpoint: checkpoint),
-          for (int i = 0; i < remainingPlaces.length; ++i)
-            PlaceMarker(
-              place: remainingPlaces[i],
-              color: AppColors.accents[i % AppColors.accents.length],
-            ),
-        ],
-      ),
+        final destination = context.watch<Destination>();
+        final places = destination.places;
+        final checkpoints = destination.createdItinerary.checkpoints;
+        final checkpointPlaces = checkpoints.map((c) => c.place).toList();
+        final remainingPlaces =
+            places.where((p) => !checkpointPlaces.contains(p)).toList();
+
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              for (int i = 0; i < remainingPlaces.length; ++i)
+                PlaceMarker(
+                  place: remainingPlaces[i],
+                  color: AppColors.accents[i % AppColors.accents.length],
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _CheckpointMarkersLayer extends StatelessWidget {
+  const _CheckpointMarkersLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapLayers.checkpoints != c.value.mapLayers.checkpoints,
+      builder: (context, state) {
+        final enabled = state.value.mapLayers.checkpoints;
+        if (!enabled) return const Offstage();
+
+        final destination = context.watch<Destination>();
+        final checkpoints = destination.createdItinerary.checkpoints;
+
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              for (final checkpoint in checkpoints)
+                CheckpointMarker(checkpoint: checkpoint),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -225,21 +262,30 @@ class _DevicesMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NearbyCubit, NearbyState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) =>
+          p.value.mapLayers.nearbyDevices != c.value.mapLayers.nearbyDevices,
       builder: (context, state) {
-        if (state is NearbyConnected) {
-          return RepaintBoundary(
-            child: MarkerLayerWidget(
-              options: MarkerLayerOptions(
-                markers: state.trackingDevices
-                    .map((d) => DeviceMarker(context, device: d))
-                    .toList(),
-              ),
-            ),
-          );
-        } else {
-          return const Offstage();
-        }
+        final enabled = state.value.mapLayers.nearbyDevices;
+        if (!enabled) return const Offstage();
+
+        return BlocBuilder<NearbyCubit, NearbyState>(
+          builder: (context, state) {
+            if (state is NearbyConnected) {
+              return RepaintBoundary(
+                child: MarkerLayerWidget(
+                  options: MarkerLayerOptions(
+                    markers: state.trackingDevices
+                        .map((d) => DeviceMarker(context, device: d))
+                        .toList(),
+                  ),
+                ),
+              );
+            } else {
+              return const Offstage();
+            }
+          },
+        );
       },
     );
   }
@@ -250,27 +296,36 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NearbyCubit, NearbyState>(
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) =>
+          p.value.mapLayers.nearbyDevices != c.value.mapLayers.nearbyDevices,
       builder: (context, state) {
-        if (state is NearbyConnected) {
-          return RepaintBoundary(
-            child: CircleLayerWidget(
-              options: CircleLayerOptions(
-                circles: state.trackingDevices
-                    .map(
-                      (d) => AccuracyCircle(
-                        color: Colors.blue,
-                        point: d.userLocation.coord,
-                        radius: d.userLocation.accuracy,
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-          );
-        } else {
-          return const Offstage();
-        }
+        final enabled = state.value.mapLayers.nearbyDevices;
+        if (!enabled) return const Offstage();
+
+        return BlocBuilder<NearbyCubit, NearbyState>(
+          builder: (context, state) {
+            if (state is NearbyConnected) {
+              return RepaintBoundary(
+                child: CircleLayerWidget(
+                  options: CircleLayerOptions(
+                    circles: state.trackingDevices
+                        .map(
+                          (d) => AccuracyCircle(
+                            color: Colors.blue,
+                            point: d.userLocation.coord,
+                            radius: d.userLocation.accuracy,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              );
+            } else {
+              return const Offstage();
+            }
+          },
+        );
       },
     );
   }

@@ -21,7 +21,7 @@ class StylesGrid extends StatelessWidget {
       backgroundColor: AppColors.darkFaded,
       titleStyle: AppTextStyles.headline3.thin.light,
       initialValue: BlocProvider.of<PrefsCubit>(context).prefs.mapStyle,
-      onSelected: (style) => context.read<PrefsCubit>().saveMapLayer(style),
+      onSelected: (style) => context.read<PrefsCubit>().saveMapStyle(style),
       items: [
         ToggleItem(
           label: 'Dark',

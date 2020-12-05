@@ -14,6 +14,7 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/map_layers.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_data.dart';
@@ -73,6 +74,7 @@ Future<void> initHive() async {
     ..registerAdapter(PlaceAdapter())
     ..registerAdapter(ReviewAdapter())
     ..registerAdapter(WeatherAdapter())
+    ..registerAdapter(MapLayersAdapter())
     ..registerAdapter(ItineraryAdapter())
     ..registerAdapter(CheckpointAdapter())
     ..registerAdapter(DestinationAdapter())

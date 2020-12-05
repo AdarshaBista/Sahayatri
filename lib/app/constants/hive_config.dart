@@ -21,4 +21,5 @@ class HiveTypeIds {
   static const int review = 10;
   static const int reviewDetails = 11;
   static const int trackerData = 12;
+  static const int mapLayers = 13;
 }

@@ -146,8 +146,9 @@ class _TileLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapStyle != c.value.mapStyle,
       builder: (context, state) {
-        final layerId = (state as PrefsLoaded).prefs.mapStyle;
+        final layerId = state.value.mapStyle;
 
         return TileLayerWidget(
           options: TileLayerOptions(
@@ -180,18 +181,27 @@ class _RouteLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.watch<Destination>();
 
-    return ScaleAnimator(
-      child: PolylineLayerWidget(
-        options: PolylineLayerOptions(
-          polylines: [
-            Polyline(
-              strokeWidth: 5.0,
-              gradientColors: AppColors.routeGradient,
-              points: destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapLayers.route != c.value.mapLayers.route,
+      builder: (context, state) {
+        final enabled = state.value.mapLayers.route;
+        if (!enabled) return const Offstage();
+
+        return ScaleAnimator(
+          child: PolylineLayerWidget(
+            options: PolylineLayerOptions(
+              polylines: [
+                Polyline(
+                  strokeWidth: 5.0,
+                  gradientColors: AppColors.routeGradient,
+                  points:
+                      destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

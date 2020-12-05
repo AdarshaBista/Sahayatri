@@ -6,6 +6,7 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -125,21 +126,29 @@ class _FlagMarkersLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.watch<Destination>();
 
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          FlagMarker(
-            label: 'START',
-            coord: destination.route.first,
-            color: Colors.green,
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapLayers.flags != c.value.mapLayers.flags,
+      builder: (context, state) {
+        final enabled = state.value.mapLayers.flags;
+        if (!enabled) return const Offstage();
+
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              FlagMarker(
+                label: 'START',
+                coord: destination.route.first,
+                color: Colors.green,
+              ),
+              FlagMarker(
+                label: 'FINISH',
+                coord: destination.route.last,
+                color: Colors.red,
+              ),
+            ],
           ),
-          FlagMarker(
-            label: 'FINISH',
-            coord: destination.route.last,
-            color: Colors.red,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -151,16 +160,24 @@ class _PlaceMarkersLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.watch<Destination>();
 
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          for (int i = 0; i < destination.places.length; ++i)
-            PlaceMarker(
-              place: destination.places[i],
-              color: AppColors.accents[i % AppColors.accents.length],
-            ),
-        ],
-      ),
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) => p.value.mapLayers.places != c.value.mapLayers.places,
+      builder: (context, state) {
+        final enabled = state.value.mapLayers.places;
+        if (!enabled) return const Offstage();
+
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: [
+              for (int i = 0; i < destination.places.length; ++i)
+                PlaceMarker(
+                  place: destination.places[i],
+                  color: AppColors.accents[i % AppColors.accents.length],
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
