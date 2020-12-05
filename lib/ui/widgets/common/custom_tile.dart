@@ -4,23 +4,28 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class CustomTile extends StatelessWidget {
+  final Color color;
   final String title;
   final IconData icon;
   final Widget trailing;
   final VoidCallback onTap;
+  final TextStyle textStyle;
 
   const CustomTile({
+    this.color,
+    this.textStyle,
     @required this.icon,
-    @required this.onTap,
     @required this.title,
+    @required this.onTap,
     this.trailing,
   })  : assert(icon != null),
-        assert(onTap != null),
-        assert(title != null);
+        assert(title != null),
+        assert(onTap != null);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      color: color,
       child: ListTile(
         dense: true,
         visualDensity: VisualDensity.compact,
@@ -36,7 +41,7 @@ class CustomTile extends StatelessWidget {
             const SizedBox(width: 16.0),
             Text(
               title,
-              style: context.t.headline5,
+              style: textStyle ?? context.t.headline5,
             ),
           ],
         ),

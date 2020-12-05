@@ -9,6 +9,7 @@ class ToggleGrid<T> extends StatefulWidget {
   final Function(T) onSelected;
   final List<ToggleItem<T>> items;
   final Color iconColor;
+  final double titlePadding;
   final TextStyle titleStyle;
   final Color backgroundColor;
 
@@ -16,6 +17,7 @@ class ToggleGrid<T> extends StatefulWidget {
     this.iconColor,
     this.titleStyle,
     this.backgroundColor,
+    this.titlePadding = 4.0,
     @required this.title,
     @required this.items,
     @required this.onSelected,
@@ -23,6 +25,7 @@ class ToggleGrid<T> extends StatefulWidget {
   })  : assert(title != null),
         assert(items != null),
         assert(onSelected != null),
+        assert(titlePadding != null),
         assert(initialValue != null);
 
   @override
@@ -45,7 +48,7 @@ class _ToggleGridState<T> extends State<ToggleGrid<T>> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 4.0),
+          padding: EdgeInsets.only(left: widget.titlePadding),
           child: Text(
             widget.title,
             style: widget.titleStyle ?? context.t.headline5.bold,

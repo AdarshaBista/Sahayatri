@@ -16,9 +16,10 @@ class StylesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToggleGrid<String>(
       title: 'Map Style',
+      titlePadding: 0.0,
       iconColor: AppColors.light,
-      backgroundColor: AppColors.darkAccent,
-      titleStyle: AppTextStyles.headline5.bold.light,
+      backgroundColor: AppColors.darkFaded,
+      titleStyle: AppTextStyles.headline3.thin.light,
       initialValue: BlocProvider.of<PrefsCubit>(context).prefs.mapStyle,
       onSelected: (style) => context.read<PrefsCubit>().saveMapLayer(style),
       items: [
