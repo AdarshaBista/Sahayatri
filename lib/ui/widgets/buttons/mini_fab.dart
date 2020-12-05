@@ -17,7 +17,7 @@ class MiniFab extends StatelessWidget {
       onPressed: onTap,
       child: Icon(
         icon,
-        size: 24.0,
+        size: 22.0,
       ),
     );
   }

@@ -146,8 +146,8 @@ class DestinationCard extends StatelessWidget {
               context.read<DownloadedDestinationsCubit>().delete(destination),
         ).openDialog(context),
         child: Container(
-          width: 40.0,
-          height: 40.0,
+          width: 36.0,
+          height: 36.0,
           decoration: const BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.only(
@@ -157,7 +157,7 @@ class DestinationCard extends StatelessWidget {
           ),
           child: const Icon(
             Icons.close,
-            size: 20.0,
+            size: 18.0,
             color: AppColors.lightAccent,
           ),
         ),
