@@ -54,15 +54,7 @@ class AppColors {
     ];
   }
 
-  static List<Color> getDrawerGradient(bool isDark) {
-    if (!isDark) return AppColors.accents.take(3).toList();
-    return [
-      AppColors.darkSurface,
-      AppColors.darkAccent,
-      AppColors.darkFaded,
-    ];
-  }
-
   static final routeGradient = AppColors.accents.take(4).toList();
+  static final drawerGradient = AppColors.accents.take(3).toList();
   static final userTrackGradient = AppColors.accents.getRange(5, 7).toList();
 }

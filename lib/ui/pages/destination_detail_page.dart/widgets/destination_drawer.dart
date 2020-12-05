@@ -27,8 +27,7 @@ class DestinationDrawer extends StatelessWidget {
           CustomPaint(
             foregroundPainter: const _DrawerBackground(),
             child: GradientContainer(
-              gradientColors: AppColors.getDrawerGradient(
-                  BlocProvider.of<ThemeCubit>(context).isDark),
+              gradientColors: AppColors.drawerGradient,
             ),
           ),
           Center(child: _buildMenuItems(context)),
@@ -77,8 +76,8 @@ class _DrawerBackground extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = AppColors.light.withOpacity(0.1);
 
-    canvas.drawCircle(Offset.zero, 220.0, paint);
-    canvas.drawCircle(Offset.zero, 130.0, paint);
+    canvas.drawCircle(Offset(size.width, 0.0), 220.0, paint);
+    canvas.drawCircle(Offset(size.width, 0.0), 130.0, paint);
   }
 
   @override
