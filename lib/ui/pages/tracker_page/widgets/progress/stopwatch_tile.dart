@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/services/tracker/tracker_service.dart';
+import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
@@ -16,13 +18,13 @@ class StopwatchTile extends StatefulWidget {
 
 class _StopwatchTileState extends State<StopwatchTile> {
   Timer timer;
+  Duration elapsed;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
+    updateTimer();
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => updateTimer());
   }
 
   @override
@@ -31,10 +33,16 @@ class _StopwatchTileState extends State<StopwatchTile> {
     super.dispose();
   }
 
+  void updateTimer() {
+    if (context.read<TrackerService>().isTracking) {
+      setState(() {
+        elapsed = context.read<StopwatchService>().elapsed();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final elapsed = context.select<TrackerCubit, Duration>((u) => u.elapsed);
-
     return Center(
       child: Column(
         children: [

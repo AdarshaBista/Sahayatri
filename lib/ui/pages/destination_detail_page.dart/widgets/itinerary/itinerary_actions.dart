@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
-import 'package:sahayatri/core/services/tracker_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 

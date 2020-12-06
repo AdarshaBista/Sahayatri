@@ -7,7 +7,6 @@ enum TrackingState { updating, paused, stopped }
 
 class TrackerUpdate {
   final int userIndex;
-  final Duration elapsed;
   final double distanceCovered;
   final double distanceRemaining;
   final TrackingState trackingState;
@@ -17,7 +16,6 @@ class TrackerUpdate {
   UserLocation get currentLocation => userTrack.last;
 
   const TrackerUpdate({
-    @required this.elapsed,
     @required this.userIndex,
     @required this.userTrack,
     @required this.nextCheckpoint,
@@ -40,7 +38,6 @@ class TrackerUpdate {
     NextCheckpoint nextCheckpoint,
   }) {
     return TrackerUpdate(
-      elapsed: elapsed ?? this.elapsed,
       userIndex: userIndex ?? this.userIndex,
       userTrack: userTrack ?? this.userTrack,
       trackingState: trackingState ?? this.trackingState,

@@ -6,29 +6,23 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
+
 import 'package:sahayatri/core/services/location_service.dart';
+import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/database/tracker_dao.dart';
 
 class TrackerService {
   /// Location updates from GPS.
   final LocationService locationService;
 
-  /// Persist [TrackerValue] on local storage.
-  final TrackerDao trackerDao;
-
-  /// Keeps track of time spent on tracking.
-  final Stopwatch _stopwatch = Stopwatch();
-
-  /// Persisted tracker data.
-  TrackerData trackerData;
+  /// Keeps track of time spent by the user on this trail.
+  final StopwatchService stopwatchService;
 
   /// The [Destination] this service is currently tracking.
   Destination _destination;
@@ -43,16 +37,16 @@ class TrackerService {
   final Set<UserLocation> _userTrack = {};
 
   /// Tracker update subscription.
-  StreamSubscription<Future<TrackerUpdate>> _trackerStreamSub;
+  StreamSubscription<TrackerUpdate> _trackerStreamSub;
 
   /// Continuous tracker updates.
   StreamController<TrackerUpdate> _trackerStreamController;
   Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
 
   TrackerService({
-    @required this.trackerDao,
+    @required this.stopwatchService,
     @required this.locationService,
-  })  : assert(trackerDao != null),
+  })  : assert(stopwatchService != null),
         assert(locationService != null);
 
   /// Start the tracking process for a [destination].
@@ -69,52 +63,27 @@ class TrackerService {
     }
 
     _destination = destination;
-    _stopwatch.reset();
-    _stopwatch.start();
-
-    await _initTrackerData();
+    await stopwatchService.start(destination.id);
     _initTrackerStream();
-  }
-
-  /// Initialize tracker data and save this session to disk.
-  Future<void> _initTrackerData() async {
-    trackerData = await trackerDao.get();
-    if (trackerData.destinationId == null) {
-      trackerData = TrackerData(destinationId: _destination.id);
-      await trackerDao.upsert(trackerData);
-    } else {
-      if (trackerData.destinationId != _destination.id) {
-        await trackerDao.delete();
-        trackerData = TrackerData(destinationId: _destination.id);
-        await trackerDao.upsert(trackerData);
-      }
-    }
   }
 
   void _initTrackerStream() {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
     _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
-      (userLocation) async {
+      (userLocation) {
         if (_checkCompleted(userLocation.coord)) onCompleted();
 
         _userTrack.add(userLocation);
         final index = _userIndex(userLocation.coord);
-        final elapsed = elapsedDuration();
-
-        trackerData = await trackerDao.get();
-        trackerDao.upsert(trackerData.copyWith(elapsed: elapsed.inSeconds));
-
         return TrackerUpdate(
           userIndex: index,
-          elapsed: elapsed,
           userTrack: _userTrack.toList(),
           nextCheckpoint: _nextCheckpoint(userLocation),
           distanceCovered: _distanceCovered(index),
           distanceRemaining: _distanceRemaining(index),
         );
       },
-    ).listen((trackerUpdateFuture) async {
-      final trackerUpdate = await trackerUpdateFuture;
+    ).listen((trackerUpdate) {
       _trackerStreamController.add(trackerUpdate);
     });
   }
@@ -130,23 +99,21 @@ class TrackerService {
     if (!isTracking) return;
 
     _destination = null;
-    await trackerDao.delete();
-
-    _stopwatch?.stop();
     _userTrack?.clear();
+    await stopwatchService.stop();
     await _trackerStreamSub?.cancel();
     await _trackerStreamController?.close();
   }
 
   /// Pause the tracking process
   void pause() {
-    _stopwatch.stop();
+    stopwatchService.pause();
     _trackerStreamSub?.pause();
   }
 
   /// Resume the tracking process
   void resume() {
-    _stopwatch.start();
+    stopwatchService.resume();
     _trackerStreamSub?.resume();
   }
 
@@ -165,13 +132,7 @@ class TrackerService {
     }
   }
 
-  /// Time since tracking started.
-  Duration elapsedDuration() {
-    final persistedElapsed = trackerData.elapsed;
-    final stopwatchElapsed = _stopwatch.elapsed.inSeconds;
-    return Duration(seconds: persistedElapsed + stopwatchElapsed);
-  }
-
+  /// The index of user on route.
   int _userIndex(Coord userCoord) {
     return GeoUtils.indexOnPath(userCoord, _destination.route);
   }
