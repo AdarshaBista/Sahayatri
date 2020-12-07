@@ -48,10 +48,8 @@ class DestinationsService {
   Future<void> download(Destination destination, User user) async {
     try {
       final fullDestination = await apiService.download(destination.id, user);
-      fullDestination.isDownloaded = true;
       destination.places = fullDestination.places;
       destination.reviewDetails = fullDestination.reviewDetails;
-      destination.isDownloaded = fullDestination.isDownloaded;
       destination.suggestedItineraries = fullDestination.suggestedItineraries;
 
       await destinationDao.upsert(fullDestination);

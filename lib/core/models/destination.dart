@@ -51,21 +51,15 @@ class Destination {
   final List<String> bestMonths;
 
   @HiveField(11)
-  bool isDownloaded;
-
-  @HiveField(12)
-  Itinerary createdItinerary;
-
-  @HiveField(13)
   List<Place> places;
 
-  @HiveField(14)
+  @HiveField(12)
   ReviewDetails reviewDetails;
 
-  @HiveField(15)
+  @HiveField(13)
   List<Itinerary> suggestedItineraries;
 
-  @HiveField(16)
+  @HiveField(14)
   List<DestinationUpdate> updates;
 
   double get minLat => route.minLat;
@@ -90,8 +84,6 @@ class Destination {
     @required this.updates,
     @required this.reviewDetails,
     @required this.suggestedItineraries,
-    @required this.createdItinerary,
-    @required this.isDownloaded,
   })  : assert(id != null),
         assert(name != null),
         assert(permit != null),
@@ -103,7 +95,6 @@ class Destination {
         assert(reviewDetails != null),
         assert(description != null),
         assert(maxAltitude != null),
-        assert(isDownloaded != null),
         assert(estimatedDuration != null);
 
   Destination copyWith({
@@ -118,8 +109,6 @@ class Destination {
     List<Coord> route,
     List<String> imageUrls,
     List<String> bestMonths,
-    bool isDownloaded,
-    Itinerary createdItinerary,
     List<Place> places,
     ReviewDetails reviewDetails,
     List<DestinationUpdate> updates,
@@ -137,8 +126,6 @@ class Destination {
       route: route ?? this.route,
       imageUrls: imageUrls ?? this.imageUrls,
       bestMonths: bestMonths ?? this.bestMonths,
-      isDownloaded: isDownloaded ?? this.isDownloaded,
-      createdItinerary: createdItinerary ?? this.createdItinerary,
       places: places ?? this.places,
       updates: updates ?? this.updates,
       reviewDetails: reviewDetails ?? this.reviewDetails,
@@ -181,8 +168,6 @@ class Destination {
       route: ApiUtils.parseRoute(map['route'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       bestMonths: ApiUtils.parseCsv(map['bestMonths'] as String),
-      isDownloaded: false,
-      createdItinerary: null,
       places: places,
       updates: updates,
       reviewDetails: reviewDetails,
@@ -192,7 +177,7 @@ class Destination {
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, isDownloaded: $isDownloaded, createdItinerary: $createdItinerary, places: $places, updates: $updates, reviewDetails: $reviewDetails, suggestedItineraries: $suggestedItineraries)';
+    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, updates: $updates, reviewDetails: $reviewDetails, suggestedItineraries: $suggestedItineraries)';
   }
 
   @override
@@ -214,8 +199,6 @@ class Destination {
         route.hashCode ^
         imageUrls.hashCode ^
         bestMonths.hashCode ^
-        isDownloaded.hashCode ^
-        createdItinerary.hashCode ^
         places.hashCode ^
         updates.hashCode ^
         reviewDetails.hashCode ^

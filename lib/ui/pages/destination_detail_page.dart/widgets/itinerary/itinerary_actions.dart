@@ -44,12 +44,9 @@ class ItineraryActions extends StatelessWidget {
           color: AppColors.primaryDark,
           icon: Icons.edit,
           onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.itineraryFormPageRoute,
-            arguments: [
-              itinerary,
-              context.read<UserItineraryCubit>(),
-            ],
-          ),
+                Routes.itineraryFormPageRoute,
+                arguments: itinerary,
+              ),
         ),
         if (deletable)
           _buildIcon(

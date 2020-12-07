@@ -10,12 +10,13 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/map/place_marker.dart';
+import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
@@ -168,8 +169,9 @@ class _PlaceMarkersLayer extends StatelessWidget {
         if (!enabled) return const Offstage();
 
         final destination = context.watch<Destination>();
+        final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
         final places = destination.places;
-        final checkpoints = destination.createdItinerary.checkpoints;
+        final checkpoints = itinerary.checkpoints;
         final checkpointPlaces = checkpoints.map((c) => c.place).toList();
         final remainingPlaces =
             places.where((p) => !checkpointPlaces.contains(p)).toList();
@@ -201,8 +203,8 @@ class _CheckpointMarkersLayer extends StatelessWidget {
         final enabled = state.prefs.mapLayers.checkpoints;
         if (!enabled) return const Offstage();
 
-        final destination = context.watch<Destination>();
-        final checkpoints = destination.createdItinerary.checkpoints;
+        final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
+        final checkpoints = itinerary.checkpoints;
 
         return MarkerLayerWidget(
           options: MarkerLayerOptions(

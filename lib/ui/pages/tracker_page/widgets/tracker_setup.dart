@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
+import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
@@ -31,8 +32,11 @@ class TrackerSetup extends StatelessWidget {
         'START',
         style: AppTextStyles.headline5.bold.withColor(context.c.background),
       ),
-      onPressed: () =>
-          context.read<TrackerCubit>().startTracking(context.read<Destination>()),
+      onPressed: () {
+        final destination = context.read<Destination>();
+        final itinerary = context.read<UserItineraryCubit>().userItinerary;
+        context.read<TrackerCubit>().startTracking(destination, itinerary);
+      },
     );
   }
 }

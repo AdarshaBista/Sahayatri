@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -18,22 +19,22 @@ class TrackerFab extends StatelessWidget {
     return BlocBuilder<UserItineraryCubit, UserItineraryState>(
       builder: (context, state) {
         if (state is UserItineraryLoaded) {
-          return _buildFab(context);
+          return _buildFab(context, state.userItinerary);
         }
         return const Offstage();
       },
     );
   }
 
-  Widget _buildFab(BuildContext context) {
+  Widget _buildFab(BuildContext context, Itinerary itinerary) {
     return MiniFab(
       icon: Icons.play_arrow_outlined,
       onTap: () {
         final destination = context.read<Destination>();
         context.read<DestinationNavService>().pushNamed(
-              Routes.trackerPageRoute,
-              arguments: destination,
-            );
+          Routes.trackerPageRoute,
+          arguments: [destination, itinerary],
+        );
       },
     );
   }

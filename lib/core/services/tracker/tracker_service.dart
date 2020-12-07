@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
@@ -26,6 +27,9 @@ class TrackerService {
 
   /// The [Destination] this service is currently tracking.
   Destination _destination;
+
+  /// The [Itinerary] the user is currently following.
+  Itinerary _itinerary;
 
   /// If destination is null, there is no tracking in progress.
   bool get isTracking => _destination != null;
@@ -50,7 +54,7 @@ class TrackerService {
         assert(locationService != null);
 
   /// Start the tracking process for a [destination].
-  Future<void> start(Destination destination) async {
+  Future<void> start(Destination destination, Itinerary itinerary) async {
     if (isTracking) {
       if (destination.id != _destination.id) {
         throw const AppError(
@@ -62,6 +66,7 @@ class TrackerService {
       return;
     }
 
+    _itinerary = itinerary;
     _destination = destination;
     await stopwatchService.start(destination.id);
     _initTrackerStream();
@@ -98,6 +103,7 @@ class TrackerService {
   Future<void> stop() async {
     if (!isTracking) return;
 
+    _itinerary = null;
     _destination = null;
     _userTrack?.clear();
     await stopwatchService.stop();
@@ -156,7 +162,7 @@ class TrackerService {
     Checkpoint nextCheckpoint;
     int userIndex, placeIndex;
 
-    for (final checkpoint in _destination.createdItinerary.checkpoints) {
+    for (final checkpoint in _itinerary.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
       placeIndex = GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
 

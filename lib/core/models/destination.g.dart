@@ -28,19 +28,17 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       route: (fields[8] as List)?.cast<Coord>(),
       imageUrls: (fields[9] as List)?.cast<String>(),
       bestMonths: (fields[10] as List)?.cast<String>(),
-      places: (fields[13] as List)?.cast<Place>(),
-      updates: (fields[16] as List)?.cast<DestinationUpdate>(),
-      reviewDetails: fields[14] as ReviewDetails,
-      suggestedItineraries: (fields[15] as List)?.cast<Itinerary>(),
-      createdItinerary: fields[12] as Itinerary,
-      isDownloaded: fields[11] as bool,
+      places: (fields[11] as List)?.cast<Place>(),
+      updates: (fields[14] as List)?.cast<DestinationUpdate>(),
+      reviewDetails: fields[12] as ReviewDetails,
+      suggestedItineraries: (fields[13] as List)?.cast<Itinerary>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Destination obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -64,16 +62,12 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       ..writeByte(10)
       ..write(obj.bestMonths)
       ..writeByte(11)
-      ..write(obj.isDownloaded)
-      ..writeByte(12)
-      ..write(obj.createdItinerary)
-      ..writeByte(13)
       ..write(obj.places)
-      ..writeByte(14)
+      ..writeByte(12)
       ..write(obj.reviewDetails)
-      ..writeByte(15)
+      ..writeByte(13)
       ..write(obj.suggestedItineraries)
-      ..writeByte(16)
+      ..writeByte(14)
       ..write(obj.updates);
   }
 

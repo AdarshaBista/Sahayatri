@@ -14,7 +14,6 @@ import 'package:sahayatri/core/services/offroute_alert_service.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/database/itinerary_dao.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,6 @@ import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
-import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/animators/page_transition.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -52,23 +50,12 @@ class DestinationRouter {
         break;
 
       case Routes.destinationDetailPageRoute:
-        _page = MultiBlocProvider(
-          providers: [
-            BlocProvider<ItineraryCubit>(
-              create: (context) => ItineraryCubit(
-                user: context.read<UserCubit>().user,
-                apiService: context.read<ApiService>(),
-                destination: context.read<Destination>(),
-              )..fetchItineraries(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (context) => UserItineraryCubit(
-                destination: context.read<Destination>(),
-                itineraryDao: context.read<ItineraryDao>(),
-              )..getItinerary(),
-            ),
-          ],
+        _page = BlocProvider<ItineraryCubit>(
+          create: (context) => ItineraryCubit(
+            user: context.read<UserCubit>().user,
+            apiService: context.read<ApiService>(),
+            destination: context.read<Destination>(),
+          )..fetchItineraries(),
           child: const DestinationDetailPage(),
         );
         break;
@@ -106,23 +93,16 @@ class DestinationRouter {
         break;
 
       case Routes.itineraryFormPageRoute:
-        final args = settings.arguments as List;
-        _page = MultiBlocProvider(
-          providers: [
-            BlocProvider<ItineraryFormCubit>(
-              create: (_) => ItineraryFormCubit(
-                itinerary: args[0] as Itinerary,
-              ),
-            ),
-            BlocProvider.value(
-              value: args[1] as UserItineraryCubit,
-            ),
-          ],
+        _page = BlocProvider<ItineraryFormCubit>(
+          create: (_) => ItineraryFormCubit(
+            itinerary: settings.arguments as Itinerary,
+          ),
           child: ItineraryFormPage(),
         );
         break;
 
       case Routes.trackerPageRoute:
+        final args = settings.arguments as List;
         _page = MultiBlocProvider(
           providers: [
             BlocProvider<TrackerCubit>(
@@ -131,7 +111,7 @@ class DestinationRouter {
                 nearbyService: context.read<NearbyService>(),
                 trackerService: context.read<TrackerService>(),
                 offRouteAlertService: context.read<OffRouteAlertService>(),
-              )..attemptTracking(settings.arguments as Destination),
+              )..attemptTracking(args[0] as Destination, args[1] as Itinerary),
             ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(

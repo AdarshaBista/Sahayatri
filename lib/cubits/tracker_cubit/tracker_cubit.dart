@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
@@ -74,9 +75,9 @@ class TrackerCubit extends Cubit<TrackerState> {
     ));
   }
 
-  Future<void> attemptTracking(Destination destination) async {
+  Future<void> attemptTracking(Destination destination, Itinerary itinerary) async {
     if (trackerService.isTracking) {
-      startTracking(destination);
+      startTracking(destination, itinerary);
       return;
     }
 
@@ -93,10 +94,10 @@ class TrackerCubit extends Cubit<TrackerState> {
     }
   }
 
-  Future<void> startTracking(Destination destination) async {
+  Future<void> startTracking(Destination destination, Itinerary itinerary) async {
     emit(const TrackerLoading());
     try {
-      await trackerService.start(destination);
+      await trackerService.start(destination, itinerary);
 
       _trackerUpdateSub?.cancel();
       _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {

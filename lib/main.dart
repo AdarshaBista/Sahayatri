@@ -46,6 +46,8 @@ import 'package:device_preview/plugins.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   setSystemPreferences();
   await initHive();
   runApp(const App());
@@ -61,7 +63,6 @@ void setSystemPreferences() {
 }
 
 Future<void> initHive() async {
-  WidgetsFlutterBinding.ensureInitialized();
   final appDir = await getApplicationDocumentsDirectory();
   final hivePath = '${appDir.path}/${AppConfig.appName}';
 

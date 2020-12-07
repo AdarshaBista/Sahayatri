@@ -14,15 +14,15 @@ import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
 
-class CreatedItineraryCard extends StatelessWidget {
-  const CreatedItineraryCard();
+class UserItineraryCard extends StatelessWidget {
+  const UserItineraryCard();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserItineraryCubit, UserItineraryState>(
       builder: (context, state) {
         if (state is UserItineraryLoaded) {
-          return _buildItineraryCard(state.createdItinerary);
+          return _buildItineraryCard(state.userItinerary);
         } else if (state is UserItineraryLoading) {
           return const BusyIndicator();
         }
@@ -45,12 +45,8 @@ class CreatedItineraryCard extends StatelessWidget {
       icon: CommunityMaterialIcons.pencil_circle_outline,
       label: 'Create an itinerary',
       onTap: () => context.read<DestinationNavService>().pushNamed(
-        Routes.itineraryFormPageRoute,
-        arguments: [
-          null,
-          context.read<UserItineraryCubit>(),
-        ],
-      ),
+            Routes.itineraryFormPageRoute,
+          ),
     );
   }
 }

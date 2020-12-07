@@ -10,7 +10,7 @@ import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itinerary_card.dart';
-import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/created_itinerary_card.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/user_itinerary_card.dart';
 
 class ItinerariesList extends StatelessWidget {
   const ItinerariesList();
@@ -29,7 +29,7 @@ class ItinerariesList extends StatelessWidget {
         const SizedBox(height: 12.0),
         _buildSuggestedItineraries(context),
         const SizedBox(height: 12.0),
-        _buildCreatedItinerary(context),
+        _buildUserItinerary(context),
         const SizedBox(height: 72.0),
       ],
     );
@@ -77,7 +77,7 @@ class ItinerariesList extends StatelessWidget {
     );
   }
 
-  Widget _buildCreatedItinerary(BuildContext context) {
+  Widget _buildUserItinerary(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -98,7 +98,7 @@ class ItinerariesList extends StatelessWidget {
         ),
         const Divider(height: 16.0),
         const SizedBox(height: 8.0),
-        const CreatedItineraryCard(),
+        const UserItineraryCard(),
       ],
     );
   }

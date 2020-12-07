@@ -27,7 +27,6 @@ class DownloadCubit extends Cubit<DownloadState> {
 
   void checkDownloaded() {
     if (destinationsService.isDownloaded(destination)) {
-      destination.isDownloaded = true;
       emit(const DownloadCompleted());
     }
   }
