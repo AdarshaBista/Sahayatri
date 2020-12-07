@@ -35,10 +35,15 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   AppBar _buildAppbar(BuildContext context) {
     return AppBar(
       leading: leading,
-      actions: actions,
       elevation: 0.0,
       centerTitle: true,
       backgroundColor: Colors.transparent,
+      actions: actions == null
+          ? null
+          : [
+              ...actions,
+              const SizedBox(width: 8.0),
+            ],
       title: SlideAnimator(
         begin: const Offset(0.0, -0.2),
         child: FadeAnimator(

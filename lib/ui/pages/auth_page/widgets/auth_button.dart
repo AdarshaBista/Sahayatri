@@ -10,15 +10,12 @@ import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class AuthButton extends StatelessWidget {
   final String label;
-  final IconData icon;
   final VoidCallback onPressed;
 
   const AuthButton({
     @required this.label,
-    @required this.icon,
     @required this.onPressed,
   })  : assert(label != null),
-        assert(icon != null),
         assert(onPressed != null);
 
   @override
@@ -32,7 +29,6 @@ class AuthButton extends StatelessWidget {
       builder: (context, state) {
         return FloatingActionButton.extended(
           heroTag: '$label Tag',
-          icon: Icon(icon),
           backgroundColor: AppColors.dark,
           onPressed: (state is AuthLoading) ? null : onPressed,
           label: (state is AuthLoading)

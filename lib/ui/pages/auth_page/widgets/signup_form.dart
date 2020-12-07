@@ -71,7 +71,6 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             AuthButton(
               label: 'SIGN UP',
-              icon: Icons.app_registration,
               onPressed: () async {
                 if (!formKey.currentState.validate()) return;
                 final success =

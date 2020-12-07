@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 
@@ -175,6 +179,12 @@ class Sahayatri extends StatelessWidget {
   }
 
   void onAuthenticated(BuildContext context, User user) {
+    getApplicationDocumentsDirectory().then((appDir) {
+      final hivePath = '${appDir.path}/${AppConfig.appName}';
+      final userDirectoryPath = '$hivePath/${user.id}';
+      Directory(userDirectoryPath).createSync();
+    });
+
     RepositoryProvider.of<PrefsDao>(context).init(user.id);
     RepositoryProvider.of<TrackerDao>(context).init(user.id);
     RepositoryProvider.of<ItineraryDao>(context).init(user.id);

@@ -7,17 +7,19 @@ class CustomTile extends StatelessWidget {
   final Color color;
   final String title;
   final IconData icon;
+  final Color iconColor;
   final Widget trailing;
   final VoidCallback onTap;
   final TextStyle textStyle;
 
   const CustomTile({
     this.color,
+    this.iconColor,
     this.textStyle,
+    this.trailing,
     @required this.icon,
     @required this.title,
     @required this.onTap,
-    this.trailing,
   })  : assert(icon != null),
         assert(title != null),
         assert(onTap != null);
@@ -36,7 +38,7 @@ class CustomTile extends StatelessWidget {
             Icon(
               icon,
               size: 20.0,
-              color: context.c.onSurface,
+              color: iconColor ?? context.c.onSurface,
             ),
             const SizedBox(width: 16.0),
             Text(

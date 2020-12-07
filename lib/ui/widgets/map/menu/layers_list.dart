@@ -129,6 +129,7 @@ class _LayerTileState extends State<_LayerTile> {
       icon: widget.icon,
       title: widget.label,
       color: Colors.transparent,
+      iconColor: AppColors.light,
       textStyle: AppTextStyles.headline5.light,
       trailing: Checkbox(
         value: isChecked,

@@ -56,7 +56,6 @@ class _LoginFormState extends State<LoginForm> {
             ),
             AuthButton(
               label: 'LOGIN',
-              icon: Icons.login_outlined,
               onPressed: () async {
                 if (!formKey.currentState.validate()) return;
 
