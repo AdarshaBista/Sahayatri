@@ -6,6 +6,8 @@ import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -23,18 +25,22 @@ class LogoutButton extends StatelessWidget {
       backgroundColor: context.c.background,
       onTap: () => ConfirmDialog(
         message: 'Do you want to log out?',
-        onConfirm: () async {
-          context.openLoadingFlushBar(
-            'Logging out...',
-            isInteractive: false,
-            callback: () async {
-              await context.read<TrackerService>().stop();
-              await context.read<NearbyCubit>().stopNearby();
-              await context.read<UserCubit>().logout();
-            },
-          );
-        },
+        onConfirm: () => _logout(context),
       ).openDialog(context),
+    );
+  }
+
+  Future<void> _logout(BuildContext context) async {
+    context.openLoadingFlushBar(
+      'Logging out...',
+      isInteractive: false,
+      callback: () async {
+        await context.read<TrackerService>().stop();
+        await context.read<NearbyCubit>().stopNearby();
+        await context.read<UserCubit>().logout();
+        context.read<PrefsCubit>().reset();
+        context.read<ThemeCubit>().changeTheme(ThemeMode.system);
+      },
     );
   }
 }

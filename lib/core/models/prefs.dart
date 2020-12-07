@@ -27,7 +27,7 @@ class Prefs {
   const Prefs({
     this.contact = '',
     this.deviceName = '',
-    this.theme = 'system',
+    this.theme = ThemeStyles.system,
     this.mapStyle = MapStyles.outdoors,
     this.mapLayers = const MapLayers(),
   })  : assert(theme != null),

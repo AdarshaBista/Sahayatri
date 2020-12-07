@@ -191,7 +191,7 @@ class Sahayatri extends StatelessWidget {
     RepositoryProvider.of<DestinationDao>(context).init(user.id);
 
     final prefsCubit = BlocProvider.of<PrefsCubit>(context);
-    prefsCubit.initPrefs().then((_) {
+    prefsCubit.init().then((_) {
       final prefs = prefsCubit.prefs;
       BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
     });

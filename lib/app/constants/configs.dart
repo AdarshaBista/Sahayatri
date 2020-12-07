@@ -22,6 +22,12 @@ class UiConfig {
   static const double profileHeaderHeight = 290.0;
 }
 
+class ThemeStyles {
+  static const String dark = 'dark';
+  static const String light = 'light';
+  static const String system = 'system';
+}
+
 class LocationConfig {
   static const int interval = 2000;
   static const double distanceFilter = 10.0;

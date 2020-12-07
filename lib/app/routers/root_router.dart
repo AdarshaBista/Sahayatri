@@ -4,19 +4,14 @@ import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
-import 'package:sahayatri/core/services/destinations_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/database/itinerary_dao.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
-import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
-import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
-import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
@@ -47,13 +42,6 @@ class RootRouter {
       case Routes.destinationPageRoute:
         _page = MultiBlocProvider(
           providers: [
-            BlocProvider<DownloadCubit>(
-              create: (context) => DownloadCubit(
-                user: context.read<UserCubit>().user,
-                destination: settings.arguments as Destination,
-                destinationsService: context.read<DestinationsService>(),
-              )..checkDownloaded(),
-            ),
             BlocProvider<ReviewCubit>(
               create: (context) => DestinationReviewCubit(
                 user: context.read<UserCubit>().user,
@@ -68,23 +56,10 @@ class RootRouter {
                 destination: settings.arguments as Destination,
               )..fetchUpdates(),
             ),
-            BlocProvider<PlacesCubit>(
-              create: (context) => PlacesCubit(
-                user: context.read<UserCubit>().user,
-                apiService: context.read<ApiService>(),
-                destination: settings.arguments as Destination,
-              )..fetchPlaces(),
-            ),
             BlocProvider<DirectionsCubit>(
               create: (context) => DirectionsCubit(
                 directionsService: context.read<DirectionsService>(),
               ),
-            ),
-            BlocProvider<UserItineraryCubit>(
-              create: (context) => UserItineraryCubit(
-                itineraryDao: context.read<ItineraryDao>(),
-                destination: settings.arguments as Destination,
-              )..getItinerary(),
             ),
           ],
           child: Provider<Destination>(

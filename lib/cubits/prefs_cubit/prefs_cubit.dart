@@ -20,37 +20,41 @@ class PrefsCubit extends Cubit<PrefsState> {
 
   Prefs get prefs => state.prefs;
 
-  Future<void> initPrefs() async {
+  Future<void> init() async {
     final prefs = await prefsDao.get();
     emit(PrefsState(prefs: prefs));
   }
 
+  void reset() {
+    emit(const PrefsState());
+  }
+
   void saveMapStyle(String mapStyle) {
     final newPrefs = state.prefs.copyWith(mapStyle: mapStyle);
-    _updatePrefs(newPrefs);
+    _update(newPrefs);
   }
 
   void saveContact(String contact) {
     final newPrefs = state.prefs.copyWith(contact: contact);
-    _updatePrefs(newPrefs);
+    _update(newPrefs);
   }
 
   void saveDeviceName(String name) {
     final newPrefs = state.prefs.copyWith(deviceName: name);
-    _updatePrefs(newPrefs);
+    _update(newPrefs);
   }
 
   void saveTheme(String theme) {
     final newPrefs = state.prefs.copyWith(theme: theme);
-    _updatePrefs(newPrefs);
+    _update(newPrefs);
   }
 
   void saveMapLayers(MapLayers mapLayers) {
     final newPrefs = state.prefs.copyWith(mapLayers: mapLayers);
-    _updatePrefs(newPrefs);
+    _update(newPrefs);
   }
 
-  void _updatePrefs(Prefs newPrefs) {
+  void _update(Prefs newPrefs) {
     emit(PrefsState(prefs: newPrefs));
     prefsDao.upsert(newPrefs);
   }

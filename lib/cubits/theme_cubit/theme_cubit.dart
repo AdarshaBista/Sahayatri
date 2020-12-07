@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 class ThemeCubit extends Cubit<ThemeMode> {
-  ThemeCubit() : super(ThemeMode.dark);
+  ThemeCubit() : super(ThemeMode.system);
 
   bool get isDark => state == ThemeMode.dark;
   String get themeStr => state.toString().split('.').last;
@@ -13,9 +15,9 @@ class ThemeCubit extends Cubit<ThemeMode> {
   }
 
   void init(String theme) {
-    if (theme == 'dark') {
+    if (theme == ThemeStyles.dark) {
       emit(ThemeMode.dark);
-    } else if (theme == 'light') {
+    } else if (theme == ThemeStyles.light) {
       emit(ThemeMode.light);
     } else {
       emit(ThemeMode.system);
