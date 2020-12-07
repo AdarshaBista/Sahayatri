@@ -36,9 +36,9 @@ class LayersList extends StatelessWidget {
 
   Widget _buildLayers() {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers != c.value.mapLayers,
+      buildWhen: (p, c) => p.prefs.mapLayers != c.prefs.mapLayers,
       builder: (context, state) {
-        final mapLayers = state.value.mapLayers;
+        final mapLayers = state.prefs.mapLayers;
 
         return Column(
           children: [

@@ -170,10 +170,10 @@ class Sahayatri extends StatelessWidget {
   Widget _buildPrefsState(BuildContext context, Authenticated state) {
     return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
-        if (state is PrefsLoaded) {
-          return const HomePage();
+        if (state.isLoading) {
+          return const SplashView();
         }
-        return const SplashView();
+        return const HomePage();
       },
     );
   }

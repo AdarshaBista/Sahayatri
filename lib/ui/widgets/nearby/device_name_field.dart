@@ -41,14 +41,14 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   Widget _buildTextField() {
     return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
-        deviceName = state.value.deviceName;
+        deviceName = state.prefs.deviceName;
 
         return CustomTextField(
           icon: Icons.account_circle_outlined,
           label: 'Device name',
           onChanged: (value) => deviceName = value,
           validator: FormValidators.requiredText(),
-          initialValue: state.value.deviceName,
+          initialValue: state.prefs.deviceName,
           inputFormatters: [
             LengthLimitingTextInputFormatter(16),
             FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),

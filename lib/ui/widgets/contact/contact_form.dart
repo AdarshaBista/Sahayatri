@@ -79,14 +79,14 @@ class _ContactFormState extends State<ContactForm> {
 
   Widget _buildTextField() {
     return BlocBuilder<PrefsCubit, PrefsState>(builder: (context, state) {
-      contact = state.value.contact;
+      contact = state.prefs.contact;
 
       return CustomTextField(
         label: 'Phone number',
         icon: Icons.phone_outlined,
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
-        initialValue: state.value.contact,
+        initialValue: state.prefs.contact,
         keyboardType: const TextInputType.numberWithOptions(),
         inputFormatters: [
           LengthLimitingTextInputFormatter(10),

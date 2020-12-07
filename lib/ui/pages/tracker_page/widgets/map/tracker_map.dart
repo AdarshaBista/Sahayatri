@@ -162,9 +162,9 @@ class _PlaceMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers.places != c.value.mapLayers.places,
+      buildWhen: (p, c) => p.prefs.mapLayers.places != c.prefs.mapLayers.places,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.places;
+        final enabled = state.prefs.mapLayers.places;
         if (!enabled) return const Offstage();
 
         final destination = context.watch<Destination>();
@@ -196,9 +196,9 @@ class _CheckpointMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers.checkpoints != c.value.mapLayers.checkpoints,
+      buildWhen: (p, c) => p.prefs.mapLayers.checkpoints != c.prefs.mapLayers.checkpoints,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.checkpoints;
+        final enabled = state.prefs.mapLayers.checkpoints;
         if (!enabled) return const Offstage();
 
         final destination = context.watch<Destination>();
@@ -264,9 +264,9 @@ class _DevicesMarkersLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
       buildWhen: (p, c) =>
-          p.value.mapLayers.nearbyDevices != c.value.mapLayers.nearbyDevices,
+          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.nearbyDevices;
+        final enabled = state.prefs.mapLayers.nearbyDevices;
         if (!enabled) return const Offstage();
 
         return BlocBuilder<NearbyCubit, NearbyState>(
@@ -298,9 +298,9 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
       buildWhen: (p, c) =>
-          p.value.mapLayers.nearbyDevices != c.value.mapLayers.nearbyDevices,
+          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.nearbyDevices;
+        final enabled = state.prefs.mapLayers.nearbyDevices;
         if (!enabled) return const Offstage();
 
         return BlocBuilder<NearbyCubit, NearbyState>(

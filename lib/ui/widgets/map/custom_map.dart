@@ -146,9 +146,9 @@ class _TileLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapStyle != c.value.mapStyle,
+      buildWhen: (p, c) => p.prefs.mapStyle != c.prefs.mapStyle,
       builder: (context, state) {
-        final layerId = state.value.mapStyle;
+        final layerId = state.prefs.mapStyle;
 
         return TileLayerWidget(
           options: TileLayerOptions(
@@ -182,9 +182,9 @@ class _RouteLayer extends StatelessWidget {
     final destination = context.watch<Destination>();
 
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers.route != c.value.mapLayers.route,
+      buildWhen: (p, c) => p.prefs.mapLayers.route != c.prefs.mapLayers.route,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.route;
+        final enabled = state.prefs.mapLayers.route;
         if (!enabled) return const Offstage();
 
         return ScaleAnimator(

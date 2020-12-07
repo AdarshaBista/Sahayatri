@@ -1,25 +1,15 @@
 part of 'prefs_cubit.dart';
 
 class PrefsState extends Equatable {
-  const PrefsState();
-
-  Prefs get value => (this as PrefsLoaded).prefs;
-
-  @override
-  List<Object> get props => [];
-}
-
-class PrefsLoading extends PrefsState {
-  const PrefsLoading();
-}
-
-class PrefsLoaded extends PrefsState {
   final Prefs prefs;
+  final bool isLoading;
 
-  const PrefsLoaded({
-    @required this.prefs,
-  }) : assert(prefs != null);
+  const PrefsState({
+    this.isLoading = false,
+    this.prefs = const Prefs(),
+  })  : assert(prefs != null),
+        assert(isLoading != null);
 
   @override
-  List<Object> get props => [prefs];
+  List<Object> get props => [prefs, isLoading];
 }

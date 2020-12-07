@@ -127,9 +127,9 @@ class _FlagMarkersLayer extends StatelessWidget {
     final destination = context.watch<Destination>();
 
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers.flags != c.value.mapLayers.flags,
+      buildWhen: (p, c) => p.prefs.mapLayers.flags != c.prefs.mapLayers.flags,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.flags;
+        final enabled = state.prefs.mapLayers.flags;
         if (!enabled) return const Offstage();
 
         return MarkerLayerWidget(
@@ -161,9 +161,9 @@ class _PlaceMarkersLayer extends StatelessWidget {
     final destination = context.watch<Destination>();
 
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.value.mapLayers.places != c.value.mapLayers.places,
+      buildWhen: (p, c) => p.prefs.mapLayers.places != c.prefs.mapLayers.places,
       builder: (context, state) {
-        final enabled = state.value.mapLayers.places;
+        final enabled = state.prefs.mapLayers.places;
         if (!enabled) return const Offstage();
 
         return MarkerLayerWidget(
