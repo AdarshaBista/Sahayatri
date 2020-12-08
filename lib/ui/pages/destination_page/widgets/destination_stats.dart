@@ -15,7 +15,7 @@ class DestinationStats extends StatelessWidget {
     final destination = context.watch<Destination>();
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      padding: const EdgeInsets.all(20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
