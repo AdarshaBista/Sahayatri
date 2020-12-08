@@ -20,30 +20,38 @@ class DestinationNavPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<DownloadCubit>(
-          create: (context) => DownloadCubit(
-            user: context.read<UserCubit>().user,
-            destination: context.read<Destination>(),
-            destinationsService: context.read<DestinationsService>(),
-          )..checkDownloaded(),
-        ),
-        BlocProvider<PlacesCubit>(
-          create: (context) => PlacesCubit(
-            user: context.read<UserCubit>().user,
-            apiService: context.read<ApiService>(),
-            destination: context.read<Destination>(),
-          )..fetchPlaces(),
-        ),
-        BlocProvider<UserItineraryCubit>(
-          create: (context) => UserItineraryCubit(
-            destination: context.read<Destination>(),
-            itineraryDao: context.read<ItineraryDao>(),
-          )..getItinerary(),
-        ),
-      ],
-      child: _buildPage(context),
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is! Authenticated) {
+          return _buildPage(context);
+        }
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<DownloadCubit>(
+              create: (context) => DownloadCubit(
+                user: context.read<UserCubit>().user,
+                destination: context.read<Destination>(),
+                destinationsService: context.read<DestinationsService>(),
+              )..checkDownloaded(),
+            ),
+            BlocProvider<PlacesCubit>(
+              create: (context) => PlacesCubit(
+                user: context.read<UserCubit>().user,
+                apiService: context.read<ApiService>(),
+                destination: context.read<Destination>(),
+              )..fetchPlaces(),
+            ),
+            BlocProvider<UserItineraryCubit>(
+              create: (context) => UserItineraryCubit(
+                destination: context.read<Destination>(),
+                itineraryDao: context.read<ItineraryDao>(),
+              )..getItinerary(),
+            ),
+          ],
+          child: _buildPage(context),
+        );
+      },
     );
   }
 
