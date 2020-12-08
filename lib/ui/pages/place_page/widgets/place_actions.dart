@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
@@ -27,7 +29,7 @@ class PlaceActions extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
-          Expanded(child: _buildWeatherButton(context, place)),
+          Expanded(child: _buildWeatherButton(place)),
           const SizedBox(width: 8.0),
           Expanded(child: _buildViewMapButton(context, place)),
         ],
@@ -35,17 +37,17 @@ class PlaceActions extends StatelessWidget {
     );
   }
 
-  Widget _buildWeatherButton(BuildContext context, Place place) {
+  Widget _buildWeatherButton(Place place) {
     return CustomButton(
       label: 'Weather',
       icon: CommunityMaterialIcons.weather_fog,
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.weatherPageRoute,
-            arguments: WeatherPageArgs(
-              name: place.name,
-              coord: place.coord,
-            ),
-          ),
+      onTap: () => locator<DestinationNavService>().pushNamed(
+        Routes.weatherPageRoute,
+        arguments: WeatherPageArgs(
+          name: place.name,
+          coord: place.coord,
+        ),
+      ),
     );
   }
 

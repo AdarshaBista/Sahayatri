@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
@@ -92,8 +94,7 @@ class _CardFront extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context, Place place) {
     return GestureDetector(
-      onTap: () => context
-          .read<DestinationNavService>()
+      onTap: () => locator<DestinationNavService>()
           .pushNamed(Routes.placePageRoute, arguments: place),
       child: Text(
         place.name.toUpperCase(),

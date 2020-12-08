@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 // import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 
@@ -9,13 +9,9 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/services/location_service.dart';
 
 class DirectionsService {
-  final LocationService locationService;
+  final LocationService locationService = locator();
 
   // MapboxNavigation _directions;
-
-  DirectionsService({
-    @required this.locationService,
-  }) : assert(locationService != null);
 
   Future<UserLocation> getUserLocation() async {
     try {

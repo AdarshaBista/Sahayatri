@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
@@ -20,10 +20,10 @@ import 'package:sahayatri/app/constants/configs.dart';
 
 class TrackerService {
   /// Location updates from GPS.
-  final LocationService locationService;
+  final LocationService locationService = locator();
 
   /// Keeps track of time spent by the user on this trail.
-  final StopwatchService stopwatchService;
+  final StopwatchService stopwatchService = locator();
 
   /// The [Destination] this service is currently tracking.
   Destination _destination;
@@ -46,12 +46,6 @@ class TrackerService {
   /// Continuous tracker updates.
   StreamController<TrackerUpdate> _trackerStreamController;
   Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
-
-  TrackerService({
-    @required this.stopwatchService,
-    @required this.locationService,
-  })  : assert(stopwatchService != null),
-        assert(locationService != null);
 
   /// Start the tracking process for a [destination].
   Future<void> start(Destination destination, Itinerary itinerary) async {

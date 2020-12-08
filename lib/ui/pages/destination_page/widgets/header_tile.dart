@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -63,13 +65,13 @@ class HeaderTile extends StatelessWidget {
     return VerticalButton(
       label: 'Weather',
       icon: CommunityMaterialIcons.weather_fog,
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.weatherPageRoute,
-            arguments: WeatherPageArgs(
-              name: destination.name,
-              coord: destination.route.first,
-            ),
-          ),
+      onTap: () => locator<DestinationNavService>().pushNamed(
+        Routes.weatherPageRoute,
+        arguments: WeatherPageArgs(
+          name: destination.name,
+          coord: destination.route.first,
+        ),
+      ),
     );
   }
 }

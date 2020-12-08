@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:nearby_connections/nearby_connections.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/nearby_message.dart';
 
@@ -14,9 +16,9 @@ import 'package:sahayatri/app/constants/notification_channels.dart';
 
 class MessagesService {
   final DevicesService devicesService;
-  final NotificationService notificationService;
+  final NotificationService notificationService = locator();
 
-  const MessagesService(this.devicesService, this.notificationService);
+  MessagesService(this.devicesService);
 
   /// Called when payload is sent from connected devices.
   /// Parses the incoming bytes and handles message according to [NearbyMessageType].

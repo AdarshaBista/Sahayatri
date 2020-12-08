@@ -7,18 +7,14 @@ import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-
 class DestinationReviewCubit extends ReviewCubit {
   final Destination destination;
 
   DestinationReviewCubit({
     @required this.destination,
     @required User user,
-    @required ApiService apiService,
-  })  : assert(apiService != null),
-        assert(destination != null),
-        super(user: user, apiService: apiService);
+  })  : assert(destination != null),
+        super(user: user);
 
   @override
   bool get hasMore => destination.reviewDetails.length < destination.reviewDetails.total;

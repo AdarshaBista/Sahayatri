@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/extensions/dialog_x.dart';
-import 'package:sahayatri/core/services/api_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
@@ -24,7 +23,6 @@ class UpdateForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<DestinationUpdateFormCubit>(
       create: (context) => DestinationUpdateFormCubit(
-        apiService: context.read<ApiService>(),
         destination: context.read<Destination>(),
         destinationUpdateCubit: context.read<DestinationUpdateCubit>(),
       ),

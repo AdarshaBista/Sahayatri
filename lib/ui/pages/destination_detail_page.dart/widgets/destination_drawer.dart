@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -44,21 +46,20 @@ class DestinationDrawer extends StatelessWidget {
         DrawerItem(
           icon: CommunityMaterialIcons.chart_line_variant,
           label: 'Route',
-          onTap: () =>
-              context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
+          onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
         ),
         DrawerItem(
           icon: CommunityMaterialIcons.weather_fog,
           label: 'Weather',
           onTap: () {
             final destination = context.read<Destination>();
-            return context.read<DestinationNavService>().pushNamed(
-                  Routes.weatherPageRoute,
-                  arguments: WeatherPageArgs(
-                    name: destination.name,
-                    coord: destination.route.first,
-                  ),
-                );
+            return locator<DestinationNavService>().pushNamed(
+              Routes.weatherPageRoute,
+              arguments: WeatherPageArgs(
+                name: destination.name,
+                coord: destination.route.first,
+              ),
+            );
           },
         ),
       ],

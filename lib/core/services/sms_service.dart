@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sms_maintained/sms.dart';
 
@@ -19,10 +19,10 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/tracker_dao.dart';
 
 class SmsService {
-  final PrefsDao prefsDao;
-  final TrackerDao trackerDao;
   final SmsSender sender = SmsSender();
-  final NotificationService notificationService;
+  final PrefsDao prefsDao = locator();
+  final TrackerDao trackerDao = locator();
+  final NotificationService notificationService = locator();
 
   /// List of ids of [Place] for which sms has already been sent in this session.
   final List<String> _sentList = [];
@@ -32,14 +32,6 @@ class SmsService {
 
   /// Persisted tracker data.
   TrackerData trackerData;
-
-  SmsService({
-    @required this.prefsDao,
-    @required this.trackerDao,
-    @required this.notificationService,
-  })  : assert(prefsDao != null),
-        assert(trackerDao != null),
-        assert(notificationService != null);
 
   /// Returns true if sms should be sent on arrival to [checkpoint].
   Future<bool> _shouldSend(Coord userLocation, Checkpoint checkpoint) async {

@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/app_error.dart';
@@ -14,15 +16,13 @@ part 'places_state.dart';
 
 class PlacesCubit extends Cubit<PlacesState> {
   final User user;
-  final ApiService apiService;
   final Destination destination;
+  final ApiService apiService = locator();
 
   PlacesCubit({
     @required this.user,
-    @required this.apiService,
     @required this.destination,
   })  : assert(user != null),
-        assert(apiService != null),
         assert(destination != null),
         super(const PlacesEmpty());
 

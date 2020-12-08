@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/utils/geo_utils.dart';
@@ -8,11 +8,7 @@ import 'package:sahayatri/app/constants/notification_channels.dart';
 
 class OffRouteAlertService {
   bool isAlreadyAlerted = false;
-  final NotificationService notificationService;
-
-  OffRouteAlertService({
-    @required this.notificationService,
-  }) : assert(notificationService != null);
+  final NotificationService notificationService = locator();
 
   /// Returns true if user should be alerted.
   /// Do not alert the user if he/she has already been alerted once.

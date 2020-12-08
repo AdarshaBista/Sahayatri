@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -14,15 +16,13 @@ part 'download_state.dart';
 class DownloadCubit extends Cubit<DownloadState> {
   final User user;
   final Destination destination;
-  final DestinationsService destinationsService;
+  final DestinationsService destinationsService = locator();
 
   DownloadCubit({
     @required this.user,
     @required this.destination,
-    @required this.destinationsService,
   })  : assert(user != null),
         assert(destination != null),
-        assert(destinationsService != null),
         super(const DownloadInitial());
 
   void checkDownloaded() {

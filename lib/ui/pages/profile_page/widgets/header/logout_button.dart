@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
@@ -35,7 +37,7 @@ class LogoutButton extends StatelessWidget {
       'Logging out...',
       isInteractive: false,
       callback: () async {
-        await context.read<TrackerService>().stop();
+        await locator<TrackerService>().stop();
         await context.read<NearbyCubit>().stopNearby();
         await context.read<UserCubit>().logout();
         context.read<PrefsCubit>().reset();

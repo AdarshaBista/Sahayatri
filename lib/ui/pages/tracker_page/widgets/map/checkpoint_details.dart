@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
@@ -50,10 +50,10 @@ class CheckpointDetails extends StatelessWidget {
         Text(checkpoint.place.name, style: context.t.headline4.serif),
         const Spacer(),
         GestureDetector(
-          onTap: () => context.read<DestinationNavService>().pushNamed(
-                Routes.placePageRoute,
-                arguments: checkpoint.place,
-              ),
+          onTap: () => locator<DestinationNavService>().pushNamed(
+            Routes.placePageRoute,
+            arguments: checkpoint.place,
+          ),
           onDoubleTap: () => Navigator.of(context).pop(),
           child: Text(
             'VIEW',

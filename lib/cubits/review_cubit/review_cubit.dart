@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/review_details.dart';
@@ -12,13 +14,11 @@ part 'review_state.dart';
 
 abstract class ReviewCubit extends Cubit<ReviewState> {
   final User user;
-  final ApiService apiService;
+  final ApiService apiService = locator();
 
   ReviewCubit({
     @required this.user,
-    @required this.apiService,
-  })  : assert(apiService != null),
-        super(const ReviewEmpty());
+  }) : super(const ReviewEmpty());
 
   int page = 1;
   bool get hasMore;

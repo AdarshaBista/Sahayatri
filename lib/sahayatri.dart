@@ -4,31 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'package:path_provider/path_provider.dart';
 
-import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/locator.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-import 'package:sahayatri/core/services/tts_service.dart';
-import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/auth_service.dart';
-import 'package:sahayatri/core/services/weather_service.dart';
-import 'package:sahayatri/core/services/location_service.dart';
-import 'package:sahayatri/core/services/translate_service.dart';
-import 'package:sahayatri/core/services/directions_service.dart';
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-import 'package:sahayatri/core/services/destinations_service.dart';
-import 'package:sahayatri/core/services/notification_service.dart';
-import 'package:sahayatri/core/services/nearby/nearby_service.dart';
-import 'package:sahayatri/core/services/offroute_alert_service.dart';
-import 'package:sahayatri/core/services/tracker/tracker_service.dart';
-import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
-import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/tracker_dao.dart';
-import 'package:sahayatri/app/database/weather_dao.dart';
 import 'package:sahayatri/app/database/itinerary_dao.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
@@ -51,86 +36,19 @@ class Sahayatri extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        RepositoryProvider<WeatherService>(
-          create: (context) => WeatherService(
-            apiService: context.read<ApiService>(),
-            weatherDao: context.read<WeatherDao>(),
-          ),
-        ),
-        RepositoryProvider<DirectionsService>(
-          create: (context) => DirectionsService(
-            locationService: context.read<LocationService>(),
-          ),
-        ),
-        RepositoryProvider<OffRouteAlertService>(
-          create: (context) => OffRouteAlertService(
-            notificationService: context.read<NotificationService>(),
-          ),
-        ),
-        RepositoryProvider<SmsService>(
-          create: (context) => SmsService(
-            prefsDao: context.read<PrefsDao>(),
-            trackerDao: context.read<TrackerDao>(),
-            notificationService: context.read<NotificationService>(),
-          ),
-        ),
-        RepositoryProvider<NearbyService>(
-          create: (context) => NearbyService(
-            notificationService: context.read<NotificationService>(),
-          ),
-        ),
-        RepositoryProvider<StopwatchService>(
-          create: (context) => StopwatchService(
-            trackerDao: context.read<TrackerDao>(),
-          ),
-        ),
-        RepositoryProvider<TrackerService>(
-          create: (context) => TrackerService(
-            locationService: context.read<LocationService>(),
-            stopwatchService: context.read<StopwatchService>(),
-          ),
-        ),
-        RepositoryProvider<DestinationsService>(
-          create: (context) => DestinationsService(
-            apiService: context.read<ApiService>(),
-            destinationDao: context.read<DestinationDao>(),
-          ),
+        BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider<PrefsCubit>(create: (context) => PrefsCubit()),
+        BlocProvider<NearbyCubit>(create: (context) => NearbyCubit()),
+        BlocProvider<TranslateCubit>(create: (context) => TranslateCubit()),
+        BlocProvider<UserCubit>(
+          create: (context) => UserCubit(
+            onAuthenticated: (user) => onAuthenticated(context, user),
+          )..isLoggedIn(),
         ),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => ThemeCubit(),
-          ),
-          BlocProvider<PrefsCubit>(
-            create: (context) => PrefsCubit(
-              prefsDao: context.read<PrefsDao>(),
-            ),
-          ),
-          BlocProvider<NearbyCubit>(
-            create: (context) => NearbyCubit(
-              nearbyService: context.read<NearbyService>(),
-            ),
-          ),
-          BlocProvider<TranslateCubit>(
-            create: (context) => TranslateCubit(
-              ttsService: context.read<TtsService>(),
-              translateService: context.read<TranslateService>(),
-            ),
-          ),
-          BlocProvider<UserCubit>(
-            create: (context) => UserCubit(
-              userDao: context.read<UserDao>(),
-              apiService: context.read<ApiService>(),
-              authService: context.read<AuthService>(),
-              onAuthenticated: (user) => onAuthenticated(context, user),
-            )..isLoggedIn(),
-          ),
-        ],
-        child: _buildApp(),
-      ),
+      child: _buildApp(),
     );
   }
 
@@ -146,7 +64,7 @@ class Sahayatri extends StatelessWidget {
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.locale(context),
           onGenerateRoute: RootRouter.onGenerateRoute,
-          navigatorKey: RepositoryProvider.of<RootNavService>(context).navigatorKey,
+          navigatorKey: locator<RootNavService>().navigatorKey,
           home: _buildUserState(),
         );
       },
@@ -185,10 +103,10 @@ class Sahayatri extends StatelessWidget {
       Directory(userDirectoryPath).createSync();
     });
 
-    RepositoryProvider.of<PrefsDao>(context).init(user.id);
-    RepositoryProvider.of<TrackerDao>(context).init(user.id);
-    RepositoryProvider.of<ItineraryDao>(context).init(user.id);
-    RepositoryProvider.of<DestinationDao>(context).init(user.id);
+    locator<PrefsDao>().init(user.id);
+    locator<TrackerDao>().init(user.id);
+    locator<ItineraryDao>().init(user.id);
+    locator<DestinationDao>().init(user.id);
 
     final prefsCubit = BlocProvider.of<PrefsCubit>(context);
     prefsCubit.init().then((_) {

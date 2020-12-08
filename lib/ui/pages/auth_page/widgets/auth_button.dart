@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -58,7 +60,7 @@ class AuthButton extends StatelessWidget {
     if (!success) return;
 
     if (isInitial) {
-      context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
+      locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
     } else {
       Navigator.of(context).pop();
     }

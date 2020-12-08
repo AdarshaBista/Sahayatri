@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
@@ -28,21 +28,20 @@ class ImageList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         itemCount: imageUrls.length,
         separatorBuilder: (_, __) => const SizedBox(width: 10.0),
-        itemBuilder: _buildImage,
+        itemBuilder: (_, index) => _buildImage(index),
       ),
     );
   }
 
-  Widget _buildImage(BuildContext context, int index) {
+  Widget _buildImage(int index) {
     return SizedBox(
       width: 200.0,
       child: GestureDetector(
-        onTap: () =>
-            context.read<DestinationNavService>().pushNamed(Routes.photoViewPageRoute,
-                arguments: PhotoViewPageArgs(
-                  imageUrls: imageUrls,
-                  initialPageIndex: index,
-                )),
+        onTap: () => locator<DestinationNavService>().pushNamed(Routes.photoViewPageRoute,
+            arguments: PhotoViewPageArgs(
+              imageUrls: imageUrls,
+              initialPageIndex: index,
+            )),
         child: Hero(
           tag: imageUrls[index],
           child: CustomCard(

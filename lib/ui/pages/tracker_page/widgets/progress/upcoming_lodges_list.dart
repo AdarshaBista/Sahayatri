@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
@@ -41,8 +41,7 @@ class UpcomingLodgesList extends StatelessWidget {
 
   Widget _buildItem(BuildContext context, Lodge lodge) {
     return GestureDetector(
-      onTap: () => context
-          .read<DestinationNavService>()
+      onTap: () => locator<DestinationNavService>()
           .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: Container(
         width: 180.0,

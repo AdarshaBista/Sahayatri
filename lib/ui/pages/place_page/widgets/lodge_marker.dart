@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -25,10 +25,10 @@ class LodgeMarker extends Marker {
           anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (context) => GestureDetector(
             onTap: () {
-              context.read<DestinationNavService>().pushNamed(
-                    Routes.lodgePageRoute,
-                    arguments: lodge,
-                  );
+              locator<DestinationNavService>().pushNamed(
+                Routes.lodgePageRoute,
+                arguments: lodge,
+              );
             },
             child: ScaleAnimator(
               child: Column(

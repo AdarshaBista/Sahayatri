@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
@@ -9,8 +9,8 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/app/database/destination_dao.dart';
 
 class DestinationsService {
-  final ApiService apiService;
-  final DestinationDao destinationDao;
+  final ApiService apiService = locator();
+  final DestinationDao destinationDao = locator();
 
   /// Called when destination has finished downloading.
   void Function() onDownload;
@@ -22,12 +22,6 @@ class DestinationsService {
   /// List of destiantions downloaded on device.
   List<Destination> _downloaded = [];
   List<Destination> get downloaded => _downloaded;
-
-  DestinationsService({
-    @required this.apiService,
-    @required this.destinationDao,
-  })  : assert(apiService != null),
-        assert(destinationDao != null);
 
   Future<void> fetchDestinations() async {
     try {

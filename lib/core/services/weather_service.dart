@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
@@ -11,14 +11,8 @@ import 'package:sahayatri/app/database/weather_dao.dart';
 class WeatherService {
   static const int cacheDuration = 20;
 
-  final ApiService apiService;
-  final WeatherDao weatherDao;
-
-  WeatherService({
-    @required this.apiService,
-    @required this.weatherDao,
-  })  : assert(apiService != null),
-        assert(weatherDao != null);
+  final ApiService apiService = locator();
+  final WeatherDao weatherDao = locator();
 
   /// Fetches weather for a given [coord] from local cache.
   /// If cache has expired, fetches weather from OpenWeatherMap one call API

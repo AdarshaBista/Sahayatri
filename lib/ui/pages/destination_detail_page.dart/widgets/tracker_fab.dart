@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -31,7 +33,7 @@ class TrackerFab extends StatelessWidget {
       icon: Icons.play_arrow_outlined,
       onTap: () {
         final destination = context.read<Destination>();
-        context.read<DestinationNavService>().pushNamed(
+        locator<DestinationNavService>().pushNamed(
           Routes.trackerPageRoute,
           arguments: [destination, itinerary],
         );

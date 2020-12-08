@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -13,18 +15,16 @@ part 'destination_update_state.dart';
 
 class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
   final User user;
-  final ApiService apiService;
   final Destination destination;
+  final ApiService apiService = locator();
 
   int page = 1;
   int total = 0;
 
   DestinationUpdateCubit({
     @required this.user,
-    @required this.apiService,
     @required this.destination,
-  })  : assert(apiService != null),
-        assert(destination != null),
+  })  : assert(destination != null),
         super(const DestinationUpdateEmpty());
 
   bool get hasMore => destination.updates.length < total;

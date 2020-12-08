@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
@@ -10,12 +12,9 @@ import 'package:sahayatri/core/services/destinations_service.dart';
 part 'downloaded_destinations_state.dart';
 
 class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
-  final DestinationsService destinationsService;
+  final DestinationsService destinationsService = locator();
 
-  DownloadedDestinationsCubit({
-    @required this.destinationsService,
-  })  : assert(destinationsService != null),
-        super(const DownloadedDestinationsEmpty()) {
+  DownloadedDestinationsCubit() : super(const DownloadedDestinationsEmpty()) {
     destinationsService.onDownload = () {
       emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
     };

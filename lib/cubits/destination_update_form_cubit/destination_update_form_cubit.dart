@@ -4,6 +4,8 @@ import 'package:meta/meta.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 
@@ -17,16 +19,14 @@ import 'package:sahayatri/core/services/api_service.dart';
 part 'destination_update_form_state.dart';
 
 class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
-  final ApiService apiService;
+  final ApiService apiService = locator();
   final Destination destination;
   final DestinationUpdateCubit destinationUpdateCubit;
 
   DestinationUpdateFormCubit({
-    @required this.apiService,
     @required this.destination,
     @required this.destinationUpdateCubit,
-  })  : assert(apiService != null),
-        assert(destination != null),
+  })  : assert(destination != null),
         assert(destinationUpdateCubit != null),
         super(
           DestinationUpdateFormState(

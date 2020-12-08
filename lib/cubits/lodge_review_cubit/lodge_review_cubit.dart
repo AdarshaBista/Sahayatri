@@ -7,19 +7,15 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-
 class LodgeReviewCubit extends ReviewCubit {
   final Lodge lodge;
 
   LodgeReviewCubit({
     @required this.lodge,
     @required User user,
-    @required ApiService apiService,
   })  : assert(user != null),
         assert(lodge != null),
-        assert(apiService != null),
-        super(user: user, apiService: apiService);
+        super(user: user);
 
   @override
   bool get hasMore => lodge.reviewDetails.length < lodge.reviewDetails.total;

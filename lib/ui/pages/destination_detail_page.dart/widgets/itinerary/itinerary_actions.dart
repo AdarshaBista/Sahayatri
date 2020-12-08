@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
@@ -43,17 +45,17 @@ class ItineraryActions extends StatelessWidget {
         _buildIcon(
           color: AppColors.primaryDark,
           icon: Icons.edit,
-          onTap: () => context.read<DestinationNavService>().pushNamed(
-                Routes.itineraryFormPageRoute,
-                arguments: itinerary,
-              ),
+          onTap: () => locator<DestinationNavService>().pushNamed(
+            Routes.itineraryFormPageRoute,
+            arguments: itinerary,
+          ),
         ),
         if (deletable)
           _buildIcon(
             color: AppColors.secondary,
             icon: Icons.close,
             onTap: () {
-              if (context.read<TrackerService>().isTracking) {
+              if (locator<TrackerService>().isTracking) {
                 const MessageDialog(
                   message: 'Cannot delete when tracker is running.',
                 ).openDialog(context);

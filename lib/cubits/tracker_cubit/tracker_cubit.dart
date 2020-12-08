@@ -5,6 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
@@ -19,22 +21,13 @@ import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 part 'tracker_state.dart';
 
 class TrackerCubit extends Cubit<TrackerState> {
-  final SmsService smsService;
-  final NearbyService nearbyService;
-  final TrackerService trackerService;
-  final OffRouteAlertService offRouteAlertService;
+  final SmsService smsService = locator();
+  final NearbyService nearbyService = locator();
+  final TrackerService trackerService = locator();
+  final OffRouteAlertService offRouteAlertService = locator();
   StreamSubscription _trackerUpdateSub;
 
-  TrackerCubit({
-    @required this.smsService,
-    @required this.nearbyService,
-    @required this.trackerService,
-    @required this.offRouteAlertService,
-  })  : assert(smsService != null),
-        assert(nearbyService != null),
-        assert(trackerService != null),
-        assert(offRouteAlertService != null),
-        super(const TrackerLoading()) {
+  TrackerCubit() : super(const TrackerLoading()) {
     trackerService.onCompleted = stopTracking;
   }
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -95,10 +95,10 @@ class _PlaceInfo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () => context.read<DestinationNavService>().pushNamed(
-              Routes.placePageRoute,
-              arguments: checkpoint.place,
-            ),
+        onTap: () => locator<DestinationNavService>().pushNamed(
+          Routes.placePageRoute,
+          arguments: checkpoint.place,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,

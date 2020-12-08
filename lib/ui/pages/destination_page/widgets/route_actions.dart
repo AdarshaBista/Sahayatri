@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -41,7 +41,7 @@ class RouteActions extends StatelessWidget {
       label: 'View Route',
       color: context.c.onSurface,
       icon: CommunityMaterialIcons.chart_line_variant,
-      onTap: () => context.read<DestinationNavService>().pushNamed(Routes.routePageRoute),
+      onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 
@@ -18,20 +20,14 @@ import 'package:sahayatri/app/database/user_dao.dart';
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  final UserDao userDao;
-  final ApiService apiService;
-  final AuthService authService;
+  final UserDao userDao = locator();
+  final ApiService apiService = locator();
+  final AuthService authService = locator();
   final Function(User) onAuthenticated;
 
   UserCubit({
-    @required this.userDao,
-    @required this.apiService,
-    @required this.authService,
     @required this.onAuthenticated,
-  })  : assert(userDao != null),
-        assert(apiService != null),
-        assert(authService != null),
-        assert(onAuthenticated != null),
+  })  : assert(onAuthenticated != null),
         super(const AuthLoading());
 
   User get user {

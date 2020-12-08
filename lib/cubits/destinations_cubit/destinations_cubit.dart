@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
@@ -11,12 +13,9 @@ import 'package:sahayatri/core/services/destinations_service.dart';
 part 'destinations_state.dart';
 
 class DestinationsCubit extends Cubit<DestinationsState> {
-  final DestinationsService destinationsService;
+  final DestinationsService destinationsService = locator();
 
-  DestinationsCubit({
-    @required this.destinationsService,
-  })  : assert(destinationsService != null),
-        super(const DestinationsEmpty());
+  DestinationsCubit() : super(const DestinationsEmpty());
 
   Future<void> fetchDestinations() async {
     emit(const DestinationsLoading());

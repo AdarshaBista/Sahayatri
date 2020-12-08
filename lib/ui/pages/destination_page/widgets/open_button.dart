@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -33,9 +35,7 @@ class OpenButton extends StatelessWidget {
           label: 'OPEN',
           icon: Icons.keyboard_arrow_right,
           onTap: () {
-            context
-                .read<DestinationNavService>()
-                .pushNamed(Routes.destinationDetailPageRoute);
+            locator<DestinationNavService>().pushNamed(Routes.destinationDetailPageRoute);
           },
         ),
       ),

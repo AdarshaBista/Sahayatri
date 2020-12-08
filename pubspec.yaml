@@ -27,6 +27,7 @@ dependencies:
   flutter_local_notifications: ^3.0.2
 
   # State Management
+  get_it: ^5.0.1
   equatable: ^1.2.5
   flutter_bloc: ^6.1.1
 

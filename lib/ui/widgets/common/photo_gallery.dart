@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/images.dart';
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 
@@ -80,13 +80,13 @@ class PhotoGallery extends StatelessWidget {
         tag: imageUrls[index],
         child: _buildImage(imageUrls[index]),
       ),
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.photoViewPageRoute,
-            arguments: PhotoViewPageArgs(
-              imageUrls: imageUrls,
-              initialPageIndex: index,
-            ),
-          ),
+      onTap: () => locator<DestinationNavService>().pushNamed(
+        Routes.photoViewPageRoute,
+        arguments: PhotoViewPageArgs(
+          imageUrls: imageUrls,
+          initialPageIndex: index,
+        ),
+      ),
     );
   }
 

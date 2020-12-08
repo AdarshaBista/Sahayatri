@@ -5,14 +5,6 @@ import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-import 'package:sahayatri/core/services/sms_service.dart';
-import 'package:sahayatri/core/services/weather_service.dart';
-import 'package:sahayatri/core/services/directions_service.dart';
-import 'package:sahayatri/core/services/nearby/nearby_service.dart';
-import 'package:sahayatri/core/services/offroute_alert_service.dart';
-import 'package:sahayatri/core/services/tracker/tracker_service.dart';
-
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
@@ -53,7 +45,6 @@ class DestinationRouter {
         _page = BlocProvider<ItineraryCubit>(
           create: (context) => ItineraryCubit(
             user: context.read<UserCubit>().user,
-            apiService: context.read<ApiService>(),
             destination: context.read<Destination>(),
           )..fetchItineraries(),
           child: const DestinationDetailPage(),
@@ -78,7 +69,6 @@ class DestinationRouter {
             create: (context) => LodgeReviewCubit(
               lodge: settings.arguments as Lodge,
               user: context.read<UserCubit>().user,
-              apiService: context.read<ApiService>(),
             )..fetchReviews(),
             child: const LodgePage(),
           ),
@@ -106,17 +96,11 @@ class DestinationRouter {
         _page = MultiBlocProvider(
           providers: [
             BlocProvider<TrackerCubit>(
-              create: (context) => TrackerCubit(
-                smsService: context.read<SmsService>(),
-                nearbyService: context.read<NearbyService>(),
-                trackerService: context.read<TrackerService>(),
-                offRouteAlertService: context.read<OffRouteAlertService>(),
-              )..attemptTracking(args[0] as Destination, args[1] as Itinerary),
+              create: (context) => TrackerCubit()
+                ..attemptTracking(args[0] as Destination, args[1] as Itinerary),
             ),
             BlocProvider<DirectionsCubit>(
-              create: (context) => DirectionsCubit(
-                directionsService: context.read<DirectionsService>(),
-              ),
+              create: (context) => DirectionsCubit(),
             ),
           ],
           child: const TrackerPage(),
@@ -128,7 +112,6 @@ class DestinationRouter {
         _page = BlocProvider<WeatherCubit>(
           create: (context) => WeatherCubit(
             title: weatherPageArgs.name,
-            weatherService: context.read<WeatherService>(),
           )..fetchWeather(weatherPageArgs.coord),
           child: const WeatherPage(),
         );

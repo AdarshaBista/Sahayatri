@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/core/services/api_service.dart';
-import 'package:sahayatri/core/services/directions_service.dart';
-
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
@@ -45,21 +42,17 @@ class RootRouter {
             BlocProvider<ReviewCubit>(
               create: (context) => DestinationReviewCubit(
                 user: context.read<UserCubit>().user,
-                apiService: context.read<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchReviews(),
             ),
             BlocProvider<DestinationUpdateCubit>(
               create: (context) => DestinationUpdateCubit(
                 user: context.read<UserCubit>().user,
-                apiService: context.read<ApiService>(),
                 destination: settings.arguments as Destination,
               )..fetchUpdates(),
             ),
             BlocProvider<DirectionsCubit>(
-              create: (context) => DirectionsCubit(
-                directionsService: context.read<DirectionsService>(),
-              ),
+              create: (context) => DirectionsCubit(),
             ),
           ],
           child: Provider<Destination>(

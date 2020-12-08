@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
@@ -12,12 +14,9 @@ import 'package:sahayatri/core/services/directions_service.dart';
 part 'directions_state.dart';
 
 class DirectionsCubit extends Cubit<DirectionsState> {
-  final DirectionsService directionsService;
+  final DirectionsService directionsService = locator();
 
-  DirectionsCubit({
-    @required this.directionsService,
-  })  : assert(directionsService != null),
-        super(const DirectionsInitial());
+  DirectionsCubit() : super(const DirectionsInitial());
 
   Future<void> startNavigation(
     String name,

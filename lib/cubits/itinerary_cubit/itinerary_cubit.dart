@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
@@ -14,15 +16,13 @@ part 'itinerary_state.dart';
 
 class ItineraryCubit extends Cubit<ItineraryState> {
   final User user;
-  final ApiService apiService;
   final Destination destination;
+  final ApiService apiService = locator();
 
   ItineraryCubit({
     @required this.user,
-    @required this.apiService,
     @required this.destination,
   })  : assert(user != null),
-        assert(apiService != null),
         assert(destination != null),
         super(const ItineraryEmpty());
 

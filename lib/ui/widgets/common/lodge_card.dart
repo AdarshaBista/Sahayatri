@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/app/constants/images.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
@@ -24,8 +24,7 @@ class LodgeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context
-          .read<DestinationNavService>()
+      onTap: () => locator<DestinationNavService>()
           .pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: ElevatedCard(
         radius: 8.0,

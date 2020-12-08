@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_list_sheet.dart';
@@ -41,7 +41,7 @@ class _PlacePickerState extends State<PlacePicker> {
       title: 'Place',
       icon: Icons.place_outlined,
       hintText: selectedPlace?.name ?? 'No place selected',
-      trailing: selectedPlace == null ? const Offstage() : _buildViewButton(context),
+      trailing: selectedPlace == null ? const Offstage() : _buildViewButton(),
       onTap: () {
         FocusScope.of(context).unfocus();
         _selectPlace(context);
@@ -49,12 +49,12 @@ class _PlacePickerState extends State<PlacePicker> {
     );
   }
 
-  GestureDetector _buildViewButton(BuildContext context) {
+  GestureDetector _buildViewButton() {
     return GestureDetector(
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.placePageRoute,
-            arguments: selectedPlace,
-          ),
+      onTap: () => locator<DestinationNavService>().pushNamed(
+        Routes.placePageRoute,
+        arguments: selectedPlace,
+      ),
       child: Text(
         'View',
         style: AppTextStyles.headline5.primary,

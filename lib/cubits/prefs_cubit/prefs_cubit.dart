@@ -1,7 +1,7 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/prefs.dart';
 import 'package:sahayatri/core/models/map_layers.dart';
@@ -11,12 +11,9 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 part 'prefs_state.dart';
 
 class PrefsCubit extends Cubit<PrefsState> {
-  final PrefsDao prefsDao;
+  final PrefsDao prefsDao = locator();
 
-  PrefsCubit({
-    @required this.prefsDao,
-  })  : assert(prefsDao != null),
-        super(const PrefsState(isLoading: true));
+  PrefsCubit() : super(const PrefsState(isLoading: true));
 
   Prefs get prefs => state.prefs;
 

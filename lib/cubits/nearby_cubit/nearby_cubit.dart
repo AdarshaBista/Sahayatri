@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 import 'package:bloc/bloc.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
@@ -10,12 +12,9 @@ import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 part 'nearby_state.dart';
 
 class NearbyCubit extends Cubit<NearbyState> {
-  final NearbyService nearbyService;
+  final NearbyService nearbyService = locator();
 
-  NearbyCubit({
-    @required this.nearbyService,
-  })  : assert(nearbyService != null),
-        super(const NearbyInitial());
+  NearbyCubit() : super(const NearbyInitial());
 
   String get username => nearbyService.connectionService.username;
 

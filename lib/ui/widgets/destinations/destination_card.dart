@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
@@ -38,8 +40,7 @@ class DestinationCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
-            context
-                .read<RootNavService>()
+            locator<RootNavService>()
                 .pushNamed(Routes.destinationPageRoute, arguments: destination);
           },
           child: Container(

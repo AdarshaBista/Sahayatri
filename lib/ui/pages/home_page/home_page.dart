@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/services/destinations_service.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
@@ -31,16 +29,12 @@ class _HomePageState extends State<HomePage> {
         return MultiBlocProvider(
           providers: [
             BlocProvider<DestinationsCubit>(
-              create: (context) => DestinationsCubit(
-                destinationsService: context.read<DestinationsService>(),
-              )..fetchDestinations(),
+              create: (context) => DestinationsCubit()..fetchDestinations(),
             ),
             if (state is Authenticated)
               BlocProvider<DownloadedDestinationsCubit>(
                 lazy: false,
-                create: (context) => DownloadedDestinationsCubit(
-                  destinationsService: context.read<DestinationsService>(),
-                )..fetchDownloaded(),
+                create: (context) => DownloadedDestinationsCubit()..fetchDownloaded(),
               ),
           ],
           child: _buildPage(),

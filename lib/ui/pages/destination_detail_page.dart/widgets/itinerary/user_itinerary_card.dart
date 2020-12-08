@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -44,9 +46,9 @@ class UserItineraryCard extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       icon: CommunityMaterialIcons.pencil_circle_outline,
       label: 'Create an itinerary',
-      onTap: () => context.read<DestinationNavService>().pushNamed(
-            Routes.itineraryFormPageRoute,
-          ),
+      onTap: () => locator<DestinationNavService>().pushNamed(
+        Routes.itineraryFormPageRoute,
+      ),
     );
   }
 }

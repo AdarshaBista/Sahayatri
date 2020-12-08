@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -86,10 +88,10 @@ class PlaceListSheet extends StatelessWidget {
         ),
       ),
       trailing: GestureDetector(
-        onTap: () => context.read<DestinationNavService>().pushNamed(
-              Routes.placePageRoute,
-              arguments: place,
-            ),
+        onTap: () => locator<DestinationNavService>().pushNamed(
+          Routes.placePageRoute,
+          arguments: place,
+        ),
         child: Text(
           'VIEW',
           style: AppTextStyles.headline5.primaryDark,

@@ -1,11 +1,8 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
-
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
-import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/services/nearby/devices_service.dart';
 import 'package:sahayatri/core/services/nearby/messsages_service.dart';
 import 'package:sahayatri/core/services/nearby/connection_service.dart';
@@ -26,11 +23,9 @@ class NearbyService {
   /// List of nearby devices.
   List<NearbyDevice> get devices => devicesService.devices;
 
-  NearbyService({
-    @required NotificationService notificationService,
-  }) : assert(notificationService != null) {
+  NearbyService() {
     devicesService = DevicesService();
-    messagesService = MessagesService(devicesService, notificationService);
+    messagesService = MessagesService(devicesService);
     connectionService = ConnectionService(devicesService, messagesService);
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
+
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/language.dart';
 import 'package:sahayatri/core/models/app_error.dart';
@@ -16,19 +16,14 @@ import 'package:sahayatri/app/constants/languages.dart';
 part 'translate_state.dart';
 
 class TranslateCubit extends Cubit<TranslateState> {
-  final TtsService ttsService;
-  final TranslateService translateService;
+  final TtsService ttsService = locator();
+  final TranslateService translateService = locator();
 
   final ScrollController controller = ScrollController();
   Language sourceLang = Languages.defaultSource;
   Language targetLang = Languages.defaultTarget;
 
-  TranslateCubit({
-    @required this.ttsService,
-    @required this.translateService,
-  })  : assert(ttsService != null),
-        assert(translateService != null),
-        super(TranslateState());
+  TranslateCubit() : super(TranslateState());
 
   Future<void> translate(String source) async {
     final query = Translation(isQuery: true, text: source, language: sourceLang);

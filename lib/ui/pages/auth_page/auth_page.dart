@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
@@ -60,7 +62,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
-          if (isInitial && !isLoading) _buildSkipButton(context),
+          if (isInitial && !isLoading) _buildSkipButton(),
         ],
       ),
     );
@@ -83,7 +85,7 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSkipButton(BuildContext context) {
+  Widget _buildSkipButton() {
     return ScaleAnimator(
       child: FlatButton(
         hoverColor: Colors.transparent,
@@ -94,7 +96,7 @@ class AuthPage extends StatelessWidget {
           style: AppTextStyles.headline6.lightAccent,
         ),
         onPressed: () =>
-            context.read<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
+            locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
       ),
     );
   }

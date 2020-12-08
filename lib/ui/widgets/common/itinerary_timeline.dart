@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
@@ -198,10 +200,10 @@ class ItineraryTimeline extends StatelessWidget {
             .updateCheckpoint(checkpoint, updatedCheckpoint),
       ).openModalBottomSheet(context, enableDrag: false);
     } else {
-      context.read<DestinationNavService>().pushNamed(
-            Routes.placePageRoute,
-            arguments: checkpoint.place,
-          );
+      locator<DestinationNavService>().pushNamed(
+        Routes.placePageRoute,
+        arguments: checkpoint.place,
+      );
     }
   }
 }

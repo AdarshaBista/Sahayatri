@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -33,7 +35,7 @@ class DestinationPage extends StatelessWidget {
         collapsible: CollapsibleCarousel(
           title: destination.name,
           imageUrls: destination.imageUrls,
-          onBack: () => context.read<RootNavService>().pop(),
+          onBack: () => locator<RootNavService>().pop(),
         ),
         child: _buildList(context, destination),
       ),

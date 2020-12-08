@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
@@ -34,9 +35,9 @@ class _StopwatchTileState extends State<StopwatchTile> {
   }
 
   void updateTimer() {
-    if (context.read<TrackerService>().isTracking) {
+    if (locator<TrackerService>().isTracking) {
       setState(() {
-        elapsed = context.read<StopwatchService>().elapsed();
+        elapsed = locator<StopwatchService>().elapsed();
       });
     }
   }

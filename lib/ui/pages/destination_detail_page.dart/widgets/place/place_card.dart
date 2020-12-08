@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/app/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/core/models/place.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
@@ -23,10 +23,10 @@ class PlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<DestinationNavService>().pushNamed(
-              Routes.placePageRoute,
-              arguments: place,
-            );
+        locator<DestinationNavService>().pushNamed(
+          Routes.placePageRoute,
+          arguments: place,
+        );
       },
       child: ElevatedCard(
         radius: 8.0,

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
+import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/tracker_data.dart';
 
@@ -8,7 +8,7 @@ import 'package:sahayatri/app/database/tracker_dao.dart';
 
 class StopwatchService {
   /// Persist [TrackerData] on local storage.
-  final TrackerDao trackerDao;
+  final TrackerDao trackerDao = locator();
 
   /// Keeps track of time spent on tracking.
   final Stopwatch _stopwatch = Stopwatch();
@@ -18,10 +18,6 @@ class StopwatchService {
 
   /// Persisted elapsed value to be added to stopwatch.
   int _initialElapsed = 0;
-
-  StopwatchService({
-    @required this.trackerDao,
-  }) : assert(trackerDao != null);
 
   Future<void> start(String destinationId) async {
     _stopwatch.reset();

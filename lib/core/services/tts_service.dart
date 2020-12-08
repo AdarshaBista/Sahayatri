@@ -6,7 +6,7 @@ class TtsService {
   final FlutterTts tts = FlutterTts();
 
   /// Default language for TTS.
-  final String _language = 'ne-NP';
+  final String _defaultLanguage = 'ne-NP';
 
   /// Audio cannot be played if language is not available.
   bool _canPlay = false;
@@ -17,8 +17,8 @@ class TtsService {
 
   Future<void> _setLang() async {
     if (Platform.isWindows) return;
-    _canPlay = await tts.isLanguageAvailable(_language) as bool;
-    if (_canPlay) tts.setLanguage(_language);
+    _canPlay = await tts.isLanguageAvailable(_defaultLanguage) as bool;
+    if (_canPlay) tts.setLanguage(_defaultLanguage);
   }
 
   Future<void> play(String text) async {
