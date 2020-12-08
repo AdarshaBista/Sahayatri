@@ -30,8 +30,7 @@ class ReviewList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.watch<UserCubit>().isAuthenticated)
-            _buildWriteReviewButton(context),
+          _buildWriteReviewButton(context),
           const SizedBox(height: 8.0),
           _buildReviews(context),
         ],
@@ -40,12 +39,17 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _buildWriteReviewButton(BuildContext context) {
-    return CustomButton(
-      label: 'Write a review',
-      icon: CommunityMaterialIcons.pencil_outline,
-      onTap: () => ReviewForm(
-        onSubmit: (rating, text) => _postReview(context, rating, text),
-      ).openModalBottomSheet(context, enableDrag: false),
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is! Authenticated) return const Offstage();
+        return CustomButton(
+          label: 'Write a review',
+          icon: CommunityMaterialIcons.pencil_outline,
+          onTap: () => ReviewForm(
+            onSubmit: (rating, text) => _postReview(context, rating, text),
+          ).openModalBottomSheet(context, enableDrag: false),
+        );
+      },
     );
   }
 

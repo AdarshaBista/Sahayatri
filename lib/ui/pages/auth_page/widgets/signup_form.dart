@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
@@ -71,20 +68,10 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             AuthButton(
               label: 'SIGN UP',
-              onPressed: () async {
-                if (!formKey.currentState.validate()) return;
-                final success =
-                    await context.read<UserCubit>().signUp(username, email, password);
-                if (success) {
-                  if (widget.isInitial) {
-                    context
-                        .read<RootNavService>()
-                        .pushReplacementNamed(Routes.homePageRoute);
-                  } else {
-                    Navigator.of(context).pop();
-                  }
-                }
-              },
+              formKey: formKey,
+              isInitial: widget.isInitial,
+              onPressed: () =>
+                  context.read<UserCubit>().signUp(username, email, password),
             ),
           ],
         ),

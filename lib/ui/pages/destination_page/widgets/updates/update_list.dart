@@ -26,7 +26,7 @@ class UpdateList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (context.watch<UserCubit>().isAuthenticated) _buildPostUpdateButton(context),
+          _buildPostUpdateButton(context),
           const SizedBox(height: 12.0),
           _buildUpdates(context),
         ],
@@ -35,10 +35,15 @@ class UpdateList extends StatelessWidget {
   }
 
   Widget _buildPostUpdateButton(BuildContext context) {
-    return CustomButton(
-      label: 'Post an update',
-      icon: Icons.post_add_outlined,
-      onTap: () => UpdateForm().openModalBottomSheet(context, enableDrag: false),
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is! Authenticated) return const Offstage();
+        return CustomButton(
+          label: 'Post an update',
+          icon: Icons.post_add_outlined,
+          onTap: () => UpdateForm().openModalBottomSheet(context, enableDrag: false),
+        );
+      },
     );
   }
 

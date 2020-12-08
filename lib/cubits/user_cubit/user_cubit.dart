@@ -34,7 +34,6 @@ class UserCubit extends Cubit<UserState> {
         assert(onAuthenticated != null),
         super(const AuthLoading());
 
-  bool get isAuthenticated => state is Authenticated;
   User get user {
     try {
       return (state as Authenticated).user;
@@ -59,12 +58,12 @@ class UserCubit extends Cubit<UserState> {
     if (pickedImage == null) return false;
 
     final newUrl = await apiService.updateUserAvatar(user, pickedImage.path);
-    if (newUrl != null) {
-      final updatedUser = user.copyWith(imageUrl: newUrl);
-      await userDao.upsert(updatedUser);
-      emit(Authenticated(user: updatedUser));
-    }
-    return newUrl != null;
+    if (newUrl == null) return false;
+
+    final updatedUser = user.copyWith(imageUrl: newUrl);
+    await userDao.upsert(updatedUser);
+    emit(Authenticated(user: updatedUser));
+    return true;
   }
 
   Future<bool> login(String email, String password) async {
@@ -96,7 +95,6 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> logout() async {
-    final user = (state as Authenticated).user;
     try {
       await authService.logout(user);
       await userDao.delete();

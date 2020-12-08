@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
@@ -56,20 +52,9 @@ class _LoginFormState extends State<LoginForm> {
             ),
             AuthButton(
               label: 'LOGIN',
-              onPressed: () async {
-                if (!formKey.currentState.validate()) return;
-
-                final success = await context.read<UserCubit>().login(email, password);
-                if (success) {
-                  if (widget.isInitial) {
-                    context
-                        .read<RootNavService>()
-                        .pushReplacementNamed(Routes.homePageRoute);
-                  } else {
-                    Navigator.of(context).pop();
-                  }
-                }
-              },
+              formKey: formKey,
+              isInitial: widget.isInitial,
+              onPressed: () => context.read<UserCubit>().login(email, password),
             ),
           ],
         ),

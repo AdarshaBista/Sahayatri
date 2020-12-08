@@ -11,33 +11,24 @@ import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/unauthenticated_indicator.dart';
 
 class UnauthenticatedView extends StatelessWidget {
-  final VoidCallback onLogin;
-
-  const UnauthenticatedView({
-    this.onLogin,
-  });
+  const UnauthenticatedView();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const UnauthenticatedIndicator(),
-        CustomButton(
-          label: 'Login / Sign Up',
-          expanded: false,
-          icon: Icons.login_outlined,
-          color: AppColors.primaryDark,
-          backgroundColor: Colors.transparent,
-          onTap: () {
-            if (onLogin != null) onLogin();
-
-            context
-                .read<RootNavService>()
-                .pushNamed(Routes.authPageRoute, arguments: false);
-          },
-        ),
-      ],
-    );
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      const UnauthenticatedIndicator(),
+      CustomButton(
+        label: 'Login / Sign Up',
+        expanded: false,
+        icon: Icons.login_outlined,
+        color: AppColors.primaryDark,
+        backgroundColor: Colors.transparent,
+        onTap: () {
+          context
+              .read<RootNavService>()
+              .pushNamed(Routes.authPageRoute, arguments: false);
+        },
+      ),
+    ]);
   }
 }
