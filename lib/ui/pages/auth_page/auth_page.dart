@@ -32,8 +32,7 @@ class AuthPage extends StatelessWidget {
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: state is! AuthLoading,
-            iconTheme: const IconThemeData(color: AppColors.light),
+            leading: _buildBackButton(context, state is AuthLoading),
           ),
           body: Stack(
             children: [
@@ -46,6 +45,21 @@ class AuthPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildBackButton(BuildContext context, bool isLoading) {
+    final shouldShow = !isLoading && !isInitial;
+    if (!shouldShow) return const Offstage();
+
+    return IconButton(
+      splashRadius: 20.0,
+      onPressed: Navigator.of(context).pop,
+      icon: const Icon(
+        Icons.keyboard_backspace,
+        size: 20.0,
+        color: AppColors.light,
+      ),
     );
   }
 

@@ -31,12 +31,7 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
-      listener: (context, state) {
-        if (state is AuthError) {
-          context.openFlushBar(state.message, type: FlushbarType.error);
-        }
-      },
+    return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return FloatingActionButton.extended(
           heroTag: '$label Tag',
@@ -57,10 +52,13 @@ class AuthButton extends StatelessWidget {
     if (!formKey.currentState.validate()) return;
 
     final success = await onPressed();
-    if (!success) return;
+    if (!success) {
+      context.openFlushBar('An error has occured!', type: FlushbarType.error);
+      return;
+    }
 
     if (isInitial) {
-      locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute);
+      locator<RootNavService>().pushOnly(Routes.homePageRoute);
     } else {
       Navigator.of(context).pop();
     }

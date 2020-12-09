@@ -18,6 +18,7 @@ import 'package:device_preview/device_preview.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setSystemPreferences();
+
   await initHive();
   setupLocator();
   runApp(const App());
@@ -60,6 +61,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
+      isToolbarVisible: false,
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),

@@ -25,14 +25,3 @@ class Authenticated extends UserState {
   @override
   List<Object> get props => [user];
 }
-
-class AuthError extends UserState {
-  final String message;
-
-  const AuthError({
-    @required this.message,
-  }) : assert(message != null);
-
-  @override
-  List<Object> get props => [message];
-}

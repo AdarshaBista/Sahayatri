@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,12 +19,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<UserCubit, UserState>(
-        listener: (context, state) {
-          if (state is AuthError) {
-            context.openFlushBar(state.message, type: FlushbarType.error);
-          }
-        },
+      body: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           if (state is Authenticated) {
             return Provider<User>.value(

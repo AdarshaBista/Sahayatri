@@ -38,12 +38,14 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> isLoggedIn() async {
+  Future<bool> isLoggedIn() async {
     final user = await userDao.get();
     if (user == null) {
       emit(const Unauthenticated());
+      return false;
     } else {
       emit(Authenticated(user: user));
+      return true;
     }
   }
 
@@ -69,8 +71,7 @@ class UserCubit extends Cubit<UserState> {
       await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
-    } on AppError catch (e) {
-      emit(AuthError(message: e.message));
+    } on AppError {
       emit(const Unauthenticated());
       return false;
     }
@@ -83,21 +84,21 @@ class UserCubit extends Cubit<UserState> {
       await userDao.upsert(user);
       emit(Authenticated(user: user));
       return true;
-    } on AppError catch (e) {
-      emit(AuthError(message: e.message));
+    } on AppError {
       emit(const Unauthenticated());
       return false;
     }
   }
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
     try {
       await authService.logout(user);
       await userDao.delete();
       emit(const Unauthenticated());
-    } on AppError catch (e) {
-      emit(AuthError(message: e.message));
+      return true;
+    } on AppError {
       emit(Authenticated(user: user));
+      return false;
     }
   }
 

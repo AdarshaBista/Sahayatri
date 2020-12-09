@@ -45,7 +45,7 @@ class Sahayatri extends StatelessWidget {
         BlocProvider<UserCubit>(
           create: (context) => UserCubit(
             onAuthenticated: (user) => onAuthenticated(context, user),
-          )..isLoggedIn(),
+          ),
         ),
       ],
       child: _buildApp(),
@@ -65,27 +65,28 @@ class Sahayatri extends StatelessWidget {
           locale: DevicePreview.locale(context),
           onGenerateRoute: RootRouter.onGenerateRoute,
           navigatorKey: locator<RootNavService>().navigatorKey,
-          home: _buildUserState(),
+          home: _buildUserState(context),
         );
       },
     );
   }
 
-  Widget _buildUserState() {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        if (state is Authenticated) {
-          return _buildPrefsState(context, state);
-        } else if (state is AuthLoading) {
-          return const SplashView();
-        } else {
+  Widget _buildUserState(BuildContext context) {
+    return FutureBuilder<bool>(
+      initialData: false,
+      future: BlocProvider.of<UserCubit>(context).isLoggedIn(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final isLoggedIn = snapshot.data;
+          if (isLoggedIn) return _buildPrefsState(context);
           return const AuthPage();
         }
+        return const SplashView();
       },
     );
   }
 
-  Widget _buildPrefsState(BuildContext context, Authenticated state) {
+  Widget _buildPrefsState(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
       builder: (context, state) {
         if (state.isLoading) {
