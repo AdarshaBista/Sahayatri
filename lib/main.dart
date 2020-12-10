@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hive/hive.dart';
+import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
 import 'package:sahayatri/core/models/models.dart';
@@ -61,7 +62,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      isToolbarVisible: false,
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
@@ -73,7 +73,14 @@ class App extends StatelessWidget {
     final dir = await getDownloadsDirectory();
     final fileName = DateTime.now().microsecondsSinceEpoch;
     final savePath = '${dir.path}/$fileName.png';
-    await File(savePath).writeAsBytes(ss.bytes);
+
+    final image = img.copyResize(
+      img.decodeImage(ss.bytes),
+      width: 720,
+      interpolation: img.Interpolation.average,
+    );
+
+    await File(savePath).writeAsBytes(img.encodePng(image));
     return savePath;
   }
 }
