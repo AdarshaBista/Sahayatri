@@ -6,7 +6,9 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -44,7 +46,7 @@ class _RoutePageState extends State<RoutePage> {
         children: [
           const _FlagMarkersLayer(),
           if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
-          if (destination.places != null) const _PlaceMarkersLayer(),
+          const _PlaceMarkersLayer(),
         ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
@@ -158,24 +160,33 @@ class _PlaceMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destination = context.watch<Destination>();
+    final isAuthenticated = BlocProvider.of<UserCubit>(context).user != null;
+    if (!isAuthenticated) return const Offstage();
 
+    final destination = context.watch<Destination>();
     return BlocBuilder<PrefsCubit, PrefsState>(
       buildWhen: (p, c) => p.prefs.mapLayers.places != c.prefs.mapLayers.places,
       builder: (context, state) {
         final enabled = state.prefs.mapLayers.places;
         if (!enabled) return const Offstage();
 
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              for (int i = 0; i < destination.places.length; ++i)
-                PlaceMarker(
-                  place: destination.places[i],
-                  color: AppColors.accents[i % AppColors.accents.length],
+        return BlocBuilder<PlacesCubit, PlacesState>(
+          builder: (context, state) {
+            if (state is PlacesLoaded) {
+              return MarkerLayerWidget(
+                options: MarkerLayerOptions(
+                  markers: [
+                    for (int i = 0; i < destination.places.length; ++i)
+                      PlaceMarker(
+                        place: destination.places[i],
+                        color: AppColors.accents[i % AppColors.accents.length],
+                      ),
+                  ],
                 ),
-            ],
-          ),
+              );
+            }
+            return const Offstage();
+          },
         );
       },
     );

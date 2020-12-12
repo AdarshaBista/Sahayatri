@@ -18,7 +18,7 @@ dependencies:
   timeago: ^2.0.29
   url_launcher: ^5.7.10
   path_provider: ^1.6.24
-  image_picker: ^0.6.7+14
+  image_picker: ^0.6.7+15
   intl: ^0.17.0-nullsafety.2
   device_preview: ^0.6.2-beta
   form_field_validator: ^1.0.1
@@ -28,7 +28,7 @@ dependencies:
   flutter_local_notifications: ^3.0.2
 
   # State Management
-  get_it: ^5.0.1
+  get_it: ^5.0.3
   equatable: ^1.2.5
   flutter_bloc: ^6.1.1
 
@@ -49,7 +49,7 @@ dependencies:
 
   # Widgets
   animator: ^2.0.2
-  fl_chart: ^0.12.0
+  fl_chart: ^0.12.1
   flushbar: ^1.10.4
   flip_card: ^0.4.4
   photo_view: ^0.10.3
@@ -68,7 +68,7 @@ dev_dependencies:
     sdk: flutter
 
   lint: ^1.5.1
-  build_runner: ^1.10.7
+  build_runner: ^1.10.9
   hive_generator: ^0.8.2
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.8.1
