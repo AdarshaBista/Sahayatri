@@ -5,11 +5,10 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/app/constants/hive_config.dart';
 
 class ItineraryDao {
-  Future<Box<Itinerary>> _itineraryBox;
+  final Future<Box<Itinerary>> _itineraryBox;
 
-  void init(String userId) {
-    _itineraryBox = Hive.openBox('$userId/${HiveConfig.itineraryBoxName}');
-  }
+  ItineraryDao(String userId)
+      : _itineraryBox = Hive.openBox('$userId/${HiveConfig.itineraryBoxName}');
 
   Future<Itinerary> get(String id) async {
     final box = await _itineraryBox;

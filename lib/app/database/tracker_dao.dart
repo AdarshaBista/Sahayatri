@@ -6,11 +6,10 @@ import 'package:sahayatri/app/constants/hive_config.dart';
 
 class TrackerDao {
   static const int _key = 0;
-  Future<Box<TrackerData>> _trackerDataBox;
+  final Future<Box<TrackerData>> _trackerDataBox;
 
-  void init(String userId) {
-    _trackerDataBox = Hive.openBox('$userId/${HiveConfig.trackerDataBoxName}');
-  }
+  TrackerDao(String userId)
+      : _trackerDataBox = Hive.openBox('$userId/${HiveConfig.trackerDataBoxName}');
 
   Future<TrackerData> get() async {
     final box = await _trackerDataBox;

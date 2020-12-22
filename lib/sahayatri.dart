@@ -12,11 +12,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
-import 'package:sahayatri/app/database/prefs_dao.dart';
-import 'package:sahayatri/app/database/tracker_dao.dart';
-import 'package:sahayatri/app/database/itinerary_dao.dart';
-import 'package:sahayatri/app/database/destination_dao.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
@@ -104,11 +99,7 @@ class Sahayatri extends StatelessWidget {
       Directory(userDirectoryPath).createSync();
     });
 
-    locator<PrefsDao>().init(user.id);
-    locator<TrackerDao>().init(user.id);
-    locator<ItineraryDao>().init(user.id);
-    locator<DestinationDao>().init(user.id);
-
+    setupUserDependentDaos(user.id);
     final prefsCubit = BlocProvider.of<PrefsCubit>(context);
     prefsCubit.init().then((_) {
       final prefs = prefsCubit.prefs;
