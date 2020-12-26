@@ -70,7 +70,7 @@ class DirectionsButton extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   final directionsCubit = context.read<DirectionsCubit>();
-                  final destination = context.watch<Destination>();
+                  final destination = context.read<Destination>();
 
                   directionsCubit.startNavigation(
                     destination.name,

@@ -14,10 +14,10 @@
             "deviceId": "emulator-5554"
         },
         {
-            "name": "Mi 4",
+            "name": "Redmi Note 9 Pro Max",
             "type": "dart",
             "request": "launch",
-            "deviceId": "d92302ea"
+            "deviceId": "c3bf6cab"
         },
         {
             "name": "OnePlus 3T",
@@ -30,7 +30,7 @@
         {
             "name": "Physical Devices",
             "configurations": [
-                "Mi 4",
+                "Redmi Note 9 Pro Max",
                 "OnePlus 3T"
             ],
         }

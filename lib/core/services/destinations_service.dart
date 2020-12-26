@@ -10,7 +10,7 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 
 class DestinationsService {
   final ApiService apiService = locator();
-  final DestinationDao destinationDao = locator();
+  DestinationDao destinationDao;
 
   /// Called when destination has finished downloading.
   void Function() onDownload;
@@ -32,11 +32,18 @@ class DestinationsService {
   }
 
   Future<void> fetchDownloaded() async {
+    destinationDao ??= locator();
+
     try {
       _downloaded = await destinationDao.getAll();
     } on AppError {
       rethrow;
     }
+  }
+
+  void clearDownloaded() {
+    destinationDao = null;
+    _downloaded.clear();
   }
 
   Future<void> download(Destination destination, User user) async {

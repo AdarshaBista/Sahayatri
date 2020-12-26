@@ -7,11 +7,18 @@ import 'package:hive/hive.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
-import 'package:sahayatri/core/models/models.dart';
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:sahayatri/locator.dart';
 import 'package:sahayatri/sahayatri.dart';
+
+import 'package:sahayatri/core/models/models.dart';
+import 'package:sahayatri/core/services/destinations_service.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
 import 'package:device_preview/plugins.dart';
 import 'package:device_preview/device_preview.dart';
@@ -21,7 +28,7 @@ Future<void> main() async {
   setSystemPreferences();
 
   await initHive();
-  setupLocator();
+  registerGlobalServices();
   runApp(const App());
 }
 
@@ -66,8 +73,43 @@ class App extends StatelessWidget {
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
-      builder: (_) => const Sahayatri(),
+      builder: (_) => MultiBlocProvider(
+        child: const Sahayatri(),
+        providers: [
+          BlocProvider(create: (_) => ThemeCubit()),
+          BlocProvider<PrefsCubit>(create: (_) => PrefsCubit()),
+          BlocProvider<UserCubit>(
+            create: (context) => UserCubit(
+              onLogout: () => onLogout(context),
+              onAuthenticated: (user) => onAuthenticated(context, user),
+            ),
+          ),
+        ],
+      ),
     );
+  }
+
+  void onAuthenticated(BuildContext context, User user) {
+    getApplicationDocumentsDirectory().then((appDir) {
+      final hivePath = '${appDir.path}/${AppConfig.appName}';
+      final userDirectoryPath = '$hivePath/${user.id}';
+      Directory(userDirectoryPath).createSync();
+    });
+
+    registerUserDependentServices(user.id);
+    final prefsCubit = BlocProvider.of<PrefsCubit>(context);
+    prefsCubit.init().then((_) {
+      final prefs = prefsCubit.prefs;
+      BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
+    });
+  }
+
+  void onLogout(BuildContext context) {
+    unregisterUserDependentServices();
+    locator<DestinationsService>().clearDownloaded();
+
+    context.read<PrefsCubit>().reset();
+    context.read<ThemeCubit>().changeTheme(ThemeMode.system);
   }
 
   Future<String> _saveScreenshot(DeviceScreenshot ss) async {

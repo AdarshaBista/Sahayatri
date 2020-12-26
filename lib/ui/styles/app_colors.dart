@@ -11,13 +11,13 @@ class AppColors {
   static const secondaryDark = Color(0xFF8F0000);
   static final secondaryLight = secondary.withOpacity(0.3);
 
-  static const dark = Color(0xFF222222);
-  static const darkAccent = Color(0xFF3C3C3C);
-  static const darkSurface = Color(0xFF292929);
+  static const dark = Color(0xFF151515);
+  static const darkAccent = Color(0xFF353535);
+  static const darkSurface = Color(0xFF252525);
   static final darkFaded = dark.withOpacity(0.7);
 
   static const light = Color(0xFFFFFFFF);
-  static const lightAccent = Color(0xFFDFDFE5);
+  static const lightAccent = Color(0xFFE0E0E0);
   static final lightFaded = light.withOpacity(0.7);
 
   static const accents = [

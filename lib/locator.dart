@@ -25,35 +25,57 @@ import 'package:sahayatri/core/services/weather_service.dart';
 
 GetIt locator = GetIt.instance;
 
-void setupLocator() {
+void registerGlobalServices() {
   locator
     // Daos
     ..registerLazySingleton<UserDao>(() => UserDao())
     ..registerLazySingleton<WeatherDao>(() => WeatherDao())
 
     // Services
-    ..registerLazySingleton<TtsService>(() => TtsService())
     ..registerLazySingleton<ApiService>(() => ApiService())
-    ..registerLazySingleton<SmsService>(() => SmsService())
     ..registerLazySingleton<AuthService>(() => AuthService())
-    ..registerLazySingleton<NearbyService>(() => NearbyService())
-    ..registerLazySingleton<WeatherService>(() => WeatherService())
-    ..registerLazySingleton<TrackerService>(() => TrackerService())
     ..registerLazySingleton<RootNavService>(() => RootNavService())
+    ..registerLazySingleton<WeatherService>(() => WeatherService())
     ..registerLazySingleton<LocationService>(() => LocationService())
-    ..registerLazySingleton<StopwatchService>(() => StopwatchService())
-    ..registerLazySingleton<TranslateService>(() => TranslateService())
     ..registerLazySingleton<DirectionsService>(() => DirectionsService())
     ..registerLazySingleton<DestinationsService>(() => DestinationsService())
-    ..registerLazySingleton<NotificationService>(() => NotificationService())
-    ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService())
     ..registerLazySingleton<DestinationNavService>(() => DestinationNavService());
 }
 
-void setupUserDependentDaos(String userId) {
+void registerUserDependentServices(String userId) {
   locator
+    // Daos
     ..registerLazySingleton<PrefsDao>(() => PrefsDao(userId))
     ..registerLazySingleton<TrackerDao>(() => TrackerDao(userId))
     ..registerLazySingleton<ItineraryDao>(() => ItineraryDao(userId))
-    ..registerLazySingleton<DestinationDao>(() => DestinationDao(userId));
+    ..registerLazySingleton<DestinationDao>(() => DestinationDao(userId))
+
+    // Services
+    ..registerLazySingleton<TtsService>(() => TtsService())
+    ..registerLazySingleton<SmsService>(() => SmsService())
+    ..registerLazySingleton<NearbyService>(() => NearbyService())
+    ..registerLazySingleton<TrackerService>(() => TrackerService())
+    ..registerLazySingleton<TranslateService>(() => TranslateService())
+    ..registerLazySingleton<StopwatchService>(() => StopwatchService())
+    ..registerLazySingleton<NotificationService>(() => NotificationService())
+    ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService());
+}
+
+void unregisterUserDependentServices() {
+  locator
+    // Daos
+    ..unregister<PrefsDao>()
+    ..unregister<TrackerDao>()
+    ..unregister<ItineraryDao>()
+    ..unregister<DestinationDao>()
+
+    // Services
+    ..unregister<TtsService>()
+    ..unregister<TranslateService>()
+    ..unregister<StopwatchService>()
+    ..unregister<NotificationService>()
+    ..unregister<OffRouteAlertService>()
+    ..unregister<SmsService>(disposingFunction: (service) => service.stop())
+    ..unregister<NearbyService>(disposingFunction: (service) async => service.stop())
+    ..unregister<TrackerService>(disposingFunction: (service) async => service.stop());
 }

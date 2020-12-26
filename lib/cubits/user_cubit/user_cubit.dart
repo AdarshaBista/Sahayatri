@@ -23,11 +23,15 @@ class UserCubit extends Cubit<UserState> {
   final UserDao userDao = locator();
   final ApiService apiService = locator();
   final AuthService authService = locator();
+
+  final Function() onLogout;
   final Function(User) onAuthenticated;
 
   UserCubit({
+    @required this.onLogout,
     @required this.onAuthenticated,
-  })  : assert(onAuthenticated != null),
+  })  : assert(onLogout != null),
+        assert(onAuthenticated != null),
         super(const AuthLoading());
 
   User get user {
@@ -38,14 +42,12 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<bool> isLoggedIn() async {
+  Future<void> checkUserLogin() async {
     final user = await userDao.get();
     if (user == null) {
       emit(const Unauthenticated());
-      return false;
     } else {
       emit(Authenticated(user: user));
-      return true;
     }
   }
 
@@ -94,6 +96,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       await authService.logout(user);
       await userDao.delete();
+      onLogout();
       emit(const Unauthenticated());
       return true;
     } on AppError {

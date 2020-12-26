@@ -13,22 +13,8 @@ import 'package:sahayatri/app/constants/configs.dart';
 class LocationService {
   final Location location = Location();
 
-  /// Wheather the user has granted location permission
-  bool _hasPermission = false;
-
   LocationService() {
     if (Platform.isWindows) return;
-
-    // Check for permission and request if needed
-    location.hasPermission().then((value) {
-      if (value == PermissionStatus.granted) {
-        _hasPermission = true;
-      } else {
-        location.requestPermission().then((value) {
-          if (value == PermissionStatus.granted) _hasPermission = true;
-        });
-      }
-    });
 
     location.changeSettings(
       interval: LocationConfig.interval,
@@ -36,11 +22,23 @@ class LocationService {
     );
   }
 
+  /// Check if user has granted permission to use location.
+  Future<bool> _checkPermission() async {
+    PermissionStatus permissionStatus;
+    permissionStatus = await location.hasPermission();
+    if (permissionStatus == PermissionStatus.granted) return true;
+
+    permissionStatus = await location.requestPermission();
+    return permissionStatus == PermissionStatus.granted;
+  }
+
   /// Get the stream of location as [UserLocation].
   Stream<UserLocation> getLocationStream() {
-    if (!_hasPermission) {
-      throw const AppError(message: 'Location permission denied.');
-    }
+    _checkPermission().then((hasPermission) {
+      if (!hasPermission) {
+        throw const AppError(message: 'Location permission denied.');
+      }
+    });
 
     return location.onLocationChanged
         .where((locationData) => locationData != null)
@@ -54,7 +52,7 @@ class LocationService {
       throw const AppError(message: 'Platform not supported.');
     }
 
-    if (!_hasPermission) {
+    if (!await _checkPermission()) {
       throw const AppError(message: 'Location permission denied.');
     }
 
