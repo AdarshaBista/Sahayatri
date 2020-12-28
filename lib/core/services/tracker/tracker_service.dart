@@ -29,7 +29,7 @@ class TrackerService {
   Destination _destination;
 
   /// The [Itinerary] the user is currently following.
-  Itinerary _itinerary;
+  Itinerary itinerary;
 
   /// If destination is null, there is no tracking in progress.
   bool get isTracking => _destination != null;
@@ -48,7 +48,7 @@ class TrackerService {
   Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
 
   /// Start the tracking process for a [destination].
-  Future<void> start(Destination destination, Itinerary itinerary) async {
+  Future<void> start(Destination destination, Itinerary userItinerary) async {
     if (isTracking) {
       if (destination.id != _destination.id) {
         throw const AppError(
@@ -60,7 +60,7 @@ class TrackerService {
       return;
     }
 
-    _itinerary = itinerary;
+    itinerary = userItinerary;
     _destination = destination;
     await stopwatchService.start(destination.id);
     _initTrackerStream();
@@ -70,7 +70,7 @@ class TrackerService {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
     _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
       (userLocation) {
-        if (_checkCompleted(userLocation.coord)) onCompleted();
+        if (_isCompleted(userLocation.coord)) onCompleted();
 
         _userTrack.add(userLocation);
         final index = _userIndex(userLocation.coord);
@@ -88,7 +88,7 @@ class TrackerService {
   }
 
   /// Check wheather the user has reached the end of trail
-  bool _checkCompleted(Coord userCoord) {
+  bool _isCompleted(Coord userCoord) {
     final distance = GeoUtils.computeDistance(userCoord, _destination.route.last);
     return distance < LocationConfig.minNearbyDistance;
   }
@@ -97,7 +97,7 @@ class TrackerService {
   Future<void> stop() async {
     if (!isTracking) return;
 
-    _itinerary = null;
+    itinerary = null;
     _destination = null;
     _userTrack?.clear();
     await stopwatchService.stop();
@@ -156,7 +156,7 @@ class TrackerService {
     Checkpoint nextCheckpoint;
     int userIndex, placeIndex;
 
-    for (final checkpoint in _itinerary.checkpoints) {
+    for (final checkpoint in itinerary.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
       placeIndex = GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
 

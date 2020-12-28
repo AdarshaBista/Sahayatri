@@ -9,6 +9,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
@@ -33,10 +34,8 @@ class TrackerFab extends StatelessWidget {
       icon: Icons.play_arrow_outlined,
       onTap: () {
         final destination = context.read<Destination>();
-        locator<DestinationNavService>().pushNamed(
-          Routes.trackerPageRoute,
-          arguments: [destination, itinerary],
-        );
+        context.read<TrackerCubit>().attemptTracking(destination, itinerary);
+        locator<DestinationNavService>().pushNamed(Routes.trackerPageRoute);
       },
     );
   }

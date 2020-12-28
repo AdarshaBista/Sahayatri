@@ -7,7 +7,6 @@ import 'package:sahayatri/locator.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
-
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class StopwatchTile extends StatefulWidget {

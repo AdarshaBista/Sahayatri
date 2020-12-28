@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/extensions/dialog_x.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
@@ -50,7 +51,10 @@ class ItineraryFormPage extends StatelessWidget {
     return BlocBuilder<ItineraryFormCubit, ItineraryFormState>(
       builder: (context, state) {
         return MiniFab(
-          onTap: () => _saveItinerary(context, state.itinerary),
+          onTap: () {
+            _saveItinerary(context, state.itinerary);
+            context.read<TrackerCubit>().changeItinerary(state.itinerary);
+          },
         );
       },
     );

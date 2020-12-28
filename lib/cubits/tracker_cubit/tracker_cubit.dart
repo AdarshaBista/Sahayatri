@@ -109,4 +109,9 @@ class TrackerCubit extends Cubit<TrackerState> {
 
     emit(TrackerUpdating(update: trackerUpdate));
   }
+
+  void changeItinerary(Itinerary itinerary) {
+    if (!trackerService.isTracking) return;
+    trackerService.itinerary = itinerary;
+  }
 }

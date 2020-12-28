@@ -12,6 +12,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:device_preview/device_preview.dart';
@@ -46,6 +47,7 @@ class Sahayatri extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider<NearbyCubit>(create: (context) => NearbyCubit()),
+            BlocProvider<TrackerCubit>(create: (context) => TrackerCubit()),
             BlocProvider<TranslateCubit>(create: (context) => TranslateCubit()),
           ],
           child: _buildApp(true),

@@ -12,9 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
-import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_cubit/itinerary_cubit.dart';
-import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
@@ -92,19 +90,7 @@ class DestinationRouter {
         break;
 
       case Routes.trackerPageRoute:
-        final args = settings.arguments as List;
-        _page = MultiBlocProvider(
-          providers: [
-            BlocProvider<TrackerCubit>(
-              create: (context) => TrackerCubit()
-                ..attemptTracking(args[0] as Destination, args[1] as Itinerary),
-            ),
-            BlocProvider<DirectionsCubit>(
-              create: (context) => DirectionsCubit(),
-            ),
-          ],
-          child: const TrackerPage(),
-        );
+        _page = const TrackerPage();
         break;
 
       case Routes.weatherPageRoute:
