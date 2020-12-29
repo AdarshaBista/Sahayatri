@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
+import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/nearby_tab.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
@@ -22,7 +23,8 @@ class _TrackerTabsState extends State<TrackerTabs> {
     return Column(
       children: [
         Expanded(
-          child: IndexedStack(
+          child: AnimatedChildView(
+            keepAlive: true,
             index: _selectedIndex,
             children: const [
               ProgressTab(),

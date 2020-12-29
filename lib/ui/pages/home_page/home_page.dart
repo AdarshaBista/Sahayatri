@@ -7,6 +7,7 @@ import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destin
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
+import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
 import 'package:sahayatri/ui/pages/downloaded_page/downloaded_page.dart';
@@ -60,7 +61,8 @@ class _HomePageState extends State<HomePage> {
           CommunityMaterialIcons.account_circle_outline,
         ],
       ),
-      body: IndexedStack(
+      body: AnimatedChildView(
+        keepAlive: true,
         index: _selectedIndex,
         children: const [
           DestinationsPage(),

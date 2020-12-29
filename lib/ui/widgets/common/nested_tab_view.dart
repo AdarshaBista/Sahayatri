@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 
 class NestedTabView extends StatefulWidget {
   final bool keepAlive;
   final bool isCentered;
   final bool isTabFilled;
+  final bool showIndicator;
   final List<Widget> children;
   final List<NestedTabData> tabs;
-  final EdgeInsetsGeometry tabBarMargin;
-  final EdgeInsetsGeometry tabBarPadding;
 
   const NestedTabView({
     @required this.tabs,
@@ -18,38 +18,21 @@ class NestedTabView extends StatefulWidget {
     this.keepAlive = false,
     this.isCentered = false,
     this.isTabFilled = false,
-    this.tabBarPadding = const EdgeInsets.symmetric(vertical: 8.0),
-    this.tabBarMargin = const EdgeInsets.symmetric(horizontal: 20.0),
+    this.showIndicator = true,
   })  : assert(tabs != null),
-        assert(isTabFilled != null),
         assert(children != null),
-        assert(tabBarPadding != null),
+        assert(keepAlive != null),
+        assert(isCentered != null),
+        assert(isTabFilled != null),
+        assert(showIndicator != null),
         assert(tabs.length == children.length);
 
   @override
   _NestedTabViewState createState() => _NestedTabViewState();
 }
 
-class _NestedTabViewState extends State<NestedTabView>
-    with SingleTickerProviderStateMixin {
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: widget.tabs.length, vsync: this)
-      ..addListener(() {
-        if (_tabController.indexIsChanging) {
-          setState(() {});
-        }
-      });
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+class _NestedTabViewState extends State<NestedTabView> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +40,13 @@ class _NestedTabViewState extends State<NestedTabView>
       crossAxisAlignment:
           widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: widget.tabBarPadding,
-          child: _buildTabBar(context),
+        const SizedBox(height: 16.0),
+        _buildTabBar(context),
+        AnimatedChildView(
+          index: _selectedIndex,
+          children: widget.children,
+          keepAlive: widget.keepAlive,
         ),
-        widget.keepAlive
-            ? IndexedStack(
-                index: _tabController.index,
-                children: widget.children,
-              )
-            : widget.children[_tabController.index],
       ],
     );
   }
@@ -77,32 +57,90 @@ class _NestedTabViewState extends State<NestedTabView>
     final color = widget.isTabFilled ? context.c.background : Colors.transparent;
     final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
-    return Theme(
-      data: Theme.of(context).copyWith(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+    return Container(
+      height: height,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
-      child: Container(
-        margin: widget.tabBarMargin,
-        height: height,
-        padding: padding,
-        decoration: BoxDecoration(
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: widget.tabs.length,
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        separatorBuilder: (_, __) => const SizedBox(width: 20.0),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => setState(() => _selectedIndex = index),
+            child: NestedTab(
+              tab: widget.tabs[index],
+              showIndicator: widget.showIndicator,
+              isSelected: index == _selectedIndex,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class NestedTab extends StatelessWidget {
+  final bool isSelected;
+  final NestedTabData tab;
+  final bool showIndicator;
+
+  const NestedTab({
+    @required this.tab,
+    @required this.isSelected,
+    @required this.showIndicator,
+  })  : assert(tab != null),
+        assert(isSelected != null),
+        assert(showIndicator != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleAnimator(
+      child: !showIndicator
+          ? _buildTab(context)
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTab(context),
+                const SizedBox(height: 5.0),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  height: isSelected ? 2.0 : 0.0,
+                  width: isSelected ? 40.0 : 0.0,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(2.0),
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildTab(BuildContext context) {
+    final color =
+        !showIndicator && isSelected ? AppColors.primaryDark : context.c.onBackground;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          tab.icon,
+          size: 18.0,
           color: color,
-          borderRadius: BorderRadius.circular(borderRadius),
         ),
-        child: TabBar(
-          isScrollable: true,
-          controller: _tabController,
-          tabs: [
-            for (int i = 0; i < widget.tabs.length; ++i)
-              NestedTab(
-                tab: widget.tabs[i],
-                color: context.c.onBackground,
-              )
-          ],
+        const SizedBox(width: 6.0),
+        Text(
+          tab.label,
+          style: context.t.headline5.bold.withColor(color),
         ),
-      ),
+      ],
     );
   }
 }
@@ -116,39 +154,4 @@ class NestedTabData {
     @required this.icon,
   })  : assert(label != null),
         assert(icon != null);
-}
-
-class NestedTab extends StatelessWidget {
-  final Color color;
-  final NestedTabData tab;
-
-  const NestedTab({
-    @required this.tab,
-    @required this.color,
-  })  : assert(tab != null),
-        assert(color != null);
-
-  @override
-  Widget build(BuildContext context) {
-    return ScaleAnimator(
-      child: Tab(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              tab.icon,
-              size: 18.0,
-              color: color,
-            ),
-            const SizedBox(width: 6.0),
-            AnimatedDefaultTextStyle(
-              child: Text(tab.label),
-              duration: const Duration(milliseconds: 200),
-              style: AppTextStyles.headline5.bold.withColor(color),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

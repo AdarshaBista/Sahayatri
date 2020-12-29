@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 
 class BottomNavbar extends StatelessWidget {
@@ -29,8 +28,8 @@ class BottomNavbar extends StatelessWidget {
             for (int i = 0; i < _tabs.length; ++i)
               NestedTab(
                 tab: _tabs[i],
-                color:
-                    tabController.index == i ? AppColors.primary : context.c.onBackground,
+                showIndicator: false,
+                isSelected: tabController.index == i,
               ),
           ],
         ),

@@ -76,6 +76,7 @@ class AuthPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           _buildTabView(),
+          const SizedBox(height: 16.0),
           if (isInitial && !isLoading) _buildSkipButton(),
         ],
       ),
@@ -87,7 +88,7 @@ class AuthPage extends StatelessWidget {
       keepAlive: true,
       isCentered: true,
       isTabFilled: true,
-      tabBarPadding: EdgeInsets.zero,
+      showIndicator: false,
       tabs: [
         NestedTabData(label: 'Login', icon: Icons.login_outlined),
         NestedTabData(label: 'Sign Up', icon: Icons.app_registration),
