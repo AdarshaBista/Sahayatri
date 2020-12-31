@@ -24,7 +24,7 @@ class ToolsList extends StatelessWidget {
             icon: CommunityMaterialIcons.access_point_network,
             onTap: () => const Padding(
               padding: EdgeInsets.all(16.0),
-              child: NearbyForm(isOnSettings: true),
+              child: NearbyForm(),
             ).openModalBottomSheet(context),
           ),
           const SizedBox(height: 12.0),
@@ -32,9 +32,7 @@ class ToolsList extends StatelessWidget {
             title: 'Translate',
             subtitle: 'Translate from one language to another with text to speech.',
             icon: CommunityMaterialIcons.translate,
-            onTap: () => const TranslateForm(
-              isOnSettings: true,
-            ).openModalBottomSheet(context),
+            onTap: () => const TranslateForm().openModalBottomSheet(context),
           ),
           const SizedBox(height: 12.0),
           ToolsCard(

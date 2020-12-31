@@ -28,17 +28,21 @@ class CustomFlexibleSpace extends StatefulWidget {
 
 class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
   double getTitleWidth() {
-    final textStyle = context.t.headline4;
     final width = MediaQuery.of(context).size.width;
 
+    final textStyle = context.t.headline4;
+    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final fontSize = textStyle.fontSize * textScaleFactor;
+    final effectiveTextStyle = textStyle.copyWith(fontSize: fontSize);
+
     final renderParagraph = RenderParagraph(
-      TextSpan(style: textStyle, text: widget.title),
+      TextSpan(style: effectiveTextStyle, text: widget.title),
       maxLines: 1,
       textDirection: ui.TextDirection.ltr,
     );
 
     renderParagraph.layout(BoxConstraints(maxWidth: width));
-    return renderParagraph.getMinIntrinsicWidth(textStyle.fontSize).ceilToDouble();
+    return renderParagraph.getMinIntrinsicWidth(fontSize).ceilToDouble();
   }
 
   @override

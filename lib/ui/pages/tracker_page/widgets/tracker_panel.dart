@@ -23,6 +23,7 @@ class _TrackerPanelState extends State<TrackerPanel> {
     final margin = (1.0 - panelOpenPercent) * 16.0;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SlidingPanel(
         margin: EdgeInsets.all(margin),
         minHeight: UiConfig.trackerPanelHeight,

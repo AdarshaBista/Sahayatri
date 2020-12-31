@@ -42,12 +42,14 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> checkUserLogin() async {
+  Future<bool> isLoggedIn() async {
     final user = await userDao.get();
     if (user == null) {
       emit(const Unauthenticated());
+      return false;
     } else {
       emit(Authenticated(user: user));
+      return true;
     }
   }
 

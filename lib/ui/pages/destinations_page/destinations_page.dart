@@ -18,16 +18,23 @@ class DestinationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const DestinationsHeader(),
-        body: RefreshIndicator(
-          onRefresh: () => context.read<DestinationsCubit>().fetchDestinations(),
-          child: ListView(
-            physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const DestinationsHeader(),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () => context.read<DestinationsCubit>().fetchDestinations(),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  children: [_buildDestinationsState()],
+                ),
+              ),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            children: [_buildDestinationsState()],
-          ),
+          ],
         ),
       ),
     );

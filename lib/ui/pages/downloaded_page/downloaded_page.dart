@@ -19,33 +19,33 @@ class DownloadedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<UserCubit, UserState>(
-          builder: (context, state) {
-            if (state is Authenticated) {
-              return _buildPage();
-            }
-            return const Center(child: UnauthenticatedView());
-          },
-        ),
+    return Scaffold(
+      body: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return _buildPage();
+          }
+          return const Center(child: UnauthenticatedView());
+        },
       ),
     );
   }
 
   Widget _buildPage() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 12.0),
-        const Header(
-          title: 'Downloaded',
-          padding: 16.0,
-          fontSize: 32.0,
-        ),
-        const SizedBox(height: 12.0),
-        Expanded(child: _buildDownloadedState()),
-      ],
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 12.0),
+          const Header(
+            title: 'Downloaded',
+            padding: 16.0,
+            fontSize: 32.0,
+          ),
+          const SizedBox(height: 12.0),
+          Expanded(child: _buildDownloadedState()),
+        ],
+      ),
     );
   }
 

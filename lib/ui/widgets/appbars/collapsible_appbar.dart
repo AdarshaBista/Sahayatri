@@ -9,7 +9,6 @@ class CollapsibleAppbar extends StatelessWidget {
   final double height;
   final double offset;
   final Widget leading;
-  final Widget trailing;
   final Widget background;
   final double leftPadding;
   final VoidCallback onBack;
@@ -19,7 +18,6 @@ class CollapsibleAppbar extends StatelessWidget {
     this.onBack,
     this.offset,
     this.leading,
-    this.trailing,
     this.background,
     this.height = 100.0,
     this.leftPadding = 20.0,
@@ -33,12 +31,6 @@ class CollapsibleAppbar extends StatelessWidget {
       pinned: true,
       elevation: 6.0,
       expandedHeight: height,
-      actions: trailing == null
-          ? []
-          : [
-              trailing,
-              const SizedBox(width: 8.0),
-            ],
       leading: leading ??
           Padding(
             padding: const EdgeInsets.all(10.0),

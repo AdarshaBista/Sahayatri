@@ -45,6 +45,7 @@ class PlacesGrid extends StatelessWidget {
             }
           },
         ),
+        const SizedBox(height: 32.0),
       ],
     );
   }

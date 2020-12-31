@@ -28,9 +28,9 @@ class Sahayatri extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: BlocProvider.of<UserCubit>(context).checkUserLogin(),
+      future: BlocProvider.of<UserCubit>(context).isLoggedIn(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.hasData) {
           return _buildUserState(context);
         }
         return const SplashView();
@@ -42,7 +42,7 @@ class Sahayatri extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is! Authenticated) {
-          return _buildApp(false);
+          return _buildApp(const AuthPage());
         }
         return MultiBlocProvider(
           providers: [
@@ -50,26 +50,7 @@ class Sahayatri extends StatelessWidget {
             BlocProvider<TrackerCubit>(create: (context) => TrackerCubit()),
             BlocProvider<TranslateCubit>(create: (context) => TranslateCubit()),
           ],
-          child: _buildApp(true),
-        );
-      },
-    );
-  }
-
-  Widget _buildApp(bool isLoggedIn) {
-    return BlocBuilder<ThemeCubit, ThemeMode>(
-      builder: (context, themeMode) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          themeMode: themeMode,
-          theme: AppThemes.light,
-          darkTheme: AppThemes.dark,
-          title: AppConfig.appName,
-          builder: DevicePreview.appBuilder,
-          locale: DevicePreview.locale(context),
-          onGenerateRoute: RootRouter.onGenerateRoute,
-          navigatorKey: locator<RootNavService>().navigatorKey,
-          home: isLoggedIn ? _buildPrefsState(context) : const AuthPage(),
+          child: _buildApp(_buildPrefsState(context)),
         );
       },
     );
@@ -82,6 +63,25 @@ class Sahayatri extends StatelessWidget {
           return const SplashView();
         }
         return const HomePage();
+      },
+    );
+  }
+
+  Widget _buildApp(Widget home) {
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, themeMode) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeMode,
+          theme: AppThemes.light,
+          darkTheme: AppThemes.dark,
+          title: AppConfig.appName,
+          builder: DevicePreview.appBuilder,
+          locale: DevicePreview.locale(context),
+          onGenerateRoute: RootRouter.onGenerateRoute,
+          navigatorKey: locator<RootNavService>().navigatorKey,
+          home: home,
+        );
       },
     );
   }

@@ -18,11 +18,7 @@ import 'package:sahayatri/ui/widgets/nearby/connection_info.dart';
 import 'package:sahayatri/ui/widgets/nearby/device_name_field.dart';
 
 class NearbyForm extends StatelessWidget {
-  final bool isOnSettings;
-
-  const NearbyForm({
-    @required this.isOnSettings,
-  }) : assert(isOnSettings != null);
+  const NearbyForm();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +28,7 @@ class NearbyForm extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       child: FadeAnimator(
         child: SlideAnimator(
-          begin: Offset(0.0, isOnSettings ? 1.0 : 0.0),
+          begin: const Offset(0.0, 1.0),
           child: _buildList(context),
         ),
       ),
@@ -43,9 +39,7 @@ class NearbyForm extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      physics: isOnSettings
-          ? const BouncingScrollPhysics()
-          : const NeverScrollableScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       children: [
         const Header(
           title: 'Nearby',

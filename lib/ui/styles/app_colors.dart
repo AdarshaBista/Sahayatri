@@ -17,7 +17,7 @@ class AppColors {
   static final darkFaded = dark.withOpacity(0.7);
 
   static const light = Color(0xFFFFFFFF);
-  static const lightAccent = Color(0xFFE0E0E0);
+  static const lightAccent = Color(0xFFEAEAFA);
   static final lightFaded = light.withOpacity(0.7);
 
   static const accents = [

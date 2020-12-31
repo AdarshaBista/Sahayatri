@@ -11,7 +11,9 @@ class SlidingPanel extends StatelessWidget {
   final double snapPoint;
   final double borderRadius;
   final EdgeInsets margin;
+  final bool backdropEnabled;
   final bool parallaxEnabled;
+  final bool renderPanelSheet;
   final Function(double) onPanelSlide;
   final Widget Function(ScrollController) panelBuilder;
 
@@ -24,13 +26,17 @@ class SlidingPanel extends StatelessWidget {
     this.onPanelSlide,
     this.panelBuilder,
     this.borderRadius = 12.0,
+    this.backdropEnabled = true,
     this.parallaxEnabled = false,
+    this.renderPanelSheet = true,
     this.margin = EdgeInsets.zero,
   })  : assert(body != null),
         assert(margin != null),
         assert(minHeight != null),
         assert(borderRadius != null),
-        assert(parallaxEnabled != null);
+        assert(backdropEnabled != null),
+        assert(parallaxEnabled != null),
+        assert(renderPanelSheet != null);
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +46,11 @@ class SlidingPanel extends StatelessWidget {
       snapPoint: snapPoint,
       parallaxOffset: 0.5,
       backdropOpacity: 0.6,
-      backdropEnabled: true,
       color: context.theme.cardColor,
+      backdropEnabled: backdropEnabled,
       parallaxEnabled: parallaxEnabled,
+      renderPanelSheet: renderPanelSheet,
+      backdropColor: context.c.background,
       borderRadius: BorderRadius.only(
         topLeft: radius,
         topRight: radius,

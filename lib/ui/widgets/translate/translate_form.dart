@@ -8,11 +8,7 @@ import 'package:sahayatri/ui/widgets/translate/language_selector.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_text_field.dart';
 
 class TranslateForm extends StatelessWidget {
-  final bool isOnSettings;
-
-  const TranslateForm({
-    @required this.isOnSettings,
-  }) : assert(isOnSettings != null);
+  const TranslateForm();
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +17,13 @@ class TranslateForm extends StatelessWidget {
       padding: MediaQuery.of(context).viewInsets,
       duration: const Duration(milliseconds: 200),
       child: FadeAnimator(
-        child: isOnSettings
-            ? SlideAnimator(
-                begin: const Offset(0.0, 1.0),
-                child: SizedBox(
-                  child: _buildContent(context),
-                  height: MediaQuery.of(context).size.height * 0.8,
-                ),
-              )
-            : _buildContent(context),
+        child: SlideAnimator(
+          begin: const Offset(0.0, 1.0),
+          child: SizedBox(
+            child: _buildContent(context),
+            height: MediaQuery.of(context).size.height * 0.8,
+          ),
+        ),
       ),
     );
   }

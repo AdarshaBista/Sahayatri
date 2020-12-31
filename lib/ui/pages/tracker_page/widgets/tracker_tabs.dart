@@ -4,8 +4,8 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
+import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/nearby_tab.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
 class TrackerTabs extends StatefulWidget {
@@ -28,8 +28,11 @@ class _TrackerTabsState extends State<TrackerTabs> {
             index: _selectedIndex,
             children: const [
               ProgressTab(),
-              TranslateForm(isOnSettings: false),
-              NearbyTab(),
+              TranslateForm(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: NearbyForm(),
+              ),
             ],
           ),
         ),

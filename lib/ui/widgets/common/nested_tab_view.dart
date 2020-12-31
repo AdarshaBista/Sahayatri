@@ -68,6 +68,7 @@ class _NestedTabViewState extends State<NestedTabView> {
         shrinkWrap: true,
         itemCount: widget.tabs.length,
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         separatorBuilder: (_, __) => const SizedBox(width: 20.0),
         itemBuilder: (context, index) {
