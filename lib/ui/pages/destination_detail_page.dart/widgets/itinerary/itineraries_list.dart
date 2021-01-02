@@ -30,7 +30,7 @@ class ItinerariesList extends StatelessWidget {
         _buildSuggestedItineraries(context),
         const SizedBox(height: 12.0),
         _buildUserItinerary(context),
-        const SizedBox(height: 72.0),
+        const SizedBox(height: 80.0),
       ],
     );
   }
@@ -41,7 +41,7 @@ class ItinerariesList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Our Suggested Itineraries',
+          'Suggested Itineraries',
           style: context.t.headline5.bold,
         ),
         const Divider(height: 16.0),
@@ -86,7 +86,7 @@ class ItinerariesList extends StatelessWidget {
           builder: (context, state) {
             if (state is UserItineraryLoaded) {
               return Text(
-                'Your Itinerary',
+                'My Itinerary',
                 style: context.t.headline5.bold,
               );
             }

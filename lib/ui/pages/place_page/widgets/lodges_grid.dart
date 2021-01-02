@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:provider/provider.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 import 'package:sahayatri/ui/widgets/common/lodge_card.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
@@ -16,23 +18,27 @@ class LodgesGrid extends StatelessWidget {
     final lodges = place.lodges;
 
     return lodges.isEmpty
-        ? const EmptyIndicator(
-            message: 'No lodges found.',
-          )
-        : GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 12.0,
-              mainAxisSpacing: 12.0,
-            ),
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-            itemCount: lodges.length,
-            itemBuilder: (context, index) {
-              return LodgeCard(lodge: lodges[index]);
-            },
-          );
+        ? const EmptyIndicator(message: 'No lodges found.')
+        : _buildList(lodges);
+  }
+
+  Widget _buildList(List<Lodge> lodges) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      itemExtent: 100.0,
+      itemCount: lodges.length,
+      itemBuilder: (context, index) {
+        return SlideAnimator(
+          duration: (index + 1) * 150,
+          begin: const Offset(0.0, 1.0),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: LodgeCard(lodge: lodges[index]),
+          ),
+        );
+      },
+    );
   }
 }

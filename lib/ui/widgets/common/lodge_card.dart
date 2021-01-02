@@ -26,15 +26,17 @@ class LodgeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => locator<DestinationNavService>()
           .pushNamed(Routes.lodgePageRoute, arguments: lodge),
-      child: ElevatedCard(
-        radius: 8.0,
-        color: context.c.surface,
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            _buildBackground(),
-            _buildDetails(),
-          ],
+      child: Hero(
+        tag: lodge.id,
+        child: ElevatedCard(
+          radius: 8.0,
+          color: context.c.surface,
+          child: Stack(
+            children: <Widget>[
+              _buildBackground(),
+              Center(child: _buildDetails()),
+            ],
+          ),
         ),
       ),
     );
@@ -46,36 +48,40 @@ class LodgeCard extends StatelessWidget {
       imageUrl = lodge.imageUrls.first;
     }
 
-    return Hero(
-      tag: lodge.id,
-      child: GradientContainer(
-        child: AdaptiveImage(imageUrl),
-        gradientColors: AppColors.cardGradient,
-      ),
+    return GradientContainer(
+      gradientColors: [AppColors.darkFaded, AppColors.darkFaded],
+      child: AdaptiveImage(imageUrl),
     );
   }
 
   Widget _buildDetails() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          StarRatingBar(
-            rating: lodge.rating,
-            size: 12.0,
-          ),
-          Divider(height: 8.0, color: AppColors.lightFaded),
-          Flexible(
-            child: Text(
-              lodge.name,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.headline5.bold.light,
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                lodge.name,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.headline5.bold.light,
+              ),
             ),
-          ),
-        ],
+            Divider(
+              height: 8.0,
+              color: AppColors.lightFaded,
+              indent: 80.0,
+              endIndent: 80.0,
+            ),
+            StarRatingBar(
+              rating: lodge.rating,
+              size: 12.0,
+            ),
+          ],
+        ),
       ),
     );
   }

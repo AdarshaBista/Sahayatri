@@ -120,7 +120,7 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
             );
           }
 
-          final double scaleValue = Tween<double>(begin: 1.5, end: 1.0).transform(t);
+          final double scaleValue = Tween<double>(begin: 1.7, end: 1.0).transform(t);
           final Matrix4 scaleTransform = Matrix4.identity()
             ..scale(scaleValue, scaleValue, 1.0);
           const Alignment titleAlignment = Alignment.bottomLeft;

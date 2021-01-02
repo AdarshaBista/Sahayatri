@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
@@ -26,6 +27,7 @@ class PlacesGrid extends StatelessWidget {
           padding: 20.0,
           slideDirection: SlideDirection.right,
         ),
+        const SizedBox(height: 12.0),
         BlocBuilder<PlacesCubit, PlacesState>(
           builder: (context, state) {
             if (state is PlacesError) {
@@ -34,7 +36,7 @@ class PlacesGrid extends StatelessWidget {
                 onRetry: () => context.read<PlacesCubit>().fetchPlaces(),
               );
             } else if (state is PlacesLoaded) {
-              return _buildGrid(state.places);
+              return _buildList(state.places);
             } else if (state is PlacesEmpty) {
               return EmptyIndicator(
                 message: 'No places found.',
@@ -45,29 +47,27 @@ class PlacesGrid extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 32.0),
+        const SizedBox(height: 80.0),
       ],
     );
   }
 
-  Widget _buildGrid(List<Place> places) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12.0,
-        mainAxisSpacing: 12.0,
-      ),
+  Widget _buildList(List<Place> places) {
+    return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(
-        top: 12.0,
-        left: 20.0,
-        right: 20.0,
-        bottom: 80.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      itemExtent: 120.0,
       itemCount: places.length,
       itemBuilder: (context, index) {
-        return PlaceCard(place: places[index]);
+        return SlideAnimator(
+          duration: (index + 1) * 150,
+          begin: const Offset(0.0, 1.0),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: PlaceCard(place: places[index]),
+          ),
+        );
       },
     );
   }

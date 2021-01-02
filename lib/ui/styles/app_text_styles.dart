@@ -28,18 +28,18 @@ class AppTextStyles {
       );
 
   static TextStyle get headline4 => _base.copyWith(
-        fontSize: 16.0,
+        fontSize: 17.0,
         fontWeight: FontWeight.w400,
       );
 
   static TextStyle get headline5 => _base.copyWith(
-        fontSize: 13.0,
+        fontSize: 14.0,
         color: AppColors.darkAccent,
         fontWeight: FontWeight.w300,
       );
 
   static TextStyle get headline6 => _base.copyWith(
-        fontSize: 10.0,
+        fontSize: 11.0,
         color: AppColors.darkFaded,
         fontWeight: FontWeight.w200,
       );

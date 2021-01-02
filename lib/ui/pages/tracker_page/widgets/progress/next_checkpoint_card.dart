@@ -112,7 +112,7 @@ class _CardFront extends StatelessWidget {
     return Row(
       children: [
         Text(
-          '${nextCheckpoint.distance.toStringAsFixed(0)} m away',
+          '${_formatDistance(nextCheckpoint.distance)} away',
           style: AppTextStyles.headline5.primary.bold,
         ),
         const Spacer(),
@@ -124,6 +124,13 @@ class _CardFront extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _formatDistance(double distance) {
+    if (distance < 2000.0) return '${distance.toStringAsFixed(0)} m';
+
+    final distanceInKm = (distance / 1000.0).toStringAsFixed(2);
+    return '$distanceInKm km';
   }
 }
 

@@ -28,49 +28,51 @@ class PlaceCard extends StatelessWidget {
           arguments: place,
         );
       },
-      child: ElevatedCard(
-        radius: 8.0,
-        color: context.c.surface,
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            _buildBackground(),
-            _buildDetails(),
-          ],
+      child: Hero(
+        tag: place.id,
+        child: ElevatedCard(
+          radius: 8.0,
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: <Widget>[
+              _buildBackground(),
+              _buildDetails(),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildBackground() {
-    return Hero(
-      tag: place.id,
-      child: GradientContainer(
-        gradientColors: AppColors.cardGradient,
-        child: AdaptiveImage(place.imageUrls[0]),
-      ),
+    return GradientContainer(
+      gradientColors: [AppColors.darkFaded, AppColors.darkFaded],
+      child: AdaptiveImage(place.imageUrls[0]),
     );
   }
 
   Widget _buildDetails() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            place.name.toUpperCase(),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.headline5.bold.light,
-          ),
-          const SizedBox(height: 4.0),
-          Text(
-            '${place.coord.alt.toInt()} m',
-            style: AppTextStyles.headline6.primary,
-          ),
-        ],
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              '${place.coord.alt.toInt()} m',
+              style: AppTextStyles.headline6.primary,
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              place.name.toUpperCase(),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.headline5.bold.light,
+            ),
+          ],
+        ),
       ),
     );
   }

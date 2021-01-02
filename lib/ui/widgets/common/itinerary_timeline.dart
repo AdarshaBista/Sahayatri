@@ -172,9 +172,11 @@ class ItineraryTimeline extends StatelessWidget {
           color: AppColors.primaryDark,
         ),
         const SizedBox(width: 4.0),
-        Text(
-          'Notify contact',
-          style: AppTextStyles.headline6.primaryDark,
+        Flexible(
+          child: Text(
+            'Notify contact',
+            style: AppTextStyles.headline6.primaryDark,
+          ),
         ),
       ],
     );
