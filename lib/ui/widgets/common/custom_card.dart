@@ -13,7 +13,7 @@ class CustomCard extends StatelessWidget {
   const CustomCard({
     @required this.child,
     this.color,
-    this.borderRadius = 4.0,
+    this.borderRadius = 6.0,
     this.elevation = 0.0,
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,

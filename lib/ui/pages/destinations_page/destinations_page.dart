@@ -29,7 +29,7 @@ class DestinationsPage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   children: [_buildDestinationsState()],
                 ),
               ),

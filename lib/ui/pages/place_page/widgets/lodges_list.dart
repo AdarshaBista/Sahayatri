@@ -9,8 +9,8 @@ import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/common/lodge_card.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 
-class LodgesGrid extends StatelessWidget {
-  const LodgesGrid();
+class LodgesList extends StatelessWidget {
+  const LodgesList();
 
   @override
   Widget build(BuildContext context) {

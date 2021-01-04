@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/locator.dart';
+
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
+
+import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/text_marker.dart';
 import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/lodge_marker.dart';
 
 class PlaceMapDialog extends StatelessWidget {
   final Place place;
@@ -25,8 +30,8 @@ class PlaceMapDialog extends StatelessWidget {
     return MapDialog(
       map: CustomMap(
         center: center,
-        minZoom: 18.0,
-        initialZoom: 18.5,
+        minZoom: 17.0,
+        initialZoom: 18.0,
         children: [if (lodges.isNotEmpty) _LodgeMarkersLayer(lodges: lodges)],
         swPanBoundary: Coord(lat: center.lat - 0.005, lng: center.lng - 0.005),
         nePanBoundary: Coord(lat: center.lat + 0.005, lng: center.lng + 0.005),
@@ -46,13 +51,21 @@ class _LodgeMarkersLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: [
-          for (int i = 0; i < lodges.length; ++i)
-            LodgeMarker(
-              lodge: lodges[i],
-              color: AppColors.accents[i % AppColors.accents.length],
-            ),
-        ],
+        markers: lodges
+            .map(
+              (l) => TextMarker(
+                text: l.name,
+                coord: l.coord,
+                color: AppColors.secondary,
+                onTap: (_) {
+                  locator<DestinationNavService>().pushNamed(
+                    Routes.lodgePageRoute,
+                    arguments: l,
+                  );
+                },
+              ),
+            )
+            .toList(),
       ),
     );
   }

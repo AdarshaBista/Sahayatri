@@ -16,19 +16,18 @@ class CustomButton extends StatelessWidget {
   final Color backgroundColor;
 
   const CustomButton({
-    @required this.icon,
-    @required this.label,
     @required this.onTap,
     this.outline = false,
     this.centered = true,
     this.expanded = true,
+    this.icon,
+    this.label,
     this.color,
     this.backgroundColor,
-  })  : assert(icon != null),
-        assert(label != null),
-        assert(outline != null),
+  })  : assert(outline != null),
         assert(expanded != null),
-        assert(centered != null);
+        assert(centered != null),
+        assert(icon != null || label != null);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class CustomButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         splashColor: splashColor,
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(6.0),
         child: expanded
             ? _buildButton(effectiveColor)
             : IntrinsicWidth(
@@ -55,7 +54,7 @@ class CustomButton extends StatelessWidget {
     return Container(
       height: UiConfig.buttonHeight,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(6.0),
         color: outline ? Colors.transparent : bgColor,
         border: outline
             ? Border.all(
@@ -69,20 +68,22 @@ class CustomButton extends StatelessWidget {
           mainAxisSize: centered ? MainAxisSize.min : MainAxisSize.max,
           children: [
             const SizedBox(width: 12.0),
-            Icon(
-              icon,
-              size: 18.0,
-              color: effectiveColor,
-            ),
-            const SizedBox(width: 8.0),
-            Flexible(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.headline5.withColor(effectiveColor),
+            if (icon != null)
+              Icon(
+                icon,
+                size: 18.0,
+                color: effectiveColor,
               ),
-            ),
+            if (icon != null && label != null) const SizedBox(width: 8.0),
+            if (label != null)
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.headline5.withColor(effectiveColor),
+                ),
+              ),
             const SizedBox(width: 12.0),
           ],
         ),

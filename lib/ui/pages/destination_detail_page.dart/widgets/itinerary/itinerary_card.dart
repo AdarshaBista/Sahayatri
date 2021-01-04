@@ -52,7 +52,7 @@ class ItineraryCard extends StatelessWidget {
                   context.theme.cardColor.withOpacity(0.8),
                   context.theme.cardColor.withOpacity(0.5),
                   context.theme.cardColor.withOpacity(0.2),
-                  Colors.transparent,
+                  context.theme.cardColor.withOpacity(0.0),
                 ],
               ),
               _buildDetails(context),
@@ -101,16 +101,18 @@ class ItineraryCard extends StatelessWidget {
           itinerary.name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: context.t.headline4.bold,
+          style: context.t.headline4,
         ),
         const Spacer(),
         if (!itinerary.isTemplate)
           ElevatedCard(
-            radius: 12.0,
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Text(
-              '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
-              style: AppTextStyles.headline6.primaryDark.bold,
+            radius: 16.0,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+              child: Text(
+                '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
+                style: AppTextStyles.headline6.primaryDark.bold,
+              ),
             ),
           ),
       ],
@@ -128,7 +130,7 @@ class _ImagesLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const height = 150.0;
-    final width = MediaQuery.of(context).size.width * 0.75;
+    final width = MediaQuery.of(context).size.width * 0.8;
     final imagesLength = math.min(imageUrls.length, 6);
     final imageWidth = width / imagesLength;
     const offset = 32.0;

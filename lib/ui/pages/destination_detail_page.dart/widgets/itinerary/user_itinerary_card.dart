@@ -45,7 +45,7 @@ class UserItineraryCard extends StatelessWidget {
       color: context.c.primaryVariant,
       backgroundColor: AppColors.primaryLight,
       icon: CommunityMaterialIcons.pencil_circle_outline,
-      label: 'Create an itinerary',
+      label: 'Create',
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.itineraryFormPageRoute,
       ),

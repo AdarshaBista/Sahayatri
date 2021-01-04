@@ -39,14 +39,15 @@ class AppColors {
     AppColors.dark.withOpacity(0.8),
     AppColors.dark.withOpacity(0.5),
     AppColors.dark.withOpacity(0.2),
-    Colors.transparent,
+    AppColors.dark.withOpacity(0.0),
   ];
 
   static List<Color> getCollapsibleHeaderGradient(Color color) {
     return [
-      Colors.transparent,
-      Colors.transparent,
-      Colors.transparent,
+      color.withOpacity(0.0),
+      color.withOpacity(0.0),
+      color.withOpacity(0.0),
+      color.withOpacity(0.0),
       color.withOpacity(0.2),
       color.withOpacity(0.5),
       color.withOpacity(0.8),
@@ -54,7 +55,7 @@ class AppColors {
     ];
   }
 
-  static final routeGradient = AppColors.accents.take(4).toList();
-  static final drawerGradient = AppColors.accents.take(3).toList();
-  static final userTrackGradient = AppColors.accents.getRange(5, 7).toList();
+  static final routeGradient = accents.getRange(0, 5).toList();
+  static final drawerGradient = accents.getRange(6, 8).toList();
+  static final userTrackGradient = accents.getRange(5, 8).toList();
 }

@@ -10,7 +10,7 @@ import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/lodges_grid.dart';
+import 'package:sahayatri/ui/pages/place_page/widgets/lodges_list.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_actions.dart';
 
 class PlacePage extends StatelessWidget {
@@ -62,7 +62,7 @@ class PlacePage extends StatelessWidget {
       ],
       children: [
         PhotoGallery(imageUrls: place.imageUrls),
-        const LodgesGrid(),
+        const LodgesList(),
       ],
     );
   }

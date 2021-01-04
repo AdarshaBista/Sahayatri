@@ -8,6 +8,8 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/lodges_list.dart';
 
@@ -23,7 +25,7 @@ class CheckpointDetails extends StatelessWidget {
     return SlideAnimator(
       begin: const Offset(0.0, 0.5),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,9 +37,10 @@ class CheckpointDetails extends StatelessWidget {
             _buildDateTime(),
             if (checkpoint.place.lodges.isNotEmpty) ...[
               Divider(height: 16.0, endIndent: MediaQuery.of(context).size.width / 2.0),
+              const SizedBox(height: .0),
               LodgesList(lodges: checkpoint.place.lodges),
             ],
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 12.0),
           ],
         ),
       ),
@@ -46,18 +49,17 @@ class CheckpointDetails extends StatelessWidget {
 
   Widget _buildTopRow(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(checkpoint.place.name, style: context.t.headline4.serif),
+        Header(title: checkpoint.place.name),
         const Spacer(),
-        GestureDetector(
+        CircularButton(
+          icon: Icons.open_in_new_outlined,
+          color: AppColors.primaryDark,
+          backgroundColor: context.c.surface,
           onTap: () => locator<DestinationNavService>().pushNamed(
             Routes.placePageRoute,
             arguments: checkpoint.place,
-          ),
-          onDoubleTap: () => Navigator.of(context).pop(),
-          child: Text(
-            'VIEW',
-            style: AppTextStyles.headline5.primaryDark,
           ),
         ),
       ],
@@ -82,11 +84,11 @@ class CheckpointDetails extends StatelessWidget {
           style: AppTextStyles.headline5.primary.bold,
         ),
         const SizedBox(width: 8.0),
-        const CircleAvatar(radius: 2.0),
+        const CircleAvatar(radius: 2.0, backgroundColor: AppColors.primary),
         const SizedBox(width: 8.0),
         Text(
           checkpoint.date,
-          style: AppTextStyles.headline6.primary,
+          style: AppTextStyles.headline5.primary,
         ),
       ],
     );

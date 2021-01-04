@@ -22,7 +22,7 @@ extension CoordListX on List<Coord> {
       MapConfig.maxZoom,
     );
 
-    final int accuracy = MathUtils.mapRangeInverse(
+    final int ptsToSkip = MathUtils.mapRangeInverse(
       scaledZoom,
       MapConfig.routeAccuracyZoomThreshold,
       MapConfig.maxZoom,
@@ -30,10 +30,12 @@ extension CoordListX on List<Coord> {
       MapConfig.minRouteAccuracy.toDouble(),
     ).toInt();
 
-    final List<Coord> simplified = [];
+    if (ptsToSkip < 2) return this;
+
+    final List<Coord> simplifiedRoute = [];
     for (int i = 0; i < length; ++i) {
-      if ((i + 1) % accuracy == 0) simplified.add(this[i]);
+      if ((i + 1) % ptsToSkip == 0) simplifiedRoute.add(this[i]);
     }
-    return simplified;
+    return simplifiedRoute;
   }
 }

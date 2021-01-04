@@ -10,25 +10,20 @@ class MapLayers {
   final bool route;
 
   @HiveField(1)
-  final bool flags;
-
-  @HiveField(2)
   final bool places;
 
-  @HiveField(3)
+  @HiveField(2)
   final bool checkpoints;
 
-  @HiveField(4)
+  @HiveField(3)
   final bool nearbyDevices;
 
   const MapLayers({
     this.route = true,
-    this.flags = true,
     this.places = true,
     this.checkpoints = true,
     this.nearbyDevices = true,
   })  : assert(route != null),
-        assert(flags != null),
         assert(places != null),
         assert(checkpoints != null),
         assert(nearbyDevices != null);
@@ -42,7 +37,6 @@ class MapLayers {
   }) {
     return MapLayers(
       route: route ?? this.route,
-      flags: flags ?? this.flags,
       places: places ?? this.places,
       checkpoints: checkpoints ?? this.checkpoints,
       nearbyDevices: nearbyDevices ?? this.nearbyDevices,
@@ -51,7 +45,7 @@ class MapLayers {
 
   @override
   String toString() {
-    return 'MapLayers(route: $route, flags: $flags, places: $places, checkpoints: $checkpoints, nearbyDevices: $nearbyDevices)';
+    return 'MapLayers(route: $route, places: $places, checkpoints: $checkpoints, nearbyDevices: $nearbyDevices)';
   }
 
   @override
@@ -60,7 +54,6 @@ class MapLayers {
 
     return o is MapLayers &&
         o.route == route &&
-        o.flags == flags &&
         o.places == places &&
         o.checkpoints == checkpoints &&
         o.nearbyDevices == nearbyDevices;
@@ -69,7 +62,6 @@ class MapLayers {
   @override
   int get hashCode {
     return route.hashCode ^
-        flags.hashCode ^
         places.hashCode ^
         checkpoints.hashCode ^
         nearbyDevices.hashCode;

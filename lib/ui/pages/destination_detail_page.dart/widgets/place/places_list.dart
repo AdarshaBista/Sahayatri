@@ -12,8 +12,8 @@ import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/place_card.dart';
 
-class PlacesGrid extends StatelessWidget {
-  const PlacesGrid();
+class PlacesList extends StatelessWidget {
+  const PlacesList();
 
   @override
   Widget build(BuildContext context) {

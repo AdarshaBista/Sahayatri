@@ -36,9 +36,10 @@ class DownloadedPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 16.0),
           const Header(
-            title: 'Downloaded',
-            padding: 16.0,
+            title: 'Downloads',
+            padding: 24.0,
             fontSize: 36.0,
           ),
           const SizedBox(height: 12.0),

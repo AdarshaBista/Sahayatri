@@ -32,9 +32,9 @@ class ConfirmDialog extends StatelessWidget {
     return CustomDialog(
       padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
       child: const Icon(
-        CommunityMaterialIcons.alert_rhombus,
-        color: AppColors.secondary,
+        CommunityMaterialIcons.alert_rhombus_outline,
         size: 80.0,
+        color: AppColors.secondary,
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,

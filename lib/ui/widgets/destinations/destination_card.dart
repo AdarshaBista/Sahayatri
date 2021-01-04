@@ -22,7 +22,7 @@ import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 
 class DestinationCard extends StatelessWidget {
-  static const double borderRadius = 6.0;
+  static const double borderRadius = 8.0;
   final bool deletable;
   final Destination destination;
 
@@ -35,24 +35,21 @@ class DestinationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: AspectRatio(
-        aspectRatio: 2.0,
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-            locator<RootNavService>()
-                .pushNamed(Routes.destinationPageRoute, arguments: destination);
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-            child: Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                _buildBackground(),
-                _buildDetails(),
-                if (deletable) _buildDeleteIcon(context),
-              ],
-            ),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+          locator<RootNavService>()
+              .pushNamed(Routes.destinationPageRoute, arguments: destination);
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              _buildBackground(),
+              _buildDetails(),
+              if (deletable) _buildDeleteIcon(context),
+            ],
           ),
         ),
       ),
@@ -63,6 +60,7 @@ class DestinationCard extends StatelessWidget {
     return CustomCard(
       borderRadius: borderRadius,
       child: GradientContainer(
+        height: 180.0,
         gradientColors: AppColors.cardGradient,
         child: destination.imageUrls.isEmpty
             ? const AdaptiveImage(Images.authBackground)
@@ -152,7 +150,7 @@ class DestinationCard extends StatelessWidget {
           decoration: const BoxDecoration(
             color: AppColors.secondary,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(16.0),
+              bottomLeft: Radius.circular(borderRadius),
               topRight: Radius.circular(borderRadius),
             ),
           ),

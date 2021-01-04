@@ -38,6 +38,8 @@ class ProfileHeader extends StatelessWidget {
         collapseMode: CollapseMode.pin,
         title: Text(
           user.name.toUpperCase(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: context.t.headline4.bold,
         ),
       ),

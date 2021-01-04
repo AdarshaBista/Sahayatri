@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
-import 'package:sahayatri/core/extensions/coord_list_x.dart';
+
+import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,9 +106,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
           const _DevicesAccuracyCircleLayer(),
           const _UserAccuracyCircleLayer(),
           const _UserMarkerLayer(),
-          const _PlaceMarkersLayer(),
-          const _CheckpointMarkersLayer(),
-          const _DevicesMarkersLayer(),
+          _CheckpointsPlacesMarkersLayer(zoom: zoom),
+          _DevicesMarkersLayer(zoom: zoom),
         ],
       ),
     );
@@ -157,86 +159,6 @@ class _UserTrackLayer extends StatelessWidget {
   }
 }
 
-class _PlaceMarkersLayer extends StatelessWidget {
-  const _PlaceMarkersLayer();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.prefs.mapLayers.places != c.prefs.mapLayers.places,
-      builder: (context, state) {
-        final enabled = state.prefs.mapLayers.places;
-        if (!enabled) return const Offstage();
-
-        final destination = context.watch<Destination>();
-        final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
-        final places = destination.places;
-        final checkpoints = itinerary.checkpoints;
-        final checkpointPlaces = checkpoints.map((c) => c.place).toList();
-        final remainingPlaces =
-            places.where((p) => !checkpointPlaces.contains(p)).toList();
-
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              for (int i = 0; i < remainingPlaces.length; ++i)
-                PlaceMarker(
-                  place: remainingPlaces[i],
-                  color: AppColors.accents[i % AppColors.accents.length],
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CheckpointMarkersLayer extends StatelessWidget {
-  const _CheckpointMarkersLayer();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.prefs.mapLayers.checkpoints != c.prefs.mapLayers.checkpoints,
-      builder: (context, state) {
-        final enabled = state.prefs.mapLayers.checkpoints;
-        if (!enabled) return const Offstage();
-
-        final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
-        final checkpoints = itinerary.checkpoints;
-
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: [
-              for (final checkpoint in checkpoints)
-                CheckpointMarker(checkpoint: checkpoint),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _UserMarkerLayer extends StatelessWidget {
-  const _UserMarkerLayer();
-
-  @override
-  Widget build(BuildContext context) {
-    final userCoord =
-        context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
-
-    return RepaintBoundary(
-      child: MarkerLayerWidget(
-        options: MarkerLayerOptions(
-          markers: [UserMarker(point: userCoord)],
-        ),
-      ),
-    );
-  }
-}
-
 class _UserAccuracyCircleLayer extends StatelessWidget {
   const _UserAccuracyCircleLayer();
 
@@ -255,40 +177,6 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _DevicesMarkersLayer extends StatelessWidget {
-  const _DevicesMarkersLayer();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) =>
-          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
-      builder: (context, state) {
-        final enabled = state.prefs.mapLayers.nearbyDevices;
-        if (!enabled) return const Offstage();
-
-        return BlocBuilder<NearbyCubit, NearbyState>(
-          builder: (context, state) {
-            if (state is NearbyConnected) {
-              return RepaintBoundary(
-                child: MarkerLayerWidget(
-                  options: MarkerLayerOptions(
-                    markers: state.trackingDevices
-                        .map((d) => DeviceMarker(context, device: d))
-                        .toList(),
-                  ),
-                ),
-              );
-            } else {
-              return const Offstage();
-            }
-          },
-        );
-      },
     );
   }
 }
@@ -319,6 +207,119 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
                             radius: d.userLocation.accuracy,
                           ),
                         )
+                        .toList(),
+                  ),
+                ),
+              );
+            } else {
+              return const Offstage();
+            }
+          },
+        );
+      },
+    );
+  }
+}
+
+class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
+  final double zoom;
+
+  const _CheckpointsPlacesMarkersLayer({
+    @required this.zoom,
+  }) : assert(zoom != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) =>
+          p.prefs.mapLayers.places != c.prefs.mapLayers.places ||
+          p.prefs.mapLayers.checkpoints != c.prefs.mapLayers.checkpoints,
+      builder: (context, state) {
+        final placesEnabled = state.prefs.mapLayers.places;
+        final checkpointsEnabled = state.prefs.mapLayers.checkpoints;
+        if (!placesEnabled && !checkpointsEnabled) return const Offstage();
+
+        final List<Place> places = [];
+        final List<Marker> markers = [];
+
+        if (placesEnabled) {
+          final destination = context.watch<Destination>();
+          places.addAll(destination.places);
+        }
+
+        if (checkpointsEnabled) {
+          final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
+          markers.addAll(itinerary.checkpoints.map(
+            (c) => CheckpointMarker(
+              checkpoint: c,
+              hideText: zoom < MapConfig.markerZoomThreshold,
+            ),
+          ));
+
+          if (placesEnabled) {
+            final checkpointPlaces = itinerary.checkpoints.map((c) => c.place).toList();
+            places.removeWhere((p) => checkpointPlaces.contains(p));
+          }
+        }
+
+        markers.addAll(places.map(
+          (p) => PlaceMarker(
+            place: p,
+            hideText: zoom < MapConfig.markerZoomThreshold,
+          ),
+        ));
+
+        return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+      },
+    );
+  }
+}
+
+class _UserMarkerLayer extends StatelessWidget {
+  const _UserMarkerLayer();
+
+  @override
+  Widget build(BuildContext context) {
+    final userCoord =
+        context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
+
+    return RepaintBoundary(
+      child: MarkerLayerWidget(
+        options: MarkerLayerOptions(
+          markers: [UserMarker(point: userCoord)],
+        ),
+      ),
+    );
+  }
+}
+
+class _DevicesMarkersLayer extends StatelessWidget {
+  final double zoom;
+
+  const _DevicesMarkersLayer({
+    @required this.zoom,
+  }) : assert(zoom != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PrefsCubit, PrefsState>(
+      buildWhen: (p, c) =>
+          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
+      builder: (context, state) {
+        final enabled = state.prefs.mapLayers.nearbyDevices;
+        if (!enabled) return const Offstage();
+
+        return BlocBuilder<NearbyCubit, NearbyState>(
+          builder: (context, state) {
+            if (state is NearbyConnected) {
+              return RepaintBoundary(
+                child: MarkerLayerWidget(
+                  options: MarkerLayerOptions(
+                    markers: state.trackingDevices
+                        .map((d) => DeviceMarker(
+                              device: d,
+                              hideText: zoom < MapConfig.markerZoomThreshold,
+                            ))
                         .toList(),
                   ),
                 ),

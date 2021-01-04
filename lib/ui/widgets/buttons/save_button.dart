@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 
 class SaveButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -13,21 +11,10 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return CustomButton(
+      expanded: false,
       onTap: onPressed,
-      child: Container(
-        width: 72.0,
-        height: UiConfig.buttonHeight,
-        decoration: BoxDecoration(
-          color: AppColors.primaryLight,
-          borderRadius: BorderRadius.circular(4.0),
-        ),
-        child: Center(
-            child: Text(
-          'SAVE',
-          style: context.t.headline5.bold,
-        )),
-      ),
+      icon: Icons.check,
     );
   }
 }

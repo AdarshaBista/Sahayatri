@@ -7,6 +7,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class LayersList extends StatelessWidget {
   const LayersList();
@@ -23,12 +24,7 @@ class LayersList extends StatelessWidget {
         const SizedBox(height: 10.0),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.75,
-          child: CustomCard(
-            borderRadius: 8.0,
-            color: AppColors.darkFaded,
-            padding: const EdgeInsets.all(10.0),
-            child: _buildLayers(),
-          ),
+          child: _buildLayers(),
         ),
       ],
     );
@@ -49,15 +45,6 @@ class LayersList extends StatelessWidget {
               onSelect: (value) => context
                   .read<PrefsCubit>()
                   .saveMapLayers(mapLayers.copyWith(route: value)),
-            ),
-            const SizedBox(height: 10.0),
-            _LayerTile(
-              label: 'Flags',
-              value: mapLayers.flags,
-              icon: CommunityMaterialIcons.flag_outline,
-              onSelect: (value) => context
-                  .read<PrefsCubit>()
-                  .saveMapLayers(mapLayers.copyWith(flags: value)),
             ),
             const SizedBox(height: 10.0),
             _LayerTile(
@@ -124,19 +111,29 @@ class _LayerTileState extends State<_LayerTile> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTile(
-      onTap: onTap,
-      icon: widget.icon,
-      title: widget.label,
-      color: Colors.transparent,
-      iconColor: AppColors.light,
-      textStyle: AppTextStyles.headline5.light,
-      trailing: Checkbox(
-        value: isChecked,
-        onChanged: (_) => onTap(),
-        checkColor: AppColors.light,
-        fillColor: MaterialStateProperty.all(AppColors.primaryDark),
+    return CustomCard(
+      borderRadius: 8.0,
+      color: AppColors.darkFaded,
+      padding: const EdgeInsets.all(4.0),
+      child: CustomTile(
+        onTap: onTap,
+        icon: widget.icon,
+        title: widget.label,
+        color: Colors.transparent,
+        iconColor: AppColors.light,
+        textStyle: AppTextStyles.headline5.light,
+        trailing: _buildCheckBox(),
       ),
+    );
+  }
+
+  Widget _buildCheckBox() {
+    return CircularButton(
+      onTap: onTap,
+      size: 16.0,
+      padding: 4.0,
+      icon: isChecked ? Icons.check : Icons.close,
+      backgroundColor: isChecked ? AppColors.primaryLight : AppColors.secondaryLight,
     );
   }
 

@@ -30,9 +30,9 @@ class CustomTile extends StatelessWidget {
       color: color,
       child: ListTile(
         dense: true,
-        visualDensity: VisualDensity.compact,
         onTap: onTap,
         trailing: trailing,
+        visualDensity: VisualDensity.compact,
         title: Row(
           children: [
             Icon(

@@ -27,10 +27,30 @@ class ItinerariesList extends StatelessWidget {
           slideDirection: SlideDirection.right,
         ),
         const SizedBox(height: 12.0),
-        _buildSuggestedItineraries(context),
-        const SizedBox(height: 12.0),
         _buildUserItinerary(context),
+        const SizedBox(height: 20.0),
+        _buildSuggestedItineraries(context),
         const SizedBox(height: 80.0),
+      ],
+    );
+  }
+
+  Widget _buildUserItinerary(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BlocBuilder<UserItineraryCubit, UserItineraryState>(
+          builder: (context, state) {
+            final title =
+                state is UserItineraryLoaded ? 'My Itinerary' : 'Create my itinerary';
+            return Text(
+              title,
+              style: context.t.headline4.bold,
+            );
+          },
+        ),
+        const SizedBox(height: 12.0),
+        const UserItineraryCard(),
       ],
     );
   }
@@ -42,10 +62,9 @@ class ItinerariesList extends StatelessWidget {
       children: [
         Text(
           'Suggested Itineraries',
-          style: context.t.headline5.bold,
+          style: context.t.headline4.bold,
         ),
-        const Divider(height: 16.0),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 12.0),
         BlocBuilder<ItineraryCubit, ItineraryState>(
           builder: (context, state) {
             if (state is ItineraryError) {
@@ -73,32 +92,6 @@ class ItinerariesList extends StatelessWidget {
             }
           },
         ),
-      ],
-    );
-  }
-
-  Widget _buildUserItinerary(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16.0),
-        BlocBuilder<UserItineraryCubit, UserItineraryState>(
-          builder: (context, state) {
-            if (state is UserItineraryLoaded) {
-              return Text(
-                'My Itinerary',
-                style: context.t.headline5.bold,
-              );
-            }
-            return Text(
-              'Create Your Own',
-              style: context.t.headline5.bold,
-            );
-          },
-        ),
-        const Divider(height: 16.0),
-        const SizedBox(height: 8.0),
-        const UserItineraryCard(),
       ],
     );
   }

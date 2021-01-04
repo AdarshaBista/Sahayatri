@@ -357,11 +357,9 @@ packages:
   flutter_map:
     dependency: "direct main"
     description:
-      path: "."
-      ref: fix-listview-scrolling
-      resolved-ref: "117f79e54dc0e8d22433fb8049c6e14399507f73"
-      url: "https://github.com/ritikmishra/flutter_map.git"
-    source: git
+      name: flutter_map
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.10.1+1"
   flutter_native_splash:
     dependency: "direct dev"

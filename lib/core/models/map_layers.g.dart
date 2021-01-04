@@ -18,26 +18,23 @@ class MapLayersAdapter extends TypeAdapter<MapLayers> {
     };
     return MapLayers(
       route: fields[0] as bool,
-      flags: fields[1] as bool,
-      places: fields[2] as bool,
-      checkpoints: fields[3] as bool,
-      nearbyDevices: fields[4] as bool,
+      places: fields[1] as bool,
+      checkpoints: fields[2] as bool,
+      nearbyDevices: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, MapLayers obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.route)
       ..writeByte(1)
-      ..write(obj.flags)
-      ..writeByte(2)
       ..write(obj.places)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.checkpoints)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.nearbyDevices);
   }
 

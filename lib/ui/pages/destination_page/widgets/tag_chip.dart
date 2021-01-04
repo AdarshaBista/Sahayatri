@@ -55,21 +55,27 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              widget.label,
-              style: context.t.headline6,
+            Flexible(
+              child: Text(
+                widget.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.t.headline6,
+              ),
             ),
             if (widget.onDelete != null) ...[
               const SizedBox(width: 2.0),
-              GestureDetector(
-                onTap: () async {
-                  await controller.reverse();
-                  widget.onDelete(widget.label);
-                },
-                child: const Icon(
-                  Icons.close,
-                  size: 12.0,
-                  color: AppColors.secondary,
+              Flexible(
+                child: GestureDetector(
+                  onTap: () async {
+                    await controller.reverse();
+                    widget.onDelete(widget.label);
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    size: 12.0,
+                    color: AppColors.secondary,
+                  ),
                 ),
               ),
             ],

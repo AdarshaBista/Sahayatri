@@ -69,7 +69,7 @@ class ConnectionService {
       );
     } catch (e) {
       print(e.toString());
-      throw const AppError(message: 'Cannot start advertising.');
+      throw const AppError(message: 'Cannot start searching.');
     }
   }
 

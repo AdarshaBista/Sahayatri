@@ -33,7 +33,7 @@ class NextCheckpointCard extends StatelessWidget {
     final place = nextCheckpoint.checkpoint.place;
     return FadeAnimator(
       child: ElevatedCard(
-        radius: 8.0,
+        radius: 12.0,
         elevation: 8.0,
         color: AppColors.darkFaded,
         margin: const EdgeInsets.symmetric(horizontal: 20.0),

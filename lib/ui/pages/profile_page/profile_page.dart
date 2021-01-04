@@ -41,9 +41,7 @@ class ProfilePage extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(top: 8.0),
-        children: [
-          _buildTabView(),
-        ],
+        children: [_buildTabView()],
       ),
     );
   }

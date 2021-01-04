@@ -2,26 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
 
-import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
+import 'package:sahayatri/ui/widgets/map/text_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart';
 
-class DeviceMarker extends Marker {
-  DeviceMarker(
-    BuildContext context, {
+class DeviceMarker extends TextMarker {
+  DeviceMarker({
+    @required bool hideText,
     @required NearbyDevice device,
   })  : assert(device != null),
         super(
-          width: 24.0,
-          height: 24.0,
-          point: device.userLocation.coord.toLatLng(),
-          builder: (_) => GestureDetector(
-            onTap: () => DeviceDetails(deviceId: device.id).openModalBottomSheet(context),
-            child: const Icon(
-              Icons.radio_button_checked,
-              size: 24.0,
-              color: Colors.blue,
-            ),
-          ),
+          hideText: hideText,
+          text: device.name,
+          color: Colors.blue,
+          coord: device.userLocation.coord,
+          icon: Icons.radio_button_checked,
+          onTap: (context) =>
+              DeviceDetails(deviceId: device.id).openModalBottomSheet(context),
         );
 }

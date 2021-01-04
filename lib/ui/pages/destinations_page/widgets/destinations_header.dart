@@ -16,10 +16,11 @@ class DestinationsHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 16.0),
         const Header(
           title: 'Destinations',
+          padding: 20.0,
           fontSize: 36.0,
-          padding: 16.0,
         ),
         const SizedBox(height: 12.0),
         BlocBuilder<DestinationsCubit, DestinationsState>(

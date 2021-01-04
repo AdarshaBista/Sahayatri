@@ -37,11 +37,7 @@ dependencies:
 
   # Map
   maps_toolkit: ^1.1.0+2
-  # flutter_map: ^0.10.1+1
-  flutter_map:
-    git:
-      url: https://github.com/ritikmishra/flutter_map.git
-      ref: fix-listview-scrolling
+  flutter_map: ^0.10.1+1
 
   # Tracker
   location: ^3.2.1

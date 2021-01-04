@@ -16,7 +16,7 @@ class ApiConfig {
 }
 
 class UiConfig {
-  static const double buttonHeight = 40.0;
+  static const double buttonHeight = 42.0;
   static const int animatorDuration = 500;
   static const double trackerPanelHeight = 90.0;
   static const double profileHeaderHeight = 290.0;
@@ -36,10 +36,11 @@ class LocationConfig {
 
 class MapConfig {
   static const double minZoom = 10.0;
-  static const double maxZoom = 19.0;
+  static const double maxZoom = 18.4;
   static const double defaultZoom = 14.0;
+  static const double markerZoomThreshold = 13.0;
   static const int maxRouteAccuracy = 1;
-  static const int minRouteAccuracy = 15;
+  static const int minRouteAccuracy = 10;
   static const double routeAccuracyZoomThreshold = 16.0;
 }
 

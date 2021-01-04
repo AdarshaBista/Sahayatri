@@ -127,12 +127,12 @@ class AppThemes {
       );
 
   static RoundedRectangleBorder get _circularBorderRadius => RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(6.0),
       );
 
   static InputBorder get _inputBorder => OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(6.0),
       );
 
   static InputDecorationTheme get _lightInputDecorationTheme => InputDecorationTheme(
@@ -252,8 +252,8 @@ class AppThemes {
         modalBackgroundColor: AppColors.light,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8.0),
-            topRight: Radius.circular(8.0),
+            topLeft: Radius.circular(12.0),
+            topRight: Radius.circular(12.0),
           ),
         ),
       );

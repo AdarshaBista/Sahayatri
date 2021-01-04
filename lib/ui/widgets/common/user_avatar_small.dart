@@ -19,7 +19,6 @@ class UserAvatarSmall extends StatelessWidget {
       width: 66.0,
       height: 66.0,
       child: ElevatedCard(
-        radius: 8.0,
         margin: const EdgeInsets.all(12.0),
         color: AppColors.primaryDark,
         child: imageUrl != null

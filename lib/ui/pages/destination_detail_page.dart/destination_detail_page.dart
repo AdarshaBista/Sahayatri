@@ -11,7 +11,7 @@ import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_i
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/tracker_fab.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/bottom_navbar.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/destination_drawer.dart';
-import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_grid.dart';
+import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/place/places_list.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/itinerary/itineraries_list.dart';
 
 class DestinationDetailPage extends StatefulWidget {
@@ -103,7 +103,7 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
       controller: tabController,
       physics: const BouncingScrollPhysics(),
       children: const [
-        PlacesGrid(),
+        PlacesList(),
         ItinerariesList(),
       ],
     );

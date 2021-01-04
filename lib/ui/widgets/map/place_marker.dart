@@ -6,34 +6,25 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/constants/images.dart';
 
-import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/map/text_marker.dart';
 
-class PlaceMarker extends Marker {
+class PlaceMarker extends TextMarker {
   PlaceMarker({
-    @required Color color,
     @required Place place,
-  })  : assert(color != null),
-        assert(place != null),
+    @required bool hideText,
+  })  : assert(place != null),
+        assert(hideText != null),
         super(
-          point: place.coord.toLatLng(),
-          builder: (context) => GestureDetector(
-            onTap: () {
-              locator<DestinationNavService>().pushNamed(
-                Routes.placePageRoute,
-                arguments: place,
-              );
-            },
-            child: ScaleAnimator(
-              child: Image.asset(
-                Images.marker,
-                width: 24.0,
-                height: 24.0,
-                color: color,
-              ),
-            ),
-          ),
+          text: place.name,
+          color: Colors.red,
+          coord: place.coord,
+          hideText: hideText,
+          onTap: (_) {
+            locator<DestinationNavService>().pushNamed(
+              Routes.placePageRoute,
+              arguments: place,
+            );
+          },
         );
 }
