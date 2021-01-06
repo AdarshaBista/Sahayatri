@@ -24,13 +24,14 @@ class TrackerActions extends StatelessWidget {
     return trackingState == TrackingState.stopped
         ? const Offstage()
         : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (trackingState == TrackingState.paused)
                 Expanded(
                   child: CustomButton(
-                    label: 'Resume',
+                    label: 'RESUME',
                     color: context.c.onBackground,
-                    backgroundColor: Colors.teal.withOpacity(0.3),
+                    backgroundColor: Colors.teal.withOpacity(0.5),
                     icon: CommunityMaterialIcons.play_circle_outline,
                     onTap: () => context.read<TrackerCubit>().resumeTracking(),
                   ),
@@ -38,19 +39,19 @@ class TrackerActions extends StatelessWidget {
               if (trackingState == TrackingState.updating)
                 Expanded(
                   child: CustomButton(
-                    label: 'Pause',
+                    label: 'PAUSE',
                     color: context.c.onBackground,
-                    backgroundColor: Colors.blue.withOpacity(0.3),
+                    backgroundColor: Colors.lightBlue.withOpacity(0.5),
                     icon: CommunityMaterialIcons.pause_circle_outline,
                     onTap: () => context.read<TrackerCubit>().pauseTracking(),
                   ),
                 ),
-              const SizedBox(width: 8.0),
+              const SizedBox(width: 12.0),
               Expanded(
                 child: CustomButton(
-                  label: 'Stop',
+                  label: 'STOP',
                   color: context.c.onBackground,
-                  backgroundColor: Colors.red.withOpacity(0.3),
+                  backgroundColor: Colors.red.withOpacity(0.5),
                   icon: CommunityMaterialIcons.stop_circle_outline,
                   onTap: () => ConfirmDialog(
                     message: 'Are you sure you want to stop the tracking process.',

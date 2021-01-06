@@ -69,7 +69,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      isToolbarVisible: false,
+      // isToolbarVisible: false,
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),

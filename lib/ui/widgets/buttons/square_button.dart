@@ -9,18 +9,21 @@ class SquareButton extends StatelessWidget {
   final double size;
   final IconData icon;
   final VoidCallback onTap;
+  final double borderRadius;
   final Color backgroundColor;
 
   const SquareButton({
     this.color,
     this.size = 80.0,
     this.backgroundColor,
+    this.borderRadius = 8.0,
     @required this.icon,
     @required this.label,
     @required this.onTap,
   })  : assert(icon != null),
         assert(label != null),
-        assert(onTap != null);
+        assert(onTap != null),
+        assert(borderRadius != null);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class SquareButton extends StatelessWidget {
         height: size,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryLight,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Center(
           child: VerticalButton(

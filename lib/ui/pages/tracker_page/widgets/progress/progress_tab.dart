@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_stats.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint_card.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_actions.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/tracker_stats.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/next_checkpoint_card.dart';
 
 class ProgressTab extends StatelessWidget {
   const ProgressTab();
@@ -9,13 +10,14 @@ class ProgressTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(20.0),
       physics: const BouncingScrollPhysics(),
       children: const [
         TrackerStats(),
-        SizedBox(height: 6.0),
+        SizedBox(height: 12.0),
+        TrackerActions(),
+        SizedBox(height: 20.0),
         NextCheckpointCard(),
-        SizedBox(height: 16.0),
       ],
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/utils/format_utils.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
@@ -45,25 +46,20 @@ class _StopwatchTileState extends State<StopwatchTile> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.timer_outlined,
-            size: 24.0,
+            Icons.access_time,
+            size: 20.0,
             color: context.c.onSurface,
           ),
-          const SizedBox(height: 2.0),
+          const SizedBox(height: 4.0),
           Text(
-            _formatDuration(elapsed),
-            style: context.t.headline1.thin,
+            FormatUtils.time(elapsed),
+            style: context.t.headline2,
           ),
         ],
       ),
     );
-  }
-
-  String _formatDuration(Duration duration) {
-    return [duration.inHours, duration.inMinutes, duration.inSeconds]
-        .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
-        .join(':');
   }
 }

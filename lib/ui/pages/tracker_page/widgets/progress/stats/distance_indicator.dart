@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/core/utils/format_utils.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
@@ -31,8 +32,8 @@ class DistanceIndicator extends StatelessWidget {
           startAngle: 120.0,
           angleRange: 300.0,
           customWidths: CustomSliderWidths(
-            trackWidth: 4.0,
-            progressBarWidth: 8.0,
+            trackWidth: 5.0,
+            progressBarWidth: 10.0,
           ),
           customColors: CustomSliderColors(
             dynamicGradient: true,
@@ -60,7 +61,7 @@ class DistanceIndicator extends StatelessWidget {
     return Column(
       children: [
         Text(
-          _formatDistance(distance),
+          FormatUtils.distance(distance),
           style: context.t.headline4.bold.withColor(color),
         ),
         const SizedBox(height: 2.0),
@@ -70,12 +71,5 @@ class DistanceIndicator extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String _formatDistance(double distance) {
-    if (distance < 2000.0) return '${distance.toStringAsFixed(0)} m';
-
-    final distanceInKm = (distance / 1000.0).toStringAsFixed(2);
-    return '$distanceInKm km';
   }
 }

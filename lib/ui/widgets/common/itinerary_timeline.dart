@@ -14,6 +14,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
@@ -164,21 +165,11 @@ class ItineraryTimeline extends StatelessWidget {
   }
 
   Widget _buildSmsStatus() {
-    return Row(
-      children: [
-        const Icon(
-          Icons.check_circle,
-          size: 12.0,
-          color: AppColors.primaryDark,
-        ),
-        const SizedBox(width: 4.0),
-        Flexible(
-          child: Text(
-            'Notify contact',
-            style: AppTextStyles.headline6.primaryDark,
-          ),
-        ),
-      ],
+    return IconLabel(
+      icon: Icons.check_circle,
+      label: 'Notify Contact',
+      iconColor: AppColors.primaryDark,
+      labelStyle: AppTextStyles.headline6.primaryDark,
     );
   }
 

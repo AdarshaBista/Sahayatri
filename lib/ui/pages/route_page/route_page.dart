@@ -43,8 +43,8 @@ class _RoutePageState extends State<RoutePage> {
       body: CustomMap(
         center: destination.midPointCoord,
         children: [
-          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
           const _PlaceMarkersLayer(),
+          if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
         ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
@@ -102,10 +102,10 @@ class _AltitudeMarkerLayer extends StatelessWidget {
         markers: [
           DynamicTextMarker(
             shrinkWhen: false,
-            icon: Icons.height,
+            icon: Icons.landscape,
             color: AppColors.light,
             coord: destination.route[index],
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Colors.deepPurple,
             label: '${destination.route[index].alt} m',
           ),
         ],

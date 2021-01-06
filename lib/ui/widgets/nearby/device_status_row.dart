@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 
 class DeviceStatusRow extends StatelessWidget {
   final DeviceStatus status;
@@ -13,37 +14,32 @@ class DeviceStatusRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _buildIcon(),
-        const SizedBox(width: 2.0),
-        Text(
-          _getStatusText(),
-          style: context.t.headline6,
-        ),
-      ],
+    return IconLabel(
+      gap: 2.0,
+      icon: _getIcon(),
+      label: _getStatusText(),
+      iconColor: _getIconColor(),
+      labelStyle: context.t.headline6,
     );
   }
 
-  Widget _buildIcon() {
+  IconData _getIcon() {
     if (status == DeviceStatus.connected) {
-      return const Icon(
-        Icons.check_circle,
-        color: Colors.green,
-        size: 12.0,
-      );
+      return Icons.check_circle;
     } else if (status == DeviceStatus.connecting) {
-      return const Icon(
-        Icons.radio_button_checked,
-        color: Colors.blue,
-        size: 12.0,
-      );
+      return Icons.radio_button_checked;
     } else {
-      return const Icon(
-        Icons.remove_circle,
-        color: Colors.red,
-        size: 12.0,
-      );
+      return Icons.remove_circle;
+    }
+  }
+
+  Color _getIconColor() {
+    if (status == DeviceStatus.connected) {
+      return Colors.green;
+    } else if (status == DeviceStatus.connecting) {
+      return Colors.blue;
+    } else {
+      return Colors.red;
     }
   }
 

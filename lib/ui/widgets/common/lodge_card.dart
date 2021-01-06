@@ -66,6 +66,7 @@ class LodgeCard extends StatelessWidget {
               child: Text(
                 lodge.name,
                 maxLines: 3,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.headline5.bold.light,
               ),
