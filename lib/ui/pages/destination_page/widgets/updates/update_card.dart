@@ -5,8 +5,8 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_small.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
@@ -103,13 +103,26 @@ class UpdateCard extends StatelessWidget {
   }
 
   Widget _buildLocationButton(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: CircularButton(
-        color: AppColors.secondary,
-        icon: Icons.location_on_outlined,
-        backgroundColor: context.c.surface,
-        onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
+    return GestureDetector(
+      onTap: () => UpdateMapDialog(coords: update.coords).openDialog(context),
+      child: CustomCard(
+        borderRadius: 32.0,
+        margin: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.location_on_outlined,
+              size: 14.0,
+              color: AppColors.secondary,
+            ),
+            const SizedBox(width: 2.0),
+            Text(
+              update.coords.length.toString(),
+              style: context.t.headline5.bold.withColor(AppColors.secondary),
+            ),
+          ],
+        ),
       ),
     );
   }

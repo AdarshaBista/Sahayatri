@@ -17,9 +17,10 @@ import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart'
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/widgets/map/place_marker.dart';
 import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
+import 'package:sahayatri/ui/widgets/map/markers/checkpoint_detail_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
@@ -196,19 +197,17 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
         return BlocBuilder<NearbyCubit, NearbyState>(
           builder: (context, state) {
             if (state is NearbyConnected) {
-              return RepaintBoundary(
-                child: CircleLayerWidget(
-                  options: CircleLayerOptions(
-                    circles: state.trackingDevices
-                        .map(
-                          (d) => AccuracyCircle(
-                            color: Colors.blue,
-                            point: d.userLocation.coord,
-                            radius: d.userLocation.accuracy,
-                          ),
-                        )
-                        .toList(),
-                  ),
+              return CircleLayerWidget(
+                options: CircleLayerOptions(
+                  circles: state.trackingDevices
+                      .map(
+                        (d) => AccuracyCircle(
+                          color: Colors.blue,
+                          point: d.userLocation.coord,
+                          radius: d.userLocation.accuracy,
+                        ),
+                      )
+                      .toList(),
                 ),
               );
             } else {
@@ -250,10 +249,12 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
         if (checkpointsEnabled) {
           final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
           markers.addAll(itinerary.checkpoints.map(
-            (c) => CheckpointMarker(
-              checkpoint: c,
-              hideText: zoom < MapConfig.markerZoomThreshold,
-            ),
+            (c) {
+              if (zoom < MapConfig.markerZoomThreshold) {
+                return CheckpointMarker(checkpoint: c);
+              }
+              return CheckpointDetailMarker(checkpoint: c);
+            },
           ));
 
           if (placesEnabled) {
@@ -265,11 +266,15 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
         markers.addAll(places.map(
           (p) => PlaceMarker(
             place: p,
-            hideText: zoom < MapConfig.markerZoomThreshold,
+            shrinkWhen: zoom < MapConfig.markerZoomThreshold,
           ),
         ));
 
-        return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+        return MarkerLayerWidget(
+          options: MarkerLayerOptions(
+            markers: markers.reversed.toList(),
+          ),
+        );
       },
     );
   }
@@ -318,7 +323,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
                     markers: state.trackingDevices
                         .map((d) => DeviceMarker(
                               device: d,
-                              hideText: zoom < MapConfig.markerZoomThreshold,
+                              shrinkWhen: zoom < MapConfig.markerZoomThreshold,
                             ))
                         .toList(),
                   ),

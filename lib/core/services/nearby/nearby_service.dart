@@ -17,9 +17,6 @@ class NearbyService {
   /// Service to initiate and close connections to nearby devices.
   ConnectionService connectionService;
 
-  /// Wheather nearby service is runnig or not.
-  bool _isRunning = false;
-
   /// List of nearby devices.
   List<NearbyDevice> get devices => devicesService.devices;
 
@@ -40,16 +37,12 @@ class NearbyService {
     } on AppError {
       rethrow;
     }
-    _isRunning = true;
   }
 
   /// Stop scanning and disconnect from all devices.
   Future<void> stop() async {
-    if (!_isRunning) return;
-
     await connectionService.stopScanning();
     await connectionService.stopAll();
     devicesService.clear();
-    _isRunning = false;
   }
 }

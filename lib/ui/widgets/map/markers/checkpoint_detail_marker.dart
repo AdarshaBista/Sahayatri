@@ -11,29 +11,26 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
-    @required Color color,
     @required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
-          width: 200,
-          height: 64,
-          anchorPos: AnchorPos.align(AnchorAlign.center),
+          width: 200.0,
+          height: 80.0,
+          anchorPos: AnchorPos.align(AnchorAlign.top),
           point: checkpoint.place.coord.toLatLng(),
           builder: (_) => Hero(
             tag: checkpoint.place.id,
-            child: ElevatedCard(
-              child: Material(
-                color: color,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _DateTimeInfo(checkpoint: checkpoint),
-                    Flexible(child: _PlaceInfo(checkpoint: checkpoint)),
-                  ],
-                ),
+            child: ArrowMarkerWidget(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _DateTimeInfo(checkpoint: checkpoint),
+                  Flexible(child: _PlaceInfo(checkpoint: checkpoint)),
+                ],
               ),
             ),
           ),
@@ -62,19 +59,22 @@ class _DateTimeInfo extends StatelessWidget {
               color: AppColors.darkFaded,
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                checkpoint.date,
-                style: AppTextStyles.headline5.light.bold,
-              ),
-              const SizedBox(height: 4.0),
-              Text(
-                checkpoint.time,
-                style: AppTextStyles.headline6.light,
-              ),
-            ],
+          Material(
+            color: Colors.transparent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  checkpoint.date,
+                  style: AppTextStyles.headline5.light.bold,
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  checkpoint.time,
+                  style: AppTextStyles.headline6.light,
+                ),
+              ],
+            ),
           ),
         ],
       ),

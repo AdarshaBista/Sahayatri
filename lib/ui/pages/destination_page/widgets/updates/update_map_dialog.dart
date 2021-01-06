@@ -7,6 +7,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
+import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 
 class UpdateMapDialog extends StatelessWidget {
   final List<Coord> coords;
@@ -44,19 +45,12 @@ class _MarkersLayer extends StatelessWidget {
   }
 
   Marker _buildMarker(Coord c) {
-    const double size = 24.0;
-
-    return Marker(
-      width: size,
-      height: size,
-      point: c.toLatLng(),
-      builder: (context) {
-        return const Icon(
-          CommunityMaterialIcons.circle_double,
-          size: size,
-          color: AppColors.secondary,
-        );
-      },
+    return DynamicTextMarker(
+      coord: c,
+      shrinkWhen: true,
+      color: AppColors.light,
+      backgroundColor: AppColors.secondary,
+      icon: CommunityMaterialIcons.circle_double,
     );
   }
 }

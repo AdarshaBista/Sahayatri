@@ -4,8 +4,6 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
@@ -13,10 +11,11 @@ import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/widgets/map/text_marker.dart';
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
-import 'package:sahayatri/ui/widgets/map/place_marker.dart';
+import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
+import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
 
 class RoutePage extends StatefulWidget {
@@ -45,7 +44,7 @@ class _RoutePageState extends State<RoutePage> {
         center: destination.midPointCoord,
         children: [
           if (isSheetOpen) _AltitudeMarkerLayer(index: altitudeDragCoordIndex),
-          const _PlaceMarkersLayer(zoom: MapConfig.maxZoom),
+          const _PlaceMarkersLayer(),
         ],
         swPanBoundary: Coord(
           lat: destination.minLat - 0.15,
@@ -101,10 +100,13 @@ class _AltitudeMarkerLayer extends StatelessWidget {
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: [
-          TextMarker(
-            color: Colors.blue,
+          DynamicTextMarker(
+            shrinkWhen: false,
+            icon: Icons.height,
+            color: AppColors.light,
             coord: destination.route[index],
-            text: '${destination.route[index].alt} m',
+            backgroundColor: Colors.deepOrange,
+            label: '${destination.route[index].alt} m',
           ),
         ],
       ),
@@ -113,11 +115,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 }
 
 class _PlaceMarkersLayer extends StatelessWidget {
-  final double zoom;
-
-  const _PlaceMarkersLayer({
-    @required this.zoom,
-  }) : assert(zoom != null);
+  const _PlaceMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +134,12 @@ class _PlaceMarkersLayer extends StatelessWidget {
             if (state is PlacesLoaded) {
               return MarkerLayerWidget(
                 options: MarkerLayerOptions(
-                  markers: [
-                    for (int i = 0; i < destination.places.length; ++i)
-                      PlaceMarker(
-                        place: destination.places[i],
-                        hideText: zoom < MapConfig.markerZoomThreshold,
-                      ),
-                  ],
-                ),
+                    markers: destination.places.reversed
+                        .map((p) => PlaceMarker(
+                              place: p,
+                              shrinkWhen: false,
+                            ))
+                        .toList()),
               );
             }
             return const Offstage();

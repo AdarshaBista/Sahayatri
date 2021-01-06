@@ -44,16 +44,18 @@ class AuthService {
   }
 
   Future<void> logout(User user) async {
-    Response res;
     try {
-      res = await Dio().get(
+      await Dio().get(
         '$authBaseUrl/logout/${user.id}',
         options: Options(
           headers: {'Authorization': 'Bearer ${user.accessToken}'},
         ),
       );
+    } on DioError catch (e) {
+      if (e.response.statusCode == 401) return;
+      print(e.toString());
+      throw const AppError(message: 'Could not logout!');
     } catch (e) {
-      if (res.statusCode == 401) return;
       print(e.toString());
       throw const AppError(message: 'Could not logout!');
     }

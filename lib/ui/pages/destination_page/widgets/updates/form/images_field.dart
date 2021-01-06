@@ -41,6 +41,7 @@ class ImagesField extends StatelessWidget {
               onDelete: (url) =>
                   context.read<DestinationUpdateFormCubit>().removeImageUrl(url),
             ),
+            if (state.imageUrls.isNotEmpty) const SizedBox(height: 8.0),
             if (state.imageUrls.length < ApiConfig.maxImages)
               ScaleAnimator(
                 duration: 200,
@@ -48,7 +49,10 @@ class ImagesField extends StatelessWidget {
                   title: 'Add Images',
                   icon: Icons.add_photo_alternate_outlined,
                   onTap: () => ImageSourceSheet(
-                    onSelect: context.read<DestinationUpdateFormCubit>().selectImage,
+                    onSelect: (source) {
+                      Navigator.of(context).pop();
+                      context.read<DestinationUpdateFormCubit>().selectImage(source);
+                    },
                   ).openModalBottomSheet(context),
                 ),
               ),

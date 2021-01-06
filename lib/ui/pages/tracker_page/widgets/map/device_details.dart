@@ -73,9 +73,13 @@ class DeviceDetails extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          device.name.toUpperCase(),
-          style: context.t.headline3.bold,
+        Flexible(
+          child: Text(
+            device.name.toUpperCase(),
+            maxLines: 2,
+            style: context.t.headline2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         const SizedBox(width: 16.0),
         if (device.status == DeviceStatus.disconnected)

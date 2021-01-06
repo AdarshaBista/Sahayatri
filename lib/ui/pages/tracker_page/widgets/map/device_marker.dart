@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/index.dart';
-
 import 'package:sahayatri/core/models/nearby_device.dart';
-import 'package:sahayatri/ui/widgets/map/text_marker.dart';
+
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart';
 
-class DeviceMarker extends TextMarker {
+class DeviceMarker extends DynamicTextMarker {
   DeviceMarker({
-    @required bool hideText,
+    @required bool shrinkWhen,
     @required NearbyDevice device,
   })  : assert(device != null),
+        assert(shrinkWhen != null),
         super(
-          hideText: hideText,
-          text: device.name,
+          label: device.name,
           color: Colors.blue,
+          shrinkWhen: shrinkWhen,
           coord: device.userLocation.coord,
-          icon: Icons.radio_button_checked,
-          onTap: (context) =>
-              DeviceDetails(deviceId: device.id).openModalBottomSheet(context),
+          icon: CommunityMaterialIcons.account_circle_outline,
+          onTap: (context) {
+            DeviceDetails(deviceId: device.id).openModalBottomSheet(context);
+          },
         );
 }
