@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class CustomTile extends StatelessWidget {
@@ -33,19 +34,13 @@ class CustomTile extends StatelessWidget {
         onTap: onTap,
         trailing: trailing,
         visualDensity: VisualDensity.compact,
-        title: Row(
-          children: [
-            Icon(
-              icon,
-              size: 20.0,
-              color: iconColor ?? context.c.onSurface,
-            ),
-            const SizedBox(width: 16.0),
-            Text(
-              title,
-              style: textStyle ?? context.t.headline5,
-            ),
-          ],
+        title: IconLabel(
+          icon: icon,
+          label: title,
+          gap: 16.0,
+          iconSize: 20.0,
+          iconColor: iconColor ?? context.c.onSurface,
+          labelStyle: textStyle ?? context.t.headline5,
         ),
       ),
     );

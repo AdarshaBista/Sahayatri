@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 
@@ -128,20 +129,12 @@ class NestedTab extends StatelessWidget {
     final color =
         !showIndicator && isSelected ? AppColors.primaryDark : context.c.onBackground;
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          tab.icon,
-          size: 18.0,
-          color: color,
-        ),
-        const SizedBox(width: 6.0),
-        Text(
-          tab.label,
-          style: context.t.headline5.bold.withColor(color),
-        ),
-      ],
+    return IconLabel(
+      iconSize: 18.0,
+      icon: tab.icon,
+      label: tab.label,
+      iconColor: color,
+      labelStyle: context.t.headline5.bold.withColor(color),
     );
   }
 }

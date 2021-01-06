@@ -55,7 +55,7 @@ class AppColors {
     ];
   }
 
-  static final routeGradient = accents.getRange(0, 5).toList();
+  static final routeGradient = accents.getRange(0, 4).toList();
   static final drawerGradient = accents.getRange(6, 8).toList();
   static final userTrackGradient = accents.getRange(5, 8).toList();
 }

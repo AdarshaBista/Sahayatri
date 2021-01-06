@@ -5,6 +5,7 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_small.dart';
@@ -109,19 +110,13 @@ class UpdateCard extends StatelessWidget {
         borderRadius: 32.0,
         margin: const EdgeInsets.symmetric(horizontal: 16.0),
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.location_on_outlined,
-              size: 14.0,
-              color: AppColors.secondary,
-            ),
-            const SizedBox(width: 2.0),
-            Text(
-              update.coords.length.toString(),
-              style: context.t.headline5.bold.withColor(AppColors.secondary),
-            ),
-          ],
+        child: IconLabel(
+          gap: 2.0,
+          iconSize: 14.0,
+          iconColor: AppColors.secondary,
+          icon: Icons.location_on_outlined,
+          label: update.coords.length.toString(),
+          labelStyle: context.t.headline5.bold.withColor(AppColors.secondary),
         ),
       ),
     );

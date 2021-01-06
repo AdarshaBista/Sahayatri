@@ -8,6 +8,7 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
@@ -65,11 +66,11 @@ class PlaceCard extends StatelessWidget {
               style: AppTextStyles.headline6.primary,
             ),
             const SizedBox(height: 4.0),
-            Text(
-              place.name.toUpperCase(),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.headline5.bold.light,
+            IconLabel(
+              icon: Icons.location_on_outlined,
+              label: place.name.toUpperCase(),
+              iconColor: AppColors.light,
+              labelStyle: AppTextStyles.headline5.bold.light,
             ),
           ],
         ),

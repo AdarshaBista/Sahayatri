@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 
 class TranslateBubble extends StatelessWidget {
   final Translation translation;
@@ -68,20 +69,12 @@ class TranslateBubble extends StatelessWidget {
       onTap: () => context.read<TranslateCubit>().play(translation.text),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.volume_up_rounded,
-              size: 16.0,
-              color: context.c.onSurface,
-            ),
-            const SizedBox(width: 4.0),
-            Text(
-              translation.language.title,
-              style: context.t.headline6,
-            ),
-          ],
+        child: IconLabel(
+          iconSize: 16.0,
+          icon: Icons.volume_up_rounded,
+          iconColor: context.c.onSurface,
+          labelStyle: context.t.headline6,
+          label: translation.language.title,
         ),
       ),
     );

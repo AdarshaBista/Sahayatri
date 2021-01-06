@@ -13,7 +13,7 @@ class ProgressTab extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: const [
         TrackerStats(),
-        SizedBox(height: 8.0),
+        SizedBox(height: 6.0),
         NextCheckpointCard(),
         SizedBox(height: 16.0),
       ],

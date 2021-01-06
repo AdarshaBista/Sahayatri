@@ -13,7 +13,9 @@ import 'package:sahayatri/app/constants/images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
@@ -76,11 +78,12 @@ class DestinationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            destination.name.toUpperCase(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.headline4.bold.light,
+          IconLabel(
+            iconSize: 16.0,
+            iconColor: AppColors.light,
+            label: destination.name.toUpperCase(),
+            icon: CommunityMaterialIcons.map_marker_circle,
+            labelStyle: AppTextStyles.headline4.bold.light,
           ),
           const SizedBox(height: 6.0),
           Padding(

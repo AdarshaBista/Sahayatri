@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/map/markers/icon_marker_widget.dart';
 import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 
@@ -69,24 +70,12 @@ class _DynamicTextMarkerWidget extends StatelessWidget {
       color: backgroundColor,
       onTap: () => onTap(context),
       padding: const EdgeInsets.fromLTRB(4.0, 4.0, 8.0, 4.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            size: 14.0,
-            color: color,
-          ),
-          const SizedBox(width: 4.0),
-          Flexible(
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.headline6.withColor(color),
-            ),
-          ),
-        ],
+      child: IconLabel(
+        icon: icon,
+        label: label,
+        iconSize: 14.0,
+        iconColor: color,
+        labelStyle: AppTextStyles.headline6.withColor(color),
       ),
     );
   }

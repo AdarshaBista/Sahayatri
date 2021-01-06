@@ -22,12 +22,12 @@ class TrackerStats extends StatelessWidget {
               children: const [
                 DistanceIndicator(),
                 Positioned(
-                  bottom: -34.0,
+                  bottom: -40.0,
                   child: StopwatchTile(),
                 ),
               ],
             ),
-            const SizedBox(height: 44.0),
+            const SizedBox(height: 48.0),
             const TrackerActions(),
           ],
         ),
