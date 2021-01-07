@@ -18,9 +18,12 @@ class CheckpointLodges extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'UPCOMING LODGES',
-          style: context.t.headline5.bold,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Text(
+            'UPCOMING LODGES',
+            style: context.t.headline5.bold,
+          ),
         ),
         const SizedBox(height: 12.0),
         SizedBox(
@@ -29,6 +32,7 @@ class CheckpointLodges extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             separatorBuilder: (_, __) => const SizedBox(width: 12.0),
             itemCount: lodges.length,
             itemBuilder: (_, index) {

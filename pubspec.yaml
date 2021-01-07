@@ -51,7 +51,6 @@ dependencies:
   animator: ^2.0.2
   fl_chart: ^0.12.2
   flushbar: ^1.10.4
-  flip_card: ^0.4.4
   photo_view: ^0.10.3
   timeline_tile: ^1.0.0
   flutter_swiper: ^1.1.6

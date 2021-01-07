@@ -1,9 +1,7 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/custom_graph.dart';
 
 class AltitudeGraph extends StatelessWidget {
   final Function(int) onDrag;
@@ -28,7 +26,7 @@ class AltitudeGraph extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Text(
-            'Elevation Gain',
+            'ALTITUDE GRAPH',
             textAlign: TextAlign.center,
             style: context.t.headline5.bold,
           ),
@@ -44,120 +42,19 @@ class AltitudeGraph extends StatelessWidget {
     );
   }
 
-  LineChart _buildGraph(BuildContext context) {
-    const double vInterval = 1000.0;
-    final double hInterval = altitudes.length / 4.0;
-
-    final List<double> xValues =
-        List.generate(altitudes.length, (index) => index.toDouble()).toList();
-
-    final double maxY = altitudes.reduce(math.max).toDouble();
-    final double minY = altitudes.reduce(math.min).toDouble();
-    final double decreasedMinY = minY - (maxY - minY);
-    final double effectiveMinY = decreasedMinY > 0 ? decreasedMinY : minY;
-
-    return LineChart(
-      LineChartData(
-        minY: effectiveMinY,
-        maxY: maxY,
-        minX: 0.0,
-        maxX: xValues.length.toDouble(),
-        borderData: _buildBorderData(context),
-        lineTouchData: _buildTouchData(),
-        gridData: _buildGrid(vInterval, hInterval),
-        titlesData: _buildTitles(context, vInterval, hInterval, xValues.length),
-        lineBarsData: [_buildLineData(xValues, altitudes, AppColors.primary)],
-      ),
-    );
-  }
-
-  FlBorderData _buildBorderData(BuildContext context) {
-    return FlBorderData(
-      border: Border.all(
-        width: 0.5,
-        color: context.c.onSurface,
-      ),
-    );
-  }
-
-  LineTouchData _buildTouchData() {
-    return LineTouchData(
-      handleBuiltInTouches: true,
-      touchTooltipData: LineTouchTooltipData(
-        fitInsideHorizontally: true,
-        tooltipBgColor: AppColors.dark,
-      ),
-      touchCallback: (response) {
-        if (response.lineBarSpots.isEmpty) return;
-        final int index = response.lineBarSpots.first.spotIndex;
-        onDrag(index);
+  Widget _buildGraph(BuildContext context) {
+    return CustomGraph(
+      onTouch: onDrag,
+      yValues: altitudes,
+      vInterval: 1000.0,
+      hInterval: altitudes.length / 4.0,
+      getLeftTitle: (value) {
+        return '${value.round()} m';
       },
-    );
-  }
-
-  FlGridData _buildGrid(double vInterval, double hInterval) {
-    return FlGridData(
-      show: true,
-      drawVerticalLine: true,
-      drawHorizontalLine: true,
-      verticalInterval: hInterval,
-      horizontalInterval: vInterval,
-    );
-  }
-
-  FlTitlesData _buildTitles(
-      BuildContext context, double vInterval, double hInterval, int length) {
-    return FlTitlesData(
-      bottomTitles: SideTitles(
-        showTitles: true,
-        margin: 8.0,
-        interval: hInterval,
-        reservedSize: 30.0,
-        getTextStyles: (_) => context.t.headline6.bold,
-        getTitles: (value) {
-          final double percent = value / length;
-          return '${(percent * routeLengthKm).round()} km';
-        },
-      ),
-      leftTitles: SideTitles(
-        showTitles: true,
-        margin: 8.0,
-        interval: vInterval,
-        reservedSize: 30.0,
-        getTextStyles: (_) => context.t.headline6.bold,
-        getTitles: (value) => '${value.round()} m',
-      ),
-    );
-  }
-
-  LineChartBarData _buildLineData(
-    List<double> xValues,
-    List<double> yValues,
-    Color color,
-  ) {
-    return LineChartBarData(
-      spots: List<FlSpot>.generate(
-        xValues.length,
-        (index) => FlSpot(xValues[index], yValues[index]),
-      ),
-      barWidth: 1.0,
-      isCurved: true,
-      preventCurveOverShooting: true,
-      isStrokeCapRound: true,
-      dotData: FlDotData(show: false),
-      colors: [color],
-      belowBarData: BarAreaData(
-        show: true,
-        colors: [
-          color.withOpacity(0.7),
-          color.withOpacity(0.5),
-          color.withOpacity(0.3),
-          color.withOpacity(0.0),
-        ],
-        gradientColorStops: [0.0, 0.5, 0.7, 1.0],
-        gradientFrom: const Offset(0.5, 0.0),
-        gradientTo: const Offset(0.5, 1.0),
-      ),
+      getBottomTitle: (value) {
+        final double percent = value / altitudes.length;
+        return '${(percent * routeLengthKm).round()} km';
+      },
     );
   }
 }

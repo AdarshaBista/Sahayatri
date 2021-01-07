@@ -12,8 +12,8 @@ class CircularButton extends StatelessWidget {
   final Color backgroundColor;
 
   const CircularButton({
-    @required this.onTap,
     @required this.icon,
+    this.onTap,
     this.size = 18.0,
     this.padding = 8.0,
     this.color = AppColors.light,

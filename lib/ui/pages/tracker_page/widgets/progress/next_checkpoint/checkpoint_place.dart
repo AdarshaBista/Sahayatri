@@ -33,6 +33,7 @@ class CheckpointPlace extends StatelessWidget {
       child: Hero(
         tag: place.id,
         child: CustomCard(
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
           borderRadius: 12.0,
           child: ListTile(
             dense: true,

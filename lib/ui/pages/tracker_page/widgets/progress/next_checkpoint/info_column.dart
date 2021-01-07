@@ -22,15 +22,15 @@ class InfoColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         InfoCard(
-          icon: Icons.av_timer_outlined,
-          title: nextCheckpoint.eta == null ? 'N/A' : _formatDuration(nextCheckpoint.eta),
-          subtitle: 'ETA',
+          icon: Icons.timeline,
+          title: FormatUtils.distance(nextCheckpoint.distance),
+          subtitle: 'Away',
         ),
         const SizedBox(height: 12.0),
         InfoCard(
-          icon: Icons.timeline,
-          title: FormatUtils.distance(nextCheckpoint.distance),
-          subtitle: 'away',
+          icon: Icons.av_timer_outlined,
+          title: nextCheckpoint.eta == null ? 'N/A' : _formatDuration(nextCheckpoint.eta),
+          subtitle: 'ETA',
         ),
       ],
     );

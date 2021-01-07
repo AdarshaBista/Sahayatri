@@ -41,14 +41,14 @@ class CheckpointInfo extends StatelessWidget {
     return Row(
       children: [
         Text(
-          checkpoint.time,
+          checkpoint.date,
           style: context.t.headline5.primaryDark.bold,
         ),
         const SizedBox(width: 8.0),
         const CircleAvatar(radius: 2.0),
         const SizedBox(width: 8.0),
         Text(
-          checkpoint.date,
+          checkpoint.time,
           style: context.t.headline5.primaryDark,
         ),
       ],
