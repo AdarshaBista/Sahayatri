@@ -4,16 +4,19 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class InfoCard extends StatelessWidget {
+  final Color color;
   final String title;
   final IconData icon;
   final String subtitle;
 
   const InfoCard({
+    this.color = AppColors.primaryDark,
     @required this.icon,
     @required this.title,
     @required this.subtitle,
   })  : assert(icon != null),
         assert(title != null),
+        assert(color != null),
         assert(subtitle != null);
 
   @override
@@ -29,7 +32,7 @@ class InfoCard extends StatelessWidget {
             Icon(
               icon,
               size: 18.0,
-              color: AppColors.primaryDark,
+              color: color,
             ),
             const SizedBox(height: 8.0),
             Flexible(

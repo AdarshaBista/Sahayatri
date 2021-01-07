@@ -10,9 +10,8 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:community_material_icon/community_material_icon.dart';
-import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class CheckpointPlace extends StatelessWidget {
   const CheckpointPlace();
@@ -42,8 +41,7 @@ class CheckpointPlace extends StatelessWidget {
               style: context.t.headline5.bold,
             ),
             leading: CircularButton(
-              onTap: () {},
-              icon: CommunityMaterialIcons.map_marker_check_outline,
+              icon: Icons.location_on,
               backgroundColor: AppColors.primaryLight,
               color: context.c.primaryVariant,
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/tracker_actions.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/graphs/speed_graph.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/graphs/elevation_graph.dart';
@@ -16,14 +15,12 @@ class ProgressTab extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: const [
         TrackerStats(),
-        SizedBox(height: 12.0),
-        TrackerActions(),
-        SizedBox(height: 20.0),
-        NextCheckpointCard(),
-        SizedBox(height: 20.0),
-        ElevationGraph(),
-        SizedBox(height: 20.0),
+        SizedBox(height: 24.0),
         SpeedGraph(),
+        SizedBox(height: 24.0),
+        ElevationGraph(),
+        SizedBox(height: 24.0),
+        NextCheckpointCard(),
       ],
     );
   }

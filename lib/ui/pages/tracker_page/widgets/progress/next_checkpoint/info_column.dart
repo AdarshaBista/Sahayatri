@@ -5,7 +5,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/info_card.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/info_card.dart';
 
 class InfoColumn extends StatelessWidget {
   const InfoColumn();
@@ -20,12 +20,14 @@ class InfoColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         InfoCard(
+          color: Colors.red,
           icon: Icons.timeline,
           title: FormatUtils.distance(nextCheckpoint.distance),
           subtitle: 'Away',
         ),
         const SizedBox(height: 12.0),
         InfoCard(
+          color: Colors.green,
           icon: Icons.av_timer_outlined,
           title: nextCheckpoint.eta == null ? 'N/A' : _formatDuration(nextCheckpoint.eta),
           subtitle: 'ETA',
