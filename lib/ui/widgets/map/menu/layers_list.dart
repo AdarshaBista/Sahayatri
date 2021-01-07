@@ -7,7 +7,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
-import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
+import 'package:sahayatri/ui/widgets/common/circular_checkbox.dart';
 
 class LayersList extends StatelessWidget {
   const LayersList();
@@ -80,7 +80,7 @@ class LayersList extends StatelessWidget {
   }
 }
 
-class _LayerTile extends StatefulWidget {
+class _LayerTile extends StatelessWidget {
   final bool value;
   final String label;
   final IconData icon;
@@ -97,50 +97,23 @@ class _LayerTile extends StatefulWidget {
         assert(onSelect != null);
 
   @override
-  _LayerTileState createState() => _LayerTileState();
-}
-
-class _LayerTileState extends State<_LayerTile> {
-  bool isChecked;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.value;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return CustomCard(
       borderRadius: 8.0,
       color: AppColors.darkFaded,
       padding: const EdgeInsets.all(4.0),
       child: CustomTile(
-        onTap: onTap,
-        icon: widget.icon,
-        title: widget.label,
+        icon: icon,
+        title: label,
         color: Colors.transparent,
         iconColor: AppColors.light,
         textStyle: AppTextStyles.headline5.light,
-        trailing: _buildCheckBox(),
+        trailing: CircularCheckbox(
+          value: value,
+          onSelect: onSelect,
+          color: AppColors.light,
+        ),
       ),
     );
-  }
-
-  Widget _buildCheckBox() {
-    return CircularButton(
-      onTap: onTap,
-      size: 16.0,
-      padding: 4.0,
-      icon: isChecked ? Icons.check : Icons.close,
-      backgroundColor: isChecked ? AppColors.primaryLight : AppColors.secondaryLight,
-    );
-  }
-
-  void onTap() {
-    setState(() {
-      isChecked = !isChecked;
-    });
-    widget.onSelect(isChecked);
   }
 }

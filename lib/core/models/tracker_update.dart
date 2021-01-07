@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:meta/meta.dart';
 
 import 'package:sahayatri/core/models/user_location.dart';
@@ -14,6 +16,9 @@ class TrackerUpdate {
   final NextCheckpoint nextCheckpoint;
 
   UserLocation get currentLocation => userTrack.last;
+  double get topSpeed => userTrack.map((t) => t.speed).reduce(math.max);
+  double get averageSpeed =>
+      (userTrack.map((t) => t.speed).reduce((a, b) => a + b)) / userTrack.length;
 
   const TrackerUpdate({
     @required this.userIndex,

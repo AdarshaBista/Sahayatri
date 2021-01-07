@@ -78,7 +78,7 @@ class LocationService {
   }
 
   Stream<UserLocation> getMockLocationStream(List<Coord> route) {
-    final period = Random().nextInt(1000) + 500;
+    final period = Random().nextInt(200) + 0;
     double _randomOffset(double start, double end) {
       return Random().nextDouble() * (end - start) + start;
     }

@@ -15,7 +15,7 @@ class ContactList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contactNumbers = context.select<Lodge, List<String>>((l) => l.contactNumbers);
+    final contactNumbers = context.watch<Lodge>().contactNumbers;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),

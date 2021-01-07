@@ -14,8 +14,7 @@ class CheckpointInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final checkpoint =
-        context.select<TrackerUpdate, Checkpoint>((u) => u.nextCheckpoint.checkpoint);
+    final checkpoint = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint;
 
     return SizedBox(
       height: 192.0,
@@ -29,8 +28,10 @@ class CheckpointInfo extends StatelessWidget {
             _buildDateTime(context, checkpoint),
             const Divider(height: 12.0),
             _buildDescription(context, checkpoint.description),
-            const SizedBox(height: 8.0),
-            _buildNotifyContact(),
+            if (checkpoint.notifyContact) ...[
+              const SizedBox(height: 8.0),
+              _buildNotifyContact(),
+            ],
           ],
         ),
       ),

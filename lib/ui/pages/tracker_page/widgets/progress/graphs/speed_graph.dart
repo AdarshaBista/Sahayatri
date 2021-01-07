@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
@@ -12,8 +11,7 @@ class SpeedGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userTrack =
-        context.select<TrackerUpdate, List<UserLocation>>((u) => u.userTrack);
+    final userTrack = context.watch<TrackerUpdate>().userTrack;
     final speeds =
         userTrack.map((u) => double.parse(u.speed.toStringAsFixed(1))).toList();
 

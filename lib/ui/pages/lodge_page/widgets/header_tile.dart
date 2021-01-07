@@ -20,7 +20,7 @@ class HeaderTile extends StatelessWidget {
   }
 
   Widget _buildRating(BuildContext context) {
-    final rating = context.select<Lodge, double>((l) => l.rating);
+    final rating = context.watch<Lodge>().rating;
 
     return Row(
       children: [

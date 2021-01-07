@@ -16,7 +16,7 @@ class NearbyActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isScanning = context.select<NearbyConnected, bool>((state) => state.isScanning);
+    final isScanning = context.watch<NearbyConnected>().isScanning;
 
     return Wrap(
       spacing: 8.0,

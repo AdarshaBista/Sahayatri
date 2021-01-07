@@ -5,7 +5,6 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:provider/provider.dart';
-import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_card.dart';
@@ -15,8 +14,7 @@ class LocationStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentLocation =
-        context.select<TrackerUpdate, UserLocation>((u) => u.currentLocation);
+    final currentLocation = context.watch<TrackerUpdate>().currentLocation;
 
     return Container(
       height: UiConfig.trackerPanelHeight - 32.0,

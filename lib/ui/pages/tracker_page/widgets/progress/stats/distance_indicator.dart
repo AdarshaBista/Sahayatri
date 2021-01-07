@@ -13,10 +13,9 @@ class DistanceIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final distanceCovered =
-        context.select<TrackerUpdate, double>((u) => u.distanceCovered);
-    final distanceRemaining =
-        context.select<TrackerUpdate, double>((u) => u.distanceRemaining);
+    final trackerUpdate = context.watch<TrackerUpdate>();
+    final distanceCovered = trackerUpdate.distanceCovered;
+    final distanceRemaining = trackerUpdate.distanceRemaining;
 
     return Center(
       child: SleekCircularSlider(

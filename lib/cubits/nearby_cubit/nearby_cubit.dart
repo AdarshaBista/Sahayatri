@@ -16,9 +16,9 @@ class NearbyCubit extends Cubit<NearbyState> {
 
   NearbyCubit() : super(const NearbyInitial());
 
-  String get username => nearbyService.connectionService.username;
-
-  void sendSos() => nearbyService.messagesService.broadcastSos();
+  void sendSos() {
+    nearbyService.messagesService.broadcastSos();
+  }
 
   Future<void> startNearby(String name) async {
     try {

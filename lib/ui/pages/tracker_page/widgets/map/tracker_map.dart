@@ -4,7 +4,6 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/app/constants/configs.dart';
@@ -78,7 +77,7 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final center = context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
+    final center = context.watch<TrackerUpdate>().currentLocation.coord;
 
     if (isTracking) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -139,9 +138,9 @@ class _UserTrackLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final center = context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
-    final userPath = context.select<TrackerUpdate, List<Coord>>(
-        (u) => u.userTrack.map((t) => t.coord).toList());
+    final trackerUpdate = context.watch<TrackerUpdate>();
+    final center = trackerUpdate.currentLocation.coord;
+    final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
 
     return PolylineLayerWidget(
       options: PolylineLayerOptions(
@@ -165,8 +164,7 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentLocation =
-        context.select<TrackerUpdate, UserLocation>((u) => u.currentLocation);
+    final currentLocation = context.watch<TrackerUpdate>().currentLocation;
 
     return CircleLayerWidget(
       options: CircleLayerOptions(
@@ -285,8 +283,7 @@ class _UserMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userCoord =
-        context.select<TrackerUpdate, Coord>((u) => u.currentLocation.coord);
+    final userCoord = context.watch<TrackerUpdate>().currentLocation.coord;
 
     return RepaintBoundary(
       child: MarkerLayerWidget(

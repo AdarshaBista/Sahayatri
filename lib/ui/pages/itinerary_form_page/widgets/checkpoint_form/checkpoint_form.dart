@@ -13,9 +13,10 @@ import 'package:sahayatri/cubits/checkpoint_form_cubit/checkpoint_form_cubit.dar
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
+import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 import 'package:sahayatri/ui/widgets/form/custom_form_field.dart';
-import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
+import 'package:sahayatri/ui/widgets/common/circular_checkbox.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_picker.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 
@@ -116,12 +117,10 @@ class CheckpointForm extends StatelessWidget {
 
   Widget _buildSmsToggle(bool shouldSendSms, BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.zero,
-      trailing: Checkbox(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+      trailing: CircularCheckbox(
         value: shouldSendSms,
-        checkColor: context.c.background,
-        fillColor: MaterialStateProperty.all(AppColors.primaryDark),
-        onChanged: (value) =>
+        onSelect: (value) =>
             context.read<CheckpointFormCubit>().toggleNotifyContact(value),
       ),
       title: Text(

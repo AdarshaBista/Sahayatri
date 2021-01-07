@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/models/lodge_facility.dart';
 
 import 'package:provider/provider.dart';
 
@@ -31,7 +30,7 @@ class FacilitiesList extends StatelessWidget {
   }
 
   Widget _buildFacilities(BuildContext context) {
-    final facility = context.select<Lodge, LodgeFacility>((l) => l.facility);
+    final facility = context.watch<Lodge>().facility;
 
     if (facility.isEmpty) {
       return Text(

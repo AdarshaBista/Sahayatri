@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -20,8 +19,7 @@ class CheckpointPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place =
-        context.select<TrackerUpdate, Place>((u) => u.nextCheckpoint.checkpoint.place);
+    final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
 
     return GestureDetector(
       onTap: () {
@@ -39,6 +37,8 @@ class CheckpointPlace extends StatelessWidget {
             dense: true,
             title: Text(
               place.name.toUpperCase(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: context.t.headline5.bold,
             ),
             leading: CircularButton(

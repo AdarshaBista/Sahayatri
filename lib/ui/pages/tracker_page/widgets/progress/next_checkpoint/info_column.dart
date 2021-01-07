@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/utils/format_utils.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
-import 'package:sahayatri/core/models/next_checkpoint.dart';
 
 import 'package:provider/provider.dart';
 
@@ -13,8 +12,7 @@ class InfoColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nextCheckpoint =
-        context.select<TrackerUpdate, NextCheckpoint>((u) => u.nextCheckpoint);
+    final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
     if (nextCheckpoint == null) return const Offstage();
 
     return Column(

@@ -14,16 +14,15 @@ class CustomTile extends StatelessWidget {
   final TextStyle textStyle;
 
   const CustomTile({
+    this.onTap,
     this.color,
     this.iconColor,
     this.textStyle,
     this.trailing,
     @required this.icon,
     @required this.title,
-    @required this.onTap,
   })  : assert(icon != null),
-        assert(title != null),
-        assert(onTap != null);
+        assert(title != null);
 
   @override
   Widget build(BuildContext context) {
