@@ -17,7 +17,7 @@ class SpeedGraph extends StatelessWidget {
 
     return TrackerGraph(
       yValues: speeds,
-      color: Colors.green,
+      color: Colors.blue,
       title: 'RECENT SPEED HISTORY',
     );
   }

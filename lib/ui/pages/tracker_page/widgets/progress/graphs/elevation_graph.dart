@@ -17,7 +17,7 @@ class ElevationGraph extends StatelessWidget {
 
     return TrackerGraph(
       yValues: altitudes,
-      color: Colors.blue,
+      color: Colors.green,
       title: 'RECENT ELEVATION GAIN',
     );
   }

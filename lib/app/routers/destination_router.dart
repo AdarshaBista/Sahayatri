@@ -41,6 +41,7 @@ class DestinationRouter {
 
       case Routes.destinationDetailPageRoute:
         _page = BlocProvider<ItineraryCubit>(
+          lazy: false,
           create: (context) => ItineraryCubit(
             user: context.read<UserCubit>().user,
             destination: context.read<Destination>(),
