@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 
 class SaveButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class SaveButton extends StatelessWidget {
     return CustomButton(
       expanded: false,
       onTap: onPressed,
-      icon: Icons.check,
+      icon: AppIcons.confirm,
     );
   }
 }

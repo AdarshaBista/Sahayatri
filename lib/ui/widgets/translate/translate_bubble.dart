@@ -71,7 +71,7 @@ class TranslateBubble extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: IconLabel(
           iconSize: 16.0,
-          icon: Icons.volume_up_rounded,
+          icon: AppIcons.speaker,
           iconColor: context.c.onSurface,
           labelStyle: context.t.headline6,
           label: translation.language.title,

@@ -31,7 +31,7 @@ class IncorrectLocationInfo extends StatelessWidget {
                   child: CustomButton(
                     label: 'No thanks',
                     outline: true,
-                    icon: Icons.close,
+                    icon: AppIcons.close,
                     color: context.c.onSurface,
                     onTap: () => Navigator.of(context).pop(),
                   ),

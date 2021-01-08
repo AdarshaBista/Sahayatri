@@ -41,7 +41,7 @@ class CheckpointPlace extends StatelessWidget {
               style: context.t.headline5.bold,
             ),
             leading: CircularButton(
-              icon: Icons.location_on,
+              icon: AppIcons.place,
               backgroundColor: AppColors.primaryLight,
               color: context.c.primaryVariant,
             ),

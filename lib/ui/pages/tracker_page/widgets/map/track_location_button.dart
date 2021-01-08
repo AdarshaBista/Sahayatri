@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class TrackLocationButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class TrackLocationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularButton(
       onTap: onTap,
-      icon: isTracking ? Icons.my_location : Icons.location_disabled,
+      icon: isTracking ? AppIcons.tracking : AppIcons.trackingOff,
     );
   }
 }

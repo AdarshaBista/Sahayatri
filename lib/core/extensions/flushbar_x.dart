@@ -46,13 +46,13 @@ extension FlushbarX on BuildContext {
     IconData getIcon() {
       switch (type) {
         case FlushbarType.info:
-          return Icons.info_outline;
+          return AppIcons.info;
         case FlushbarType.success:
-          return Icons.check_circle_outline;
+          return AppIcons.success;
         case FlushbarType.error:
-          return Icons.error_outline;
+          return AppIcons.error;
         default:
-          return Icons.circle;
+          return AppIcons.info;
       }
     }
 

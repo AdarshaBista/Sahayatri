@@ -78,9 +78,9 @@ class DestinationPage extends StatelessWidget {
   Widget _buildTabView(BuildContext context, Destination destination) {
     return NestedTabView(
       tabs: [
-        NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
-        NestedTabData(label: 'Reviews', icon: Icons.star_outline),
-        NestedTabData(label: 'Updates', icon: Icons.featured_play_list_outlined),
+        NestedTabData(label: 'Photos', icon: AppIcons.photos),
+        NestedTabData(label: 'Reviews', icon: AppIcons.reviews),
+        NestedTabData(label: 'Updates', icon: AppIcons.updates),
       ],
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),

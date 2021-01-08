@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
+
 class MiniFab extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
   const MiniFab({
     @required this.onTap,
-    this.icon = Icons.check,
+    this.icon = AppIcons.confirm,
   })  : assert(icon != null),
         assert(onTap != null);
 

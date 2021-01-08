@@ -11,7 +11,7 @@ class ExitButton extends StatelessWidget {
 
   const ExitButton({
     this.size = 18.0,
-    this.icon = Icons.close,
+    this.icon = AppIcons.close,
     this.color = AppColors.light,
     this.backgroundColor = AppColors.dark,
   })  : assert(size != null),

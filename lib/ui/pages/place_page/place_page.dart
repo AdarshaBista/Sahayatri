@@ -57,8 +57,8 @@ class PlacePage extends StatelessWidget {
   Widget _buildTabView(Place place) {
     return NestedTabView(
       tabs: [
-        NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
-        NestedTabData(label: 'Lodges', icon: Icons.house_outlined),
+        NestedTabData(label: 'Photos', icon: AppIcons.photos),
+        NestedTabData(label: 'Lodges', icon: AppIcons.lodges),
       ],
       children: [
         PhotoGallery(imageUrls: place.imageUrls),

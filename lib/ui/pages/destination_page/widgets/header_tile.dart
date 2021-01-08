@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
@@ -64,7 +63,7 @@ class HeaderTile extends StatelessWidget {
 
     return VerticalButton(
       label: 'Weather',
-      icon: CommunityMaterialIcons.weather_fog,
+      icon: AppIcons.weather,
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.weatherPageRoute,
         arguments: WeatherPageArgs(

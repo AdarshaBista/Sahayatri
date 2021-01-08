@@ -113,8 +113,8 @@ class UpdateCard extends StatelessWidget {
         child: IconLabel(
           gap: 2.0,
           iconSize: 14.0,
+          icon: AppIcons.location,
           iconColor: AppColors.secondary,
-          icon: Icons.location_on_outlined,
           label: update.coords.length.toString(),
           labelStyle: context.t.headline5.bold.withColor(AppColors.secondary),
         ),

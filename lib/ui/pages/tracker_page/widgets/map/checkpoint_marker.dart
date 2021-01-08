@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/checkpoint_details.dart';
 import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
@@ -18,7 +17,7 @@ class CheckpointMarker extends DynamicTextMarker {
           label: checkpoint.place.name,
           coord: checkpoint.place.coord,
           backgroundColor: AppColors.primaryDark,
-          icon: CommunityMaterialIcons.map_marker_check,
+          icon: AppIcons.checkpoint,
           onTap: (context) {
             CheckpointDetails(checkpoint: checkpoint).openModalBottomSheet(context);
           },

@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
@@ -88,7 +87,7 @@ class NearbyForm extends StatelessWidget {
   Widget _buildStartNearbyButton(BuildContext context) {
     return CustomButton(
       label: 'Start Nearby',
-      icon: CommunityMaterialIcons.circle_double,
+      icon: AppIcons.nearby,
       onTap: () {
         final name = context.read<PrefsCubit>().prefs.deviceName;
         if (name.isNotEmpty) {

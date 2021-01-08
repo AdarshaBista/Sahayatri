@@ -31,7 +31,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Widget build(BuildContext context) {
     return CustomFormTile(
       title: 'Date & Time',
-      icon: Icons.date_range_outlined,
+      icon: AppIcons.date,
       hintText: selectedDateTime == null
           ? 'No date & time selected'
           : _formattedDate(selectedDateTime),

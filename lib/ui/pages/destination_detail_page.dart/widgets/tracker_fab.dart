@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 
 class TrackerFab extends StatelessWidget {
@@ -31,7 +32,7 @@ class TrackerFab extends StatelessWidget {
 
   Widget _buildFab(BuildContext context, Itinerary itinerary) {
     return MiniFab(
-      icon: Icons.play_arrow_outlined,
+      icon: AppIcons.track,
       onTap: () {
         final destination = context.read<Destination>();
         context.read<TrackerCubit>().attemptTracking(destination, itinerary);

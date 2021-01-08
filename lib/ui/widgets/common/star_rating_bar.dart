@@ -34,7 +34,7 @@ class StarRatingBar extends StatelessWidget {
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,
         itemBuilder: (_, index) {
-          final IconData iconData = index < rating ? Icons.star : Icons.star_border;
+          final IconData iconData = index < rating ? AppIcons.starFilled : AppIcons.star;
           final Icon icon = Icon(
             iconData,
             color: color,

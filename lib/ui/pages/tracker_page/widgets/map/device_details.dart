@@ -5,7 +5,6 @@ import 'package:sahayatri/core/models/nearby_device.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
 import 'package:sahayatri/ui/widgets/nearby/device_status_row.dart';
@@ -51,17 +50,17 @@ class DeviceDetails extends StatelessWidget {
         const SizedBox(height: 16.0),
         StatTile(
           label: 'Altitude',
-          icon: CommunityMaterialIcons.altimeter,
+          icon: AppIcons.altitude,
           stat: '${device.userLocation.altitude.floor()} m',
         ),
         StatTile(
           label: 'Speed',
-          icon: CommunityMaterialIcons.speedometer,
+          icon: AppIcons.speed,
           stat: '${device.userLocation.speed.toStringAsFixed(1)} m/s',
         ),
         StatTile(
           label: 'Accuracy',
-          icon: CommunityMaterialIcons.circle_slice_8,
+          icon: AppIcons.accuracy,
           stat: '${device.userLocation.accuracy.toStringAsFixed(1)} m',
         ),
         const SizedBox(height: 16.0),

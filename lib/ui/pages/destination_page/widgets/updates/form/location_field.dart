@@ -5,7 +5,6 @@ import 'package:sahayatri/core/extensions/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/select_location_dialog.dart';
@@ -33,7 +32,7 @@ class LocationField extends StatelessWidget {
             const SizedBox(height: 6.0),
             CustomTile(
               title: 'View / Select Locations',
-              icon: CommunityMaterialIcons.map_marker_plus_outline,
+              icon: AppIcons.addLocation,
               onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
                 value: context.read<DestinationUpdateFormCubit>(),
                 child: const SelectLocationDialog(),

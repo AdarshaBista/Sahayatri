@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/coord.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
@@ -49,8 +48,8 @@ class _MarkersLayer extends StatelessWidget {
       coord: c,
       shrinkWhen: true,
       color: AppColors.light,
+      icon: AppIcons.updateMarker,
       backgroundColor: AppColors.secondary,
-      icon: CommunityMaterialIcons.circle_double,
     );
   }
 }

@@ -10,7 +10,6 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
@@ -36,7 +35,7 @@ class _RoutePageState extends State<RoutePage> {
     return Scaffold(
       floatingActionButton: Builder(
         builder: (context) => MiniFab(
-          icon: CommunityMaterialIcons.chart_bell_curve,
+          icon: AppIcons.altitude,
           onTap: () => _openAltitudeSheet(context),
         ),
       ),
@@ -102,8 +101,8 @@ class _AltitudeMarkerLayer extends StatelessWidget {
         markers: [
           DynamicTextMarker(
             shrinkWhen: false,
-            icon: Icons.landscape,
             color: AppColors.light,
+            icon: AppIcons.mountain,
             coord: destination.route[index],
             backgroundColor: Colors.deepPurple,
             label: '${destination.route[index].alt} m',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
@@ -48,9 +48,9 @@ class _TrackerTabsState extends State<TrackerTabs> {
               });
             },
             icons: const [
-              CommunityMaterialIcons.progress_clock,
-              CommunityMaterialIcons.translate,
-              CommunityMaterialIcons.access_point_network,
+              AppIcons.progress,
+              AppIcons.translate,
+              AppIcons.nearby,
             ],
           ),
         ),

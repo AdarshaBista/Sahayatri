@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
@@ -64,7 +63,7 @@ class _MarkersLayer extends StatelessWidget {
         return GestureDetector(
           onTap: () => context.read<DestinationUpdateFormCubit>().updateCoords(c),
           child: const Icon(
-            CommunityMaterialIcons.circle_double,
+            AppIcons.updateMarker,
             size: size,
             color: AppColors.secondary,
           ),

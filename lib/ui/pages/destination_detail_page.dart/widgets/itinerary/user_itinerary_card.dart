@@ -10,7 +10,6 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
@@ -42,9 +41,9 @@ class UserItineraryCard extends StatelessWidget {
 
   Widget _buildButton(BuildContext context) {
     return CustomButton(
+      icon: AppIcons.create,
       color: context.c.primaryVariant,
       backgroundColor: AppColors.primaryLight,
-      icon: CommunityMaterialIcons.pencil_circle_outline,
       label: 'Create',
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.itineraryFormPageRoute,

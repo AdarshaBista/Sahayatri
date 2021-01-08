@@ -34,7 +34,7 @@ class SearchBox extends StatelessWidget {
                   fillColor: context.theme.cardColor,
                   prefixIcon: ScaleAnimator(
                     child: Icon(
-                      Icons.search,
+                      AppIcons.search,
                       size: 20.0,
                       color: context.c.onSurface,
                     ),

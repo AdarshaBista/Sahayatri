@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
@@ -40,8 +39,8 @@ class LayersList extends StatelessWidget {
           children: [
             _LayerTile(
               label: 'Route',
+              icon: AppIcons.route,
               value: mapLayers.route,
-              icon: CommunityMaterialIcons.chart_line_variant,
               onSelect: (value) => context
                   .read<PrefsCubit>()
                   .saveMapLayers(mapLayers.copyWith(route: value)),
@@ -49,8 +48,8 @@ class LayersList extends StatelessWidget {
             const SizedBox(height: 10.0),
             _LayerTile(
               label: 'Places',
+              icon: AppIcons.place,
               value: mapLayers.places,
-              icon: CommunityMaterialIcons.map_marker_multiple_outline,
               onSelect: (value) => context
                   .read<PrefsCubit>()
                   .saveMapLayers(mapLayers.copyWith(places: value)),
@@ -58,8 +57,8 @@ class LayersList extends StatelessWidget {
             const SizedBox(height: 10.0),
             _LayerTile(
               label: 'Checkpoints',
+              icon: AppIcons.checkpoint,
               value: mapLayers.checkpoints,
-              icon: CommunityMaterialIcons.map_marker_check_outline,
               onSelect: (value) => context
                   .read<PrefsCubit>()
                   .saveMapLayers(mapLayers.copyWith(checkpoints: value)),
@@ -68,7 +67,7 @@ class LayersList extends StatelessWidget {
             _LayerTile(
               label: 'Nearby Devices',
               value: mapLayers.nearbyDevices,
-              icon: Icons.radio_button_checked,
+              icon: AppIcons.nearbyDevice,
               onSelect: (value) => context
                   .read<PrefsCubit>()
                   .saveMapLayers(mapLayers.copyWith(nearbyDevices: value)),

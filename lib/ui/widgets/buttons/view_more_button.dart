@@ -47,9 +47,9 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: CustomButton(
         label: 'View More',
+        icon: AppIcons.more,
         color: AppColors.primaryDark,
         backgroundColor: AppColors.primaryLight,
-        icon: Icons.arrow_right_alt_outlined,
         onTap: _loadMore,
       ),
     );

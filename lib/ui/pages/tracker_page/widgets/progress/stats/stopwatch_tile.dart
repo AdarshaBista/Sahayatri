@@ -24,7 +24,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
   @override
   void initState() {
     super.initState();
-    updateTimer();
+    elapsed = locator<StopwatchService>().elapsed();
     timer = Timer.periodic(const Duration(seconds: 1), (_) => updateTimer());
   }
 
@@ -49,7 +49,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.access_time,
+            AppIcons.timer,
             size: 20.0,
             color: context.c.onSurface,
           ),

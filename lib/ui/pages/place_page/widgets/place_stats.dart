@@ -4,7 +4,7 @@ import 'package:sahayatri/core/models/place.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
 
 class PlaceStats extends StatelessWidget {
@@ -21,12 +21,12 @@ class PlaceStats extends StatelessWidget {
           StatTile(
             label: 'Altitude',
             stat: '${place.coord.alt.floor()} m',
-            icon: CommunityMaterialIcons.altimeter,
+            icon: AppIcons.altitude,
           ),
           StatTile(
             label: 'Cell Network',
             stat: place.isNetworkAvailable ? 'Yes' : 'No',
-            icon: CommunityMaterialIcons.antenna,
+            icon: AppIcons.network,
           ),
         ],
       ),

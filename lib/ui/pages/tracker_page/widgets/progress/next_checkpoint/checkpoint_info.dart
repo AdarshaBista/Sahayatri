@@ -70,7 +70,7 @@ class CheckpointInfo extends StatelessWidget {
 
   Widget _buildNotifyContact() {
     return IconLabel(
-      icon: Icons.check_circle,
+      icon: AppIcons.check,
       label: 'Notify Contact',
       iconColor: AppColors.primaryDark,
       labelStyle: AppTextStyles.headline6.primaryDark,

@@ -74,7 +74,7 @@ class DownloadDialog extends StatelessWidget {
         ),
         CustomButton(
           label: 'OK',
-          icon: Icons.check,
+          icon: AppIcons.confirm,
           onTap: () => Navigator.of(context).pop(),
         ),
       ],

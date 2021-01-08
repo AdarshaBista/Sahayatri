@@ -7,7 +7,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 
@@ -18,7 +17,7 @@ class PlaceMarker extends DynamicTextMarker {
   })  : assert(place != null),
         assert(shrinkWhen != null),
         super(
-          icon: CommunityMaterialIcons.map_marker_circle,
+          icon: AppIcons.place,
           label: place.name,
           coord: place.coord,
           shrinkWhen: shrinkWhen,

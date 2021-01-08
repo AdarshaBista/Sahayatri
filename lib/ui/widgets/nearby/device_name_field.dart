@@ -8,6 +8,7 @@ import 'package:sahayatri/core/utils/form_validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/save_button.dart';
 import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
 
@@ -44,7 +45,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
         deviceName = state.prefs.deviceName;
 
         return CustomTextField(
-          icon: Icons.account_circle_outlined,
+          icon: AppIcons.nearbyDevice,
           label: 'Device name',
           onChanged: (value) => deviceName = value,
           validator: FormValidators.requiredText(),

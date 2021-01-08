@@ -251,7 +251,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
               if (zoom < MapConfig.markerZoomThreshold) {
                 return CheckpointMarker(checkpoint: c);
               }
-              return CheckpointDetailMarker(checkpoint: c);
+              return CheckpointDetailMarker(checkpoint: c, isTracking: true);
             },
           ));
 

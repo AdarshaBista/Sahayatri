@@ -54,7 +54,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         setState(() {});
       },
       child: const Icon(
-        Icons.compare_arrows,
+        AppIcons.flip,
         color: AppColors.primaryDark,
       ),
     );

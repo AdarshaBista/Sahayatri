@@ -6,7 +6,6 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
@@ -22,17 +21,17 @@ class DirectionsButton extends StatelessWidget {
         const _DirectionsModeData(
           title: 'Drive',
           // mode: NavigationMode.driving,
-          icon: CommunityMaterialIcons.car,
+          icon: AppIcons.drive,
         ),
         const _DirectionsModeData(
           title: 'Cycle',
           // mode: NavigationMode.cycling,
-          icon: CommunityMaterialIcons.bike,
+          icon: AppIcons.cycle,
         ),
         const _DirectionsModeData(
           title: 'Walk',
           // mode: NavigationMode.walking,
-          icon: CommunityMaterialIcons.hiking,
+          icon: AppIcons.walk,
         ),
       ];
 
@@ -51,7 +50,7 @@ class DirectionsButton extends StatelessWidget {
         label: label,
         outline: true,
         color: context.c.onSurface,
-        icon: Icons.directions_outlined,
+        icon: AppIcons.directions,
         onTap: () => _buildModesRow(context).openModalBottomSheet(context),
       ),
     );

@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
@@ -27,9 +26,7 @@ class NearbyActions extends StatelessWidget {
           backgroundColor: isScanning
               ? Colors.deepPurple.withOpacity(0.3)
               : Colors.green.withOpacity(0.3),
-          icon: isScanning
-              ? Icons.search_off_outlined
-              : CommunityMaterialIcons.account_search_outline,
+          icon: isScanning ? AppIcons.scanningOff : AppIcons.scanning,
           onTap: () {
             isScanning
                 ? context.read<NearbyCubit>().stopScanning()
@@ -39,7 +36,7 @@ class NearbyActions extends StatelessWidget {
         SquareButton(
           label: 'Stop\n Nearby',
           backgroundColor: AppColors.secondaryLight,
-          icon: CommunityMaterialIcons.access_point_network_off,
+          icon: AppIcons.nearby,
           onTap: () => ConfirmDialog(
             message: 'Are you sure you want to stop nearby.',
             onConfirm: () => context.read<NearbyCubit>().stopNearby(),
@@ -48,7 +45,7 @@ class NearbyActions extends StatelessWidget {
         SquareButton(
           label: 'Send\n SOS',
           backgroundColor: AppColors.primaryLight,
-          icon: Icons.speaker_phone_outlined,
+          icon: AppIcons.sos,
           onTap: () {
             context.openFlushBar('SOS Sent', type: FlushbarType.success);
             context.read<NearbyCubit>().sendSos();

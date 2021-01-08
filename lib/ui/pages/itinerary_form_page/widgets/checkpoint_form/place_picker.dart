@@ -39,7 +39,7 @@ class _PlacePickerState extends State<PlacePicker> {
   Widget build(BuildContext context) {
     return CustomFormTile(
       title: 'Place',
-      icon: Icons.place_outlined,
+      icon: AppIcons.place,
       hintText: selectedPlace?.name ?? 'No place selected',
       trailing: selectedPlace == null ? const Offstage() : _buildViewButton(),
       onTap: () {

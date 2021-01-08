@@ -83,7 +83,7 @@ class _ContactFormState extends State<ContactForm> {
 
       return CustomTextField(
         label: 'Phone number',
-        icon: Icons.phone_outlined,
+        icon: AppIcons.phone,
         validator: FormValidators.phoneNumber(),
         onChanged: (value) => contact = value,
         initialValue: state.prefs.contact,

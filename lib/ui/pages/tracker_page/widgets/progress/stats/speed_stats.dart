@@ -4,6 +4,7 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/info_card.dart';
 
 class SpeedStats extends StatelessWidget {
@@ -26,13 +27,13 @@ class SpeedStats extends StatelessWidget {
       children: [
         InfoCard(
           color: Colors.blue,
-          icon: Icons.run_circle_outlined,
+          icon: AppIcons.averageSpeed,
           title: '${trackerUpdate.averageSpeed.toStringAsFixed(1)} m/s',
           subtitle: 'Average Speed',
         ),
         InfoCard(
-          color: Colors.yellowAccent,
-          icon: Icons.arrow_circle_up,
+          color: Colors.red,
+          icon: AppIcons.topSpeed,
           title: '${trackerUpdate.topSpeed.toStringAsFixed(1)} m/s',
           subtitle: 'Top Speed',
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/custom_dialog.dart';
@@ -18,8 +17,8 @@ class ConfirmDialog extends StatelessWidget {
     @required this.onConfirm,
     this.cancelText = 'NO',
     this.confirmText = 'YES',
-    this.cancelIcon = Icons.close,
-    this.confirmIcon = Icons.check,
+    this.cancelIcon = AppIcons.close,
+    this.confirmIcon = AppIcons.confirm,
   })  : assert(message != null),
         assert(onConfirm != null),
         assert(cancelText != null),
@@ -32,7 +31,7 @@ class ConfirmDialog extends StatelessWidget {
     return CustomDialog(
       padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 20.0),
       child: const Icon(
-        CommunityMaterialIcons.alert_rhombus_outline,
+        AppIcons.alert,
         size: 80.0,
         color: AppColors.secondary,
       ),

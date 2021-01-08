@@ -47,7 +47,7 @@ class ImagesField extends StatelessWidget {
                 duration: 200,
                 child: CustomTile(
                   title: 'Add Images',
-                  icon: Icons.add_photo_alternate_outlined,
+                  icon: AppIcons.addPhoto,
                   onTap: () => ImageSourceSheet(
                     onSelect: (source) {
                       Navigator.of(context).pop();

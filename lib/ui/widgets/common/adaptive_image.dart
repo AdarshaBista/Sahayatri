@@ -51,7 +51,7 @@ class AdaptiveImage extends StatelessWidget {
   Widget _buildError(BuildContext context, Object exception, StackTrace stackTrace) {
     return Center(
       child: Icon(
-        Icons.error_outline,
+        AppIcons.error,
         size: 32.0,
         color: context.c.surface,
       ),

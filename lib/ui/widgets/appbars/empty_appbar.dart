@@ -15,7 +15,7 @@ class EmptyAppbar extends StatelessWidget implements PreferredSizeWidget {
         child: ExitButton(
           size: 20.0,
           color: context.c.onBackground,
-          icon: Icons.keyboard_backspace,
+          icon: AppIcons.back,
           backgroundColor: Colors.transparent,
         ),
       ),

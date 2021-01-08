@@ -56,7 +56,7 @@ class AuthPage extends StatelessWidget {
       splashRadius: 20.0,
       onPressed: Navigator.of(context).pop,
       icon: const Icon(
-        Icons.keyboard_backspace,
+        AppIcons.back,
         size: 20.0,
         color: AppColors.light,
       ),
@@ -90,8 +90,8 @@ class AuthPage extends StatelessWidget {
       isTabFilled: true,
       showIndicator: false,
       tabs: [
-        NestedTabData(label: 'Login', icon: Icons.login_outlined),
-        NestedTabData(label: 'Sign Up', icon: Icons.app_registration),
+        NestedTabData(label: 'Login', icon: AppIcons.login),
+        NestedTabData(label: 'Sign Up', icon: AppIcons.signUp),
       ],
       children: [
         LoginForm(isInitial: isInitial),

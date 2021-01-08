@@ -46,7 +46,7 @@ class ContactList extends StatelessWidget {
         radius: 14.0,
         backgroundColor: AppColors.primaryLight,
         child: Icon(
-          Icons.phone,
+          AppIcons.phone,
           size: 14.0,
           color: context.c.primaryVariant,
         ),

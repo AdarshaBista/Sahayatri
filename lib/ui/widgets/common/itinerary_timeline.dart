@@ -166,7 +166,7 @@ class ItineraryTimeline extends StatelessWidget {
 
   Widget _buildSmsStatus() {
     return IconLabel(
-      icon: Icons.check_circle,
+      icon: AppIcons.check,
       label: 'Notify Contact',
       iconColor: AppColors.primaryDark,
       labelStyle: AppTextStyles.headline6.primaryDark,
@@ -177,7 +177,7 @@ class ItineraryTimeline extends StatelessWidget {
     return CircularButton(
       size: 14.0,
       padding: 5.0,
-      icon: Icons.close,
+      icon: AppIcons.close,
       color: AppColors.secondary,
       backgroundColor: context.c.surface,
       onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),

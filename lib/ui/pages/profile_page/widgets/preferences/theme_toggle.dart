@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/toggle_grid.dart';
 
 class ThemeToggle extends StatelessWidget {
@@ -20,17 +20,17 @@ class ThemeToggle extends StatelessWidget {
         ToggleItem(
           label: 'System',
           value: ThemeMode.system,
-          icon: CommunityMaterialIcons.theme_light_dark,
+          icon: AppIcons.system,
         ),
         ToggleItem(
           label: 'Light',
           value: ThemeMode.light,
-          icon: CommunityMaterialIcons.weather_sunny,
+          icon: AppIcons.day,
         ),
         ToggleItem(
           label: 'Dark',
           value: ThemeMode.dark,
-          icon: CommunityMaterialIcons.weather_night,
+          icon: AppIcons.night,
         ),
       ],
     );

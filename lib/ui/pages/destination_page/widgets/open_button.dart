@@ -9,6 +9,7 @@ import 'package:sahayatri/app/constants/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 
@@ -33,7 +34,7 @@ class OpenButton extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 12.0),
         child: CustomButton(
           label: 'OPEN',
-          icon: Icons.keyboard_arrow_right,
+          icon: AppIcons.open,
           onTap: () {
             locator<DestinationNavService>().pushNamed(Routes.destinationDetailPageRoute);
           },

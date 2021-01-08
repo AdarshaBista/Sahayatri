@@ -88,7 +88,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
         visualDensity: VisualDensity.compact,
         splashRadius: 20.0,
         icon: Icon(
-          Icons.send,
+          AppIcons.send,
           size: 22.0,
           color: context.c.background,
         ),

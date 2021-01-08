@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_map_dialog.dart';
@@ -41,7 +40,7 @@ class PlaceActions extends StatelessWidget {
   Widget _buildViewMapButton(BuildContext context, Place place) {
     return CustomButton(
       label: 'View Map',
-      icon: Icons.map_outlined,
+      icon: AppIcons.map,
       onTap: () => PlaceMapDialog(place: place).openDialog(context),
     );
   }
@@ -50,8 +49,8 @@ class PlaceActions extends StatelessWidget {
     return CustomButton(
       label: 'Weather',
       outline: true,
+      icon: AppIcons.weather,
       color: context.c.onBackground,
-      icon: CommunityMaterialIcons.weather_fog,
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.weatherPageRoute,
         arguments: WeatherPageArgs(

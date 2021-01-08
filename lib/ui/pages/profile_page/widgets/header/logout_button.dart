@@ -21,7 +21,7 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularButton(
       color: AppColors.secondary,
-      icon: Icons.exit_to_app_outlined,
+      icon: AppIcons.logout,
       backgroundColor: context.c.background,
       onTap: () => ConfirmDialog(
         message: 'Do you want to log out?',

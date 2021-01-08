@@ -44,7 +44,7 @@ class ItineraryActions extends StatelessWidget {
       children: [
         _buildIcon(
           color: AppColors.primaryDark,
-          icon: Icons.edit,
+          icon: AppIcons.edit,
           onTap: () => locator<DestinationNavService>().pushNamed(
             Routes.itineraryFormPageRoute,
             arguments: itinerary,
@@ -53,7 +53,7 @@ class ItineraryActions extends StatelessWidget {
         if (deletable)
           _buildIcon(
             color: AppColors.secondary,
-            icon: Icons.close,
+            icon: AppIcons.delete,
             onTap: () {
               if (locator<TrackerService>().isTracking) {
                 const MessageDialog(

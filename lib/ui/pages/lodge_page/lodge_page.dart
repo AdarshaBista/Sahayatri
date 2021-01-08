@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
 import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
@@ -50,8 +51,8 @@ class LodgePage extends StatelessWidget {
   Widget _buildTabView(BuildContext context) {
     return NestedTabView(
       tabs: [
-        NestedTabData(label: 'Photos', icon: Icons.photo_outlined),
-        NestedTabData(label: 'Reviews', icon: Icons.star_outline),
+        NestedTabData(label: 'Photos', icon: AppIcons.photos),
+        NestedTabData(label: 'Reviews', icon: AppIcons.reviews),
       ],
       children: [
         PhotoGallery(imageUrls: context.watch<Lodge>().imageUrls),

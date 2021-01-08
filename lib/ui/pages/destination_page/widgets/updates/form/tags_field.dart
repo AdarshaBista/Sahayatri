@@ -53,7 +53,7 @@ class _TagsFieldState extends State<TagsField> {
   Widget _buildTextField(int tagsLength) {
     return CustomTextField(
       label: 'Tags',
-      icon: Icons.tag,
+      icon: AppIcons.tag,
       onChanged: addTag,
       hintText: 'Add a tag',
       controller: controller,

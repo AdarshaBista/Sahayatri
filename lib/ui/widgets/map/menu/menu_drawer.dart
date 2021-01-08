@@ -34,7 +34,7 @@ class MenuDrawer extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: const Icon(
-          Icons.close,
+          AppIcons.close,
           size: 24.0,
           color: AppColors.light,
         ),

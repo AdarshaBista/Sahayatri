@@ -5,7 +5,7 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
 import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       bottomNavigationBar: BottomNavBar(
-        iconSize: 22.0,
+        iconSize: 24.0,
         selectedIndex: _selectedIndex,
         onItemSelected: (index) {
           setState(() {
@@ -56,9 +56,9 @@ class _HomePageState extends State<HomePage> {
           });
         },
         icons: const [
-          CommunityMaterialIcons.map_marker_circle,
-          CommunityMaterialIcons.check_circle_outline,
-          CommunityMaterialIcons.account_circle_outline,
+          AppIcons.destinations,
+          AppIcons.downloaded,
+          AppIcons.profile,
         ],
       ),
       body: AnimatedChildView(

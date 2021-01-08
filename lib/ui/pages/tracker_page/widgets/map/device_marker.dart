@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart';
 
@@ -18,7 +18,7 @@ class DeviceMarker extends DynamicTextMarker {
           color: Colors.blue,
           shrinkWhen: shrinkWhen,
           coord: device.userLocation.coord,
-          icon: CommunityMaterialIcons.account_circle_outline,
+          icon: AppIcons.nearbyDevice,
           onTap: (context) {
             DeviceDetails(deviceId: device.id).openModalBottomSheet(context);
           },

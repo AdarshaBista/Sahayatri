@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_form.dart';
 import 'package:sahayatri/ui/widgets/review/review_card.dart';
 import 'package:sahayatri/ui/widgets/review/rating_chart.dart';
@@ -44,7 +44,7 @@ class ReviewList extends StatelessWidget {
         if (state is! Authenticated) return const Offstage();
         return CustomButton(
           label: 'Write a review',
-          icon: CommunityMaterialIcons.pencil_outline,
+          icon: AppIcons.edit,
           onTap: () => ReviewForm(
             onSubmit: (rating, text) => _postReview(context, rating, text),
           ).openModalBottomSheet(context, enableDrag: false),

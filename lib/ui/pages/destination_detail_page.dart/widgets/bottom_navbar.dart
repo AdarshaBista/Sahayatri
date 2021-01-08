@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 
 class BottomNavbar extends StatelessWidget {
@@ -40,11 +40,11 @@ class BottomNavbar extends StatelessWidget {
   List<NestedTabData> get _tabs => [
         NestedTabData(
           label: 'Places',
-          icon: CommunityMaterialIcons.map_marker_radius_outline,
+          icon: AppIcons.places,
         ),
         NestedTabData(
           label: 'Itinerary',
-          icon: CommunityMaterialIcons.book_outline,
+          icon: AppIcons.itineraries,
         ),
       ];
 }

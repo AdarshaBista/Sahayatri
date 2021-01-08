@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/pages/destination_detail_page.dart/widgets/drawer_item.dart';
@@ -44,12 +43,12 @@ class DestinationDrawer extends StatelessWidget {
       padding: const EdgeInsets.only(left: 32.0),
       children: [
         DrawerItem(
-          icon: CommunityMaterialIcons.chart_line_variant,
+          icon: AppIcons.route,
           label: 'Route',
           onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
         ),
         DrawerItem(
-          icon: CommunityMaterialIcons.weather_fog,
+          icon: AppIcons.weather,
           label: 'Weather',
           onTap: () {
             final destination = context.read<Destination>();

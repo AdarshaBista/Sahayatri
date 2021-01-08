@@ -26,7 +26,7 @@ class IconMarkerWidget extends StatelessWidget {
         child: Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding: const EdgeInsets.only(top: 6.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: Icon(
               icon,
               size: 20.0,

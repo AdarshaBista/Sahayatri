@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
@@ -51,11 +52,11 @@ class ProfilePage extends StatelessWidget {
       tabs: [
         NestedTabData(
           label: 'Tools',
-          icon: Icons.handyman_outlined,
+          icon: AppIcons.tools,
         ),
         NestedTabData(
           label: 'Preferences',
-          icon: Icons.settings_outlined,
+          icon: AppIcons.preferences,
         ),
       ],
       children: const [

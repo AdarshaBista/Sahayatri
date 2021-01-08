@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
@@ -42,16 +42,16 @@ class DownloadButton extends StatelessWidget {
 
   Widget _buildDownloaded() {
     return VerticalButton(
-      label: 'Downloaded',
-      icon: CommunityMaterialIcons.cloud_check_outline,
       onTap: () {},
+      label: 'Downloaded',
+      icon: AppIcons.downloadComplete,
     );
   }
 
   Widget _buildDownload(BuildContext context) {
     return VerticalButton(
       label: 'Download',
-      icon: CommunityMaterialIcons.cloud_download_outline,
+      icon: AppIcons.download,
       onTap: () {
         context.read<DownloadCubit>().startDownload();
         const DownloadDialog().openDialog(context, barrierDismissible: false);

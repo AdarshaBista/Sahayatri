@@ -50,7 +50,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       CustomTextField(
                         label: 'Username',
                         initialValue: username,
-                        icon: Icons.account_circle_outlined,
+                        icon: AppIcons.username,
                         validator: FormValidators.requiredText(),
                         onChanged: (value) => username = value,
                       ),

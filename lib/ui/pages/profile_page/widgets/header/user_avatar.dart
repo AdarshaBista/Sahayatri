@@ -44,7 +44,7 @@ class UserAvatar extends StatelessWidget {
   Widget _buildImage(User user) {
     return user.imageUrl == null
         ? const Icon(
-            Icons.edit_outlined,
+            AppIcons.edit,
             size: 24.0,
             color: AppColors.darkAccent,
           )

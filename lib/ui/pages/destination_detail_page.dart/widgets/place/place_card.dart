@@ -67,7 +67,7 @@ class PlaceCard extends StatelessWidget {
             ),
             const SizedBox(height: 4.0),
             IconLabel(
-              icon: Icons.location_on_outlined,
+              icon: AppIcons.place,
               label: place.name.toUpperCase(),
               iconColor: AppColors.light,
               labelStyle: AppTextStyles.headline5.bold.light,

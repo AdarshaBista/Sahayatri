@@ -13,7 +13,6 @@ import 'package:sahayatri/app/constants/images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
@@ -81,8 +80,8 @@ class DestinationCard extends StatelessWidget {
           IconLabel(
             iconSize: 16.0,
             iconColor: AppColors.light,
+            icon: deletable ? AppIcons.downloaded : AppIcons.destinations,
             label: destination.name.toUpperCase(),
-            icon: CommunityMaterialIcons.map_marker_circle,
             labelStyle: AppTextStyles.headline4.bold.light,
           ),
           const SizedBox(height: 6.0),
@@ -158,7 +157,7 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
           child: const Icon(
-            Icons.close,
+            AppIcons.close,
             size: 18.0,
             color: AppColors.lightAccent,
           ),

@@ -25,11 +25,11 @@ class DeviceStatusRow extends StatelessWidget {
 
   IconData _getIcon() {
     if (status == DeviceStatus.connected) {
-      return Icons.check_circle;
+      return AppIcons.deviceConnected;
     } else if (status == DeviceStatus.connecting) {
-      return Icons.radio_button_checked;
+      return AppIcons.deviceConnecting;
     } else {
-      return Icons.remove_circle;
+      return AppIcons.deviceDisconnected;
     }
   }
 

@@ -92,7 +92,7 @@ class UpdateForm extends StatelessWidget {
           child: state.isLoading
               ? const CircularBusyIndicator()
               : const Icon(
-                  Icons.check,
+                  AppIcons.confirm,
                   size: 24.0,
                 ),
           onPressed: () async {

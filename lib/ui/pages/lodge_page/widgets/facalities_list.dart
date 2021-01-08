@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 
 class FacilitiesList extends StatelessWidget {
   const FacilitiesList();
@@ -42,9 +41,9 @@ class FacilitiesList extends StatelessWidget {
     return Wrap(
       spacing: 8.0,
       children: [
-        if (facility.wifi) _buildIcon(context, CommunityMaterialIcons.wifi),
-        if (facility.toilet) _buildIcon(context, CommunityMaterialIcons.toilet),
-        if (facility.shower) _buildIcon(context, CommunityMaterialIcons.shower_head),
+        if (facility.wifi) _buildIcon(context, AppIcons.wifi),
+        if (facility.toilet) _buildIcon(context, AppIcons.toilet),
+        if (facility.shower) _buildIcon(context, AppIcons.shower),
       ],
     );
   }

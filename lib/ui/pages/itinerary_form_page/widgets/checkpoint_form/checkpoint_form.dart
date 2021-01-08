@@ -109,8 +109,8 @@ class CheckpointForm extends StatelessWidget {
       label: 'Description',
       hintText: 'No description provided',
       validator: (_) => null,
-      icon: Icons.description_outlined,
       initialValue: description,
+      icon: AppIcons.description,
       onChanged: (desc) => context.read<CheckpointFormCubit>().changeDescription(desc),
     );
   }

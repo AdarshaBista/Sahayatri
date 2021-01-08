@@ -16,7 +16,7 @@ class RetryButton extends StatelessWidget {
       onTap: onTap,
       label: 'Retry',
       expanded: false,
-      icon: Icons.refresh,
+      icon: AppIcons.refresh,
       color: AppColors.secondary,
       backgroundColor: Colors.transparent,
     );

@@ -6,7 +6,6 @@ import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/constants/routes.dart';
 
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
@@ -39,8 +38,8 @@ class RouteActions extends StatelessWidget {
     return CustomButton(
       outline: true,
       label: 'View Route',
+      icon: AppIcons.route,
       color: context.c.onSurface,
-      icon: CommunityMaterialIcons.chart_line_variant,
       onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
     );
   }

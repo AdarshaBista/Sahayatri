@@ -20,7 +20,7 @@ class UnauthenticatedView extends StatelessWidget {
       CustomButton(
         label: 'Login / Sign Up',
         expanded: false,
-        icon: Icons.login_outlined,
+        icon: AppIcons.login,
         color: AppColors.primaryDark,
         backgroundColor: Colors.transparent,
         onTap: () {

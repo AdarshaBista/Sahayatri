@@ -59,7 +59,7 @@ class CheckpointDetails extends StatelessWidget {
         ),
         const Spacer(),
         CircularButton(
-          icon: Icons.open_in_new_outlined,
+          icon: AppIcons.open,
           color: AppColors.primary,
           backgroundColor: context.c.surface,
           onTap: () => locator<DestinationNavService>().pushNamed(
@@ -106,14 +106,14 @@ class _CheckpointDateTime extends StatelessWidget {
             context: context,
             title: 'DATE',
             subtitle: checkpoint.date,
-            icon: Icons.calendar_today_outlined,
+            icon: AppIcons.date,
           ),
           const SizedBox(width: 12.0),
           _buildCard(
             context: context,
             title: 'TIME',
             subtitle: checkpoint.time,
-            icon: Icons.access_time,
+            icon: AppIcons.time,
           ),
         ],
       ),

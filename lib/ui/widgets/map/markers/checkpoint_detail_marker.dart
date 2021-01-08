@@ -11,8 +11,10 @@ import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
+    bool isTracking = false,
     @required Checkpoint checkpoint,
-  })  : assert(checkpoint != null),
+  })  : assert(isTracking != null),
+        assert(checkpoint != null),
         super(
           width: 200.0,
           height: 72.0,
@@ -22,7 +24,7 @@ class CheckpointDetailMarker extends Marker {
             borderRadius: 50.0,
             onTap: () {
               CheckpointDetails(
-                showLodges: false,
+                showLodges: isTracking,
                 checkpoint: checkpoint,
               ).openModalBottomSheet(context);
             },
