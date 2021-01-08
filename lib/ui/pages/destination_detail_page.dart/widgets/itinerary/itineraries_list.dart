@@ -45,7 +45,7 @@ class ItinerariesList extends StatelessWidget {
                 state is UserItineraryLoaded ? 'My Itinerary' : 'Create my itinerary';
             return Text(
               title,
-              style: context.t.headline4.bold,
+              style: context.t.headline5.bold,
             );
           },
         ),
@@ -62,7 +62,7 @@ class ItinerariesList extends StatelessWidget {
       children: [
         Text(
           'Suggested Itineraries',
-          style: context.t.headline4.bold,
+          style: context.t.headline5.bold,
         ),
         const SizedBox(height: 12.0),
         BlocBuilder<ItineraryCubit, ItineraryState>(

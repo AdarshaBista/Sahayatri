@@ -27,13 +27,13 @@ class SpeedStats extends StatelessWidget {
         InfoCard(
           color: Colors.blue,
           icon: Icons.run_circle_outlined,
-          title: trackerUpdate.averageSpeed.toStringAsFixed(1),
+          title: '${trackerUpdate.averageSpeed.toStringAsFixed(1)} m/s',
           subtitle: 'Average Speed',
         ),
         InfoCard(
           color: Colors.yellowAccent,
           icon: Icons.arrow_circle_up,
-          title: trackerUpdate.topSpeed.toStringAsFixed(1),
+          title: '${trackerUpdate.topSpeed.toStringAsFixed(1)} m/s',
           subtitle: 'Top Speed',
         ),
       ],

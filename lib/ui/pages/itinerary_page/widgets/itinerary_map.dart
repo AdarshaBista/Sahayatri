@@ -27,7 +27,9 @@ class ItineraryMap extends StatelessWidget {
     final checkpoints = Provider.of<Itinerary>(context, listen: false).checkpoints;
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: checkpoints.map((c) => CheckpointDetailMarker(checkpoint: c)).toList(),
+        markers: checkpoints.reversed
+            .map((c) => CheckpointDetailMarker(checkpoint: c))
+            .toList(),
       ),
     );
   }

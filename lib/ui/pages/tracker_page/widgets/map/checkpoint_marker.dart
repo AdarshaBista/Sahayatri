@@ -5,8 +5,8 @@ import 'package:sahayatri/core/extensions/index.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/checkpoint_details.dart';
 import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_details.dart';
 
 class CheckpointMarker extends DynamicTextMarker {
   CheckpointMarker({

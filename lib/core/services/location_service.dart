@@ -86,11 +86,11 @@ class LocationService {
     return Stream<UserLocation>.periodic(
       Duration(milliseconds: period),
       (index) => UserLocation(
-        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
-        altitude: 2000.0 + _randomOffset(-50.0, 50.0),
-        speed: 1.0 + _randomOffset(-1.0, 1.0),
-        bearing: _randomOffset(0.0, 360.0),
         timestamp: DateTime.now(),
+        altitude: route[index].alt,
+        bearing: _randomOffset(0.0, 360.0),
+        speed: 1.5 + _randomOffset(-1.0, 1.0),
+        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
         coord: Coord(
           lat: route[index].lat,
           lng: route[index].lng + _randomOffset(-0.00005, 0.00005),
