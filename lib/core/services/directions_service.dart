@@ -1,54 +1,22 @@
-import 'package:sahayatri/locator.dart';
-
-// import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/user_location.dart';
-
-import 'package:sahayatri/core/services/location_service.dart';
 
 class DirectionsService {
-  final LocationService locationService = locator();
+  Future<void> startNavigation(Coord coord, String mode) async {
+    final parameters = [
+      'destination=${coord.lat},${coord.lng}',
+      'dir_action=navigate',
+      'travelmode=$mode',
+    ].join('&');
 
-  // MapboxNavigation _directions;
+    final url = 'https://www.google.com/maps/dir/?api=1&$parameters';
 
-  Future<UserLocation> getUserLocation() async {
-    try {
-      return await locationService.getLocation();
-    } on AppError {
-      rethrow;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw const AppError(message: 'Could not launch Google Maps!');
     }
-  }
-
-  Future<void> startNavigation(
-    String name,
-    Coord coord,
-    UserLocation userLocation,
-    // NavigationMode mode,
-  ) async {
-    // _directions = MapboxNavigation(onRouteProgress: (arrived) async {
-    //   if (arrived) await _directions.finishNavigation();
-    // });
-
-    // final Location _origin = Location(
-    //   name: 'Your location',
-    //   latitude: userLocation.coord.lat,
-    //   longitude: userLocation.coord.lng,
-    // );
-
-    // final Location _destination = Location(
-    //   name: name,
-    //   latitude: coord.lat,
-    //   longitude: coord.lng,
-    // );
-
-    // await _directions.startNavigation(
-    //   origin: _origin,
-    //   destination: _destination,
-    //   language: 'en',
-    //   units: VoiceUnits.metric,
-    //   mode: mode,
-    // );
   }
 }

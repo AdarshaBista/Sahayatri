@@ -7,8 +7,6 @@ import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/user_location.dart';
-
 import 'package:sahayatri/core/services/directions_service.dart';
 
 part 'directions_state.dart';
@@ -18,23 +16,13 @@ class DirectionsCubit extends Cubit<DirectionsState> {
 
   DirectionsCubit() : super(const DirectionsInitial());
 
-  Future<void> startNavigation(
-    String name,
-    Coord coord,
-    // NavigationMode mode,
-  ) async {
+  Future<void> startNavigation(Coord coord, String mode) async {
     emit(const DirectionsLoading());
     try {
-      final UserLocation userLocation = await directionsService.getUserLocation();
-      await directionsService.startNavigation(
-        name,
-        coord,
-        userLocation,
-        // mode,
-      );
-      emit(const DirectionsInitial());
+      await directionsService.startNavigation(coord, mode);
     } on AppError catch (e) {
       emit(DirectionsError(message: e.message));
     }
+    emit(const DirectionsInitial());
   }
 }

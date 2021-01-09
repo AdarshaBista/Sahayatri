@@ -3,7 +3,6 @@ temp/
 
 # Secrets
 lib/app/constants/api_keys.dart
-android/app/src/main/res/values/strings.xml
 
 # Miscellaneous
 *.class

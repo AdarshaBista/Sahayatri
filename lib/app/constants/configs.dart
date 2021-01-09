@@ -44,6 +44,12 @@ class MapConfig {
   static const double routeAccuracyZoomThreshold = 16.0;
 }
 
+class DirectionsMode {
+  static const String walk = 'walking';
+  static const String drive = 'driving';
+  static const String cycle = 'bicycling';
+}
+
 class MapStyles {
   static const String dark = 'mapbox/dark-v10';
   static const String light = 'mapbox/light-v10';

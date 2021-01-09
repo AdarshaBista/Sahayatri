@@ -2,16 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMotionUsageDescription</key>
-	<string>This application tracks your steps.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>This app requires access to your storage for recording videos.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to your storage for capturing images.</string>
+	<string>This app requires access to your camera for capturing images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to your storage for selecting images.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

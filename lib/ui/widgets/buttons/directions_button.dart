@@ -6,8 +6,10 @@ import 'package:sahayatri/core/models/destination.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 
+import 'package:sahayatri/app/constants/configs.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 
 class DirectionsButton extends StatelessWidget {
@@ -16,24 +18,6 @@ class DirectionsButton extends StatelessWidget {
   const DirectionsButton({
     this.label = 'Get Directions',
   }) : assert(label != null);
-
-  List<_DirectionsModeData> get _directionsModesData => [
-        const _DirectionsModeData(
-          title: 'Drive',
-          // mode: NavigationMode.driving,
-          icon: AppIcons.drive,
-        ),
-        const _DirectionsModeData(
-          title: 'Cycle',
-          // mode: NavigationMode.cycling,
-          icon: AppIcons.cycle,
-        ),
-        const _DirectionsModeData(
-          title: 'Walk',
-          // mode: NavigationMode.walking,
-          icon: AppIcons.walk,
-        ),
-      ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,49 +35,54 @@ class DirectionsButton extends StatelessWidget {
         outline: true,
         color: context.c.onSurface,
         icon: AppIcons.directions,
-        onTap: () => _buildModesRow(context).openModalBottomSheet(context),
-      ),
-    );
-  }
-
-  Widget _buildModesRow(BuildContext context) {
-    return SizedBox(
-      height: 80.0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: _directionsModesData
-            .map(
-              (m) => VerticalButton(
-                label: m.title,
-                icon: m.icon,
-                onTap: () {
-                  Navigator.of(context).pop();
-                  final directionsCubit = context.read<DirectionsCubit>();
-                  final destination = context.read<Destination>();
-
-                  directionsCubit.startNavigation(
-                    destination.name,
-                    destination.route.first,
-                  );
-                },
-              ),
-            )
-            .toList(),
+        onTap: () => const _NavigationModeSheet().openModalBottomSheet(context),
       ),
     );
   }
 }
 
-class _DirectionsModeData {
-  final String title;
-  final IconData icon;
-  // final NavigationMode mode;
+class _NavigationModeSheet extends StatelessWidget {
+  const _NavigationModeSheet();
 
-  const _DirectionsModeData({
-    @required this.title,
-    @required this.icon,
-    // @required this.mode,
-  })  : assert(title != null),
-        assert(icon != null);
-  // assert(mode != null);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Header(
+            title: 'Select mode',
+            fontSize: 20.0,
+          ),
+          const SizedBox(height: 12.0),
+          CustomButton(
+            label: 'DRIVE',
+            icon: AppIcons.drive,
+            onTap: () => startNavigation(context, DirectionsMode.drive),
+          ),
+          const SizedBox(height: 8.0),
+          CustomButton(
+            label: 'CYCLE',
+            icon: AppIcons.cycle,
+            onTap: () => startNavigation(context, DirectionsMode.cycle),
+          ),
+          const SizedBox(height: 8.0),
+          CustomButton(
+            label: 'WALK',
+            icon: AppIcons.walk,
+            onTap: () => startNavigation(context, DirectionsMode.walk),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> startNavigation(BuildContext context, String mode) async {
+    Navigator.of(context).pop();
+    final destination = context.read<Destination>();
+    final directionsCubit = context.read<DirectionsCubit>();
+    directionsCubit.startNavigation(destination.route.first, mode);
+  }
 }
