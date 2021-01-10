@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/destination_update_form_cubit/destination_updat
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/select_location_dialog.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 
 class LocationField extends StatelessWidget {
   const LocationField();
@@ -35,7 +35,7 @@ class LocationField extends StatelessWidget {
               icon: AppIcons.addLocation,
               onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
                 value: context.read<DestinationUpdateFormCubit>(),
-                child: const SelectLocationDialog(),
+                child: const UpdateMapDialog(),
               ).openDialog(context),
             ),
           ],
