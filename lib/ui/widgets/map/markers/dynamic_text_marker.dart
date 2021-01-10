@@ -22,8 +22,8 @@ class DynamicTextMarker extends Marker {
         assert(shrinkWhen != null),
         assert(backgroundColor != null),
         super(
-          height: 44.0,
-          width: shrinkWhen ? 24.0 : 120.0,
+          height: shrinkWhen ? 28.0 : 44.0,
+          width: shrinkWhen ? 28.0 : 120.0,
           point: coord.toLatLng(),
           anchorPos: AnchorPos.align(AnchorAlign.top),
           builder: (_) => _DynamicTextMarkerWidget(
@@ -59,9 +59,8 @@ class _DynamicTextMarkerWidget extends StatelessWidget {
     if (shrinkWhen || label == null) {
       return IconMarkerWidget(
         icon: icon,
-        color: color,
+        color: backgroundColor,
         onTap: () => onTap(context),
-        backgroundColor: backgroundColor,
       );
     }
 
