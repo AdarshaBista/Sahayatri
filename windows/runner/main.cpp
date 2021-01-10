@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
 
   FlutterWindow window(&run_loop, project);
   Win32Window::Point origin(500, 15);
-  Win32Window::Size size(340, 670);
+  Win32Window::Size size(340, 690);
   if (!window.CreateAndShow(L"Sahayatri", origin, size)) {
     return EXIT_FAILURE;
   }

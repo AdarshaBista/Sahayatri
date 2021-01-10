@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
@@ -102,16 +103,12 @@ class AuthPage extends StatelessWidget {
 
   Widget _buildSkipButton() {
     return ScaleAnimator(
-      child: FlatButton(
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        child: Text(
-          'Continue without signing in...',
-          style: AppTextStyles.headline6.lightAccent,
-        ),
-        onPressed: () =>
-            locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
+      child: CustomButton(
+        icon: AppIcons.open,
+        color: AppColors.light,
+        backgroundColor: Colors.transparent,
+        label: 'Continue without signing in...',
+        onTap: () => locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
       ),
     );
   }
