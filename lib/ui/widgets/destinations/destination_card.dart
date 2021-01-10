@@ -157,7 +157,7 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
           child: const Icon(
-            AppIcons.close,
+            AppIcons.delete,
             size: 18.0,
             color: AppColors.lightAccent,
           ),

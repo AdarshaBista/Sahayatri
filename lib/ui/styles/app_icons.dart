@@ -6,11 +6,11 @@ class AppIcons {
   AppIcons._();
 
   // General
-  static const search = Icons.search;
-  static const refresh = Icons.refresh;
+  static const search = Icons.search_outlined;
+  static const refresh = Icons.refresh_outlined;
   static const edit = Icons.edit_outlined;
-  static const create = CommunityMaterialIcons.pencil_circle_outline;
-  static const delete = Icons.close_rounded;
+  static const create = CommunityMaterialIcons.pencil_plus_outline;
+  static const delete = Icons.delete_outlined;
   static const close = Icons.close_outlined;
   static const confirm = Icons.check_outlined;
   static const check = Icons.check_circle_outlined;
@@ -54,9 +54,9 @@ class AppIcons {
   static const starFilled = Icons.star;
 
   // Update
-  static const updates = Icons.featured_play_list_outlined;
+  static const updates = Icons.update_outlined;
   static const updateMarker = CommunityMaterialIcons.circle_double;
-  static const tag = Icons.tag;
+  static const tag = CommunityMaterialIcons.tag_outline;
   static const addUpdate = Icons.post_add_outlined;
   static const addPhoto = Icons.add_photo_alternate_outlined;
   static const addLocation = CommunityMaterialIcons.map_marker_plus_outline;
@@ -66,21 +66,21 @@ class AppIcons {
   static const contact = CommunityMaterialIcons.account_alert_outline;
 
   // Translate
-  static const translate = Icons.translate_outlined;
-  static const send = Icons.send_outlined;
+  static const send = Icons.send;
   static const speaker = Icons.volume_up_outlined;
   static const flip = Icons.compare_arrows_outlined;
+  static const translate = Icons.translate_outlined;
 
   // Directions
   static const directions = Icons.directions_outlined;
-  static const drive = CommunityMaterialIcons.car;
-  static const cycle = CommunityMaterialIcons.bike;
-  static const walk = CommunityMaterialIcons.hiking;
+  static const drive = Icons.directions_car_outlined;
+  static const cycle = Icons.directions_bike_outlined;
+  static const walk = Icons.directions_walk_outlined;
 
   // Itinerary
-  static const itineraries = CommunityMaterialIcons.book_outline;
-  static const checkpoint = CommunityMaterialIcons.map_marker_check;
+  static const itineraries = Icons.list_alt_outlined;
   static const addCheckpoint = Icons.add_location_alt_outlined;
+  static const checkpoint = CommunityMaterialIcons.map_marker_check_outline;
 
   // Progress
   static const progress = CommunityMaterialIcons.progress_check;
@@ -97,28 +97,28 @@ class AppIcons {
 
   // Nearby
   static const nearby = Icons.device_hub_outlined;
-  static const nearbyDevice = CommunityMaterialIcons.google_nearby;
+  static const nearbyDevice = Icons.supervisor_account_outlined;
   static const sos = Icons.speaker_phone_outlined;
   static const scanningOff = Icons.search_off_outlined;
   static const scanning = CommunityMaterialIcons.account_search_outline;
   static const deviceConnected = Icons.check_circle_outlined;
-  static const deviceConnecting = Icons.radio_button_checked_outlined;
   static const deviceDisconnected = Icons.remove_circle_outlined;
+  static const deviceConnecting = Icons.radio_button_checked_outlined;
 
   // Place
   static const place = CommunityMaterialIcons.map_marker_outline;
-  static const places = CommunityMaterialIcons.map_marker_radius_outline;
+  static const places = CommunityMaterialIcons.map_marker_multiple_outline;
 
   // Lodge Facilities
-  static const wifi = CommunityMaterialIcons.wifi;
+  static const wifi = Icons.wifi_outlined;
+  static const shower = Icons.bathtub_outlined;
   static const toilet = CommunityMaterialIcons.toilet;
-  static const shower = CommunityMaterialIcons.shower_head;
 
   // Map
   static const layers = Icons.layers_outlined;
   static const map = Icons.map_outlined;
   static const route = CommunityMaterialIcons.chart_line_variant;
-  static const location = Icons.location_on_outlined;
+  static const location = CommunityMaterialIcons.map_marker_radius_outline;
   static const street = CommunityMaterialIcons.google_street_view;
   static const satellite = CommunityMaterialIcons.earth;
   static const outdoors = CommunityMaterialIcons.hiking;

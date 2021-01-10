@@ -112,7 +112,7 @@ class UpdateCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: IconLabel(
           gap: 2.0,
-          iconSize: 14.0,
+          iconSize: 16.0,
           icon: AppIcons.location,
           iconColor: AppColors.secondary,
           label: update.coords.length.toString(),
