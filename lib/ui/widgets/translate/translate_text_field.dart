@@ -18,19 +18,15 @@ class TranslateTextField extends StatefulWidget {
 }
 
 class _TranslateTextFieldState extends State<TranslateTextField> {
-  FocusNode sourceNode;
   TextEditingController sourceController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    sourceNode = FocusNode();
-    sourceNode.requestFocus();
   }
 
   @override
   void dispose() {
-    sourceNode.dispose();
     super.dispose();
   }
 
@@ -55,7 +51,6 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
-      focusNode: sourceNode,
       style: context.t.headline5,
       controller: sourceController,
       autovalidateMode: AutovalidateMode.onUserInteraction,

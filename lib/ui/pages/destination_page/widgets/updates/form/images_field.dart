@@ -48,12 +48,15 @@ class ImagesField extends StatelessWidget {
                 child: CustomTile(
                   title: 'Add Images',
                   icon: AppIcons.addPhoto,
-                  onTap: () => ImageSourceSheet(
-                    onSelect: (source) {
-                      Navigator.of(context).pop();
-                      context.read<DestinationUpdateFormCubit>().selectImage(source);
-                    },
-                  ).openModalBottomSheet(context),
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    ImageSourceSheet(
+                      onSelect: (source) {
+                        Navigator.of(context).pop();
+                        context.read<DestinationUpdateFormCubit>().selectImage(source);
+                      },
+                    ).openModalBottomSheet(context);
+                  },
                 ),
               ),
           ],

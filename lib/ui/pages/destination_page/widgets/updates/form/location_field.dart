@@ -33,10 +33,13 @@ class LocationField extends StatelessWidget {
             CustomTile(
               title: 'View / Select Locations',
               icon: AppIcons.addLocation,
-              onTap: () => BlocProvider<DestinationUpdateFormCubit>.value(
-                value: context.read<DestinationUpdateFormCubit>(),
-                child: const UpdateMapDialog(),
-              ).openDialog(context),
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                BlocProvider<DestinationUpdateFormCubit>.value(
+                  value: context.read<DestinationUpdateFormCubit>(),
+                  child: const UpdateMapDialog(),
+                ).openDialog(context);
+              },
             ),
           ],
         );
