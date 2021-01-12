@@ -6,6 +6,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 class SlidingPanel extends StatelessWidget {
   final Widget body;
   final Widget panel;
+  final Widget collapsed;
   final double minHeight;
   final double maxHeight;
   final double snapPoint;
@@ -21,6 +22,7 @@ class SlidingPanel extends StatelessWidget {
     @required this.body,
     @required this.minHeight,
     this.panel,
+    this.collapsed,
     this.maxHeight,
     this.snapPoint,
     this.onPanelSlide,
@@ -50,7 +52,7 @@ class SlidingPanel extends StatelessWidget {
       backdropEnabled: backdropEnabled,
       parallaxEnabled: parallaxEnabled,
       renderPanelSheet: renderPanelSheet,
-      backdropColor: context.c.background,
+      backdropColor: AppColors.dark,
       borderRadius: BorderRadius.only(
         topLeft: radius,
         topRight: radius,
@@ -63,6 +65,7 @@ class SlidingPanel extends StatelessWidget {
       onPanelSlide: onPanelSlide,
       body: body,
       panel: panel,
+      collapsed: collapsed,
       panelBuilder: panelBuilder,
     );
   }
