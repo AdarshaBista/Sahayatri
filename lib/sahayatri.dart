@@ -70,19 +70,29 @@ class Sahayatri extends StatelessWidget {
   Widget _buildApp(Widget home) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, themeMode) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          themeMode: themeMode,
-          theme: AppThemes.light,
-          darkTheme: AppThemes.dark,
-          title: AppConfig.appName,
-          builder: DevicePreview.appBuilder,
-          locale: DevicePreview.locale(context),
-          onGenerateRoute: RootRouter.onGenerateRoute,
-          navigatorKey: locator<RootNavService>().navigatorKey,
-          home: home,
+        return Listener(
+          onPointerDown: (_) => _unfocusKeyboard(context),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: themeMode,
+            theme: AppThemes.light,
+            darkTheme: AppThemes.dark,
+            title: AppConfig.appName,
+            builder: DevicePreview.appBuilder,
+            locale: DevicePreview.locale(context),
+            onGenerateRoute: RootRouter.onGenerateRoute,
+            navigatorKey: locator<RootNavService>().navigatorKey,
+            home: home,
+          ),
         );
       },
     );
+  }
+
+  void _unfocusKeyboard(BuildContext context) {
+    final FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus.unfocus();
+    }
   }
 }
