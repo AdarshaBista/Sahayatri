@@ -63,7 +63,7 @@ class CheckpointForm extends StatelessWidget {
                     const SizedBox(height: 16.0),
                     _buildDescriptionField(state.description, context),
                     const SizedBox(height: 12.0),
-                    _buildSmsToggle(state.notifyContact, context),
+                    _buildNotifyContactToggle(state.notifyContact, context),
                     const SizedBox(height: 16.0),
                     _buildSubmitButton(state, context),
                   ],
@@ -115,7 +115,7 @@ class CheckpointForm extends StatelessWidget {
     );
   }
 
-  Widget _buildSmsToggle(bool shouldSendSms, BuildContext context) {
+  Widget _buildNotifyContactToggle(bool shouldSendSms, BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
       trailing: CircularCheckbox(

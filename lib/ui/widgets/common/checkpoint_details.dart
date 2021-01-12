@@ -12,6 +12,7 @@ import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/common/checkpoint_lodges.dart';
+import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
 
 class CheckpointDetails extends StatelessWidget {
   final bool showLodges;
@@ -42,6 +43,11 @@ class CheckpointDetails extends StatelessWidget {
             const SizedBox(height: 16.0),
             CheckpointLodges(lodges: checkpoint.place.lodges),
           ],
+          const SizedBox(height: 8.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: NotifyContactStatus(isNotified: checkpoint.notifyContact),
+          ),
           const SizedBox(height: 8.0),
         ],
       ),

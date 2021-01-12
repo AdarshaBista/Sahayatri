@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/image_card.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
 
 class ItineraryPanel extends StatelessWidget {
   const ItineraryPanel();
@@ -95,10 +95,8 @@ class _CheckpointCard extends StatelessWidget {
           _buildDescription(context),
           const Divider(height: 16.0),
           _buildPlace(context),
-          if (checkpoint.notifyContact) ...[
-            const SizedBox(height: 12.0),
-            _buildSmsStatus(),
-          ],
+          const SizedBox(height: 12.0),
+          NotifyContactStatus(isNotified: checkpoint.notifyContact),
         ],
       ),
     );
@@ -112,17 +110,17 @@ class _CheckpointCard extends StatelessWidget {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          checkpoint.time.toUpperCase(),
-          style: context.t.headline6.bold,
-        ),
-        const SizedBox(height: 4.0),
         Text(
           checkpoint.date.toUpperCase(),
           style: context.t.headline5.bold,
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          checkpoint.time.toUpperCase(),
+          style: context.t.headline5,
         ),
       ],
     );
@@ -173,15 +171,6 @@ class _CheckpointCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildSmsStatus() {
-    return IconLabel(
-      icon: AppIcons.check,
-      label: 'Notify Contact',
-      iconColor: AppColors.primaryDark,
-      labelStyle: AppTextStyles.headline6.primaryDark,
     );
   }
 }

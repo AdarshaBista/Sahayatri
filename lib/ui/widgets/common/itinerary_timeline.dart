@@ -11,10 +11,10 @@ import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
+import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
 
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
@@ -156,20 +156,9 @@ class ItineraryTimeline extends StatelessWidget {
               : checkpoint.description,
           style: context.t.headline6,
         ),
-        if (checkpoint.notifyContact) ...[
-          const SizedBox(height: 4.0),
-          _buildSmsStatus(),
-        ],
+        const SizedBox(height: 4.0),
+        NotifyContactStatus(isNotified: checkpoint.notifyContact),
       ],
-    );
-  }
-
-  Widget _buildSmsStatus() {
-    return IconLabel(
-      icon: AppIcons.check,
-      label: 'Notify Contact',
-      iconColor: AppColors.primaryDark,
-      labelStyle: AppTextStyles.headline6.primaryDark,
     );
   }
 

@@ -6,8 +6,8 @@ import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
 
 class CheckpointInfo extends StatelessWidget {
   const CheckpointInfo();
@@ -28,10 +28,8 @@ class CheckpointInfo extends StatelessWidget {
             _buildDateTime(context, checkpoint),
             const Divider(height: 12.0),
             _buildDescription(context, checkpoint.description),
-            if (checkpoint.notifyContact) ...[
-              const SizedBox(height: 8.0),
-              _buildNotifyContact(),
-            ],
+            const SizedBox(height: 8.0),
+            NotifyContactStatus(isNotified: checkpoint.notifyContact),
           ],
         ),
       ),
@@ -65,15 +63,6 @@ class CheckpointInfo extends StatelessWidget {
           style: context.t.headline5,
         ),
       ),
-    );
-  }
-
-  Widget _buildNotifyContact() {
-    return IconLabel(
-      icon: AppIcons.check,
-      label: 'Notify Contact',
-      iconColor: AppColors.primaryDark,
-      labelStyle: AppTextStyles.headline6.primaryDark,
     );
   }
 }
