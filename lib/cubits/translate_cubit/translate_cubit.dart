@@ -58,8 +58,8 @@ class TranslateCubit extends Cubit<TranslateState> {
     targetLang = temp;
   }
 
-  Future<void> play(String text) async {
-    await ttsService.play(text);
+  Future<void> play(String text, String language) async {
+    await ttsService.play(text, language);
   }
 
   void _scrollToEnd() {

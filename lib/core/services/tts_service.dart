@@ -5,25 +5,28 @@ import 'package:flutter_tts/flutter_tts.dart';
 class TtsService {
   final FlutterTts tts = FlutterTts();
 
-  /// Default language for TTS.
-  final String _defaultLanguage = 'ne-NP';
+  /// Last spoken language.
+  String _currentLang = '';
 
-  /// Audio cannot be played if language is not available.
-  bool _canPlay = false;
+  Future<void> play(String text, String language) async {
+    if (Platform.isWindows) return;
 
-  TtsService() {
-    _setLang();
+    if (language.isEmpty) return;
+    if (language == _currentLang) {
+      _speak(text);
+      return;
+    }
+
+    final canPlay = await tts.isLanguageAvailable(language) as bool;
+    if (canPlay) {
+      _currentLang = language;
+      _speak(text);
+    }
   }
 
-  Future<void> _setLang() async {
-    if (Platform.isWindows) return;
-    _canPlay = await tts.isLanguageAvailable(_defaultLanguage) as bool;
-    if (_canPlay) tts.setLanguage(_defaultLanguage);
-  }
-
-  Future<void> play(String text) async {
-    if (Platform.isWindows) return;
-    tts.stop();
-    if (_canPlay) tts.speak(text);
+  Future<void> _speak(String text) async {
+    await tts.stop();
+    await tts.setLanguage(_currentLang);
+    tts.speak(text);
   }
 }
