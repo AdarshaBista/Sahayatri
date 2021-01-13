@@ -12,6 +12,7 @@ import 'package:sahayatri/sahayatri.dart';
 
 import 'package:sahayatri/core/models/models.dart';
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/utils/config_reader.dart';
 import 'package:sahayatri/core/services/destinations_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
   setSystemPreferences();
 
   await initHive();
+  await ConfigReader.initialize();
   registerGlobalServices();
   runApp(const App());
 }

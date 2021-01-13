@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination.dart';
+
 import 'package:sahayatri/core/constants/configs.dart';
-import 'package:sahayatri/core/constants/api_keys.dart';
+import 'package:sahayatri/core/utils/config_reader.dart';
 import 'package:sahayatri/core/extensions/route_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:latlong/latlong.dart';
@@ -162,7 +163,7 @@ class _TileLayer extends StatelessWidget {
             tileFadeInDuration: 300,
             overrideTilesWhenUrlChanges: true,
             urlTemplate:
-                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ApiKeys.mapBoxAccessToken}',
+                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ConfigReader.mapBoxAccessToken}',
           ),
         );
       },

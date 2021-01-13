@@ -86,6 +86,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - config/
     - assets/icons/
     - assets/images/
     - assets/images/markers/

@@ -12,7 +12,7 @@ import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/constants/configs.dart';
-import 'package:sahayatri/core/constants/api_keys.dart';
+import 'package:sahayatri/core/utils/config_reader.dart';
 
 class ApiService {
   Future<String> updateUserAvatar(User user, String imagePath) async {
@@ -300,7 +300,7 @@ class ApiService {
   Future<List<Weather>> fetchForecasts(Coord coord) async {
     try {
       final Response res = await Dio().get(
-        '${ApiConfig.weatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ApiKeys.openWeatherMapKey}',
+        '${ApiConfig.weatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ConfigReader.openWeatherMapKey}',
       );
       final resList = res.data['daily'] as List<dynamic>;
       return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();
