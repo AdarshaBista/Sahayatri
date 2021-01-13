@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart'
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
-import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
+import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class TrackerSetup extends StatelessWidget {

@@ -4,7 +4,9 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class DragIndicatorPill extends StatelessWidget {
-  const DragIndicatorPill();
+  final Color color;
+
+  const DragIndicatorPill({this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +16,8 @@ class DragIndicatorPill extends StatelessWidget {
         height: 5.0,
         width: 32.0,
         decoration: BoxDecoration(
-          color: context.c.onBackground.withOpacity(0.25),
           borderRadius: BorderRadius.circular(5.0),
+          color: color ?? context.c.onBackground.withOpacity(0.25),
         ),
       ),
     );

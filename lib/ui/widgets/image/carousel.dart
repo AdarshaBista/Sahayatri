@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
 class Carousel extends StatelessWidget {
   final double width;

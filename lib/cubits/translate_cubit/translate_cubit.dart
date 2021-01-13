@@ -11,7 +11,7 @@ import 'package:sahayatri/core/models/translation.dart';
 import 'package:sahayatri/core/services/tts_service.dart';
 import 'package:sahayatri/core/services/translate_service.dart';
 
-import 'package:sahayatri/app/constants/languages.dart';
+import 'package:sahayatri/core/constants/languages.dart';
 
 part 'translate_state.dart';
 

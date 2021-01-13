@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/dialog_x.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';

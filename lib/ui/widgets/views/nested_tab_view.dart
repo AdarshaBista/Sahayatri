@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/icon_label.dart';
+import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
-import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
 
 class NestedTabView extends StatefulWidget {
   final bool keepAlive;
@@ -43,7 +43,7 @@ class _NestedTabViewState extends State<NestedTabView> {
       children: [
         const SizedBox(height: 16.0),
         _buildTabBar(context),
-        AnimatedChildView(
+        AnimatedTabView(
           index: _selectedIndex,
           children: widget.children,
           keepAlive: widget.keepAlive,

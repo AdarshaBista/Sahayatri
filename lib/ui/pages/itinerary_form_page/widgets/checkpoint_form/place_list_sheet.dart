@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/image_card.dart';
+import 'package:sahayatri/ui/widgets/image/image_card.dart';
 import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';

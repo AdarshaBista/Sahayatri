@@ -1,15 +1,14 @@
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/tracker_data.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 class TrackerDao {
   static const int _key = 0;
   final Future<Box<TrackerData>> _trackerDataBox;
 
   TrackerDao(String userId)
-      : _trackerDataBox = Hive.openBox('$userId/${HiveConfig.trackerDataBoxName}');
+      : _trackerDataBox = Hive.openBox('$userId/${HiveBoxNames.trackerData}');
 
   Future<TrackerData> get() async {
     final box = await _trackerDataBox;

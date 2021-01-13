@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';

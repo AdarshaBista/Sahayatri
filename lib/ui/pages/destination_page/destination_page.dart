@@ -11,9 +11,9 @@ import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cub
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/review/review_list.dart';
-import 'package:sahayatri/ui/widgets/common/photo_gallery.dart';
-import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/common/collapsible_view.dart';
+import 'package:sahayatri/ui/widgets/image/photo_gallery.dart';
+import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';

@@ -8,7 +8,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 
 class LocationService {
   final Location location = Location();

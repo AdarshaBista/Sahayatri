@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_card.dart';
 import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
-import 'package:sahayatri/ui/widgets/contact/contact_form.dart';
+import 'package:sahayatri/ui/widgets/tools/contact_form.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
 
 class ToolsList extends StatelessWidget {

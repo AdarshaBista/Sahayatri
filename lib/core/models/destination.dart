@@ -9,9 +9,8 @@ import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
-import 'package:sahayatri/core/extensions/coord_list_x.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/extensions/route_extension.dart';
 
 part 'destination.g.dart';
 

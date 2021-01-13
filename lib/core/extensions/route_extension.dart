@@ -2,10 +2,9 @@ import 'dart:math' as math;
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/utils/math_utls.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
-extension CoordListX on List<Coord> {
+extension RouteExtension on List<Coord> {
   double get minLat => map((c) => c.lat).reduce(math.min);
   double get maxLat => map((c) => c.lat).reduce(math.max);
   double get minLng => map((c) => c.lng).reduce(math.min);

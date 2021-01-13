@@ -11,9 +11,8 @@ import 'package:sahayatri/core/models/review_details.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
-
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/api_keys.dart';
+import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/constants/api_keys.dart';
 
 class ApiService {
   Future<String> updateUserAvatar(User user, String imagePath) async {

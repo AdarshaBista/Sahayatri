@@ -4,8 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 part 'review.g.dart';
 

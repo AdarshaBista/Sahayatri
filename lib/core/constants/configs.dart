@@ -3,12 +3,11 @@ class AppConfig {
   static const String packageName = 'com.adrsh.sahayatri';
   static const String fontFamily = 'Sen';
   static const String fontFamilySerif = 'RobotoSlab';
-  static const String smsMessagePrefix = 'I have safely reached';
 }
 
 class ApiConfig {
-  static const int maxTags = 10;
   static const int pageLimit = 10;
+  static const int maxTags = 10;
   static const int maxImages = 10;
   static const int maxTextLength = 500;
   static const String apiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
@@ -18,8 +17,6 @@ class ApiConfig {
 class UiConfig {
   static const double buttonHeight = 42.0;
   static const int animatorDuration = 500;
-  static const double trackerPanelHeight = 90.0;
-  static const double profileHeaderHeight = 290.0;
 }
 
 class ThemeStyles {

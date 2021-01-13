@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/checkpoint_lodges.dart';
+import 'package:sahayatri/ui/widgets/checkpoint/checkpoint_lodges.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/info_column.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/checkpoint_info.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/checkpoint_place.dart';

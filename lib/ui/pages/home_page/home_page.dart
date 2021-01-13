@@ -7,7 +7,7 @@ import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destin
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
-import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
+import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/profile_page.dart';
 import 'package:sahayatri/ui/pages/downloaded_page/downloaded_page.dart';
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           AppIcons.profile,
         ],
       ),
-      body: AnimatedChildView(
+      body: AnimatedTabView(
         keepAlive: true,
         index: _selectedIndex,
         children: const [

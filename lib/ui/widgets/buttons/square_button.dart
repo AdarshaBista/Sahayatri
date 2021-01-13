@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/vertical_button.dart';
 
 class SquareButton extends StatelessWidget {
   final String label;

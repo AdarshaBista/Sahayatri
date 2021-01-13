@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/user.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -24,7 +22,7 @@ class ProfileHeader extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       elevation: 8.0,
-      expandedHeight: UiConfig.profileHeaderHeight,
+      expandedHeight: 290.0,
       automaticallyImplyLeading: false,
       actions: const [
         Padding(

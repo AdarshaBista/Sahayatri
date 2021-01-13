@@ -20,7 +20,7 @@ class ItineraryHeader extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 4.0),
-          const DragIndicatorPill(),
+          DragIndicatorPill(color: AppColors.light.withOpacity(0.25)),
           const SizedBox(height: 4.0),
           Text(
             itinerary.name,

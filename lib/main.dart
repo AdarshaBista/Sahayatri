@@ -11,9 +11,8 @@ import 'package:sahayatri/locator.dart';
 import 'package:sahayatri/sahayatri.dart';
 
 import 'package:sahayatri/core/models/models.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/services/destinations_service.dart';
-
-import 'package:sahayatri/app/constants/configs.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
@@ -69,7 +68,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      // isToolbarVisible: false,
+      isToolbarVisible: false,
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
       storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),

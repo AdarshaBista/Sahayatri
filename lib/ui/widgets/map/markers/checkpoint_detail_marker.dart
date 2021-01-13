@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
-import 'package:sahayatri/ui/widgets/common/checkpoint_details.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/checkpoint/checkpoint_details.dart';
 import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 
 class CheckpointDetailMarker extends Marker {

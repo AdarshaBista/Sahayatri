@@ -11,12 +11,11 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
-import 'package:sahayatri/core/utils/geo_utils.dart';
-
 import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/core/utils/geo_utils.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 
 class TrackerService {
   /// Location updates from GPS.

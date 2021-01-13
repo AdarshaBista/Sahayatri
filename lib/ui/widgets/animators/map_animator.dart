@@ -1,4 +1,4 @@
-/// Credits: https://gist.github.com/avioli/a0b800d6a5ed053871ab4eec8f57c2da
+/// Modified from https://gist.github.com/avioli/a0b800d6a5ed053871ab4eec8f57c2da
 
 import 'package:flutter/material.dart';
 

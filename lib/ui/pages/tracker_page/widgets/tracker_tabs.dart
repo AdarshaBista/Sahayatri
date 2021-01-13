@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
-import 'package:sahayatri/ui/widgets/common/animated_child_view.dart';
-import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
+import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
 
@@ -23,7 +23,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
     return Column(
       children: [
         Expanded(
-          child: AnimatedChildView(
+          child: AnimatedTabView(
             keepAlive: true,
             index: _selectedIndex,
             children: const [

@@ -6,7 +6,7 @@ import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart'
 import 'package:sahayatri/core/utils/form_validators.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/widgets/forms/custom_text_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/duration_field.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/checkpoint_list.dart';
 

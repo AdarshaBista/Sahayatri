@@ -1,14 +1,13 @@
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 class DestinationDao {
   final Future<Box<Destination>> _destinationBox;
 
   DestinationDao(String userId)
-      : _destinationBox = Hive.openBox('$userId/${HiveConfig.destinationBoxName}');
+      : _destinationBox = Hive.openBox('$userId/${HiveBoxNames.destination}');
 
   Future<List<Destination>> getAll() async {
     final box = await _destinationBox;

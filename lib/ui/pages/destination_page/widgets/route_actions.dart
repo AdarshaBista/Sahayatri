@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';

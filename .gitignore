@@ -2,7 +2,7 @@
 temp/
 
 # Secrets
-lib/app/constants/api_keys.dart
+lib/core/constants/api_keys.dart
 
 # Miscellaneous
 *.class

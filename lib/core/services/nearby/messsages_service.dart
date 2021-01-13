@@ -11,8 +11,8 @@ import 'package:sahayatri/core/models/nearby_message.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/services/nearby/devices_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/notification_channels.dart';
+import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/constants/notification_channels.dart';
 
 class MessagesService {
   final DevicesService devicesService;

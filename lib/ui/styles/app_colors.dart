@@ -20,26 +20,29 @@ class AppColors {
   static const lightAccent = Color(0xFFE5E5F5);
   static final lightFaded = light.withOpacity(0.6);
 
-  static const accents = [
-    Color(0xFF7B1FA2),
-    Color(0xFF512DA8),
-    Color(0xFF303F9F),
-    Color(0xFF1976D2),
-    Color(0xFF0288D1),
-    Color(0xFF0097A7),
-    Color(0xFF00796B),
-    Color(0xFF388E3C),
-    Color(0xFF689F38),
-    Color(0xFFFBC02D),
-    Color(0xFFFFA000),
-    Color(0xFFF57C00),
-  ];
-
   static final cardGradient = [
     AppColors.dark.withOpacity(0.8),
     AppColors.dark.withOpacity(0.5),
     AppColors.dark.withOpacity(0.2),
     AppColors.dark.withOpacity(0.0),
+  ];
+
+  static const routeGradient = [
+    Color(0xFF7B1FA2),
+    Color(0xFF512DA8),
+    Color(0xFF303F9F),
+  ];
+
+  static const drawerGradient = [
+    Color(0xFF00796B),
+    Color(0xFF388E3C),
+  ];
+
+  static const userTrackGradient = [
+    Color(0xFF0097A7),
+    Color(0xFF00796B),
+    Color(0xFF388E3C),
+    Color(0xFF689F38),
   ];
 
   static List<Color> getCollapsibleHeaderGradient(Color color) {
@@ -54,8 +57,4 @@ class AppColors {
       color,
     ];
   }
-
-  static final routeGradient = accents.getRange(0, 4).toList();
-  static final drawerGradient = accents.getRange(6, 8).toList();
-  static final userTrackGradient = accents.getRange(5, 8).toList();
 }

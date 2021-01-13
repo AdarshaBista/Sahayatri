@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
-import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
+import 'package:sahayatri/ui/widgets/checkpoint/notify_contact_status.dart';
 
 class CheckpointInfo extends StatelessWidget {
   const CheckpointInfo();

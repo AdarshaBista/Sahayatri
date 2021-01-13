@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 
 import 'package:sahayatri/ui/styles/app_colors.dart';
 
-extension TextStyleX on TextStyle {
+extension TextStyleExtension on TextStyle {
   TextStyle get thin => copyWith(fontWeight: FontWeight.w200);
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
   TextStyle get primary => copyWith(color: AppColors.primary);
@@ -24,7 +24,7 @@ extension TextStyleX on TextStyle {
   TextStyle withSize(double size) => copyWith(fontSize: size);
 }
 
-extension ContextStyles on BuildContext {
+extension ContextStyleExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
   TextTheme get t => Theme.of(this).textTheme;
   ColorScheme get c => Theme.of(this).colorScheme;

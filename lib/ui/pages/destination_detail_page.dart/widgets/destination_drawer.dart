@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,8 +23,8 @@ class DestinationDrawer extends StatelessWidget {
       backgroundColor: AppColors.lightAccent,
       body: Stack(
         children: [
-          CustomPaint(
-            foregroundPainter: const _DrawerBackground(),
+          const CustomPaint(
+            foregroundPainter: _DrawerBackground(),
             child: GradientContainer(
               gradientColors: AppColors.drawerGradient,
             ),

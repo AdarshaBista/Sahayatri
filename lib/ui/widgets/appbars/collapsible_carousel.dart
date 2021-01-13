@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/carousel.dart';
+import 'package:sahayatri/ui/widgets/image/carousel.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 

@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 part 'user.g.dart';
 

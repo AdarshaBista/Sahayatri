@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/extensions/coord_list_x.dart';
-
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/api_keys.dart';
+import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/constants/api_keys.dart';
+import 'package:sahayatri/core/extensions/route_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/core/models/destination.dart';

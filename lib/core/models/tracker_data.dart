@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 part 'tracker_data.g.dart';
 

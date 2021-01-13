@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AnimatedChildView extends StatefulWidget {
+class AnimatedTabView extends StatefulWidget {
   final int index;
   final bool keepAlive;
   final List<Widget> children;
 
-  const AnimatedChildView({
+  const AnimatedTabView({
     @required this.index,
     @required this.children,
     this.keepAlive = false,
@@ -14,11 +14,10 @@ class AnimatedChildView extends StatefulWidget {
         assert(keepAlive != null);
 
   @override
-  _AnimatedChildViewState createState() => _AnimatedChildViewState();
+  _AnimatedTabViewState createState() => _AnimatedTabViewState();
 }
 
-class _AnimatedChildViewState extends State<AnimatedChildView>
-    with TickerProviderStateMixin {
+class _AnimatedTabViewState extends State<AnimatedTabView> with TickerProviderStateMixin {
   int index;
   AnimationController fadeController;
   AnimationController scaleController;
@@ -45,7 +44,7 @@ class _AnimatedChildViewState extends State<AnimatedChildView>
   }
 
   @override
-  void didUpdateWidget(AnimatedChildView oldWidget) {
+  void didUpdateWidget(AnimatedTabView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.index != index) {

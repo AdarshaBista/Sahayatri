@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/index.dart';
-
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-import 'package:sahayatri/app/constants/images.dart';
+import 'package:sahayatri/core/constants/routes.dart';
+import 'package:sahayatri/core/constants/images.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
@@ -18,7 +17,7 @@ import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 

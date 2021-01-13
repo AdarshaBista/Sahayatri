@@ -1,13 +1,12 @@
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/user.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 // TODO: Replace with secure storage
 class UserDao {
   static const int _userKey = 0;
-  final Future<Box<User>> _userBox = Hive.openBox(HiveConfig.userBoxName);
+  final Future<Box<User>> _userBox = Hive.openBox(HiveBoxNames.user);
 
   Future<User> get() async {
     final box = await _userBox;

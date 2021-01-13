@@ -1,10 +1,10 @@
-class HiveConfig {
-  static const String userBoxName = 'user_box';
-  static const String prefsBoxName = 'prefs_box';
-  static const String weatherBoxName = 'weather_box';
-  static const String itineraryBoxName = 'itinerary_box';
-  static const String destinationBoxName = 'destination_box';
-  static const String trackerDataBoxName = 'tracker_data_box';
+class HiveBoxNames {
+  static const String user = 'user_box';
+  static const String prefs = 'prefs_box';
+  static const String weather = 'weather_box';
+  static const String itinerary = 'itinerary_box';
+  static const String destination = 'destination_box';
+  static const String trackerData = 'tracker_data_box';
 }
 
 class HiveTypeIds {

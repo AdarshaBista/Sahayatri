@@ -6,7 +6,6 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab.dart';
 import 'package:sahayatri/ui/pages/weather_page/widgets/weather_detail.dart';
-import 'package:sahayatri/ui/pages/weather_page/widgets/curve_background.dart';
 
 class WeatherTabView extends StatefulWidget {
   final List<Weather> forecasts;
@@ -72,7 +71,7 @@ class _WeatherTabViewState extends State<WeatherTabView>
     return Expanded(
       flex: 2,
       child: CustomPaint(
-        painter: const CurveBackground(),
+        painter: const _CurveBackground(),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -98,5 +97,33 @@ class _WeatherTabViewState extends State<WeatherTabView>
         ),
       ),
     );
+  }
+}
+
+class _CurveBackground extends CustomPainter {
+  const _CurveBackground();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final double width = size.width;
+    final double height = size.height;
+
+    final paint = Paint()
+      ..color = AppColors.dark
+      ..style = PaintingStyle.fill;
+
+    final bottomCurve = Path()
+      ..moveTo(0.0, -32.0)
+      ..quadraticBezierTo(width * 0.25, -64.0, width * 0.5, -32.0)
+      ..quadraticBezierTo(width * 0.75, 0.0, width * 1.0, -32.0)
+      ..lineTo(width, height)
+      ..lineTo(0.0, height);
+
+    canvas.drawPath(bottomCurve, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

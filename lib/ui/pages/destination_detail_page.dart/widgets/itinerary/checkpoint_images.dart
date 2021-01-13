@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
 class CheckpointImages extends StatelessWidget {
   static const double height = 22.0;

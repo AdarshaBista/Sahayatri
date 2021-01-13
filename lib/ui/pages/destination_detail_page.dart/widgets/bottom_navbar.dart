@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
 
 class BottomNavbar extends StatelessWidget {
   final TabController tabController;

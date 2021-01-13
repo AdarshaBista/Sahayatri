@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
-class UserAvatarSmall extends StatelessWidget {
+class UserAvatarSquare extends StatelessWidget {
   final String username;
   final String imageUrl;
 
-  const UserAvatarSmall({
+  const UserAvatarSquare({
     @required this.username,
     @required this.imageUrl,
   }) : assert(username != null);

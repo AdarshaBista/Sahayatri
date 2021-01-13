@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/extensions/index.dart';
-
+import 'package:sahayatri/core/constants/routes.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

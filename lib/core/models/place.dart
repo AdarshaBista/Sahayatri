@@ -6,8 +6,7 @@ import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/core/utils/api_utils.dart';
-
-import 'package:sahayatri/app/constants/hive_config.dart';
+import 'package:sahayatri/core/constants/hive_config.dart';
 
 part 'place.g.dart';
 

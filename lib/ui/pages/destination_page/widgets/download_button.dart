@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/column_button.dart';
+import 'package:sahayatri/ui/widgets/buttons/vertical_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_dialog.dart';
 

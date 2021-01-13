@@ -12,8 +12,8 @@ import 'package:sahayatri/core/models/tracker_data.dart';
 import 'package:sahayatri/core/utils/geo_utils.dart';
 import 'package:sahayatri/core/services/notification_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-import 'package:sahayatri/app/constants/notification_channels.dart';
+import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/constants/notification_channels.dart';
 
 import 'package:sahayatri/app/database/prefs_dao.dart';
 import 'package:sahayatri/app/database/tracker_dao.dart';
@@ -62,7 +62,7 @@ class SmsService {
     _alert('$contact has been notified on your arrival at ${place.name}');
     final smsMessage = SmsMessage(
       contact,
-      '${AppConfig.smsMessagePrefix} ${place.name}',
+      'I have safely reached ${place.name}',
     );
 
     smsMessage.onStateChanged.listen((state) {

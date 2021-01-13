@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
 import 'package:sahayatri/core/utils/form_validators.dart';
 
@@ -10,7 +10,7 @@ import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/save_button.dart';
-import 'package:sahayatri/ui/widgets/form/custom_text_field.dart';
+import 'package:sahayatri/ui/widgets/forms/custom_text_field.dart';
 
 class DeviceNameField extends StatefulWidget {
   const DeviceNameField();

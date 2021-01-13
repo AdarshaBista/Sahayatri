@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/language.dart';
-
-import 'package:sahayatri/app/constants/languages.dart';
+import 'package:sahayatri/core/constants/languages.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';

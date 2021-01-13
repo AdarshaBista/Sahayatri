@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
 import 'package:sahayatri/core/models/destination_update.dart';
 
@@ -8,7 +8,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/user_avatar_small.dart';
+import 'package:sahayatri/ui/widgets/common/user_avatar_square.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/image_list.dart';
@@ -52,7 +52,7 @@ class UpdateCard extends StatelessWidget {
   Widget _buildUserInfo(BuildContext context) {
     return Row(
       children: [
-        UserAvatarSmall(
+        UserAvatarSquare(
           username: update.user.name,
           imageUrl: update.user.imageUrl,
         ),

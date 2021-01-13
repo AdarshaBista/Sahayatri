@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/extensions/index.dart';
-
 import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

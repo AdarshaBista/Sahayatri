@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/image_card.dart';
+import 'package:sahayatri/ui/widgets/image/image_card.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/notify_contact_status.dart';
+import 'package:sahayatri/ui/widgets/checkpoint/notify_contact_status.dart';
 
 class ItineraryPanel extends StatelessWidget {
   const ItineraryPanel();

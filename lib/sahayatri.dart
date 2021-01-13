@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
 import 'package:sahayatri/app/routers/root_router.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/splash_view.dart';
+import 'package:sahayatri/ui/widgets/views/splash_view.dart';
 
 import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/home_page/home_page.dart';

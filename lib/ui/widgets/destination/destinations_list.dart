@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:sahayatri/core/constants/images.dart';
 import 'package:sahayatri/core/models/destination.dart';
-
-import 'package:sahayatri/app/constants/images.dart';
 
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/widgets/destinations/destination_card.dart';
+import 'package:sahayatri/ui/widgets/destination/destination_card.dart';
 
 class DestinationsList extends StatelessWidget {
   final bool deletable;

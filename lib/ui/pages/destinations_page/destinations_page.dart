@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/images.dart';
+import 'package:sahayatri/core/constants/images.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
@@ -8,7 +8,7 @@ import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/widgets/destinations/destinations_list.dart';
+import 'package:sahayatri/ui/widgets/destination/destinations_list.dart';
 import 'package:sahayatri/ui/pages/destinations_page/widgets/destinations_header.dart';
 
 class DestinationsPage extends StatelessWidget {

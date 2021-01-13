@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
 
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/app/constants/routes.dart';
-
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
-import 'package:sahayatri/ui/widgets/common/adaptive_image.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
 

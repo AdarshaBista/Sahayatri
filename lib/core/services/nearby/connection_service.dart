@@ -6,7 +6,7 @@ import 'package:sahayatri/core/models/nearby_device.dart';
 import 'package:sahayatri/core/services/nearby/devices_service.dart';
 import 'package:sahayatri/core/services/nearby/messsages_service.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 
 class ConnectionService {
   final DevicesService devicesService;

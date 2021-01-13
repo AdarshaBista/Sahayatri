@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:sahayatri/ui/widgets/common/sliding_panel.dart';
 import 'package:sahayatri/ui/widgets/common/drag_indicator_pill.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
@@ -25,10 +23,10 @@ class _TrackerPanelState extends State<TrackerPanel> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SlidingPanel(
+        minHeight: 90.0,
         borderRadius: 16.0,
-        margin: EdgeInsets.all(margin),
-        minHeight: UiConfig.trackerPanelHeight,
         maxHeight: MediaQuery.of(context).size.height * 0.85,
+        margin: EdgeInsets.all(margin),
         body: const TrackerMap(),
         panel: _buildPanel(),
         onPanelSlide: (value) {

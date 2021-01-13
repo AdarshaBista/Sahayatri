@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/extensions/index.dart';
+import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
 import 'package:provider/provider.dart';
 

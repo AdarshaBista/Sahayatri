@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/tracker_update.dart';
 
-import 'package:sahayatri/app/constants/configs.dart';
-
 import 'package:provider/provider.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -17,7 +15,7 @@ class LocationStats extends StatelessWidget {
     final currentLocation = context.watch<TrackerUpdate>().currentLocation;
 
     return Container(
-      height: UiConfig.trackerPanelHeight - 32.0,
+      height: 60.0,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

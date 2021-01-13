@@ -4,8 +4,7 @@ import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
-
-import 'package:sahayatri/app/constants/routes.dart';
+import 'package:sahayatri/core/constants/routes.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
