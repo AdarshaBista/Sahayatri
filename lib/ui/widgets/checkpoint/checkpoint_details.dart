@@ -36,17 +36,17 @@ class CheckpointDetails extends StatelessWidget {
           const Divider(height: 12.0, indent: 20.0, endIndent: 20.0),
           const SizedBox(height: 4.0),
           _buildDescription(context),
-          const SizedBox(height: 16.0),
-          _CheckpointDateTime(checkpoint: checkpoint),
-          if (showLodges && checkpoint.place.lodges.isNotEmpty) ...[
-            const SizedBox(height: 16.0),
-            CheckpointLodges(lodges: checkpoint.place.lodges),
-          ],
           const SizedBox(height: 8.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: NotifyContactStatus(isNotified: checkpoint.notifyContact),
           ),
+          const SizedBox(height: 12.0),
+          _CheckpointDateTime(checkpoint: checkpoint),
+          if (showLodges && checkpoint.place.lodges.isNotEmpty) ...[
+            const SizedBox(height: 16.0),
+            CheckpointLodges(lodges: checkpoint.place.lodges),
+          ],
           const SizedBox(height: 8.0),
         ],
       ),

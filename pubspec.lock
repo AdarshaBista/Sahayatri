@@ -98,7 +98,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.12"
+    version: "1.10.13"
   build_runner_core:
     dependency: transitive
     description:
@@ -421,7 +421,7 @@ packages:
       name: flutter_tts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -461,7 +461,7 @@ packages:
       name: get_it
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.3"
+    version: "5.0.4"
   glob:
     dependency: transitive
     description:
@@ -1204,4 +1204,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.24.0-6.0.pre"
+  flutter: ">=1.24.0-6.0.pre <2.0.0"

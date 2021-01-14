@@ -84,6 +84,7 @@ class _CheckpointCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
+      radius: 12.0,
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.only(right: 16.0),
       child: Column(

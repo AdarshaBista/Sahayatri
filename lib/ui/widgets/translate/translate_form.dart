@@ -12,18 +12,16 @@ class TranslateForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: AnimatedPadding(
-        curve: Curves.decelerate,
-        padding: MediaQuery.of(context).viewInsets,
-        duration: const Duration(milliseconds: 200),
-        child: FadeAnimator(
-          child: SlideAnimator(
-            begin: const Offset(0.0, 1.0),
-            child: SizedBox(
-              child: _buildContent(context),
-              height: MediaQuery.of(context).size.height * 0.8,
-            ),
+    return AnimatedPadding(
+      curve: Curves.decelerate,
+      padding: MediaQuery.of(context).viewInsets,
+      duration: const Duration(milliseconds: 200),
+      child: FadeAnimator(
+        child: SlideAnimator(
+          begin: const Offset(0.0, 1.0),
+          child: SizedBox(
+            child: _buildContent(context),
+            height: MediaQuery.of(context).size.height * 0.8,
           ),
         ),
       ),
