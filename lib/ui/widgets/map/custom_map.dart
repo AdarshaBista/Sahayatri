@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -99,8 +97,16 @@ class _CustomMapState extends State<CustomMap> {
       body: Stack(
         children: [
           RepaintBoundary(child: _buildMap()),
-          const Positioned(top: 16.0, right: 16.0, child: SafeArea(child: ExitButton())),
-          const Positioned(top: 16.0, left: 16.0, child: SafeArea(child: MenuButton())),
+          const Positioned(
+            top: 16.0,
+            right: 16.0,
+            child: SafeArea(child: ExitButton()),
+          ),
+          const Positioned(
+            top: 16.0,
+            left: 16.0,
+            child: SafeArea(child: MenuButton()),
+          ),
         ],
       ),
     );
@@ -117,6 +123,7 @@ class _CustomMapState extends State<CustomMap> {
           ...widget.children,
         ],
         options: MapOptions(
+          interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
           zoom: widget.initialZoom,
           minZoom: widget.minZoom,
           maxZoom: widget.maxZoom,
@@ -153,17 +160,18 @@ class _TileLayer extends StatelessWidget {
 
         return TileLayerWidget(
           options: TileLayerOptions(
-            backgroundColor: AppColors.light,
-            tileProvider: Platform.isWindows
-                ? NetworkTileProvider()
-                : const CachedNetworkTileProvider(),
+            backgroundColor: context.c.background,
             keepBuffer: 8,
             tileSize: 512,
             zoomOffset: -1,
             tileFadeInDuration: 300,
             overrideTilesWhenUrlChanges: true,
             urlTemplate:
-                'https://api.mapbox.com/styles/v1/$layerId/tiles/{z}/{x}/{y}@2x?access_token=${ConfigReader.mapBoxAccessToken}',
+                'https://api.mapbox.com/styles/v1/{layerId}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
+            additionalOptions: {
+              'layerId': layerId,
+              'accessToken': ConfigReader.mapBoxAccessToken,
+            },
           ),
         );
       },
@@ -195,8 +203,10 @@ class _RouteLayer extends StatelessWidget {
                 Polyline(
                   strokeWidth: 4.0,
                   gradientColors: AppColors.routeGradient,
-                  points:
-                      destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
+                  points: destination.route
+                      .simplify(zoom)
+                      .map((c) => c.toLatLng())
+                      .toList(),
                 ),
               ],
             ),

@@ -33,7 +33,8 @@ class TrackerMap extends StatefulWidget {
   _TrackerMapState createState() => _TrackerMapState();
 }
 
-class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateMixin {
+class _TrackerMapState extends State<TrackerMap>
+    with SingleTickerProviderStateMixin {
   double zoom;
   bool isTracking = true;
   bool shouldSimplifyRoute = false;
@@ -44,7 +45,8 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
   void initState() {
     zoom = 18.0;
     mapController = MapController();
-    mapAnimator = MapAnimator(mapController: mapController, tickerProvider: this);
+    mapAnimator =
+        MapAnimator(mapController: mapController, tickerProvider: this);
     super.initState();
   }
 
@@ -245,7 +247,8 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
         }
 
         if (checkpointsEnabled) {
-          final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
+          final itinerary =
+              BlocProvider.of<UserItineraryCubit>(context).userItinerary;
           markers.addAll(itinerary.checkpoints.map(
             (c) {
               if (zoom < MapConfig.markerZoomThreshold) {
@@ -256,7 +259,8 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
           ));
 
           if (placesEnabled) {
-            final checkpointPlaces = itinerary.checkpoints.map((c) => c.place).toList();
+            final checkpointPlaces =
+                itinerary.checkpoints.map((c) => c.place).toList();
             places.removeWhere((p) => checkpointPlaces.contains(p));
           }
         }
