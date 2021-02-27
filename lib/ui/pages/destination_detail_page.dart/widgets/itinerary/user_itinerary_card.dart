@@ -39,14 +39,24 @@ class UserItineraryCard extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context) {
-    return CustomButton(
-      icon: AppIcons.create,
-      color: context.c.primaryVariant,
-      backgroundColor: AppColors.primaryLight,
-      label: 'Create',
-      onTap: () => locator<DestinationNavService>().pushNamed(
-        Routes.itineraryFormPageRoute,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Create an itinerary to enable live tracking.',
+          style: context.t.headline6,
+        ),
+        const SizedBox(height: 8.0),
+        CustomButton(
+          icon: AppIcons.create,
+          color: context.c.primaryVariant,
+          backgroundColor: AppColors.primaryLight,
+          label: 'Create',
+          onTap: () => locator<DestinationNavService>().pushNamed(
+            Routes.itineraryFormPageRoute,
+          ),
+        ),
+      ],
     );
   }
 }
