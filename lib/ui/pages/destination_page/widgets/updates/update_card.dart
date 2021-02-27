@@ -11,7 +11,7 @@ import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_square.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/image_list.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/images_grid.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 
 class UpdateCard extends StatelessWidget {
@@ -40,7 +40,7 @@ class UpdateCard extends StatelessWidget {
               _buildText(context),
               if (update.imageUrls.isNotEmpty) ...[
                 const SizedBox(height: 10.0),
-                ImageList(imageUrls: update.imageUrls),
+                ImagesGrid(imageUrls: update.imageUrls),
               ],
             ],
           ),

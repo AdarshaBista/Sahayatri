@@ -15,22 +15,22 @@ dependencies:
   # Utils
   dio: ^3.0.10
   image: ^2.1.19
-  timeago: ^2.0.29
+  timeago: ^2.0.30
   url_launcher: ^5.7.10
   path_provider: ^1.6.27
   image_picker: ^0.6.7+22
-  intl: ^0.17.0-nullsafety.2
+  intl: ^0.17.0
   device_preview: ^0.6.2-beta
   form_field_validator: ^1.0.1
 
   # Alert
   sms_maintained: ^0.2.5
-  flutter_local_notifications: ^4.0.0
+  flutter_local_notifications: ^4.0.1+1
 
   # State Management
   get_it: ^5.0.6
-  equatable: ^1.2.5
-  flutter_bloc: ^6.1.1
+  equatable: ^1.2.6
+  flutter_bloc: ^6.1.2
 
   # Database
   hive: ^1.4.4+1
@@ -49,7 +49,7 @@ dependencies:
 
   # Widgets
   animator: ^2.0.2
-  fl_chart: ^0.12.2
+  fl_chart: ^0.12.3
   flushbar: ^1.10.4
   photo_view: ^0.10.3
   timeline_tile: ^1.0.0
@@ -60,16 +60,16 @@ dependencies:
   flutter_zoom_drawer: ^1.0.4+1
   community_material_icon: ^5.8.55
   sleek_circular_slider: ^1.2.0+web
-  flutter_staggered_grid_view: ^0.3.3
+  flutter_staggered_grid_view: ^0.3.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   lint: ^1.5.1
-  build_runner: ^1.11.0
+  build_runner: ^1.11.1
   hive_generator: ^0.8.2
-  flutter_native_splash: ^0.2.9
+  flutter_native_splash: ^0.3.0
   flutter_launcher_icons: ^0.8.1
 
 flutter_icons:
