@@ -16,11 +16,7 @@ import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class ContactForm extends StatefulWidget {
-  final bool isOnSettings;
-
-  const ContactForm({
-    @required this.isOnSettings,
-  }) : assert(isOnSettings != null);
+  const ContactForm();
 
   @override
   _ContactFormState createState() => _ContactFormState();
@@ -33,42 +29,37 @@ class _ContactFormState extends State<ContactForm> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      curve: Curves.decelerate,
-      padding: MediaQuery.of(context).viewInsets,
-      duration: const Duration(milliseconds: 200),
-      child: FadeAnimator(
-        child: SlideAnimator(
-          begin: Offset(0.0, widget.isOnSettings ? 1.0 : 0.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Header(
-                  title: 'Assign a contact',
-                  fontSize: 20.0,
-                ),
-                const SizedBox(height: 6.0),
-                Text(
-                  'A message will be automatically sent to this number once you reach a checkpoint.',
-                  style: context.t.headline6,
-                ),
-                const SizedBox(height: 12.0),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(child: _buildTextField()),
-                    const SizedBox(width: 8.0),
-                    _buildSubmitButton(context),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                _buildPreviewText(),
-                const SizedBox(height: 8.0),
-              ],
-            ),
+    return FadeAnimator(
+      child: SlideAnimator(
+        begin: const Offset(0.0, 1.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Header(
+                title: 'Assign a contact',
+                fontSize: 20.0,
+              ),
+              const SizedBox(height: 6.0),
+              Text(
+                'A message will be automatically sent to this number once you reach a checkpoint.',
+                style: context.t.headline6,
+              ),
+              const SizedBox(height: 12.0),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(child: _buildTextField()),
+                  const SizedBox(width: 8.0),
+                  _buildSubmitButton(context),
+                ],
+              ),
+              const SizedBox(height: 16.0),
+              _buildPreviewText(),
+              const SizedBox(height: 8.0),
+            ],
           ),
         ),
       ),
@@ -100,8 +91,9 @@ class _ContactFormState extends State<ContactForm> {
         if (!_formKey.currentState.validate()) return;
         context.read<PrefsCubit>().saveContact(contact);
 
-        if (widget.isOnSettings) Navigator.of(context).pop();
-        context.openFlushBar('Contact saved: $contact', type: FlushbarType.success);
+        Navigator.of(context).pop();
+        context.openFlushBar('Contact saved: $contact',
+            type: FlushbarType.success);
       },
     );
   }

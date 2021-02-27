@@ -26,34 +26,29 @@ class UpdateForm extends StatelessWidget {
         destination: context.read<Destination>(),
         destinationUpdateCubit: context.read<DestinationUpdateCubit>(),
       ),
-      child: AnimatedPadding(
-        curve: Curves.decelerate,
-        padding: MediaQuery.of(context).viewInsets,
-        duration: const Duration(milliseconds: 200),
-        child: Builder(
-          builder: (context) => WillPopScope(
-            onWillPop: () => _handleBackButton(context),
-            child: Form(
-              key: formKey,
-              child: ListView(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(20.0),
-                children: [
-                  _buildHeader(context),
-                  const TagsField(),
-                  const SizedBox(height: 16.0),
-                  const ImagesField(),
-                  const SizedBox(height: 12.0),
-                  const LocationField(),
-                  const SizedBox(height: 12.0),
-                  const UpdateField(),
-                  const SizedBox(height: 4.0),
-                  _buildMessage(),
-                  const SizedBox(height: 4.0),
-                  _buildSubmitButton(),
-                ],
-              ),
+      child: Builder(
+        builder: (context) => WillPopScope(
+          onWillPop: () => _handleBackButton(context),
+          child: Form(
+            key: formKey,
+            child: ListView(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.all(20.0),
+              children: [
+                _buildHeader(context),
+                const TagsField(),
+                const SizedBox(height: 16.0),
+                const ImagesField(),
+                const SizedBox(height: 12.0),
+                const LocationField(),
+                const SizedBox(height: 12.0),
+                const UpdateField(),
+                const SizedBox(height: 4.0),
+                _buildMessage(),
+                const SizedBox(height: 4.0),
+                _buildSubmitButton(),
+              ],
             ),
           ),
         ),
@@ -99,7 +94,8 @@ class UpdateForm extends StatelessWidget {
             if (state.isLoading) return;
             if (!formKey.currentState.validate()) return;
 
-            final success = await context.read<DestinationUpdateFormCubit>().postUpdate();
+            final success =
+                await context.read<DestinationUpdateFormCubit>().postUpdate();
             if (success) Navigator.of(context).pop();
           },
         );

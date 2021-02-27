@@ -8,21 +8,20 @@ import 'package:sahayatri/ui/widgets/translate/language_selector.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_text_field.dart';
 
 class TranslateForm extends StatelessWidget {
-  const TranslateForm();
+  final bool resizeToAvoidBottomInset;
+
+  const TranslateForm({
+    this.resizeToAvoidBottomInset = false,
+  }) : assert(resizeToAvoidBottomInset != null);
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      curve: Curves.decelerate,
-      padding: MediaQuery.of(context).viewInsets,
-      duration: const Duration(milliseconds: 200),
-      child: FadeAnimator(
-        child: SlideAnimator(
-          begin: const Offset(0.0, 1.0),
-          child: SizedBox(
-            child: _buildContent(context),
-            height: MediaQuery.of(context).size.height * 0.8,
-          ),
+    return FadeAnimator(
+      child: SlideAnimator(
+        begin: const Offset(0.0, 1.0),
+        child: SizedBox(
+          child: _buildContent(context),
+          height: MediaQuery.of(context).size.height * 0.8,
         ),
       ),
     );
@@ -41,10 +40,15 @@ class TranslateForm extends StatelessWidget {
         Expanded(
           child: Stack(
             alignment: Alignment.bottomCenter,
-            children: const [
-              TranslationList(),
-              TranslateTextField(),
-              Align(alignment: Alignment.topCenter, child: LanguageSelector()),
+            children: [
+              const TranslationList(),
+              TranslateTextField(
+                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+              ),
+              const Align(
+                alignment: Alignment.topCenter,
+                child: LanguageSelector(),
+              ),
             ],
           ),
         ),

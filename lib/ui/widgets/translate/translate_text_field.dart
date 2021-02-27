@@ -11,7 +11,11 @@ import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class TranslateTextField extends StatefulWidget {
-  const TranslateTextField();
+  final bool resizeToAvoidBottomInset;
+
+  const TranslateTextField({
+    @required this.resizeToAvoidBottomInset,
+  }) : assert(resizeToAvoidBottomInset != null);
 
   @override
   _TranslateTextFieldState createState() => _TranslateTextFieldState();
@@ -22,6 +26,17 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.resizeToAvoidBottomInset) return _buildCard();
+
+    return AnimatedPadding(
+      curve: Curves.decelerate,
+      padding: MediaQuery.of(context).viewInsets,
+      duration: const Duration(milliseconds: 100),
+      child: _buildCard(),
+    );
+  }
+
+  Widget _buildCard() {
     return SlideAnimator(
       begin: const Offset(0.0, 2.0),
       child: ElevatedCard(

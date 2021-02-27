@@ -28,7 +28,7 @@ class _TrackerTabsState extends State<TrackerTabs> {
             index: _selectedIndex,
             children: const [
               ProgressTab(),
-              TranslateForm(),
+              TranslateForm(resizeToAvoidBottomInset: true),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: NearbyForm(),

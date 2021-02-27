@@ -33,32 +33,27 @@ class _ReviewFormState extends State<ReviewForm> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => _handleBackButton(context),
-      child: AnimatedPadding(
-        curve: Curves.decelerate,
-        padding: MediaQuery.of(context).viewInsets,
-        duration: const Duration(milliseconds: 200),
-        child: Form(
-          key: formKey,
-          child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(20.0),
-            children: [
-              SheetHeader(
-                title: 'Write a review',
-                onClose: () async {
-                  if (await _handleBackButton(context)) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              ),
-              _buildRatingField(),
-              const SizedBox(height: 16.0),
-              _buildTextField(),
-              const SizedBox(height: 16.0),
-              _buildSubmitButton(context),
-            ],
-          ),
+      child: Form(
+        key: formKey,
+        child: ListView(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(20.0),
+          children: [
+            SheetHeader(
+              title: 'Write a review',
+              onClose: () async {
+                if (await _handleBackButton(context)) {
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            _buildRatingField(),
+            const SizedBox(height: 16.0),
+            _buildTextField(),
+            const SizedBox(height: 16.0),
+            _buildSubmitButton(context),
+          ],
         ),
       ),
     );

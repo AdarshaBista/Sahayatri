@@ -22,15 +22,10 @@ class NearbyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      curve: Curves.decelerate,
-      padding: MediaQuery.of(context).viewInsets,
-      duration: const Duration(milliseconds: 200),
-      child: FadeAnimator(
-        child: SlideAnimator(
-          begin: const Offset(0.0, 1.0),
-          child: _buildList(context),
-        ),
+    return FadeAnimator(
+      child: SlideAnimator(
+        begin: const Offset(0.0, 1.0),
+        child: _buildList(context),
       ),
     );
   }
