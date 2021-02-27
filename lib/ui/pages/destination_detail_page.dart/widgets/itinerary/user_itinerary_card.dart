@@ -43,7 +43,7 @@ class UserItineraryCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Create an itinerary to enable live tracking.',
+          'Create an itinerary to enable location tracking.',
           style: context.t.headline6,
         ),
         const SizedBox(height: 8.0),

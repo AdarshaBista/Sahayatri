@@ -80,24 +80,30 @@ class ImagesGrid extends StatelessWidget {
   }
 
   Widget _buildRemaining(int remaining, int index) {
-    return ElevatedCard(
-      child: GestureDetector(
-        onTap: () => _navigateToPhotoViewPage(index),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: ImageUtils.getImageProvider(imageUrls[index]),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                AppColors.darkFaded,
-                BlendMode.srcATop,
+    return Hero(
+      tag: imageUrls[index],
+      child: ElevatedCard(
+        child: GestureDetector(
+          onTap: () => _navigateToPhotoViewPage(index),
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: ImageUtils.getImageProvider(imageUrls[index]),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  AppColors.darkFaded,
+                  BlendMode.srcATop,
+                ),
               ),
             ),
-          ),
-          child: Text(
-            '+$remaining',
-            style: AppTextStyles.headline1.light.thin,
+            child: Material(
+              color: Colors.transparent,
+              child: Text(
+                '+$remaining',
+                style: AppTextStyles.headline1.light.thin,
+              ),
+            ),
           ),
         ),
       ),
