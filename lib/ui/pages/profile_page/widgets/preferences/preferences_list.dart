@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/theme_toggle.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/gps_accuracy_toggle.dart';
 
 class PreferencesList extends StatelessWidget {
   const PreferencesList();
@@ -13,6 +14,8 @@ class PreferencesList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: const [
           ThemeToggle(),
+          SizedBox(height: 16.0),
+          GpsAccuracyToggle(),
         ],
       ),
     );

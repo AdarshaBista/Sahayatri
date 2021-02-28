@@ -25,7 +25,7 @@ import 'package:sahayatri/core/services/weather_service.dart';
 
 GetIt locator = GetIt.instance;
 
-void registerGlobalServices() {
+Future<void> registerGlobalServices() async {
   locator
     // Daos
     ..registerLazySingleton<UserDao>(() => UserDao())
@@ -39,10 +39,13 @@ void registerGlobalServices() {
     ..registerLazySingleton<LocationService>(() => LocationService())
     ..registerLazySingleton<DirectionsService>(() => DirectionsService())
     ..registerLazySingleton<DestinationsService>(() => DestinationsService())
-    ..registerLazySingleton<DestinationNavService>(() => DestinationNavService());
+    ..registerLazySingleton<DestinationNavService>(
+        () => DestinationNavService());
+
+  await locator.allReady();
 }
 
-void registerUserDependentServices(String userId) {
+Future<void> registerUserDependentServices(String userId) async {
   locator
     // Daos
     ..registerLazySingleton<PrefsDao>(() => PrefsDao(userId))
@@ -59,9 +62,11 @@ void registerUserDependentServices(String userId) {
     ..registerLazySingleton<StopwatchService>(() => StopwatchService())
     ..registerLazySingleton<NotificationService>(() => NotificationService())
     ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService());
+
+  await locator.allReady();
 }
 
-void unregisterUserDependentServices() {
+Future<void> unregisterUserDependentServices() async {
   locator
     // Daos
     ..unregister<PrefsDao>()
@@ -75,7 +80,15 @@ void unregisterUserDependentServices() {
     ..unregister<StopwatchService>()
     ..unregister<NotificationService>()
     ..unregister<OffRouteAlertService>()
-    ..unregister<SmsService>(disposingFunction: (service) => service.stop())
-    ..unregister<NearbyService>(disposingFunction: (service) async => service.stop())
-    ..unregister<TrackerService>(disposingFunction: (service) async => service.stop());
+    ..unregister<SmsService>(
+      disposingFunction: (service) => service.stop(),
+    )
+    ..unregister<NearbyService>(
+      disposingFunction: (service) async => service.stop(),
+    )
+    ..unregister<TrackerService>(
+      disposingFunction: (service) async => service.stop(),
+    );
+
+  await locator.allReady();
 }

@@ -114,6 +114,11 @@ class AppIcons {
   static const shower = Icons.bathtub_outlined;
   static const toilet = CommunityMaterialIcons.toilet;
 
+  // GPS Accuracy
+  static const accuracyBalanced = Icons.pin_drop_outlined;
+  static const accuracyHigh = Icons.location_history_outlined;
+  static const accuracyLow = Icons.location_searching_outlined;
+
   // Map
   static const layers = Icons.layers_outlined;
   static const map = Icons.map_outlined;

@@ -29,7 +29,7 @@ Future<void> main() async {
 
   await initHive();
   await ConfigReader.initialize();
-  registerGlobalServices();
+  await registerGlobalServices();
   runApp(const App());
 }
 
@@ -72,7 +72,8 @@ class App extends StatelessWidget {
     return DevicePreview(
       enabled: Platform.isWindows,
       plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
-      storage: FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
+      storage:
+          FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
       builder: (_) => MultiBlocProvider(
         child: const Sahayatri(),
         providers: [
@@ -96,20 +97,22 @@ class App extends StatelessWidget {
       Directory(userDirectoryPath).createSync();
     });
 
-    registerUserDependentServices(user.id);
-    final prefsCubit = BlocProvider.of<PrefsCubit>(context);
-    prefsCubit.init().then((_) {
-      final prefs = prefsCubit.prefs;
-      BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
+    registerUserDependentServices(user.id).then((_) {
+      final prefsCubit = BlocProvider.of<PrefsCubit>(context);
+      prefsCubit.init().then((_) {
+        final prefs = prefsCubit.prefs;
+        BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
+      });
     });
   }
 
   void onLogout(BuildContext context) {
-    unregisterUserDependentServices();
-    locator<DestinationsService>().clearDownloaded();
+    unregisterUserDependentServices().then((_) {
+      locator<DestinationsService>().clearDownloaded();
 
-    context.read<PrefsCubit>().reset();
-    context.read<ThemeCubit>().changeTheme(ThemeMode.system);
+      context.read<PrefsCubit>().reset();
+      context.read<ThemeCubit>().changeTheme(ThemeMode.system);
+    });
   }
 
   Future<String> _saveScreenshot(DeviceScreenshot ss) async {

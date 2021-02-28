@@ -53,6 +53,11 @@ class PrefsCubit extends Cubit<PrefsState> {
     _update(newPrefs);
   }
 
+  void saveGpsAccuracy(String gpsAccuracy) {
+    final newPrefs = state.prefs.copyWith(gpsAccuracy: gpsAccuracy);
+    _update(newPrefs);
+  }
+
   void _update(Prefs newPrefs) {
     emit(PrefsState(prefs: newPrefs));
     prefsDao?.upsert(newPrefs);

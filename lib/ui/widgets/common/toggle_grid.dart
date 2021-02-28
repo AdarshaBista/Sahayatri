@@ -51,7 +51,7 @@ class _ToggleGridState<T> extends State<ToggleGrid<T>> {
           padding: EdgeInsets.only(left: widget.titlePadding),
           child: Text(
             widget.title,
-            style: widget.titleStyle ?? context.t.headline4.bold,
+            style: widget.titleStyle ?? context.t.headline5.bold,
           ),
         ),
         const SizedBox(height: 10.0),

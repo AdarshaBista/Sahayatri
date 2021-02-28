@@ -23,23 +23,29 @@ class Prefs {
   @HiveField(4)
   final MapLayers mapLayers;
 
+  @HiveField(5)
+  final String gpsAccuracy;
+
   const Prefs({
     this.contact = '',
     this.deviceName = '',
     this.theme = ThemeStyles.system,
     this.mapStyle = MapStyles.outdoors,
     this.mapLayers = const MapLayers(),
+    this.gpsAccuracy = GpsAccuracy.high,
   })  : assert(theme != null),
         assert(contact != null),
         assert(mapStyle != null),
         assert(mapLayers != null),
-        assert(deviceName != null);
+        assert(deviceName != null),
+        assert(gpsAccuracy != null);
 
   Prefs copyWith({
     String theme,
     String contact,
     String mapStyle,
     String deviceName,
+    String gpsAccuracy,
     MapLayers mapLayers,
   }) {
     return Prefs(
@@ -48,12 +54,13 @@ class Prefs {
       mapStyle: mapStyle ?? this.mapStyle,
       mapLayers: mapLayers ?? this.mapLayers,
       deviceName: deviceName ?? this.deviceName,
+      gpsAccuracy: gpsAccuracy ?? this.gpsAccuracy,
     );
   }
 
   @override
   String toString() {
-    return 'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName, theme: $theme, mapLayers: $mapLayers)';
+    return 'Prefs(contact: $contact, mapStyle: $mapStyle, deviceName: $deviceName, theme: $theme, mapLayers: $mapLayers, gpsAccuracy: $gpsAccuracy)';
   }
 
   @override
@@ -65,7 +72,8 @@ class Prefs {
         o.mapStyle == mapStyle &&
         o.deviceName == deviceName &&
         o.theme == theme &&
-        o.mapLayers == mapLayers;
+        o.mapLayers == mapLayers &&
+        o.gpsAccuracy == gpsAccuracy;
   }
 
   @override
@@ -74,6 +82,7 @@ class Prefs {
         mapStyle.hashCode ^
         deviceName.hashCode ^
         theme.hashCode ^
-        mapLayers.hashCode;
+        mapLayers.hashCode ^
+        gpsAccuracy.hashCode;
   }
 }

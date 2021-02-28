@@ -22,6 +22,17 @@ class LocationService {
     );
   }
 
+  /// Sets accuracy of location data.
+  Future<void> setLocationAccuracy(String accuracy) async {
+    const accuracyMap = {
+      GpsAccuracy.low: LocationAccuracy.powerSave,
+      GpsAccuracy.balanced: LocationAccuracy.balanced,
+      GpsAccuracy.high: LocationAccuracy.high,
+    };
+
+    await location.changeSettings(accuracy: accuracyMap[accuracy]);
+  }
+
   /// Check if user has granted permission to use location.
   Future<bool> _checkPermission() async {
     PermissionStatus permissionStatus;

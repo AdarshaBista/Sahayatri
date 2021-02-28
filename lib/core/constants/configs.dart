@@ -11,7 +11,8 @@ class ApiConfig {
   static const int maxImages = 10;
   static const int maxTextLength = 500;
   static const String apiBaseUrl = 'https://sahayatriapi.herokuapp.com/api/v1';
-  static const String weatherApiBaseUrl = 'https://api.openweathermap.org/data/2.5';
+  static const String weatherApiBaseUrl =
+      'https://api.openweathermap.org/data/2.5';
 }
 
 class UiConfig {
@@ -23,6 +24,12 @@ class ThemeStyles {
   static const String dark = 'dark';
   static const String light = 'light';
   static const String system = 'system';
+}
+
+class GpsAccuracy {
+  static const String low = 'low';
+  static const String high = 'high';
+  static const String balanced = 'balanced';
 }
 
 class LocationConfig {

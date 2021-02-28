@@ -22,13 +22,14 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
       theme: fields[3] as String,
       mapStyle: fields[1] as String,
       mapLayers: fields[4] as MapLayers,
+      gpsAccuracy: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Prefs obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.contact)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class PrefsAdapter extends TypeAdapter<Prefs> {
       ..writeByte(3)
       ..write(obj.theme)
       ..writeByte(4)
-      ..write(obj.mapLayers);
+      ..write(obj.mapLayers)
+      ..writeByte(5)
+      ..write(obj.gpsAccuracy);
   }
 
   @override
