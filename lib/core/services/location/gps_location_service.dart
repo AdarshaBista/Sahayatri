@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:location/location.dart';
 
@@ -9,11 +7,12 @@ import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/user_location.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/services/location/location_service.dart';
 
-class LocationService {
+class GpsLocationService implements LocationService {
   final Location location = Location();
 
-  LocationService() {
+  GpsLocationService() {
     if (Platform.isWindows) return;
 
     location.changeSettings(
@@ -23,6 +22,7 @@ class LocationService {
   }
 
   /// Sets accuracy of location data.
+  @override
   Future<void> setLocationAccuracy(String accuracy) async {
     const accuracyMap = {
       GpsAccuracy.low: LocationAccuracy.powerSave,
@@ -44,7 +44,8 @@ class LocationService {
   }
 
   /// Get the stream of location as [UserLocation].
-  Stream<UserLocation> getLocationStream() {
+  @override
+  Stream<UserLocation> getLocationStream(List<Coord> route) {
     _checkPermission().then((hasPermission) {
       if (!hasPermission) {
         throw const AppError(message: 'Location permission denied.');
@@ -58,7 +59,8 @@ class LocationService {
   }
 
   /// One time location query.
-  Future<UserLocation> getLocation() async {
+  @override
+  Future<UserLocation> getLocation(Coord fakeStartingPoint) async {
     if (Platform.isWindows) {
       throw const AppError(message: 'Platform not supported.');
     }
@@ -74,39 +76,5 @@ class LocationService {
       print(e.toString());
       throw const AppError(message: 'Could not get your location.');
     }
-  }
-
-  Future<UserLocation> getMockLocation(Coord fakeStartingPoint) async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    return UserLocation(
-      coord: fakeStartingPoint,
-      accuracy: 15.0,
-      altitude: 2000.0,
-      speed: 1.0,
-      bearing: 0.0,
-      timestamp: DateTime.now(),
-    );
-  }
-
-  Stream<UserLocation> getMockLocationStream(List<Coord> route) {
-    final period = Random().nextInt(1000) + 500;
-    double _randomOffset(double start, double end) {
-      return Random().nextDouble() * (end - start) + start;
-    }
-
-    return Stream<UserLocation>.periodic(
-      Duration(milliseconds: period),
-      (index) => UserLocation(
-        timestamp: DateTime.now(),
-        altitude: route[index].alt,
-        bearing: _randomOffset(0.0, 360.0),
-        speed: 1.5 + _randomOffset(-1.0, 1.0),
-        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
-        coord: Coord(
-          lat: route[index].lat,
-          lng: route[index].lng + _randomOffset(-0.00005, 0.00005),
-        ),
-      ),
-    ).take(route.length).asBroadcastStream();
   }
 }

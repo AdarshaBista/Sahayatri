@@ -5,11 +5,9 @@ import 'package:sahayatri/locator.dart';
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
@@ -37,10 +35,6 @@ class TrackerFab extends StatelessWidget {
       onTap: () {
         final destination = context.read<Destination>();
         context.read<TrackerCubit>().attemptTracking(destination, itinerary);
-
-        final gpsAccuracy = context.read<PrefsCubit>().prefs.gpsAccuracy;
-        locator<LocationService>().setLocationAccuracy(gpsAccuracy);
-
         locator<DestinationNavService>().pushNamed(Routes.trackerPageRoute);
       },
     );

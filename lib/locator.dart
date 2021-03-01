@@ -4,7 +4,6 @@ import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/tts_service.dart';
 import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
-import 'package:sahayatri/core/services/location_service.dart';
 import 'package:sahayatri/core/services/translate_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
@@ -14,6 +13,7 @@ import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
+import 'package:sahayatri/core/services/location/location_service.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
 import 'package:sahayatri/app/database/prefs_dao.dart';
@@ -36,7 +36,6 @@ Future<void> registerGlobalServices() async {
     ..registerLazySingleton<AuthService>(() => AuthService())
     ..registerLazySingleton<RootNavService>(() => RootNavService())
     ..registerLazySingleton<WeatherService>(() => WeatherService())
-    ..registerLazySingleton<LocationService>(() => LocationService())
     ..registerLazySingleton<DirectionsService>(() => DirectionsService())
     ..registerLazySingleton<DestinationsService>(() => DestinationsService())
     ..registerLazySingleton<DestinationNavService>(
@@ -61,7 +60,12 @@ Future<void> registerUserDependentServices(String userId) async {
     ..registerLazySingleton<TranslateService>(() => TranslateService())
     ..registerLazySingleton<StopwatchService>(() => StopwatchService())
     ..registerLazySingleton<NotificationService>(() => NotificationService())
-    ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService());
+    ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService())
+    ..registerLazySingleton<LocationService>(() => GpsLocationService())
+    ..registerLazySingleton<LocationService>(
+      () => MockLocationService(),
+      instanceName: 'mock',
+    );
 
   await locator.allReady();
 }
@@ -76,6 +80,8 @@ Future<void> unregisterUserDependentServices() async {
 
     // Services
     ..unregister<TtsService>()
+    ..unregister<LocationService>()
+    ..unregister<LocationService>(instanceName: 'mock')
     ..unregister<TranslateService>()
     ..unregister<StopwatchService>()
     ..unregister<NotificationService>()

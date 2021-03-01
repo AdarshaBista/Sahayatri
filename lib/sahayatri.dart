@@ -4,6 +4,7 @@ import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
+import 'package:sahayatri/core/services/location/location_service.dart';
 
 import 'package:sahayatri/app/routers/root_router.dart';
 
@@ -57,7 +58,15 @@ class Sahayatri extends StatelessWidget {
   }
 
   Widget _buildPrefsState(BuildContext context) {
-    return BlocBuilder<PrefsCubit, PrefsState>(
+    return BlocConsumer<PrefsCubit, PrefsState>(
+      listener: (context, state) {
+        if (!state.isLoading) {
+          final gpsAccuracy = state.prefs.gpsAccuracy;
+          locator<LocationService>().setLocationAccuracy(gpsAccuracy);
+          locator<LocationService>(instanceName: 'mock')
+              .setLocationAccuracy(gpsAccuracy);
+        }
+      },
       builder: (context, state) {
         if (state.isLoading) {
           return const SplashView();

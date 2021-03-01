@@ -11,7 +11,7 @@ import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
-import 'package:sahayatri/core/services/location_service.dart';
+import 'package:sahayatri/core/services/location/location_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
 
 import 'package:sahayatri/core/utils/geo_utils.dart';
@@ -19,7 +19,7 @@ import 'package:sahayatri/core/constants/configs.dart';
 
 class TrackerService {
   /// Location updates from GPS.
-  final LocationService locationService = locator();
+  LocationService locationService = locator();
 
   /// Keeps track of time spent by the user on this trail.
   final StopwatchService stopwatchService = locator();
@@ -44,7 +44,8 @@ class TrackerService {
 
   /// Continuous tracker updates.
   StreamController<TrackerUpdate> _trackerStreamController;
-  Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
+  Stream<TrackerUpdate> get trackerUpdateStream =>
+      _trackerStreamController.stream;
 
   /// Start the tracking process for a [destination].
   Future<void> start(Destination destination, Itinerary userItinerary) async {
@@ -67,7 +68,8 @@ class TrackerService {
 
   void _initTrackerStream() {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
-    _trackerStreamSub = locationService.getMockLocationStream(_destination.route).map(
+    _trackerStreamSub =
+        locationService.getLocationStream(_destination.route).map(
       (userLocation) {
         if (_isCompleted(userLocation.coord)) onCompleted();
 
@@ -88,7 +90,10 @@ class TrackerService {
 
   /// Check wheather the user has reached the end of trail
   bool _isCompleted(Coord userCoord) {
-    final distance = GeoUtils.computeDistance(userCoord, _destination.route.last);
+    final distance = GeoUtils.computeDistance(
+      userCoord,
+      _destination.route.last,
+    );
     return distance < LocationConfig.minNearbyDistance;
   }
 
@@ -120,7 +125,7 @@ class TrackerService {
   /// Tracking is only started if this returns true.
   Future<bool> isNearTrail(List<Coord> route) async {
     try {
-      final userLocation = await locationService.getMockLocation(route.first);
+      final userLocation = await locationService.getLocation(route.first);
       return GeoUtils.isOnPath(
         userLocation.coord,
         route,
@@ -157,7 +162,8 @@ class TrackerService {
 
     for (final checkpoint in itinerary.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
-      placeIndex = GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
+      placeIndex =
+          GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
 
       if (userIndex >= placeIndex) continue;
       nextCheckpoint = checkpoint;
@@ -170,7 +176,8 @@ class TrackerService {
       start: userIndex,
       end: placeIndex,
     );
-    final int eta = userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
+    final int eta =
+        userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
 
     return NextCheckpoint(
       distance: distance,
