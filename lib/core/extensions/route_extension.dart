@@ -35,6 +35,8 @@ extension RouteExtension on List<Coord> {
     for (int i = 0; i < length; ++i) {
       if ((i + 1) % ptsToSkip == 0) simplifiedRoute.add(this[i]);
     }
+
+    if (simplifiedRoute.length < 2) return [first, last];
     return simplifiedRoute;
   }
 }

@@ -16,14 +16,15 @@ import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart'
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
 import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
 import 'package:sahayatri/ui/widgets/map/markers/checkpoint_detail_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_marker.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_location_layer.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
 
 class TrackerMap extends StatefulWidget {
@@ -45,8 +46,11 @@ class _TrackerMapState extends State<TrackerMap>
   void initState() {
     zoom = 18.0;
     mapController = MapController();
-    mapAnimator =
-        MapAnimator(mapController: mapController, tickerProvider: this);
+    mapAnimator = MapAnimator(
+      tickerProvider: this,
+      mapController: mapController,
+      duration: const Duration(milliseconds: 300),
+    );
     super.initState();
   }
 
@@ -98,19 +102,22 @@ class _TrackerMapState extends State<TrackerMap>
   Widget _buildMap(Coord center) {
     return Listener(
       onPointerUp: (_) => onPointerUp(),
-      child: CustomMap(
-        center: center,
-        initialZoom: zoom,
-        mapController: mapController,
-        onPositionChanged: onPositionChanged,
-        children: [
-          _UserTrackLayer(zoom: zoom),
-          const _DevicesAccuracyCircleLayer(),
-          const _UserAccuracyCircleLayer(),
-          const _UserMarkerLayer(),
-          _CheckpointsPlacesMarkersLayer(zoom: zoom),
-          _DevicesMarkersLayer(zoom: zoom),
-        ],
+      child: Provider<double>.value(
+        value: zoom,
+        child: CustomMap(
+          center: center,
+          initialZoom: zoom,
+          mapController: mapController,
+          onPositionChanged: onPositionChanged,
+          children: const [
+            _UserTrackLayer(),
+            _DevicesAccuracyCircleLayer(),
+            _UserAccuracyCircleLayer(),
+            _UserMarkerLayer(),
+            _CheckpointsPlacesMarkersLayer(),
+            _DevicesMarkersLayer(),
+          ],
+        ),
       ),
     );
   }
@@ -132,30 +139,30 @@ class _TrackerMapState extends State<TrackerMap>
 }
 
 class _UserTrackLayer extends StatelessWidget {
-  final double zoom;
-
-  const _UserTrackLayer({
-    @required this.zoom,
-  }) : assert(zoom != null);
+  const _UserTrackLayer();
 
   @override
   Widget build(BuildContext context) {
+    final zoom = Provider.of<double>(context, listen: false);
     final trackerUpdate = context.watch<TrackerUpdate>();
-    final center = trackerUpdate.currentLocation.coord;
     final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
+    final simplifiedPath =
+        userPath.simplify(zoom).map((p) => p.toLatLng()).toList()..removeLast();
 
-    return PolylineLayerWidget(
-      options: PolylineLayerOptions(
-        polylines: [
-          Polyline(
-            strokeWidth: 6.0,
-            gradientColors: AppColors.userTrackGradient,
-            points: [
-              ...userPath.simplify(zoom).map((p) => p.toLatLng()).toList(),
-              center.toLatLng(),
-            ],
-          ),
-        ],
+    return UserLocationLayer(
+      builder: (point) => PolylineLayerWidget(
+        options: PolylineLayerOptions(
+          polylines: [
+            Polyline(
+              strokeWidth: 6.0,
+              gradientColors: AppColors.userTrackGradient,
+              points: [
+                ...simplifiedPath,
+                point,
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -168,15 +175,17 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentLocation = context.watch<TrackerUpdate>().currentLocation;
 
-    return CircleLayerWidget(
-      options: CircleLayerOptions(
-        circles: [
-          AccuracyCircle(
-            color: AppColors.primaryDark,
-            point: currentLocation.coord,
-            radius: currentLocation.accuracy,
-          ),
-        ],
+    return UserLocationLayer(
+      builder: (point) => CircleLayerWidget(
+        options: CircleLayerOptions(
+          circles: [
+            AccuracyCircle(
+              point: point,
+              color: AppColors.primaryDark,
+              radius: currentLocation.accuracy,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -203,8 +212,8 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
                       .map(
                         (d) => AccuracyCircle(
                           color: Colors.blue,
-                          point: d.userLocation.coord,
                           radius: d.userLocation.accuracy,
+                          point: d.userLocation.coord.toLatLng(),
                         ),
                       )
                       .toList(),
@@ -221,11 +230,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
 }
 
 class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
-  final double zoom;
-
-  const _CheckpointsPlacesMarkersLayer({
-    @required this.zoom,
-  }) : assert(zoom != null);
+  const _CheckpointsPlacesMarkersLayer();
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +239,8 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
           p.prefs.mapLayers.places != c.prefs.mapLayers.places ||
           p.prefs.mapLayers.checkpoints != c.prefs.mapLayers.checkpoints,
       builder: (context, state) {
+        final zoom = Provider.of<double>(context, listen: false);
+
         final placesEnabled = state.prefs.mapLayers.places;
         final checkpointsEnabled = state.prefs.mapLayers.checkpoints;
         if (!placesEnabled && !checkpointsEnabled) return const Offstage();
@@ -287,12 +294,11 @@ class _UserMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userCoord = context.watch<TrackerUpdate>().currentLocation.coord;
-
-    return RepaintBoundary(
-      child: MarkerLayerWidget(
+    return UserLocationLayer(
+      repaintBoundary: true,
+      builder: (point) => MarkerLayerWidget(
         options: MarkerLayerOptions(
-          markers: [UserMarker(point: userCoord)],
+          markers: [UserMarker(point: point)],
         ),
       ),
     );
@@ -300,19 +306,16 @@ class _UserMarkerLayer extends StatelessWidget {
 }
 
 class _DevicesMarkersLayer extends StatelessWidget {
-  final double zoom;
-
-  const _DevicesMarkersLayer({
-    @required this.zoom,
-  }) : assert(zoom != null);
-
+  const _DevicesMarkersLayer();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
       buildWhen: (p, c) =>
           p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
+        final zoom = Provider.of<double>(context, listen: false);
         final enabled = state.prefs.mapLayers.nearbyDevices;
+
         if (!enabled) return const Offstage();
 
         return BlocBuilder<NearbyCubit, NearbyState>(

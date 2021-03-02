@@ -19,7 +19,7 @@ import 'package:sahayatri/core/constants/configs.dart';
 
 class TrackerService {
   /// Location updates from GPS.
-  LocationService locationService = locator();
+  LocationService locationService = locator(instanceName: 'mock');
 
   /// Keeps track of time spent by the user on this trail.
   final StopwatchService stopwatchService = locator();
