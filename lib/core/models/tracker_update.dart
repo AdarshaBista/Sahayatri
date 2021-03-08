@@ -9,6 +9,7 @@ enum TrackingState { updating, paused, stopped }
 
 class TrackerUpdate {
   final int userIndex;
+  final bool isOffRoute;
   final double distanceCovered;
   final double distanceRemaining;
   final TrackingState trackingState;
@@ -18,23 +19,27 @@ class TrackerUpdate {
   UserLocation get currentLocation => userTrack.last;
   double get topSpeed => userTrack.map((t) => t.speed).reduce(math.max);
   double get averageSpeed =>
-      (userTrack.map((t) => t.speed).reduce((a, b) => a + b)) / userTrack.length;
+      (userTrack.map((t) => t.speed).reduce((a, b) => a + b)) /
+      userTrack.length;
 
   const TrackerUpdate({
     @required this.userIndex,
     @required this.userTrack,
+    @required this.isOffRoute,
     @required this.nextCheckpoint,
     @required this.distanceCovered,
     @required this.distanceRemaining,
     this.trackingState = TrackingState.updating,
   })  : assert(userIndex != null),
         assert(userTrack != null),
+        assert(isOffRoute != null),
         assert(trackingState != null),
         assert(distanceCovered != null),
         assert(distanceRemaining != null);
 
   TrackerUpdate copyWith({
     int userIndex,
+    bool isOffRoute,
     Duration elapsed,
     double distanceCovered,
     double distanceRemaining,
@@ -45,6 +50,7 @@ class TrackerUpdate {
     return TrackerUpdate(
       userIndex: userIndex ?? this.userIndex,
       userTrack: userTrack ?? this.userTrack,
+      isOffRoute: isOffRoute ?? this.isOffRoute,
       trackingState: trackingState ?? this.trackingState,
       nextCheckpoint: nextCheckpoint ?? this.nextCheckpoint,
       distanceCovered: distanceCovered ?? this.distanceCovered,

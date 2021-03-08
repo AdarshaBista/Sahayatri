@@ -68,7 +68,10 @@ class TrackerCubit extends Cubit<TrackerState> {
     ));
   }
 
-  Future<void> attemptTracking(Destination destination, Itinerary itinerary) async {
+  Future<void> attemptTracking(
+    Destination destination,
+    Itinerary itinerary,
+  ) async {
     if (trackerService.isTracking) {
       startTracking(destination, itinerary);
       return;
@@ -87,13 +90,15 @@ class TrackerCubit extends Cubit<TrackerState> {
     }
   }
 
-  Future<void> startTracking(Destination destination, Itinerary itinerary) async {
+  Future<void> startTracking(
+      Destination destination, Itinerary itinerary) async {
     emit(const TrackerLoading());
     try {
       await trackerService.start(destination, itinerary);
 
       _trackerUpdateSub?.cancel();
-      _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {
+      _trackerUpdateSub =
+          trackerService.trackerUpdateStream.listen((trackerUpdate) {
         _updateTrackerData(trackerUpdate, destination.route);
       });
     } on AppError catch (e) {
@@ -103,9 +108,11 @@ class TrackerCubit extends Cubit<TrackerState> {
 
   void _updateTrackerData(TrackerUpdate trackerUpdate, List<Coord> route) {
     final userLocation = trackerUpdate.currentLocation;
+    final userCoord = userLocation.coord;
+
+    offRouteAlertService.alert(!trackerUpdate.isOffRoute);
     nearbyService.messagesService.broadcastLocation(userLocation);
-    offRouteAlertService.alert(userLocation.coord, route);
-    smsService.send(userLocation.coord, trackerUpdate.nextCheckpoint?.checkpoint);
+    smsService.send(userCoord, trackerUpdate.nextCheckpoint?.checkpoint);
 
     emit(TrackerUpdating(update: trackerUpdate));
   }

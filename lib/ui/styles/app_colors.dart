@@ -45,6 +45,11 @@ class AppColors {
     Color(0xFF689F38),
   ];
 
+  static const userTrackOffRouteGradient = [
+    secondary,
+    secondaryDark,
+  ];
+
   static List<Color> getCollapsibleHeaderGradient(Color color) {
     return [
       color.withOpacity(0.0),

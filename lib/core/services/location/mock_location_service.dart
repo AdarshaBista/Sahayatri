@@ -10,8 +10,8 @@ class MockLocationService implements LocationService {
   String _accuracy = GpsAccuracy.high;
   static const _accuracyMap = {
     GpsAccuracy.high: 0.00005,
-    GpsAccuracy.balanced: 0.0001,
-    GpsAccuracy.low: 0.0005,
+    GpsAccuracy.balanced: 0.0003,
+    GpsAccuracy.low: 0.0009,
   };
 
   /// Sets accuracy of location data.

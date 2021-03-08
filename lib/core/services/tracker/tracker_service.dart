@@ -78,9 +78,10 @@ class TrackerService {
         return TrackerUpdate(
           userIndex: index,
           userTrack: _userTrack.toList(),
-          nextCheckpoint: _nextCheckpoint(userLocation),
+          isOffRoute: _isOffRoute(userLocation.coord),
           distanceCovered: _distanceCovered(index),
           distanceRemaining: _distanceRemaining(index),
+          nextCheckpoint: _nextCheckpoint(userLocation),
         );
       },
     ).listen((trackerUpdate) {
@@ -144,6 +145,11 @@ class TrackerService {
   /// Distance covered by the user in metres.
   double _distanceCovered(int userIndex) {
     return GeoUtils.distanceBetweenIndices(_destination.route, end: userIndex);
+  }
+
+  /// Check if user goes off-route
+  bool _isOffRoute(Coord userCoord) {
+    return !GeoUtils.isOnPath(userCoord, _destination.route);
   }
 
   /// Remaining distance on the route.

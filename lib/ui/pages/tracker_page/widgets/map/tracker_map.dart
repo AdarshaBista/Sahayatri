@@ -145,9 +145,14 @@ class _UserTrackLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final zoom = Provider.of<double>(context, listen: false);
     final trackerUpdate = context.watch<TrackerUpdate>();
+
     final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
     final simplifiedPath =
         userPath.simplify(zoom).map((p) => p.toLatLng()).toList()..removeLast();
+
+    final trackGradientColors = trackerUpdate.isOffRoute
+        ? AppColors.userTrackOffRouteGradient
+        : AppColors.userTrackGradient;
 
     return UserLocationLayer(
       builder: (point) => PolylineLayerWidget(
@@ -155,11 +160,8 @@ class _UserTrackLayer extends StatelessWidget {
           polylines: [
             Polyline(
               strokeWidth: 6.0,
-              gradientColors: AppColors.userTrackGradient,
-              points: [
-                ...simplifiedPath,
-                point,
-              ],
+              gradientColors: trackGradientColors,
+              points: [...simplifiedPath, point],
             ),
           ],
         ),
