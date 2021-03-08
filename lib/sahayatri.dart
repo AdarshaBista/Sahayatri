@@ -61,10 +61,13 @@ class Sahayatri extends StatelessWidget {
     return BlocConsumer<PrefsCubit, PrefsState>(
       listener: (context, state) {
         if (!state.isLoading) {
-          final gpsAccuracy = state.prefs.gpsAccuracy;
-          locator<LocationService>().setLocationAccuracy(gpsAccuracy);
-          locator<LocationService>(instanceName: 'mock')
-              .setLocationAccuracy(gpsAccuracy);
+          if (locator.isRegistered<LocationService>() &&
+              locator.isRegistered<LocationService>(instanceName: 'mock')) {
+            final gpsAccuracy = state.prefs.gpsAccuracy;
+            locator<LocationService>().setLocationAccuracy(gpsAccuracy);
+            locator<LocationService>(instanceName: 'mock')
+                .setLocationAccuracy(gpsAccuracy);
+          }
         }
       },
       builder: (context, state) {

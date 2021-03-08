@@ -98,7 +98,9 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
       update = await apiService.postUpdate(update, destination.id);
       destination.updates ??= [];
       destination.updates.insert(0, update);
-      destinationUpdateCubit.emit(DestinationUpdateLoaded(updates: destination.updates));
+      destinationUpdateCubit.emit(
+        DestinationUpdateLoaded(updates: destination.updates),
+      );
       return true;
     } on AppError {
       emit(state.copyWith(isLoading: false, message: 'Failed to post update!'));

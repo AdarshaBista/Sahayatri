@@ -28,7 +28,9 @@ class NearbyService {
 
   /// Start nearby service.
   Future<void> start(String name) async {
-    if (Platform.isWindows) throw const AppError(message: 'Platform not supported!');
+    if (Platform.isWindows) {
+      throw const AppError(message: 'Platform not supported!');
+    }
 
     connectionService.username = name;
     try {

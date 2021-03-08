@@ -43,7 +43,10 @@ class SmsService {
       return false;
     }
 
-    final distance = GeoUtils.computeDistance(userLocation, checkpoint.place.coord);
+    final distance = GeoUtils.computeDistance(
+      userLocation,
+      checkpoint.place.coord,
+    );
     if (distance > LocationConfig.minNearbyDistance) return false;
 
     trackerData = await trackerDao.get();

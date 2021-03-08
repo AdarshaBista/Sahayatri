@@ -46,8 +46,9 @@ Future<void> initHive() async {
   final appDir = await getApplicationDocumentsDirectory();
   final hivePath = '${appDir.path}/${AppConfig.appName}';
 
+  Hive.init(hivePath);
+
   Hive
-    ..init(hivePath)
     ..registerAdapter(UserAdapter())
     ..registerAdapter(PrefsAdapter())
     ..registerAdapter(CoordAdapter())
