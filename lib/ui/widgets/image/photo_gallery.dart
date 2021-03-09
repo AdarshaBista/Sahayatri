@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -14,7 +16,7 @@ import 'package:sahayatri/ui/widgets/image/image_card.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 
-class PhotoGallery extends StatelessWidget {
+class PhotoGallery extends StatefulWidget {
   final List<String> imageUrls;
   final Function(String) onDelete;
 
@@ -23,13 +25,46 @@ class PhotoGallery extends StatelessWidget {
     @required this.imageUrls,
   }) : assert(imageUrls != null);
 
-  bool get deletable => onDelete != null;
+  @override
+  _PhotoGalleryState createState() => _PhotoGalleryState();
+}
+
+class _PhotoGalleryState extends State<PhotoGallery> {
+  static const int crossAxisCount = 4;
+  final List<StaggeredTile> _staggeredTiles = [];
+
+  bool get deletable => widget.onDelete != null;
   double get padding => deletable ? 0.0 : 12.0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!deletable) _populateStaggeredGridLayout();
+  }
+
+  void _populateStaggeredGridLayout() {
+    int yCount = 2;
+    int xRemaining = crossAxisCount;
+
+    for (int i = 0; i < widget.imageUrls.length; ++i) {
+      // Move onto the next row.
+      if (xRemaining <= 0) {
+        xRemaining = crossAxisCount;
+        yCount = math.Random().nextInt(2) + 1;
+      }
+
+      final xCount = (math.Random().nextInt(xRemaining) % crossAxisCount) + 1;
+      final effectiveXCount = math.min(xCount, crossAxisCount - 1);
+      xRemaining -= effectiveXCount;
+
+      _staggeredTiles.add(StaggeredTile.count(effectiveXCount, yCount));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
-      child: imageUrls.isEmpty
+      child: widget.imageUrls.isEmpty
           ? _buildEmptyIndicator()
           : deletable
               ? _buildGrid()
@@ -47,16 +82,13 @@ class PhotoGallery extends StatelessWidget {
 
   Widget _buildStaggeredGrid() {
     return StaggeredGridView.countBuilder(
-      crossAxisCount: 4,
       shrinkWrap: true,
+      crossAxisCount: crossAxisCount,
       padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: imageUrls.length,
       itemBuilder: _buildItem,
-      staggeredTileBuilder: (int index) {
-        final int count = index % 3 == 0 ? 2 : 1;
-        return StaggeredTile.count(count, count);
-      },
+      itemCount: widget.imageUrls.length,
+      staggeredTileBuilder: (index) => _staggeredTiles[index],
     );
   }
 
@@ -68,7 +100,7 @@ class PhotoGallery extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.only(left: padding, right: padding, bottom: padding),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: imageUrls.length,
+      itemCount: widget.imageUrls.length,
       itemBuilder: _buildItem,
     );
   }
@@ -76,20 +108,21 @@ class PhotoGallery extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     return GestureDetector(
       child: Hero(
-        tag: imageUrls[index],
-        child: _buildImage(imageUrls[index]),
+        tag: widget.imageUrls[index],
+        child: _buildImage(index),
       ),
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.photoViewPageRoute,
         arguments: PhotoViewPageArgs(
-          imageUrls: imageUrls,
+          imageUrls: widget.imageUrls,
           initialPageIndex: index,
         ),
       ),
     );
   }
 
-  Widget _buildImage(String imageUrl) {
+  Widget _buildImage(int index) {
+    final imageUrl = widget.imageUrls[index];
     if (!deletable) return ImageCard(imageUrl: imageUrl);
     return Stack(
       children: [
@@ -98,7 +131,7 @@ class PhotoGallery extends StatelessWidget {
           top: 2.0,
           right: 2.0,
           child: GestureDetector(
-            onTap: () => onDelete(imageUrl),
+            onTap: () => widget.onDelete(imageUrl),
             child: const CircleAvatar(
               radius: 9.0,
               backgroundColor: AppColors.secondary,

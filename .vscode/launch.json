@@ -8,7 +8,7 @@
             "deviceId": "windows"
         },
         {
-            "name": "Pixel 3",
+            "name": "Pixel 4",
             "type": "dart",
             "request": "launch",
             "deviceId": "emulator-5554"
