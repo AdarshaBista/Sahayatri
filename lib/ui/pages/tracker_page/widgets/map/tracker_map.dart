@@ -38,7 +38,6 @@ class _TrackerMapState extends State<TrackerMap>
     with SingleTickerProviderStateMixin {
   double zoom;
   bool isTracking = true;
-  bool shouldSimplifyRoute = false;
   MapAnimator mapAnimator;
   MapController mapController;
 
@@ -60,14 +59,6 @@ class _TrackerMapState extends State<TrackerMap>
     super.dispose();
   }
 
-  void onPointerUp() {
-    if (shouldSimplifyRoute) {
-      setState(() {
-        shouldSimplifyRoute = false;
-      });
-    }
-  }
-
   void onPositionChanged(MapPosition pos, bool hasGesture) {
     if (hasGesture && isTracking) {
       setState(() {
@@ -75,10 +66,7 @@ class _TrackerMapState extends State<TrackerMap>
       });
     }
 
-    if (zoom != pos.zoom) {
-      zoom = pos.zoom;
-      shouldSimplifyRoute = true;
-    }
+    if (zoom != pos.zoom) zoom = pos.zoom;
   }
 
   @override
@@ -100,24 +88,21 @@ class _TrackerMapState extends State<TrackerMap>
   }
 
   Widget _buildMap(Coord center) {
-    return Listener(
-      onPointerUp: (_) => onPointerUp(),
-      child: Provider<double>.value(
-        value: zoom,
-        child: CustomMap(
-          center: center,
-          initialZoom: zoom,
-          mapController: mapController,
-          onPositionChanged: onPositionChanged,
-          children: const [
-            _UserTrackLayer(),
-            _DevicesAccuracyCircleLayer(),
-            _UserAccuracyCircleLayer(),
-            _UserMarkerLayer(),
-            _CheckpointsPlacesMarkersLayer(),
-            _DevicesMarkersLayer(),
-          ],
-        ),
+    return Provider<double>.value(
+      value: zoom,
+      child: CustomMap(
+        center: center,
+        initialZoom: zoom,
+        mapController: mapController,
+        onPositionChanged: onPositionChanged,
+        children: const [
+          _UserTrackLayer(),
+          _DevicesAccuracyCircleLayer(),
+          _UserAccuracyCircleLayer(),
+          _UserMarkerLayer(),
+          _CheckpointsPlacesMarkersLayer(),
+          _DevicesMarkersLayer(),
+        ],
       ),
     );
   }
@@ -143,7 +128,7 @@ class _UserTrackLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zoom = Provider.of<double>(context, listen: false);
+    final zoom = context.watch<double>();
     final trackerUpdate = context.watch<TrackerUpdate>();
 
     final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
@@ -241,7 +226,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
           p.prefs.mapLayers.places != c.prefs.mapLayers.places ||
           p.prefs.mapLayers.checkpoints != c.prefs.mapLayers.checkpoints,
       builder: (context, state) {
-        final zoom = Provider.of<double>(context, listen: false);
+        final zoom = context.watch<double>();
 
         final placesEnabled = state.prefs.mapLayers.places;
         final checkpointsEnabled = state.prefs.mapLayers.checkpoints;
@@ -315,7 +300,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
       buildWhen: (p, c) =>
           p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
-        final zoom = Provider.of<double>(context, listen: false);
+        final zoom = context.watch<double>();
         final enabled = state.prefs.mapLayers.nearbyDevices;
 
         if (!enabled) return const Offstage();

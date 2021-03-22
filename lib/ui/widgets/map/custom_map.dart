@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/utils/config_reader.dart';
-import 'package:sahayatri/core/extensions/route_extension.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
-import 'package:latlong/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/map/route_layer.dart';
 import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_button.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class CustomMap extends StatefulWidget {
   final Size size;
@@ -54,37 +51,12 @@ class CustomMap extends StatefulWidget {
 }
 
 class _CustomMapState extends State<CustomMap> {
-  double zoom;
-  bool shouldSimplifyRoute = false;
+  MapController mapController;
 
   @override
   void initState() {
     super.initState();
-    zoom = widget.initialZoom;
-  }
-
-  void onPointerUp() {
-    if (shouldSimplifyRoute) {
-      setState(() {
-        shouldSimplifyRoute = false;
-      });
-    }
-  }
-
-  void onTap(LatLng latLng) {
-    if (widget.onTap == null) return;
-    widget.onTap(Coord(lat: latLng.latitude, lng: latLng.longitude));
-  }
-
-  void onPositionChanged(MapPosition pos, bool hasGesture) {
-    if (widget.onPositionChanged != null) {
-      widget.onPositionChanged(pos, hasGesture);
-    }
-
-    if (zoom != pos.zoom) {
-      zoom = pos.zoom;
-      shouldSimplifyRoute = true;
-    }
+    mapController = widget.mapController ?? MapController();
   }
 
   @override
@@ -113,36 +85,34 @@ class _CustomMapState extends State<CustomMap> {
   }
 
   Widget _buildMap() {
-    return Listener(
-      onPointerUp: (_) => onPointerUp(),
-      child: FlutterMap(
-        mapController: widget.mapController,
-        children: [
-          const _TileLayer(),
-          _RouteLayer(zoom: zoom),
-          ...widget.children,
-        ],
-        options: MapOptions(
-          interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-          zoom: widget.initialZoom,
-          minZoom: widget.minZoom,
-          maxZoom: widget.maxZoom,
-          screenSize: widget.size,
-          center: widget.center.toLatLng(),
-          controller: widget.mapController,
-          onTap: onTap,
-          onPositionChanged: onPositionChanged,
-          swPanBoundary: widget.swPanBoundary?.toLatLng() ??
-              Coord(
-                lat: widget.center.lat - 0.3,
-                lng: widget.center.lng - 0.3,
-              ).toLatLng(),
-          nePanBoundary: widget.nePanBoundary?.toLatLng() ??
-              Coord(
-                lat: widget.center.lat + 0.3,
-                lng: widget.center.lng + 0.3,
-              ).toLatLng(),
-        ),
+    return FlutterMap(
+      mapController: mapController,
+      children: [
+        const _TileLayer(),
+        RouteLayer(mapController: mapController),
+        ...widget.children,
+      ],
+      options: MapOptions(
+        interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+        zoom: widget.initialZoom,
+        minZoom: widget.minZoom,
+        maxZoom: widget.maxZoom,
+        screenSize: widget.size,
+        center: widget.center.toLatLng(),
+        controller: mapController,
+        onTap: (latLng) => widget.onTap
+            ?.call(Coord(lat: latLng.latitude, lng: latLng.longitude)),
+        onPositionChanged: widget.onPositionChanged,
+        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
+            Coord(
+              lat: widget.center.lat - 0.3,
+              lng: widget.center.lng - 0.3,
+            ).toLatLng(),
+        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
+            Coord(
+              lat: widget.center.lat + 0.3,
+              lng: widget.center.lng + 0.3,
+            ).toLatLng(),
       ),
     );
   }
@@ -172,44 +142,6 @@ class _TileLayer extends StatelessWidget {
               'layerId': layerId,
               'accessToken': ConfigReader.mapBoxAccessToken,
             },
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _RouteLayer extends StatelessWidget {
-  final double zoom;
-
-  const _RouteLayer({
-    @required this.zoom,
-  }) : assert(zoom != null);
-
-  @override
-  Widget build(BuildContext context) {
-    final destination = context.watch<Destination>();
-
-    return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) => p.prefs.mapLayers.route != c.prefs.mapLayers.route,
-      builder: (context, state) {
-        final enabled = state.prefs.mapLayers.route;
-        if (!enabled) return const Offstage();
-
-        return ScaleAnimator(
-          child: PolylineLayerWidget(
-            options: PolylineLayerOptions(
-              polylines: [
-                Polyline(
-                  strokeWidth: 4.0,
-                  gradientColors: AppColors.routeGradient,
-                  points: destination.route
-                      .simplify(zoom)
-                      .map((c) => c.toLatLng())
-                      .toList(),
-                ),
-              ],
-            ),
           ),
         );
       },
