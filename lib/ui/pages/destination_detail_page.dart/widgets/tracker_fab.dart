@@ -24,7 +24,7 @@ class TrackerFab extends StatelessWidget {
         if (state is UserItineraryLoaded) {
           return _buildFab(context, state.userItinerary);
         }
-        return const Offstage();
+        return const SizedBox();
       },
     );
   }

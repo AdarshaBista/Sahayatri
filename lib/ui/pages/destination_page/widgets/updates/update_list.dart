@@ -23,7 +23,8 @@ class UpdateList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, left: 16.0, right: 16.0, bottom: 16.0),
+      padding: const EdgeInsets.only(
+          top: 4.0, left: 16.0, right: 16.0, bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -38,11 +39,12 @@ class UpdateList extends StatelessWidget {
   Widget _buildPostUpdateButton(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is! Authenticated) return const Offstage();
+        if (state is! Authenticated) return const SizedBox();
         return CustomButton(
           label: 'Post an update',
           icon: AppIcons.addUpdate,
-          onTap: () => UpdateForm().openModalBottomSheet(context, enableDrag: false),
+          onTap: () =>
+              UpdateForm().openModalBottomSheet(context, enableDrag: false),
         );
       },
     );
@@ -54,14 +56,16 @@ class UpdateList extends StatelessWidget {
         if (state is DestinationUpdateError) {
           return ErrorIndicator(
             message: state.message,
-            onRetry: () => context.read<DestinationUpdateCubit>().fetchUpdates(),
+            onRetry: () =>
+                context.read<DestinationUpdateCubit>().fetchUpdates(),
           );
         } else if (state is DestinationUpdateLoaded) {
           return _buildList(context, state.updates);
         } else if (state is DestinationUpdateEmpty) {
           return EmptyIndicator(
             message: 'No updates yet.',
-            onRetry: () => context.read<DestinationUpdateCubit>().fetchUpdates(),
+            onRetry: () =>
+                context.read<DestinationUpdateCubit>().fetchUpdates(),
           );
         } else {
           return const BusyIndicator();

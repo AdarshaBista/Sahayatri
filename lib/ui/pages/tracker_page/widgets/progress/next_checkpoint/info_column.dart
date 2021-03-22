@@ -14,7 +14,7 @@ class InfoColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
-    if (nextCheckpoint == null) return const Offstage();
+    if (nextCheckpoint == null) return const SizedBox();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -30,7 +30,9 @@ class InfoColumn extends StatelessWidget {
         InfoCard(
           color: Colors.green,
           icon: AppIcons.eta,
-          title: nextCheckpoint.eta == null ? 'N/A' : _formatDuration(nextCheckpoint.eta),
+          title: nextCheckpoint.eta == null
+              ? 'N/A'
+              : _formatDuration(nextCheckpoint.eta),
           subtitle: 'ETA',
         ),
       ],

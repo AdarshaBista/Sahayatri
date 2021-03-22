@@ -33,7 +33,7 @@ class DestinationsHeader extends StatelessWidget {
                 ),
               );
             }
-            return const Offstage();
+            return const SizedBox();
           },
         ),
       ],

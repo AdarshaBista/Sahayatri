@@ -188,7 +188,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
           p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
         final enabled = state.prefs.mapLayers.nearbyDevices;
-        if (!enabled) return const Offstage();
+        if (!enabled) return const SizedBox();
 
         return BlocBuilder<NearbyCubit, NearbyState>(
           builder: (context, state) {
@@ -207,7 +207,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
                 ),
               );
             } else {
-              return const Offstage();
+              return const SizedBox();
             }
           },
         );
@@ -230,7 +230,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
 
         final placesEnabled = state.prefs.mapLayers.places;
         final checkpointsEnabled = state.prefs.mapLayers.checkpoints;
-        if (!placesEnabled && !checkpointsEnabled) return const Offstage();
+        if (!placesEnabled && !checkpointsEnabled) return const SizedBox();
 
         final List<Place> places = [];
         final List<Marker> markers = [];
@@ -303,7 +303,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
         final zoom = context.watch<double>();
         final enabled = state.prefs.mapLayers.nearbyDevices;
 
-        if (!enabled) return const Offstage();
+        if (!enabled) return const SizedBox();
 
         return BlocBuilder<NearbyCubit, NearbyState>(
           builder: (context, state) {
@@ -321,7 +321,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
                 ),
               );
             } else {
-              return const Offstage();
+              return const SizedBox();
             }
           },
         );

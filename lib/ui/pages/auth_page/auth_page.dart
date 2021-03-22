@@ -50,7 +50,7 @@ class AuthPage extends StatelessWidget {
 
   Widget _buildBackButton(BuildContext context, bool isLoading) {
     final shouldShow = !isLoading && !isInitial;
-    if (!shouldShow) return const Offstage();
+    if (!shouldShow) return const SizedBox();
 
     return IconButton(
       splashRadius: 20.0,
@@ -107,7 +107,8 @@ class AuthPage extends StatelessWidget {
         color: AppColors.light,
         backgroundColor: Colors.transparent,
         label: 'Continue without signing in...',
-        onTap: () => locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
+        onTap: () => locator<RootNavService>()
+            .pushReplacementNamed(Routes.homePageRoute),
       ),
     );
   }

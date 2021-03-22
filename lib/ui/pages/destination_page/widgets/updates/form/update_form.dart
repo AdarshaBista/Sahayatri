@@ -70,7 +70,7 @@ class UpdateForm extends StatelessWidget {
   Widget _buildMessage() {
     return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
-        if (state.message == null) return const Offstage();
+        if (state.message == null) return const SizedBox();
         return Text(
           state.message,
           style: AppTextStyles.headline6.secondary,

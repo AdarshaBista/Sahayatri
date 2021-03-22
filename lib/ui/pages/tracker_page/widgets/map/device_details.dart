@@ -26,12 +26,13 @@ class DeviceDetails extends StatelessWidget {
             .trackingDevices
             .firstWhere((d) => d.id == deviceId, orElse: () => null);
 
-        if (deviceReactive == null) return const Offstage();
+        if (deviceReactive == null) return const SizedBox();
 
         return SlideAnimator(
           begin: const Offset(0.0, 0.5),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
             child: _buildBottomSheet(context, deviceReactive),
           ),
         );

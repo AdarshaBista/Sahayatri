@@ -28,7 +28,7 @@ class DownloadDialog extends StatelessWidget {
                 } else if (state is DownloadInProgress) {
                   return _buildProgress(context, state.message);
                 } else {
-                  return const Offstage();
+                  return const SizedBox();
                 }
               },
             ),

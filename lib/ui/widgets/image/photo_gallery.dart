@@ -73,7 +73,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
   }
 
   Widget _buildEmptyIndicator() {
-    if (deletable) return const Offstage();
+    if (deletable) return const SizedBox();
     return const EmptyIndicator(
       imageUrl: Images.imagesEmpty,
       message: 'No photos at the moment.',

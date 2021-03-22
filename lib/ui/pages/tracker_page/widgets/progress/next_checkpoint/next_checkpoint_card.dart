@@ -15,7 +15,7 @@ class NextCheckpointCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nextCheckpoint = context.watch<TrackerUpdate>().nextCheckpoint;
-    if (nextCheckpoint == null) return const Offstage();
+    if (nextCheckpoint == null) return const SizedBox();
     final lodges = nextCheckpoint.checkpoint.place.lodges;
 
     return Column(

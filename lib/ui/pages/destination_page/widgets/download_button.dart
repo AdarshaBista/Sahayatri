@@ -19,7 +19,7 @@ class DownloadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is! Authenticated) return const Offstage();
+        if (state is! Authenticated) return const SizedBox();
 
         return BlocConsumer<DownloadCubit, DownloadState>(
           listener: (context, state) {

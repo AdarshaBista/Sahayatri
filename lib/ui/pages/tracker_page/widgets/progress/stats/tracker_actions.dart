@@ -17,7 +17,7 @@ class TrackerActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackingState = context.watch<TrackerUpdate>().trackingState;
-    if (trackingState == TrackingState.stopped) return const Offstage();
+    if (trackingState == TrackingState.stopped) return const SizedBox();
 
     return Row(
       children: [

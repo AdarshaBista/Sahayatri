@@ -27,7 +27,8 @@ class ReviewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, left: 20.0, right: 20.0, bottom: 16.0),
+      padding: const EdgeInsets.only(
+          top: 4.0, left: 20.0, right: 20.0, bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -42,7 +43,7 @@ class ReviewList extends StatelessWidget {
   Widget _buildWriteReviewButton(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state is! Authenticated) return const Offstage();
+        if (state is! Authenticated) return const SizedBox();
         return CustomButton(
           label: 'Write a review',
           icon: AppIcons.edit,
@@ -106,7 +107,8 @@ class ReviewList extends StatelessWidget {
     );
   }
 
-  Future<void> _postReview(BuildContext context, double rating, String text) async {
+  Future<void> _postReview(
+      BuildContext context, double rating, String text) async {
     Navigator.of(context).pop();
     final success = await reviewCubit.postReview(rating, text);
     if (success) {

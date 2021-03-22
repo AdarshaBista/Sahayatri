@@ -119,14 +119,14 @@ class _PlaceMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isAuthenticated = BlocProvider.of<UserCubit>(context).user != null;
-    if (!isAuthenticated) return const Offstage();
+    if (!isAuthenticated) return const SizedBox();
 
     final destination = context.watch<Destination>();
     return BlocBuilder<PrefsCubit, PrefsState>(
       buildWhen: (p, c) => p.prefs.mapLayers.places != c.prefs.mapLayers.places,
       builder: (context, state) {
         final enabled = state.prefs.mapLayers.places;
-        if (!enabled) return const Offstage();
+        if (!enabled) return const SizedBox();
 
         return BlocBuilder<PlacesCubit, PlacesState>(
           builder: (context, state) {
@@ -141,7 +141,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
                         .toList()),
               );
             }
-            return const Offstage();
+            return const SizedBox();
           },
         );
       },

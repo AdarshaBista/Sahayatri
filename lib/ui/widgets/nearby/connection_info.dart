@@ -49,7 +49,7 @@ class ConnectionInfo extends StatelessWidget {
       builder: (context, state) {
         return (state as NearbyConnected).isScanning
             ? const ScanIndicator()
-            : const Offstage();
+            : const SizedBox();
       },
     );
   }

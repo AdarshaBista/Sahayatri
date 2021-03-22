@@ -22,7 +22,7 @@ class OpenButton extends StatelessWidget {
         if (state is Authenticated) {
           return _buildButton(context);
         }
-        return const Offstage();
+        return const SizedBox();
       },
     );
   }
@@ -35,7 +35,8 @@ class OpenButton extends StatelessWidget {
           label: 'OPEN',
           icon: AppIcons.open,
           onTap: () {
-            locator<DestinationNavService>().pushNamed(Routes.destinationDetailPageRoute);
+            locator<DestinationNavService>()
+                .pushNamed(Routes.destinationDetailPageRoute);
           },
         ),
       ),
