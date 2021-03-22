@@ -17,7 +17,7 @@ class MockLocationService implements LocationService {
   /// Sets accuracy of location data.
   @override
   Future<void> setLocationAccuracy(String accuracy) async {
-    _accuracy = accuracy;
+    if (_accuracy != accuracy) _accuracy = accuracy;
   }
 
   /// Get the stream of location as [UserLocation].

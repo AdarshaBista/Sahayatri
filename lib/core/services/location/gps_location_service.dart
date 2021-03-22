@@ -12,11 +12,20 @@ import 'package:sahayatri/core/services/location/location_service.dart';
 class GpsLocationService implements LocationService {
   final Location location = Location();
 
+  /// The accuracy of location data obtained from GPS.
+  String _locationAccuracy = GpsAccuracy.high;
+  static const accuracyMap = {
+    GpsAccuracy.high: LocationAccuracy.high,
+    GpsAccuracy.low: LocationAccuracy.powerSave,
+    GpsAccuracy.balanced: LocationAccuracy.balanced,
+  };
+
   GpsLocationService() {
     if (Platform.isWindows) return;
 
     location.changeSettings(
       interval: LocationConfig.interval,
+      accuracy: accuracyMap[_locationAccuracy],
       distanceFilter: LocationConfig.distanceFilter,
     );
   }
@@ -24,11 +33,8 @@ class GpsLocationService implements LocationService {
   /// Sets accuracy of location data.
   @override
   Future<void> setLocationAccuracy(String accuracy) async {
-    const accuracyMap = {
-      GpsAccuracy.low: LocationAccuracy.powerSave,
-      GpsAccuracy.balanced: LocationAccuracy.balanced,
-      GpsAccuracy.high: LocationAccuracy.high,
-    };
+    if (_locationAccuracy == accuracy) return;
+    _locationAccuracy = accuracy;
 
     await location.changeSettings(accuracy: accuracyMap[accuracy]);
   }
