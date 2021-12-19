@@ -66,7 +66,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  lint: ^1.5.3
+  flutter_lints: ^1.0.4
   build_runner: ^1.11.5
   hive_generator: ^0.8.2
   flutter_native_splash: ^0.3.0
