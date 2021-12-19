@@ -94,18 +94,24 @@ flutter:
     - assets/images/backgrounds/
 
   fonts:
-    - family: Sen
+    - family: Poppins
       fonts:
-        - asset: assets/fonts/Sen-Bold.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Sen-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Medium.ttf
           weight: 500
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
 
     - family: RobotoSlab
       fonts:
         - asset: assets/fonts/RobotoSlab-Bold.ttf
           weight: 700
         - asset: assets/fonts/RobotoSlab-Regular.ttf
-          weight: 500
+          weight: 400
         - asset: assets/fonts/RobotoSlab-Light.ttf
           weight: 300
