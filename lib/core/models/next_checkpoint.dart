@@ -1,7 +1,7 @@
 import 'package:sahayatri/core/models/checkpoint.dart';
 
 class NextCheckpoint {
-  final Duration eta;
+  final Duration? eta;
   final double distance;
   final Checkpoint checkpoint;
 
@@ -25,7 +25,7 @@ class NextCheckpoint {
 
   factory NextCheckpoint.fromMap(Map<String, dynamic> map) {
     return NextCheckpoint(
-      eta: Duration(seconds: map['eta'] ?? 0),
+      eta: map['eta'] == null ? null : Duration(seconds: map['eta']),
       distance: map['distance']?.toDouble() ?? 0.0,
       checkpoint: Checkpoint.fromMap(map['checkpoint']),
     );

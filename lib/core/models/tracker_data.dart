@@ -8,7 +8,7 @@ part 'tracker_data.g.dart';
 @HiveType(typeId: HiveTypeIds.trackerData)
 class TrackerData {
   @HiveField(0)
-  final String destinationId;
+  final String? destinationId;
 
   @HiveField(1)
   final int elapsed;

@@ -16,7 +16,7 @@ class ConnectionService {
   final Strategy _strategy = Strategy.P2P_CLUSTER;
 
   /// Username identifying this device.
-  String username;
+  late String username;
 
   ConnectionService(this.devicesService, this.messagesService);
 
@@ -90,7 +90,11 @@ class ConnectionService {
   }
 
   /// Called (by discoverer) when nearby device is found.
-  Future<void> _onEndpointFound(String id, String name, String serviceId) async {
+  Future<void> _onEndpointFound(
+    String id,
+    String name,
+    String serviceId,
+  ) async {
     final device = devicesService.findDevice(id);
     if (device != null) return;
 
@@ -111,7 +115,7 @@ class ConnectionService {
   }
 
   /// Called (by discoverer) when nearby device is lost.
-  void _onEndpointLost(String id) {}
+  void _onEndpointLost(String? id) {}
 
   /// Called when a connection is requested.
   Future<void> _onConnectionInit(String id, ConnectionInfo info) async {

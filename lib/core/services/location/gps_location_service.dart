@@ -59,7 +59,6 @@ class GpsLocationService implements LocationService {
     });
 
     return location.onLocationChanged
-        .where((locationData) => locationData != null)
         .map((locationData) => UserLocation.fromLocationData(locationData))
         .asBroadcastStream();
   }

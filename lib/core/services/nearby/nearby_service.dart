@@ -9,13 +9,13 @@ import 'package:sahayatri/core/services/nearby/connection_service.dart';
 
 class NearbyService {
   /// Service to manage list of nearby devices.
-  DevicesService devicesService;
+  late DevicesService devicesService;
 
   /// Service to handle incoming and outgoing nearby messages.
-  MessagesService messagesService;
+  late MessagesService messagesService;
 
   /// Service to initiate and close connections to nearby devices.
-  ConnectionService connectionService;
+  late ConnectionService connectionService;
 
   /// List of nearby devices.
   List<NearbyDevice> get devices => devicesService.devices;
