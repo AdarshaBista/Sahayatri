@@ -15,7 +15,7 @@ import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/utils/config_reader.dart';
 
 class ApiService {
-  Future<String> updateUserAvatar(User user, String imagePath) async {
+  Future<String?> updateUserAvatar(User user, String imagePath) async {
     try {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/users/${user.id}/images',
@@ -25,7 +25,8 @@ class ApiService {
         data: FormData()
           ..files.add(MapEntry(
             'images',
-            await MultipartFile.fromFile(imagePath, filename: '${user.id}_avatar.png'),
+            await MultipartFile.fromFile(imagePath,
+                filename: '${user.id}_avatar.png'),
           )),
       );
       final body = res.data as Map<String, dynamic>;
@@ -38,7 +39,8 @@ class ApiService {
 
   Future<List<Destination>> fetchDestinations() async {
     try {
-      final Response res = await Dio().get('${ApiConfig.apiBaseUrl}/destinations');
+      final Response res =
+          await Dio().get('${ApiConfig.apiBaseUrl}/destinations');
       final body = res.data as Map<String, dynamic>;
       final destinations = body['data'] as List<dynamic>;
       return destinations
@@ -91,7 +93,8 @@ class ApiService {
     }
   }
 
-  Future<DestinationUpdate> postUpdate(DestinationUpdate update, String destId) async {
+  Future<DestinationUpdate> postUpdate(
+      DestinationUpdate update, String destId) async {
     try {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/updates',
@@ -238,7 +241,8 @@ class ApiService {
     }
   }
 
-  Future<ReviewDetails> fetchLodgeReviews(String lodgeId, int page, User user) async {
+  Future<ReviewDetails> fetchLodgeReviews(
+      String lodgeId, int page, User user) async {
     try {
       final Response res = await Dio().get(
         '${ApiConfig.apiBaseUrl}/lodges/$lodgeId/reviews',
@@ -303,7 +307,9 @@ class ApiService {
         '${ApiConfig.weatherApiBaseUrl}/onecall?lat=${coord.lat}&lon=${coord.lng}&units=metric&exclude=hourly,current&appid=${ConfigReader.openWeatherMapKey}',
       );
       final resList = res.data['daily'] as List<dynamic>;
-      return resList.map((m) => Weather.fromMap(m as Map<String, dynamic>)).toList();
+      return resList
+          .map((m) => Weather.fromMap(m as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       print(e.toString());
       throw const AppError(message: 'Unable to get weather.');

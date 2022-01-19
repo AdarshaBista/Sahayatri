@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hive/hive.dart';
-import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -20,7 +19,6 @@ import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
-import 'package:device_preview/plugins.dart';
 import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
@@ -66,15 +64,12 @@ Future<void> initHive() async {
 }
 
 class App extends StatelessWidget {
-  const App();
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
       enabled: Platform.isWindows,
-      plugins: [ScreenshotPlugin(processor: _saveScreenshot)],
-      storage:
-          FileDevicePreviewStorage(file: File('./temp/device_preview.json')),
       builder: (_) => MultiBlocProvider(
         child: const Sahayatri(),
         providers: [
@@ -114,20 +109,5 @@ class App extends StatelessWidget {
       context.read<PrefsCubit>().reset();
       context.read<ThemeCubit>().changeTheme(ThemeMode.system);
     });
-  }
-
-  Future<String> _saveScreenshot(DeviceScreenshot ss) async {
-    final dir = await getDownloadsDirectory();
-    final fileName = DateTime.now().microsecondsSinceEpoch;
-    final savePath = '${dir.path}/$fileName.png';
-
-    final image = img.copyResize(
-      img.decodeImage(ss.bytes),
-      width: 720,
-      interpolation: img.Interpolation.average,
-    );
-
-    await File(savePath).writeAsBytes(img.encodePng(image));
-    return savePath;
   }
 }

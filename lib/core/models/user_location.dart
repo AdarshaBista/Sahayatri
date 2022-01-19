@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:location/location.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -13,27 +11,21 @@ class UserLocation {
   final DateTime timestamp;
 
   UserLocation({
-    @required this.coord,
-    @required this.accuracy,
-    @required this.altitude,
-    @required this.speed,
-    @required this.bearing,
-    @required this.timestamp,
-  })  : assert(coord != null),
-        assert(accuracy != null),
-        assert(altitude != null),
-        assert(speed != null),
-        assert(bearing != null),
-        assert(timestamp != null);
+    required this.coord,
+    required this.accuracy,
+    required this.altitude,
+    required this.speed,
+    required this.bearing,
+    required this.timestamp,
+  });
 
   UserLocation copyWith({
-    Coord coord,
-    double longitude,
-    double accuracy,
-    double altitude,
-    double speed,
-    double bearing,
-    DateTime timestamp,
+    Coord? coord,
+    double? accuracy,
+    double? altitude,
+    double? speed,
+    double? bearing,
+    DateTime? timestamp,
   }) {
     return UserLocation(
       coord: coord ?? this.coord,
@@ -46,15 +38,17 @@ class UserLocation {
   }
 
   factory UserLocation.fromLocationData(LocationData locationData) {
-    if (locationData == null) return null;
-
     return UserLocation(
-      coord: Coord(lat: locationData.latitude, lng: locationData.longitude),
-      altitude: locationData.altitude,
-      bearing: locationData.heading,
-      speed: locationData.speed,
-      accuracy: locationData.accuracy,
-      timestamp: DateTime.fromMillisecondsSinceEpoch(locationData.time.toInt()),
+      coord: Coord(
+        lat: locationData.latitude ?? 0.0,
+        lng: locationData.longitude ?? 0.0,
+      ),
+      altitude: locationData.altitude ?? 0.0,
+      bearing: locationData.heading ?? 0.0,
+      speed: locationData.speed ?? 0.0,
+      accuracy: locationData.accuracy ?? 0.0,
+      timestamp:
+          DateTime.fromMillisecondsSinceEpoch(locationData.time?.toInt() ?? 0),
     );
   }
 
@@ -64,40 +58,38 @@ class UserLocation {
       'accuracy': accuracy,
       'altitude': altitude,
       'speed': speed,
-      'bearingDegree': bearing,
-      'timestamp': timestamp?.millisecondsSinceEpoch,
+      'bearing': bearing,
+      'timestamp': timestamp.millisecondsSinceEpoch,
     };
   }
 
   factory UserLocation.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return UserLocation(
-      coord: Coord.fromMap(map['coord'] as Map<String, dynamic>),
-      accuracy: map['accuracy'] as double,
-      altitude: map['altitude'] as double,
-      speed: map['speed'] as double,
-      bearing: map['bearingDegree'] as double,
-      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
+      coord: Coord.fromMap(map['coord']),
+      accuracy: map['accuracy']?.toDouble() ?? 0.0,
+      altitude: map['altitude']?.toDouble() ?? 0.0,
+      speed: map['speed']?.toDouble() ?? 0.0,
+      bearing: map['bearing']?.toDouble() ?? 0.0,
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp']),
     );
   }
 
   @override
   String toString() {
-    return 'UserLocation(coord: $coord, accuracy: $accuracy, altitude: $altitude, speed: $speed, bearingDegree: $bearing, timestamp: $timestamp)';
+    return 'UserLocation(coord: $coord, accuracy: $accuracy, altitude: $altitude, speed: $speed, bearing: $bearing, timestamp: $timestamp)';
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is UserLocation &&
-        o.coord == coord &&
-        o.accuracy == accuracy &&
-        o.altitude == altitude &&
-        o.speed == speed &&
-        o.bearing == bearing &&
-        o.timestamp == timestamp;
+    return other is UserLocation &&
+        other.coord == coord &&
+        other.accuracy == accuracy &&
+        other.altitude == altitude &&
+        other.speed == speed &&
+        other.bearing == bearing &&
+        other.timestamp == timestamp;
   }
 
   @override

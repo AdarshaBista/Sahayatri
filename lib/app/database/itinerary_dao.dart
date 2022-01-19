@@ -9,7 +9,7 @@ class ItineraryDao {
   ItineraryDao(String userId)
       : _itineraryBox = Hive.openBox('$userId/${HiveBoxNames.itinerary}');
 
-  Future<Itinerary> get(String id) async {
+  Future<Itinerary?> get(String id) async {
     final box = await _itineraryBox;
     return box.get(id);
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -50,16 +49,16 @@ class Destination {
   final List<String> bestMonths;
 
   @HiveField(11)
-  List<Place> places;
+  List<Place>? places;
 
   @HiveField(12)
   ReviewDetails reviewDetails;
 
   @HiveField(13)
-  List<Itinerary> suggestedItineraries;
+  List<Itinerary>? suggestedItineraries;
 
   @HiveField(14)
-  List<DestinationUpdate> updates;
+  List<DestinationUpdate>? updates;
 
   double get minLat => route.minLat;
   double get maxLat => route.maxLat;
@@ -68,50 +67,39 @@ class Destination {
   Coord get midPointCoord => route[route.length ~/ 2];
 
   Destination({
-    @required this.id,
-    @required this.name,
-    @required this.permit,
-    @required this.length,
-    @required this.rating,
-    @required this.description,
-    @required this.maxAltitude,
-    @required this.estimatedDuration,
-    @required this.route,
-    @required this.imageUrls,
-    @required this.bestMonths,
-    @required this.places,
-    @required this.updates,
-    @required this.reviewDetails,
-    @required this.suggestedItineraries,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(permit != null),
-        assert(length != null),
-        assert(rating != null),
-        assert(route != null),
-        assert(imageUrls != null),
-        assert(bestMonths != null),
-        assert(reviewDetails != null),
-        assert(description != null),
-        assert(maxAltitude != null),
-        assert(estimatedDuration != null);
+    required this.id,
+    required this.name,
+    required this.permit,
+    required this.length,
+    required this.rating,
+    required this.description,
+    required this.maxAltitude,
+    required this.estimatedDuration,
+    required this.route,
+    required this.imageUrls,
+    required this.bestMonths,
+    required this.places,
+    required this.reviewDetails,
+    required this.suggestedItineraries,
+    required this.updates,
+  });
 
   Destination copyWith({
-    String id,
-    String name,
-    String permit,
-    String length,
-    double rating,
-    String description,
-    String maxAltitude,
-    String estimatedDuration,
-    List<Coord> route,
-    List<String> imageUrls,
-    List<String> bestMonths,
-    List<Place> places,
-    ReviewDetails reviewDetails,
-    List<DestinationUpdate> updates,
-    List<Itinerary> suggestedItineraries,
+    String? id,
+    String? name,
+    String? permit,
+    String? length,
+    double? rating,
+    String? description,
+    String? maxAltitude,
+    String? estimatedDuration,
+    List<Coord>? route,
+    List<String>? imageUrls,
+    List<String>? bestMonths,
+    List<Place>? places,
+    ReviewDetails? reviewDetails,
+    List<Itinerary>? suggestedItineraries,
+    List<DestinationUpdate>? updates,
   }) {
     return Destination(
       id: id ?? this.id,
@@ -126,44 +114,40 @@ class Destination {
       imageUrls: imageUrls ?? this.imageUrls,
       bestMonths: bestMonths ?? this.bestMonths,
       places: places ?? this.places,
-      updates: updates ?? this.updates,
       reviewDetails: reviewDetails ?? this.reviewDetails,
       suggestedItineraries: suggestedItineraries ?? this.suggestedItineraries,
+      updates: updates ?? this.updates,
     );
   }
 
   factory Destination.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     final places = !map.containsKey('places')
         ? null
-        : List<Place>.from((map['places'] as List<dynamic>)
-            ?.map((x) => Place.fromMap(x as Map<String, dynamic>)));
+        : List<Place>.from(map['places']?.map((x) => Place.fromMap(x)));
 
     final updates = !map.containsKey('updates')
         ? null
-        : List<DestinationUpdate>.from((map['updates'] as List<dynamic>)
-            ?.map((x) => DestinationUpdate.fromMap(x as Map<String, dynamic>)));
+        : List<DestinationUpdate>.from(
+            map['updates']?.map((x) => DestinationUpdate.fromMap(x)));
 
     final reviewDetails = !map.containsKey('reviews')
         ? const ReviewDetails()
-        : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>);
+        : ReviewDetails.fromMap(map['reviews']);
 
     final suggestedItineraries = !map.containsKey('itinenaries')
         ? null
-        : List<Itinerary>.from((map['itinenaries'] as List<dynamic>)
-            ?.map((x) => Itinerary.fromMap(x as Map<String, dynamic>)));
+        : List<Itinerary>.from(
+            map['itinenaries']?.map((x) => Itinerary.fromMap(x)));
 
     return Destination(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      length: map['length'] as String,
-      permit: map['permits'] as String,
-      description: map['description'] as String,
-      maxAltitude: map['maxAltitude'] as String,
-      estimatedDuration: map['estimatedDuration'] as String,
-      rating:
-          map['rating'] == null ? 0.0 : double.tryParse(map['rating'] as String) ?? 0.0,
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      permit: map['permit'] ?? '',
+      length: map['length'] ?? '',
+      rating: map['rating']?.toDouble() ?? 0.0,
+      description: map['description'] ?? '',
+      maxAltitude: map['maxAltitude'] ?? '',
+      estimatedDuration: map['estimatedDuration'] ?? '',
       route: ApiUtils.parseRoute(map['route'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       bestMonths: ApiUtils.parseCsv(map['bestMonths'] as String),
@@ -176,13 +160,29 @@ class Destination {
 
   @override
   String toString() {
-    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, updates: $updates, reviewDetails: $reviewDetails, suggestedItineraries: $suggestedItineraries)';
+    return 'Destination(id: $id, name: $name, permit: $permit, length: $length, rating: $rating, description: $description, maxAltitude: $maxAltitude, estimatedDuration: $estimatedDuration, route: $route, imageUrls: $imageUrls, bestMonths: $bestMonths, places: $places, reviewDetails: $reviewDetails, suggestedItineraries: $suggestedItineraries, updates: $updates)';
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-    return o is Destination && o.id == id;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Destination &&
+        other.id == id &&
+        other.name == name &&
+        other.permit == permit &&
+        other.length == length &&
+        other.rating == rating &&
+        other.description == description &&
+        other.maxAltitude == maxAltitude &&
+        other.estimatedDuration == estimatedDuration &&
+        other.reviewDetails == reviewDetails &&
+        listEquals(other.route, route) &&
+        listEquals(other.imageUrls, imageUrls) &&
+        listEquals(other.bestMonths, bestMonths) &&
+        listEquals(other.places, places) &&
+        listEquals(other.suggestedItineraries, suggestedItineraries) &&
+        listEquals(other.updates, updates);
   }
 
   @override

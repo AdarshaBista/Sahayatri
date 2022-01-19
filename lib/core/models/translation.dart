@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:sahayatri/core/models/language.dart';
 
 class Translation {
@@ -11,18 +9,15 @@ class Translation {
   Translation({
     this.isQuery = false,
     this.isError = false,
-    @required this.text,
-    @required this.language,
-  })  : assert(text != null),
-        assert(isQuery != null),
-        assert(isError != null),
-        assert(language != null);
+    required this.text,
+    required this.language,
+  });
 
   Translation copyWith({
-    bool isQuery,
-    bool isError,
-    String text,
-    Language language,
+    bool? isQuery,
+    bool? isError,
+    String? text,
+    Language? language,
   }) {
     return Translation(
       isQuery: isQuery ?? this.isQuery,
@@ -38,18 +33,21 @@ class Translation {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Translation &&
-        o.isQuery == isQuery &&
-        o.isError == isError &&
-        o.text == text &&
-        o.language == language;
+    return other is Translation &&
+        other.isQuery == isQuery &&
+        other.isError == isError &&
+        other.text == text &&
+        other.language == language;
   }
 
   @override
   int get hashCode {
-    return isQuery.hashCode ^ isError.hashCode ^ text.hashCode ^ language.hashCode;
+    return isQuery.hashCode ^
+        isError.hashCode ^
+        text.hashCode ^
+        language.hashCode;
   }
 }

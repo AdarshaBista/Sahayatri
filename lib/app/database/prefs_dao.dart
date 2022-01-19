@@ -7,9 +7,10 @@ class PrefsDao {
   static const int _prefsKey = 0;
   final Future<Box<Prefs>> _prefsBox;
 
-  PrefsDao(String userId) : _prefsBox = Hive.openBox('$userId/${HiveBoxNames.prefs}');
+  PrefsDao(String userId)
+      : _prefsBox = Hive.openBox('$userId/${HiveBoxNames.prefs}');
 
-  Future<Prefs> get() async {
+  Future<Prefs?> get() async {
     final box = await _prefsBox;
     return box.get(_prefsKey, defaultValue: const Prefs());
   }

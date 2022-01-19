@@ -33,20 +33,15 @@ class Prefs {
     this.mapStyle = MapStyles.outdoors,
     this.mapLayers = const MapLayers(),
     this.gpsAccuracy = GpsAccuracy.high,
-  })  : assert(theme != null),
-        assert(contact != null),
-        assert(mapStyle != null),
-        assert(mapLayers != null),
-        assert(deviceName != null),
-        assert(gpsAccuracy != null);
+  });
 
   Prefs copyWith({
-    String theme,
-    String contact,
-    String mapStyle,
-    String deviceName,
-    String gpsAccuracy,
-    MapLayers mapLayers,
+    String? theme,
+    String? contact,
+    String? mapStyle,
+    String? deviceName,
+    String? gpsAccuracy,
+    MapLayers? mapLayers,
   }) {
     return Prefs(
       theme: theme ?? this.theme,
@@ -64,16 +59,16 @@ class Prefs {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Prefs &&
-        o.contact == contact &&
-        o.mapStyle == mapStyle &&
-        o.deviceName == deviceName &&
-        o.theme == theme &&
-        o.mapLayers == mapLayers &&
-        o.gpsAccuracy == gpsAccuracy;
+    return other is Prefs &&
+        other.contact == contact &&
+        other.mapStyle == mapStyle &&
+        other.deviceName == deviceName &&
+        other.theme == theme &&
+        other.mapLayers == mapLayers &&
+        other.gpsAccuracy == gpsAccuracy;
   }
 
   @override

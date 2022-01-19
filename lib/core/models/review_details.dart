@@ -25,14 +25,12 @@ class ReviewDetails {
     this.total = 0,
     this.stars = const {},
     this.reviews = const [],
-  })  : assert(total != null),
-        assert(stars != null),
-        assert(reviews != null);
+  });
 
   ReviewDetails copyWith({
-    int total,
-    Map<int, int> stars,
-    List<Review> reviews,
+    int? total,
+    Map<int, int>? stars,
+    List<Review>? reviews,
   }) {
     return ReviewDetails(
       total: total ?? this.total,
@@ -42,31 +40,28 @@ class ReviewDetails {
   }
 
   factory ReviewDetails.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return ReviewDetails(
-      total: map['count'] as int,
-      stars: Map<int, int>.from(
-          (map['stars'] as Map<String, dynamic>).map((key, value) => MapEntry(
-                int.tryParse(key) ?? 0,
-                int.tryParse(value as String) ?? 0,
-              ))),
-      reviews: List<Review>.from((map['data'] as List<dynamic>)
-          ?.map((x) => Review.fromMap(x as Map<String, dynamic>))),
+      total: map['count'] ?? 0,
+      stars: Map<int, int>.from((map['stars']?.map((key, value) => MapEntry(
+            int.tryParse(key) ?? 0,
+            int.tryParse(value) ?? 0,
+          )))),
+      reviews: List<Review>.from((map['data']?.map((x) => Review.fromMap(x)))),
     );
   }
 
   @override
-  String toString() => 'ReviewDetails(total: $total, stars: $stars, reviews: $reviews)';
+  String toString() =>
+      'ReviewDetails(total: $total, stars: $stars, reviews: $reviews)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is ReviewDetails &&
-        o.total == total &&
-        mapEquals(o.stars, stars) &&
-        listEquals(o.reviews, reviews);
+    return other is ReviewDetails &&
+        other.total == total &&
+        mapEquals(other.stars, stars) &&
+        listEquals(other.reviews, reviews);
   }
 
   @override

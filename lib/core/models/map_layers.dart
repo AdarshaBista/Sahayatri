@@ -23,17 +23,14 @@ class MapLayers {
     this.places = true,
     this.checkpoints = true,
     this.nearbyDevices = true,
-  })  : assert(route != null),
-        assert(places != null),
-        assert(checkpoints != null),
-        assert(nearbyDevices != null);
+  });
 
   MapLayers copyWith({
-    bool route,
-    bool flags,
-    bool places,
-    bool checkpoints,
-    bool nearbyDevices,
+    bool? route,
+    bool? flags,
+    bool? places,
+    bool? checkpoints,
+    bool? nearbyDevices,
   }) {
     return MapLayers(
       route: route ?? this.route,
@@ -49,14 +46,14 @@ class MapLayers {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is MapLayers &&
-        o.route == route &&
-        o.places == places &&
-        o.checkpoints == checkpoints &&
-        o.nearbyDevices == nearbyDevices;
+    return other is MapLayers &&
+        other.route == route &&
+        other.places == places &&
+        other.checkpoints == checkpoints &&
+        other.nearbyDevices == nearbyDevices;
   }
 
   @override

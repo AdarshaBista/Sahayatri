@@ -1,20 +1,18 @@
-import 'package:meta/meta.dart';
-
 class AppError {
   final String message;
 
   const AppError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   String toString() => 'Failure(message: $message)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is AppError && o.message == message;
+    return other is AppError && other.message == message;
   }
 
   @override

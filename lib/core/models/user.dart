@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/constants/hive_config.dart';
@@ -24,21 +22,19 @@ class User {
   final String accessToken;
 
   User({
-    @required this.id,
-    @required this.name,
-    @required this.email,
-    @required this.imageUrl,
-    @required this.accessToken,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(email != null);
+    required this.id,
+    required this.name,
+    required this.email,
+    this.imageUrl = '',
+    this.accessToken = '',
+  });
 
   User copyWith({
-    String id,
-    String name,
-    String email,
-    String imageUrl,
-    String accessToken,
+    String? id,
+    String? name,
+    String? email,
+    String? imageUrl,
+    String? accessToken,
   }) {
     return User(
       id: id ?? this.id,
@@ -55,19 +51,17 @@ class User {
       'name': name,
       'email': email,
       'imageUrl': imageUrl,
-      'access_token': accessToken,
+      'accessToken': accessToken,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return User(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      imageUrl: map['imageUrl'] as String,
-      accessToken: map['access_token'] as String,
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      accessToken: map['accessToken'] ?? '',
     );
   }
 
@@ -77,15 +71,15 @@ class User {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is User &&
-        o.id == id &&
-        o.name == name &&
-        o.email == email &&
-        o.imageUrl == imageUrl &&
-        o.accessToken == accessToken;
+    return other is User &&
+        other.id == id &&
+        other.name == name &&
+        other.email == email &&
+        other.imageUrl == imageUrl &&
+        other.accessToken == accessToken;
   }
 
   @override

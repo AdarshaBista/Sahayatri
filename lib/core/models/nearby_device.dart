@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:sahayatri/core/models/user_location.dart';
 
 enum DeviceStatus { connected, connecting, disconnected }
@@ -8,26 +6,24 @@ class NearbyDevice {
   final String id;
   final String name;
   DeviceStatus status;
-  UserLocation userLocation;
+  UserLocation? userLocation;
 
   NearbyDevice({
-    @required this.id,
-    @required this.name,
-    @required this.status,
+    required this.id,
+    required this.name,
+    required this.status,
     this.userLocation,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(status != null);
+  });
 
   @override
   String toString() =>
       'NearbyDevice(id: $id, name: $name, status: $status, userLocation: $userLocation)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is NearbyDevice && o.id == id && o.name == name;
+    return other is NearbyDevice && other.id == id && other.name == name;
   }
 
   @override

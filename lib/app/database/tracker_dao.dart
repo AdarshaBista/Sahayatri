@@ -10,7 +10,7 @@ class TrackerDao {
   TrackerDao(String userId)
       : _trackerDataBox = Hive.openBox('$userId/${HiveBoxNames.trackerData}');
 
-  Future<TrackerData> get() async {
+  Future<TrackerData?> get() async {
     final box = await _trackerDataBox;
     return box.get(_key, defaultValue: const TrackerData());
   }

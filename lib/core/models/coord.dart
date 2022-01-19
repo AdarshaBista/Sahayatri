@@ -1,8 +1,5 @@
-import 'package:meta/meta.dart';
-
 import 'package:hive/hive.dart';
-
-import 'package:latlong/latlong.dart';
+import 'package:maps_toolkit/maps_toolkit.dart';
 
 import 'package:sahayatri/core/constants/hive_config.dart';
 
@@ -20,17 +17,15 @@ class Coord {
   final double alt;
 
   const Coord({
-    @required this.lat,
-    @required this.lng,
+    required this.lat,
+    required this.lng,
     this.alt = 0.0,
-  })  : assert(lat != null),
-        assert(lng != null),
-        assert(alt != null);
+  });
 
   Coord copyWith({
-    double lat,
-    double lng,
-    double alt,
+    double? lat,
+    double? lng,
+    double? alt,
   }) {
     return Coord(
       lat: lat ?? this.lat,
@@ -44,8 +39,6 @@ class Coord {
   }
 
   factory Coord.fromLatLng(LatLng latLng) {
-    if (latLng == null) return null;
-
     return Coord(
       lat: latLng.latitude,
       lng: latLng.longitude,
@@ -53,11 +46,10 @@ class Coord {
   }
 
   factory Coord.fromCsv(String coordStr) {
-    if (coordStr == null || coordStr.isEmpty) return null;
-
     final List<String> values = coordStr.split(',');
     if (values.length == 2) values.add('0.0');
-    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
+    final List<double> points =
+        values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
     return Coord(
       lat: points[0],
@@ -79,12 +71,10 @@ class Coord {
   }
 
   factory Coord.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Coord(
-      lat: map['lat'] as double,
-      lng: map['lng'] as double,
-      alt: map['alt'] as double,
+      lat: map['lat']?.toDouble() ?? 0.0,
+      lng: map['lng']?.toDouble() ?? 0.0,
+      alt: map['alt']?.toDouble() ?? 0.0,
     );
   }
 
@@ -92,10 +82,13 @@ class Coord {
   String toString() => 'Coord(lat: $lat, lng: $lng, alt: $alt)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Coord && o.lat == lat && o.lng == lng && o.alt == alt;
+    return other is Coord &&
+        other.lat == lat &&
+        other.lng == lng &&
+        other.alt == alt;
   }
 
   @override

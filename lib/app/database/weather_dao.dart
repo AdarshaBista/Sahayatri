@@ -6,7 +6,7 @@ import 'package:sahayatri/core/constants/hive_config.dart';
 class WeatherDao {
   final Future<Box<List>> _weatherBox = Hive.openBox(HiveBoxNames.weather);
 
-  Future<List<Weather>> get(String key) async {
+  Future<List<Weather>?> get(String key) async {
     final box = await _weatherBox;
     return box.get(key)?.cast<Weather>();
   }
