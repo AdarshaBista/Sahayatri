@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/constants/hive_config.dart';
@@ -18,16 +17,15 @@ class TrackerData {
   final List<String> smsSentList;
 
   const TrackerData({
-    this.destinationId,
+    this.destinationId = '',
     this.elapsed = 0,
     this.smsSentList = const [],
-  })  : assert(elapsed != null),
-        assert(smsSentList != null);
+  });
 
   TrackerData copyWith({
-    int elapsed,
-    String destinationId,
-    List<String> smsSentList,
+    int? elapsed,
+    String? destinationId,
+    List<String>? smsSentList,
   }) {
     return TrackerData(
       elapsed: elapsed ?? this.elapsed,
@@ -41,15 +39,16 @@ class TrackerData {
       'TrackerData(destinationId: $destinationId, elapsed: $elapsed, smsSentList: $smsSentList)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is TrackerData &&
-        o.destinationId == destinationId &&
-        o.elapsed == elapsed &&
-        listEquals(o.smsSentList, smsSentList);
+    return other is TrackerData &&
+        other.destinationId == destinationId &&
+        other.elapsed == elapsed &&
+        listEquals(other.smsSentList, smsSentList);
   }
 
   @override
-  int get hashCode => destinationId.hashCode ^ elapsed.hashCode ^ smsSentList.hashCode;
+  int get hashCode =>
+      destinationId.hashCode ^ elapsed.hashCode ^ smsSentList.hashCode;
 }

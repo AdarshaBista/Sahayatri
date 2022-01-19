@@ -24,7 +24,7 @@ import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/home_page/home_page.dart';
 
 class Sahayatri extends StatelessWidget {
-  const Sahayatri();
+  const Sahayatri({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +102,9 @@ class Sahayatri extends StatelessWidget {
   }
 
   void _unfocusKeyboard(BuildContext context) {
-    final FocusScopeNode currentFocus = FocusScope.of(context);
+    final currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-      FocusManager.instance.primaryFocus.unfocus();
+      FocusManager.instance.primaryFocus?.unfocus();
     }
   }
 }

@@ -10,10 +10,10 @@ import 'package:sahayatri/app/database/destination_dao.dart';
 
 class DestinationsService {
   final ApiService apiService = locator();
-  DestinationDao destinationDao;
+  DestinationDao? destinationDao;
 
   /// Called when destination has finished downloading.
-  void Function() onDownload;
+  void Function()? onDownload;
 
   /// List of destiantions fetched from api.
   List<Destination> _destinations = [];
@@ -35,7 +35,7 @@ class DestinationsService {
     destinationDao ??= locator();
 
     try {
-      _downloaded = await destinationDao.getAll();
+      _downloaded = await destinationDao!.getAll();
     } on AppError {
       rethrow;
     }
@@ -53,7 +53,7 @@ class DestinationsService {
       destination.reviewDetails = fullDestination.reviewDetails;
       destination.suggestedItineraries = fullDestination.suggestedItineraries;
 
-      await destinationDao.upsert(fullDestination);
+      await destinationDao?.upsert(fullDestination);
       _downloaded.add(fullDestination);
       onDownload?.call();
     } on AppError {
@@ -62,7 +62,7 @@ class DestinationsService {
   }
 
   Future<void> deleteDownloaded(String id) async {
-    destinationDao.delete(id);
+    destinationDao?.delete(id);
     _downloaded.removeWhere((d) => d.id == id);
   }
 

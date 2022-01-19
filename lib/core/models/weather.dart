@@ -47,50 +47,38 @@ class Weather {
   @HiveField(12)
   final DateTime createdAt;
 
-  IconData get icon => _iconsMap[iconString];
+  IconData get icon => _iconsMap[iconString] ?? Icons.error_outlined;
 
   Weather({
-    @required this.date,
-    @required this.sunset,
-    @required this.sunrise,
-    @required this.temp,
-    @required this.minTemp,
-    @required this.maxTemp,
-    @required this.feelsLikeTemp,
-    @required this.pressure,
-    @required this.humidity,
-    @required this.windSpeed,
-    @required this.label,
-    @required this.iconString,
-    @required this.createdAt,
-  })  : assert(date != null),
-        assert(sunset != null),
-        assert(sunrise != null),
-        assert(temp != null),
-        assert(minTemp != null),
-        assert(maxTemp != null),
-        assert(feelsLikeTemp != null),
-        assert(pressure != null),
-        assert(humidity != null),
-        assert(windSpeed != null),
-        assert(label != null),
-        assert(iconString != null),
-        assert(createdAt != null);
+    required this.date,
+    required this.sunset,
+    required this.sunrise,
+    required this.temp,
+    required this.minTemp,
+    required this.maxTemp,
+    required this.feelsLikeTemp,
+    required this.pressure,
+    required this.humidity,
+    required this.windSpeed,
+    required this.label,
+    required this.iconString,
+    required this.createdAt,
+  });
 
   Weather copyWith({
-    DateTime date,
-    DateTime sunset,
-    DateTime sunrise,
-    int temp,
-    int minTemp,
-    int maxTemp,
-    int feelsLikeTemp,
-    int pressure,
-    int humidity,
-    double windSpeed,
-    String label,
-    String iconString,
-    DateTime createdAt,
+    DateTime? date,
+    DateTime? sunset,
+    DateTime? sunrise,
+    int? temp,
+    int? minTemp,
+    int? maxTemp,
+    int? feelsLikeTemp,
+    int? pressure,
+    int? humidity,
+    double? windSpeed,
+    String? label,
+    String? iconString,
+    DateTime? createdAt,
   }) {
     return Weather(
       date: date ?? this.date,
@@ -136,12 +124,12 @@ class Weather {
   }
 
   factory Weather.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Weather(
       date: DateTime.fromMillisecondsSinceEpoch((map['dt'] as int) * 1000),
-      sunset: DateTime.fromMillisecondsSinceEpoch((map['sunset'] as int) * 1000),
-      sunrise: DateTime.fromMillisecondsSinceEpoch((map['sunrise'] as int) * 1000),
+      sunset:
+          DateTime.fromMillisecondsSinceEpoch((map['sunset'] as int) * 1000),
+      sunrise:
+          DateTime.fromMillisecondsSinceEpoch((map['sunrise'] as int) * 1000),
       temp: (map['temp']['day'] as num).toInt(),
       minTemp: (map['temp']['min'] as num).toInt(),
       maxTemp: (map['temp']['max'] as num).toInt(),
@@ -163,23 +151,23 @@ class Weather {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Weather &&
-        o.date == date &&
-        o.sunset == sunset &&
-        o.sunrise == sunrise &&
-        o.temp == temp &&
-        o.minTemp == minTemp &&
-        o.maxTemp == maxTemp &&
-        o.feelsLikeTemp == feelsLikeTemp &&
-        o.pressure == pressure &&
-        o.humidity == humidity &&
-        o.windSpeed == windSpeed &&
-        o.label == label &&
-        o.iconString == iconString &&
-        o.createdAt == createdAt;
+    return other is Weather &&
+        other.date == date &&
+        other.sunset == sunset &&
+        other.sunrise == sunrise &&
+        other.temp == temp &&
+        other.minTemp == minTemp &&
+        other.maxTemp == maxTemp &&
+        other.feelsLikeTemp == feelsLikeTemp &&
+        other.pressure == pressure &&
+        other.humidity == humidity &&
+        other.windSpeed == windSpeed &&
+        other.label == label &&
+        other.iconString == iconString &&
+        other.createdAt == createdAt;
   }
 
   @override

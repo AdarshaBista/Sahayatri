@@ -1,10 +1,8 @@
-import 'package:meta/meta.dart';
-
-import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
-import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/user.dart';
 
 part 'review.g.dart';
 
@@ -28,23 +26,19 @@ class Review {
   String get date => DateFormat('MM/dd/yyyy').format(dateUpdated);
 
   const Review({
-    @required this.id,
-    @required this.user,
-    @required this.text,
-    @required this.rating,
-    @required this.dateUpdated,
-  })  : assert(id != null),
-        assert(user != null),
-        assert(text != null),
-        assert(rating != null),
-        assert(dateUpdated != null);
+    required this.id,
+    required this.user,
+    required this.text,
+    required this.rating,
+    required this.dateUpdated,
+  });
 
   Review copyWith({
-    String id,
-    User user,
-    String text,
-    double rating,
-    DateTime dateUpdated,
+    String? id,
+    User? user,
+    String? text,
+    double? rating,
+    DateTime? dateUpdated,
   }) {
     return Review(
       id: id ?? this.id,
@@ -56,13 +50,11 @@ class Review {
   }
 
   factory Review.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Review(
-      id: map['id'] as String,
-      text: map['text'] as String,
-      rating: double.tryParse(map['rating'] as String) ?? 0.0,
-      user: User.fromMap(map['user'] as Map<String, dynamic>),
+      id: map['id'] ?? '',
+      text: map['text'] ?? '',
+      user: User.fromMap(map['user']),
+      rating: map['rating']?.toDouble() ?? 0.0,
       dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
           DateTime.fromMillisecondsSinceEpoch(0),
     );
@@ -74,15 +66,15 @@ class Review {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Review &&
-        o.id == id &&
-        o.user == user &&
-        o.text == text &&
-        o.rating == rating &&
-        o.dateUpdated == dateUpdated;
+    return other is Review &&
+        other.id == id &&
+        other.user == user &&
+        other.text == text &&
+        other.rating == rating &&
+        other.dateUpdated == dateUpdated;
   }
 
   @override

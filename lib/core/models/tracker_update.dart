@@ -1,7 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:meta/meta.dart';
-
 import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
 
@@ -23,29 +21,24 @@ class TrackerUpdate {
       userTrack.length;
 
   const TrackerUpdate({
-    @required this.userIndex,
-    @required this.userTrack,
-    @required this.isOffRoute,
-    @required this.nextCheckpoint,
-    @required this.distanceCovered,
-    @required this.distanceRemaining,
+    required this.userIndex,
+    required this.userTrack,
+    required this.isOffRoute,
+    required this.nextCheckpoint,
+    required this.distanceCovered,
+    required this.distanceRemaining,
     this.trackingState = TrackingState.updating,
-  })  : assert(userIndex != null),
-        assert(userTrack != null),
-        assert(isOffRoute != null),
-        assert(trackingState != null),
-        assert(distanceCovered != null),
-        assert(distanceRemaining != null);
+  });
 
   TrackerUpdate copyWith({
-    int userIndex,
-    bool isOffRoute,
-    Duration elapsed,
-    double distanceCovered,
-    double distanceRemaining,
-    TrackingState trackingState,
-    List<UserLocation> userTrack,
-    NextCheckpoint nextCheckpoint,
+    int? userIndex,
+    bool? isOffRoute,
+    Duration? elapsed,
+    double? distanceCovered,
+    double? distanceRemaining,
+    TrackingState? trackingState,
+    List<UserLocation>? userTrack,
+    NextCheckpoint? nextCheckpoint,
   }) {
     return TrackerUpdate(
       userIndex: userIndex ?? this.userIndex,

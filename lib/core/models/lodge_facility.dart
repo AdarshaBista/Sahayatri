@@ -21,14 +21,12 @@ class LodgeFacility {
     this.wifi = false,
     this.toilet = false,
     this.shower = false,
-  })  : assert(wifi != null),
-        assert(toilet != null),
-        assert(shower != null);
+  });
 
   LodgeFacility copyWith({
-    bool wifi,
-    bool toilet,
-    bool shower,
+    bool? wifi,
+    bool? toilet,
+    bool? shower,
   }) {
     return LodgeFacility(
       wifi: wifi ?? this.wifi,
@@ -38,7 +36,6 @@ class LodgeFacility {
   }
 
   factory LodgeFacility.parse(String str) {
-    if (str == null) return null;
     final List<String> values = str.split(',');
 
     return LodgeFacility(
@@ -49,16 +46,17 @@ class LodgeFacility {
   }
 
   @override
-  String toString() => 'LodgeFacility(wifi: $wifi, toilet: $toilet, shower: $shower)';
+  String toString() =>
+      'LodgeFacility(wifi: $wifi, toilet: $toilet, shower: $shower)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is LodgeFacility &&
-        o.wifi == wifi &&
-        o.toilet == toilet &&
-        o.shower == shower;
+    return other is LodgeFacility &&
+        other.wifi == wifi &&
+        other.toilet == toilet &&
+        other.shower == shower;
   }
 
   @override

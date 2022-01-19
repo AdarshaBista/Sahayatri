@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/place.dart';
 
 part 'checkpoint.g.dart';
 
@@ -17,7 +15,7 @@ class Checkpoint {
   final String description;
 
   @HiveField(2)
-  final DateTime dateTime;
+  final DateTime? dateTime;
 
   @HiveField(3)
   final int day;
@@ -26,68 +24,69 @@ class Checkpoint {
   final bool notifyContact;
 
   bool get isTemplate => dateTime == null;
-  String get date => isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime);
-  String get time => isTemplate ? '' : DateFormat('h:mm a').format(dateTime);
+  String get time => isTemplate ? '' : DateFormat('h:mm a').format(dateTime!);
+  String get date =>
+      isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime!);
 
   const Checkpoint({
-    @required this.place,
-    @required this.dateTime,
-    @required this.description,
+    required this.place,
+    required this.description,
+    required this.dateTime,
     this.day = 0,
     this.notifyContact = true,
-  })  : assert(description != null),
-        assert(notifyContact != null);
+  });
 
   Checkpoint copyWith({
-    int day,
-    Place place,
-    String description,
-    DateTime dateTime,
-    bool notifyContact,
+    Place? place,
+    String? description,
+    DateTime? dateTime,
+    int? day,
+    bool? notifyContact,
   }) {
     return Checkpoint(
-      day: day ?? this.day,
       place: place ?? this.place,
       description: description ?? this.description,
       dateTime: dateTime ?? this.dateTime,
+      day: day ?? this.day,
       notifyContact: notifyContact ?? this.notifyContact,
     );
   }
 
   factory Checkpoint.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Checkpoint(
-      day: map['day'] as int,
-      description: map['description'] as String,
-      place: Place.fromMap(map['place'] as Map<String, dynamic>),
-      dateTime: null,
+      place: Place.fromMap(map['place']),
+      description: map['description'] ?? '',
+      dateTime: map['dateTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['dateTime'])
+          : null,
+      day: map['day']?.toInt() ?? 0,
+      notifyContact: map['notifyContact'] ?? false,
     );
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Checkpoint &&
-        o.place == place &&
-        o.day == day &&
-        o.description == description &&
-        o.dateTime == dateTime &&
-        o.notifyContact == notifyContact;
+    return other is Checkpoint &&
+        other.place == place &&
+        other.description == description &&
+        other.dateTime == dateTime &&
+        other.day == day &&
+        other.notifyContact == notifyContact;
   }
 
   @override
   int get hashCode {
     return place.hashCode ^
-        day.hashCode ^
         description.hashCode ^
         dateTime.hashCode ^
+        day.hashCode ^
         notifyContact.hashCode;
   }
 
   @override
   String toString() {
-    return 'Checkpoint(place: $place, day: $day, description: $description, dateTime: $dateTime, notifyContact: $notifyContact)';
+    return 'Checkpoint(place: $place, description: $description, dateTime: $dateTime, day: $day, notifyContact: $notifyContact)';
   }
 }

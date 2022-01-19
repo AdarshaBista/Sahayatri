@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
-
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/review_details.dart';
-import 'package:sahayatri/core/models/lodge_facility.dart';
-
-import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/lodge_facility.dart';
+import 'package:sahayatri/core/models/review_details.dart';
+import 'package:sahayatri/core/utils/api_utils.dart';
 
 part 'lodge.g.dart';
 
@@ -38,32 +36,25 @@ class Lodge {
   ReviewDetails reviewDetails;
 
   Lodge({
-    @required this.id,
-    @required this.name,
-    @required this.coord,
-    @required this.rating,
-    @required this.facility,
-    @required this.imageUrls,
-    @required this.reviewDetails,
-    @required this.contactNumbers,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(rating != null),
-        assert(coord != null),
-        assert(facility != null),
-        assert(imageUrls != null),
-        assert(reviewDetails != null),
-        assert(contactNumbers != null);
+    required this.id,
+    required this.name,
+    required this.coord,
+    required this.rating,
+    required this.facility,
+    required this.imageUrls,
+    required this.contactNumbers,
+    required this.reviewDetails,
+  });
 
   Lodge copyWith({
-    String id,
-    String name,
-    Coord coord,
-    double rating,
-    LodgeFacility facility,
-    List<String> imageUrls,
-    ReviewDetails reviewDetails,
-    List<String> contactNumbers,
+    String? id,
+    String? name,
+    Coord? coord,
+    double? rating,
+    LodgeFacility? facility,
+    List<String>? imageUrls,
+    List<String>? contactNumbers,
+    ReviewDetails? reviewDetails,
   }) {
     return Lodge(
       id: id ?? this.id,
@@ -72,23 +63,20 @@ class Lodge {
       rating: rating ?? this.rating,
       facility: facility ?? this.facility,
       imageUrls: imageUrls ?? this.imageUrls,
-      reviewDetails: reviewDetails ?? this.reviewDetails,
       contactNumbers: contactNumbers ?? this.contactNumbers,
+      reviewDetails: reviewDetails ?? this.reviewDetails,
     );
   }
 
   factory Lodge.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Lodge(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      rating:
-          map['rating'] == null ? 0.0 : double.tryParse(map['rating'] as String) ?? 0.0,
-      coord: Coord.fromCsv(map['coord'] as String),
-      facility: LodgeFacility.parse(map['facility'] as String),
-      imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
-      contactNumbers: ApiUtils.parseCsv(map['contactNumber'] as String),
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      coord: Coord.fromMap(map['coord']),
+      rating: map['rating']?.toDouble() ?? 0.0,
+      facility: LodgeFacility.parse(map['facility']),
+      imageUrls: ApiUtils.parseCsv(map['imageUrls']),
+      contactNumbers: ApiUtils.parseCsv(map['contactNumber']),
       reviewDetails: !map.containsKey('reviews')
           ? const ReviewDetails()
           : ReviewDetails.fromMap(map['reviews'] as Map<String, dynamic>),
@@ -97,22 +85,22 @@ class Lodge {
 
   @override
   String toString() {
-    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, contactNumbers: $contactNumbers, facility: $facility, imageUrls: $imageUrls, reviewDetails: $reviewDetails)';
+    return 'Lodge(id: $id, name: $name, coord: $coord, rating: $rating, facility: $facility, imageUrls: $imageUrls, contactNumbers: $contactNumbers, reviewDetails: $reviewDetails)';
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Lodge &&
-        o.id == id &&
-        o.name == name &&
-        o.coord == coord &&
-        o.rating == rating &&
-        o.facility == facility &&
-        o.reviewDetails == reviewDetails &&
-        listEquals(o.imageUrls, imageUrls) &&
-        listEquals(o.contactNumbers, contactNumbers);
+    return other is Lodge &&
+        other.id == id &&
+        other.name == name &&
+        other.coord == coord &&
+        other.rating == rating &&
+        other.facility == facility &&
+        listEquals(other.imageUrls, imageUrls) &&
+        listEquals(other.contactNumbers, contactNumbers) &&
+        other.reviewDetails == reviewDetails;
   }
 
   @override
@@ -123,7 +111,7 @@ class Lodge {
         rating.hashCode ^
         facility.hashCode ^
         imageUrls.hashCode ^
-        reviewDetails.hashCode ^
-        contactNumbers.hashCode;
+        contactNumbers.hashCode ^
+        reviewDetails.hashCode;
   }
 }

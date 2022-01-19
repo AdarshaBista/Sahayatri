@@ -4,7 +4,8 @@ class NotificationService {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   NotificationService() {
-    const initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
     const initializationSettingsIOS = IOSInitializationSettings();
     const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
@@ -16,14 +17,14 @@ class NotificationService {
   Future<void> show(
     int id,
     String message, {
-    String channelId,
-    String channelName,
-    String channelDescription,
+    required String channelId,
+    required String channelName,
+    required String channelDescription,
   }) async {
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
       channelId,
       channelName,
-      channelDescription,
+      channelDescription: channelDescription,
       priority: Priority.max,
       importance: Importance.max,
       visibility: NotificationVisibility.public,

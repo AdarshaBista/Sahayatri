@@ -14,7 +14,7 @@ class DestinationDao {
     return box.values.toList();
   }
 
-  Future<Destination> get(String id) async {
+  Future<Destination?> get(String id) async {
     final box = await _destinationBox;
     return box.get(id);
   }

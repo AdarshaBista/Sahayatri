@@ -1,7 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:meta/meta.dart';
-
 import 'package:maps_toolkit/maps_toolkit.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -35,8 +33,8 @@ class GeoUtils {
 
   /// Index of a [Coord] closest to a [point] on the path.
   /// This index determines the position of [point] along a path.
-  static int indexOnPath(Coord point, List<Coord> path) {
-    int nearestIndex;
+  static int? indexOnPath(Coord point, List<Coord> path) {
+    int? nearestIndex;
     double shortestDistanceSq = double.infinity;
 
     for (int i = 0; i < path.length; ++i) {
@@ -53,7 +51,7 @@ class GeoUtils {
 
   /// Distance between [start] and [end] indices of a [path].
   static double distanceBetweenIndices(List<Coord> path,
-      {int start = 0, @required int end}) {
+      {int start = 0, required int end}) {
     final points = path.getRange(start, end).toList();
     return computeLength(points);
   }

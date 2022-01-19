@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -34,29 +32,23 @@ class Place {
   final List<Lodge> lodges;
 
   Place({
-    @required this.id,
-    @required this.name,
-    @required this.coord,
-    @required this.imageUrls,
-    @required this.description,
-    @required this.isNetworkAvailable,
-    @required this.lodges,
-  })  : assert(id != null),
-        assert(name != null),
-        assert(coord != null),
-        assert(lodges != null),
-        assert(imageUrls != null),
-        assert(description != null),
-        assert(isNetworkAvailable != null);
+    required this.id,
+    required this.name,
+    required this.coord,
+    required this.imageUrls,
+    required this.description,
+    required this.isNetworkAvailable,
+    required this.lodges,
+  });
 
   Place copyWith({
-    String id,
-    String name,
-    Coord coord,
-    String description,
-    bool isNetworkAvailable,
-    List<String> imageUrls,
-    List<Lodge> lodges,
+    String? id,
+    String? name,
+    Coord? coord,
+    String? description,
+    bool? isNetworkAvailable,
+    List<String>? imageUrls,
+    List<Lodge>? lodges,
   }) {
     return Place(
       id: id ?? this.id,
@@ -70,17 +62,14 @@ class Place {
   }
 
   factory Place.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Place(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      description: map['description'] as String,
-      coord: Coord.fromCsv(map['coord'] as String),
-      isNetworkAvailable: map['isNetworkAvailable'] as bool,
-      imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
-      lodges: List<Lodge>.from((map['lodges'] as List<dynamic>)
-          ?.map((x) => Lodge.fromMap(x as Map<String, dynamic>))),
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      coord: Coord.fromCsv(map['coord'] ?? ''),
+      isNetworkAvailable: map['isNetworkAvailable'] ?? false,
+      imageUrls: ApiUtils.parseCsv(map['imageUrls']),
+      lodges: List<Lodge>.from((map['lodges']?.map((x) => Lodge.fromMap(x)))),
     );
   }
 
@@ -90,9 +79,9 @@ class Place {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-    return o is Place && o.id == id;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Place && other.id == id;
   }
 
   @override

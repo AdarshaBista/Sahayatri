@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:sahayatri/core/models/checkpoint.dart';
 
 class NextCheckpoint {
@@ -8,16 +6,15 @@ class NextCheckpoint {
   final Checkpoint checkpoint;
 
   NextCheckpoint({
-    @required this.eta,
-    @required this.distance,
-    @required this.checkpoint,
-  })  : assert(distance != null),
-        assert(checkpoint != null);
+    required this.eta,
+    required this.distance,
+    required this.checkpoint,
+  });
 
   NextCheckpoint copyWith({
-    Duration eta,
-    double distance,
-    Checkpoint checkpoint,
+    Duration? eta,
+    double? distance,
+    Checkpoint? checkpoint,
   }) {
     return NextCheckpoint(
       eta: eta ?? this.eta,
@@ -27,12 +24,10 @@ class NextCheckpoint {
   }
 
   factory NextCheckpoint.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return NextCheckpoint(
-      distance: map['distance'] as double,
-      eta: Duration(seconds: map['eta'] as int),
-      checkpoint: Checkpoint.fromMap(map['checkpoint'] as Map<String, dynamic>),
+      eta: Duration(seconds: map['eta'] ?? 0),
+      distance: map['distance']?.toDouble() ?? 0.0,
+      checkpoint: Checkpoint.fromMap(map['checkpoint']),
     );
   }
 
@@ -41,13 +36,13 @@ class NextCheckpoint {
       'NextCheckpoint(checkpoint: $checkpoint, eta: $eta, distance: $distance)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is NextCheckpoint &&
-        o.eta == eta &&
-        o.distance == distance &&
-        o.checkpoint == checkpoint;
+    return other is NextCheckpoint &&
+        other.eta == eta &&
+        other.distance == distance &&
+        other.checkpoint == checkpoint;
   }
 
   @override

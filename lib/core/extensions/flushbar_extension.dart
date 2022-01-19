@@ -6,20 +6,20 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 enum FlushbarType { info, success, error }
-Flushbar _flushbar;
+Flushbar? _flushbar;
 
 extension FlushbarExtension on BuildContext {
   Future<void> openLoadingFlushBar(
     String message, {
-    AsyncCallback callback,
     bool isInteractive = true,
+    required AsyncCallback callback,
   }) async {
     _flushbar?.dismiss();
 
     _flushbar = Flushbar(
-      borderRadius: 8.0,
       isDismissible: isInteractive,
       margin: const EdgeInsets.all(16.0),
+      borderRadius: BorderRadius.circular(8.0),
       backgroundColor: AppColors.darkSurface,
       flushbarPosition: FlushbarPosition.TOP,
       blockBackgroundInteraction: !isInteractive,
@@ -32,9 +32,9 @@ extension FlushbarExtension on BuildContext {
       ),
     );
 
-    _flushbar.show(this);
-    await callback();
-    _flushbar.dismiss();
+    _flushbar?.show(this);
+    await callback.call();
+    _flushbar?.dismiss();
   }
 
   void openFlushBar(
@@ -73,9 +73,9 @@ extension FlushbarExtension on BuildContext {
     final color = getColor();
 
     _flushbar = Flushbar(
-      borderRadius: 8.0,
       leftBarIndicatorColor: color,
       margin: const EdgeInsets.all(16.0),
+      borderRadius: BorderRadius.circular(8.0),
       duration: const Duration(seconds: 2),
       backgroundColor: AppColors.darkSurface,
       flushbarPosition: FlushbarPosition.TOP,
@@ -85,6 +85,6 @@ extension FlushbarExtension on BuildContext {
       messageText:
           Text(message, style: AppTextStyles.headline5.withColor(color)),
     );
-    _flushbar.show(this);
+    _flushbar?.show(this);
   }
 }

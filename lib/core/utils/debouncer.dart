@@ -2,7 +2,7 @@ import 'dart:async';
 
 class Debouncer {
   final int ms;
-  Timer _timer;
+  Timer? _timer;
 
   Debouncer({this.ms = 400});
 

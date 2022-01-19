@@ -8,7 +8,7 @@ class UserDao {
   static const int _userKey = 0;
   final Future<Box<User>> _userBox = Hive.openBox(HiveBoxNames.user);
 
-  Future<User> get() async {
+  Future<User?> get() async {
     final box = await _userBox;
     return box.get(_userKey);
   }

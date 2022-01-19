@@ -52,7 +52,7 @@ class AuthService {
         ),
       );
     } on DioError catch (e) {
-      if (e.response.statusCode == 401) return;
+      if ((e.response?.statusCode ?? 0) == 401) return;
       print(e.toString());
       throw const AppError(message: 'Could not logout!');
     } catch (e) {

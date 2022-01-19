@@ -5,24 +5,29 @@ abstract class NavigationService {
 
   const NavigationService(this.navigatorKey);
 
-  Future<void> pushNamed(String routeName, {Object arguments}) async {
-    await navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
+  Future<void> pushNamed(String routeName, {Object? arguments}) async {
+    await navigatorKey.currentState!.pushNamed(routeName, arguments: arguments);
   }
 
-  Future<void> pushReplacementNamed(String routeName, {Object arguments}) async {
-    await navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
+  Future<void> pushReplacementNamed(
+    String routeName, {
+    Object? arguments,
+  }) async {
+    await navigatorKey.currentState!
+        .pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  Future<void> pushOnly(String routeName, {Object arguments}) async {
-    await navigatorKey.currentState.pushNamedAndRemoveUntil(routeName, (route) => false);
+  Future<void> pushOnly(String routeName, {Object? arguments}) async {
+    await navigatorKey.currentState!
+        .pushNamedAndRemoveUntil(routeName, (route) => false);
   }
 
   bool canPop() {
-    return navigatorKey.currentState.canPop();
+    return navigatorKey.currentState!.canPop();
   }
 
   void pop() {
-    navigatorKey.currentState.pop();
+    navigatorKey.currentState!.pop();
   }
 }
 

@@ -24,20 +24,17 @@ class Itinerary {
   bool get isTemplate => checkpoints.any((c) => c.isTemplate);
 
   const Itinerary({
-    @required this.name,
-    @required this.days,
-    @required this.nights,
-    @required this.checkpoints,
-  })  : assert(name != null),
-        assert(days != null),
-        assert(nights != null),
-        assert(checkpoints != null);
+    required this.name,
+    required this.days,
+    required this.nights,
+    required this.checkpoints,
+  });
 
   Itinerary copyWith({
-    String name,
-    String days,
-    String nights,
-    List<Checkpoint> checkpoints,
+    String? name,
+    String? days,
+    String? nights,
+    List<Checkpoint>? checkpoints,
   }) {
     return Itinerary(
       name: name ?? this.name,
@@ -48,13 +45,11 @@ class Itinerary {
   }
 
   factory Itinerary.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Itinerary(
-      name: map['name'] as String,
-      days: map['days'] as String,
-      nights: map['nights'] as String,
-      checkpoints: List<Checkpoint>.from((map['checkpoints'] as List<dynamic>)
+      name: map['name'] ?? '',
+      days: map['days'] ?? '',
+      nights: map['nights'] ?? '',
+      checkpoints: List<Checkpoint>.from(map['checkpoints']
           ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>)))
         ..sort((c1, c2) => c1.day.compareTo(c2.day)),
     );
@@ -66,18 +61,21 @@ class Itinerary {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Itinerary &&
-        o.name == name &&
-        o.days == days &&
-        o.nights == nights &&
-        listEquals(o.checkpoints, checkpoints);
+    return other is Itinerary &&
+        other.name == name &&
+        other.days == days &&
+        other.nights == nights &&
+        listEquals(other.checkpoints, checkpoints);
   }
 
   @override
   int get hashCode {
-    return name.hashCode ^ days.hashCode ^ nights.hashCode ^ checkpoints.hashCode;
+    return name.hashCode ^
+        days.hashCode ^
+        nights.hashCode ^
+        checkpoints.hashCode;
   }
 }
