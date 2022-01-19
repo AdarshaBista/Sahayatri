@@ -33,8 +33,8 @@ class GeoUtils {
 
   /// Index of a [Coord] closest to a [point] on the path.
   /// This index determines the position of [point] along a path.
-  static int? indexOnPath(Coord point, List<Coord> path) {
-    int? nearestIndex;
+  static int indexOnPath(Coord point, List<Coord> path) {
+    int nearestIndex = 0;
     double shortestDistanceSq = double.infinity;
 
     for (int i = 0; i < path.length; ++i) {

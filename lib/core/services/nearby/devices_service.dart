@@ -6,14 +6,18 @@ class DevicesService {
   List<NearbyDevice> get devices => _devices.toList();
 
   /// Called when a device is added to or updated in [_devices].
-  void Function() onDeviceChanged;
+  void Function()? onDeviceChanged;
 
   /// Clears current list of devices.
   void clear() => _devices.clear();
 
   /// Find [NearbyDevice] with given [id].
-  NearbyDevice findDevice(String id) {
-    return _devices.firstWhere((d) => d.id == id, orElse: () => null);
+  NearbyDevice? findDevice(String id) {
+    try {
+      return _devices.firstWhere((d) => d.id == id);
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Add a [NearbyDevice] to nearby devices set.
@@ -23,7 +27,7 @@ class DevicesService {
       name: name,
       status: DeviceStatus.connecting,
     ));
-    onDeviceChanged();
+    onDeviceChanged?.call();
   }
 
   /// Remove a [NearbyDevice] from nearby devices set.
@@ -36,6 +40,6 @@ class DevicesService {
     final device = findDevice(id);
     if (device == null) return;
     device.status = status;
-    onDeviceChanged();
+    onDeviceChanged?.call();
   }
 }

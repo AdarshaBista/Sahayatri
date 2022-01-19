@@ -24,7 +24,7 @@ class MockLocationService implements LocationService {
   @override
   Stream<UserLocation> getLocationStream(List<Coord> route) {
     final period = Random().nextInt(1000) + 500;
-    final offset = _accuracyMap[_accuracy];
+    final offset = _accuracyMap[_accuracy] ?? 0;
 
     double _randomOffset(double start, double end) {
       return Random().nextDouble() * (end - start) + start;

@@ -23,7 +23,7 @@ class MessagesService {
   /// Called when payload is sent from connected devices.
   /// Parses the incoming bytes and handles message according to [NearbyMessageType].
   void onPayLoadRecieved(String id, Payload payload) {
-    final payloadStr = String.fromCharCodes(payload.bytes);
+    final payloadStr = String.fromCharCodes(payload.bytes ?? []);
     final message = _parseRawMessage(payloadStr);
 
     switch (message.type) {
@@ -42,7 +42,10 @@ class MessagesService {
 
   /// Called when payload is received on this device.
   /// Irrelevant when payload type is [PayloadType.BYTES]
-  void onPayloadTransferUpdate(String id, PayloadTransferUpdate payloadTransferUpdate) {}
+  void onPayloadTransferUpdate(
+    String id,
+    PayloadTransferUpdate payloadTransferUpdate,
+  ) {}
 
   /// Parses the raw message string into [NearbyMessage].
   NearbyMessage _parseRawMessage(String payloadStr) {
@@ -64,7 +67,8 @@ class MessagesService {
         NearbyMessageType.location + NearbyMessageType.separator + locationJson;
 
     for (final device in devicesService.devices) {
-      Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
+      Nearby()
+          .sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
     }
   }
 
@@ -74,9 +78,10 @@ class MessagesService {
     if (sender == null) return;
 
     final parsedMessage = jsonDecode(message);
-    final userLocation = UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
+    final userLocation =
+        UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
     sender.userLocation = userLocation;
-    devicesService.onDeviceChanged();
+    devicesService.onDeviceChanged?.call();
   }
 
   /// Send SOS signal to connected devices.
@@ -107,9 +112,10 @@ class MessagesService {
 
   /// Show notification when device is disconnected
   void showDisconnectedNotification(String id) {
-    final deviceName = devicesService.findDevice(id).name;
-    final alertMessage = '$deviceName has disconnected from network.';
+    final device = devicesService.findDevice(id);
+    if (device == null) return;
 
+    final alertMessage = '${device.name} has disconnected from network.';
     notificationService.show(
       NotificationChannels.deviceDisconnectedId,
       alertMessage,

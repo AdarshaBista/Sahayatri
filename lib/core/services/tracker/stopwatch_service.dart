@@ -14,7 +14,7 @@ class StopwatchService {
   final Stopwatch _stopwatch = Stopwatch();
 
   /// Persisted tracker data.
-  TrackerData _trackerData;
+  late TrackerData _trackerData;
 
   /// Persisted elapsed value to be added to stopwatch.
   int _initialElapsed = 0;
@@ -24,15 +24,16 @@ class StopwatchService {
     _stopwatch.start();
 
     // Get the latest tracker data and set intial elapsed.
-    _trackerData = await trackerDao.get();
-    _initialElapsed = _trackerData.elapsed;
+    final trackerData = await trackerDao.get();
 
-    if (_trackerData.destinationId == null) {
-      // There was no stored tracker data.
-      // So, create tracker data for the current session.
+    // There was no stored tracker data.
+    // So, create tracker data for the current session.
+    if (trackerData == null || trackerData.destinationId == null) {
       _trackerData = TrackerData(destinationId: destinationId);
       await trackerDao.upsert(_trackerData);
     } else {
+      _trackerData = trackerData;
+
       // The stored tracker data is for another destination.
       // So, delete it and create tracker data for the current session.
       if (_trackerData.destinationId != destinationId) {
@@ -41,6 +42,7 @@ class StopwatchService {
         await trackerDao.upsert(_trackerData);
       }
     }
+    _initialElapsed = _trackerData.elapsed;
   }
 
   Future<void> stop() async {
@@ -68,7 +70,10 @@ class StopwatchService {
 
   /// Save the current [elapsed] time.
   Future<void> _saveElapsed(int elapsed) async {
-    _trackerData = await trackerDao.get();
+    final trackerData = await trackerDao.get();
+    if (trackerData == null) return;
+
+    _trackerData = trackerData;
     await trackerDao.upsert(_trackerData.copyWith(elapsed: elapsed));
   }
 }

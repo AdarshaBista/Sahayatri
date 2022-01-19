@@ -43,17 +43,9 @@ class ApiService {
           await Dio().get('${ApiConfig.apiBaseUrl}/destinations');
       final body = res.data as Map<String, dynamic>;
       final destinations = body['data'] as List<dynamic>;
-      return destinations
-          .map((d) {
-            try {
-              return Destination.fromMap(d as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((d) => d != null)
-          .toList();
+      return destinations.tryMap<Destination>(
+        (d) => Destination.fromMap(d as Map<String, dynamic>),
+      );
     } catch (e) {
       print(e.toString());
       throw const AppError(message: 'Failed to get destinations.');
@@ -72,17 +64,9 @@ class ApiService {
       final body = res.data as Map<String, dynamic>;
       final total = body['count'] as int;
       final updatesList = body['data'] as List<dynamic>;
-      final updates = updatesList
-          .map((u) {
-            try {
-              return DestinationUpdate.fromMap(u as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((u) => u != null)
-          .toList();
+      final updates = updatesList.tryMap<DestinationUpdate>(
+        (u) => DestinationUpdate.fromMap(u as Map<String, dynamic>),
+      );
       return DestinationUpdatesList(
         total: total,
         updates: updates,
@@ -126,7 +110,7 @@ class ApiService {
     }
   }
 
-  Future<DestinationUpdate> postUpdateImages(DestinationUpdate update) async {
+  Future<DestinationUpdate?> postUpdateImages(DestinationUpdate update) async {
     try {
       final List<MapEntry<String, MultipartFile>> entries = [];
       for (final url in update.imageUrls) {
@@ -198,17 +182,9 @@ class ApiService {
         ),
       );
       final places = res.data as List<dynamic>;
-      return places
-          .map((p) {
-            try {
-              return Place.fromMap(p as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((p) => p != null)
-          .toList();
+      return places.tryMap<Place>(
+        (p) => Place.fromMap(p as Map<String, dynamic>),
+      );
     } catch (e) {
       print(e.toString());
       throw const AppError(message: 'Failed to get places.');
@@ -224,17 +200,9 @@ class ApiService {
         ),
       );
       final itineraries = res.data as List<dynamic>;
-      return itineraries
-          .map((i) {
-            try {
-              return Itinerary.fromMap(i as Map<String, dynamic>);
-            } catch (e) {
-              print(e.toString());
-              return null;
-            }
-          })
-          .where((i) => i != null)
-          .toList();
+      return itineraries.tryMap<Itinerary>(
+        (i) => Itinerary.fromMap(i as Map<String, dynamic>),
+      );
     } catch (e) {
       print(e.toString());
       throw const AppError(message: 'Failed to get suggested itineraries.');
@@ -314,5 +282,19 @@ class ApiService {
       print(e.toString());
       throw const AppError(message: 'Unable to get weather.');
     }
+  }
+}
+
+extension on List<dynamic> {
+  List<T> tryMap<T>(void Function(T) callback) {
+    final ret = <T>[];
+    for (final item in this) {
+      try {
+        callback(item);
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+    return ret;
   }
 }

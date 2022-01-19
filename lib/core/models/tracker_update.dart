@@ -12,7 +12,7 @@ class TrackerUpdate {
   final double distanceRemaining;
   final TrackingState trackingState;
   final List<UserLocation> userTrack;
-  final NextCheckpoint nextCheckpoint;
+  final NextCheckpoint? nextCheckpoint;
 
   UserLocation get currentLocation => userTrack.last;
   double get topSpeed => userTrack.map((t) => t.speed).reduce(math.max);

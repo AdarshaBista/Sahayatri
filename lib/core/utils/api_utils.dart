@@ -1,11 +1,12 @@
 import 'package:sahayatri/core/models/coord.dart';
 
 class ApiUtils {
-  static List<Coord> parseRoute(String routeStr) {
+  static List<Coord> parseRoute(String? routeStr) {
     if (routeStr == null || routeStr.isEmpty) return [];
 
     final List<String> values = routeStr.split(',');
-    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
+    final List<double> points =
+        values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
     final List<Coord> route = [];
     for (int i = 0; i < points.length; i += 3) {
@@ -19,7 +20,7 @@ class ApiUtils {
   }
 
   static String routeToCsv(List<Coord> coords) {
-    if (coords == null || coords.isEmpty) return '';
+    if (coords.isEmpty) return '';
 
     final StringBuffer routeStrBuffer = StringBuffer();
     for (int i = 0; i < coords.length; ++i) {
@@ -29,13 +30,13 @@ class ApiUtils {
     return routeStrBuffer.toString();
   }
 
-  static List<String> parseCsv(String csvStr) {
+  static List<String> parseCsv(String? csvStr) {
     if (csvStr == null || csvStr.isEmpty) return [];
     return csvStr.split(',');
   }
 
   static String toCsv(List<String> values) {
-    if (values == null || values.isEmpty) return '';
+    if (values.isEmpty) return '';
     return values.join(',');
   }
 }

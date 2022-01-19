@@ -25,32 +25,32 @@ class TrackerService {
   final StopwatchService stopwatchService = locator();
 
   /// The [Destination] this service is currently tracking.
-  Destination _destination;
+  Destination? _destination;
 
   /// The [Itinerary] the user is currently following.
-  Itinerary itinerary;
+  Itinerary? itinerary;
 
   /// If destination is null, there is no tracking in progress.
   bool get isTracking => _destination != null;
 
   /// Called when user finishes the trail.
-  void Function() onCompleted;
+  void Function()? onCompleted;
 
   /// Track covered by user.
   final Set<UserLocation> _userTrack = {};
 
   /// Tracker update subscription.
-  StreamSubscription<TrackerUpdate> _trackerStreamSub;
+  StreamSubscription<TrackerUpdate>? _trackerStreamSub;
 
   /// Continuous tracker updates.
-  StreamController<TrackerUpdate> _trackerStreamController;
+  late StreamController<TrackerUpdate> _trackerStreamController;
   Stream<TrackerUpdate> get trackerUpdateStream =>
       _trackerStreamController.stream;
 
   /// Start the tracking process for a [destination].
   Future<void> start(Destination destination, Itinerary userItinerary) async {
     if (isTracking) {
-      if (destination.id != _destination.id) {
+      if (destination.id != _destination?.id) {
         throw const AppError(
           message: 'Tracking is already in progress for another destination.',
         );
@@ -69,9 +69,9 @@ class TrackerService {
   void _initTrackerStream() {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
     _trackerStreamSub =
-        locationService.getLocationStream(_destination.route).map(
+        locationService.getLocationStream(_destination!.route).map(
       (userLocation) {
-        if (_isCompleted(userLocation.coord)) onCompleted();
+        if (_isCompleted(userLocation.coord)) onCompleted?.call();
 
         _userTrack.add(userLocation);
         final index = _userIndex(userLocation.coord);
@@ -93,7 +93,7 @@ class TrackerService {
   bool _isCompleted(Coord userCoord) {
     final distance = GeoUtils.computeDistance(
       userCoord,
-      _destination.route.last,
+      _destination!.route.last,
     );
     return distance < LocationConfig.minNearbyDistance;
   }
@@ -104,10 +104,10 @@ class TrackerService {
 
     itinerary = null;
     _destination = null;
-    _userTrack?.clear();
+    _userTrack.clear();
     await stopwatchService.stop();
     await _trackerStreamSub?.cancel();
-    await _trackerStreamController?.close();
+    await _trackerStreamController.close();
   }
 
   /// Pause the tracking process
@@ -139,37 +139,38 @@ class TrackerService {
 
   /// The index of user on route.
   int _userIndex(Coord userCoord) {
-    return GeoUtils.indexOnPath(userCoord, _destination.route);
+    return GeoUtils.indexOnPath(userCoord, _destination!.route);
   }
 
   /// Distance covered by the user in metres.
   double _distanceCovered(int userIndex) {
-    return GeoUtils.distanceBetweenIndices(_destination.route, end: userIndex);
+    return GeoUtils.distanceBetweenIndices(_destination!.route, end: userIndex);
   }
 
   /// Check if user goes off-route
   bool _isOffRoute(Coord userCoord) {
-    return !GeoUtils.isOnPath(userCoord, _destination.route);
+    return !GeoUtils.isOnPath(userCoord, _destination!.route);
   }
 
   /// Remaining distance on the route.
   double _distanceRemaining(int userIndex) {
     return GeoUtils.distanceBetweenIndices(
-      _destination.route,
+      _destination!.route,
       start: userIndex,
-      end: _destination.route.length,
+      end: _destination!.route.length,
     );
   }
 
   /// [NextCheckpoint] the user is approaching along the route.
-  NextCheckpoint _nextCheckpoint(UserLocation userLocation) {
-    Checkpoint nextCheckpoint;
-    int userIndex, placeIndex;
+  NextCheckpoint? _nextCheckpoint(UserLocation userLocation) {
+    Checkpoint? nextCheckpoint;
+    int userIndex = 0;
+    int placeIndex = 0;
 
-    for (final checkpoint in itinerary.checkpoints) {
-      userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination.route);
+    for (final checkpoint in itinerary!.checkpoints) {
+      userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination!.route);
       placeIndex =
-          GeoUtils.indexOnPath(checkpoint.place.coord, _destination.route);
+          GeoUtils.indexOnPath(checkpoint.place.coord, _destination!.route);
 
       if (userIndex >= placeIndex) continue;
       nextCheckpoint = checkpoint;
@@ -177,12 +178,12 @@ class TrackerService {
     }
     if (nextCheckpoint == null) return null;
 
-    final double distance = GeoUtils.distanceBetweenIndices(
-      _destination.route,
+    final distance = GeoUtils.distanceBetweenIndices(
+      _destination!.route,
       start: userIndex,
       end: placeIndex,
     );
-    final int eta =
+    final eta =
         userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
 
     return NextCheckpoint(
