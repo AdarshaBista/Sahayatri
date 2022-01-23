@@ -4,11 +4,11 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 
 class RetryButton extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const RetryButton({
-    required this.onTap,
-  }) : assert(onTap != null);
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -10,16 +10,14 @@ class EmptyIndicator extends StatelessWidget {
   final String message;
   final String imageUrl;
   final double padding;
-  final VoidCallback onRetry;
+  final VoidCallback? onRetry;
 
   const EmptyIndicator({
-    this.onRetry,
     this.padding = 64.0,
     this.message = 'Nothing to show...',
     this.imageUrl = Images.generalEmpty,
-  })  : assert(message != null),
-        assert(padding != null),
-        assert(imageUrl != null);
+    this.onRetry,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class EmptyIndicator extends StatelessWidget {
             title: Text(
               message,
               textAlign: TextAlign.center,
-              style: context.t.headline5.bold,
+              style: context.t.headline5?.bold,
             ),
           ),
           if (onRetry != null) RetryButton(onTap: onRetry),

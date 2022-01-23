@@ -7,18 +7,18 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 class CustomGraph extends StatelessWidget {
   final Color color;
-  final double height;
   final double vInterval;
   final double hInterval;
-  final List<double> xValues;
   final List<double> yValues;
   final bool showGrid;
   final bool showBorder;
   final bool showLeftLabels;
   final bool showBottomLabels;
-  final Function(int) onTouch;
-  final String Function(double) getLeftTitle;
-  final String Function(double) getBottomTitle;
+  final double? height;
+  final List<double>? xValues;
+  final Function(int)? onTouch;
+  final String Function(double)? getLeftTitle;
+  final String Function(double)? getBottomTitle;
 
   const CustomGraph({
     required this.yValues,
@@ -34,13 +34,7 @@ class CustomGraph extends StatelessWidget {
     this.onTouch,
     this.getLeftTitle,
     this.getBottomTitle,
-  })  : assert(color != null),
-        assert(yValues != null),
-        assert(vInterval != null),
-        assert(showGrid != null),
-        assert(showBorder != null),
-        assert(showLeftLabels != null),
-        assert(showBottomLabels != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +88,12 @@ class CustomGraph extends StatelessWidget {
         fitInsideHorizontally: true,
         tooltipBgColor: AppColors.dark,
       ),
-      touchCallback: (response) {
-        if (onTouch == null || response.lineBarSpots.isEmpty) return;
-        final int index = response.lineBarSpots.first.spotIndex;
-        onTouch(index);
+      touchCallback: (_, response) {
+        if (response == null || response.lineBarSpots == null) return;
+        if (onTouch == null || (response.lineBarSpots!.isEmpty)) return;
+
+        final int index = response.lineBarSpots!.first.spotIndex;
+        onTouch?.call(index);
       },
     );
   }
@@ -120,7 +116,7 @@ class CustomGraph extends StatelessWidget {
         reservedSize: 30.0,
         interval: hInterval,
         getTitles: getBottomTitle,
-        getTextStyles: (_) => context.t.headline6.bold,
+        getTextStyles: (_, __) => context.t.headline6?.bold,
       ),
       leftTitles: SideTitles(
         showTitles: showLeftLabels,
@@ -128,7 +124,7 @@ class CustomGraph extends StatelessWidget {
         reservedSize: 30.0,
         interval: vInterval,
         getTitles: getLeftTitle,
-        getTextStyles: (_) => context.t.headline6.bold,
+        getTextStyles: (_, __) => context.t.headline6?.bold,
       ),
     );
   }

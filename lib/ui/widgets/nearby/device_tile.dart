@@ -12,8 +12,7 @@ class DeviceTile extends StatelessWidget {
   const DeviceTile({
     required this.index,
     required this.device,
-  })  : assert(index != null),
-        assert(device != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class DeviceTile extends StatelessWidget {
         backgroundColor: AppColors.primaryLight,
         child: Text(
           '${index + 1}',
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
       ),
     );

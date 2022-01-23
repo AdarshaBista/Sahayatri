@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' show MapController;
 
 class MapAnimator {
@@ -26,13 +26,13 @@ class MapAnimator {
   /// Holds the easing [Curve] for the animation
   final Curve curve;
 
-  AnimationController _animationController;
+  late final AnimationController _animationController;
 
   /// Provides the [AnimationController]
   AnimationController get animationController => _animationController;
 
-  Animation<LatLng> _centerAnimation;
-  Animation<double> _zoomAnimation;
+  Animation<LatLng>? _centerAnimation;
+  Animation<double>? _zoomAnimation;
 
   bool _willUpdateProp = false;
 
@@ -45,8 +45,7 @@ class MapAnimator {
   bool get needsAnimation => _needsAnimation;
 
   /// Animates a mapController.move to a given center (and zoom)
-  TickerFuture move(LatLng center, [double zoom]) {
-    assert(center != null);
+  TickerFuture move(LatLng center, [double? zoom]) {
     return animate(() {
       this.center = center;
       this.zoom = zoom ?? mapController.zoom;
@@ -66,7 +65,7 @@ class MapAnimator {
   ///
   /// Changes can be made prior calling the method or within the [animator]
   /// callback.
-  TickerFuture animate([Function animator]) => animateIn(duration, animator);
+  TickerFuture animate([Function? animator]) => animateIn(duration, animator);
 
   /// Animates the changed properties, overriding the default [Duration]
   ///
@@ -75,8 +74,7 @@ class MapAnimator {
   ///
   /// NOTE: Calling this method will stop any ongoing animation.
   /// Its [orCancel] future will be (silently) rejected.
-  TickerFuture animateIn(Duration duration, [Function animator]) {
-    assert(duration != null);
+  TickerFuture animateIn(Duration duration, [Function? animator]) {
     if (animator != null) {
       animator();
     }
@@ -98,7 +96,6 @@ class MapAnimator {
   /// Must be set within an [animate] or [animateIn] callback, or the desired
   /// method must be called after the set to run the animation.
   set center(LatLng value) {
-    assert(value != null);
     updateProp(() {
       _centerAnimation = animationFor(LatLngTween(
         begin: center,
@@ -117,7 +114,6 @@ class MapAnimator {
   /// Must be set within an [animate] or [animateIn] callback, or the desired
   /// method must be called after the set to run the animation.
   set zoom(double value) {
-    assert(value != null);
     updateProp(() {
       _zoomAnimation = animationFor(Tween<double>(
         begin: zoom,
@@ -178,41 +174,38 @@ class LatLngTween extends Tween<LatLng> {
   ///
   /// The [begin] and [end] properties may be null; the null value
   /// is treated as an empty LatLng.
-  LatLngTween({LatLng begin, LatLng end}) : super(begin: begin, end: end);
+  LatLngTween({
+    required LatLng begin,
+    required LatLng end,
+  }) : super(begin: begin, end: end);
 
   /// Returns the value this variable has at the given animation clock value.
   @override
   LatLng lerp(double t) {
-    assert(t != null);
-    if (begin == null && end == null) return null;
     double lat, lng;
     if (begin == null) {
-      lat = end.latitude * t;
-      lng = end.longitude * t;
+      lat = end?.latitude ?? 0.0 * t;
+      lng = end?.longitude ?? 0.0 * t;
     } else if (end == null) {
-      lat = begin.latitude * (1.0 - t);
-      lng = begin.longitude * (1.0 - t);
+      lat = begin?.latitude ?? 0.0 * (1.0 - t);
+      lng = begin?.longitude ?? 0.0 * (1.0 - t);
     } else {
-      lat = lerpDouble(begin.latitude, end.latitude, t);
-      lng = lerpDouble(begin.longitude, end.longitude, t);
+      lat = lerpDouble(begin!.latitude, end!.latitude, t);
+      lng = lerpDouble(begin!.longitude, end!.longitude, t);
     }
     return LatLng(lat, lng);
   }
 
   @protected
-  double lerpDouble(double a, double b, double t) {
-    if (a == null && b == null) return null;
-    final double start = a ?? 0.0;
-    final double end = b ?? 0.0;
+  double lerpDouble(double start, double end, double t) {
     return start + (end - start) * t;
   }
 }
 
 extension EndListener<T> on Animation<T> {
-  /// Adds a one-off `completed/dismissed` listener that is automatically
-  /// removed
+  /// Adds a one-off `completed/dismissed` listener that is automatically removed
   Function onEnd(Function callback) {
-    AnimationStatusListener wrapper;
+    late AnimationStatusListener wrapper;
     wrapper = (AnimationStatus status) {
       if (status == AnimationStatus.completed ||
           status == AnimationStatus.dismissed) {

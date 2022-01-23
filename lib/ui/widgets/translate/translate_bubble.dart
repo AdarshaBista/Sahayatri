@@ -13,7 +13,7 @@ class TranslateBubble extends StatelessWidget {
 
   const TranslateBubble({
     required this.translation,
-  }) : assert(translation != null);
+  });
 
   @override
   Widget build(BuildContext context) {

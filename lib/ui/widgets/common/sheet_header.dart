@@ -5,14 +5,13 @@ import 'package:sahayatri/ui/widgets/common/header.dart';
 class SheetHeader extends StatelessWidget {
   final String title;
   final bool showDivider;
-  final VoidCallback onClose;
+  final VoidCallback? onClose;
 
   const SheetHeader({
     required this.title,
     this.onClose,
     this.showDivider = true,
-  })  : assert(title != null),
-        assert(showDivider != null);
+  });
 
   @override
   Widget build(BuildContext context) {

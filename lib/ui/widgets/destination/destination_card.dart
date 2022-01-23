@@ -23,14 +23,14 @@ import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 
 class DestinationCard extends StatelessWidget {
   static const double borderRadius = 8.0;
+
   final bool deletable;
   final Destination destination;
 
   const DestinationCard({
     this.deletable = false,
     required this.destination,
-  })  : assert(deletable != null),
-        assert(destination != null);
+  });
 
   @override
   Widget build(BuildContext context) {

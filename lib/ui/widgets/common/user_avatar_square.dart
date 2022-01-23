@@ -6,12 +6,12 @@ import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
 class UserAvatarSquare extends StatelessWidget {
   final String username;
-  final String imageUrl;
+  final String? imageUrl;
 
   const UserAvatarSquare({
     required this.username,
     required this.imageUrl,
-  }) : assert(username != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class UserAvatarSquare extends StatelessWidget {
         margin: const EdgeInsets.all(12.0),
         color: AppColors.primaryDark,
         child: imageUrl != null
-            ? AdaptiveImage(imageUrl, showLoading: false)
+            ? AdaptiveImage(imageUrl!, showLoading: false)
             : Center(
                 child: Text(
                   username[0].toUpperCase(),

@@ -19,12 +19,7 @@ class ConfirmDialog extends StatelessWidget {
     this.confirmText = 'YES',
     this.cancelIcon = AppIcons.close,
     this.confirmIcon = AppIcons.confirm,
-  })  : assert(message != null),
-        assert(onConfirm != null),
-        assert(cancelText != null),
-        assert(confirmText != null),
-        assert(cancelIcon != null),
-        assert(confirmIcon != null);
+  });
 
   @override
   Widget build(BuildContext context) {

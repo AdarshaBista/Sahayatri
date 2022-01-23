@@ -12,9 +12,7 @@ class StatTile extends StatelessWidget {
     required this.icon,
     required this.stat,
     required this.label,
-  })  : assert(icon != null),
-        assert(stat != null),
-        assert(label != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class StatTile extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         title: Text(
           label,
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         leading: Icon(
           icon,

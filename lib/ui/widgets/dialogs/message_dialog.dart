@@ -8,7 +8,7 @@ class MessageDialog extends StatelessWidget {
 
   const MessageDialog({
     required this.message,
-  }) : assert(message != null);
+  });
 
   @override
   Widget build(BuildContext context) {

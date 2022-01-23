@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class IconLabel extends StatelessWidget {
+  final double gap;
   final IconData icon;
   final String label;
   final double iconSize;
-  final Color iconColor;
-  final double gap;
-  final TextStyle labelStyle;
+  final Color? iconColor;
+  final TextStyle? labelStyle;
 
   const IconLabel({
     required this.icon,
@@ -17,10 +17,7 @@ class IconLabel extends StatelessWidget {
     this.iconColor,
     this.gap = 4.0,
     this.iconSize = 12.0,
-  })  : assert(gap != null),
-        assert(icon != null),
-        assert(label != null),
-        assert(iconSize != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class IconLabel extends StatelessWidget {
             label,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: labelStyle ?? context.t.headline5.bold,
+            style: labelStyle ?? context.t.headline5?.bold,
           ),
         ),
       ],

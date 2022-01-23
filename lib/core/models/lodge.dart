@@ -41,9 +41,9 @@ class Lodge {
     required this.coord,
     required this.rating,
     required this.facility,
-    required this.imageUrls,
-    required this.contactNumbers,
     required this.reviewDetails,
+    this.imageUrls = const [],
+    this.contactNumbers = const [],
   });
 
   Lodge copyWith({

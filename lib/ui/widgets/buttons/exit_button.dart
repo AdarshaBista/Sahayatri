@@ -14,10 +14,7 @@ class ExitButton extends StatelessWidget {
     this.icon = AppIcons.close,
     this.color = AppColors.light,
     this.backgroundColor = AppColors.dark,
-  })  : assert(size != null),
-        assert(icon != null),
-        assert(color != null),
-        assert(backgroundColor != null);
+  });
 
   @override
   Widget build(BuildContext context) {

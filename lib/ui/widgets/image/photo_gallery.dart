@@ -18,12 +18,12 @@ import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 
 class PhotoGallery extends StatefulWidget {
   final List<String> imageUrls;
-  final Function(String) onDelete;
+  final Function(String)? onDelete;
 
   const PhotoGallery({
     this.onDelete,
     required this.imageUrls,
-  }) : assert(imageUrls != null);
+  });
 
   @override
   _PhotoGalleryState createState() => _PhotoGalleryState();
@@ -57,7 +57,10 @@ class _PhotoGalleryState extends State<PhotoGallery> {
       final effectiveXCount = math.min(xCount, crossAxisCount - 1);
       xRemaining -= effectiveXCount;
 
-      _staggeredTiles.add(StaggeredTile.count(effectiveXCount, yCount));
+      _staggeredTiles.add(StaggeredTile.count(
+        effectiveXCount,
+        yCount.toDouble(),
+      ));
     }
   }
 
@@ -124,6 +127,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
   Widget _buildImage(int index) {
     final imageUrl = widget.imageUrls[index];
     if (!deletable) return ImageCard(imageUrl: imageUrl);
+
     return Stack(
       children: [
         ImageCard(imageUrl: imageUrl),
@@ -131,7 +135,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
           top: 2.0,
           right: 2.0,
           child: GestureDetector(
-            onTap: () => widget.onDelete(imageUrl),
+            onTap: () => widget.onDelete?.call(imageUrl),
             child: const CircleAvatar(
               radius: 9.0,
               backgroundColor: AppColors.secondary,

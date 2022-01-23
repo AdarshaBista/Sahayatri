@@ -13,15 +13,11 @@ class DynamicTextMarker extends Marker {
     required Coord coord,
     required IconData icon,
     required bool shrinkWhen,
-    String label,
-    Function(BuildContext) onTap,
     Color color = AppColors.dark,
     Color backgroundColor = AppColors.light,
-  })  : assert(icon != null),
-        assert(color != null),
-        assert(shrinkWhen != null),
-        assert(backgroundColor != null),
-        super(
+    String? label,
+    void Function(BuildContext)? onTap,
+  }) : super(
           height: shrinkWhen ? 28.0 : 44.0,
           width: shrinkWhen ? 28.0 : 120.0,
           point: coord.toLatLng(),
@@ -39,19 +35,19 @@ class DynamicTextMarker extends Marker {
 
 class _DynamicTextMarkerWidget extends StatelessWidget {
   final Color color;
-  final String label;
   final IconData icon;
   final bool shrinkWhen;
   final Color backgroundColor;
-  final Function(BuildContext) onTap;
+  final void Function(BuildContext)? onTap;
+  final String? label;
 
   const _DynamicTextMarkerWidget({
-    this.icon,
-    this.label,
-    this.color,
+    required this.icon,
+    required this.color,
+    required this.shrinkWhen,
+    required this.backgroundColor,
     this.onTap,
-    this.shrinkWhen,
-    this.backgroundColor,
+    this.label,
   });
 
   @override
@@ -60,18 +56,18 @@ class _DynamicTextMarkerWidget extends StatelessWidget {
       return IconMarkerWidget(
         icon: icon,
         color: backgroundColor,
-        onTap: () => onTap(context),
+        onTap: () => onTap?.call(context),
       );
     }
 
     return ArrowMarkerWidget(
       borderRadius: 32.0,
       color: backgroundColor,
-      onTap: () => onTap(context),
+      onTap: () => onTap?.call(context),
       padding: const EdgeInsets.fromLTRB(4.0, 4.0, 8.0, 4.0),
       child: IconLabel(
         icon: icon,
-        label: label,
+        label: label!,
         iconSize: 14.0,
         iconColor: color,
         labelStyle: AppTextStyles.headline6.withColor(color),

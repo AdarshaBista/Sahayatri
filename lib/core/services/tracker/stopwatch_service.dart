@@ -69,8 +69,6 @@ class StopwatchService {
   /// Save the current [elapsed] time.
   Future<void> _saveElapsed(int elapsed) async {
     final trackerData = await trackerDao.get();
-    if (trackerData == null) return;
-
     _trackerData = trackerData;
     await trackerDao.upsert(_trackerData.copyWith(elapsed: elapsed));
   }

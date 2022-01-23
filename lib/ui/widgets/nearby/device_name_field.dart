@@ -62,7 +62,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
   Widget _buildSubmitButton(BuildContext context) {
     return SaveButton(
       onPressed: () {
-        if (!_formKey.currentState.validate()) return;
+        if (!(_formKey.currentState?.validate() ?? false)) return;
         context.read<PrefsCubit>().saveDeviceName(deviceName);
         context.openFlushBar(
           'Device name saved: $deviceName',

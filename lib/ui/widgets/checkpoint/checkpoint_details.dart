@@ -20,8 +20,7 @@ class CheckpointDetails extends StatelessWidget {
   const CheckpointDetails({
     this.showLodges = true,
     required this.checkpoint,
-  })  : assert(checkpoint != null),
-        assert(showLodges != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +42,9 @@ class CheckpointDetails extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           _CheckpointDateTime(checkpoint: checkpoint),
-          if (showLodges && checkpoint.place.lodges.isNotEmpty) ...[
+          if (showLodges && (checkpoint.place?.lodges.isNotEmpty ?? false)) ...[
             const SizedBox(height: 16.0),
-            CheckpointLodges(lodges: checkpoint.place.lodges),
+            CheckpointLodges(lodges: checkpoint.place!.lodges),
           ],
           const SizedBox(height: 8.0),
         ],
@@ -60,7 +59,7 @@ class CheckpointDetails extends StatelessWidget {
         Header(
           padding: 20.0,
           fontSize: 25.0,
-          title: checkpoint.place.name,
+          title: checkpoint.place?.name ?? 'N/A',
         ),
         const Spacer(),
         CircularButton(
@@ -99,7 +98,7 @@ class _CheckpointDateTime extends StatelessWidget {
 
   const _CheckpointDateTime({
     required this.checkpoint,
-  }) : assert(checkpoint != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,10 +125,10 @@ class _CheckpointDateTime extends StatelessWidget {
   }
 
   Widget _buildCard({
-    BuildContext context,
-    String title,
-    IconData icon,
-    String subtitle,
+    required BuildContext context,
+    required String title,
+    required IconData icon,
+    required String subtitle,
   }) {
     return Expanded(
       child: CustomCard(
@@ -153,7 +152,7 @@ class _CheckpointDateTime extends StatelessWidget {
                 const SizedBox(height: 4.0),
                 Text(
                   subtitle,
-                  style: context.t.headline5.bold,
+                  style: context.t.headline5?.bold,
                 ),
               ],
             ),

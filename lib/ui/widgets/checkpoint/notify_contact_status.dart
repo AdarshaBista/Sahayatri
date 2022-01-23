@@ -8,7 +8,7 @@ class NotifyContactStatus extends StatelessWidget {
 
   const NotifyContactStatus({
     required this.isNotified,
-  }) : assert(isNotified != null);
+  });
 
   @override
   Widget build(BuildContext context) {

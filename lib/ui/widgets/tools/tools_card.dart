@@ -8,17 +8,14 @@ class ToolsCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ToolsCard({
     required this.title,
     required this.subtitle,
     required this.icon,
-    required this.onTap,
-  })  : assert(title != null),
-        assert(subtitle != null),
-        assert(icon != null),
-        assert(onTap != null);
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +40,7 @@ class ToolsCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: context.t.headline5.bold,
+                      style: context.t.headline5?.bold,
                     ),
                     const SizedBox(height: 4.0),
                     Text(

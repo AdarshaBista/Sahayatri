@@ -5,13 +5,13 @@ import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class CustomTile extends StatelessWidget {
-  final Color color;
   final String title;
   final IconData icon;
-  final Color iconColor;
-  final Widget trailing;
-  final VoidCallback onTap;
-  final TextStyle textStyle;
+  final Color? color;
+  final Color? iconColor;
+  final Widget? trailing;
+  final VoidCallback? onTap;
+  final TextStyle? textStyle;
 
   const CustomTile({
     this.onTap,
@@ -21,8 +21,7 @@ class CustomTile extends StatelessWidget {
     this.trailing,
     required this.icon,
     required this.title,
-  })  : assert(icon != null),
-        assert(title != null);
+  });
 
   @override
   Widget build(BuildContext context) {

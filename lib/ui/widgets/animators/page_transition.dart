@@ -5,8 +5,7 @@ class PageTransition extends PageRouteBuilder {
 
   PageTransition({
     required this.page,
-  })  : assert(page != null),
-        super(
+  }) : super(
           pageBuilder: (
             BuildContext context,
             Animation<double> animation,

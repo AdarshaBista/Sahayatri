@@ -7,11 +7,11 @@ import 'package:sahayatri/ui/widgets/appbars/custom_flexible_space.dart';
 class CollapsibleAppbar extends StatelessWidget {
   final String title;
   final double height;
-  final double offset;
-  final Widget leading;
-  final Widget background;
   final double leftPadding;
-  final VoidCallback onBack;
+  final Widget? background;
+  final double? offset;
+  final Widget? leading;
+  final VoidCallback? onBack;
 
   const CollapsibleAppbar({
     required this.title,
@@ -21,9 +21,7 @@ class CollapsibleAppbar extends StatelessWidget {
     this.background,
     this.height = 100.0,
     this.leftPadding = 20.0,
-  })  : assert(title != null),
-        assert(height != null),
-        assert(leftPadding != null);
+  });
 
   @override
   Widget build(BuildContext context) {

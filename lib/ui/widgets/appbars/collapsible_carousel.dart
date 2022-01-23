@@ -7,17 +7,16 @@ import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class CollapsibleCarousel extends StatelessWidget {
   final String title;
-  final String heroId;
-  final VoidCallback onBack;
   final List<String> imageUrls;
+  final String? heroId;
+  final VoidCallback? onBack;
 
   const CollapsibleCarousel({
     this.heroId,
     this.onBack,
     required this.title,
     required this.imageUrls,
-  })  : assert(title != null),
-        assert(imageUrls != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +42,6 @@ class CollapsibleCarousel extends StatelessWidget {
       ),
     );
 
-    return heroId == null ? carousel : Hero(tag: heroId, child: carousel);
+    return heroId == null ? carousel : Hero(tag: heroId!, child: carousel);
   }
 }

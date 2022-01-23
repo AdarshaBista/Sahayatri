@@ -9,9 +9,7 @@ class AnimatedTabView extends StatefulWidget {
     required this.index,
     required this.children,
     this.keepAlive = false,
-  })  : assert(index != null),
-        assert(children != null),
-        assert(keepAlive != null);
+  });
 
   @override
   _AnimatedTabViewState createState() => _AnimatedTabViewState();
@@ -19,9 +17,9 @@ class AnimatedTabView extends StatefulWidget {
 
 class _AnimatedTabViewState extends State<AnimatedTabView>
     with TickerProviderStateMixin {
-  int index;
-  AnimationController fadeController;
-  AnimationController scaleController;
+  late int index;
+  late final AnimationController fadeController;
+  late final AnimationController scaleController;
 
   @override
   void initState() {

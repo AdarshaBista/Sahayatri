@@ -4,27 +4,23 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class ArrowMarkerWidget extends StatelessWidget {
-  final Color color;
   final Widget child;
   final EdgeInsets padding;
   final double borderRadius;
   final double arrowWidth;
   final double arrowHeight;
-  final VoidCallback onTap;
+  final Color? color;
+  final VoidCallback? onTap;
 
   const ArrowMarkerWidget({
     required this.child,
-    this.color,
-    this.onTap,
     this.arrowWidth = 30.0,
     this.arrowHeight = 20.0,
     this.borderRadius = 6.0,
     this.padding = EdgeInsets.zero,
-  })  : assert(child != null),
-        assert(padding != null),
-        assert(arrowWidth != null),
-        assert(arrowHeight != null),
-        assert(borderRadius != null);
+    this.color,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,7 @@ class _ArrowPainter extends CustomPainter {
 
   const _ArrowPainter({
     required this.color,
-  }) : assert(color != null);
+  });
 
   @override
   void paint(Canvas canvas, Size size) {

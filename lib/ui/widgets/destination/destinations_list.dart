@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/core/constants/images.dart';
 import 'package:sahayatri/core/models/destination.dart';
@@ -17,9 +16,7 @@ class DestinationsList extends StatelessWidget {
     this.deletable = false,
     required this.isSearching,
     required this.destinations,
-  })  : assert(deletable != null),
-        assert(isSearching != null),
-        assert(destinations != null);
+  });
 
   @override
   Widget build(BuildContext context) {

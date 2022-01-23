@@ -10,7 +10,7 @@ class LocationErrorIndicator extends StatelessWidget {
 
   const LocationErrorIndicator({
     required this.message,
-  }) : assert(message != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LocationErrorIndicator extends StatelessWidget {
       title: Text(
         message,
         textAlign: TextAlign.center,
-        style: context.t.headline5.bold,
+        style: context.t.headline5?.bold,
       ),
     );
   }

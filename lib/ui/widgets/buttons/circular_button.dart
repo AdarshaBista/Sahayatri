@@ -8,8 +8,8 @@ class CircularButton extends StatelessWidget {
   final Color color;
   final IconData icon;
   final double padding;
-  final VoidCallback onTap;
   final Color backgroundColor;
+  final VoidCallback? onTap;
 
   const CircularButton({
     required this.icon,
@@ -18,10 +18,7 @@ class CircularButton extends StatelessWidget {
     this.padding = 8.0,
     this.color = AppColors.light,
     this.backgroundColor = AppColors.dark,
-  })  : assert(size != null),
-        assert(icon != null),
-        assert(color != null),
-        assert(backgroundColor != null);
+  });
 
   @override
   Widget build(BuildContext context) {

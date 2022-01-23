@@ -7,19 +7,16 @@ class StatCard extends StatelessWidget {
   final String label;
   final String count;
   final Color color;
-  final TextStyle countStyle;
   final CrossAxisAlignment crossAxisAlignment;
+  final TextStyle? countStyle;
 
   const StatCard({
     required this.label,
     required this.count,
     required this.color,
-    this.countStyle,
     this.crossAxisAlignment = CrossAxisAlignment.center,
-  })  : assert(label != null),
-        assert(count != null),
-        assert(color != null),
-        assert(crossAxisAlignment != null);
+    this.countStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class StatCard extends StatelessWidget {
             child: Text(
               label,
               textAlign: TextAlign.center,
-              style: context.t.headline6.bold,
+              style: context.t.headline6?.bold,
             ),
           ),
           const SizedBox(height: 3.0),

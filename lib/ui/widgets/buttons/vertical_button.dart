@@ -4,18 +4,17 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class VerticalButton extends StatelessWidget {
-  final Color color;
   final String label;
   final IconData icon;
-  final VoidCallback onTap;
+  final Color? color;
+  final VoidCallback? onTap;
 
   const VerticalButton({
     required this.icon,
     required this.label,
     this.color,
     this.onTap,
-  })  : assert(icon != null),
-        assert(label != null);
+  });
 
   @override
   Widget build(BuildContext context) {

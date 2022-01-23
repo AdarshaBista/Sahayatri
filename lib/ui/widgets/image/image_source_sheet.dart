@@ -11,7 +11,7 @@ class ImageSourceSheet extends StatelessWidget {
 
   const ImageSourceSheet({
     required this.onSelect,
-  }) : assert(onSelect != null);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,40 +5,34 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 class SlidingPanel extends StatelessWidget {
   final Widget body;
-  final Widget panel;
-  final Widget collapsed;
   final double minHeight;
-  final double maxHeight;
-  final double snapPoint;
   final double borderRadius;
   final EdgeInsets margin;
   final bool backdropEnabled;
   final bool parallaxEnabled;
   final bool renderPanelSheet;
-  final Function(double) onPanelSlide;
-  final Widget Function(ScrollController) panelBuilder;
+  final Widget? panel;
+  final Widget? collapsed;
+  final double? maxHeight;
+  final double? snapPoint;
+  final Function(double)? onPanelSlide;
+  final Widget Function(ScrollController)? panelBuilder;
 
   const SlidingPanel({
     required this.body,
     required this.minHeight,
+    this.borderRadius = 12.0,
+    this.backdropEnabled = true,
+    this.parallaxEnabled = false,
+    this.renderPanelSheet = true,
+    this.margin = EdgeInsets.zero,
     this.panel,
     this.collapsed,
     this.maxHeight,
     this.snapPoint,
     this.onPanelSlide,
     this.panelBuilder,
-    this.borderRadius = 12.0,
-    this.backdropEnabled = true,
-    this.parallaxEnabled = false,
-    this.renderPanelSheet = true,
-    this.margin = EdgeInsets.zero,
-  })  : assert(body != null),
-        assert(margin != null),
-        assert(minHeight != null),
-        assert(borderRadius != null),
-        assert(backdropEnabled != null),
-        assert(parallaxEnabled != null),
-        assert(renderPanelSheet != null);
+  });
 
   @override
   Widget build(BuildContext context) {

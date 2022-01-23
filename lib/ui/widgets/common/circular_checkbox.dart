@@ -5,22 +5,21 @@ import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class CircularCheckbox extends StatefulWidget {
   final bool value;
-  final Color color;
   final Function(bool) onSelect;
+  final Color? color;
 
   const CircularCheckbox({
     this.color,
     required this.value,
     required this.onSelect,
-  })  : assert(value != null),
-        assert(onSelect != null);
+  });
 
   @override
   _CircularCheckboxState createState() => _CircularCheckboxState();
 }
 
 class _CircularCheckboxState extends State<CircularCheckbox> {
-  bool isChecked;
+  late bool isChecked;
 
   @override
   void initState() {

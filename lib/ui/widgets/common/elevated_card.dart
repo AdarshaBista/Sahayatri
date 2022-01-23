@@ -4,13 +4,13 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 class ElevatedCard extends StatelessWidget {
   final Widget child;
-  final Color color;
   final double radius;
-  final Color shadowColor;
   final double elevation;
+  final Color shadowColor;
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
-  final BorderRadius borderRadius;
+  final Color? color;
+  final BorderRadius? borderRadius;
 
   const ElevatedCard({
     required this.child,
@@ -21,12 +21,7 @@ class ElevatedCard extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
     this.borderRadius,
-  })  : assert(child != null),
-        assert(elevation != null),
-        assert(radius != null),
-        assert(margin != null),
-        assert(padding != null),
-        assert(shadowColor != null);
+  });
 
   @override
   Widget build(BuildContext context) {

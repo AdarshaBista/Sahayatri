@@ -12,8 +12,7 @@ class BusyIndicator extends StatelessWidget {
   const BusyIndicator({
     this.padding = 64.0,
     this.imageUrl = Images.generalLoading,
-  })  : assert(padding != null),
-        assert(imageUrl != null);
+  });
 
   @override
   Widget build(BuildContext context) {

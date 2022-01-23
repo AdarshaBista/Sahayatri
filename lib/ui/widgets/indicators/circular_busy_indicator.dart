@@ -8,7 +8,7 @@ class CircularBusyIndicator extends StatelessWidget {
 
   const CircularBusyIndicator({
     this.color = AppColors.primaryDark,
-  }) : assert(color != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CircularBusyIndicator extends StatelessWidget {
         width: 32.0,
         height: 32.0,
         child: LoadingIndicator(
-          color: color,
+          colors: [color],
           indicatorType: Indicator.ballSpinFadeLoader,
         ),
       ),
