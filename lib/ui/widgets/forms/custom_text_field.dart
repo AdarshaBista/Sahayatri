@@ -21,7 +21,7 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter> inputFormatters;
 
   const CustomTextField({
-    @required this.label,
+    required this.label,
     this.validator,
     this.onChanged,
     this.initialValue,

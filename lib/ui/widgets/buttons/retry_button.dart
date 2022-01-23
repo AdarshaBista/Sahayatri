@@ -7,7 +7,7 @@ class RetryButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const RetryButton({
-    @required this.onTap,
+    required this.onTap,
   }) : assert(onTap != null);
 
   @override

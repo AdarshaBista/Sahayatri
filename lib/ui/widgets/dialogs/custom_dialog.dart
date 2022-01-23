@@ -10,7 +10,7 @@ class CustomDialog extends StatelessWidget {
 
   const CustomDialog({
     this.content,
-    @required this.child,
+    required this.child,
     this.padding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
   })  : assert(child != null),
         assert(padding != null);

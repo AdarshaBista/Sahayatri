@@ -14,8 +14,8 @@ class NestedTabView extends StatefulWidget {
   final List<NestedTabData> tabs;
 
   const NestedTabView({
-    @required this.tabs,
-    @required this.children,
+    required this.tabs,
+    required this.children,
     this.keepAlive = false,
     this.isCentered = false,
     this.isTabFilled = false,
@@ -38,8 +38,9 @@ class _NestedTabViewState extends State<NestedTabView> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: widget.isCentered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16.0),
         _buildTabBar(context),
@@ -55,8 +56,10 @@ class _NestedTabViewState extends State<NestedTabView> {
   Widget _buildTabBar(BuildContext context) {
     final height = widget.isTabFilled ? 38.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
-    final color = widget.isTabFilled ? context.c.background : Colors.transparent;
-    final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
+    final color =
+        widget.isTabFilled ? context.c.background : Colors.transparent;
+    final padding =
+        widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
     return Container(
       height: height,
@@ -94,9 +97,9 @@ class NestedTab extends StatelessWidget {
   final bool showIndicator;
 
   const NestedTab({
-    @required this.tab,
-    @required this.isSelected,
-    @required this.showIndicator,
+    required this.tab,
+    required this.isSelected,
+    required this.showIndicator,
   })  : assert(tab != null),
         assert(isSelected != null),
         assert(showIndicator != null);
@@ -126,8 +129,9 @@ class NestedTab extends StatelessWidget {
   }
 
   Widget _buildTab(BuildContext context) {
-    final color =
-        !showIndicator && isSelected ? AppColors.primaryDark : context.c.onBackground;
+    final color = !showIndicator && isSelected
+        ? AppColors.primaryDark
+        : context.c.onBackground;
 
     return IconLabel(
       iconSize: 18.0,
@@ -144,8 +148,8 @@ class NestedTabData {
   final IconData icon;
 
   NestedTabData({
-    @required this.label,
-    @required this.icon,
+    required this.label,
+    required this.icon,
   })  : assert(label != null),
         assert(icon != null);
 }

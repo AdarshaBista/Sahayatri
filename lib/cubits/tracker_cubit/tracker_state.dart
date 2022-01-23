@@ -23,8 +23,8 @@ class TrackerUpdating extends TrackerState {
   final TrackerUpdate update;
 
   const TrackerUpdating({
-    @required this.update,
-  }) : assert(update != null);
+    required this.update,
+  });
 
   @override
   List<Object> get props => [update];
@@ -34,8 +34,8 @@ class TrackerError extends TrackerState {
   final String message;
 
   const TrackerError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

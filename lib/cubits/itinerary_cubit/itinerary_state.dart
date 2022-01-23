@@ -19,8 +19,8 @@ class ItineraryLoaded extends ItineraryState {
   final List<Itinerary> itineraries;
 
   const ItineraryLoaded({
-    @required this.itineraries,
-  }) : assert(itineraries != null);
+    required this.itineraries,
+  });
 
   @override
   List<Object> get props => [itineraries];
@@ -30,8 +30,8 @@ class ItineraryError extends ItineraryState {
   final String message;
 
   const ItineraryError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

@@ -10,8 +10,8 @@ class VerticalButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const VerticalButton({
-    @required this.icon,
-    @required this.label,
+    required this.icon,
+    required this.label,
     this.color,
     this.onTap,
   })  : assert(icon != null),

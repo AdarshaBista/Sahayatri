@@ -9,7 +9,7 @@ class DeviceStatusRow extends StatelessWidget {
   final DeviceStatus status;
 
   const DeviceStatusRow({
-    @required this.status,
+    required this.status,
   }) : assert(status != null);
 
   @override

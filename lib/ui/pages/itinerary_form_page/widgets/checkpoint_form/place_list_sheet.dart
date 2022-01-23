@@ -20,7 +20,7 @@ class PlaceListSheet extends StatelessWidget {
   final void Function(Place) onSelect;
 
   const PlaceListSheet({
-    @required this.onSelect,
+    required this.onSelect,
   }) : assert(onSelect != null);
 
   @override

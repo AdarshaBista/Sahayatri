@@ -11,9 +11,9 @@ class StatCard extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const StatCard({
-    @required this.label,
-    @required this.count,
-    @required this.color,
+    required this.label,
+    required this.count,
+    required this.color,
     this.countStyle,
     this.crossAxisAlignment = CrossAxisAlignment.center,
   })  : assert(label != null),

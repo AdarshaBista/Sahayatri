@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -18,14 +16,13 @@ class WeatherCubit extends Cubit<WeatherState> {
   final WeatherService weatherService = locator();
 
   WeatherCubit({
-    @required this.title,
-  })  : assert(title != null),
-        super(const WeatherInitial());
+    required this.title,
+  }) : super(const WeatherInitial());
 
   Future<void> fetchWeather(Coord coord) async {
     emit(const WeatherLoading());
     try {
-      final List<Weather> forecasts = await weatherService.fetchForecasts(coord);
+      final forecasts = await weatherService.fetchForecasts(coord);
       emit(WeatherSuccess(forecasts: forecasts));
     } on AppError catch (e) {
       emit(WeatherError(message: e.message));

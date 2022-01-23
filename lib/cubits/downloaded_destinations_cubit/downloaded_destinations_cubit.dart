@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -16,7 +14,9 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
 
   DownloadedDestinationsCubit() : super(const DownloadedDestinationsEmpty()) {
     destinationsService.onDownload = () {
-      emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+      emit(DownloadedDestinationsLoaded(
+        destinations: destinationsService.downloaded,
+      ));
     };
   }
 
@@ -27,7 +27,9 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
       if (destinationsService.downloaded.isEmpty) {
         emit(const DownloadedDestinationsEmpty());
       } else {
-        emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+        emit(DownloadedDestinationsLoaded(
+          destinations: destinationsService.downloaded,
+        ));
       }
     } on AppError catch (e) {
       emit(DownloadedDestinationsError(message: e.message));
@@ -35,13 +37,17 @@ class DownloadedDestinationsCubit extends Cubit<DownloadedDestinationsState> {
   }
 
   Future<void> delete(Destination destination) async {
-    emit(DownloadedDestinationsMessage(message: 'Deleting ${destination.name}...'));
+    emit(DownloadedDestinationsMessage(
+      message: 'Deleting ${destination.name}...',
+    ));
     await destinationsService.deleteDownloaded(destination.id);
     emit(DownloadedDestinationsMessage(message: 'Deleted ${destination.name}'));
     if (destinationsService.downloaded.isEmpty) {
       emit(const DownloadedDestinationsEmpty());
     } else {
-      emit(DownloadedDestinationsLoaded(destinations: destinationsService.downloaded));
+      emit(DownloadedDestinationsLoaded(
+        destinations: destinationsService.downloaded,
+      ));
     }
   }
 }

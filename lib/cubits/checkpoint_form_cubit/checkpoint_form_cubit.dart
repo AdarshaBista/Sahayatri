@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,10 +7,10 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 part 'checkpoint_form_state.dart';
 
 class CheckpointFormCubit extends Cubit<CheckpointFormState> {
-  final Checkpoint checkpoint;
+  final Checkpoint? checkpoint;
 
   CheckpointFormCubit({
-    @required this.checkpoint,
+    required this.checkpoint,
   }) : super(
           CheckpointFormState(
             place: checkpoint?.place,

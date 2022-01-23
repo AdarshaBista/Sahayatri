@@ -105,8 +105,8 @@ class _Painter extends CustomPainter {
   final Color shadowColor;
 
   const _Painter({
-    @required this.color,
-    @required this.shadowColor,
+    required this.color,
+    required this.shadowColor,
   })  : assert(color != null),
         assert(shadowColor != null);
 

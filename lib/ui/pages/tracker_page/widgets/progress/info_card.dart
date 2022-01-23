@@ -11,9 +11,9 @@ class InfoCard extends StatelessWidget {
 
   const InfoCard({
     this.color = AppColors.primaryDark,
-    @required this.icon,
-    @required this.title,
-    @required this.subtitle,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
   })  : assert(icon != null),
         assert(title != null),
         assert(color != null),

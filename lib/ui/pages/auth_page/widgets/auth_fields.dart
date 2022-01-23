@@ -12,10 +12,10 @@ class AuthFields extends StatelessWidget {
   final void Function(String) onPasswordChanged;
 
   const AuthFields({
-    @required this.initialEmail,
-    @required this.onEmailChanged,
-    @required this.initialPassword,
-    @required this.onPasswordChanged,
+    required this.initialEmail,
+    required this.onEmailChanged,
+    required this.initialPassword,
+    required this.onPasswordChanged,
   })  : assert(initialEmail != null),
         assert(onEmailChanged != null),
         assert(initialPassword != null),

@@ -16,7 +16,7 @@ class RouteLayer extends StatefulWidget {
   final MapController mapController;
 
   const RouteLayer({
-    @required this.mapController,
+    required this.mapController,
   }) : assert(mapController != null);
 
   @override

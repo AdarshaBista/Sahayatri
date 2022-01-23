@@ -12,9 +12,9 @@ class TrackerGraph extends StatelessWidget {
   final List<double> yValues;
 
   const TrackerGraph({
-    @required this.title,
-    @required this.color,
-    @required this.yValues,
+    required this.title,
+    required this.color,
+    required this.yValues,
     this.shouldOffset = true,
     this.offsetRange = 10,
   })  : assert(title != null),

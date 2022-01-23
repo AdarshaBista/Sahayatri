@@ -19,8 +19,8 @@ class DirectionsError extends DirectionsState {
   final String message;
 
   const DirectionsError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

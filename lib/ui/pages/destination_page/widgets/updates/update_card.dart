@@ -18,7 +18,7 @@ class UpdateCard extends StatelessWidget {
   final DestinationUpdate update;
 
   const UpdateCard({
-    @required this.update,
+    required this.update,
   }) : assert(update != null);
 
   @override

@@ -170,7 +170,7 @@ class TrackerService {
     for (final checkpoint in itinerary!.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination!.route);
       placeIndex =
-          GeoUtils.indexOnPath(checkpoint.place.coord, _destination!.route);
+          GeoUtils.indexOnPath(checkpoint.place!.coord, _destination!.route);
 
       if (userIndex >= placeIndex) continue;
       nextCheckpoint = checkpoint;

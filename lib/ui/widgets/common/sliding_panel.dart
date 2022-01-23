@@ -19,8 +19,8 @@ class SlidingPanel extends StatelessWidget {
   final Widget Function(ScrollController) panelBuilder;
 
   const SlidingPanel({
-    @required this.body,
-    @required this.minHeight,
+    required this.body,
+    required this.minHeight,
     this.panel,
     this.collapsed,
     this.maxHeight,

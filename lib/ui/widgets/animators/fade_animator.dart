@@ -9,7 +9,7 @@ class FadeAnimator extends StatelessWidget {
   final int duration;
 
   const FadeAnimator({
-    @required this.child,
+    required this.child,
     this.duration = UiConfig.animatorDuration,
   }) : assert(child != null);
 

@@ -13,8 +13,8 @@ class ConfirmDialog extends StatelessWidget {
   final VoidCallback onConfirm;
 
   const ConfirmDialog({
-    @required this.message,
-    @required this.onConfirm,
+    required this.message,
+    required this.onConfirm,
     this.cancelText = 'NO',
     this.confirmText = 'YES',
     this.cancelIcon = AppIcons.close,

@@ -11,10 +11,10 @@ class ToolsCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const ToolsCard({
-    @required this.title,
-    @required this.subtitle,
-    @required this.icon,
-    @required this.onTap,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onTap,
   })  : assert(title != null),
         assert(subtitle != null),
         assert(icon != null),

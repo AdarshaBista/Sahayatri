@@ -16,7 +16,7 @@ class PlaceCard extends StatelessWidget {
   final Place place;
 
   const PlaceCard({
-    @required this.place,
+    required this.place,
   }) : assert(place != null);
 
   @override

@@ -19,8 +19,8 @@ class CustomTile extends StatelessWidget {
     this.iconColor,
     this.textStyle,
     this.trailing,
-    @required this.icon,
-    @required this.title,
+    required this.icon,
+    required this.title,
   })  : assert(icon != null),
         assert(title != null);
 

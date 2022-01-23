@@ -7,8 +7,7 @@ class PrefsState extends Equatable {
   const PrefsState({
     this.isLoading = false,
     this.prefs = const Prefs(),
-  })  : assert(prefs != null),
-        assert(isLoading != null);
+  });
 
   @override
   List<Object> get props => [prefs, isLoading];

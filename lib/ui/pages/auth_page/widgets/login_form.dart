@@ -13,7 +13,7 @@ class LoginForm extends StatefulWidget {
   final bool isInitial;
 
   const LoginForm({
-    @required this.isInitial,
+    required this.isInitial,
   }) : assert(isInitial != null);
 
   @override

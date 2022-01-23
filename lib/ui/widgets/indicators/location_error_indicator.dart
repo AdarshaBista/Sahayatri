@@ -9,7 +9,7 @@ class LocationErrorIndicator extends StatelessWidget {
   final String message;
 
   const LocationErrorIndicator({
-    @required this.message,
+    required this.message,
   }) : assert(message != null);
 
   @override

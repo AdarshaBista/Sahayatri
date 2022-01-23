@@ -21,7 +21,7 @@ class ReviewList extends StatelessWidget {
   final ReviewCubit reviewCubit;
 
   const ReviewList({
-    @required this.reviewCubit,
+    required this.reviewCubit,
   }) : assert(reviewCubit != null);
 
   @override

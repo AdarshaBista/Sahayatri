@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -13,11 +11,11 @@ import 'package:sahayatri/core/services/api_service.dart';
 part 'review_state.dart';
 
 abstract class ReviewCubit extends Cubit<ReviewState> {
-  final User user;
+  final User? user;
   final ApiService apiService = locator();
 
   ReviewCubit({
-    @required this.user,
+    required this.user,
   }) : super(const ReviewEmpty());
 
   int page = 1;
@@ -27,7 +25,11 @@ abstract class ReviewCubit extends Cubit<ReviewState> {
   Future<void> fetchReviews();
   Future<bool> postReview(double rating, String text);
 
-  ReviewDetails updateReviewDetails(ReviewDetails old, double rating, Review review) {
+  ReviewDetails updateReviewDetails(
+    ReviewDetails old,
+    double rating,
+    Review review,
+  ) {
     if (old.isNotEmpty) {
       return old.copyWith(
         total: old.total + 1,

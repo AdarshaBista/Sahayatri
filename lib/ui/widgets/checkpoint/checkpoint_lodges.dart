@@ -9,7 +9,7 @@ class CheckpointLodges extends StatelessWidget {
   final List<Lodge> lodges;
 
   const CheckpointLodges({
-    @required this.lodges,
+    required this.lodges,
   }) : assert(lodges != null);
 
   @override

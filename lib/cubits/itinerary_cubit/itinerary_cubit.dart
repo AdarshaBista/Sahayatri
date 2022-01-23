@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -15,26 +13,29 @@ import 'package:sahayatri/core/services/api_service.dart';
 part 'itinerary_state.dart';
 
 class ItineraryCubit extends Cubit<ItineraryState> {
-  final User user;
+  final User? user;
   final Destination destination;
   final ApiService apiService = locator();
 
   ItineraryCubit({
-    @required this.user,
-    @required this.destination,
-  })  : assert(user != null),
-        assert(destination != null),
-        super(const ItineraryEmpty());
+    required this.user,
+    required this.destination,
+  }) : super(const ItineraryEmpty());
 
   Future<void> fetchItineraries() async {
+    if (user == null) return;
+
     if (destination.suggestedItineraries != null) {
-      emit(ItineraryLoaded(itineraries: destination.suggestedItineraries));
+      emit(ItineraryLoaded(
+        itineraries: destination.suggestedItineraries ?? [],
+      ));
       return;
     }
 
     emit(const ItineraryLoading());
     try {
-      final itineraries = await apiService.fetchItineraries(destination.id, user);
+      final itineraries =
+          await apiService.fetchItineraries(destination.id, user!);
       if (itineraries.isNotEmpty) {
         destination.suggestedItineraries = itineraries;
         emit(ItineraryLoaded(itineraries: itineraries));

@@ -12,7 +12,7 @@ import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 class CheckpointDetailMarker extends Marker {
   CheckpointDetailMarker({
     bool isTracking = false,
-    @required Checkpoint checkpoint,
+    required Checkpoint checkpoint,
   })  : assert(isTracking != null),
         assert(checkpoint != null),
         super(
@@ -43,7 +43,7 @@ class _PlaceImage extends StatelessWidget {
   final String imageUrl;
 
   const _PlaceImage({
-    @required this.imageUrl,
+    required this.imageUrl,
   }) : assert(imageUrl != null);
 
   @override
@@ -65,7 +65,7 @@ class _CheckpointInfo extends StatelessWidget {
   final Checkpoint checkpoint;
 
   const _CheckpointInfo({
-    @required this.checkpoint,
+    required this.checkpoint,
   }) : assert(checkpoint != null);
 
   @override

@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
-
 import 'package:image_picker/image_picker.dart';
 
 import 'package:bloc/bloc.dart';
@@ -28,13 +26,11 @@ class UserCubit extends Cubit<UserState> {
   final Function(User) onAuthenticated;
 
   UserCubit({
-    @required this.onLogout,
-    @required this.onAuthenticated,
-  })  : assert(onLogout != null),
-        assert(onAuthenticated != null),
-        super(const AuthLoading());
+    required this.onLogout,
+    required this.onAuthenticated,
+  }) : super(const AuthLoading());
 
-  User get user {
+  User? get user {
     try {
       return (state as Authenticated).user;
     } catch (_) {
@@ -55,14 +51,15 @@ class UserCubit extends Cubit<UserState> {
 
   Future<bool> updateAvatar(ImageSource source) async {
     if (Platform.isWindows) return false;
+    if (user == null) return false;
 
-    final pickedImage = await ImagePicker().getImage(source: source);
+    final pickedImage = await ImagePicker().pickImage(source: source);
     if (pickedImage == null) return false;
 
-    final newUrl = await apiService.updateUserAvatar(user, pickedImage.path);
+    final newUrl = await apiService.updateUserAvatar(user!, pickedImage.path);
     if (newUrl == null) return false;
 
-    final updatedUser = user.copyWith(imageUrl: newUrl);
+    final updatedUser = user!.copyWith(imageUrl: newUrl);
     await userDao.upsert(updatedUser);
     emit(Authenticated(user: updatedUser));
     return true;
@@ -96,13 +93,13 @@ class UserCubit extends Cubit<UserState> {
 
   Future<bool> logout() async {
     try {
-      await authService.logout(user);
+      await authService.logout(user!);
       await userDao.delete();
       onLogout();
       emit(const Unauthenticated());
       return true;
     } on AppError {
-      emit(Authenticated(user: user));
+      emit(Authenticated(user: user!));
       return false;
     }
   }

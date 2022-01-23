@@ -14,20 +14,17 @@ class ItineraryFormState {
       );
 
   const ItineraryFormState({
-    @required this.name,
-    @required this.days,
-    @required this.nights,
-    @required this.checkpoints,
-  })  : assert(name != null),
-        assert(days != null),
-        assert(nights != null),
-        assert(checkpoints != null);
+    required this.name,
+    required this.days,
+    required this.nights,
+    required this.checkpoints,
+  });
 
   ItineraryFormState copyWith({
-    String name,
-    String days,
-    String nights,
-    List<Checkpoint> checkpoints,
+    String? name,
+    String? days,
+    String? nights,
+    List<Checkpoint>? checkpoints,
   }) {
     return ItineraryFormState(
       name: name ?? this.name,
@@ -37,7 +34,7 @@ class ItineraryFormState {
     );
   }
 
-  bool isDirty(Itinerary initial) {
+  bool isDirty(Itinerary? initial) {
     if (initial == null) {
       return name.isNotEmpty ||
           days.isNotEmpty ||

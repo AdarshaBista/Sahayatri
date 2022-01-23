@@ -24,16 +24,15 @@ class StopwatchService {
     _stopwatch.start();
 
     // Get the latest tracker data and set intial elapsed.
-    final trackerData = await trackerDao.get();
+    _trackerData = await trackerDao.get();
+    _initialElapsed = _trackerData.elapsed;
 
-    // There was no stored tracker data.
-    // So, create tracker data for the current session.
-    if (trackerData == null || trackerData.destinationId == null) {
+    if (_trackerData.destinationId == null) {
+      // There was no stored tracker data.
+      // So, create tracker data for the current session.
       _trackerData = TrackerData(destinationId: destinationId);
       await trackerDao.upsert(_trackerData);
     } else {
-      _trackerData = trackerData;
-
       // The stored tracker data is for another destination.
       // So, delete it and create tracker data for the current session.
       if (_trackerData.destinationId != destinationId) {
@@ -42,7 +41,6 @@ class StopwatchService {
         await trackerDao.upsert(_trackerData);
       }
     }
-    _initialElapsed = _trackerData.elapsed;
   }
 
   Future<void> stop() async {

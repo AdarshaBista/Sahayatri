@@ -16,7 +16,7 @@ class SignUpForm extends StatefulWidget {
   final bool isInitial;
 
   const SignUpForm({
-    @required this.isInitial,
+    required this.isInitial,
   }) : assert(isInitial != null);
 
   @override

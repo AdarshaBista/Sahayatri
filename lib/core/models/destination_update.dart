@@ -6,9 +6,9 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/utils/api_utils.dart';
 
 class DestinationUpdate {
-  final String id;
+  final User? user;
+  final String? id;
   final String text;
-  final User user;
   final DateTime dateUpdated;
   final List<String> tags;
   final List<Coord> coords;
@@ -17,11 +17,11 @@ class DestinationUpdate {
   String get timeAgo => timeago.format(dateUpdated);
 
   const DestinationUpdate({
-    required this.id,
     required this.text,
-    required this.user,
     required this.dateUpdated,
     required this.imageUrls,
+    this.id,
+    this.user,
     this.tags = const [],
     this.coords = const [],
   });

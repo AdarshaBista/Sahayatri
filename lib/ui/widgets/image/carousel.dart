@@ -14,7 +14,7 @@ class Carousel extends StatelessWidget {
     this.width,
     this.height,
     this.showPagination = true,
-    @required this.imageUrls,
+    required this.imageUrls,
   }) : assert(imageUrls != null);
 
   @override

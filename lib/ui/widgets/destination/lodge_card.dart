@@ -17,7 +17,7 @@ class LodgeCard extends StatelessWidget {
   final Lodge lodge;
 
   const LodgeCard({
-    @required this.lodge,
+    required this.lodge,
   }) : assert(lodge != null);
 
   @override

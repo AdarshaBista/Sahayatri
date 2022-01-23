@@ -9,7 +9,7 @@ class ScaleAnimator extends StatelessWidget {
   final int duration;
 
   const ScaleAnimator({
-    @required this.child,
+    required this.child,
     this.duration = UiConfig.animatorDuration,
   }) : assert(child != null);
 

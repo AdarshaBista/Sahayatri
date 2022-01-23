@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,7 +22,9 @@ class DestinationsCubit extends Cubit<DestinationsState> {
       if (destinationsService.destinations.isEmpty) {
         emit(const DestinationsEmpty());
       } else {
-        emit(DestinationsLoaded(destinations: destinationsService.destinations));
+        emit(DestinationsLoaded(
+          destinations: destinationsService.destinations,
+        ));
       }
     } on AppError catch (e) {
       emit(DestinationsError(message: e.message));
@@ -49,7 +49,10 @@ class DestinationsCubit extends Cubit<DestinationsState> {
     if (searchedDestinations.isEmpty) {
       emit(const DestinationsLoaded(isSearching: true, destinations: []));
     } else {
-      emit(DestinationsLoaded(isSearching: true, destinations: searchedDestinations));
+      emit(DestinationsLoaded(
+        isSearching: true,
+        destinations: searchedDestinations,
+      ));
     }
   }
 }

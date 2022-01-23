@@ -13,7 +13,7 @@ class PlaceMapDialog extends StatelessWidget {
   final Place place;
 
   const PlaceMapDialog({
-    @required this.place,
+    required this.place,
   }) : assert(place != null);
 
   @override
@@ -38,7 +38,7 @@ class _LodgeMarkersLayer extends StatelessWidget {
   final List<Lodge> lodges;
 
   const _LodgeMarkersLayer({
-    @required this.lodges,
+    required this.lodges,
   }) : assert(lodges != null);
 
   @override

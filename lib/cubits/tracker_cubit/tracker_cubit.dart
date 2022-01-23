@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,7 +11,6 @@ import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
-import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
@@ -21,11 +18,10 @@ import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 part 'tracker_state.dart';
 
 class TrackerCubit extends Cubit<TrackerState> {
-  final SmsService smsService = locator();
   final NearbyService nearbyService = locator();
   final TrackerService trackerService = locator();
   final OffRouteAlertService offRouteAlertService = locator();
-  StreamSubscription _trackerUpdateSub;
+  StreamSubscription? _trackerUpdateSub;
 
   TrackerCubit() : super(const TrackerLoading()) {
     trackerService.onCompleted = stopTracking;
@@ -58,7 +54,6 @@ class TrackerCubit extends Cubit<TrackerState> {
   }
 
   Future<void> stopTracking() async {
-    smsService.stop();
     await trackerService.stop();
 
     emit(TrackerUpdating(
@@ -108,11 +103,8 @@ class TrackerCubit extends Cubit<TrackerState> {
 
   void _updateTrackerData(TrackerUpdate trackerUpdate, List<Coord> route) {
     final userLocation = trackerUpdate.currentLocation;
-    final userCoord = userLocation.coord;
-
     offRouteAlertService.alert(!trackerUpdate.isOffRoute);
     nearbyService.messagesService.broadcastLocation(userLocation);
-    smsService.send(userCoord, trackerUpdate.nextCheckpoint?.checkpoint);
 
     emit(TrackerUpdating(update: trackerUpdate));
   }

@@ -15,8 +15,8 @@ class DownloadInProgress extends DownloadState {
   final String message;
 
   const DownloadInProgress({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];
@@ -30,8 +30,8 @@ class DownloadError extends DownloadState {
   final String message;
 
   const DownloadError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

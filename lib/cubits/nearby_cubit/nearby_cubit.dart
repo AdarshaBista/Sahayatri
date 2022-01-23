@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -43,7 +41,10 @@ class NearbyCubit extends Cubit<NearbyState> {
   }
 
   Future<void> stopScanning() async {
-    emit(NearbyConnected(isScanning: false, nearbyDevices: nearbyService.devices));
+    emit(NearbyConnected(
+      isScanning: false,
+      nearbyDevices: nearbyService.devices,
+    ));
     await nearbyService.connectionService.stopScanning();
   }
 

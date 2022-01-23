@@ -15,7 +15,7 @@ class DeviceDetails extends StatelessWidget {
   final String deviceId;
 
   const DeviceDetails({
-    @required this.deviceId,
+    required this.deviceId,
   }) : assert(deviceId != null);
 
   @override

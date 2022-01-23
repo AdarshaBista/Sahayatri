@@ -11,8 +11,8 @@ class ViewMoreButton extends StatefulWidget {
   final Future<bool> Function() onLoadMore;
 
   const ViewMoreButton({
-    @required this.hasMore,
-    @required this.onLoadMore,
+    required this.hasMore,
+    required this.onLoadMore,
   })  : assert(hasMore != null),
         assert(onLoadMore != null);
 
@@ -59,7 +59,8 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
     setState(() => isLoading = true);
     final bool success = await widget.onLoadMore();
     if (!success) {
-      context.openFlushBar('Failed to load more reviews!', type: FlushbarType.error);
+      context.openFlushBar('Failed to load more reviews!',
+          type: FlushbarType.error);
     }
     setState(() => isLoading = false);
   }

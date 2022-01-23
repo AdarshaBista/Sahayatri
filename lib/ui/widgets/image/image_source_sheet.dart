@@ -10,7 +10,7 @@ class ImageSourceSheet extends StatelessWidget {
   final void Function(ImageSource) onSelect;
 
   const ImageSourceSheet({
-    @required this.onSelect,
+    required this.onSelect,
   }) : assert(onSelect != null);
 
   @override

@@ -12,7 +12,7 @@ class TranslateBubble extends StatelessWidget {
   final Translation translation;
 
   const TranslateBubble({
-    @required this.translation,
+    required this.translation,
   }) : assert(translation != null);
 
   @override
@@ -28,7 +28,8 @@ class TranslateBubble extends StatelessWidget {
         right: isQuery ? 0.0 : 50.0,
       ),
       child: Column(
-        crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           _buildAudioButton(context),
           _buildText(context),

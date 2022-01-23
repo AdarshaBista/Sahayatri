@@ -16,7 +16,7 @@ class ReviewForm extends StatefulWidget {
   final void Function(double, String) onSubmit;
 
   const ReviewForm({
-    @required this.onSubmit,
+    required this.onSubmit,
   }) : assert(onSubmit != null);
 
   @override

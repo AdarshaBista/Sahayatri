@@ -28,7 +28,7 @@ class DestinationCard extends StatelessWidget {
 
   const DestinationCard({
     this.deletable = false,
-    @required this.destination,
+    required this.destination,
   })  : assert(deletable != null),
         assert(destination != null);
 

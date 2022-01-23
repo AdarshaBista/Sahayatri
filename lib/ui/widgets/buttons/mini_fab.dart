@@ -7,7 +7,7 @@ class MiniFab extends StatelessWidget {
   final VoidCallback onTap;
 
   const MiniFab({
-    @required this.onTap,
+    required this.onTap,
     this.icon = AppIcons.confirm,
   })  : assert(icon != null),
         assert(onTap != null);

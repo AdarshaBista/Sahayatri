@@ -15,7 +15,7 @@ class GradientContainer extends StatelessWidget {
   final EdgeInsetsGeometry padding;
 
   const GradientContainer({
-    @required this.gradientColors,
+    required this.gradientColors,
     this.gradientStops,
     this.isForeground = true,
     this.borderRadius = 0.0,

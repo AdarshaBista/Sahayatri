@@ -10,8 +10,8 @@ class SlideAnimator extends StatelessWidget {
   final Widget child;
 
   const SlideAnimator({
-    @required this.child,
-    @required this.begin,
+    required this.child,
+    required this.begin,
     this.duration = UiConfig.animatorDuration,
   })  : assert(child != null),
         assert(begin != null),

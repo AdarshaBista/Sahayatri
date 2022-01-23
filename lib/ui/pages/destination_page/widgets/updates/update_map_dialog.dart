@@ -69,7 +69,7 @@ class _MarkersLayer extends StatelessWidget {
 
   const _MarkersLayer({
     this.onTap,
-    @required this.coords,
+    required this.coords,
   }) : assert(coords != null);
 
   @override

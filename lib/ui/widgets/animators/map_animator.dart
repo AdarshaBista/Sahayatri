@@ -7,8 +7,8 @@ import 'package:flutter_map/flutter_map.dart' show MapController;
 
 class MapAnimator {
   MapAnimator({
-    @required this.mapController,
-    @required TickerProvider tickerProvider,
+    required this.mapController,
+    required TickerProvider tickerProvider,
     this.curve = Curves.fastOutSlowIn,
     this.duration = const Duration(milliseconds: 600),
   }) {
@@ -214,7 +214,8 @@ extension EndListener<T> on Animation<T> {
   Function onEnd(Function callback) {
     AnimationStatusListener wrapper;
     wrapper = (AnimationStatus status) {
-      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
         removeStatusListener(wrapper);
         callback();
       }

@@ -8,7 +8,7 @@ class TagChip extends StatefulWidget {
 
   const TagChip({
     Key key,
-    @required this.label,
+    required this.label,
     this.onDelete,
   })  : assert(label != null),
         super(key: key);

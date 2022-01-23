@@ -17,16 +17,15 @@ class ReviewLoaded extends ReviewState {
   final ReviewDetails reviewDetails;
 
   const ReviewLoaded({
-    @required this.average,
-    @required this.reviewDetails,
-  })  : assert(average != null),
-        assert(reviewDetails != null);
+    required this.average,
+    required this.reviewDetails,
+  });
 }
 
 class ReviewError extends ReviewState {
   final String message;
 
   const ReviewError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 }

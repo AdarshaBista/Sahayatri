@@ -63,7 +63,8 @@ class ItineraryPanel extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 48.0),
               itemCount: itinerary.checkpoints.length,
               itemBuilder: (context, index) {
-                return _CheckpointCard(checkpoint: itinerary.checkpoints[index]);
+                return _CheckpointCard(
+                    checkpoint: itinerary.checkpoints[index]);
               },
             ),
           ),
@@ -78,7 +79,7 @@ class _CheckpointCard extends StatelessWidget {
   final Checkpoint checkpoint;
 
   const _CheckpointCard({
-    @required this.checkpoint,
+    required this.checkpoint,
   }) : assert(checkpoint != null);
 
   @override

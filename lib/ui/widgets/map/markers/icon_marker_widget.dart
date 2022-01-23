@@ -7,8 +7,8 @@ class IconMarkerWidget extends StatelessWidget {
 
   const IconMarkerWidget({
     this.onTap,
-    @required this.icon,
-    @required this.color,
+    required this.icon,
+    required this.color,
   })  : assert(icon != null),
         assert(color != null);
 

@@ -2,7 +2,6 @@ import 'package:get_it/get_it.dart';
 
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/tts_service.dart';
-import 'package:sahayatri/core/services/sms_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 import 'package:sahayatri/core/services/translate_service.dart';
 import 'package:sahayatri/core/services/directions_service.dart';
@@ -54,7 +53,6 @@ Future<void> registerUserDependentServices(String userId) async {
 
     // Services
     ..registerLazySingleton<TtsService>(() => TtsService())
-    ..registerLazySingleton<SmsService>(() => SmsService())
     ..registerLazySingleton<NearbyService>(() => NearbyService())
     ..registerLazySingleton<TrackerService>(() => TrackerService())
     ..registerLazySingleton<TranslateService>(() => TranslateService())
@@ -86,9 +84,6 @@ Future<void> unregisterUserDependentServices() async {
     ..unregister<StopwatchService>()
     ..unregister<NotificationService>()
     ..unregister<OffRouteAlertService>()
-    ..unregister<SmsService>(
-      disposingFunction: (service) => service.stop(),
-    )
     ..unregister<NearbyService>(
       disposingFunction: (service) async => service.stop(),
     )

@@ -21,9 +21,8 @@ class DestinationsLoaded extends DestinationsState {
 
   const DestinationsLoaded({
     this.isSearching = false,
-    @required this.destinations,
-  })  : assert(isSearching != null),
-        assert(destinations != null);
+    required this.destinations,
+  });
 
   @override
   List<Object> get props => [isSearching, destinations];
@@ -33,8 +32,8 @@ class DestinationsError extends DestinationsState {
   final String message;
 
   const DestinationsError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

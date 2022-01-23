@@ -10,8 +10,8 @@ class DeviceTile extends StatelessWidget {
   final NearbyDevice device;
 
   const DeviceTile({
-    @required this.index,
-    @required this.device,
+    required this.index,
+    required this.device,
   })  : assert(index != null),
         assert(device != null);
 

@@ -19,8 +19,8 @@ class UserItineraryLoaded extends UserItineraryState {
   final Itinerary userItinerary;
 
   const UserItineraryLoaded({
-    @required this.userItinerary,
-  }) : assert(userItinerary != null);
+    required this.userItinerary,
+  });
 
   @override
   List<Object> get props => [userItinerary];

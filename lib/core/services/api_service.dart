@@ -78,18 +78,24 @@ class ApiService {
   }
 
   Future<DestinationUpdate> postUpdate(
-      DestinationUpdate update, String destId) async {
+    DestinationUpdate update,
+    String destId,
+  ) async {
+    if (update.user == null) {
+      throw const AppError(message: 'Failed to post update.');
+    }
+
     try {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/updates',
         options: Options(
-          headers: {'Authorization': 'Bearer ${update.user.accessToken}'},
+          headers: {'Authorization': 'Bearer ${update.user!.accessToken}'},
         ),
         data: {
           "text": update.text,
           "tag": ApiUtils.toCsv(update.tags),
           "coord": ApiUtils.routeToCsv(update.coords),
-          "user": {"id": update.user.id},
+          "user": {"id": update.user!.id},
           "destination": {"id": destId}
         },
       );
@@ -121,7 +127,7 @@ class ApiService {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/updates/${update.id}/images',
         options: Options(headers: {
-          'Authorization': 'Bearer ${update.user.accessToken}',
+          'Authorization': 'Bearer ${update.user!.accessToken}',
         }),
         data: FormData()..files.addAll(entries),
       );
@@ -151,7 +157,15 @@ class ApiService {
   }
 
   Future<String> postDestinationReview(
-      double rating, String text, String destId, User user) async {
+    double rating,
+    String text,
+    String destId,
+    User? user,
+  ) async {
+    if (user == null) {
+      throw const AppError(message: 'Failed to post review.');
+    }
+
     try {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/reviews',
@@ -210,7 +224,14 @@ class ApiService {
   }
 
   Future<ReviewDetails> fetchLodgeReviews(
-      String lodgeId, int page, User user) async {
+    String lodgeId,
+    int page,
+    User? user,
+  ) async {
+    if (user == null) {
+      throw const AppError(message: 'Failed to post review.');
+    }
+
     try {
       final Response res = await Dio().get(
         '${ApiConfig.apiBaseUrl}/lodges/$lodgeId/reviews',
@@ -232,7 +253,15 @@ class ApiService {
   }
 
   Future<String> postLodgeReview(
-      double rating, String text, String lodgeId, User user) async {
+    double rating,
+    String text,
+    String lodgeId,
+    User? user,
+  ) async {
+    if (user == null) {
+      throw const AppError(message: 'Failed to post review.');
+    }
+
     try {
       final Response res = await Dio().post(
         '${ApiConfig.apiBaseUrl}/lodgereviews',

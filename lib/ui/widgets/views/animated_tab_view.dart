@@ -6,8 +6,8 @@ class AnimatedTabView extends StatefulWidget {
   final List<Widget> children;
 
   const AnimatedTabView({
-    @required this.index,
-    @required this.children,
+    required this.index,
+    required this.children,
     this.keepAlive = false,
   })  : assert(index != null),
         assert(children != null),
@@ -17,7 +17,8 @@ class AnimatedTabView extends StatefulWidget {
   _AnimatedTabViewState createState() => _AnimatedTabViewState();
 }
 
-class _AnimatedTabViewState extends State<AnimatedTabView> with TickerProviderStateMixin {
+class _AnimatedTabViewState extends State<AnimatedTabView>
+    with TickerProviderStateMixin {
   int index;
   AnimationController fadeController;
   AnimationController scaleController;

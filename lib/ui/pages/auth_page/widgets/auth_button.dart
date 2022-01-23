@@ -19,10 +19,10 @@ class AuthButton extends StatelessWidget {
   final Future<bool> Function() onPressed;
 
   const AuthButton({
-    @required this.label,
-    @required this.formKey,
-    @required this.isInitial,
-    @required this.onPressed,
+    required this.label,
+    required this.formKey,
+    required this.isInitial,
+    required this.onPressed,
   })  : assert(label != null),
         assert(formKey != null),
         assert(isInitial != null),
@@ -35,7 +35,9 @@ class AuthButton extends StatelessWidget {
         return FloatingActionButton.extended(
           heroTag: '$label Tag',
           backgroundColor: AppColors.dark,
-          onPressed: (state is AuthLoading) ? null : () async => _authenticate(context),
+          onPressed: (state is AuthLoading)
+              ? null
+              : () async => _authenticate(context),
           label: (state is AuthLoading)
               ? const CircularBusyIndicator()
               : Text(

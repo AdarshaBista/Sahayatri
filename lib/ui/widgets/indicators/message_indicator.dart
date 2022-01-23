@@ -10,7 +10,7 @@ class MessageIndicator extends StatelessWidget {
   final String imageUrl;
 
   const MessageIndicator({
-    @required this.message,
+    required this.message,
     this.imageUrl = Images.alert,
   })  : assert(message != null),
         assert(imageUrl != null);

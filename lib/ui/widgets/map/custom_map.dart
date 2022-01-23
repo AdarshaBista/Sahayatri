@@ -29,7 +29,7 @@ class CustomMap extends StatefulWidget {
   final Function(MapPosition, bool) onPositionChanged;
 
   const CustomMap({
-    @required this.center,
+    required this.center,
     this.size,
     this.onTap,
     this.mapController,

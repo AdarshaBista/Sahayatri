@@ -10,7 +10,7 @@ class CheckpointImages extends StatelessWidget {
   final List<String> imageUrls;
 
   const CheckpointImages({
-    @required this.imageUrls,
+    required this.imageUrls,
   }) : assert(imageUrls != null);
 
   @override

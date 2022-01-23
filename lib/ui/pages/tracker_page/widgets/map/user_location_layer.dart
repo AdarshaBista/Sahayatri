@@ -11,7 +11,7 @@ class UserLocationLayer extends StatelessWidget {
   final Widget Function(LatLng) builder;
 
   const UserLocationLayer({
-    @required this.builder,
+    required this.builder,
     this.repaintBoundary = false,
   })  : assert(builder != null),
         assert(repaintBoundary != null);

@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -20,15 +18,13 @@ class PlacesCubit extends Cubit<PlacesState> {
   final ApiService apiService = locator();
 
   PlacesCubit({
-    @required this.user,
-    @required this.destination,
-  })  : assert(user != null),
-        assert(destination != null),
-        super(const PlacesEmpty());
+    required this.user,
+    required this.destination,
+  }) : super(const PlacesEmpty());
 
   Future<void> fetchPlaces() async {
     if (destination.places != null) {
-      emit(PlacesLoaded(places: destination.places));
+      emit(PlacesLoaded(places: destination.places ?? []));
       return;
     }
 

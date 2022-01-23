@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -17,9 +15,8 @@ class UserItineraryCubit extends Cubit<UserItineraryState> {
   final ItineraryDao itineraryDao = locator();
 
   UserItineraryCubit({
-    @required this.destination,
-  })  : assert(destination != null),
-        super(const UserItineraryEmpty());
+    required this.destination,
+  }) : super(const UserItineraryEmpty());
 
   Itinerary get userItinerary => (state as UserItineraryLoaded).userItinerary;
 

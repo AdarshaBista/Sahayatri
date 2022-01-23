@@ -11,10 +11,10 @@ class CustomFormTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const CustomFormTile({
-    @required this.icon,
-    @required this.onTap,
-    @required this.title,
-    @required this.hintText,
+    required this.icon,
+    required this.onTap,
+    required this.title,
+    required this.hintText,
     this.trailing,
   })  : assert(icon != null),
         assert(onTap != null),

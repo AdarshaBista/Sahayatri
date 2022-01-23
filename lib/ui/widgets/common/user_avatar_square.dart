@@ -9,8 +9,8 @@ class UserAvatarSquare extends StatelessWidget {
   final String imageUrl;
 
   const UserAvatarSquare({
-    @required this.username,
-    @required this.imageUrl,
+    required this.username,
+    required this.imageUrl,
   }) : assert(username != null);
 
   @override

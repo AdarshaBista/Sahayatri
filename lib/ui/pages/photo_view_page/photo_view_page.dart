@@ -12,7 +12,7 @@ class PhotoViewPage extends StatelessWidget {
   final PhotoViewPageArgs args;
 
   const PhotoViewPage({
-    @required this.args,
+    required this.args,
   }) : assert(args != null);
 
   @override
@@ -60,8 +60,8 @@ class PhotoViewPageArgs {
   final List<String> imageUrls;
 
   const PhotoViewPageArgs({
-    @required this.initialPageIndex,
-    @required this.imageUrls,
+    required this.initialPageIndex,
+    required this.imageUrls,
   })  : assert(initialPageIndex != null),
         assert(imageUrls != null);
 }
