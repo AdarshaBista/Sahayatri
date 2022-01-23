@@ -13,9 +13,7 @@ class RatingChart extends StatelessWidget {
     required this.total,
     required this.stars,
     required this.average,
-  })  : assert(total != null),
-        assert(stars != null),
-        assert(average != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +69,7 @@ class RatingChart extends StatelessWidget {
         children: [
           Text(
             index.toString(),
-            style: context.t.headline6.bold,
+            style: context.t.headline6?.bold,
           ),
           const SizedBox(width: 12.0),
           Expanded(
@@ -80,7 +78,7 @@ class RatingChart extends StatelessWidget {
                 return CustomPaint(
                   size: Size(constraints.maxWidth, 6.0),
                   painter: BarPainter(
-                    value: stars[index] / total * constraints.maxWidth,
+                    value: stars[index]! / total * constraints.maxWidth,
                     backgroundColor: context.c.surface,
                   ),
                 );

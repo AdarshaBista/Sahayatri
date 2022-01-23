@@ -17,24 +17,24 @@ class ReviewForm extends StatefulWidget {
 
   const ReviewForm({
     required this.onSubmit,
-  }) : assert(onSubmit != null);
+  });
 
   @override
   _ReviewFormState createState() => _ReviewFormState();
 }
 
 class _ReviewFormState extends State<ReviewForm> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  double rating = 3.0;
-  String text = '';
+  double _rating = 3.0;
+  String _text = '';
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => _handleBackButton(context),
       child: Form(
-        key: formKey,
+        key: _formKey,
         child: ListView(
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
@@ -65,24 +65,24 @@ class _ReviewFormState extends State<ReviewForm> {
       children: [
         Text(
           'Rating',
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 8.0),
         Row(
           children: [
             StarRatingBar(
               size: 32.0,
-              rating: rating,
+              rating: _rating,
               onUpdate: (value) {
                 setState(() {
-                  rating = value;
+                  _rating = value;
                 });
               },
             ),
             const Spacer(),
             const SizedBox(width: 12.0),
             Text(
-              rating.toStringAsFixed(1),
+              _rating.toStringAsFixed(1),
               style: context.t.headline3,
             ),
             const SizedBox(width: 12.0),
@@ -99,8 +99,8 @@ class _ReviewFormState extends State<ReviewForm> {
         CustomTextField(
           isLarge: true,
           label: 'Review',
-          initialValue: text,
-          onChanged: (value) => setState(() => text = value),
+          initialValue: _text,
+          onChanged: (value) => setState(() => _text = value),
           validator: FormValidators.requiredText(),
           inputFormatters: [
             LengthLimitingTextInputFormatter(ApiConfig.maxTextLength),
@@ -110,7 +110,7 @@ class _ReviewFormState extends State<ReviewForm> {
         Padding(
           padding: const EdgeInsets.only(right: 4.0),
           child: Text(
-            '${text.length} / ${ApiConfig.maxTextLength}',
+            '${_text.length} / ${ApiConfig.maxTextLength}',
             style: context.t.headline6,
           ),
         ),
@@ -121,16 +121,16 @@ class _ReviewFormState extends State<ReviewForm> {
   Widget _buildSubmitButton(BuildContext context) {
     return MiniFab(
       onTap: () {
-        if (!formKey.currentState.validate()) return;
+        if (!(_formKey.currentState?.validate() ?? false)) return;
 
-        widget.onSubmit(rating, text);
+        widget.onSubmit(_rating, _text);
         Navigator.of(context).pop();
       },
     );
   }
 
   Future<bool> _handleBackButton(BuildContext context) async {
-    if (text.isNotEmpty) {
+    if (_text.isNotEmpty) {
       const UnsavedDialog().openDialog(context);
       return Future.value(false);
     }

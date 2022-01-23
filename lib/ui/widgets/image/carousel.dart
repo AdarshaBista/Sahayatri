@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 
 class Carousel extends StatelessWidget {
-  final double width;
-  final double height;
   final bool showPagination;
   final List<String> imageUrls;
+  final double? width;
+  final double? height;
 
   const Carousel({
+    required this.imageUrls,
+    this.showPagination = true,
     this.width,
     this.height,
-    this.showPagination = true,
-    required this.imageUrls,
-  }) : assert(imageUrls != null);
+  });
 
   @override
   Widget build(BuildContext context) {

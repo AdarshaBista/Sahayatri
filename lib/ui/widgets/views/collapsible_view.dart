@@ -7,8 +7,7 @@ class CollapsibleView extends StatelessWidget {
   const CollapsibleView({
     required this.child,
     required this.collapsible,
-  })  : assert(child != null),
-        assert(collapsible != null);
+  });
 
   @override
   Widget build(BuildContext context) {

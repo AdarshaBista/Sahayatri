@@ -8,7 +8,7 @@ class MapDialog extends StatelessWidget {
 
   const MapDialog({
     required this.map,
-  }) : assert(map != null);
+  });
 
   @override
   Widget build(BuildContext context) {

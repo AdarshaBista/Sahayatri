@@ -12,7 +12,7 @@ class TranslateForm extends StatelessWidget {
 
   const TranslateForm({
     this.resizeToAvoidBottomInset = false,
-  }) : assert(resizeToAvoidBottomInset != null);
+  });
 
   @override
   Widget build(BuildContext context) {

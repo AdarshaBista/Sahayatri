@@ -8,15 +8,14 @@ import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 
 class ErrorIndicator extends StatelessWidget {
   final String message;
-  final VoidCallback onRetry;
   final String imageUrl;
+  final VoidCallback? onRetry;
 
   const ErrorIndicator({
-    this.onRetry,
     this.imageUrl = Images.generalError,
     this.message = 'An error has occured!',
-  })  : assert(message != null),
-        assert(imageUrl != null);
+    this.onRetry,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ErrorIndicator extends StatelessWidget {
             title: Text(
               message,
               textAlign: TextAlign.center,
-              style: context.t.headline5.bold,
+              style: context.t.headline5?.bold,
             ),
           ),
           if (onRetry != null) RetryButton(onTap: onRetry),

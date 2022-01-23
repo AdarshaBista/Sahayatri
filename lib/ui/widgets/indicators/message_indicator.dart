@@ -12,8 +12,7 @@ class MessageIndicator extends StatelessWidget {
   const MessageIndicator({
     required this.message,
     this.imageUrl = Images.alert,
-  })  : assert(message != null),
-        assert(imageUrl != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class MessageIndicator extends StatelessWidget {
       title: Text(
         message,
         textAlign: TextAlign.center,
-        style: context.t.headline5.bold,
+        style: context.t.headline5?.bold,
       ),
     );
   }

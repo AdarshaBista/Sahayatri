@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:maps_toolkit/maps_toolkit.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:sahayatri/core/constants/hive_config.dart';
 

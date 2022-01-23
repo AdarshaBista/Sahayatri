@@ -58,7 +58,7 @@ dependencies:
   flutter_zoom_drawer: ^2.2.1
   community_material_icon: ^5.9.55
   sleek_circular_slider: ^2.0.1
-  flutter_staggered_grid_view: ^0.6.0
+  flutter_staggered_grid_view: ^0.4.1
 
 dev_dependencies:
   flutter_test:

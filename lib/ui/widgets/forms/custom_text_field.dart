@@ -8,20 +8,24 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final bool isLarge;
   final bool showField;
-  final IconData icon;
-  final String hintText;
   final bool obscureText;
-  final Widget middleChild;
-  final String initialValue;
-  final TextStyle labelStyle;
   final TextInputType keyboardType;
-  final ValueChanged<String> onChanged;
-  final TextEditingController controller;
-  final FormFieldValidator<String> validator;
-  final List<TextInputFormatter> inputFormatters;
+  final IconData? icon;
+  final String? hintText;
+  final Widget? middleChild;
+  final String? initialValue;
+  final TextStyle? labelStyle;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     required this.label,
+    this.isLarge = false,
+    this.showField = true,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
     this.validator,
     this.onChanged,
     this.initialValue,
@@ -31,14 +35,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.middleChild,
     this.inputFormatters,
-    this.isLarge = false,
-    this.showField = true,
-    this.obscureText = false,
-    this.keyboardType = TextInputType.text,
-  })  : assert(label != null),
-        assert(isLarge != null),
-        assert(showField != null),
-        assert(obscureText != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +43,7 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLabel(context),
-        if (middleChild != null) middleChild,
+        if (middleChild != null) middleChild!,
         if (showField) ...[
           if (middleChild == null) const SizedBox(height: 8.0),
           _buildField(context),
@@ -58,12 +55,12 @@ class CustomTextField extends StatelessWidget {
   Widget _buildLabel(BuildContext context) {
     return Text(
       label,
-      style: labelStyle ?? context.t.headline5.bold,
+      style: labelStyle ?? context.t.headline5?.bold,
     );
   }
 
   Widget _buildField(BuildContext context) {
-    final int maxLines = obscureText ? 1 : null;
+    final int? maxLines = obscureText ? 1 : null;
     final int minLines = maxLines ?? (isLarge ? 4 : 1);
 
     return ScaleAnimator(

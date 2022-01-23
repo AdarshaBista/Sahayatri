@@ -25,7 +25,7 @@ class ConnectionInfo extends StatelessWidget {
         const SizedBox(height: 20.0),
         Text(
           'CONNECTED DEVIECS',
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 8.0),
         const DevicesList(),
@@ -38,7 +38,7 @@ class ConnectionInfo extends StatelessWidget {
       builder: (context, state) {
         return Text(
           'Your Name : ${state.prefs.deviceName}',
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         );
       },
     );

@@ -15,10 +15,7 @@ class BottomNavBar extends StatelessWidget {
     required this.icons,
     required this.iconSize,
     required this.onItemSelected,
-  })  : assert(icons != null),
-        assert(iconSize != null),
-        assert(onItemSelected != null),
-        assert(icons.length >= 2 && icons.length <= 5);
+  }) : assert(icons.length >= 2 && icons.length <= 5);
 
   @override
   Widget build(BuildContext context) {

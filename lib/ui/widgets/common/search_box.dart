@@ -13,8 +13,7 @@ class SearchBox extends StatelessWidget {
   const SearchBox({
     this.hintText = 'Search',
     required this.onChanged,
-  })  : assert(hintText != null),
-        assert(onChanged != null);
+  });
 
   @override
   Widget build(BuildContext context) {

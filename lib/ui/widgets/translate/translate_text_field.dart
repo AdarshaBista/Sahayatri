@@ -15,7 +15,7 @@ class TranslateTextField extends StatefulWidget {
 
   const TranslateTextField({
     required this.resizeToAvoidBottomInset,
-  }) : assert(resizeToAvoidBottomInset != null);
+  });
 
   @override
   _TranslateTextFieldState createState() => _TranslateTextFieldState();

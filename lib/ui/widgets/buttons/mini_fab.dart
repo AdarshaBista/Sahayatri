@@ -9,8 +9,7 @@ class MiniFab extends StatelessWidget {
   const MiniFab({
     required this.onTap,
     this.icon = AppIcons.confirm,
-  })  : assert(icon != null),
-        assert(onTap != null);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,14 +8,13 @@ import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 class StarRatingBar extends StatelessWidget {
   final double size;
   final double rating;
-  final Function(double) onUpdate;
+  final Function(double)? onUpdate;
 
   const StarRatingBar({
+    required this.rating,
     this.size = 24.0,
     this.onUpdate,
-    required this.rating,
-  })  : assert(size != null),
-        assert(rating != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class StarRatingBar extends StatelessWidget {
         unratedColor: context.c.surface,
         itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
         ignoreGestures: onUpdate == null,
-        onRatingUpdate: onUpdate,
+        onRatingUpdate: (newRating) => onUpdate?.call(newRating),
         itemBuilder: (_, index) {
           final IconData iconData =
               index < rating ? AppIcons.starFilled : AppIcons.star;

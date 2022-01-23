@@ -10,7 +10,7 @@ class CheckpointLodges extends StatelessWidget {
 
   const CheckpointLodges({
     required this.lodges,
-  }) : assert(lodges != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CheckpointLodges extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             'UPCOMING LODGES',
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
         ),
         const SizedBox(height: 12.0),

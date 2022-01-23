@@ -13,8 +13,7 @@ class ViewMoreButton extends StatefulWidget {
   const ViewMoreButton({
     required this.hasMore,
     required this.onLoadMore,
-  })  : assert(hasMore != null),
-        assert(onLoadMore != null);
+  });
 
   @override
   _ViewMoreButtonState createState() => _ViewMoreButtonState();

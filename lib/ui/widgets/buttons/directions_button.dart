@@ -17,7 +17,7 @@ class DirectionsButton extends StatelessWidget {
 
   const DirectionsButton({
     this.label = 'Get Directions',
-  }) : assert(label != null);
+  });
 
   @override
   Widget build(BuildContext context) {

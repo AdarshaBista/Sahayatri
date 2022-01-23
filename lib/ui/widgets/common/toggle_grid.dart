@@ -8,32 +8,28 @@ class ToggleGrid<T> extends StatefulWidget {
   final T initialValue;
   final Function(T) onSelected;
   final List<ToggleItem<T>> items;
-  final Color iconColor;
   final double titlePadding;
-  final TextStyle titleStyle;
-  final Color backgroundColor;
+  final Color? iconColor;
+  final TextStyle? titleStyle;
+  final Color? backgroundColor;
 
   const ToggleGrid({
-    this.iconColor,
-    this.titleStyle,
-    this.backgroundColor,
-    this.titlePadding = 4.0,
     required this.title,
     required this.items,
     required this.onSelected,
     required this.initialValue,
-  })  : assert(title != null),
-        assert(items != null),
-        assert(onSelected != null),
-        assert(titlePadding != null),
-        assert(initialValue != null);
+    this.titlePadding = 4.0,
+    this.iconColor,
+    this.titleStyle,
+    this.backgroundColor,
+  });
 
   @override
   _ToggleGridState<T> createState() => _ToggleGridState<T>();
 }
 
 class _ToggleGridState<T> extends State<ToggleGrid<T>> {
-  T selectedItem;
+  late T selectedItem;
 
   @override
   void initState() {
@@ -51,7 +47,7 @@ class _ToggleGridState<T> extends State<ToggleGrid<T>> {
           padding: EdgeInsets.only(left: widget.titlePadding),
           child: Text(
             widget.title,
-            style: widget.titleStyle ?? context.t.headline5.bold,
+            style: widget.titleStyle ?? context.t.headline5?.bold,
           ),
         ),
         const SizedBox(height: 10.0),
@@ -98,7 +94,5 @@ class ToggleItem<T> {
     required this.icon,
     required this.label,
     required this.value,
-  })  : assert(icon != null),
-        assert(value != null),
-        assert(label != null);
+  });
 }

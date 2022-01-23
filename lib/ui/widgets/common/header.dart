@@ -16,10 +16,7 @@ class Header extends StatelessWidget {
     this.padding = 0.0,
     this.fontSize = 30.0,
     this.slideDirection = SlideDirection.left,
-  })  : assert(title != null),
-        assert(padding != null),
-        assert(fontSize != null),
-        assert(slideDirection != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +28,7 @@ class Header extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: padding),
         child: Text(
           title,
-          style: context.t.headline2.serif
+          style: context.t.headline2?.serif
               .withSize(fontSize)
               .copyWith(fontWeight: FontWeight.normal),
         ),

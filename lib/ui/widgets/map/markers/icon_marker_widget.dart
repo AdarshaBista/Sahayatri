@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 class IconMarkerWidget extends StatelessWidget {
   final Color color;
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const IconMarkerWidget({
     this.onTap,
     required this.icon,
     required this.color,
-  })  : assert(icon != null),
-        assert(color != null);
+  });
 
   @override
   Widget build(BuildContext context) {

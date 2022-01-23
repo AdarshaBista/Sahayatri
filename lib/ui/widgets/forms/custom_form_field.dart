@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class CustomFormField<T> extends StatelessWidget {
-  final T initialValue;
+  final T? initialValue;
   final FormFieldBuilder<T> builder;
   final FormFieldValidator<T> validator;
 
@@ -12,9 +12,7 @@ class CustomFormField<T> extends StatelessWidget {
     required this.builder,
     required this.validator,
     required this.initialValue,
-  })  : assert(builder != null),
-        assert(validator != null);
-
+  });
   @override
   Widget build(BuildContext context) {
     return FormField<T>(
@@ -26,7 +24,7 @@ class CustomFormField<T> extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             builder(field),
-            if (field.hasError) _buildError(field.errorText),
+            if (field.hasError) _buildError(field.errorText!),
           ],
         );
       },

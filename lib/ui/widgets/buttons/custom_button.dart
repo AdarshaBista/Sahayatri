@@ -6,14 +6,14 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 
 class CustomButton extends StatelessWidget {
-  final Color color;
-  final String label;
   final bool outline;
-  final bool centered;
   final bool expanded;
-  final IconData icon;
-  final VoidCallback onTap;
-  final Color backgroundColor;
+  final bool centered;
+  final Color? color;
+  final String? label;
+  final IconData? icon;
+  final VoidCallback? onTap;
+  final Color? backgroundColor;
 
   const CustomButton({
     required this.onTap,
@@ -24,10 +24,7 @@ class CustomButton extends StatelessWidget {
     this.label,
     this.color,
     this.backgroundColor,
-  })  : assert(outline != null),
-        assert(expanded != null),
-        assert(centered != null),
-        assert(icon != null || label != null);
+  }) : assert(icon != null || label != null);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +76,7 @@ class CustomButton extends StatelessWidget {
             if (label != null)
               Flexible(
                 child: Text(
-                  label,
+                  label!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.headline5.withColor(effectiveColor),

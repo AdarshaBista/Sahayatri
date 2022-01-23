@@ -20,13 +20,7 @@ class NestedTabView extends StatefulWidget {
     this.isCentered = false,
     this.isTabFilled = false,
     this.showIndicator = true,
-  })  : assert(tabs != null),
-        assert(children != null),
-        assert(keepAlive != null),
-        assert(isCentered != null),
-        assert(isTabFilled != null),
-        assert(showIndicator != null),
-        assert(tabs.length == children.length);
+  }) : assert(tabs.length == children.length);
 
   @override
   _NestedTabViewState createState() => _NestedTabViewState();
@@ -100,9 +94,7 @@ class NestedTab extends StatelessWidget {
     required this.tab,
     required this.isSelected,
     required this.showIndicator,
-  })  : assert(tab != null),
-        assert(isSelected != null),
-        assert(showIndicator != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +130,7 @@ class NestedTab extends StatelessWidget {
       icon: tab.icon,
       label: tab.label,
       iconColor: color,
-      labelStyle: context.t.headline5.bold.withColor(color),
+      labelStyle: context.t.headline5?.bold.withColor(color),
     );
   }
 }
@@ -150,6 +142,5 @@ class NestedTabData {
   NestedTabData({
     required this.label,
     required this.icon,
-  })  : assert(label != null),
-        assert(icon != null);
+  });
 }

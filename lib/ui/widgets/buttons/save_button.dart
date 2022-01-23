@@ -4,11 +4,11 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 
 class SaveButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const SaveButton({
-    required this.onPressed,
-  }) : assert(onPressed != null);
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {

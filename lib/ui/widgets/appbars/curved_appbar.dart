@@ -6,17 +6,16 @@ import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Widget leading;
   final double elevation;
-  final List<Widget> actions;
+  final Widget? leading;
+  final List<Widget>? actions;
 
   const CurvedAppbar({
     required this.title,
+    this.elevation = 8.0,
     this.leading,
     this.actions,
-    this.elevation = 8.0,
-  })  : assert(title != null),
-        assert(elevation != null);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(40.0);
@@ -41,7 +40,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions == null
           ? null
           : [
-              ...actions,
+              ...actions!,
               const SizedBox(width: 8.0),
             ],
       title: SlideAnimator(
@@ -51,7 +50,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline4.serif,
+            style: context.t.headline4?.serif,
           ),
         ),
       ),
@@ -66,8 +65,7 @@ class _CurvePainter extends CustomPainter {
   _CurvePainter({
     required this.color,
     required this.elevation,
-  })  : assert(color != null),
-        assert(elevation != null);
+  });
 
   @override
   void paint(Canvas canvas, Size size) {

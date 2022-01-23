@@ -18,7 +18,7 @@ class LodgeCard extends StatelessWidget {
 
   const LodgeCard({
     required this.lodge,
-  }) : assert(lodge != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class LodgeCard extends StatelessWidget {
   }
 
   Widget _buildBackground() {
-    String imageUrl = Images.splash;
-    if (lodge.imageUrls != null && lodge.imageUrls.isNotEmpty) {
+    var imageUrl = Images.splash;
+    if (lodge.imageUrls.isNotEmpty) {
       imageUrl = lodge.imageUrls.first;
     }
 

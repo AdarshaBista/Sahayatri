@@ -5,10 +5,10 @@ import 'package:sahayatri/core/utils/image_utils.dart';
 
 class AdaptiveImage extends StatelessWidget {
   final Color color;
-  final double width;
-  final double height;
-  final String imageUrl;
   final bool showLoading;
+  final String imageUrl;
+  final double? width;
+  final double? height;
 
   const AdaptiveImage(
     this.imageUrl, {
@@ -16,8 +16,7 @@ class AdaptiveImage extends StatelessWidget {
     this.height,
     this.showLoading = true,
     this.color = Colors.transparent,
-  })  : assert(color != null),
-        assert(showLoading != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,12 @@ class AdaptiveImage extends StatelessWidget {
     );
   }
 
-  Widget _buildFrame(BuildContext context, Widget child, int frame, bool isSync) {
+  Widget _buildFrame(
+    BuildContext context,
+    Widget child,
+    int? frame,
+    bool isSync,
+  ) {
     if (isSync) return child;
     return frame != null
         ? child
@@ -48,7 +52,11 @@ class AdaptiveImage extends StatelessWidget {
           );
   }
 
-  Widget _buildError(BuildContext context, Object exception, StackTrace stackTrace) {
+  Widget _buildError(
+    BuildContext context,
+    Object exception,
+    StackTrace? stackTrace,
+  ) {
     return Center(
       child: Icon(
         AppIcons.error,

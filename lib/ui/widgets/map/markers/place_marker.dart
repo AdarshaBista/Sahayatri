@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/place.dart';
@@ -13,9 +11,7 @@ class PlaceMarker extends DynamicTextMarker {
   PlaceMarker({
     required Place place,
     required bool shrinkWhen,
-  })  : assert(place != null),
-        assert(shrinkWhen != null),
-        super(
+  }) : super(
           icon: AppIcons.place,
           label: place.name,
           coord: place.coord,

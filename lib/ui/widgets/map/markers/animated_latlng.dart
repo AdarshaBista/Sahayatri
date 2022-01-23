@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
@@ -14,9 +14,7 @@ class AnimatedLatLng extends StatefulWidget {
     required this.begin,
     required this.end,
     required this.builder,
-  })  : assert(begin != null),
-        assert(end != null),
-        assert(builder != null);
+  });
 
   @override
   _AnimatedLatLngState createState() => _AnimatedLatLngState();
@@ -24,8 +22,8 @@ class AnimatedLatLng extends StatefulWidget {
 
 class _AnimatedLatLngState extends State<AnimatedLatLng>
     with SingleTickerProviderStateMixin {
-  Animation<LatLng> animation;
-  AnimationController animationController;
+  late final Animation<LatLng> animation;
+  late final AnimationController animationController;
 
   @override
   void initState() {

@@ -1,26 +1,23 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class CustomFlexibleSpace extends StatefulWidget {
   final String title;
-  final double offset;
-  final Widget background;
   final double leftPadding;
+  final double? offset;
+  final Widget? background;
 
   const CustomFlexibleSpace({
     required this.title,
     this.offset,
     this.background,
     this.leftPadding = 20.0,
-  })  : assert(title != null),
-        assert(leftPadding != null);
+  });
 
   @override
   _CustomFlexibleSpaceState createState() => _CustomFlexibleSpaceState();
@@ -32,8 +29,8 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
 
     final textStyle = context.t.headline4;
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
-    final fontSize = textStyle.fontSize * textScaleFactor;
-    final effectiveTextStyle = textStyle.copyWith(fontSize: fontSize);
+    final fontSize = textStyle?.fontSize ?? 0.0 * textScaleFactor;
+    final effectiveTextStyle = textStyle?.copyWith(fontSize: fontSize);
 
     final renderParagraph = RenderParagraph(
       TextSpan(style: effectiveTextStyle, text: widget.title),
@@ -50,7 +47,8 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final settings = context
-            .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+            .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
+
         final effectiveOffset = widget.offset ?? settings.maxExtent;
         final deltaExtent = effectiveOffset - settings.minExtent;
         final t =
@@ -83,7 +81,7 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
           );
         }
 
-        final textStyle = context.t.headline4.serif;
+        final textStyle = context.t.headline4?.serif;
         Widget titleWidget = Text(
           widget.title,
           maxLines: 3,

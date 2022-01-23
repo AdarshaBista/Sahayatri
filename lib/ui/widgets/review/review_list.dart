@@ -22,7 +22,7 @@ class ReviewList extends StatelessWidget {
 
   const ReviewList({
     required this.reviewCubit,
-  }) : assert(reviewCubit != null);
+  });
 
   @override
   Widget build(BuildContext context) {

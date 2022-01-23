@@ -16,17 +16,17 @@ import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_button.dart';
 
 class CustomMap extends StatefulWidget {
-  final Size size;
   final Coord center;
-  final Coord swPanBoundary;
-  final Coord nePanBoundary;
   final double minZoom;
   final double maxZoom;
   final double initialZoom;
   final List<Widget> children;
-  final Function(Coord) onTap;
-  final MapController mapController;
-  final Function(MapPosition, bool) onPositionChanged;
+  final Size? size;
+  final Coord? swPanBoundary;
+  final Coord? nePanBoundary;
+  final void Function(Coord)? onTap;
+  final MapController? mapController;
+  final void Function(MapPosition, bool)? onPositionChanged;
 
   const CustomMap({
     required this.center,
@@ -40,18 +40,14 @@ class CustomMap extends StatefulWidget {
     this.minZoom = MapConfig.minZoom,
     this.maxZoom = MapConfig.maxZoom,
     this.initialZoom = MapConfig.defaultZoom,
-  })  : assert(center != null),
-        assert(minZoom != null),
-        assert(maxZoom != null),
-        assert(initialZoom != null),
-        assert(children != null);
+  });
 
   @override
   _CustomMapState createState() => _CustomMapState();
 }
 
 class _CustomMapState extends State<CustomMap> {
-  MapController mapController;
+  late final MapController mapController;
 
   @override
   void initState() {
@@ -100,7 +96,7 @@ class _CustomMapState extends State<CustomMap> {
         screenSize: widget.size,
         center: widget.center.toLatLng(),
         controller: mapController,
-        onTap: (latLng) => widget.onTap
+        onTap: (_, latLng) => widget.onTap
             ?.call(Coord(lat: latLng.latitude, lng: latLng.longitude)),
         onPositionChanged: widget.onPositionChanged,
         swPanBoundary: widget.swPanBoundary?.toLatLng() ??

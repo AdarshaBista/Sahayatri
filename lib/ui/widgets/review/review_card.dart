@@ -12,7 +12,7 @@ class ReviewCard extends StatelessWidget {
 
   const ReviewCard({
     required this.review,
-  }) : assert(review != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class ReviewCard extends StatelessWidget {
             review.user.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
         ),
         const SizedBox(height: 2.0),

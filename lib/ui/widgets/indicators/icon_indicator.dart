@@ -11,9 +11,7 @@ class IconIndicator extends StatelessWidget {
     required this.title,
     required this.imageUrl,
     this.padding = 64.0,
-  })  : assert(title != null),
-        assert(padding != null),
-        assert(imageUrl != null);
+  });
 
   @override
   Widget build(BuildContext context) {

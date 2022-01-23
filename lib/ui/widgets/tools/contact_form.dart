@@ -88,7 +88,7 @@ class _ContactFormState extends State<ContactForm> {
   Widget _buildSubmitButton(BuildContext context) {
     return SaveButton(
       onPressed: () {
-        if (!_formKey.currentState.validate()) return;
+        if (!(_formKey.currentState?.validate() ?? false)) return;
         context.read<PrefsCubit>().saveContact(contact);
 
         Navigator.of(context).pop();
@@ -105,7 +105,7 @@ class _ContactFormState extends State<ContactForm> {
         Text(
           'Message Preview',
           textAlign: TextAlign.left,
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 8.0),
         Container(

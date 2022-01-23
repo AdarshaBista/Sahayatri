@@ -13,9 +13,7 @@ class SlideAnimator extends StatelessWidget {
     required this.child,
     required this.begin,
     this.duration = UiConfig.animatorDuration,
-  })  : assert(child != null),
-        assert(begin != null),
-        assert(duration != null);
+  });
 
   @override
   Widget build(BuildContext context) {

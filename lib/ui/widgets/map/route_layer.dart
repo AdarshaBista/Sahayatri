@@ -17,16 +17,16 @@ class RouteLayer extends StatefulWidget {
 
   const RouteLayer({
     required this.mapController,
-  }) : assert(mapController != null);
+  });
 
   @override
   _RouteLayerState createState() => _RouteLayerState();
 }
 
 class _RouteLayerState extends State<RouteLayer> {
-  double zoom;
-  bool shouldSimplifyRoute = false;
-  StreamSubscription mapEventSubscription;
+  late double zoom;
+  late bool shouldSimplifyRoute = false;
+  late final StreamSubscription mapEventSubscription;
 
   @override
   void initState() {

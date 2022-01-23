@@ -11,7 +11,7 @@ class FadeAnimator extends StatelessWidget {
   const FadeAnimator({
     required this.child,
     this.duration = UiConfig.animatorDuration,
-  }) : assert(child != null);
+  });
 
   @override
   Widget build(BuildContext context) {
