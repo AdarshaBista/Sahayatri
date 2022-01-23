@@ -7,7 +7,7 @@ class MapDialog extends StatelessWidget {
   final Widget map;
 
   const MapDialog({
-    @required this.map,
+    required this.map,
   }) : assert(map != null);
 
   @override

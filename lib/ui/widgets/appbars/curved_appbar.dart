@@ -11,7 +11,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
 
   const CurvedAppbar({
-    @required this.title,
+    required this.title,
     this.leading,
     this.actions,
     this.elevation = 8.0,
@@ -64,8 +64,8 @@ class _CurvePainter extends CustomPainter {
   final double elevation;
 
   _CurvePainter({
-    @required this.color,
-    @required this.elevation,
+    required this.color,
+    required this.elevation,
   })  : assert(color != null),
         assert(elevation != null);
 

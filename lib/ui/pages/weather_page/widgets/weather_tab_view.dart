@@ -11,7 +11,7 @@ class WeatherTabView extends StatefulWidget {
   final List<Weather> forecasts;
 
   const WeatherTabView({
-    @required this.forecasts,
+    required this.forecasts,
   }) : assert(forecasts != null);
 
   @override
@@ -87,8 +87,9 @@ class _WeatherTabViewState extends State<WeatherTabView>
                     child: WeatherTab(
                       isToday: i == 0,
                       weather: widget.forecasts[i],
-                      color:
-                          _tabController.index == i ? AppColors.primary : AppColors.light,
+                      color: _tabController.index == i
+                          ? AppColors.primary
+                          : AppColors.light,
                     ),
                   )
               ],

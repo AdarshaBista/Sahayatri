@@ -63,8 +63,8 @@ class WeatherPageArgs {
   final Coord coord;
 
   const WeatherPageArgs({
-    @required this.name,
-    @required this.coord,
+    required this.name,
+    required this.coord,
   })  : assert(name != null),
         assert(coord != null);
 }

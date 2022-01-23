@@ -11,9 +11,9 @@ class AnimatedLatLng extends StatefulWidget {
   final Widget Function(LatLng) builder;
 
   const AnimatedLatLng({
-    @required this.begin,
-    @required this.end,
-    @required this.builder,
+    required this.begin,
+    required this.end,
+    required this.builder,
   })  : assert(begin != null),
         assert(end != null),
         assert(builder != null);

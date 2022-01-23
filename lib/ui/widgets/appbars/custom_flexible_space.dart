@@ -15,7 +15,7 @@ class CustomFlexibleSpace extends StatefulWidget {
   final double leftPadding;
 
   const CustomFlexibleSpace({
-    @required this.title,
+    required this.title,
     this.offset,
     this.background,
     this.leftPadding = 20.0,
@@ -49,13 +49,14 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final settings =
-            context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+        final settings = context
+            .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
         final effectiveOffset = widget.offset ?? settings.maxExtent;
         final deltaExtent = effectiveOffset - settings.minExtent;
-        final t = (1.0 - (settings.currentExtent - settings.minExtent) / deltaExtent)
-            .clamp(0.0, 1.0)
-            .toDouble();
+        final t =
+            (1.0 - (settings.currentExtent - settings.minExtent) / deltaExtent)
+                .clamp(0.0, 1.0)
+                .toDouble();
 
         final List<Widget> children = [];
 
@@ -64,7 +65,8 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
           const fadeEnd = 1.0;
           final opacity = 1.0 - Interval(fadeStart, fadeEnd).transform(t);
           final height = settings.maxExtent;
-          final collapsePadding = -(settings.maxExtent - settings.currentExtent);
+          final collapsePadding =
+              -(settings.maxExtent - settings.currentExtent);
 
           children.add(
             Positioned(
@@ -120,7 +122,8 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
             );
           }
 
-          final double scaleValue = Tween<double>(begin: 1.7, end: 1.0).transform(t);
+          final double scaleValue =
+              Tween<double>(begin: 1.7, end: 1.0).transform(t);
           final Matrix4 scaleTransform = Matrix4.identity()
             ..scale(scaleValue, scaleValue, 1.0);
           const Alignment titleAlignment = Alignment.bottomLeft;

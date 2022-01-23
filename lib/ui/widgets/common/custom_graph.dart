@@ -21,7 +21,7 @@ class CustomGraph extends StatelessWidget {
   final String Function(double) getBottomTitle;
 
   const CustomGraph({
-    @required this.yValues,
+    required this.yValues,
     this.xValues,
     this.height,
     this.vInterval = 1.0,
@@ -56,7 +56,8 @@ class CustomGraph extends StatelessWidget {
     final double minY = yValues.reduce(math.min).toDouble();
     final double decreasedMinY = minY - (maxY - minY);
     final double effectiveMinY = decreasedMinY > 0 ? decreasedMinY : minY;
-    final double effectiveMaxX = (xValues?.length ?? yValues.length).toDouble() - 1.0;
+    final double effectiveMaxX =
+        (xValues?.length ?? yValues.length).toDouble() - 1.0;
 
     return LineChart(
       LineChartData(
@@ -133,8 +134,8 @@ class CustomGraph extends StatelessWidget {
   }
 
   LineChartBarData _buildLineData() {
-    final effectiveXValues =
-        xValues ?? List.generate(yValues.length, (index) => index.toDouble()).toList();
+    final effectiveXValues = xValues ??
+        List.generate(yValues.length, (index) => index.toDouble()).toList();
 
     return LineChartBarData(
       spots: List<FlSpot>.generate(

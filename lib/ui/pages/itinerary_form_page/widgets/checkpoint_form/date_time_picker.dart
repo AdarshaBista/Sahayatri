@@ -10,8 +10,8 @@ class DateTimePicker extends StatefulWidget {
   final Function(DateTime) onSelect;
 
   const DateTimePicker({
-    @required this.onSelect,
-    @required this.initialDateTime,
+    required this.onSelect,
+    required this.initialDateTime,
   }) : assert(onSelect != null);
 
   @override
@@ -63,9 +63,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   Future<DateTime> _showDatePicker(BuildContext context) {
     final now = DateTime.now();
-    final firstDate = (selectedDateTime == null || selectedDateTime.isAfter(now))
-        ? now
-        : selectedDateTime;
+    final firstDate =
+        (selectedDateTime == null || selectedDateTime.isAfter(now))
+            ? now
+            : selectedDateTime;
 
     return showDatePicker(
       context: context,

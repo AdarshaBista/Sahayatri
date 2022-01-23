@@ -18,10 +18,10 @@ class ToggleGrid<T> extends StatefulWidget {
     this.titleStyle,
     this.backgroundColor,
     this.titlePadding = 4.0,
-    @required this.title,
-    @required this.items,
-    @required this.onSelected,
-    @required this.initialValue,
+    required this.title,
+    required this.items,
+    required this.onSelected,
+    required this.initialValue,
   })  : assert(title != null),
         assert(items != null),
         assert(onSelected != null),
@@ -95,9 +95,9 @@ class ToggleItem<T> {
   final IconData icon;
 
   ToggleItem({
-    @required this.icon,
-    @required this.label,
-    @required this.value,
+    required this.icon,
+    required this.label,
+    required this.value,
   })  : assert(icon != null),
         assert(value != null),
         assert(label != null);

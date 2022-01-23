@@ -89,7 +89,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
   final int index;
 
   const _AltitudeMarkerLayer({
-    @required this.index,
+    required this.index,
   }) : assert(index != null);
 
   @override

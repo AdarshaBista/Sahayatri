@@ -13,7 +13,7 @@ class ElevatedCard extends StatelessWidget {
   final BorderRadius borderRadius;
 
   const ElevatedCard({
-    @required this.child,
+    required this.child,
     this.color,
     this.shadowColor = AppColors.dark,
     this.elevation = 2.0,

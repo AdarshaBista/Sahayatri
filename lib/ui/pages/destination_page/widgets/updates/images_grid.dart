@@ -44,7 +44,7 @@ class ImagesGrid extends StatelessWidget {
   };
 
   const ImagesGrid({
-    @required this.imageUrls,
+    required this.imageUrls,
   }) : assert(imageUrls != null);
 
   @override

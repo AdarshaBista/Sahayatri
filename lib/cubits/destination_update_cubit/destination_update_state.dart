@@ -16,14 +16,14 @@ class DestinationUpdateLoaded extends DestinationUpdateState {
   final List<DestinationUpdate> updates;
 
   const DestinationUpdateLoaded({
-    @required this.updates,
-  }) : assert(updates != null);
+    required this.updates,
+  });
 }
 
 class DestinationUpdateError extends DestinationUpdateState {
   final String message;
 
   const DestinationUpdateError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 }

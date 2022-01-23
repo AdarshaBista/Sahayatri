@@ -11,7 +11,7 @@ import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 
 class LodgeMarker extends DynamicTextMarker {
   LodgeMarker({
-    @required Lodge lodge,
+    required Lodge lodge,
   })  : assert(lodge != null),
         super(
           label: lodge.name,

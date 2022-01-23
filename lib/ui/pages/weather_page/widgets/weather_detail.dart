@@ -12,14 +12,15 @@ class WeatherDetail extends StatelessWidget {
   final Weather weather;
 
   const WeatherDetail({
-    @required this.weather,
+    required this.weather,
   }) : assert(weather != null);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 32.0),
+      padding: const EdgeInsets.only(
+          top: 16.0, left: 16.0, right: 16.0, bottom: 32.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

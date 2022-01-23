@@ -8,8 +8,8 @@ class IconIndicator extends StatelessWidget {
   final String imageUrl;
 
   const IconIndicator({
-    @required this.title,
-    @required this.imageUrl,
+    required this.title,
+    required this.imageUrl,
     this.padding = 64.0,
   })  : assert(title != null),
         assert(padding != null),

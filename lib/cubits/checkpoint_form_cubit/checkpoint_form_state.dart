@@ -1,9 +1,9 @@
 part of 'checkpoint_form_cubit.dart';
 
 class CheckpointFormState extends Equatable {
-  final Place place;
+  final Place? place;
+  final DateTime? dateTime;
   final String description;
-  final DateTime dateTime;
   final bool notifyContact;
 
   Checkpoint get checkpoint => Checkpoint(
@@ -14,18 +14,17 @@ class CheckpointFormState extends Equatable {
       );
 
   const CheckpointFormState({
-    @required this.place,
-    @required this.description,
-    @required this.dateTime,
-    @required this.notifyContact,
-  })  : assert(description != null),
-        assert(notifyContact != null);
+    required this.place,
+    required this.description,
+    required this.dateTime,
+    required this.notifyContact,
+  });
 
   CheckpointFormState copyWith({
-    Place place,
-    String description,
-    DateTime dateTime,
-    bool notifyContact,
+    Place? place,
+    String? description,
+    DateTime? dateTime,
+    bool? notifyContact,
   }) {
     return CheckpointFormState(
       place: place ?? this.place,
@@ -35,7 +34,7 @@ class CheckpointFormState extends Equatable {
     );
   }
 
-  bool isDirty(Checkpoint initial) {
+  bool isDirty(Checkpoint? initial) {
     if (initial == null) {
       return place != null ||
           description.isNotEmpty ||
@@ -50,5 +49,5 @@ class CheckpointFormState extends Equatable {
   }
 
   @override
-  List<Object> get props => [place, description, dateTime, notifyContact];
+  List<Object?> get props => [place, description, dateTime, notifyContact];
 }

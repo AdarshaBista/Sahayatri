@@ -9,7 +9,7 @@ import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 
 class CheckpointMarker extends DynamicTextMarker {
   CheckpointMarker({
-    @required Checkpoint checkpoint,
+    required Checkpoint checkpoint,
   })  : assert(checkpoint != null),
         super(
           shrinkWhen: false,
@@ -19,7 +19,8 @@ class CheckpointMarker extends DynamicTextMarker {
           backgroundColor: AppColors.primaryDark,
           icon: AppIcons.checkpoint,
           onTap: (context) {
-            CheckpointDetails(checkpoint: checkpoint).openModalBottomSheet(context);
+            CheckpointDetails(checkpoint: checkpoint)
+                .openModalBottomSheet(context);
           },
         );
 }

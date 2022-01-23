@@ -4,7 +4,7 @@ class PageTransition extends PageRouteBuilder {
   final Widget page;
 
   PageTransition({
-    @required this.page,
+    required this.page,
   })  : assert(page != null),
         super(
           pageBuilder: (

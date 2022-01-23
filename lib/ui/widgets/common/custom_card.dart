@@ -11,7 +11,7 @@ class CustomCard extends StatelessWidget {
   final EdgeInsetsGeometry padding;
 
   const CustomCard({
-    @required this.child,
+    required this.child,
     this.color,
     this.borderRadius = 6.0,
     this.elevation = 0.0,
@@ -32,7 +32,8 @@ class CustomCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       color: color ?? context.c.surface,
       shadowColor: AppColors.dark.withOpacity(0.4),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius)),
       child: Padding(
         padding: padding,
         child: child,

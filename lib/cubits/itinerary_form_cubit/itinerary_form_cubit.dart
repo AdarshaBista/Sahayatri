@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
@@ -10,17 +8,18 @@ import 'package:sahayatri/core/models/checkpoint.dart';
 part 'itinerary_form_state.dart';
 
 class ItineraryFormCubit extends Cubit<ItineraryFormState> {
-  final Itinerary itinerary;
+  final Itinerary? itinerary;
 
   ItineraryFormCubit({
-    @required this.itinerary,
+    required this.itinerary,
   }) : super(
           ItineraryFormState(
             name: itinerary?.name ?? '',
             days: itinerary?.days ?? '',
             nights: itinerary?.nights ?? '',
-            checkpoints:
-                itinerary == null ? [] : List<Checkpoint>.from(itinerary.checkpoints),
+            checkpoints: itinerary == null
+                ? []
+                : List<Checkpoint>.from(itinerary.checkpoints),
           ),
         );
 
@@ -62,6 +61,6 @@ class ItineraryFormCubit extends Cubit<ItineraryFormState> {
   void _sortCheckpoints(List<Checkpoint> checkpoints) {
     final bool isSortable = checkpoints.every((c) => c.dateTime != null);
     if (!isSortable) return;
-    checkpoints.sort((c1, c2) => c1.dateTime.compareTo(c2.dateTime));
+    checkpoints.sort((c1, c2) => c1.dateTime!.compareTo(c2.dateTime!));
   }
 }

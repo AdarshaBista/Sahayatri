@@ -14,7 +14,7 @@ class CollapsibleAppbar extends StatelessWidget {
   final VoidCallback onBack;
 
   const CollapsibleAppbar({
-    @required this.title,
+    required this.title,
     this.onBack,
     this.offset,
     this.leading,

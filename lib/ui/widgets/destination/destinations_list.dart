@@ -15,8 +15,8 @@ class DestinationsList extends StatelessWidget {
 
   const DestinationsList({
     this.deletable = false,
-    @required this.isSearching,
-    @required this.destinations,
+    required this.isSearching,
+    required this.destinations,
   })  : assert(deletable != null),
         assert(isSearching != null),
         assert(destinations != null);

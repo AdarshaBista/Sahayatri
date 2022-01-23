@@ -13,7 +13,7 @@ class ArrowMarkerWidget extends StatelessWidget {
   final VoidCallback onTap;
 
   const ArrowMarkerWidget({
-    @required this.child,
+    required this.child,
     this.color,
     this.onTap,
     this.arrowWidth = 30.0,
@@ -54,7 +54,7 @@ class _ArrowPainter extends CustomPainter {
   final Color color;
 
   const _ArrowPainter({
-    @required this.color,
+    required this.color,
   }) : assert(color != null);
 
   @override

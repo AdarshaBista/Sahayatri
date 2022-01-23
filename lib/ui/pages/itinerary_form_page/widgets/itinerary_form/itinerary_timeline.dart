@@ -26,7 +26,7 @@ class ItineraryTimeline extends StatelessWidget {
   final List<Checkpoint> checkpoints;
 
   const ItineraryTimeline({
-    @required this.checkpoints,
+    required this.checkpoints,
     this.controller,
     this.isNested = false,
     this.isEditable = false,
@@ -167,7 +167,8 @@ class ItineraryTimeline extends StatelessWidget {
       icon: AppIcons.close,
       color: AppColors.secondary,
       backgroundColor: context.c.surface,
-      onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
+      onTap: () =>
+          context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
     );
   }
 

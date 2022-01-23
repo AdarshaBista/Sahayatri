@@ -11,8 +11,8 @@ import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 
 class PlaceMarker extends DynamicTextMarker {
   PlaceMarker({
-    @required Place place,
-    @required bool shrinkWhen,
+    required Place place,
+    required bool shrinkWhen,
   })  : assert(place != null),
         assert(shrinkWhen != null),
         super(

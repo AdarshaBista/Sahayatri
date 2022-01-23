@@ -9,9 +9,9 @@ class AltitudeGraph extends StatelessWidget {
   final List<double> altitudes;
 
   const AltitudeGraph({
-    @required this.onDrag,
-    @required this.altitudes,
-    @required this.routeLengthKm,
+    required this.onDrag,
+    required this.altitudes,
+    required this.routeLengthKm,
   })  : assert(onDrag != null),
         assert(altitudes != null),
         assert(routeLengthKm != null);

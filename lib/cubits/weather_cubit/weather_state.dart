@@ -19,8 +19,8 @@ class WeatherSuccess extends WeatherState {
   final List<Weather> forecasts;
 
   const WeatherSuccess({
-    @required this.forecasts,
-  }) : assert(forecasts != null);
+    required this.forecasts,
+  });
 
   @override
   List<Object> get props => [forecasts];
@@ -30,8 +30,8 @@ class WeatherError extends WeatherState {
   final String message;
 
   const WeatherError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 
   @override
   List<Object> get props => [message];

@@ -19,7 +19,7 @@ class CheckpointDetails extends StatelessWidget {
 
   const CheckpointDetails({
     this.showLodges = true,
-    @required this.checkpoint,
+    required this.checkpoint,
   })  : assert(checkpoint != null),
         assert(showLodges != null);
 
@@ -98,7 +98,7 @@ class _CheckpointDateTime extends StatelessWidget {
   final Checkpoint checkpoint;
 
   const _CheckpointDateTime({
-    @required this.checkpoint,
+    required this.checkpoint,
   }) : assert(checkpoint != null);
 
   @override

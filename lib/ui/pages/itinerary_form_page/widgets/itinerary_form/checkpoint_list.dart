@@ -18,7 +18,7 @@ class CheckpointList extends StatelessWidget {
   final List<Checkpoint> checkpoints;
 
   const CheckpointList({
-    @required this.checkpoints,
+    required this.checkpoints,
   }) : assert(checkpoints != null);
 
   @override

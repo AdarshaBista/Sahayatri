@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
-
 import 'package:image_picker/image_picker.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -24,11 +22,9 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
   final DestinationUpdateCubit destinationUpdateCubit;
 
   DestinationUpdateFormCubit({
-    @required this.destination,
-    @required this.destinationUpdateCubit,
-  })  : assert(destination != null),
-        assert(destinationUpdateCubit != null),
-        super(
+    required this.destination,
+    required this.destinationUpdateCubit,
+  }) : super(
           DestinationUpdateFormState(
             text: '',
             tags: [],
@@ -82,10 +78,10 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
   }
 
   Future<void> selectImage(ImageSource source) async {
-    if (Platform.isWindows) return false;
+    if (Platform.isWindows) return;
 
-    final pickedImage = await ImagePicker().getImage(source: source);
-    if (pickedImage == null) return false;
+    final pickedImage = await ImagePicker().pickImage(source: source);
+    if (pickedImage == null) return;
     addImageUrl(pickedImage.path);
   }
 
@@ -97,9 +93,9 @@ class DestinationUpdateFormCubit extends Cubit<DestinationUpdateFormState> {
       var update = state.update.copyWith(user: destinationUpdateCubit.user);
       update = await apiService.postUpdate(update, destination.id);
       destination.updates ??= [];
-      destination.updates.insert(0, update);
+      destination.updates?.insert(0, update);
       destinationUpdateCubit.emit(
-        DestinationUpdateLoaded(updates: destination.updates),
+        DestinationUpdateLoaded(updates: destination.updates ?? []),
       );
       return true;
     } on AppError {

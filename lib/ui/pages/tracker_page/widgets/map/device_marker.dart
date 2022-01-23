@@ -9,8 +9,8 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart'
 
 class DeviceMarker extends DynamicTextMarker {
   DeviceMarker({
-    @required bool shrinkWhen,
-    @required NearbyDevice device,
+    required bool shrinkWhen,
+    required NearbyDevice device,
   })  : assert(device != null),
         assert(shrinkWhen != null),
         super(

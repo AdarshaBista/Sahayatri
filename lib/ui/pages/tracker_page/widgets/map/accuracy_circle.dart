@@ -6,9 +6,9 @@ import 'package:flutter_map/flutter_map.dart';
 
 class AccuracyCircle extends CircleMarker {
   AccuracyCircle({
-    @required LatLng point,
-    @required Color color,
-    @required double radius,
+    required LatLng point,
+    required Color color,
+    required double radius,
   })  : assert(point != null),
         assert(color != null),
         assert(radius != null),

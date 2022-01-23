@@ -10,8 +10,8 @@ class CircularCheckbox extends StatefulWidget {
 
   const CircularCheckbox({
     this.color,
-    @required this.value,
-    @required this.onSelect,
+    required this.value,
+    required this.onSelect,
   })  : assert(value != null),
         assert(onSelect != null);
 
@@ -36,7 +36,8 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
       padding: 4.0,
       icon: isChecked ? AppIcons.confirm : AppIcons.close,
       color: widget.color ?? context.c.onBackground,
-      backgroundColor: isChecked ? AppColors.primaryLight : AppColors.secondaryLight,
+      backgroundColor:
+          isChecked ? AppColors.primaryLight : AppColors.secondaryLight,
     );
   }
 

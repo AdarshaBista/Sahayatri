@@ -21,8 +21,8 @@ class ItineraryActions extends StatelessWidget {
   final Itinerary itinerary;
 
   const ItineraryActions({
-    @required this.deletable,
-    @required this.itinerary,
+    required this.deletable,
+    required this.itinerary,
   })  : assert(deletable != null),
         assert(itinerary != null);
 
@@ -62,7 +62,8 @@ class ItineraryActions extends StatelessWidget {
               }
               ConfirmDialog(
                 message: 'Do you want to delete this itinerary?',
-                onConfirm: () => context.read<UserItineraryCubit>().deleteItinerary(),
+                onConfirm: () =>
+                    context.read<UserItineraryCubit>().deleteItinerary(),
               ).openDialog(context);
             },
           ),

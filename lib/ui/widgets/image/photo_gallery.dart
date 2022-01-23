@@ -22,7 +22,7 @@ class PhotoGallery extends StatefulWidget {
 
   const PhotoGallery({
     this.onDelete,
-    @required this.imageUrls,
+    required this.imageUrls,
   }) : assert(imageUrls != null);
 
   @override

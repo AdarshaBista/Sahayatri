@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:sahayatri/locator.dart';
@@ -14,7 +12,7 @@ import 'package:sahayatri/core/services/api_service.dart';
 part 'destination_update_state.dart';
 
 class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
-  final User user;
+  final User? user;
   final Destination destination;
   final ApiService apiService = locator();
 
@@ -22,20 +20,19 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
   int total = 0;
 
   DestinationUpdateCubit({
-    @required this.user,
-    @required this.destination,
-  })  : assert(destination != null),
-        super(const DestinationUpdateEmpty());
+    this.user,
+    required this.destination,
+  }) : super(const DestinationUpdateEmpty());
 
-  bool get hasMore => destination.updates.length < total;
+  bool get hasMore => (destination.updates?.length ?? 0) < total;
 
   Future<bool> loadMore() async {
     page++;
     try {
       final updatesList = await apiService.fetchUpdates(destination.id, page);
       final updates = updatesList.updates;
-      destination.updates.addAll(updates);
-      emit(DestinationUpdateLoaded(updates: destination.updates));
+      destination.updates?.addAll(updates);
+      emit(DestinationUpdateLoaded(updates: destination.updates ?? []));
       return true;
     } on AppError {
       return false;
@@ -44,7 +41,7 @@ class DestinationUpdateCubit extends Cubit<DestinationUpdateState> {
 
   Future<void> fetchUpdates() async {
     if (destination.updates != null) {
-      emit(DestinationUpdateLoaded(updates: destination.updates));
+      emit(DestinationUpdateLoaded(updates: destination.updates ?? []));
       return;
     }
 

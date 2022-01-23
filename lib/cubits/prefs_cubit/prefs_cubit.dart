@@ -11,7 +11,7 @@ import 'package:sahayatri/app/database/prefs_dao.dart';
 part 'prefs_state.dart';
 
 class PrefsCubit extends Cubit<PrefsState> {
-  PrefsDao prefsDao;
+  PrefsDao? prefsDao;
 
   PrefsCubit() : super(const PrefsState(isLoading: true));
 
@@ -19,7 +19,7 @@ class PrefsCubit extends Cubit<PrefsState> {
 
   Future<void> init() async {
     prefsDao = locator();
-    final prefs = await prefsDao.get();
+    final prefs = await prefsDao?.get() ?? const Prefs();
     emit(PrefsState(prefs: prefs));
   }
 

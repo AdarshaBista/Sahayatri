@@ -12,9 +12,9 @@ class WeatherTab extends StatelessWidget {
   final Weather weather;
 
   const WeatherTab({
-    @required this.color,
-    @required this.isToday,
-    @required this.weather,
+    required this.color,
+    required this.isToday,
+    required this.weather,
   })  : assert(color != null),
         assert(isToday != null),
         assert(weather != null);
@@ -30,7 +30,9 @@ class WeatherTab extends StatelessWidget {
           Text(
             isToday
                 ? 'TODAY'
-                : DateFormat(DateFormat.ABBR_WEEKDAY).format(weather.date).toUpperCase(),
+                : DateFormat(DateFormat.ABBR_WEEKDAY)
+                    .format(weather.date)
+                    .toUpperCase(),
             style: AppTextStyles.headline4.withColor(color),
           ),
           const SizedBox(height: 10.0),

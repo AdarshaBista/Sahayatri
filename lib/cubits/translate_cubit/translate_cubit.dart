@@ -26,7 +26,11 @@ class TranslateCubit extends Cubit<TranslateState> {
   TranslateCubit() : super(TranslateState());
 
   Future<void> translate(String source) async {
-    final query = Translation(isQuery: true, text: source, language: sourceLang);
+    final query = Translation(
+      isQuery: true,
+      text: source,
+      language: sourceLang,
+    );
     emit(TranslateState(
       isLoading: true,
       translations: [...state.translations, query],
@@ -74,7 +78,7 @@ class TranslateCubit extends Cubit<TranslateState> {
 
   @override
   Future<void> close() {
-    controller?.dispose();
+    controller.dispose();
     return super.close();
   }
 }

@@ -26,8 +26,8 @@ class CheckpointForm extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   CheckpointForm({
-    @required this.onSubmit,
-    @required this.checkpoint,
+    required this.onSubmit,
+    required this.checkpoint,
   }) : assert(onSubmit != null);
 
   @override

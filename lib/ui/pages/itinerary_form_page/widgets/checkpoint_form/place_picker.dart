@@ -16,8 +16,8 @@ class PlacePicker extends StatefulWidget {
   final Function(Place) onSelect;
 
   const PlacePicker({
-    @required this.onSelect,
-    @required this.initialPlace,
+    required this.onSelect,
+    required this.initialPlace,
   }) : assert(onSelect != null);
 
   @override

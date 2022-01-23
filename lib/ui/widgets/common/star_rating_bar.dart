@@ -13,7 +13,7 @@ class StarRatingBar extends StatelessWidget {
   const StarRatingBar({
     this.size = 24.0,
     this.onUpdate,
-    @required this.rating,
+    required this.rating,
   })  : assert(size != null),
         assert(rating != null);
 
@@ -34,7 +34,8 @@ class StarRatingBar extends StatelessWidget {
         ignoreGestures: onUpdate == null,
         onRatingUpdate: onUpdate,
         itemBuilder: (_, index) {
-          final IconData iconData = index < rating ? AppIcons.starFilled : AppIcons.star;
+          final IconData iconData =
+              index < rating ? AppIcons.starFilled : AppIcons.star;
           final Icon icon = Icon(
             iconData,
             color: color,

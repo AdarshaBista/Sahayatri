@@ -86,10 +86,10 @@ class _LayerTile extends StatelessWidget {
   final Function(bool) onSelect;
 
   const _LayerTile({
-    @required this.icon,
-    @required this.value,
-    @required this.label,
-    @required this.onSelect,
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.onSelect,
   })  : assert(icon != null),
         assert(value != null),
         assert(label != null),

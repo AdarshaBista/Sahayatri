@@ -7,7 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 
 class UserMarker extends Marker {
   UserMarker({
-    @required LatLng point,
+    required LatLng point,
   })  : assert(point != null),
         super(
           width: 24.0,

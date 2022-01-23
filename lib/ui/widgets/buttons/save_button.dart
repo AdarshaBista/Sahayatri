@@ -7,7 +7,7 @@ class SaveButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const SaveButton({
-    @required this.onPressed,
+    required this.onPressed,
   }) : assert(onPressed != null);
 
   @override

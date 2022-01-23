@@ -9,9 +9,9 @@ class StatTile extends StatelessWidget {
   final String stat;
 
   const StatTile({
-    @required this.icon,
-    @required this.stat,
-    @required this.label,
+    required this.icon,
+    required this.stat,
+    required this.label,
   })  : assert(icon != null),
         assert(stat != null),
         assert(label != null);

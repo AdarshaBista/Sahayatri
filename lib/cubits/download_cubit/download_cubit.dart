@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -19,11 +17,9 @@ class DownloadCubit extends Cubit<DownloadState> {
   final DestinationsService destinationsService = locator();
 
   DownloadCubit({
-    @required this.user,
-    @required this.destination,
-  })  : assert(user != null),
-        assert(destination != null),
-        super(const DownloadInitial());
+    required this.user,
+    required this.destination,
+  }) : super(const DownloadInitial());
 
   void checkDownloaded() {
     if (destinationsService.isDownloaded(destination)) {

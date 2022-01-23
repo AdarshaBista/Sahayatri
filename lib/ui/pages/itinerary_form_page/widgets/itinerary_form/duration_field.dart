@@ -13,10 +13,10 @@ class DurationField extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const DurationField({
-    @required this.icon,
-    @required this.label,
-    @required this.onChanged,
-    @required this.initialValue,
+    required this.icon,
+    required this.label,
+    required this.onChanged,
+    required this.initialValue,
   })  : assert(icon != null),
         assert(label != null),
         assert(onChanged != null),
@@ -30,7 +30,8 @@ class DurationField extends StatelessWidget {
       initialValue: initialValue,
       labelStyle: context.t.headline6,
       onChanged: onChanged,
-      validator: FormValidators.duration('Please enter number of ${label.toLowerCase()}'),
+      validator: FormValidators.duration(
+          'Please enter number of ${label.toLowerCase()}'),
       keyboardType: const TextInputType.numberWithOptions(),
       inputFormatters: [
         LengthLimitingTextInputFormatter(3),

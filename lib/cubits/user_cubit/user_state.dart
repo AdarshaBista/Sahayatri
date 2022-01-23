@@ -19,8 +19,8 @@ class Authenticated extends UserState {
   final User user;
 
   const Authenticated({
-    @required this.user,
-  }) : assert(user != null);
+    required this.user,
+  });
 
   @override
   List<Object> get props => [user];

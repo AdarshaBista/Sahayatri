@@ -10,9 +10,9 @@ import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
 
 class DynamicTextMarker extends Marker {
   DynamicTextMarker({
-    @required Coord coord,
-    @required IconData icon,
-    @required bool shrinkWhen,
+    required Coord coord,
+    required IconData icon,
+    required bool shrinkWhen,
     String label,
     Function(BuildContext) onTap,
     Color color = AppColors.dark,

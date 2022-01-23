@@ -16,22 +16,22 @@ class DownloadedDestinationsLoaded extends DownloadedDestinationsState {
   final List<Destination> destinations;
 
   const DownloadedDestinationsLoaded({
-    @required this.destinations,
-  }) : assert(destinations != null);
+    required this.destinations,
+  });
 }
 
 class DownloadedDestinationsError extends DownloadedDestinationsState {
   final String message;
 
   const DownloadedDestinationsError({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 }
 
 class DownloadedDestinationsMessage extends DownloadedDestinationsState {
   final String message;
 
   const DownloadedDestinationsMessage({
-    @required this.message,
-  }) : assert(message != null);
+    required this.message,
+  });
 }

@@ -11,7 +11,7 @@ class ImageCard extends StatelessWidget {
   final Color backgroundColor;
 
   const ImageCard({
-    @required this.imageUrl,
+    required this.imageUrl,
     this.backgroundColor,
     this.borderRadius = 8.0,
     this.showLoading = true,

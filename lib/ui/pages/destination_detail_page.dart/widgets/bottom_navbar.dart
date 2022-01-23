@@ -7,7 +7,7 @@ class BottomNavbar extends StatelessWidget {
   final TabController tabController;
 
   const BottomNavbar({
-    @required this.tabController,
+    required this.tabController,
   }) : assert(tabController != null);
 
   @override

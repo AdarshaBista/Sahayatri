@@ -10,9 +10,9 @@ class RatingChart extends StatelessWidget {
   final Map<int, int> stars;
 
   const RatingChart({
-    @required this.total,
-    @required this.stars,
-    @required this.average,
+    required this.total,
+    required this.stars,
+    required this.average,
   })  : assert(total != null),
         assert(stars != null),
         assert(average != null);
@@ -20,7 +20,8 @@ class RatingChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
+      padding: const EdgeInsets.only(
+          left: 24.0, bottom: 20.0, right: 24.0, top: 10.0),
       child: Row(
         children: [
           _buildDetails(context),
@@ -97,8 +98,8 @@ class BarPainter extends CustomPainter {
   final Color backgroundColor;
 
   BarPainter({
-    @required this.value,
-    @required this.backgroundColor,
+    required this.value,
+    required this.backgroundColor,
   })  : assert(value != null),
         assert(backgroundColor != null);
 

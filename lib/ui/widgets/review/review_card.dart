@@ -11,14 +11,15 @@ class ReviewCard extends StatelessWidget {
   final Review review;
 
   const ReviewCard({
-    @required this.review,
+    required this.review,
   }) : assert(review != null);
 
   @override
   Widget build(BuildContext context) {
     return FadeAnimator(
       child: Container(
-        padding: const EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            top: 4.0, left: 8.0, right: 8.0, bottom: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -85,7 +86,7 @@ class _ReviewText extends StatefulWidget {
   final String text;
 
   const _ReviewText({
-    @required this.text,
+    required this.text,
   }) : assert(text != null);
 
   @override

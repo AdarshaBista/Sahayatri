@@ -7,6 +7,5 @@ class TranslateState {
   TranslateState({
     this.translations = const [],
     this.isLoading = false,
-  })  : assert(translations != null),
-        assert(isLoading != null);
+  });
 }

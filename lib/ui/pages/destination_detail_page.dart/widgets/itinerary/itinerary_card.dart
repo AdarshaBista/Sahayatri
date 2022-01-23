@@ -21,7 +21,7 @@ class ItineraryCard extends StatelessWidget {
 
   const ItineraryCard({
     this.deletable = false,
-    @required this.itinerary,
+    required this.itinerary,
   })  : assert(itinerary != null),
         assert(deletable != null);
 
@@ -58,7 +58,8 @@ class ItineraryCard extends StatelessWidget {
               Positioned(
                 top: 0.0,
                 right: 0.0,
-                child: ItineraryActions(itinerary: itinerary, deletable: deletable),
+                child: ItineraryActions(
+                    itinerary: itinerary, deletable: deletable),
               ),
             ],
           ),
@@ -76,7 +77,9 @@ class ItineraryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            checkpointsLen == 1 ? '1 checkpoint' : '$checkpointsLen checkpoints',
+            checkpointsLen == 1
+                ? '1 checkpoint'
+                : '$checkpointsLen checkpoints',
             style: context.t.headline6,
           ),
           const SizedBox(height: 6.0),
@@ -107,7 +110,8 @@ class ItineraryCard extends StatelessWidget {
           ElevatedCard(
             radius: 16.0,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
               child: Text(
                 '${itinerary.checkpoints.first.date} - ${itinerary.checkpoints.last.date}',
                 style: AppTextStyles.headline6.primaryDark.bold,
@@ -123,7 +127,7 @@ class _ImagesLayer extends StatelessWidget {
   final List<String> imageUrls;
 
   const _ImagesLayer({
-    @required this.imageUrls,
+    required this.imageUrls,
   }) : assert(imageUrls != null);
 
   @override

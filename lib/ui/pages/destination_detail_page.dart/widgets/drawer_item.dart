@@ -8,9 +8,9 @@ class DrawerItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const DrawerItem({
-    @required this.icon,
-    @required this.label,
-    @required this.onTap,
+    required this.icon,
+    required this.label,
+    required this.onTap,
   })  : assert(icon != null),
         assert(label != null),
         assert(onTap != null);

@@ -1,8 +1,8 @@
 part of 'destination_update_form_cubit.dart';
 
 class DestinationUpdateFormState {
-  String message;
-  bool isLoading = false;
+  final String? message;
+  final bool isLoading;
   final String text;
   final List<String> tags;
   final List<Coord> coords;
@@ -19,22 +19,19 @@ class DestinationUpdateFormState {
   DestinationUpdateFormState({
     this.message,
     this.isLoading = false,
-    @required this.text,
-    @required this.tags,
-    @required this.coords,
-    @required this.imageUrls,
-  })  : assert(text != null),
-        assert(tags != null),
-        assert(coords != null),
-        assert(imageUrls != null);
+    required this.text,
+    required this.tags,
+    required this.coords,
+    required this.imageUrls,
+  });
 
   DestinationUpdateFormState copyWith({
-    String message,
-    bool isLoading,
-    String text,
-    List<String> tags,
-    List<Coord> coords,
-    List<String> imageUrls,
+    String? message,
+    bool? isLoading,
+    String? text,
+    List<String>? tags,
+    List<Coord>? coords,
+    List<String>? imageUrls,
   }) {
     return DestinationUpdateFormState(
       message: message ?? this.message,
