@@ -48,7 +48,7 @@ class ItineraryForm extends StatelessWidget {
       children: [
         Text(
           'Duration',
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 8.0),
         Row(
@@ -59,7 +59,7 @@ class ItineraryForm extends StatelessWidget {
                 label: 'Days',
                 initialValue: state.days,
                 icon: AppIcons.day,
-                onChanged: (days) => context.read<ItineraryFormCubit>().changeDays(days),
+                onChanged: context.read<ItineraryFormCubit>().changeDays,
               ),
             ),
             const SizedBox(width: 12.0),
@@ -68,8 +68,7 @@ class ItineraryForm extends StatelessWidget {
                 label: 'Nights',
                 initialValue: state.nights,
                 icon: AppIcons.night,
-                onChanged: (nights) =>
-                    context.read<ItineraryFormCubit>().changeNights(nights),
+                onChanged: context.read<ItineraryFormCubit>().changeNights,
               ),
             ),
           ],

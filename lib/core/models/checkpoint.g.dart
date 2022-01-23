@@ -18,8 +18,8 @@ class CheckpointAdapter extends TypeAdapter<Checkpoint> {
     };
     return Checkpoint(
       place: fields[0] as Place,
-      dateTime: fields[2] as DateTime,
       description: fields[1] as String,
+      dateTime: fields[2] as DateTime?,
       day: fields[3] as int,
       notifyContact: fields[4] as bool,
     );

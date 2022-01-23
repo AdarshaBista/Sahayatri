@@ -11,7 +11,7 @@ class CheckpointImages extends StatelessWidget {
 
   const CheckpointImages({
     required this.imageUrls,
-  }) : assert(imageUrls != null);
+  });
 
   @override
   Widget build(BuildContext context) {

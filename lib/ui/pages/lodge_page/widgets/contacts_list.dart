@@ -24,13 +24,17 @@ class ContactList extends StatelessWidget {
         children: [
           Text(
             'Contact Numbers',
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
           const SizedBox(height: 8.0),
           ElevatedCard(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              children: contactNumbers.map((n) => _buildNumber(context, n)).toList(),
+              children: contactNumbers
+                  .map(
+                    (n) => _buildNumber(context, n),
+                  )
+                  .toList(),
             ),
           ),
         ],
@@ -53,13 +57,13 @@ class ContactList extends StatelessWidget {
       ),
       title: Text(
         number,
-        style: context.t.headline5.bold.serif,
+        style: context.t.headline5?.bold.serif,
       ),
       trailing: GestureDetector(
         onTap: () => _launchPhone(context, number),
         child: Text(
           'Call',
-          style: context.t.headline5.primary,
+          style: context.t.headline5?.primary,
         ),
       ),
     );

@@ -98,8 +98,7 @@ class BarPainter extends CustomPainter {
   BarPainter({
     required this.value,
     required this.backgroundColor,
-  })  : assert(value != null),
-        assert(backgroundColor != null);
+  });
 
   @override
   void paint(Canvas canvas, Size size) {

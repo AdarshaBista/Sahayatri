@@ -11,16 +11,12 @@ class DeviceMarker extends DynamicTextMarker {
   DeviceMarker({
     required bool shrinkWhen,
     required NearbyDevice device,
-  })  : assert(device != null),
-        assert(shrinkWhen != null),
-        super(
+  }) : super(
           label: device.name,
           color: Colors.blue,
           shrinkWhen: shrinkWhen,
-          coord: device.userLocation.coord,
+          coord: device.userLocation!.coord,
           icon: AppIcons.nearbyDevice,
-          onTap: (context) {
-            DeviceDetails(deviceId: device.id).openModalBottomSheet(context);
-          },
+          onTap: DeviceDetails(deviceId: device.id).openModalBottomSheet,
         );
 }

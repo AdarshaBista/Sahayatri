@@ -36,10 +36,10 @@ class TrackerMap extends StatefulWidget {
 
 class _TrackerMapState extends State<TrackerMap>
     with SingleTickerProviderStateMixin {
-  double zoom;
   bool isTracking = true;
-  MapAnimator mapAnimator;
-  MapController mapController;
+  late double zoom;
+  late final MapAnimator mapAnimator;
+  late final MapController mapController;
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _TrackerMapState extends State<TrackerMap>
       });
     }
 
-    if (zoom != pos.zoom) zoom = pos.zoom;
+    if (zoom != pos.zoom) zoom = pos.zoom ?? 18.0;
   }
 
   @override
@@ -74,7 +74,7 @@ class _TrackerMapState extends State<TrackerMap>
     final center = context.watch<TrackerUpdate>().currentLocation.coord;
 
     if (isTracking) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
         mapAnimator.move(center.toLatLng());
       });
     }
@@ -199,8 +199,8 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
                       .map(
                         (d) => AccuracyCircle(
                           color: Colors.blue,
-                          radius: d.userLocation.accuracy,
-                          point: d.userLocation.coord.toLatLng(),
+                          radius: d.userLocation!.accuracy,
+                          point: d.userLocation!.coord.toLatLng(),
                         ),
                       )
                       .toList(),
@@ -237,7 +237,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
 
         if (placesEnabled) {
           final destination = context.watch<Destination>();
-          places.addAll(destination.places);
+          places.addAll(destination.places!);
         }
 
         if (checkpointsEnabled) {

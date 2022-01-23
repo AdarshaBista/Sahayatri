@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 class DevicesService {
@@ -13,11 +14,7 @@ class DevicesService {
 
   /// Find [NearbyDevice] with given [id].
   NearbyDevice? findDevice(String id) {
-    try {
-      return _devices.firstWhere((d) => d.id == id);
-    } catch (e) {
-      return null;
-    }
+    return _devices.firstWhereOrNull((d) => d.id == id);
   }
 
   /// Add a [NearbyDevice] to nearby devices set.

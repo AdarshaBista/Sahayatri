@@ -10,8 +10,7 @@ class TrackLocationButton extends StatelessWidget {
   const TrackLocationButton({
     required this.onTap,
     required this.isTracking,
-  })  : assert(onTap != null),
-        assert(isTracking != null);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ class WeatherTabView extends StatefulWidget {
 
   const WeatherTabView({
     required this.forecasts,
-  }) : assert(forecasts != null);
+  });
 
   @override
   _WeatherTabViewState createState() => _WeatherTabViewState();
@@ -20,7 +20,7 @@ class WeatherTabView extends StatefulWidget {
 
 class _WeatherTabViewState extends State<WeatherTabView>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late final TabController _tabController;
 
   @override
   void initState() {

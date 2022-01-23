@@ -17,11 +17,7 @@ class TrackerGraph extends StatelessWidget {
     required this.yValues,
     this.shouldOffset = true,
     this.offsetRange = 10,
-  })  : assert(title != null),
-        assert(color != null),
-        assert(yValues != null),
-        assert(offsetRange != null),
-        assert(shouldOffset != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class TrackerGraph extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             title,
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
         ),
         const SizedBox(height: 16.0),

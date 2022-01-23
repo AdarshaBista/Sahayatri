@@ -16,10 +16,7 @@ class AuthFields extends StatelessWidget {
     required this.onEmailChanged,
     required this.initialPassword,
     required this.onPasswordChanged,
-  })  : assert(initialEmail != null),
-        assert(onEmailChanged != null),
-        assert(initialPassword != null),
-        assert(onPasswordChanged != null);
+  });
 
   @override
   Widget build(BuildContext context) {

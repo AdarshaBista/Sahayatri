@@ -19,14 +19,14 @@ class CheckpointList extends StatelessWidget {
 
   const CheckpointList({
     required this.checkpoints,
-  }) : assert(checkpoints != null);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Checkpoints', style: context.t.headline5.bold),
+        Text('Checkpoints', style: context.t.headline5?.bold),
         const SizedBox(height: 8.0),
         CustomFormField<List<Checkpoint>>(
           initialValue: checkpoints,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 
@@ -9,10 +9,7 @@ class AccuracyCircle extends CircleMarker {
     required LatLng point,
     required Color color,
     required double radius,
-  })  : assert(point != null),
-        assert(color != null),
-        assert(radius != null),
-        super(
+  }) : super(
           point: point,
           radius: radius,
           useRadiusInMeter: true,

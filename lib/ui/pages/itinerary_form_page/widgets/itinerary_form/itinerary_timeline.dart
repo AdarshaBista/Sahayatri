@@ -22,16 +22,15 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/c
 class ItineraryTimeline extends StatelessWidget {
   final bool isNested;
   final bool isEditable;
-  final ScrollController controller;
   final List<Checkpoint> checkpoints;
+  final ScrollController? controller;
 
   const ItineraryTimeline({
     required this.checkpoints,
-    this.controller,
     this.isNested = false,
     this.isEditable = false,
-  })  : assert(isEditable != null),
-        assert(checkpoints != null);
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +74,8 @@ class ItineraryTimeline extends StatelessWidget {
       indicatorStyle: IndicatorStyle(
         width: 44.0,
         height: 44.0,
-        padding: const EdgeInsets.symmetric(
-          vertical: 4.0,
-          horizontal: 8.0,
-        ),
-        indicator: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(shape: BoxShape.circle),
-          child: AdaptiveImage(checkpoint.place.imageUrls[0]),
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+        indicator: _buildIndicator(checkpoint),
       ),
       beforeLineStyle: const LineStyle(
         thickness: 1.5,
@@ -98,6 +90,16 @@ class ItineraryTimeline extends StatelessWidget {
     );
   }
 
+  Widget _buildIndicator(Checkpoint checkpoint) {
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: checkpoint.place.imageUrls.isEmpty
+          ? const Center(child: Icon(AppIcons.place))
+          : AdaptiveImage(checkpoint.place.imageUrls.first),
+    );
+  }
+
   Widget _buildDateTime(BuildContext context, Checkpoint checkpoint) {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 80.0),
@@ -107,7 +109,7 @@ class ItineraryTimeline extends StatelessWidget {
         children: [
           Text(
             checkpoint.date,
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
           if (!checkpoint.isTemplate) const SizedBox(height: 4.0),
           if (!checkpoint.isTemplate)
@@ -138,14 +140,14 @@ class ItineraryTimeline extends StatelessWidget {
     );
   }
 
-  Column _buildCheckpointText(BuildContext context, Checkpoint checkpoint) {
+  Widget _buildCheckpointText(BuildContext context, Checkpoint checkpoint) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           checkpoint.place.name.toUpperCase(),
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 4.0),
         Text(

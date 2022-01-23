@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
@@ -12,8 +10,7 @@ import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 class LodgeMarker extends DynamicTextMarker {
   LodgeMarker({
     required Lodge lodge,
-  })  : assert(lodge != null),
-        super(
+  }) : super(
           label: lodge.name,
           coord: lodge.coord,
           shrinkWhen: false,

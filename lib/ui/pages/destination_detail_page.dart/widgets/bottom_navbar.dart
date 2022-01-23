@@ -8,7 +8,7 @@ class BottomNavbar extends StatelessWidget {
 
   const BottomNavbar({
     required this.tabController,
-  }) : assert(tabController != null);
+  });
 
   @override
   Widget build(BuildContext context) {

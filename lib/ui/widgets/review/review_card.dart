@@ -87,7 +87,7 @@ class _ReviewText extends StatefulWidget {
 
   const _ReviewText({
     required this.text,
-  }) : assert(text != null);
+  });
 
   @override
   _ReviewTextState createState() => _ReviewTextState();

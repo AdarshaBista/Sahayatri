@@ -28,14 +28,14 @@ class DestinationNavPage extends StatelessWidget {
           providers: [
             BlocProvider<DownloadCubit>(
               create: (context) => DownloadCubit(
-                user: context.read<UserCubit>().user,
+                user: context.read<UserCubit>().user!,
                 destination: context.read<Destination>(),
               )..checkDownloaded(),
             ),
             BlocProvider<PlacesCubit>(
               lazy: false,
               create: (context) => PlacesCubit(
-                user: context.read<UserCubit>().user,
+                user: context.read<UserCubit>().user!,
                 destination: context.read<Destination>(),
               )..fetchPlaces(),
             ),

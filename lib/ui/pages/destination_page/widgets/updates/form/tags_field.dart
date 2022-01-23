@@ -17,7 +17,7 @@ class TagsField extends StatefulWidget {
 }
 
 class _TagsFieldState extends State<TagsField> {
-  TextEditingController controller;
+  late final TextEditingController controller;
 
   @override
   void initState() {
@@ -41,7 +41,8 @@ class _TagsFieldState extends State<TagsField> {
           children: [
             _buildTextField(state.tags.length),
             if (state.tags.isNotEmpty) ...[
-              if (state.tags.length < ApiConfig.maxImages) const SizedBox(height: 12.0),
+              if (state.tags.length < ApiConfig.maxImages)
+                const SizedBox(height: 12.0),
               _buildTagsList(state.tags),
             ],
           ],

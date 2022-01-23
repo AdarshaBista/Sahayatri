@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
@@ -21,14 +20,15 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/p
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/date_time_picker.dart';
 
 class CheckpointForm extends StatelessWidget {
-  final Checkpoint checkpoint;
-  final Function(Checkpoint) onSubmit;
+  final Checkpoint? checkpoint;
+  final void Function(Checkpoint) onSubmit;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   CheckpointForm({
     required this.onSubmit,
-    required this.checkpoint,
-  }) : assert(onSubmit != null);
+    this.checkpoint,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class CheckpointForm extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceField(Place place, BuildContext context) {
+  Widget _buildPlaceField(Place? place, BuildContext context) {
     return CustomFormField<Place>(
       initialValue: place,
       validator: FormValidators.nonNull('Please select a place.'),
@@ -87,7 +87,7 @@ class CheckpointForm extends StatelessWidget {
     );
   }
 
-  Widget _buildDateTimeField(DateTime dateTime, BuildContext context) {
+  Widget _buildDateTimeField(DateTime? dateTime, BuildContext context) {
     return CustomFormField<DateTime>(
       initialValue: dateTime,
       validator: FormValidators.nonNull('Please select date and time.'),
@@ -123,7 +123,7 @@ class CheckpointForm extends StatelessWidget {
       ),
       title: Text(
         'Notify Contact',
-        style: context.t.headline5.bold,
+        style: context.t.headline5?.bold,
       ),
       subtitle: Text(
         'Notify close contact via SMS when you reach this checkpoint.',
@@ -135,7 +135,7 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildSubmitButton(CheckpointFormState state, BuildContext context) {
     return MiniFab(
       onTap: () {
-        if (!_formKey.currentState.validate()) return;
+        if (!(_formKey.currentState?.validate() ?? false)) return;
 
         onSubmit(state.checkpoint);
         Navigator.of(context).pop();

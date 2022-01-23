@@ -17,10 +17,7 @@ class DurationField extends StatelessWidget {
     required this.label,
     required this.onChanged,
     required this.initialValue,
-  })  : assert(icon != null),
-        assert(label != null),
-        assert(onChanged != null),
-        assert(initialValue != null);
+  });
 
   @override
   Widget build(BuildContext context) {

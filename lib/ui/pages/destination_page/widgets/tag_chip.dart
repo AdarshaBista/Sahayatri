@@ -4,21 +4,20 @@ import 'package:sahayatri/ui/styles/styles.dart';
 
 class TagChip extends StatefulWidget {
   final String label;
-  final void Function(String) onDelete;
+  final void Function(String)? onDelete;
 
   const TagChip({
-    Key key,
+    Key? key,
     required this.label,
     this.onDelete,
-  })  : assert(label != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _TagChipState createState() => _TagChipState();
 }
 
 class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late final AnimationController controller;
 
   @override
   void initState() {
@@ -69,7 +68,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
                 child: GestureDetector(
                   onTap: () async {
                     await controller.reverse();
-                    widget.onDelete(widget.label);
+                    widget.onDelete?.call(widget.label);
                   },
                   child: const Icon(
                     AppIcons.close,

@@ -20,7 +20,7 @@ class ItineraryAdapter extends TypeAdapter<Itinerary> {
       name: fields[0] as String,
       days: fields[1] as String,
       nights: fields[2] as String,
-      checkpoints: (fields[3] as List)?.cast<Checkpoint>(),
+      checkpoints: (fields[3] as List).cast<Checkpoint>(),
     );
   }
 

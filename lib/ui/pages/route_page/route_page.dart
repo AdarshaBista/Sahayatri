@@ -90,7 +90,7 @@ class _AltitudeMarkerLayer extends StatelessWidget {
 
   const _AltitudeMarkerLayer({
     required this.index,
-  }) : assert(index != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +133,7 @@ class _PlaceMarkersLayer extends StatelessWidget {
             if (state is PlacesLoaded) {
               return MarkerLayerWidget(
                 options: MarkerLayerOptions(
-                    markers: destination.places.reversed
+                    markers: destination.places!.reversed
                         .map((p) => PlaceMarker(
                               place: p,
                               shrinkWhen: false,

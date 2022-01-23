@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import 'package:sahayatri/core/models/nearby_device.dart';
 
@@ -16,7 +17,7 @@ class DeviceDetails extends StatelessWidget {
 
   const DeviceDetails({
     required this.deviceId,
-  }) : assert(deviceId != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class DeviceDetails extends StatelessWidget {
       builder: (context, state) {
         final deviceReactive = (state as NearbyConnected)
             .trackingDevices
-            .firstWhere((d) => d.id == deviceId, orElse: () => null);
+            .firstWhereOrNull((d) => d.id == deviceId);
 
         if (deviceReactive == null) return const SizedBox();
 
@@ -52,17 +53,17 @@ class DeviceDetails extends StatelessWidget {
         StatTile(
           label: 'Altitude',
           icon: AppIcons.altitude,
-          stat: '${device.userLocation.altitude.floor()} m',
+          stat: '${device.userLocation!.altitude.floor()} m',
         ),
         StatTile(
           label: 'Speed',
           icon: AppIcons.speed,
-          stat: '${device.userLocation.speed.toStringAsFixed(1)} m/s',
+          stat: '${device.userLocation!.speed.toStringAsFixed(1)} m/s',
         ),
         StatTile(
           label: 'Accuracy',
           icon: AppIcons.accuracy,
-          stat: '${device.userLocation.accuracy.toStringAsFixed(1)} m',
+          stat: '${device.userLocation!.accuracy.toStringAsFixed(1)} m',
         ),
         const SizedBox(height: 16.0),
       ],

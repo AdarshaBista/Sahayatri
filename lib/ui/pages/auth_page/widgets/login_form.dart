@@ -14,7 +14,7 @@ class LoginForm extends StatefulWidget {
 
   const LoginForm({
     required this.isInitial,
-  }) : assert(isInitial != null);
+  });
 
   @override
   _LoginFormState createState() => _LoginFormState();

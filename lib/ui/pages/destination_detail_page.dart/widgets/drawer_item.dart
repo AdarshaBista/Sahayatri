@@ -11,9 +11,7 @@ class DrawerItem extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
-  })  : assert(icon != null),
-        assert(label != null),
-        assert(onTap != null);
+  });
 
   @override
   Widget build(BuildContext context) {

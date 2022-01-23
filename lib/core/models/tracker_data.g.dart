@@ -17,9 +17,9 @@ class TrackerDataAdapter extends TypeAdapter<TrackerData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TrackerData(
-      destinationId: fields[0] as String,
+      destinationId: fields[0] as String?,
       elapsed: fields[1] as int,
-      smsSentList: (fields[2] as List)?.cast<String>(),
+      smsSentList: (fields[2] as List).cast<String>(),
     );
   }
 

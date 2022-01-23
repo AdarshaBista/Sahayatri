@@ -43,7 +43,7 @@ class UserAvatar extends StatelessWidget {
   }
 
   Widget _buildImage(User user) {
-    return user.imageUrl == null
+    return !user.hasImage
         ? const Icon(
             AppIcons.edit,
             size: 24.0,
@@ -58,7 +58,7 @@ class UserAvatar extends StatelessWidget {
   Future<void> _updateAvatar(BuildContext context, ImageSource source) async {
     Navigator.of(context).pop();
 
-    bool success;
+    late bool success;
     await context.openLoadingFlushBar(
       'Updating avatar...',
       callback: () async {
@@ -68,7 +68,8 @@ class UserAvatar extends StatelessWidget {
     if (success) {
       context.openFlushBar('Avatar updated.', type: FlushbarType.success);
     } else {
-      context.openFlushBar('Failed to update avatar.', type: FlushbarType.error);
+      context.openFlushBar('Failed to update avatar.',
+          type: FlushbarType.error);
     }
   }
 }

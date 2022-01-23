@@ -12,16 +12,18 @@ import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
 
 class UpdateMapDialog extends StatelessWidget {
-  final List<Coord> coords;
+  final List<Coord>? coords;
 
-  const UpdateMapDialog({this.coords});
+  const UpdateMapDialog({
+    this.coords,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (coords != null) {
+    if (coords != null && coords!.isNotEmpty) {
       return _buildMapDialog(
-        center: coords.first,
-        effectiveCoords: coords,
+        center: coords!.first,
+        effectiveCoords: coords!,
       );
     }
 
@@ -34,17 +36,16 @@ class UpdateMapDialog extends StatelessWidget {
         return _buildMapDialog(
           center: center,
           effectiveCoords: state.coords,
-          onTap: (coord) =>
-              context.read<DestinationUpdateFormCubit>().updateCoords(coord),
+          onTap: context.read<DestinationUpdateFormCubit>().updateCoords,
         );
       },
     );
   }
 
   Widget _buildMapDialog({
-    Coord center,
-    Function(Coord) onTap,
-    List<Coord> effectiveCoords,
+    required Coord center,
+    required List<Coord> effectiveCoords,
+    Function(Coord)? onTap,
   }) {
     return MapDialog(
       map: CustomMap(
@@ -65,12 +66,12 @@ class UpdateMapDialog extends StatelessWidget {
 
 class _MarkersLayer extends StatelessWidget {
   final List<Coord> coords;
-  final Function(Coord) onTap;
+  final void Function(Coord)? onTap;
 
   const _MarkersLayer({
     this.onTap,
     required this.coords,
-  }) : assert(coords != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +91,7 @@ class _MarkersLayer extends StatelessWidget {
       point: c.toLatLng(),
       builder: (context) {
         return GestureDetector(
-          onTap: () => onTap(c),
+          onTap: () => onTap?.call(c),
           child: const Icon(
             AppIcons.updateMarker,
             size: size,

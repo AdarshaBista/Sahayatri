@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:provider/provider.dart';
@@ -13,8 +13,7 @@ class UserLocationLayer extends StatelessWidget {
   const UserLocationLayer({
     required this.builder,
     this.repaintBoundary = false,
-  })  : assert(builder != null),
-        assert(repaintBoundary != null);
+  });
 
   @override
   Widget build(BuildContext context) {

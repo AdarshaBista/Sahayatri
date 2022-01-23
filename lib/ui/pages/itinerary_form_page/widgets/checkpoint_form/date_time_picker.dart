@@ -6,20 +6,20 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
 
 class DateTimePicker extends StatefulWidget {
-  final DateTime initialDateTime;
-  final Function(DateTime) onSelect;
+  final DateTime? initialDateTime;
+  final void Function(DateTime) onSelect;
 
   const DateTimePicker({
     required this.onSelect,
     required this.initialDateTime,
-  }) : assert(onSelect != null);
+  });
 
   @override
   _DateTimePickerState createState() => _DateTimePickerState();
 }
 
 class _DateTimePickerState extends State<DateTimePicker> {
-  DateTime selectedDateTime;
+  late DateTime? selectedDateTime;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
       icon: AppIcons.date,
       hintText: selectedDateTime == null
           ? 'No date & time selected'
-          : _formattedDate(selectedDateTime),
+          : _formattedDate(selectedDateTime!),
       onTap: () {
         FocusScope.of(context).unfocus();
         _selectDateTime();
@@ -43,10 +43,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
   }
 
   Future<void> _selectDateTime() async {
-    final DateTime pickedDate = await _showDatePicker(context);
+    final pickedDate = await _showDatePicker(context);
     if (pickedDate == null) return;
 
-    final TimeOfDay pickedTime = await _showTimePicker(context);
+    final pickedTime = await _showTimePicker(context);
     if (pickedTime == null) return;
 
     setState(() {
@@ -58,13 +58,13 @@ class _DateTimePickerState extends State<DateTimePicker> {
         pickedTime.minute,
       );
     });
-    widget.onSelect(selectedDateTime);
+    widget.onSelect(selectedDateTime!);
   }
 
-  Future<DateTime> _showDatePicker(BuildContext context) {
+  Future<DateTime?> _showDatePicker(BuildContext context) {
     final now = DateTime.now();
     final firstDate =
-        (selectedDateTime == null || selectedDateTime.isAfter(now))
+        (selectedDateTime == null || selectedDateTime!.isAfter(now))
             ? now
             : selectedDateTime;
 
@@ -73,18 +73,18 @@ class _DateTimePickerState extends State<DateTimePicker> {
       helpText: '',
       fieldLabelText: '',
       builder: _getTheme,
-      firstDate: firstDate,
+      firstDate: firstDate!,
       initialDate: selectedDateTime ?? now,
       lastDate: DateTime.now().add(const Duration(days: 5 * 365)),
     );
   }
 
-  Future<TimeOfDay> _showTimePicker(BuildContext context) {
+  Future<TimeOfDay?> _showTimePicker(BuildContext context) {
     final initialTime = selectedDateTime == null
         ? TimeOfDay.now()
         : TimeOfDay(
-            hour: selectedDateTime.hour,
-            minute: selectedDateTime.minute,
+            hour: selectedDateTime!.hour,
+            minute: selectedDateTime!.minute,
           );
 
     return showTimePicker(
@@ -95,7 +95,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
     );
   }
 
-  Widget _getTheme(BuildContext context, Widget child) {
+  Widget _getTheme(BuildContext context, Widget? child) {
     final colorScheme = Theme.of(context).colorScheme;
     return Theme(
       data: Theme.of(context).copyWith(
@@ -106,7 +106,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
           surface: context.theme.cardColor,
         ),
       ),
-      child: child,
+      child: child!,
     );
   }
 

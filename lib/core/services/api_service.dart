@@ -315,7 +315,7 @@ class ApiService {
 }
 
 extension on List<dynamic> {
-  List<T> tryMap<T>(void Function(T) callback) {
+  List<T> tryMap<T>(void Function(dynamic) callback) {
     final ret = <T>[];
     for (final item in this) {
       try {
