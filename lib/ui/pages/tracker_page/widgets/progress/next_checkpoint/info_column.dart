@@ -32,7 +32,7 @@ class InfoColumn extends StatelessWidget {
           icon: AppIcons.eta,
           title: nextCheckpoint.eta == null
               ? 'N/A'
-              : _formatDuration(nextCheckpoint.eta),
+              : _formatDuration(nextCheckpoint.eta!),
           subtitle: 'ETA',
         ),
       ],

@@ -20,10 +20,10 @@ class PlaceAdapter extends TypeAdapter<Place> {
       id: fields[0] as String,
       name: fields[1] as String,
       coord: fields[2] as Coord,
-      imageUrls: (fields[5] as List)?.cast<String>(),
+      imageUrls: (fields[5] as List).cast<String>(),
       description: fields[3] as String,
       isNetworkAvailable: fields[4] as bool,
-      lodges: (fields[6] as List)?.cast<Lodge>(),
+      lodges: (fields[6] as List).cast<Lodge>(),
     );
   }
 

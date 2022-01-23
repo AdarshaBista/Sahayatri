@@ -38,7 +38,7 @@ class ProfileHeader extends StatelessWidget {
           user.name.toUpperCase(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: context.t.headline4.bold,
+          style: context.t.headline4?.bold,
         ),
       ),
     );
@@ -47,8 +47,8 @@ class ProfileHeader extends StatelessWidget {
   Widget _buildContent(BuildContext context, User user) {
     return Stack(
       children: [
-        if (user.imageUrl != null) _buildBlurredImage(user.imageUrl),
-        if (user.imageUrl != null) _buildGradient(context),
+        if (user.hasImage) _buildBlurredImage(user.imageUrl),
+        if (user.hasImage) _buildGradient(context),
         _buildForeground(),
       ],
     );
@@ -72,7 +72,8 @@ class ProfileHeader extends StatelessWidget {
     return GradientContainer(
       gradientBegin: Alignment.topCenter,
       gradientEnd: Alignment.bottomCenter,
-      gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.background),
+      gradientColors:
+          AppColors.getCollapsibleHeaderGradient(context.c.background),
     );
   }
 

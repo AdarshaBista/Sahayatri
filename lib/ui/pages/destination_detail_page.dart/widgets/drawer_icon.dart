@@ -9,8 +9,9 @@ class DrawerIcon extends StatefulWidget {
   _DrawerIconState createState() => _DrawerIconState();
 }
 
-class _DrawerIconState extends State<DrawerIcon> with SingleTickerProviderStateMixin {
-  AnimationController animController;
+class _DrawerIconState extends State<DrawerIcon>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController animController;
 
   @override
   void initState() {
@@ -20,7 +21,7 @@ class _DrawerIconState extends State<DrawerIcon> with SingleTickerProviderStateM
       duration: const Duration(milliseconds: 300),
     );
 
-    final drawerStateNotifier = ZoomDrawer.of(context).stateNotifier;
+    final drawerStateNotifier = ZoomDrawer.of(context)!.stateNotifier!;
     drawerStateNotifier.addListener(() {
       if (drawerStateNotifier.value == DrawerState.opening) {
         animController.forward();
@@ -47,7 +48,7 @@ class _DrawerIconState extends State<DrawerIcon> with SingleTickerProviderStateM
       onPressed: () {
         final drawerController = ZoomDrawer.of(context);
 
-        if (drawerController.isOpen()) {
+        if (drawerController!.isOpen()) {
           animController.reverse();
         } else {
           animController.forward();

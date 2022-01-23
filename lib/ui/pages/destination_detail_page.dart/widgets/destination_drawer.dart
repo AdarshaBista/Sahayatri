@@ -44,14 +44,16 @@ class DestinationDrawer extends StatelessWidget {
         DrawerItem(
           icon: AppIcons.route,
           label: 'Route',
-          onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
+          onTap: () {
+            locator<DestinationNavService>().pushNamed(Routes.routePageRoute);
+          },
         ),
         DrawerItem(
           icon: AppIcons.weather,
           label: 'Weather',
           onTap: () {
             final destination = context.read<Destination>();
-            return locator<DestinationNavService>().pushNamed(
+            locator<DestinationNavService>().pushNamed(
               Routes.weatherPageRoute,
               arguments: WeatherPageArgs(
                 name: destination.name,

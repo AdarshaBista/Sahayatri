@@ -23,10 +23,7 @@ class AuthButton extends StatelessWidget {
     required this.formKey,
     required this.isInitial,
     required this.onPressed,
-  })  : assert(label != null),
-        assert(formKey != null),
-        assert(isInitial != null),
-        assert(onPressed != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +47,7 @@ class AuthButton extends StatelessWidget {
   }
 
   Future<void> _authenticate(BuildContext context) async {
-    if (!formKey.currentState.validate()) return;
+    if (!(formKey.currentState?.validate() ?? false)) return;
 
     final success = await onPressed();
     if (!success) {

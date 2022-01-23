@@ -21,7 +21,7 @@ class PlaceListSheet extends StatelessWidget {
 
   const PlaceListSheet({
     required this.onSelect,
-  }) : assert(onSelect != null);
+  });
 
   @override
   Widget build(BuildContext context) {

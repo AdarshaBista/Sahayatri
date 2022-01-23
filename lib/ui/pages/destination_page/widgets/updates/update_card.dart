@@ -19,7 +19,7 @@ class UpdateCard extends StatelessWidget {
 
   const UpdateCard({
     required this.update,
-  }) : assert(update != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +53,17 @@ class UpdateCard extends StatelessWidget {
     return Row(
       children: [
         UserAvatarSquare(
-          username: update.user.name,
-          imageUrl: update.user.imageUrl,
+          username: update.user!.name,
+          imageUrl: update.user!.imageUrl,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              update.user.name,
+              update.user!.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.t.headline5.bold,
+              style: context.t.headline5?.bold,
             ),
             const SizedBox(height: 2.0),
             Text(
@@ -116,7 +116,7 @@ class UpdateCard extends StatelessWidget {
           icon: AppIcons.location,
           iconColor: AppColors.secondary,
           label: update.coords.length.toString(),
-          labelStyle: context.t.headline5.bold.withColor(AppColors.secondary),
+          labelStyle: context.t.headline5?.bold.withColor(AppColors.secondary),
         ),
       ),
     );

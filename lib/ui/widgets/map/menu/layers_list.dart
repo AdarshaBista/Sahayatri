@@ -90,10 +90,7 @@ class _LayerTile extends StatelessWidget {
     required this.value,
     required this.label,
     required this.onSelect,
-  })  : assert(icon != null),
-        assert(value != null),
-        assert(label != null),
-        assert(onSelect != null);
+  });
 
   @override
   Widget build(BuildContext context) {

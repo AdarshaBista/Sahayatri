@@ -7,7 +7,7 @@ class CustomFormTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final String hintText;
-  final Widget trailing;
+  final Widget? trailing;
   final VoidCallback onTap;
 
   const CustomFormTile({
@@ -16,10 +16,7 @@ class CustomFormTile extends StatelessWidget {
     required this.title,
     required this.hintText,
     this.trailing,
-  })  : assert(icon != null),
-        assert(onTap != null),
-        assert(title != null),
-        assert(hintText != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,7 @@ class CustomFormTile extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 8.0),
         CustomTile(

@@ -12,20 +12,20 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/p
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
 
 class PlacePicker extends StatefulWidget {
-  final Place initialPlace;
-  final Function(Place) onSelect;
+  final Place? initialPlace;
+  final void Function(Place) onSelect;
 
   const PlacePicker({
     required this.onSelect,
     required this.initialPlace,
-  }) : assert(onSelect != null);
+  });
 
   @override
   _PlacePickerState createState() => _PlacePickerState();
 }
 
 class _PlacePickerState extends State<PlacePicker> {
-  Place selectedPlace;
+  late Place? selectedPlace;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _PlacePickerState extends State<PlacePicker> {
       onSelect: (place) {
         setState(() {
           selectedPlace = place;
-          widget.onSelect(selectedPlace);
+          widget.onSelect(place);
         });
       },
     ).openModalBottomSheet(context);

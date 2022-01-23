@@ -23,8 +23,8 @@ class DestinationDetailPage extends StatefulWidget {
 
 class _DestinationDetailPageState extends State<DestinationDetailPage>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
-  ZoomDrawerController drawerController;
+  late final TabController tabController;
+  late final ZoomDrawerController drawerController;
 
   @override
   void initState() {
@@ -46,10 +46,10 @@ class _DestinationDetailPageState extends State<DestinationDetailPage>
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => drawerController.close(),
+      onTap: () => drawerController.close?.call(),
       onPanUpdate: (details) {
-        if (details.delta.dx < -6.0) drawerController.open();
-        if (details.delta.dx > 6.0) drawerController.close();
+        if (details.delta.dx < -6.0) drawerController.open?.call();
+        if (details.delta.dx > 6.0) drawerController.close?.call();
       },
       child: ZoomDrawer(
         angle: 0.0,

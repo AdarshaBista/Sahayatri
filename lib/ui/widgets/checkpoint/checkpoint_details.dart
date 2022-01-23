@@ -42,9 +42,9 @@ class CheckpointDetails extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           _CheckpointDateTime(checkpoint: checkpoint),
-          if (showLodges && (checkpoint.place?.lodges.isNotEmpty ?? false)) ...[
+          if (showLodges && (checkpoint.place.lodges.isNotEmpty)) ...[
             const SizedBox(height: 16.0),
-            CheckpointLodges(lodges: checkpoint.place!.lodges),
+            CheckpointLodges(lodges: checkpoint.place.lodges),
           ],
           const SizedBox(height: 8.0),
         ],
@@ -59,7 +59,7 @@ class CheckpointDetails extends StatelessWidget {
         Header(
           padding: 20.0,
           fontSize: 25.0,
-          title: checkpoint.place?.name ?? 'N/A',
+          title: checkpoint.place.name,
         ),
         const Spacer(),
         CircularButton(

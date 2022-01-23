@@ -25,7 +25,7 @@ class NextCheckpointCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             'NEXT CHECKPOINT',
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
         ),
         const SizedBox(height: 12.0),

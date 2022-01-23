@@ -80,7 +80,7 @@ class _CheckpointCard extends StatelessWidget {
 
   const _CheckpointCard({
     required this.checkpoint,
-  }) : assert(checkpoint != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class _CheckpointCard extends StatelessWidget {
     if (checkpoint.isTemplate) {
       return Text(
         'DAY ${checkpoint.day}',
-        style: context.t.headline5.bold,
+        style: context.t.headline5?.bold,
       );
     }
 
@@ -116,7 +116,7 @@ class _CheckpointCard extends StatelessWidget {
       children: [
         Text(
           checkpoint.date.toUpperCase(),
-          style: context.t.headline5.bold,
+          style: context.t.headline5?.bold,
         ),
         const SizedBox(height: 4.0),
         Text(

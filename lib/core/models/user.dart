@@ -29,6 +29,8 @@ class User {
     this.accessToken = '',
   });
 
+  bool get hasImage => imageUrl.trim().isNotEmpty;
+
   User copyWith({
     String? id,
     String? name,

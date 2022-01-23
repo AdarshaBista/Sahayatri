@@ -15,9 +15,7 @@ class WeatherTab extends StatelessWidget {
     required this.color,
     required this.isToday,
     required this.weather,
-  })  : assert(color != null),
-        assert(isToday != null),
-        assert(weather != null);
+  });
 
   @override
   Widget build(BuildContext context) {

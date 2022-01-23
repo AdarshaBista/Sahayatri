@@ -6,6 +6,7 @@ import 'package:sahayatri/locator.dart';
 
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -22,11 +23,20 @@ class ItineraryCard extends StatelessWidget {
   const ItineraryCard({
     this.deletable = false,
     required this.itinerary,
-  })  : assert(itinerary != null),
-        assert(deletable != null);
+  });
 
-  List<String> get imageUrls =>
-      itinerary.checkpoints.map((c) => c.place.imageUrls.first).toList();
+  List<String> get imageUrls {
+    String? _getImageUrl(Checkpoint c) {
+      if (c.place.imageUrls.isEmpty) return null;
+      return c.place.imageUrls.first;
+    }
+
+    return itinerary.checkpoints
+        .map(_getImageUrl)
+        .where((url) => url != null)
+        .map((url) => url!)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +97,7 @@ class ItineraryCard extends StatelessWidget {
           const SizedBox(height: 10.0),
           Text(
             '${itinerary.days} days / ${itinerary.nights} nights',
-            style: context.t.headline6.bold,
+            style: context.t.headline6?.bold,
           ),
           const SizedBox(height: 6.0),
           _buildTitleRow(context),
@@ -128,7 +138,7 @@ class _ImagesLayer extends StatelessWidget {
 
   const _ImagesLayer({
     required this.imageUrls,
-  }) : assert(imageUrls != null);
+  });
 
   @override
   Widget build(BuildContext context) {

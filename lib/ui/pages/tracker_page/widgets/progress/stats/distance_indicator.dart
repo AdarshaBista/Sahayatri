@@ -45,7 +45,11 @@ class DistanceIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildDistanceInfo(BuildContext context, double covered, double remaining) {
+  Widget _buildDistanceInfo(
+    BuildContext context,
+    double covered,
+    double remaining,
+  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -56,12 +60,17 @@ class DistanceIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildStat(BuildContext context, double distance, String label, Color color) {
+  Widget _buildStat(
+    BuildContext context,
+    double distance,
+    String label,
+    Color color,
+  ) {
     return Column(
       children: [
         Text(
           FormatUtils.distance(distance),
-          style: context.t.headline4.bold.withColor(color),
+          style: context.t.headline4?.bold.withColor(color),
         ),
         const SizedBox(height: 2.0),
         Text(

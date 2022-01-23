@@ -14,7 +14,8 @@ class CheckpointInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final checkpoint = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint;
+    final checkpoint =
+        context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint;
 
     return SizedBox(
       height: 192.0,
@@ -41,14 +42,14 @@ class CheckpointInfo extends StatelessWidget {
       children: [
         Text(
           checkpoint.date,
-          style: context.t.headline5.primaryDark.bold,
+          style: context.t.headline5?.primaryDark.bold,
         ),
         const SizedBox(width: 8.0),
         const CircleAvatar(radius: 2.0),
         const SizedBox(width: 8.0),
         Text(
           checkpoint.time,
-          style: context.t.headline5.primaryDark,
+          style: context.t.headline5?.primaryDark,
         ),
       ],
     );

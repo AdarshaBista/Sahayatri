@@ -17,7 +17,7 @@ import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/location_field.dart';
 
 class UpdateForm extends StatelessWidget {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class UpdateForm extends StatelessWidget {
         builder: (context) => WillPopScope(
           onWillPop: () => _handleBackButton(context),
           child: Form(
-            key: formKey,
+            key: _formKey,
             child: ListView(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -71,8 +71,9 @@ class UpdateForm extends StatelessWidget {
     return BlocBuilder<DestinationUpdateFormCubit, DestinationUpdateFormState>(
       builder: (context, state) {
         if (state.message == null) return const SizedBox();
+
         return Text(
-          state.message,
+          state.message!,
           style: AppTextStyles.headline6.secondary,
         );
       },
@@ -92,7 +93,7 @@ class UpdateForm extends StatelessWidget {
                 ),
           onPressed: () async {
             if (state.isLoading) return;
-            if (!formKey.currentState.validate()) return;
+            if (!(_formKey.currentState?.validate() ?? false)) return;
 
             final success =
                 await context.read<DestinationUpdateFormCubit>().postUpdate();

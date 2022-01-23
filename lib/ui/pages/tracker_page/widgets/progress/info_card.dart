@@ -14,10 +14,7 @@ class InfoCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-  })  : assert(icon != null),
-        assert(title != null),
-        assert(color != null),
-        assert(subtitle != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,7 @@ class InfoCard extends StatelessWidget {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.t.headline5.bold,
+                style: context.t.headline5?.bold,
               ),
             ),
             const SizedBox(height: 4.0),

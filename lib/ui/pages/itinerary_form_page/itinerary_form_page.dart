@@ -17,8 +17,6 @@ import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/it
 class ItineraryFormPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  ItineraryFormPage();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -61,7 +59,7 @@ class ItineraryFormPage extends StatelessWidget {
   }
 
   void _saveItinerary(BuildContext context, Itinerary itinerary) {
-    if (!_formKey.currentState.validate()) return;
+    if (!(_formKey.currentState?.validate() ?? false)) return;
 
     context.read<UserItineraryCubit>().createItinerary(itinerary);
     Navigator.of(context).pop();

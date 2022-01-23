@@ -13,7 +13,7 @@ class WeatherDetail extends StatelessWidget {
 
   const WeatherDetail({
     required this.weather,
-  }) : assert(weather != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class WeatherDetail extends StatelessWidget {
           const SizedBox(height: 8.0),
           Text(
             weather.label.toUpperCase(),
-            style: context.t.headline3.bold,
+            style: context.t.headline3?.bold,
           ),
           _buildTemp(context),
           Text(
@@ -87,20 +87,20 @@ class WeatherDetail extends StatelessWidget {
       children: [
         Text(
           '${weather.temp}',
-          style: context.t.headline3.serif.withSize(96.0),
+          style: context.t.headline3?.serif.withSize(96.0),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
             '°',
-            style: context.t.headline3.withSize(50.0),
+            style: context.t.headline3?.withSize(50.0),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Text(
             'C',
-            style: context.t.headline2.withSize(40.0),
+            style: context.t.headline2?.withSize(40.0),
           ),
         ),
       ],

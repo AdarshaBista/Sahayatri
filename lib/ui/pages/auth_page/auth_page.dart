@@ -22,7 +22,7 @@ class AuthPage extends StatelessWidget {
 
   const AuthPage({
     this.isInitial = true,
-  }) : assert(isInitial != null);
+  });
 
   @override
   Widget build(BuildContext context) {

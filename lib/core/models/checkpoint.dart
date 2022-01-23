@@ -9,7 +9,7 @@ part 'checkpoint.g.dart';
 @HiveType(typeId: HiveTypeIds.checkpoint)
 class Checkpoint {
   @HiveField(0)
-  final Place? place;
+  final Place place;
 
   @HiveField(1)
   final String description;

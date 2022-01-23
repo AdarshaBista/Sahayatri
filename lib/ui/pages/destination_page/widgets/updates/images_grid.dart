@@ -45,7 +45,7 @@ class ImagesGrid extends StatelessWidget {
 
   const ImagesGrid({
     required this.imageUrls,
-  }) : assert(imageUrls != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class ImagesGrid extends StatelessWidget {
       crossAxisSpacing: 6.0,
       itemCount: maxImages,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      staggeredTileBuilder: (int index) => _layout[maxImages][index],
+      staggeredTileBuilder: (int index) => _layout[maxImages]![index],
       itemBuilder: (context, index) => _buildItem(context, index, maxImages),
     );
   }

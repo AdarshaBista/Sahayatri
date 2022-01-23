@@ -23,8 +23,7 @@ class ItineraryActions extends StatelessWidget {
   const ItineraryActions({
     required this.deletable,
     required this.itinerary,
-  })  : assert(deletable != null),
-        assert(itinerary != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,11 @@ class ItineraryActions extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon({Color color, IconData icon, VoidCallback onTap}) {
+  Widget _buildIcon({
+    required Color color,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

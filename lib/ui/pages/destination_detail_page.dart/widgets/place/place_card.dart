@@ -17,7 +17,7 @@ class PlaceCard extends StatelessWidget {
 
   const PlaceCard({
     required this.place,
-  }) : assert(place != null);
+  });
 
   @override
   Widget build(BuildContext context) {

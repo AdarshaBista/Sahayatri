@@ -25,13 +25,13 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       description: fields[5] as String,
       maxAltitude: fields[6] as String,
       estimatedDuration: fields[7] as String,
-      route: (fields[8] as List)?.cast<Coord>(),
-      imageUrls: (fields[9] as List)?.cast<String>(),
-      bestMonths: (fields[10] as List)?.cast<String>(),
-      places: (fields[11] as List)?.cast<Place>(),
-      updates: (fields[14] as List)?.cast<DestinationUpdate>(),
+      route: (fields[8] as List).cast<Coord>(),
+      imageUrls: (fields[9] as List).cast<String>(),
+      bestMonths: (fields[10] as List).cast<String>(),
+      places: (fields[11] as List?)?.cast<Place>(),
       reviewDetails: fields[12] as ReviewDetails,
-      suggestedItineraries: (fields[13] as List)?.cast<Itinerary>(),
+      suggestedItineraries: (fields[13] as List?)?.cast<Itinerary>(),
+      updates: (fields[14] as List?)?.cast<DestinationUpdate>(),
     );
   }
 

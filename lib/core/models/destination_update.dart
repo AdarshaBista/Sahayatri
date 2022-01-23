@@ -6,8 +6,8 @@ import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/utils/api_utils.dart';
 
 class DestinationUpdate {
-  final User? user;
   final String? id;
+  final User? user;
   final String text;
   final DateTime dateUpdated;
   final List<String> tags;

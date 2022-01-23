@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/lodge.dart';
 
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/lodge_review_cubit/lodge_review_cubit.dart';
@@ -57,7 +56,8 @@ class LodgePage extends StatelessWidget {
       children: [
         PhotoGallery(imageUrls: context.watch<Lodge>().imageUrls),
         ReviewList(
-          reviewCubit: BlocProvider.of<ReviewCubit>(context) as LodgeReviewCubit,
+          reviewCubit:
+              BlocProvider.of<ReviewCubit>(context) as LodgeReviewCubit,
         ),
       ],
     );

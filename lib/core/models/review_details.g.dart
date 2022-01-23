@@ -18,8 +18,8 @@ class ReviewDetailsAdapter extends TypeAdapter<ReviewDetails> {
     };
     return ReviewDetails(
       total: fields[0] as int,
-      stars: (fields[1] as Map)?.cast<int, int>(),
-      reviews: (fields[2] as List)?.cast<Review>(),
+      stars: (fields[1] as Map).cast<int, int>(),
+      reviews: (fields[2] as List).cast<Review>(),
     );
   }
 

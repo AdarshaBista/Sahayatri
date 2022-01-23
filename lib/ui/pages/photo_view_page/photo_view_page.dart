@@ -13,7 +13,7 @@ class PhotoViewPage extends StatelessWidget {
 
   const PhotoViewPage({
     required this.args,
-  }) : assert(args != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +62,5 @@ class PhotoViewPageArgs {
   const PhotoViewPageArgs({
     required this.initialPageIndex,
     required this.imageUrls,
-  })  : assert(initialPageIndex != null),
-        assert(imageUrls != null);
+  });
 }

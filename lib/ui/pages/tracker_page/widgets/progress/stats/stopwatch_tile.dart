@@ -18,8 +18,8 @@ class StopwatchTile extends StatefulWidget {
 }
 
 class _StopwatchTileState extends State<StopwatchTile> {
-  Timer timer;
-  Duration elapsed;
+  late final Timer timer;
+  late Duration elapsed;
 
   @override
   void initState() {

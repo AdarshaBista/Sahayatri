@@ -7,7 +7,7 @@ class CheckpointFormState extends Equatable {
   final bool notifyContact;
 
   Checkpoint get checkpoint => Checkpoint(
-        place: place,
+        place: place!,
         description: description.trim(),
         dateTime: dateTime,
         notifyContact: notifyContact,

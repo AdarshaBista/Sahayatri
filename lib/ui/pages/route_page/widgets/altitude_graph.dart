@@ -12,9 +12,7 @@ class AltitudeGraph extends StatelessWidget {
     required this.onDrag,
     required this.altitudes,
     required this.routeLengthKm,
-  })  : assert(onDrag != null),
-        assert(altitudes != null),
-        assert(routeLengthKm != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class AltitudeGraph extends StatelessWidget {
           Text(
             'ALTITUDE GRAPH',
             textAlign: TextAlign.center,
-            style: context.t.headline5.bold,
+            style: context.t.headline5?.bold,
           ),
           const SizedBox(height: 24.0),
           Flexible(

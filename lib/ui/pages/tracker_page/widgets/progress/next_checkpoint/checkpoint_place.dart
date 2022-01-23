@@ -17,7 +17,8 @@ class CheckpointPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = context.watch<TrackerUpdate>().nextCheckpoint.checkpoint.place;
+    final place =
+        context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint.place;
 
     return GestureDetector(
       onTap: () {
@@ -37,7 +38,7 @@ class CheckpointPlace extends StatelessWidget {
               place.name.toUpperCase(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.t.headline5.bold,
+              style: context.t.headline5?.bold,
             ),
             leading: CircularButton(
               icon: AppIcons.place,
@@ -46,7 +47,7 @@ class CheckpointPlace extends StatelessWidget {
             ),
             subtitle: Text(
               '${place.coord.alt.toStringAsFixed(0)} m',
-              style: context.t.headline6.bold,
+              style: context.t.headline6?.bold,
             ),
           ),
         ),

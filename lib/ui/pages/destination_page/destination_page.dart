@@ -69,7 +69,7 @@ class DestinationPage extends StatelessWidget {
         child: Text(
           destination.description,
           textAlign: TextAlign.left,
-          style: context.t.headline5.serif,
+          style: context.t.headline5?.serif,
         ),
       ),
     );
@@ -85,7 +85,7 @@ class DestinationPage extends StatelessWidget {
       children: [
         PhotoGallery(imageUrls: destination.imageUrls),
         ReviewList(
-          reviewCubit: BlocProvider.of<ReviewCubit>(context) as DestinationReviewCubit,
+          reviewCubit: context.read<ReviewCubit>() as DestinationReviewCubit,
         ),
         const UpdateList(),
       ],
