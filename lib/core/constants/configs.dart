@@ -1,7 +1,7 @@
 class AppConfig {
   static const String appName = 'Sahayatri';
   static const String packageName = 'com.adrsh.sahayatri';
-  static const String fontFamily = 'Poppins';
+  static const String fontFamily = 'Bozon';
   static const String fontFamilySerif = 'RobotoSlab';
 }
 

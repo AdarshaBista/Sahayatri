@@ -25,7 +25,7 @@
     <application
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="${applicationName}"
         android:label="Sahayatri"
         android:icon="@mipmap/ic_launcher">
         <activity
