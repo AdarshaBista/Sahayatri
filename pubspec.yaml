@@ -15,15 +15,15 @@ dependencies:
   # Utils
   dio: ^4.0.4
   intl: ^0.17.0
-  timeago: ^3.1.0
-  url_launcher: ^6.0.18
-  path_provider: ^2.0.8
-  image_picker: ^0.8.4+4
+  timeago: ^3.2.2
+  url_launcher: ^6.0.20
+  path_provider: ^2.0.9
+  image_picker: ^0.8.4+8
   device_preview: ^1.0.0
   form_field_validator: ^1.1.0
 
   # Alert
-  flutter_local_notifications: ^9.2.0
+  flutter_local_notifications: ^9.3.1
 
   # State Management
   get_it: ^7.2.0
@@ -55,7 +55,7 @@ dependencies:
   loading_indicator: ^3.0.2
   another_flushbar: ^1.10.28
   flutter_rating_bar: ^4.0.0
-  flutter_zoom_drawer: ^2.2.1
+  flutter_zoom_drawer: ^2.3.1
   community_material_icon: ^5.9.55
   sleek_circular_slider: ^2.0.1
   flutter_staggered_grid_view: ^0.4.1
@@ -92,18 +92,17 @@ flutter:
     - assets/images/backgrounds/
 
   fonts:
-    - family: Poppins
+    - family: Bozon
       fonts:
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Bozon-Bold.otf
           weight: 700
-        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Bozon-SemiBold.otf
           weight: 600
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Bozon-Medium.otf
           weight: 500
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Bozon-Regular.otf
           weight: 400
-        - asset: assets/fonts/Poppins-Light.ttf
-          weight: 300
+        - asset: assets/fonts/Bozon-Light.otf
 
     - family: RobotoSlab
       fonts:
