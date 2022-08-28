@@ -1,0 +1,79 @@
+{
+    "[dart]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true,
+        "editor.detectIndentation": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+        }
+    },
+    "dartimportsorter.sortOnSave": true,
+    "dartimportsorter.leaveEmptyLinesBetweenGroups": true,
+    "dartimportsorter.matchingRules": [
+        {
+            "label": "Dart",
+            "regex": "^dart:.*$",
+            "order": 1,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "Flutter",
+            "regex": "^package:flutter/.*$",
+            "order": 2,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "Third party packages",
+            "regex": "^package:(?!sahayatri).*$",
+            "order": 3,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "App core imports",
+            "regex": "^package:sahayatri/core/.*$",
+            "order": 4,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "App app imports",
+            "regex": "^package:sahayatri/app/.*$",
+            "order": 5,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "App cubits imports",
+            "regex": "^package:sahayatri/cubits/.*$",
+            "order": 6,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "App ui imports",
+            "regex": "^package:sahayatri/ui/.*$",
+            "order": 7,
+            "regexFlags": [
+                "m"
+            ]
+        },
+        {
+            "label": "Relative",
+            "regex": "^\\..*$",
+            "order": 8,
+            "regexFlags": [
+                "m"
+            ]
+        }
+    ]
+}

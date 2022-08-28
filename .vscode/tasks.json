@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // Build runner's build task
+        {
+            "label": "build_runner-build",
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs",
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$dart-build_runner"
+            ],
+            "group": "build",
+            "detail": ""
+        },
+        // Build runner's watch task
+        {
+            "label": "build_runner-watch",
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "run",
+                "build_runner",
+                "watch",
+                "--delete-conflicting-outputs",
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$dart-build_runner"
+            ],
+            "group": "build",
+            "detail": ""
+        },
+    ]
+}

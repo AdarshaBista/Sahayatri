@@ -13,19 +13,13 @@
             "request": "launch",
             "deviceId": "c3bf6cab"
         },
-        {
-            "name": "OnePlus 3T",
-            "type": "dart",
-            "request": "launch",
-            "deviceId": "3ec2a0ea"
-        },
     ],
     "compounds": [
         {
-            "name": "Physical Devices",
+            "name": "All",
             "configurations": [
                 "Redmi Note 9 Pro Max",
-                "OnePlus 3T"
+                "Windows"
             ],
         }
     ]
