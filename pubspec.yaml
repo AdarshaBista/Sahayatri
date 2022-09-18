@@ -75,11 +75,6 @@ dev_dependencies:
 dependency_overrides:
   win32: ^3.0.0
 
-flutter_icons:
-  ios: true
-  android: true
-  image_path: "assets/icons/icon.png"
-
 flutter:
   uses-material-design: true
 
