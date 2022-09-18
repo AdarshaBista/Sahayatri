@@ -1,13 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  errors:
-    missing_return: error
-    missing_required_param: error
-
   exclude:
-    - lib/core/models/*.g.dart
-
-linter:
-  rules:
-    use_key_in_widget_constructors: false
+    - "build/**"
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
