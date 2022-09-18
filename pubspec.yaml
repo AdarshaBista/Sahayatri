@@ -80,10 +80,6 @@ flutter_icons:
   android: true
   image_path: "assets/icons/icon.png"
 
-flutter_native_splash:
-  color: "36C7CB"
-  image: assets/icons/splash.png
-
 flutter:
   uses-material-design: true
 
