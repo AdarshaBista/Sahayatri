@@ -7,10 +7,10 @@ class TagChip extends StatefulWidget {
   final void Function(String)? onDelete;
 
   const TagChip({
-    Key? key,
+    super.key,
     required this.label,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   @override
   State<TagChip> createState() => _TagChipState();

@@ -24,7 +24,7 @@ import 'package:sahayatri/ui/widgets/views/splash_view.dart';
 import 'package:sahayatri/locator.dart';
 
 class Sahayatri extends StatelessWidget {
-  const Sahayatri({Key? key}) : super(key: key);
+  const Sahayatri({super.key});
 
   @override
   Widget build(BuildContext context) {
