@@ -15,8 +15,7 @@ class MenuDrawer extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
-          padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 132.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 132.0),
           children: [
             _buildCloseButton(context),
             const SizedBox(height: 20.0),

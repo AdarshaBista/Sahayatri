@@ -14,8 +14,7 @@ class CheckpointInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final checkpoint =
-        context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint;
+    final checkpoint = context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint;
 
     return SizedBox(
       height: 192.0,

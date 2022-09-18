@@ -45,9 +45,6 @@ class Translation {
 
   @override
   int get hashCode {
-    return isQuery.hashCode ^
-        isError.hashCode ^
-        text.hashCode ^
-        language.hashCode;
+    return isQuery.hashCode ^ isError.hashCode ^ text.hashCode ^ language.hashCode;
   }
 }

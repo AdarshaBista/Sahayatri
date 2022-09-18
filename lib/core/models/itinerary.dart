@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 part 'itinerary.g.dart';
 
@@ -49,8 +49,8 @@ class Itinerary {
       name: map['name'] ?? '',
       days: map['days'] ?? '',
       nights: map['nights'] ?? '',
-      checkpoints: List<Checkpoint>.from(map['checkpoints']
-          ?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>)))
+      checkpoints: List<Checkpoint>.from(
+          map['checkpoints']?.map((x) => Checkpoint.fromMap(x as Map<String, dynamic>)))
         ..sort((c1, c2) => c1.day.compareTo(c2.day)),
     );
   }
@@ -73,9 +73,6 @@ class Itinerary {
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        days.hashCode ^
-        nights.hashCode ^
-        checkpoints.hashCode;
+    return name.hashCode ^ days.hashCode ^ nights.hashCode ^ checkpoints.hashCode;
   }
 }

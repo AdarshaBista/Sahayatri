@@ -44,9 +44,6 @@ class DestinationUpdateFormState {
   }
 
   bool isDirty() {
-    return text.isNotEmpty ||
-        tags.isNotEmpty ||
-        imageUrls.isNotEmpty ||
-        coords.isNotEmpty;
+    return text.isNotEmpty || tags.isNotEmpty || imageUrls.isNotEmpty || coords.isNotEmpty;
   }
 }

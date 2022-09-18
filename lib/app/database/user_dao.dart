@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/user.dart';
 
 // TODO: Replace with secure storage
 class UserDao {

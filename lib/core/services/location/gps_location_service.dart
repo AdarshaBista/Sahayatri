@@ -2,11 +2,10 @@ import 'dart:io';
 
 import 'package:location/location.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/user_location.dart';
-
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/services/location/location_service.dart';
 
 class GpsLocationService implements LocationService {

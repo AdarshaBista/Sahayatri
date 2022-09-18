@@ -17,8 +17,6 @@ class AppTextStyles {
   static final headline2 = _base.copyWith(fontSize: 25.0).semiBold;
   static final headline3 = _base.copyWith(fontSize: 20.0).medium;
   static final headline4 = _base.copyWith(fontSize: 17.0).regular;
-  static final headline5 =
-      _base.copyWith(fontSize: 14.0, color: AppColors.darkAccent).thin;
-  static final headline6 =
-      _base.copyWith(fontSize: 11.0, color: AppColors.darkFaded).thin;
+  static final headline5 = _base.copyWith(fontSize: 14.0, color: AppColors.darkAccent).thin;
+  static final headline6 = _base.copyWith(fontSize: 11.0, color: AppColors.darkFaded).thin;
 }

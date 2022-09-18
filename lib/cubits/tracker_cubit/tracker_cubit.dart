@@ -36,9 +36,7 @@ class TrackerCubit extends Cubit<TrackerState> {
     trackerService.pause();
     emit(
       TrackerUpdating(
-        update: (state as TrackerUpdating)
-            .update
-            .copyWith(trackingState: TrackingState.paused),
+        update: (state as TrackerUpdating).update.copyWith(trackingState: TrackingState.paused),
       ),
     );
   }
@@ -46,9 +44,7 @@ class TrackerCubit extends Cubit<TrackerState> {
   Future<void> resumeTracking() async {
     trackerService.resume();
     emit(TrackerUpdating(
-      update: (state as TrackerUpdating)
-          .update
-          .copyWith(trackingState: TrackingState.updating),
+      update: (state as TrackerUpdating).update.copyWith(trackingState: TrackingState.updating),
     ));
   }
 
@@ -56,9 +52,7 @@ class TrackerCubit extends Cubit<TrackerState> {
     await trackerService.stop();
 
     emit(TrackerUpdating(
-      update: (state as TrackerUpdating)
-          .update
-          .copyWith(trackingState: TrackingState.stopped),
+      update: (state as TrackerUpdating).update.copyWith(trackingState: TrackingState.stopped),
     ));
   }
 
@@ -84,15 +78,13 @@ class TrackerCubit extends Cubit<TrackerState> {
     }
   }
 
-  Future<void> startTracking(
-      Destination destination, Itinerary itinerary) async {
+  Future<void> startTracking(Destination destination, Itinerary itinerary) async {
     emit(const TrackerLoading());
     try {
       await trackerService.start(destination, itinerary);
 
       _trackerUpdateSub?.cancel();
-      _trackerUpdateSub =
-          trackerService.trackerUpdateStream.listen((trackerUpdate) {
+      _trackerUpdateSub = trackerService.trackerUpdateStream.listen((trackerUpdate) {
         _updateTrackerData(trackerUpdate, destination.route);
       });
     } on AppError catch (e) {

@@ -55,8 +55,8 @@ class Review {
       text: map['text'] ?? '',
       user: User.fromMap(map['user']),
       rating: double.tryParse(map['rating']) ?? 0.0,
-      dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
-          DateTime.fromMillisecondsSinceEpoch(0),
+      dateUpdated:
+          DateTime.tryParse(map['dateupdated'] as String) ?? DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 
@@ -79,10 +79,6 @@ class Review {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        user.hashCode ^
-        text.hashCode ^
-        rating.hashCode ^
-        dateUpdated.hashCode;
+    return id.hashCode ^ user.hashCode ^ text.hashCode ^ rating.hashCode ^ dateUpdated.hashCode;
   }
 }

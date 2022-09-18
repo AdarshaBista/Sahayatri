@@ -57,8 +57,7 @@ class LodgePage extends StatelessWidget {
       children: [
         PhotoGallery(imageUrls: context.watch<Lodge>().imageUrls),
         ReviewList(
-          reviewCubit:
-              BlocProvider.of<ReviewCubit>(context) as LodgeReviewCubit,
+          reviewCubit: BlocProvider.of<ReviewCubit>(context) as LodgeReviewCubit,
         ),
       ],
     );

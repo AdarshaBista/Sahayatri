@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:hive/hive.dart';
 
 import 'package:sahayatri/core/constants/hive_config.dart';
@@ -49,6 +50,5 @@ class TrackerData {
   }
 
   @override
-  int get hashCode =>
-      destinationId.hashCode ^ elapsed.hashCode ^ smsSentList.hashCode;
+  int get hashCode => destinationId.hashCode ^ elapsed.hashCode ^ smsSentList.hashCode;
 }

@@ -3,23 +3,22 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:sahayatri/locator.dart';
-import 'package:sahayatri/sahayatri.dart';
-
-import 'package:sahayatri/core/models/models.dart';
 import 'package:sahayatri/core/constants/configs.dart';
-import 'package:sahayatri/core/utils/config_reader.dart';
+import 'package:sahayatri/core/models/models.dart';
 import 'package:sahayatri/core/services/destinations_service.dart';
+import 'package:sahayatri/core/utils/config_reader.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:device_preview/device_preview.dart';
+import 'package:sahayatri/locator.dart';
+import 'package:sahayatri/sahayatri.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

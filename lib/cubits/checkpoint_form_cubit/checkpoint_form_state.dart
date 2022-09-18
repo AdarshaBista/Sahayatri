@@ -36,10 +36,7 @@ class CheckpointFormState extends Equatable {
 
   bool isDirty(Checkpoint? initial) {
     if (initial == null) {
-      return place != null ||
-          description.isNotEmpty ||
-          dateTime != null ||
-          notifyContact == false;
+      return place != null || description.isNotEmpty || dateTime != null || notifyContact == false;
     }
 
     return initial.place != place ||

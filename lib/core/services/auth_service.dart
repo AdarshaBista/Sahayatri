@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 
-import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/app_error.dart';
-
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/user.dart';
 
 class AuthService {
   static const String authBaseUrl = '${ApiConfig.apiBaseUrl}/auth';

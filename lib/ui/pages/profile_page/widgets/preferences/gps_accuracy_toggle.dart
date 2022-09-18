@@ -43,8 +43,7 @@ class GpsAccuracyToggle extends StatelessWidget {
 
   void onSelected(BuildContext context, String accuracy) {
     locator<LocationService>().setLocationAccuracy(accuracy);
-    locator<LocationService>(instanceName: 'mock')
-        .setLocationAccuracy(accuracy);
+    locator<LocationService>(instanceName: 'mock').setLocationAccuracy(accuracy);
     context.read<PrefsCubit>().saveGpsAccuracy(accuracy);
   }
 }

@@ -53,7 +53,5 @@ class PlaceAdapter extends TypeAdapter<Place> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PlaceAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is PlaceAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

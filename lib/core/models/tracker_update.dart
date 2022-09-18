@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 
 enum TrackingState { updating, paused, stopped }
 
@@ -17,8 +17,7 @@ class TrackerUpdate {
   UserLocation get currentLocation => userTrack.last;
   double get topSpeed => userTrack.map((t) => t.speed).reduce(math.max);
   double get averageSpeed =>
-      (userTrack.map((t) => t.speed).reduce((a, b) => a + b)) /
-      userTrack.length;
+      (userTrack.map((t) => t.speed).reduce((a, b) => a + b)) / userTrack.length;
 
   const TrackerUpdate({
     required this.userIndex,

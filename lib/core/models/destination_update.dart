@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:sahayatri/core/models/coord.dart';
@@ -54,8 +55,8 @@ class DestinationUpdate {
       tags: ApiUtils.parseCsv(map['tag'] as String),
       coords: ApiUtils.parseRoute(map['coord'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
-      dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
-          DateTime.fromMillisecondsSinceEpoch(0),
+      dateUpdated:
+          DateTime.tryParse(map['dateupdated'] as String) ?? DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
 

@@ -62,8 +62,7 @@ class ItineraryActions extends StatelessWidget {
               }
               ConfirmDialog(
                 message: 'Do you want to delete this itinerary?',
-                onConfirm: () =>
-                    context.read<UserItineraryCubit>().deleteItinerary(),
+                onConfirm: () => context.read<UserItineraryCubit>().deleteItinerary(),
               ).openDialog(context);
             },
           ),

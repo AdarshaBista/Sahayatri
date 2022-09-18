@@ -48,8 +48,7 @@ class Coord {
   factory Coord.fromCsv(String coordStr) {
     final List<String> values = coordStr.split(',');
     if (values.length == 2) values.add('0.0');
-    final List<double> points =
-        values.map((p) => double.tryParse(p) ?? 0.0).toList();
+    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
     return Coord(
       lat: points[0],
@@ -85,10 +84,7 @@ class Coord {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Coord &&
-        other.lat == lat &&
-        other.lng == lng &&
-        other.alt == alt;
+    return other is Coord && other.lat == lat && other.lng == lng && other.alt == alt;
   }
 
   @override

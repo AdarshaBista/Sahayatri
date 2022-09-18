@@ -16,9 +16,7 @@ import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/locator.dart';
 
 class UserItineraryCard extends StatelessWidget {
-  const UserItineraryCard({
-    super.key,
-  });
+  const UserItineraryCard({super.key});
 
   @override
   Widget build(BuildContext context) {

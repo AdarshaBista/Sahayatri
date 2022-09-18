@@ -20,8 +20,7 @@ class ToolsList extends StatelessWidget {
         children: [
           ToolsCard(
             title: 'Nearby Network',
-            subtitle:
-                'Setup a network to remain connected with your friends nearby.',
+            subtitle: 'Setup a network to remain connected with your friends nearby.',
             icon: AppIcons.nearby,
             onTap: () => const Padding(
               padding: EdgeInsets.all(16.0),
@@ -31,16 +30,14 @@ class ToolsList extends StatelessWidget {
           const SizedBox(height: 12.0),
           ToolsCard(
             title: 'Translate',
-            subtitle:
-                'Translate from one language to another with text to speech.',
+            subtitle: 'Translate from one language to another with text to speech.',
             icon: AppIcons.translate,
             onTap: () => const TranslateForm().openModalBottomSheet(context),
           ),
           const SizedBox(height: 12.0),
           ToolsCard(
             title: 'Close Contact',
-            subtitle:
-                'Setup close contact to notify them about your whereabouts.',
+            subtitle: 'Setup close contact to notify them about your whereabouts.',
             icon: AppIcons.contact,
             onTap: () => const Padding(
               padding: EdgeInsets.all(16.0),

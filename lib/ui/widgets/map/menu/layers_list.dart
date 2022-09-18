@@ -42,27 +42,24 @@ class LayersList extends StatelessWidget {
               label: 'Route',
               icon: AppIcons.route,
               value: mapLayers.route,
-              onSelect: (value) => context
-                  .read<PrefsCubit>()
-                  .saveMapLayers(mapLayers.copyWith(route: value)),
+              onSelect: (value) =>
+                  context.read<PrefsCubit>().saveMapLayers(mapLayers.copyWith(route: value)),
             ),
             const SizedBox(height: 10.0),
             _LayerTile(
               label: 'Places',
               icon: AppIcons.place,
               value: mapLayers.places,
-              onSelect: (value) => context
-                  .read<PrefsCubit>()
-                  .saveMapLayers(mapLayers.copyWith(places: value)),
+              onSelect: (value) =>
+                  context.read<PrefsCubit>().saveMapLayers(mapLayers.copyWith(places: value)),
             ),
             const SizedBox(height: 10.0),
             _LayerTile(
               label: 'Checkpoints',
               icon: AppIcons.checkpoint,
               value: mapLayers.checkpoints,
-              onSelect: (value) => context
-                  .read<PrefsCubit>()
-                  .saveMapLayers(mapLayers.copyWith(checkpoints: value)),
+              onSelect: (value) =>
+                  context.read<PrefsCubit>().saveMapLayers(mapLayers.copyWith(checkpoints: value)),
             ),
             const SizedBox(height: 10.0),
             _LayerTile(

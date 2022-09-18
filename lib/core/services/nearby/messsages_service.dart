@@ -3,16 +3,14 @@ import 'dart:typed_data';
 
 import 'package:nearby_connections/nearby_connections.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/user_location.dart';
-import 'package:sahayatri/core/models/nearby_message.dart';
-
-import 'package:sahayatri/core/services/notification_service.dart';
-import 'package:sahayatri/core/services/nearby/devices_service.dart';
-
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/constants/notification_channels.dart';
+import 'package:sahayatri/core/models/nearby_message.dart';
+import 'package:sahayatri/core/models/user_location.dart';
+import 'package:sahayatri/core/services/nearby/devices_service.dart';
+import 'package:sahayatri/core/services/notification_service.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class MessagesService {
   final DevicesService devicesService;
@@ -63,12 +61,10 @@ class MessagesService {
   /// Broadcast this device's location to connected devices.
   void broadcastLocation(UserLocation userLocation) {
     final String locationJson = jsonEncode(userLocation.toMap());
-    final String payload =
-        NearbyMessageType.location + NearbyMessageType.separator + locationJson;
+    final String payload = NearbyMessageType.location + NearbyMessageType.separator + locationJson;
 
     for (final device in devicesService.devices) {
-      Nearby()
-          .sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
+      Nearby().sendBytesPayload(device.id, Uint8List.fromList(payload.codeUnits));
     }
   }
 
@@ -78,8 +74,7 @@ class MessagesService {
     if (sender == null) return;
 
     final parsedMessage = jsonDecode(message);
-    final userLocation =
-        UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
+    final userLocation = UserLocation.fromMap(parsedMessage as Map<String, dynamic>);
     sender.userLocation = userLocation;
     devicesService.onDeviceChanged?.call();
   }

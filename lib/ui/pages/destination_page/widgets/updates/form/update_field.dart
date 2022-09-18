@@ -29,8 +29,7 @@ class UpdateField extends StatelessWidget {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(ApiConfig.maxTextLength),
               ],
-              onChanged: (value) =>
-                  context.read<DestinationUpdateFormCubit>().changeText(value),
+              onChanged: (value) => context.read<DestinationUpdateFormCubit>().changeText(value),
             ),
             const SizedBox(height: 6.0),
             Padding(

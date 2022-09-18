@@ -36,8 +36,7 @@ class OpenButton extends StatelessWidget {
           label: 'OPEN',
           icon: AppIcons.open,
           onTap: () {
-            locator<DestinationNavService>()
-                .pushNamed(Routes.destinationDetailPageRoute);
+            locator<DestinationNavService>().pushNamed(Routes.destinationDetailPageRoute);
           },
         ),
       ),

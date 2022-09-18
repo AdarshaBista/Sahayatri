@@ -48,9 +48,7 @@ class ConnectionInfo extends StatelessWidget {
   Widget _buildScanIndicator() {
     return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
-        return (state as NearbyConnected).isScanning
-            ? const ScanIndicator()
-            : const SizedBox();
+        return (state as NearbyConnected).isScanning ? const ScanIndicator() : const SizedBox();
       },
     );
   }

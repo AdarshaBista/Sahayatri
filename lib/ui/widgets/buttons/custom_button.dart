@@ -30,8 +30,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveColor = color ?? context.c.primaryContainer;
-    final splashColor =
-        outline ? AppColors.primary : effectiveColor.withOpacity(0.4);
+    final splashColor = outline ? AppColors.primary : effectiveColor.withOpacity(0.4);
 
     return FadeAnimator(
       child: InkWell(

@@ -12,9 +12,7 @@ class ElevationGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userTrack = context.watch<TrackerUpdate>().userTrack;
-    final altitudes = userTrack
-        .map((u) => double.parse(u.altitude.toStringAsFixed(1)))
-        .toList();
+    final altitudes = userTrack.map((u) => double.parse(u.altitude.toStringAsFixed(1))).toList();
 
     return TrackerGraph(
       yValues: altitudes,

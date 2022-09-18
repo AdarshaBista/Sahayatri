@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/destination.dart';
 
 class DestinationDao {
   final Future<Box<Destination>> _destinationBox;

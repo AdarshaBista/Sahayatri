@@ -38,9 +38,7 @@ class ImagesField extends StatelessWidget {
             const SizedBox(height: 6.0),
             PhotoGallery(
               imageUrls: state.imageUrls,
-              onDelete: (url) => context
-                  .read<DestinationUpdateFormCubit>()
-                  .removeImageUrl(url),
+              onDelete: (url) => context.read<DestinationUpdateFormCubit>().removeImageUrl(url),
             ),
             if (state.imageUrls.isNotEmpty) const SizedBox(height: 8.0),
             if (state.imageUrls.length < ApiConfig.maxImages)
@@ -53,9 +51,7 @@ class ImagesField extends StatelessWidget {
                     ImageSourceSheet(
                       onSelect: (source) {
                         Navigator.of(context).pop();
-                        context
-                            .read<DestinationUpdateFormCubit>()
-                            .selectImage(source);
+                        context.read<DestinationUpdateFormCubit>().selectImage(source);
                       },
                     ).openModalBottomSheet(context);
                   },

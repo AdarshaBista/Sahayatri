@@ -46,8 +46,7 @@ class LodgeFacility {
   }
 
   @override
-  String toString() =>
-      'LodgeFacility(wifi: $wifi, toilet: $toilet, shower: $shower)';
+  String toString() => 'LodgeFacility(wifi: $wifi, toilet: $toilet, shower: $shower)';
 
   @override
   bool operator ==(Object other) {

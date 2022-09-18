@@ -33,9 +33,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
     return CustomFormTile(
       title: 'Date & Time',
       icon: AppIcons.date,
-      hintText: selectedDateTime == null
-          ? 'No date & time selected'
-          : _formattedDate(selectedDateTime!),
+      hintText:
+          selectedDateTime == null ? 'No date & time selected' : _formattedDate(selectedDateTime!),
       onTap: () {
         FocusScope.of(context).unfocus();
         _selectDateTime();
@@ -67,9 +66,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Future<DateTime?> _showDatePicker(BuildContext context) {
     final now = DateTime.now();
     final firstDate =
-        (selectedDateTime == null || selectedDateTime!.isAfter(now))
-            ? now
-            : selectedDateTime;
+        (selectedDateTime == null || selectedDateTime!.isAfter(now)) ? now : selectedDateTime;
 
     return showDatePicker(
       context: context,

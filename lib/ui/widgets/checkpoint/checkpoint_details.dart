@@ -82,9 +82,7 @@ class CheckpointDetails extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          checkpoint.description.isEmpty
-              ? 'No description provided.'
-              : checkpoint.description,
+          checkpoint.description.isEmpty ? 'No description provided.' : checkpoint.description,
           maxLines: 25,
           overflow: TextOverflow.ellipsis,
           style: context.t.headline5,

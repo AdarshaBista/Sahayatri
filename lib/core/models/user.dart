@@ -86,10 +86,6 @@ class User {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        email.hashCode ^
-        imageUrl.hashCode ^
-        accessToken.hashCode;
+    return id.hashCode ^ name.hashCode ^ email.hashCode ^ imageUrl.hashCode ^ accessToken.hashCode;
   }
 }

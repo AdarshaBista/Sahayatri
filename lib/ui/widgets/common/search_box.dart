@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class SearchBox extends StatelessWidget {
   final String hintText;

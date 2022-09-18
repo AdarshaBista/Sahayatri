@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/constants/images.dart';
+import 'package:sahayatri/core/constants/routes.dart';
+import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
-import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class LodgeCard extends StatelessWidget {
   final Lodge lodge;
@@ -24,8 +24,8 @@ class LodgeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => locator<DestinationNavService>()
-          .pushNamed(Routes.lodgePageRoute, arguments: lodge),
+      onTap: () =>
+          locator<DestinationNavService>().pushNamed(Routes.lodgePageRoute, arguments: lodge),
       child: Hero(
         tag: lodge.id,
         child: ElevatedCard(

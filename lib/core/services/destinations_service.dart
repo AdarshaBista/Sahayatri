@@ -1,12 +1,11 @@
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/destination.dart';
-
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/services/api_service.dart';
 
 import 'package:sahayatri/app/database/destination_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class DestinationsService {
   final ApiService apiService = locator();

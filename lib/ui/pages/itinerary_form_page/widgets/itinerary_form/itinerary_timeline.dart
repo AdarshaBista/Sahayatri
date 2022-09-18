@@ -44,9 +44,7 @@ class ItineraryTimeline extends StatelessWidget {
           vertical: 8.0,
           horizontal: 16.0,
         ),
-        physics: isNested
-            ? const NeverScrollableScrollPhysics()
-            : const BouncingScrollPhysics(),
+        physics: isNested ? const NeverScrollableScrollPhysics() : const BouncingScrollPhysics(),
         itemCount: checkpoints.length,
         itemBuilder: (context, index) {
           final bool isFirst = index == 0;
@@ -153,9 +151,7 @@ class ItineraryTimeline extends StatelessWidget {
         ),
         const SizedBox(height: 4.0),
         Text(
-          checkpoint.description.isEmpty
-              ? 'No description provided.'
-              : checkpoint.description,
+          checkpoint.description.isEmpty ? 'No description provided.' : checkpoint.description,
           style: context.t.headline6,
         ),
         const SizedBox(height: 4.0),
@@ -171,8 +167,7 @@ class ItineraryTimeline extends StatelessWidget {
       icon: AppIcons.close,
       color: AppColors.secondary,
       backgroundColor: context.c.surface,
-      onTap: () =>
-          context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
+      onTap: () => context.read<ItineraryFormCubit>().removeCheckpoint(checkpoint),
     );
   }
 
@@ -180,9 +175,8 @@ class ItineraryTimeline extends StatelessWidget {
     if (isEditable) {
       CheckpointForm(
         checkpoint: checkpoint,
-        onSubmit: (updatedCheckpoint) => context
-            .read<ItineraryFormCubit>()
-            .updateCheckpoint(checkpoint, updatedCheckpoint),
+        onSubmit: (updatedCheckpoint) =>
+            context.read<ItineraryFormCubit>().updateCheckpoint(checkpoint, updatedCheckpoint),
       ).openModalBottomSheet(context, enableDrag: false);
     } else {
       locator<DestinationNavService>().pushNamed(

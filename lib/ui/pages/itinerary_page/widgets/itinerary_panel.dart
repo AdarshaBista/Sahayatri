@@ -63,8 +63,7 @@ class ItineraryPanel extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 48.0),
               itemCount: itinerary.checkpoints.length,
               itemBuilder: (context, index) {
-                return _CheckpointCard(
-                    checkpoint: itinerary.checkpoints[index]);
+                return _CheckpointCard(checkpoint: itinerary.checkpoints[index]);
               },
             ),
           ),
@@ -128,9 +127,8 @@ class _CheckpointCard extends StatelessWidget {
   }
 
   Widget _buildDescription(BuildContext context) {
-    final text = checkpoint.description.isEmpty
-        ? 'No description provided.'
-        : checkpoint.description;
+    final text =
+        checkpoint.description.isEmpty ? 'No description provided.' : checkpoint.description;
     return Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.zero,

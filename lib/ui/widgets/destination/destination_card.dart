@@ -39,8 +39,7 @@ class DestinationCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
-          locator<RootNavService>()
-              .pushNamed(Routes.destinationPageRoute, arguments: destination);
+          locator<RootNavService>().pushNamed(Routes.destinationPageRoute, arguments: destination);
         },
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
@@ -143,8 +142,7 @@ class DestinationCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => ConfirmDialog(
           message: 'Do you want to delete\n${destination.name}',
-          onConfirm: () =>
-              context.read<DownloadedDestinationsCubit>().delete(destination),
+          onConfirm: () => context.read<DownloadedDestinationsCubit>().delete(destination),
         ).openDialog(context),
         child: Container(
           width: 36.0,

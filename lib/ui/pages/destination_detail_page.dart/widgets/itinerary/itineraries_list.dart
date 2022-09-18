@@ -42,9 +42,7 @@ class ItinerariesList extends StatelessWidget {
       children: [
         BlocBuilder<UserItineraryCubit, UserItineraryState>(
           builder: (context, state) {
-            final title = state is UserItineraryLoaded
-                ? 'My Itinerary'
-                : 'Create my itinerary';
+            final title = state is UserItineraryLoaded ? 'My Itinerary' : 'Create my itinerary';
             return Text(
               title,
               style: context.t.headline5?.bold,
@@ -72,8 +70,7 @@ class ItinerariesList extends StatelessWidget {
             if (state is ItineraryError) {
               return ErrorIndicator(
                 message: state.message,
-                onRetry: () =>
-                    context.read<ItineraryCubit>().fetchItineraries(),
+                onRetry: () => context.read<ItineraryCubit>().fetchItineraries(),
               );
             } else if (state is ItineraryLoaded) {
               return ListView.builder(
@@ -88,8 +85,7 @@ class ItinerariesList extends StatelessWidget {
             } else if (state is ItineraryEmpty) {
               return EmptyIndicator(
                 message: 'No itineraries found.',
-                onRetry: () =>
-                    context.read<ItineraryCubit>().fetchItineraries(),
+                onRetry: () => context.read<ItineraryCubit>().fetchItineraries(),
               );
             } else {
               return const BusyIndicator();

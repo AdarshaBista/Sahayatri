@@ -39,8 +39,7 @@ class RouteActions extends StatelessWidget {
       label: 'View Route',
       icon: AppIcons.route,
       color: context.c.onSurface,
-      onTap: () =>
-          locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
+      onTap: () => locator<DestinationNavService>().pushNamed(Routes.routePageRoute),
     );
   }
 }

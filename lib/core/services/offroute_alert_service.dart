@@ -1,7 +1,7 @@
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/services/notification_service.dart';
 import 'package:sahayatri/core/constants/notification_channels.dart';
+import 'package:sahayatri/core/services/notification_service.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class OffRouteAlertService {
   bool isAlreadyAlerted = false;
@@ -19,8 +19,7 @@ class OffRouteAlertService {
   Future<void> alert(bool isOnRoute) async {
     if (!_shouldAlert(isOnRoute)) return;
 
-    const alertMessage =
-        'You seem to be going off route. Please re-evaluate your course.';
+    const alertMessage = 'You seem to be going off route. Please re-evaluate your course.';
 
     await notificationService.show(
       NotificationChannels.offRouteId,

@@ -33,9 +33,7 @@ class _NestedTabViewState extends State<NestedTabView> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: widget.isCentered
-          ? CrossAxisAlignment.center
-          : CrossAxisAlignment.start,
+      crossAxisAlignment: widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16.0),
         _buildTabBar(context),
@@ -51,10 +49,8 @@ class _NestedTabViewState extends State<NestedTabView> {
   Widget _buildTabBar(BuildContext context) {
     final height = widget.isTabFilled ? 38.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
-    final color =
-        widget.isTabFilled ? context.c.background : Colors.transparent;
-    final padding =
-        widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
+    final color = widget.isTabFilled ? context.c.background : Colors.transparent;
+    final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
     return Container(
       height: height,
@@ -123,9 +119,7 @@ class NestedTab extends StatelessWidget {
   }
 
   Widget _buildTab(BuildContext context) {
-    final color = !showIndicator && isSelected
-        ? AppColors.primaryDark
-        : context.c.onBackground;
+    final color = !showIndicator && isSelected ? AppColors.primaryDark : context.c.onBackground;
 
     return IconLabel(
       iconSize: 18.0,

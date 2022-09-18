@@ -36,10 +36,7 @@ class ItineraryFormState {
 
   bool isDirty(Itinerary? initial) {
     if (initial == null) {
-      return name.isNotEmpty ||
-          days.isNotEmpty ||
-          nights.isNotEmpty ||
-          checkpoints.isNotEmpty;
+      return name.isNotEmpty || days.isNotEmpty || nights.isNotEmpty || checkpoints.isNotEmpty;
     }
 
     return initial.name != name ||

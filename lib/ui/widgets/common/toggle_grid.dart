@@ -73,9 +73,8 @@ class _ToggleGridState<T> extends State<ToggleGrid<T>> {
       icon: t.icon,
       label: t.label,
       color: widget.iconColor,
-      backgroundColor: isSelected
-          ? AppColors.primaryLight
-          : widget.backgroundColor ?? context.c.surface,
+      backgroundColor:
+          isSelected ? AppColors.primaryLight : widget.backgroundColor ?? context.c.surface,
       onTap: () {
         setState(() {
           selectedItem = t.value;

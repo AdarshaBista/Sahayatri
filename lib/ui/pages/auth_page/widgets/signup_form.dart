@@ -72,8 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
               label: 'SIGN UP',
               formKey: formKey,
               isInitial: widget.isInitial,
-              onPressed: () =>
-                  context.read<UserCubit>().signUp(username, email, password),
+              onPressed: () => context.read<UserCubit>().signUp(username, email, password),
             ),
           ],
         ),

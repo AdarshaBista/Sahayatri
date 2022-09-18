@@ -35,8 +35,7 @@ class _HomePageState extends State<HomePage> {
             if (state is Authenticated)
               BlocProvider<DownloadedDestinationsCubit>(
                 lazy: false,
-                create: (context) =>
-                    DownloadedDestinationsCubit()..fetchDownloaded(),
+                create: (context) => DownloadedDestinationsCubit()..fetchDownloaded(),
               ),
           ],
           child: _buildPage(),

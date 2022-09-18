@@ -45,8 +45,7 @@ class StatCard extends StatelessWidget {
             child: Text(
               count,
               textAlign: TextAlign.center,
-              style: countStyle?.withColor(color) ??
-                  AppTextStyles.headline4.bold.withColor(color),
+              style: countStyle?.withColor(color) ?? AppTextStyles.headline4.bold.withColor(color),
             ),
           ),
         ],
