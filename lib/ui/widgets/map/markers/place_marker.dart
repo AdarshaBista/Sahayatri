@@ -10,12 +10,11 @@ import 'package:sahayatri/locator.dart';
 class PlaceMarker extends DynamicTextMarker {
   PlaceMarker({
     required Place place,
-    required bool shrinkWhen,
+    required super.shrinkWhen,
   }) : super(
           icon: AppIcons.place,
           label: place.name,
           coord: place.coord,
-          shrinkWhen: shrinkWhen,
           color: AppColors.light,
           backgroundColor: AppColors.secondary,
           onTap: (_) => locator<DestinationNavService>().pushNamed(

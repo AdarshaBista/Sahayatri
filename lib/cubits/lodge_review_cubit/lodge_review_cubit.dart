@@ -1,7 +1,6 @@
 import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/models/review.dart';
-import 'package:sahayatri/core/models/user.dart';
 
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
@@ -10,8 +9,8 @@ class LodgeReviewCubit extends ReviewCubit {
 
   LodgeReviewCubit({
     required this.lodge,
-    required User? user,
-  }) : super(user: user);
+    required super.user,
+  });
 
   @override
   bool get hasMore => lodge.reviewDetails.length < lodge.reviewDetails.total;
