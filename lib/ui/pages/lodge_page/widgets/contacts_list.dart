@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:sahayatri/core/models/lodge.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
-
-import 'package:provider/provider.dart';
+import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class ContactList extends StatelessWidget {
-  const ContactList();
+  const ContactList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class ContactList extends StatelessWidget {
         child: Icon(
           AppIcons.phone,
           size: 14.0,
-          color: context.c.primaryVariant,
+          color: context.c.primaryContainer,
         ),
       ),
       title: Text(
@@ -70,9 +69,9 @@ class ContactList extends StatelessWidget {
   }
 
   Future<void> _launchPhone(BuildContext context, String number) async {
-    final String scheme = 'tel:$number';
-    if (await canLaunch(scheme)) {
-      await launch(scheme);
+    final scheme = Uri.parse('tel:$number');
+    if (await canLaunchUrl(scheme)) {
+      await launchUrl(scheme);
     } else {
       context.openFlushBar('Could not  open dialer!', type: FlushbarType.error);
     }

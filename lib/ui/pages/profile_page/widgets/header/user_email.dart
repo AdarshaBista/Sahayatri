@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/user.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/models/user.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
 class UserEmail extends StatelessWidget {
-  const UserEmail();
+  const UserEmail({super.key});
 
   @override
   Widget build(BuildContext context) {

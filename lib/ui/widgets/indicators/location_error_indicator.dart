@@ -9,6 +9,7 @@ class LocationErrorIndicator extends StatelessWidget {
   final String message;
 
   const LocationErrorIndicator({
+    super.key,
     required this.message,
   });
 

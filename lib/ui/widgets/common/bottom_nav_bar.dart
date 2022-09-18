@@ -11,6 +11,7 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int> onItemSelected;
 
   const BottomNavBar({
+    super.key,
     this.selectedIndex = 0,
     required this.icons,
     required this.iconSize,

@@ -10,6 +10,7 @@ class DeviceTile extends StatelessWidget {
   final NearbyDevice device;
 
   const DeviceTile({
+    super.key,
     required this.index,
     required this.device,
   });

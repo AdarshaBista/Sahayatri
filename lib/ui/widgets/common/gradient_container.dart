@@ -15,6 +15,7 @@ class GradientContainer extends StatelessWidget {
   final List<double>? gradientStops;
 
   const GradientContainer({
+    super.key,
     required this.gradientColors,
     this.isForeground = true,
     this.borderRadius = 0.0,

@@ -9,6 +9,7 @@ class AltitudeGraph extends StatelessWidget {
   final List<double> altitudes;
 
   const AltitudeGraph({
+    super.key,
     required this.onDrag,
     required this.altitudes,
     required this.routeLengthKm,

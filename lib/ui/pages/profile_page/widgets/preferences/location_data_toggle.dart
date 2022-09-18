@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/toggle_grid.dart';
 
+import 'package:sahayatri/locator.dart';
+
 class LocationDataToggle extends StatelessWidget {
-  const LocationDataToggle();
+  const LocationDataToggle({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -10,6 +10,7 @@ class VerticalButton extends StatelessWidget {
   final VoidCallback? onTap;
 
   const VerticalButton({
+    super.key,
     required this.icon,
     required this.label,
     this.color,

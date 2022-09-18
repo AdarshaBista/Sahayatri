@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/constants/images.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/custom_dialog.dart';
-import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 
 class DownloadDialog extends StatelessWidget {
-  const DownloadDialog();
+  const DownloadDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

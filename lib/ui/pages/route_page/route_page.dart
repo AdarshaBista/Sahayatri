@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
+
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
-import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
-import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
 import 'package:sahayatri/ui/pages/route_page/widgets/altitude_graph.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
+import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
 
 class RoutePage extends StatefulWidget {
-  const RoutePage();
+  const RoutePage({super.key});
 
   @override
-  _RoutePageState createState() => _RoutePageState();
+  State<RoutePage> createState() => _RoutePageState();
 }
 
 class _RoutePageState extends State<RoutePage> {

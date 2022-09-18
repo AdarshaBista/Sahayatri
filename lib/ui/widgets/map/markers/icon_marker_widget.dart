@@ -6,6 +6,7 @@ class IconMarkerWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   const IconMarkerWidget({
+    super.key,
     this.onTap,
     required this.icon,
     required this.color,

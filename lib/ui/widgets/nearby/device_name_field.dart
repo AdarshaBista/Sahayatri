@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:sahayatri/core/extensions/flushbar_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -13,10 +13,10 @@ import 'package:sahayatri/ui/widgets/buttons/save_button.dart';
 import 'package:sahayatri/ui/widgets/forms/custom_text_field.dart';
 
 class DeviceNameField extends StatefulWidget {
-  const DeviceNameField();
+  const DeviceNameField({super.key});
 
   @override
-  _DeviceNameFieldState createState() => _DeviceNameFieldState();
+  State<DeviceNameField> createState() => _DeviceNameFieldState();
 }
 
 class _DeviceNameFieldState extends State<DeviceNameField> {

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+
 import 'package:sahayatri/core/models/nearby_device.dart';
 
 class DevicesService {

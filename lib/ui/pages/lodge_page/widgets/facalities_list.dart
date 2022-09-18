@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/lodge.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class FacilitiesList extends StatelessWidget {
-  const FacilitiesList();
+  const FacilitiesList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class FacilitiesList extends StatelessWidget {
         child: Center(
           child: Icon(
             icon,
-            color: context.c.primaryVariant,
+            color: context.c.primaryContainer,
           ),
         ),
       ),

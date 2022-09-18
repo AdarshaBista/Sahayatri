@@ -1,9 +1,8 @@
 import 'dart:math';
 
+import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/user_location.dart';
-
-import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/services/location/location_service.dart';
 
 class MockLocationService implements LocationService {
@@ -26,7 +25,7 @@ class MockLocationService implements LocationService {
     final period = Random().nextInt(1000) + 500;
     final offset = _accuracyMap[_accuracy] ?? 0;
 
-    double _randomOffset(double start, double end) {
+    double randomOffset(double start, double end) {
       return Random().nextDouble() * (end - start) + start;
     }
 
@@ -35,12 +34,12 @@ class MockLocationService implements LocationService {
       (index) => UserLocation(
         timestamp: DateTime.now(),
         altitude: route[index].alt,
-        bearing: _randomOffset(0.0, 360.0),
-        speed: 1.5 + _randomOffset(-1.0, 1.0),
-        accuracy: 15.0 + _randomOffset(-5.0, 5.0),
+        bearing: randomOffset(0.0, 360.0),
+        speed: 1.5 + randomOffset(-1.0, 1.0),
+        accuracy: 15.0 + randomOffset(-5.0, 5.0),
         coord: Coord(
           lat: route[index].lat,
-          lng: route[index].lng + _randomOffset(-offset, offset),
+          lng: route[index].lng + randomOffset(-offset, offset),
         ),
       ),
     ).take(route.length).asBroadcastStream();

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/tracker_update.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/models/tracker_update.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_card.dart';
 
 class LocationStats extends StatelessWidget {
-  const LocationStats();
+  const LocationStats({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class ScanIndicator extends StatelessWidget {
-  const ScanIndicator();
+  const ScanIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

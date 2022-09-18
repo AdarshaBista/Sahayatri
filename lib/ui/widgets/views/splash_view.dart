@@ -6,7 +6,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class SplashView extends StatelessWidget {
-  const SplashView();
+  const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {

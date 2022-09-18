@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/routes.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
-class AuthButton extends StatelessWidget {
+import 'package:sahayatri/locator.dart';
+
+class AuthButton extends StatefulWidget {
   final String label;
   final bool isInitial;
   final GlobalKey<FormState> formKey;
   final Future<bool> Function() onPressed;
 
   const AuthButton({
+    super.key,
     required this.label,
     required this.formKey,
     required this.isInitial,
@@ -26,11 +28,16 @@ class AuthButton extends StatelessWidget {
   });
 
   @override
+  State<AuthButton> createState() => _AuthButtonState();
+}
+
+class _AuthButtonState extends State<AuthButton> {
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         return FloatingActionButton.extended(
-          heroTag: '$label Tag',
+          heroTag: '${widget.label} Tag',
           backgroundColor: AppColors.dark,
           onPressed: (state is AuthLoading)
               ? null
@@ -38,7 +45,7 @@ class AuthButton extends StatelessWidget {
           label: (state is AuthLoading)
               ? const CircularBusyIndicator()
               : Text(
-                  label,
+                  widget.label,
                   style: AppTextStyles.headline5.bold.primary,
                 ),
         );
@@ -47,15 +54,17 @@ class AuthButton extends StatelessWidget {
   }
 
   Future<void> _authenticate(BuildContext context) async {
-    if (!(formKey.currentState?.validate() ?? false)) return;
+    if (!(widget.formKey.currentState?.validate() ?? false)) return;
 
-    final success = await onPressed();
+    final success = await widget.onPressed();
+    if (!mounted) return;
+
     if (!success) {
       context.openFlushBar('An error has occured!', type: FlushbarType.error);
       return;
     }
 
-    if (isInitial) {
+    if (widget.isInitial) {
       locator<RootNavService>().pushOnly(Routes.homePageRoute);
     } else {
       Navigator.of(context).pop();

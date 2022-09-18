@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:sahayatri/ui/pages/place_page/widgets/place_map_dialog.dart';
 import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
-
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/place_map_dialog.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class PlaceActions extends StatelessWidget {
-  const PlaceActions();
+  const PlaceActions({super.key});
 
   @override
   Widget build(BuildContext context) {

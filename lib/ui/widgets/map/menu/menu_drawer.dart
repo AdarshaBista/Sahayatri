@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/menu/styles_grid.dart';
 import 'package:sahayatri/ui/widgets/map/menu/layers_list.dart';
+import 'package:sahayatri/ui/widgets/map/menu/styles_grid.dart';
 
 class MenuDrawer extends StatelessWidget {
-  const MenuDrawer();
+  const MenuDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,8 @@ class MenuDrawer extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 132.0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 132.0),
           children: [
             _buildCloseButton(context),
             const SizedBox(height: 20.0),

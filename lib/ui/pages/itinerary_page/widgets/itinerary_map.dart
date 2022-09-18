@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/itinerary.dart';
-
+import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_map/flutter_map.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
+
 import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 import 'package:sahayatri/ui/widgets/map/markers/checkpoint_detail_marker.dart';
 
 class ItineraryMap extends StatelessWidget {
-  const ItineraryMap();
+  const ItineraryMap({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,8 @@ class ItineraryMap extends StatelessWidget {
   }
 
   Widget _buildMarkers(BuildContext context) {
-    final checkpoints = Provider.of<Itinerary>(context, listen: false).checkpoints;
+    final checkpoints =
+        Provider.of<Itinerary>(context, listen: false).checkpoints;
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
         markers: checkpoints.reversed

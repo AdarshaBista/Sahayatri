@@ -1,19 +1,17 @@
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/models/app_error.dart';
-
+import 'package:sahayatri/core/models/user.dart';
 import 'package:sahayatri/core/services/api_service.dart';
 import 'package:sahayatri/core/services/auth_service.dart';
 
 import 'package:sahayatri/app/database/user_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'user_state.dart';
 

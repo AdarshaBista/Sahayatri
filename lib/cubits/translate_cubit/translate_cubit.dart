@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:bloc/bloc.dart';
-
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/language.dart';
-import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/translation.dart';
-
-import 'package:sahayatri/core/services/tts_service.dart';
-import 'package:sahayatri/core/services/translate_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/languages.dart';
+import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/language.dart';
+import 'package:sahayatri/core/models/translation.dart';
+import 'package:sahayatri/core/services/translate_service.dart';
+import 'package:sahayatri/core/services/tts_service.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'translate_state.dart';
 

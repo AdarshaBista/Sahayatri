@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/tracker_update.dart';
-
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
+
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/info_card.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class SpeedStats extends StatelessWidget {
-  const SpeedStats();
+  const SpeedStats({super.key});
 
   @override
   Widget build(BuildContext context) {

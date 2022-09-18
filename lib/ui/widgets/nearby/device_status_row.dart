@@ -9,6 +9,7 @@ class DeviceStatusRow extends StatelessWidget {
   final DeviceStatus status;
 
   const DeviceStatusRow({
+    super.key,
     required this.status,
   });
 

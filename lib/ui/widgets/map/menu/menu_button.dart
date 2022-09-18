@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class MenuButton extends StatelessWidget {
-  const MenuButton();
+  const MenuButton({super.key});
 
   @override
   Widget build(BuildContext context) {

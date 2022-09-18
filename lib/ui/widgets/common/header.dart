@@ -12,6 +12,7 @@ class Header extends StatelessWidget {
   final SlideDirection slideDirection;
 
   const Header({
+    super.key,
     required this.title,
     this.padding = 0.0,
     this.fontSize = 30.0,

@@ -5,13 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:sahayatri/core/models/weather.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/stat_card.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/common/stat_card.dart';
 
 class WeatherDetail extends StatelessWidget {
   final Weather weather;
 
   const WeatherDetail({
+    super.key,
     required this.weather,
   });
 

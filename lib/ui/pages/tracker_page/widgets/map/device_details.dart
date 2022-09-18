@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+
 import 'package:collection/collection.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/models/nearby_device.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
 import 'package:sahayatri/ui/widgets/nearby/device_status_row.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class DeviceDetails extends StatelessWidget {
   final String deviceId;
 
   const DeviceDetails({
+    super.key,
     required this.deviceId,
   });
 

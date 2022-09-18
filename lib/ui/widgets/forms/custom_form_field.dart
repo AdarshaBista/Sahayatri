@@ -9,6 +9,7 @@ class CustomFormField<T> extends StatelessWidget {
   final FormFieldValidator<T> validator;
 
   const CustomFormField({
+    super.key,
     required this.builder,
     required this.validator,
     required this.initialValue,

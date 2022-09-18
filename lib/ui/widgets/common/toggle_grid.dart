@@ -14,6 +14,7 @@ class ToggleGrid<T> extends StatefulWidget {
   final Color? backgroundColor;
 
   const ToggleGrid({
+    super.key,
     required this.title,
     required this.items,
     required this.onSelected,
@@ -25,7 +26,7 @@ class ToggleGrid<T> extends StatefulWidget {
   });
 
   @override
-  _ToggleGridState<T> createState() => _ToggleGridState<T>();
+  State<ToggleGrid<T>> createState() => _ToggleGridState<T>();
 }
 
 class _ToggleGridState<T> extends State<ToggleGrid<T>> {

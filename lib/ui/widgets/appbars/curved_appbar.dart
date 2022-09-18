@@ -11,6 +11,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
 
   const CurvedAppbar({
+    super.key,
     required this.title,
     this.elevation = 8.0,
     this.leading,

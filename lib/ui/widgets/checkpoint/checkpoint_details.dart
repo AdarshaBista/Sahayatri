@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/constants/routes.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/header.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/checkpoint/checkpoint_lodges.dart';
 import 'package:sahayatri/ui/widgets/checkpoint/notify_contact_status.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class CheckpointDetails extends StatelessWidget {
   final bool showLodges;
   final Checkpoint checkpoint;
 
   const CheckpointDetails({
+    super.key,
     this.showLodges = true,
     required this.checkpoint,
   });
@@ -138,7 +139,7 @@ class _CheckpointDateTime extends StatelessWidget {
           children: [
             CircularButton(
               icon: icon,
-              color: context.c.primaryVariant,
+              color: context.c.primaryContainer,
               backgroundColor: AppColors.primaryLight,
             ),
             const SizedBox(width: 16.0),

@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:provider/provider.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/extensions/route_extension.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
-import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
-import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
-import 'package:sahayatri/ui/widgets/map/markers/checkpoint_detail_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/accuracy_circle.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/checkpoint_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_location_layer.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_marker.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/track_location_button.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_location_layer.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/user_marker.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
+import 'package:sahayatri/ui/widgets/map/markers/checkpoint_detail_marker.dart';
+import 'package:sahayatri/ui/widgets/map/markers/place_marker.dart';
 
 class TrackerMap extends StatefulWidget {
-  const TrackerMap();
+  const TrackerMap({super.key});
 
   @override
-  _TrackerMapState createState() => _TrackerMapState();
+  State<TrackerMap> createState() => _TrackerMapState();
 }
 
 class _TrackerMapState extends State<TrackerMap>
@@ -74,7 +74,7 @@ class _TrackerMapState extends State<TrackerMap>
     final center = context.watch<TrackerUpdate>().currentLocation.coord;
 
     if (isTracking) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         mapAnimator.move(center.toLatLng());
       });
     }

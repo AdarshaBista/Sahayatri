@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/review/review_form.dart';
-import 'package:sahayatri/ui/widgets/review/review_card.dart';
-import 'package:sahayatri/ui/widgets/review/rating_chart.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/view_more_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
+import 'package:sahayatri/ui/widgets/review/rating_chart.dart';
+import 'package:sahayatri/ui/widgets/review/review_card.dart';
+import 'package:sahayatri/ui/widgets/review/review_form.dart';
 
-class ReviewList extends StatelessWidget {
+class ReviewList extends StatefulWidget {
   final ReviewCubit reviewCubit;
 
   const ReviewList({
+    super.key,
     required this.reviewCubit,
   });
 
+  @override
+  State<ReviewList> createState() => _ReviewListState();
+}
+
+class _ReviewListState extends State<ReviewList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -100,17 +107,22 @@ class ReviewList extends StatelessWidget {
           },
         ),
         ViewMoreButton(
-          hasMore: reviewCubit.hasMore,
-          onLoadMore: reviewCubit.loadMore,
+          hasMore: widget.reviewCubit.hasMore,
+          onLoadMore: widget.reviewCubit.loadMore,
         ),
       ],
     );
   }
 
   Future<void> _postReview(
-      BuildContext context, double rating, String text) async {
+    BuildContext context,
+    double rating,
+    String text,
+  ) async {
     Navigator.of(context).pop();
-    final success = await reviewCubit.postReview(rating, text);
+    final success = await widget.reviewCubit.postReview(rating, text);
+    if (!mounted) return;
+
     if (success) {
       context.openFlushBar('Review posted', type: FlushbarType.success);
     } else {

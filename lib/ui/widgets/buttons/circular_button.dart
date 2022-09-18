@@ -12,6 +12,7 @@ class CircularButton extends StatelessWidget {
   final VoidCallback? onTap;
 
   const CircularButton({
+    super.key,
     required this.icon,
     this.onTap,
     this.size = 18.0,

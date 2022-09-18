@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/models/translation.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -12,6 +13,7 @@ class TranslateBubble extends StatelessWidget {
   final Translation translation;
 
   const TranslateBubble({
+    super.key,
     required this.translation,
   });
 

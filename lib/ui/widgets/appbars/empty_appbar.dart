@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
 
 class EmptyAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const EmptyAppbar();
+  const EmptyAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:sahayatri/ui/widgets/buttons/directions_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/location_error_indicator.dart';
 
 class IncorrectLocationInfo extends StatelessWidget {
-  const IncorrectLocationInfo();
+  const IncorrectLocationInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

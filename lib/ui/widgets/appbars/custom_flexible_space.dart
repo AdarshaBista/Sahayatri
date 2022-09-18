@@ -13,6 +13,7 @@ class CustomFlexibleSpace extends StatefulWidget {
   final Widget? background;
 
   const CustomFlexibleSpace({
+    super.key,
     required this.title,
     this.offset,
     this.background,
@@ -20,7 +21,7 @@ class CustomFlexibleSpace extends StatefulWidget {
   });
 
   @override
-  _CustomFlexibleSpaceState createState() => _CustomFlexibleSpaceState();
+  State<CustomFlexibleSpace> createState() => _CustomFlexibleSpaceState();
 }
 
 class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {

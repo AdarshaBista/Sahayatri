@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class ToolsCard extends StatelessWidget {
   final String title;
@@ -11,6 +11,7 @@ class ToolsCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const ToolsCard({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,
@@ -30,7 +31,7 @@ class ToolsCard extends StatelessWidget {
                 backgroundColor: AppColors.primaryLight,
                 child: Icon(
                   icon,
-                  color: context.c.primaryVariant,
+                  color: context.c.primaryContainer,
                 ),
               ),
               const SizedBox(width: 16.0),

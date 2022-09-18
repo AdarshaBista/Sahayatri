@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/image/photo_gallery.dart';
-import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
-import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
-import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
+import 'package:sahayatri/core/models/place.dart';
+
 import 'package:sahayatri/ui/pages/place_page/widgets/lodges_list.dart';
 import 'package:sahayatri/ui/pages/place_page/widgets/place_actions.dart';
+import 'package:sahayatri/ui/pages/place_page/widgets/place_stats.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
+import 'package:sahayatri/ui/widgets/image/photo_gallery.dart';
+import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
+import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
 
 class PlacePage extends StatelessWidget {
-  const PlacePage();
+  const PlacePage({super.key});
 
   @override
   Widget build(BuildContext context) {

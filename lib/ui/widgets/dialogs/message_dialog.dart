@@ -7,6 +7,7 @@ class MessageDialog extends StatelessWidget {
   final String message;
 
   const MessageDialog({
+    super.key,
     required this.message,
   });
 

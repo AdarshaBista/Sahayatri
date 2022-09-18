@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
-import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
-import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
+import 'package:sahayatri/cubits/directions_cubit/directions_cubit.dart';
+import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
+import 'package:sahayatri/ui/pages/destination_page/destination_nav_page.dart';
+import 'package:sahayatri/ui/pages/home_page/home_page.dart';
 import 'package:sahayatri/ui/widgets/animators/page_transition.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
-import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
-import 'package:sahayatri/ui/pages/home_page/home_page.dart';
-import 'package:sahayatri/ui/pages/destination_page/destination_nav_page.dart';
-
 class RootRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    Widget _page;
+    Widget page;
 
     switch (settings.name) {
       case Routes.authPageRoute:
         if (settings.arguments != null) {
-          _page = AuthPage(isInitial: settings.arguments as bool);
+          page = AuthPage(isInitial: settings.arguments as bool);
         } else {
-          _page = const AuthPage();
+          page = const AuthPage();
         }
         break;
 
       case Routes.homePageRoute:
-        _page = const HomePage();
+        page = const HomePage();
         break;
 
       case Routes.destinationPageRoute:
-        _page = MultiBlocProvider(
+        page = MultiBlocProvider(
           providers: [
             BlocProvider<ReviewCubit>(
               create: (context) => DestinationReviewCubit(
@@ -62,7 +62,7 @@ class RootRouter {
         break;
 
       default:
-        _page = Scaffold(
+        page = Scaffold(
           appBar: AppBar(),
           body: Center(
             child: ErrorIndicator(
@@ -73,6 +73,6 @@ class RootRouter {
         break;
     }
 
-    return PageTransition(page: _page);
+    return PageTransition(page: page);
   }
 }

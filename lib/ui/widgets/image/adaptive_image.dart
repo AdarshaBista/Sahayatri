@@ -12,6 +12,7 @@ class AdaptiveImage extends StatelessWidget {
 
   const AdaptiveImage(
     this.imageUrl, {
+    super.key,
     this.width,
     this.height,
     this.showLoading = true,

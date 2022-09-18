@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
-
 import 'package:sahayatri/core/models/destination_update.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/user_avatar_square.dart';
-import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/images_grid.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
+import 'package:sahayatri/ui/widgets/common/user_avatar_square.dart';
 
 class UpdateCard extends StatelessWidget {
   final DestinationUpdate update;
 
   const UpdateCard({
+    super.key,
     required this.update,
   });
 

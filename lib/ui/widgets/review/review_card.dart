@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:sahayatri/core/models/review.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/common/user_avatar_square.dart';
 
 class ReviewCard extends StatelessWidget {
   final Review review;
 
   const ReviewCard({
+    super.key,
     required this.review,
   });
 

@@ -12,6 +12,7 @@ class WeatherTab extends StatelessWidget {
   final Weather weather;
 
   const WeatherTab({
+    super.key,
     required this.color,
     required this.isToday,
     required this.weather,

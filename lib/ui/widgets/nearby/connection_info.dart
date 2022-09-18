@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
+
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/indicators/scan_indicator.dart';
 import 'package:sahayatri/ui/widgets/nearby/devices_list.dart';
 import 'package:sahayatri/ui/widgets/nearby/nearby_actions.dart';
-import 'package:sahayatri/ui/widgets/indicators/scan_indicator.dart';
 
 class ConnectionInfo extends StatelessWidget {
-  const ConnectionInfo();
+  const ConnectionInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

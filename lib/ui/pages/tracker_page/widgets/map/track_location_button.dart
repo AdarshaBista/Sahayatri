@@ -8,6 +8,7 @@ class TrackLocationButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const TrackLocationButton({
+    super.key,
     required this.onTap,
     required this.isTracking,
   });

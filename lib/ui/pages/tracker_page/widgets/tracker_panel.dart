@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/widgets/common/sliding_panel.dart';
-import 'package:sahayatri/ui/widgets/common/drag_indicator_pill.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/location_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/map/tracker_map.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/tracker_tabs.dart';
+import 'package:sahayatri/ui/widgets/common/drag_indicator_pill.dart';
+import 'package:sahayatri/ui/widgets/common/sliding_panel.dart';
 
 class TrackerPanel extends StatefulWidget {
-  const TrackerPanel();
+  const TrackerPanel({super.key});
 
   @override
-  _TrackerPanelState createState() => _TrackerPanelState();
+  State<TrackerPanel> createState() => _TrackerPanelState();
 }
 
 class _TrackerPanelState extends State<TrackerPanel> {

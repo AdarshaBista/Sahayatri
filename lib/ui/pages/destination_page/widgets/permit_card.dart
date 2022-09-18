@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class PermitCard extends StatelessWidget {
-  const PermitCard();
+  const PermitCard({super.key});
 
   @override
   Widget build(BuildContext context) {

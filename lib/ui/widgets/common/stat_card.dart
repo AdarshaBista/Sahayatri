@@ -11,6 +11,7 @@ class StatCard extends StatelessWidget {
   final TextStyle? countStyle;
 
   const StatCard({
+    super.key,
     required this.label,
     required this.count,
     required this.color,

@@ -9,6 +9,7 @@ class StatTile extends StatelessWidget {
   final String stat;
 
   const StatTile({
+    super.key,
     required this.icon,
     required this.stat,
     required this.label,

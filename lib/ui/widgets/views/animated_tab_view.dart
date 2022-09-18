@@ -6,13 +6,14 @@ class AnimatedTabView extends StatefulWidget {
   final List<Widget> children;
 
   const AnimatedTabView({
+    super.key,
     required this.index,
     required this.children,
     this.keepAlive = false,
   });
 
   @override
-  _AnimatedTabViewState createState() => _AnimatedTabViewState();
+  State<AnimatedTabView> createState() => _AnimatedTabViewState();
 }
 
 class _AnimatedTabViewState extends State<AnimatedTabView>

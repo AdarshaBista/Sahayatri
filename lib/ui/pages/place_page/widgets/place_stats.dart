@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/models/place.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_tile.dart';
 
 class PlaceStats extends StatelessWidget {
-  const PlaceStats();
+  const PlaceStats({super.key});
 
   @override
   Widget build(BuildContext context) {

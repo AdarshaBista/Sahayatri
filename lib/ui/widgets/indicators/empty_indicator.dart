@@ -13,6 +13,7 @@ class EmptyIndicator extends StatelessWidget {
   final VoidCallback? onRetry;
 
   const EmptyIndicator({
+    super.key,
     this.padding = 64.0,
     this.message = 'Nothing to show...',
     this.imageUrl = Images.generalEmpty,

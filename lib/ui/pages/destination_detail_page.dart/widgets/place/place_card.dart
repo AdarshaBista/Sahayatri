@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/constants/routes.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
+import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class PlaceCard extends StatelessWidget {
   final Place place;
 
   const PlaceCard({
+    super.key,
     required this.place,
   });
 

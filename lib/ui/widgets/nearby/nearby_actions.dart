@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -12,7 +13,7 @@ import 'package:sahayatri/ui/widgets/buttons/square_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 
 class NearbyActions extends StatelessWidget {
-  const NearbyActions();
+  const NearbyActions({super.key});
 
   @override
   Widget build(BuildContext context) {

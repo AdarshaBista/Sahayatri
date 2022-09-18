@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination_update.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/destination_update.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_form.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_card.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/buttons/view_more_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_card.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_form.dart';
 
 class UpdateList extends StatelessWidget {
-  const UpdateList();
+  const UpdateList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +43,8 @@ class UpdateList extends StatelessWidget {
         return CustomButton(
           label: 'Post an update',
           icon: AppIcons.addUpdate,
-          onTap: () =>
-              UpdateForm().openModalBottomSheet(context, enableDrag: false),
+          onTap: () => const UpdateForm()
+              .openModalBottomSheet(context, enableDrag: false),
         );
       },
     );

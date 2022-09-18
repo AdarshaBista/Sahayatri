@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/services/location/location_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/toggle_grid.dart';
 
+import 'package:sahayatri/locator.dart';
+
 class GpsAccuracyToggle extends StatelessWidget {
-  const GpsAccuracyToggle();
+  const GpsAccuracyToggle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,8 @@ class GpsAccuracyToggle extends StatelessWidget {
 
   void onSelected(BuildContext context, String accuracy) {
     locator<LocationService>().setLocationAccuracy(accuracy);
-    locator<LocationService>(instanceName: 'mock').setLocationAccuracy(accuracy);
+    locator<LocationService>(instanceName: 'mock')
+        .setLocationAccuracy(accuracy);
     context.read<PrefsCubit>().saveGpsAccuracy(accuracy);
   }
 }

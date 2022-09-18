@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/constants/images.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/constants/images.dart';
+import 'package:sahayatri/core/models/coord.dart';
+
 import 'package:sahayatri/cubits/weather_cubit/weather_cubit.dart';
 
+import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab_view.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/appbars/empty_appbar.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab_view.dart';
 
 class WeatherPage extends StatelessWidget {
-  const WeatherPage();
+  const WeatherPage({super.key});
 
   @override
   Widget build(BuildContext context) {

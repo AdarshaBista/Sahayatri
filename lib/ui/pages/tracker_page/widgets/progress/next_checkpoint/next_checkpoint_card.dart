@@ -10,7 +10,7 @@ import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/checkpoint_place.dart';
 
 class NextCheckpointCard extends StatelessWidget {
-  const NextCheckpointCard();
+  const NextCheckpointCard({super.key});
 
   @override
   Widget build(BuildContext context) {

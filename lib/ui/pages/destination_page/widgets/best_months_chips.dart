@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:sahayatri/core/models/destination.dart';
+
+import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/tag_chip.dart';
 
 class BestMonthsChips extends StatelessWidget {
-  const BestMonthsChips();
+  const BestMonthsChips({super.key});
 
   @override
   Widget build(BuildContext context) {

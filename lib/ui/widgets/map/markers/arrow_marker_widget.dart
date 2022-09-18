@@ -13,6 +13,7 @@ class ArrowMarkerWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   const ArrowMarkerWidget({
+    super.key,
     required this.child,
     this.arrowWidth = 30.0,
     this.arrowHeight = 20.0,

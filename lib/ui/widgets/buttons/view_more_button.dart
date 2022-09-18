@@ -11,12 +11,13 @@ class ViewMoreButton extends StatefulWidget {
   final Future<bool> Function() onLoadMore;
 
   const ViewMoreButton({
+    super.key,
     required this.hasMore,
     required this.onLoadMore,
   });
 
   @override
-  _ViewMoreButtonState createState() => _ViewMoreButtonState();
+  State<ViewMoreButton> createState() => _ViewMoreButtonState();
 }
 
 class _ViewMoreButtonState extends State<ViewMoreButton> {
@@ -57,9 +58,11 @@ class _ViewMoreButtonState extends State<ViewMoreButton> {
   Future<void> _loadMore() async {
     setState(() => isLoading = true);
     final bool success = await widget.onLoadMore();
-    if (!success) {
-      context.openFlushBar('Failed to load more reviews!',
-          type: FlushbarType.error);
+    if (!success && mounted) {
+      context.openFlushBar(
+        'Failed to load more reviews!',
+        type: FlushbarType.error,
+      );
     }
     setState(() => isLoading = false);
   }

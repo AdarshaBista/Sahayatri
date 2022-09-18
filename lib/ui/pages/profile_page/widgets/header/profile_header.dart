@@ -2,18 +2,18 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/user.dart';
-
 import 'package:provider/provider.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
+import 'package:sahayatri/core/models/user.dart';
+
+import 'package:sahayatri/ui/pages/profile_page/widgets/header/logout_button.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_avatar.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/user_email.dart';
-import 'package:sahayatri/ui/pages/profile_page/widgets/header/logout_button.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader();
+  const ProfileHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

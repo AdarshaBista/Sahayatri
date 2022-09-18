@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:sahayatri/core/models/weather.dart';
 
+import 'package:sahayatri/ui/pages/weather_page/widgets/weather_detail.dart';
+import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/pages/weather_page/widgets/weather_tab.dart';
-import 'package:sahayatri/ui/pages/weather_page/widgets/weather_detail.dart';
 
 class WeatherTabView extends StatefulWidget {
   final List<Weather> forecasts;
 
   const WeatherTabView({
+    super.key,
     required this.forecasts,
   });
 
   @override
-  _WeatherTabViewState createState() => _WeatherTabViewState();
+  State<WeatherTabView> createState() => _WeatherTabViewState();
 }
 
 class _WeatherTabViewState extends State<WeatherTabView>

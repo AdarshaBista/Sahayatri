@@ -9,6 +9,7 @@ class UserAvatarSquare extends StatelessWidget {
   final String? imageUrl;
 
   const UserAvatarSquare({
+    super.key,
     required this.username,
     required this.imageUrl,
   });

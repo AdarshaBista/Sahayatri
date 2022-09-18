@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/lodge.dart';
-import 'package:sahayatri/core/models/coord.dart';
-
 import 'package:flutter_map/flutter_map.dart';
-import 'package:sahayatri/ui/widgets/map/custom_map.dart';
-import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
+
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/lodge.dart';
+import 'package:sahayatri/core/models/place.dart';
+
 import 'package:sahayatri/ui/pages/place_page/widgets/lodge_marker.dart';
+import 'package:sahayatri/ui/widgets/dialogs/map_dialog.dart';
+import 'package:sahayatri/ui/widgets/map/custom_map.dart';
 
 class PlaceMapDialog extends StatelessWidget {
   final Place place;
 
   const PlaceMapDialog({
+    super.key,
     required this.place,
   });
 

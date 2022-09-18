@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/distance_indicator.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/speed_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/stopwatch_tile.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/tracker_actions.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/distance_indicator.dart';
 
 class TrackerStats extends StatelessWidget {
-  const TrackerStats();
+  const TrackerStats({super.key});
 
   @override
   Widget build(BuildContext context) {

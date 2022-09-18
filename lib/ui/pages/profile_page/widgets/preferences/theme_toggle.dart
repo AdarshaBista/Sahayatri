@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
 
@@ -8,7 +9,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/toggle_grid.dart';
 
 class ThemeToggle extends StatelessWidget {
-  const ThemeToggle();
+  const ThemeToggle({super.key});
 
   @override
   Widget build(BuildContext context) {

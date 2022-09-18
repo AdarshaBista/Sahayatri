@@ -14,6 +14,7 @@ class CustomTile extends StatelessWidget {
   final TextStyle? textStyle;
 
   const CustomTile({
+    super.key,
     this.onTap,
     this.color,
     this.iconColor,

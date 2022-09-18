@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'package:fl_chart/fl_chart.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class CustomGraph extends StatelessWidget {
@@ -21,6 +22,7 @@ class CustomGraph extends StatelessWidget {
   final String Function(double)? getBottomTitle;
 
   const CustomGraph({
+    super.key,
     required this.yValues,
     this.xValues,
     this.height,
@@ -110,21 +112,35 @@ class CustomGraph extends StatelessWidget {
 
   FlTitlesData _buildTitles(BuildContext context) {
     return FlTitlesData(
-      bottomTitles: SideTitles(
-        showTitles: showBottomLabels,
-        margin: 8.0,
-        reservedSize: 30.0,
-        interval: hInterval,
-        getTitles: getBottomTitle,
-        getTextStyles: (_, __) => context.t.headline6?.bold,
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: showBottomLabels,
+          reservedSize: 30.0,
+          interval: hInterval,
+          getTitlesWidget: getBottomTitle == null
+              ? null
+              : (value, meta) {
+                  return Text(
+                    getBottomTitle!(value),
+                    style: context.t.headline6?.bold,
+                  );
+                },
+        ),
       ),
-      leftTitles: SideTitles(
-        showTitles: showLeftLabels,
-        margin: 8.0,
-        reservedSize: 30.0,
-        interval: vInterval,
-        getTitles: getLeftTitle,
-        getTextStyles: (_, __) => context.t.headline6?.bold,
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: showLeftLabels,
+          reservedSize: 30.0,
+          interval: vInterval,
+          getTitlesWidget: getLeftTitle == null
+              ? null
+              : (value, meta) {
+                  return Text(
+                    getLeftTitle!(value),
+                    style: context.t.headline6?.bold,
+                  );
+                },
+        ),
       ),
     );
   }
@@ -143,17 +159,19 @@ class CustomGraph extends StatelessWidget {
       isStrokeCapRound: true,
       preventCurveOverShooting: true,
       dotData: FlDotData(show: false),
-      colors: [color],
+      color: color,
       belowBarData: BarAreaData(
         show: true,
-        colors: [
-          color.withOpacity(0.7),
-          color.withOpacity(0.4),
-          color.withOpacity(0.0),
-        ],
-        gradientTo: const Offset(0.5, 1.0),
-        gradientFrom: const Offset(0.5, 0.0),
-        gradientColorStops: [0.0, 0.2, 1.0],
+        gradient: LinearGradient(
+          end: const Alignment(0.5, 1.0),
+          begin: const Alignment(0.5, 0.0),
+          stops: const [0.0, 0.2, 1.0],
+          colors: [
+            color.withOpacity(0.7),
+            color.withOpacity(0.4),
+            color.withOpacity(0.0),
+          ],
+        ),
       ),
     );
   }

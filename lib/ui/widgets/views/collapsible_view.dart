@@ -5,6 +5,7 @@ class CollapsibleView extends StatelessWidget {
   final Widget collapsible;
 
   const CollapsibleView({
+    super.key,
     required this.child,
     required this.collapsible,
   });

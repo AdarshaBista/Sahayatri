@@ -10,6 +10,7 @@ class ImageSourceSheet extends StatelessWidget {
   final void Function(ImageSource) onSelect;
 
   const ImageSourceSheet({
+    super.key,
     required this.onSelect,
   });
 

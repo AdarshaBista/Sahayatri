@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/theme_toggle.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/gps_accuracy_toggle.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/location_data_toggle.dart';
+import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/theme_toggle.dart';
 
 class PreferencesList extends StatelessWidget {
-  const PreferencesList();
+  const PreferencesList({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/constants/configs.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 class TranslateTextField extends StatefulWidget {
   final bool resizeToAvoidBottomInset;
 
   const TranslateTextField({
+    super.key,
     required this.resizeToAvoidBottomInset,
   });
 
   @override
-  _TranslateTextFieldState createState() => _TranslateTextFieldState();
+  State<TranslateTextField> createState() => _TranslateTextFieldState();
 }
 
 class _TranslateTextFieldState extends State<TranslateTextField> {

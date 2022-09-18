@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/image/carousel.dart';
-import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
+import 'package:sahayatri/ui/widgets/common/gradient_container.dart';
+import 'package:sahayatri/ui/widgets/image/carousel.dart';
 
 class CollapsibleCarousel extends StatelessWidget {
   final String title;
@@ -12,6 +12,7 @@ class CollapsibleCarousel extends StatelessWidget {
   final VoidCallback? onBack;
 
   const CollapsibleCarousel({
+    super.key,
     this.heroId,
     this.onBack,
     required this.title,

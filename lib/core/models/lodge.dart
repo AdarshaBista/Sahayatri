@@ -73,7 +73,7 @@ class Lodge {
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       coord: Coord.fromMap(map['coord']),
-      rating: map['rating']?.toDouble() ?? 0.0,
+      rating: double.tryParse(map['rating']) ?? 0.0,
       facility: LodgeFacility.parse(map['facility']),
       imageUrls: ApiUtils.parseCsv(map['imageUrls']),
       contactNumbers: ApiUtils.parseCsv(map['contactNumber']),

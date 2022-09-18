@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/models/destination.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
 import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
-import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 
 class TrackerSetup extends StatelessWidget {
-  const TrackerSetup();
+  const TrackerSetup({super.key});
 
   @override
   Widget build(BuildContext context) {

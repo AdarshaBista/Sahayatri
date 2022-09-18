@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/constants/images.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/downloaded_destinations_cubit/downloaded_destinations_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/common/header.dart';
+import 'package:sahayatri/ui/widgets/destination/destinations_list.dart';
 import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/widgets/views/unauthenticated_view.dart';
 import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/widgets/destination/destinations_list.dart';
+import 'package:sahayatri/ui/widgets/views/unauthenticated_view.dart';
 
 class DownloadedPage extends StatelessWidget {
-  const DownloadedPage();
+  const DownloadedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,8 @@ class DownloadedPage extends StatelessWidget {
   }
 
   Widget _buildDownloadedState() {
-    return BlocConsumer<DownloadedDestinationsCubit, DownloadedDestinationsState>(
+    return BlocConsumer<DownloadedDestinationsCubit,
+        DownloadedDestinationsState>(
       listener: (context, state) {
         if (state is DownloadedDestinationsMessage) {
           context.openFlushBar(state.message);
@@ -61,7 +63,8 @@ class DownloadedPage extends StatelessWidget {
           return ErrorIndicator(
             imageUrl: Images.destinationsError,
             message: state.message,
-            onRetry: () => context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
+            onRetry: () =>
+                context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
           );
         } else if (state is DownloadedDestinationsLoading) {
           return const BusyIndicator(imageUrl: Images.destinationsLoading);
@@ -75,7 +78,8 @@ class DownloadedPage extends StatelessWidget {
           return EmptyIndicator(
             imageUrl: Images.destinationsEmpty,
             message: 'No downloaded destinations!',
-            onRetry: () => context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
+            onRetry: () =>
+                context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
           );
         }
       },

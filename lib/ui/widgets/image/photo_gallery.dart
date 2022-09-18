@@ -2,31 +2,32 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:sahayatri/core/constants/images.dart';
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/ui/pages/photo_view_page/photo_view_page.dart';
-
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/image/image_card.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
+import 'package:sahayatri/ui/widgets/image/image_card.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class PhotoGallery extends StatefulWidget {
   final List<String> imageUrls;
   final Function(String)? onDelete;
 
   const PhotoGallery({
+    super.key,
     this.onDelete,
     required this.imageUrls,
   });
 
   @override
-  _PhotoGalleryState createState() => _PhotoGalleryState();
+  State<PhotoGallery> createState() => _PhotoGalleryState();
 }
 
 class _PhotoGalleryState extends State<PhotoGallery> {

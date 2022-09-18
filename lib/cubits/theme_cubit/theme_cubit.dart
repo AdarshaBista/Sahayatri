@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 

@@ -7,6 +7,7 @@ class NotifyContactStatus extends StatelessWidget {
   final bool isNotified;
 
   const NotifyContactStatus({
+    super.key,
     required this.isNotified,
   });
 

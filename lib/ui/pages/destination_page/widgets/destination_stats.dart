@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/stat_card.dart';
 
 class DestinationStats extends StatelessWidget {
-  const DestinationStats();
+  const DestinationStats({super.key});
 
   @override
   Widget build(BuildContext context) {

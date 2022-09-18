@@ -4,7 +4,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 
 class UnsavedDialog extends StatelessWidget {
-  const UnsavedDialog();
+  const UnsavedDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

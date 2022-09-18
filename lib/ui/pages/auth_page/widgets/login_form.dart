@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
 import 'package:sahayatri/ui/pages/auth_page/widgets/auth_button.dart';
+import 'package:sahayatri/ui/pages/auth_page/widgets/auth_fields.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class LoginForm extends StatefulWidget {
   final bool isInitial;
 
   const LoginForm({
+    super.key,
     required this.isInitial,
   });
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {

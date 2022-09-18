@@ -11,6 +11,7 @@ class SearchBox extends StatelessWidget {
   final Function(String) onChanged;
 
   const SearchBox({
+    super.key,
     this.hintText = 'Search',
     required this.onChanged,
   });

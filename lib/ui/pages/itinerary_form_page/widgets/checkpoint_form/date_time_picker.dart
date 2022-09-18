@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class DateTimePicker extends StatefulWidget {
   final DateTime? initialDateTime;
   final void Function(DateTime) onSelect;
 
   const DateTimePicker({
+    super.key,
     required this.onSelect,
     required this.initialDateTime,
   });
 
   @override
-  _DateTimePickerState createState() => _DateTimePickerState();
+  State<DateTimePicker> createState() => _DateTimePickerState();
 }
 
 class _DateTimePickerState extends State<DateTimePicker> {
@@ -45,6 +46,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Future<void> _selectDateTime() async {
     final pickedDate = await _showDatePicker(context);
     if (pickedDate == null) return;
+
+    if (!mounted) return;
 
     final pickedTime = await _showTimePicker(context);
     if (pickedTime == null) return;
