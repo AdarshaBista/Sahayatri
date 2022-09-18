@@ -75,10 +75,7 @@ class _RouteLayerState extends State<RouteLayer> {
                   Polyline(
                     strokeWidth: 4.0,
                     gradientColors: AppColors.routeGradient,
-                    points: destination.route
-                        .simplify(zoom)
-                        .map((c) => c.toLatLng())
-                        .toList(),
+                    points: destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
                   ),
                 ],
               ),

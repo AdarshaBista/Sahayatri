@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_map/flutter_map.dart';
+
 import 'package:sahayatri/core/models/coord.dart';
 
-import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/icon_label.dart';
-import 'package:sahayatri/ui/widgets/map/markers/icon_marker_widget.dart';
 import 'package:sahayatri/ui/widgets/map/markers/arrow_marker_widget.dart';
+import 'package:sahayatri/ui/widgets/map/markers/icon_marker_widget.dart';
 
 class DynamicTextMarker extends Marker {
   DynamicTextMarker({

@@ -15,8 +15,7 @@ class NotificationChannels {
   static const int sosId = 2;
   static const String sosChannelId = 'sos';
   static const String sosChannelName = 'SOS Signal';
-  static const String sosChannelDesc =
-      'Notify when SOS signal is received from other devices';
+  static const String sosChannelDesc = 'Notify when SOS signal is received from other devices';
 
   // Notify when device is disconnected from nearby network.
   static const int deviceDisconnectedId = 3;

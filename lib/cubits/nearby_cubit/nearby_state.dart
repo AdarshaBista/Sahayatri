@@ -12,9 +12,8 @@ class NearbyConnected extends NearbyState {
   final bool isScanning;
   final List<NearbyDevice> nearbyDevices;
 
-  List<NearbyDevice> get connectedDevices => nearbyDevices
-      .where((d) => d.status != DeviceStatus.disconnected)
-      .toList();
+  List<NearbyDevice> get connectedDevices =>
+      nearbyDevices.where((d) => d.status != DeviceStatus.disconnected).toList();
   List<NearbyDevice> get trackingDevices =>
       nearbyDevices.where((d) => d.userLocation != null).toList();
 

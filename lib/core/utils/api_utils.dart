@@ -5,8 +5,7 @@ class ApiUtils {
     if (routeStr == null || routeStr.isEmpty) return [];
 
     final List<String> values = routeStr.split(',');
-    final List<double> points =
-        values.map((p) => double.tryParse(p) ?? 0.0).toList();
+    final List<double> points = values.map((p) => double.tryParse(p) ?? 0.0).toList();
 
     final List<Coord> route = [];
     for (int i = 0; i < points.length; i += 3) {

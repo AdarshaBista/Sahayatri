@@ -22,8 +22,7 @@ class AnimatedLatLng extends StatefulWidget {
   State<AnimatedLatLng> createState() => _AnimatedLatLngState();
 }
 
-class _AnimatedLatLngState extends State<AnimatedLatLng>
-    with SingleTickerProviderStateMixin {
+class _AnimatedLatLngState extends State<AnimatedLatLng> with SingleTickerProviderStateMixin {
   late final Animation<LatLng> animation;
   late final AnimationController animationController;
 

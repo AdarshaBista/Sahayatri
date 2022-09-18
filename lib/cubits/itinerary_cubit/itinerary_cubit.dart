@@ -33,8 +33,7 @@ class ItineraryCubit extends Cubit<ItineraryState> {
 
     emit(const ItineraryLoading());
     try {
-      final itineraries =
-          await apiService.fetchItineraries(destination.id, user!);
+      final itineraries = await apiService.fetchItineraries(destination.id, user!);
       if (itineraries.isNotEmpty) {
         destination.suggestedItineraries = itineraries;
         emit(ItineraryLoaded(itineraries: itineraries));

@@ -1,5 +1,5 @@
-import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/checkpoint/checkpoint_details.dart';

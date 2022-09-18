@@ -32,8 +32,7 @@ class NextCheckpoint {
   }
 
   @override
-  String toString() =>
-      'NextCheckpoint(checkpoint: $checkpoint, eta: $eta, distance: $distance)';
+  String toString() => 'NextCheckpoint(checkpoint: $checkpoint, eta: $eta, distance: $distance)';
 
   @override
   bool operator ==(Object other) {

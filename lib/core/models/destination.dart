@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/itinerary.dart';
-import 'package:sahayatri/core/models/review_details.dart';
-import 'package:sahayatri/core/models/destination_update.dart';
-
-import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
 import 'package:sahayatri/core/extensions/route_extension.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination_update.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/review_details.dart';
+import 'package:sahayatri/core/utils/api_utils.dart';
 
 part 'destination.g.dart';
 
@@ -136,16 +136,13 @@ class Destination {
       places: map['places'] != null
           ? List<Place>.from(map['places']?.map((x) => Place.fromMap(x)))
           : null,
-      reviewDetails: map['reviews'] != null
-          ? ReviewDetails.fromMap(map['reviews'])
-          : const ReviewDetails(),
+      reviewDetails:
+          map['reviews'] != null ? ReviewDetails.fromMap(map['reviews']) : const ReviewDetails(),
       suggestedItineraries: map['itinenaries'] != null
-          ? List<Itinerary>.from(
-              map['itinenaries']?.map((x) => Itinerary.fromMap(x)))
+          ? List<Itinerary>.from(map['itinenaries']?.map((x) => Itinerary.fromMap(x)))
           : null,
       updates: map['updates'] != null
-          ? List<DestinationUpdate>.from(
-              map['updates']?.map((x) => DestinationUpdate.fromMap(x)))
+          ? List<DestinationUpdate>.from(map['updates']?.map((x) => DestinationUpdate.fromMap(x)))
           : null,
     );
   }

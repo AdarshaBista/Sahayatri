@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:hive/hive.dart';
-
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:hive/hive.dart';
 
 part 'weather.g.dart';
 
@@ -126,10 +125,8 @@ class Weather {
   factory Weather.fromMap(Map<String, dynamic> map) {
     return Weather(
       date: DateTime.fromMillisecondsSinceEpoch((map['dt'] as int) * 1000),
-      sunset:
-          DateTime.fromMillisecondsSinceEpoch((map['sunset'] as int) * 1000),
-      sunrise:
-          DateTime.fromMillisecondsSinceEpoch((map['sunrise'] as int) * 1000),
+      sunset: DateTime.fromMillisecondsSinceEpoch((map['sunset'] as int) * 1000),
+      sunrise: DateTime.fromMillisecondsSinceEpoch((map['sunrise'] as int) * 1000),
       temp: (map['temp']['day'] as num).toInt(),
       minTemp: (map['temp']['min'] as num).toInt(),
       maxTemp: (map['temp']['max'] as num).toInt(),

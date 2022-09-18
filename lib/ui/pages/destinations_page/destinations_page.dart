@@ -25,8 +25,7 @@ class DestinationsPage extends StatelessWidget {
             const DestinationsHeader(),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () =>
-                    context.read<DestinationsCubit>().fetchDestinations(),
+                onRefresh: () => context.read<DestinationsCubit>().fetchDestinations(),
                 child: ListView(
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
@@ -49,8 +48,7 @@ class DestinationsPage extends StatelessWidget {
           return ErrorIndicator(
             imageUrl: Images.destinationsError,
             message: state.message,
-            onRetry: () =>
-                context.read<DestinationsCubit>().fetchDestinations(),
+            onRetry: () => context.read<DestinationsCubit>().fetchDestinations(),
           );
         } else if (state is DestinationsLoading) {
           return const BusyIndicator(imageUrl: Images.destinationsLoading);

@@ -17,9 +17,7 @@ class LodgesList extends StatelessWidget {
     final place = Provider.of<Place>(context, listen: false);
     final lodges = place.lodges;
 
-    return lodges.isEmpty
-        ? const EmptyIndicator(message: 'No lodges found.')
-        : _buildList(lodges);
+    return lodges.isEmpty ? const EmptyIndicator(message: 'No lodges found.') : _buildList(lodges);
   }
 
   Widget _buildList(List<Lodge> lodges) {

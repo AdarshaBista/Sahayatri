@@ -30,9 +30,7 @@ class InfoColumn extends StatelessWidget {
         InfoCard(
           color: Colors.green,
           icon: AppIcons.eta,
-          title: nextCheckpoint.eta == null
-              ? 'N/A'
-              : _formatDuration(nextCheckpoint.eta!),
+          title: nextCheckpoint.eta == null ? 'N/A' : _formatDuration(nextCheckpoint.eta!),
           subtitle: 'ETA',
         ),
       ],

@@ -22,8 +22,7 @@ class Language {
   }
 
   @override
-  String toString() =>
-      'Language(code: $code, title: $title, ttsCode: $ttsCode)';
+  String toString() => 'Language(code: $code, title: $title, ttsCode: $ttsCode)';
 
   @override
   bool operator ==(Object other) {

@@ -85,8 +85,7 @@ extension FlushbarExtension on BuildContext {
       icon: Icon(icon, color: color, size: 24.0),
       animationDuration: const Duration(milliseconds: 300),
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-      messageText:
-          Text(message, style: AppTextStyles.headline5.withColor(color)),
+      messageText: Text(message, style: AppTextStyles.headline5.withColor(color)),
     );
     _flushbar?.show(this);
   }

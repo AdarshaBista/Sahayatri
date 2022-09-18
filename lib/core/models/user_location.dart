@@ -47,8 +47,7 @@ class UserLocation {
       bearing: locationData.heading ?? 0.0,
       speed: locationData.speed ?? 0.0,
       accuracy: locationData.accuracy ?? 0.0,
-      timestamp:
-          DateTime.fromMillisecondsSinceEpoch(locationData.time?.toInt() ?? 0),
+      timestamp: DateTime.fromMillisecondsSinceEpoch(locationData.time?.toInt() ?? 0),
     );
   }
 

@@ -17,8 +17,7 @@ extension TextStyleExtension on TextStyle {
 
   TextStyle get secondary => copyWith(color: AppColors.secondary);
   TextStyle get secondaryDark => copyWith(color: AppColors.secondaryDark);
-  TextStyle get secondaryLight =>
-      withColor(AppColors.secondary.withOpacity(0.25));
+  TextStyle get secondaryLight => withColor(AppColors.secondary.withOpacity(0.25));
 
   TextStyle get light => copyWith(color: AppColors.light);
   TextStyle get lightFaded => copyWith(color: AppColors.lightFaded);

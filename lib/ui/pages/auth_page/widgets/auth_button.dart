@@ -39,9 +39,7 @@ class _AuthButtonState extends State<AuthButton> {
         return FloatingActionButton.extended(
           heroTag: '${widget.label} Tag',
           backgroundColor: AppColors.dark,
-          onPressed: (state is AuthLoading)
-              ? null
-              : () async => _authenticate(context),
+          onPressed: (state is AuthLoading) ? null : () async => _authenticate(context),
           label: (state is AuthLoading)
               ? const CircularBusyIndicator()
               : Text(

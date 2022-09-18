@@ -1,12 +1,11 @@
-import 'package:sahayatri/locator.dart';
-
+import 'package:sahayatri/core/models/app_error.dart';
 import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/weather.dart';
-import 'package:sahayatri/core/models/app_error.dart';
-
 import 'package:sahayatri/core/services/api_service.dart';
 
 import 'package:sahayatri/app/database/weather_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class WeatherService {
   static const int cacheDuration = 20;

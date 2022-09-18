@@ -30,8 +30,7 @@ class TranslateBubble extends StatelessWidget {
         right: isQuery ? 0.0 : 50.0,
       ),
       child: Column(
-        crossAxisAlignment:
-            isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: isQuery ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           _buildAudioButton(context),
           _buildText(context),
@@ -69,9 +68,8 @@ class TranslateBubble extends StatelessWidget {
 
   Widget _buildAudioButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => context
-          .read<TranslateCubit>()
-          .play(translation.text, translation.language.ttsCode),
+      onTap: () =>
+          context.read<TranslateCubit>().play(translation.text, translation.language.ttsCode),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconLabel(

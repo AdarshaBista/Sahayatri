@@ -58,9 +58,6 @@ class MapLayers {
 
   @override
   int get hashCode {
-    return route.hashCode ^
-        places.hashCode ^
-        checkpoints.hashCode ^
-        nearbyDevices.hashCode;
+    return route.hashCode ^ places.hashCode ^ checkpoints.hashCode ^ nearbyDevices.hashCode;
   }
 }

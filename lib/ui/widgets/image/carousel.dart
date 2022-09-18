@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:card_swiper/card_swiper.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 

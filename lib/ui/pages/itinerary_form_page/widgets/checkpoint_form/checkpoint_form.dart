@@ -52,9 +52,7 @@ class CheckpointForm extends StatelessWidget {
                         Navigator.of(context).pop();
                       }
                     },
-                    title: checkpoint == null
-                        ? 'Add a checkpoint'
-                        : 'Edit checkpoint',
+                    title: checkpoint == null ? 'Add a checkpoint' : 'Edit checkpoint',
                   ),
                   _buildPlaceField(state.place, context),
                   const SizedBox(height: 16.0),
@@ -109,8 +107,7 @@ class CheckpointForm extends StatelessWidget {
       validator: (_) => null,
       initialValue: description,
       icon: AppIcons.description,
-      onChanged: (desc) =>
-          context.read<CheckpointFormCubit>().changeDescription(desc),
+      onChanged: (desc) => context.read<CheckpointFormCubit>().changeDescription(desc),
     );
   }
 
@@ -119,8 +116,7 @@ class CheckpointForm extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
       trailing: CircularCheckbox(
         value: shouldSendSms,
-        onSelect: (value) =>
-            context.read<CheckpointFormCubit>().toggleNotifyContact(value),
+        onSelect: (value) => context.read<CheckpointFormCubit>().toggleNotifyContact(value),
       ),
       title: Text(
         'Notify Contact',

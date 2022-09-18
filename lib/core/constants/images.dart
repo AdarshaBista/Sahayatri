@@ -3,7 +3,6 @@ class Images {
   static const String marker = 'assets/images/markers/marker.png';
   static const String userMarker = 'assets/images/markers/user.png';
   static const String authBackground = 'assets/images/backgrounds/auth.png';
-
   static const String alert = 'assets/images/indicators/alert.png';
   static const String unauthenticated = 'assets/images/indicators/unauthenticated.png';
   static const String generalEmpty = 'assets/images/indicators/general_empty.png';
@@ -18,12 +17,8 @@ class Images {
   static const String weatherLoading = 'assets/images/indicators/weather_loading.png';
   static const String trackerError = 'assets/images/indicators/tracker_error.png';
   static const String trackerLoading = 'assets/images/indicators/tracker_loading.png';
-  static const String trackerUnavailable =
-      'assets/images/indicators/tracker_unavailable.png';
-  static const String destinationsEmpty =
-      'assets/images/indicators/destinations_empty.png';
-  static const String destinationsError =
-      'assets/images/indicators/destinations_error.png';
-  static const String destinationsLoading =
-      'assets/images/indicators/destinations_loading.png';
+  static const String trackerUnavailable = 'assets/images/indicators/tracker_unavailable.png';
+  static const String destinationsEmpty = 'assets/images/indicators/destinations_empty.png';
+  static const String destinationsError = 'assets/images/indicators/destinations_error.png';
+  static const String destinationsLoading = 'assets/images/indicators/destinations_loading.png';
 }

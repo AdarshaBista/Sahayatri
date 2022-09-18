@@ -92,8 +92,8 @@ class _CustomMapState extends State<CustomMap> {
         screenSize: widget.size,
         center: widget.center.toLatLng(),
         controller: mapController,
-        onTap: (_, latLng) => widget.onTap
-            ?.call(Coord(lat: latLng.latitude, lng: latLng.longitude)),
+        onTap: (_, latLng) =>
+            widget.onTap?.call(Coord(lat: latLng.latitude, lng: latLng.longitude)),
         onPositionChanged: widget.onPositionChanged,
         swPanBoundary: widget.swPanBoundary?.toLatLng() ??
             Coord(

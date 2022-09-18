@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/common/custom_card.dart';
+import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 
 class CustomTile extends StatelessWidget {
   final String title;

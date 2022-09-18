@@ -121,8 +121,7 @@ class AppThemes {
         color: AppColors.dark,
       );
 
-  static RoundedRectangleBorder get _circularBorderRadius =>
-      RoundedRectangleBorder(
+  static RoundedRectangleBorder get _circularBorderRadius => RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6.0),
       );
 
@@ -131,8 +130,7 @@ class AppThemes {
         borderRadius: BorderRadius.circular(6.0),
       );
 
-  static InputDecorationTheme get _lightInputDecorationTheme =>
-      InputDecorationTheme(
+  static InputDecorationTheme get _lightInputDecorationTheme => InputDecorationTheme(
         filled: true,
         isDense: true,
         errorMaxLines: 2,
@@ -156,8 +154,7 @@ class AppThemes {
         focusedErrorBorder: _inputBorder,
       );
 
-  static InputDecorationTheme get _darkInputDecorationTheme =>
-      _lightInputDecorationTheme.copyWith(
+  static InputDecorationTheme get _darkInputDecorationTheme => _lightInputDecorationTheme.copyWith(
         fillColor: AppColors.darkAccent,
         focusColor: AppColors.darkAccent,
         hintStyle: AppTextStyles.headline5.lightAccent,
@@ -201,15 +198,13 @@ class AppThemes {
         actionsIconTheme: _lightIconTheme,
       );
 
-  static BottomAppBarTheme get _lightBottomAppBarTheme =>
-      const BottomAppBarTheme(
+  static BottomAppBarTheme get _lightBottomAppBarTheme => const BottomAppBarTheme(
         elevation: 0.0,
         color: AppColors.light,
         shape: CircularNotchedRectangle(),
       );
 
-  static BottomAppBarTheme get _darkBottomAppBarTheme =>
-      _lightBottomAppBarTheme.copyWith(
+  static BottomAppBarTheme get _darkBottomAppBarTheme => _lightBottomAppBarTheme.copyWith(
         color: AppColors.dark,
       );
 
@@ -241,8 +236,7 @@ class AppThemes {
         thickness: 0.25,
       );
 
-  static BottomSheetThemeData get _lightBottomSheetTheme =>
-      const BottomSheetThemeData(
+  static BottomSheetThemeData get _lightBottomSheetTheme => const BottomSheetThemeData(
         elevation: 12.0,
         modalElevation: 12.0,
         clipBehavior: Clip.antiAlias,
@@ -256,8 +250,7 @@ class AppThemes {
         ),
       );
 
-  static BottomSheetThemeData get _darkBottomSheetTheme =>
-      _lightBottomSheetTheme.copyWith(
+  static BottomSheetThemeData get _darkBottomSheetTheme => _lightBottomSheetTheme.copyWith(
         backgroundColor: AppColors.darkSurface,
         modalBackgroundColor: AppColors.darkSurface,
       );
@@ -281,8 +274,7 @@ class AppThemes {
         textStyle: AppTextStyles.headline5,
       );
 
-  static PopupMenuThemeData get _darkPopupMenuTheme =>
-      _lightPopupMenuTheme.copyWith(
+  static PopupMenuThemeData get _darkPopupMenuTheme => _lightPopupMenuTheme.copyWith(
         color: AppColors.darkSurface,
         textStyle: AppTextStyles.headline5.lightAccent,
       );

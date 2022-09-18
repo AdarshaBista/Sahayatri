@@ -25,8 +25,7 @@ class Checkpoint {
 
   bool get isTemplate => dateTime == null;
   String get time => isTemplate ? '' : DateFormat('h:mm a').format(dateTime!);
-  String get date =>
-      isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime!);
+  String get date => isTemplate ? 'Day $day' : DateFormat('MMM dd').format(dateTime!);
 
   const Checkpoint({
     required this.place,
@@ -56,9 +55,8 @@ class Checkpoint {
     return Checkpoint(
       place: Place.fromMap(map['place']),
       description: map['description'] ?? '',
-      dateTime: map['dateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['dateTime'])
-          : null,
+      dateTime:
+          map['dateTime'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateTime']) : null,
       day: map['day']?.toInt() ?? 0,
       notifyContact: map['notifyContact'] ?? false,
     );

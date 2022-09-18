@@ -29,9 +29,7 @@ class WeatherTab extends StatelessWidget {
           Text(
             isToday
                 ? 'TODAY'
-                : DateFormat(DateFormat.ABBR_WEEKDAY)
-                    .format(weather.date)
-                    .toUpperCase(),
+                : DateFormat(DateFormat.ABBR_WEEKDAY).format(weather.date).toUpperCase(),
             style: AppTextStyles.headline4.withColor(color),
           ),
           const SizedBox(height: 10.0),

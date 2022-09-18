@@ -23,8 +23,7 @@ class UnauthenticatedView extends StatelessWidget {
         color: AppColors.primaryDark,
         backgroundColor: Colors.transparent,
         onTap: () {
-          locator<RootNavService>()
-              .pushNamed(Routes.authPageRoute, arguments: false);
+          locator<RootNavService>().pushNamed(Routes.authPageRoute, arguments: false);
         },
       ),
     ]);

@@ -16,8 +16,7 @@ class AnimatedTabView extends StatefulWidget {
   State<AnimatedTabView> createState() => _AnimatedTabViewState();
 }
 
-class _AnimatedTabViewState extends State<AnimatedTabView>
-    with TickerProviderStateMixin {
+class _AnimatedTabViewState extends State<AnimatedTabView> with TickerProviderStateMixin {
   late int index;
   late final AnimationController fadeController;
   late final AnimationController scaleController;

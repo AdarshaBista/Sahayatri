@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/nearby_device.dart';
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/nearby_device.dart';
 
+import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/map/markers/dynamic_text_marker.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/map/device_details.dart';
 
 class DeviceMarker extends DynamicTextMarker {
   DeviceMarker({

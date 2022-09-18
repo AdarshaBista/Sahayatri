@@ -68,9 +68,7 @@ class BottomNavBar extends StatelessWidget {
           duration: const Duration(milliseconds: 120),
           width: isSelected ? 6.0 : 0.0,
           height: isSelected ? 6.0 : 0.0,
-          margin: isSelected
-              ? const EdgeInsets.all(4.0)
-              : const EdgeInsets.only(top: 16.0),
+          margin: isSelected ? const EdgeInsets.all(4.0) : const EdgeInsets.only(top: 16.0),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(3),

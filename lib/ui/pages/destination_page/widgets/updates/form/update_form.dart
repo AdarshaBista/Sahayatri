@@ -103,8 +103,7 @@ class _UpdateFormState extends State<UpdateForm> {
             if (state.isLoading) return;
             if (!(_formKey.currentState?.validate() ?? false)) return;
 
-            final success =
-                await context.read<DestinationUpdateFormCubit>().postUpdate();
+            final success = await context.read<DestinationUpdateFormCubit>().postUpdate();
             if (success && mounted) Navigator.of(context).pop();
           },
         );

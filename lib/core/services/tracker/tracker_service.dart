@@ -1,21 +1,19 @@
 import 'dart:async';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/checkpoint.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/user_location.dart';
-import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/next_checkpoint.dart';
-
+import 'package:sahayatri/core/models/tracker_update.dart';
+import 'package:sahayatri/core/models/user_location.dart';
 import 'package:sahayatri/core/services/location/location_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
-
 import 'package:sahayatri/core/utils/geo_utils.dart';
-import 'package:sahayatri/core/constants/configs.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class TrackerService {
   /// Location updates from GPS.
@@ -44,8 +42,7 @@ class TrackerService {
 
   /// Continuous tracker updates.
   late StreamController<TrackerUpdate> _trackerStreamController;
-  Stream<TrackerUpdate> get trackerUpdateStream =>
-      _trackerStreamController.stream;
+  Stream<TrackerUpdate> get trackerUpdateStream => _trackerStreamController.stream;
 
   /// Start the tracking process for a [destination].
   Future<void> start(Destination destination, Itinerary userItinerary) async {
@@ -68,8 +65,7 @@ class TrackerService {
 
   void _initTrackerStream() {
     _trackerStreamController = StreamController<TrackerUpdate>.broadcast();
-    _trackerStreamSub =
-        locationService.getLocationStream(_destination!.route).map(
+    _trackerStreamSub = locationService.getLocationStream(_destination!.route).map(
       (userLocation) {
         if (_isCompleted(userLocation.coord)) onCompleted?.call();
 
@@ -169,8 +165,7 @@ class TrackerService {
 
     for (final checkpoint in itinerary!.checkpoints) {
       userIndex = GeoUtils.indexOnPath(userLocation.coord, _destination!.route);
-      placeIndex =
-          GeoUtils.indexOnPath(checkpoint.place.coord, _destination!.route);
+      placeIndex = GeoUtils.indexOnPath(checkpoint.place.coord, _destination!.route);
 
       if (userIndex >= placeIndex) continue;
       nextCheckpoint = checkpoint;
@@ -183,8 +178,7 @@ class TrackerService {
       start: userIndex,
       end: placeIndex,
     );
-    final eta =
-        userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
+    final eta = userLocation.speed < 0.1 ? null : distance ~/ userLocation.speed;
 
     return NextCheckpoint(
       distance: distance,

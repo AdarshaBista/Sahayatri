@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
-import 'package:sahayatri/core/services/navigation_service.dart';
 import 'package:sahayatri/core/services/location/location_service.dart';
+import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/routers/root_router.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
+import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/theme_cubit/theme_cubit.dart';
-import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
-
-import 'package:device_preview/device_preview.dart';
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/views/splash_view.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
 import 'package:sahayatri/ui/pages/auth_page/auth_page.dart';
 import 'package:sahayatri/ui/pages/home_page/home_page.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/views/splash_view.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class Sahayatri extends StatelessWidget {
   const Sahayatri({Key? key}) : super(key: key);
@@ -65,8 +65,7 @@ class Sahayatri extends StatelessWidget {
               locator.isRegistered<LocationService>(instanceName: 'mock')) {
             final gpsAccuracy = state.prefs.gpsAccuracy;
             locator<LocationService>().setLocationAccuracy(gpsAccuracy);
-            locator<LocationService>(instanceName: 'mock')
-                .setLocationAccuracy(gpsAccuracy);
+            locator<LocationService>(instanceName: 'mock').setLocationAccuracy(gpsAccuracy);
           }
         }
       },

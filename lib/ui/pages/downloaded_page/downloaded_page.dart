@@ -51,8 +51,7 @@ class DownloadedPage extends StatelessWidget {
   }
 
   Widget _buildDownloadedState() {
-    return BlocConsumer<DownloadedDestinationsCubit,
-        DownloadedDestinationsState>(
+    return BlocConsumer<DownloadedDestinationsCubit, DownloadedDestinationsState>(
       listener: (context, state) {
         if (state is DownloadedDestinationsMessage) {
           context.openFlushBar(state.message);
@@ -63,8 +62,7 @@ class DownloadedPage extends StatelessWidget {
           return ErrorIndicator(
             imageUrl: Images.destinationsError,
             message: state.message,
-            onRetry: () =>
-                context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
+            onRetry: () => context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
           );
         } else if (state is DownloadedDestinationsLoading) {
           return const BusyIndicator(imageUrl: Images.destinationsLoading);
@@ -78,8 +76,7 @@ class DownloadedPage extends StatelessWidget {
           return EmptyIndicator(
             imageUrl: Images.destinationsEmpty,
             message: 'No downloaded destinations!',
-            onRetry: () =>
-                context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
+            onRetry: () => context.read<DownloadedDestinationsCubit>().fetchDownloaded(),
           );
         }
       },

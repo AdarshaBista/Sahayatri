@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/map_layers.dart';
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/map_layers.dart';
 
 part 'prefs.g.dart';
 

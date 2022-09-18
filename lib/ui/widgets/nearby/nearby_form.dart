@@ -90,8 +90,7 @@ class NearbyForm extends StatelessWidget {
         if (name.isNotEmpty) {
           context.read<NearbyCubit>().startNearby(name);
         } else {
-          const MessageDialog(message: 'Please set your device name first.')
-              .openDialog(context);
+          const MessageDialog(message: 'Please set your device name first.').openDialog(context);
         }
       },
     );

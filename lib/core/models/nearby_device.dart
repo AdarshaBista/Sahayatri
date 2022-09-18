@@ -27,6 +27,5 @@ class NearbyDevice {
   }
 
   @override
-  int get hashCode =>
-      id.hashCode ^ name.hashCode ^ status.hashCode ^ userLocation.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ status.hashCode ^ userLocation.hashCode;
 }

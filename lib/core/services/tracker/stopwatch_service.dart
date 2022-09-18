@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:sahayatri/locator.dart';
-
 import 'package:sahayatri/core/models/tracker_data.dart';
 
 import 'package:sahayatri/app/database/tracker_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class StopwatchService {
   /// Persist [TrackerData] on local storage.

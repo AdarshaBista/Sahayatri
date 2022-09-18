@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' show MapController;
+import 'package:latlong2/latlong.dart';
 
 class MapAnimator {
   MapAnimator({
@@ -207,8 +207,7 @@ extension EndListener<T> on Animation<T> {
   Function onEnd(Function callback) {
     late AnimationStatusListener wrapper;
     wrapper = (AnimationStatus status) {
-      if (status == AnimationStatus.completed ||
-          status == AnimationStatus.dismissed) {
+      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
         removeStatusListener(wrapper);
         callback();
       }

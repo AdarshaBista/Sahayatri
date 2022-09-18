@@ -19,8 +19,7 @@ class WeatherTabView extends StatefulWidget {
   State<WeatherTabView> createState() => _WeatherTabViewState();
 }
 
-class _WeatherTabViewState extends State<WeatherTabView>
-    with SingleTickerProviderStateMixin {
+class _WeatherTabViewState extends State<WeatherTabView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
@@ -88,9 +87,7 @@ class _WeatherTabViewState extends State<WeatherTabView>
                     child: WeatherTab(
                       isToday: i == 0,
                       weather: widget.forecasts[i],
-                      color: _tabController.index == i
-                          ? AppColors.primary
-                          : AppColors.light,
+                      color: _tabController.index == i ? AppColors.primary : AppColors.light,
                     ),
                   )
               ],

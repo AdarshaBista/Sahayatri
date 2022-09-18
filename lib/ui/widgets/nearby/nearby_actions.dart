@@ -25,9 +25,8 @@ class NearbyActions extends StatelessWidget {
       children: [
         SquareButton(
           label: isScanning ? 'Stop\nScanning' : 'Start\nScanning',
-          backgroundColor: isScanning
-              ? Colors.deepPurple.withOpacity(0.3)
-              : Colors.green.withOpacity(0.3),
+          backgroundColor:
+              isScanning ? Colors.deepPurple.withOpacity(0.3) : Colors.green.withOpacity(0.3),
           icon: isScanning ? AppIcons.scanningOff : AppIcons.scanning,
           onTap: () {
             isScanning

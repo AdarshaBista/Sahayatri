@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/core/utils/image_utils.dart';
+
+import 'package:sahayatri/ui/styles/styles.dart';
 
 class AdaptiveImage extends StatelessWidget {
   final Color color;

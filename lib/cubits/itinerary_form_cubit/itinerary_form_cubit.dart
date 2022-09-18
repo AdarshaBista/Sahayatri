@@ -17,9 +17,7 @@ class ItineraryFormCubit extends Cubit<ItineraryFormState> {
             name: itinerary?.name ?? '',
             days: itinerary?.days ?? '',
             nights: itinerary?.nights ?? '',
-            checkpoints: itinerary == null
-                ? []
-                : List<Checkpoint>.from(itinerary.checkpoints),
+            checkpoints: itinerary == null ? [] : List<Checkpoint>.from(itinerary.checkpoints),
           ),
         );
 

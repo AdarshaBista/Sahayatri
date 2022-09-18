@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/weather.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/weather.dart';
 
 class WeatherDao {
   final Future<Box<List>> _weatherBox = Hive.openBox(HiveBoxNames.weather);

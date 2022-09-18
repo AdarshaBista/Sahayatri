@@ -92,8 +92,7 @@ class _ContactFormState extends State<ContactForm> {
         context.read<PrefsCubit>().saveContact(contact);
 
         Navigator.of(context).pop();
-        context.openFlushBar('Contact saved: $contact',
-            type: FlushbarType.success);
+        context.openFlushBar('Contact saved: $contact', type: FlushbarType.success);
       },
     );
   }

@@ -24,13 +24,10 @@ class ItineraryMap extends StatelessWidget {
   }
 
   Widget _buildMarkers(BuildContext context) {
-    final checkpoints =
-        Provider.of<Itinerary>(context, listen: false).checkpoints;
+    final checkpoints = Provider.of<Itinerary>(context, listen: false).checkpoints;
     return MarkerLayerWidget(
       options: MarkerLayerOptions(
-        markers: checkpoints.reversed
-            .map((c) => CheckpointDetailMarker(checkpoint: c))
-            .toList(),
+        markers: checkpoints.reversed.map((c) => CheckpointDetailMarker(checkpoint: c)).toList(),
       ),
     );
   }

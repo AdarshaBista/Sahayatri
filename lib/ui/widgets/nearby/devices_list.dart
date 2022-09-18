@@ -16,8 +16,7 @@ class DevicesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final connectedDevices =
-        context.select<NearbyConnected, List<NearbyDevice>>(
-            (state) => state.connectedDevices);
+        context.select<NearbyConnected, List<NearbyDevice>>((state) => state.connectedDevices);
 
     return connectedDevices.isEmpty
         ? Text(

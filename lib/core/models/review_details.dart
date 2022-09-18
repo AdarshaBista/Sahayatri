@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:hive/hive.dart';
 
-import 'package:sahayatri/core/models/review.dart';
 import 'package:sahayatri/core/constants/hive_config.dart';
+import 'package:sahayatri/core/models/review.dart';
 
 part 'review_details.g.dart';
 
@@ -51,8 +51,7 @@ class ReviewDetails {
   }
 
   @override
-  String toString() =>
-      'ReviewDetails(total: $total, stars: $stars, reviews: $reviews)';
+  String toString() => 'ReviewDetails(total: $total, stars: $stars, reviews: $reviews)';
 
   @override
   bool operator ==(Object other) {

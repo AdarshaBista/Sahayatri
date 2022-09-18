@@ -109,8 +109,7 @@ class AuthPage extends StatelessWidget {
         color: AppColors.light,
         backgroundColor: Colors.transparent,
         label: 'Continue without signing in...',
-        onTap: () => locator<RootNavService>()
-            .pushReplacementNamed(Routes.homePageRoute),
+        onTap: () => locator<RootNavService>().pushReplacementNamed(Routes.homePageRoute),
       ),
     );
   }

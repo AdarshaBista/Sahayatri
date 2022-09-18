@@ -34,8 +34,7 @@ class TrackerMap extends StatefulWidget {
   State<TrackerMap> createState() => _TrackerMapState();
 }
 
-class _TrackerMapState extends State<TrackerMap>
-    with SingleTickerProviderStateMixin {
+class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateMixin {
   bool isTracking = true;
   late double zoom;
   late final MapAnimator mapAnimator;
@@ -132,8 +131,7 @@ class _UserTrackLayer extends StatelessWidget {
     final trackerUpdate = context.watch<TrackerUpdate>();
 
     final userPath = trackerUpdate.userTrack.map((t) => t.coord).toList();
-    final simplifiedPath =
-        userPath.simplify(zoom).map((p) => p.toLatLng()).toList()..removeLast();
+    final simplifiedPath = userPath.simplify(zoom).map((p) => p.toLatLng()).toList()..removeLast();
 
     final trackGradientColors = trackerUpdate.isOffRoute
         ? AppColors.userTrackOffRouteGradient
@@ -184,8 +182,7 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) =>
-          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
+      buildWhen: (p, c) => p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
         final enabled = state.prefs.mapLayers.nearbyDevices;
         if (!enabled) return const SizedBox();
@@ -241,8 +238,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
         }
 
         if (checkpointsEnabled) {
-          final itinerary =
-              BlocProvider.of<UserItineraryCubit>(context).userItinerary;
+          final itinerary = BlocProvider.of<UserItineraryCubit>(context).userItinerary;
           markers.addAll(itinerary.checkpoints.map(
             (c) {
               if (zoom < MapConfig.markerZoomThreshold) {
@@ -253,8 +249,7 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
           ));
 
           if (placesEnabled) {
-            final checkpointPlaces =
-                itinerary.checkpoints.map((c) => c.place).toList();
+            final checkpointPlaces = itinerary.checkpoints.map((c) => c.place).toList();
             places.removeWhere((p) => checkpointPlaces.contains(p));
           }
         }
@@ -297,8 +292,7 @@ class _DevicesMarkersLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrefsCubit, PrefsState>(
-      buildWhen: (p, c) =>
-          p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
+      buildWhen: (p, c) => p.prefs.mapLayers.nearbyDevices != c.prefs.mapLayers.nearbyDevices,
       builder: (context, state) {
         final zoom = context.watch<double>();
         final enabled = state.prefs.mapLayers.nearbyDevices;

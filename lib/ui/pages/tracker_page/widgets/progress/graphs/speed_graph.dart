@@ -12,8 +12,7 @@ class SpeedGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userTrack = context.watch<TrackerUpdate>().userTrack;
-    final speeds =
-        userTrack.map((u) => double.parse(u.speed.toStringAsFixed(1))).toList();
+    final speeds = userTrack.map((u) => double.parse(u.speed.toStringAsFixed(1))).toList();
 
     return TrackerGraph(
       yValues: speeds,

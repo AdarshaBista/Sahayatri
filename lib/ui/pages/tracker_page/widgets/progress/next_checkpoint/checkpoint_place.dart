@@ -17,8 +17,7 @@ class CheckpointPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place =
-        context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint.place;
+    final place = context.watch<TrackerUpdate>().nextCheckpoint!.checkpoint.place;
 
     return GestureDetector(
       onTap: () {

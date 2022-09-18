@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/models/user.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
-import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
-import 'package:sahayatri/ui/widgets/views/unauthenticated_view.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.dart';
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/preferences_list.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/tools/tools_list.dart';
+import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
+import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
+import 'package:sahayatri/ui/widgets/views/unauthenticated_view.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

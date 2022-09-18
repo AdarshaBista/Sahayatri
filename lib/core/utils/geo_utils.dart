@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:maps_toolkit/maps_toolkit.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/models/coord.dart';
 
 class GeoUtils {
   /// Determine if [coord] is in [path] within a given [tolerance].
@@ -50,8 +50,7 @@ class GeoUtils {
   }
 
   /// Distance between [start] and [end] indices of a [path].
-  static double distanceBetweenIndices(List<Coord> path,
-      {int start = 0, required int end}) {
+  static double distanceBetweenIndices(List<Coord> path, {int start = 0, required int end}) {
     final points = path.getRange(start, end).toList();
     return computeLength(points);
   }
