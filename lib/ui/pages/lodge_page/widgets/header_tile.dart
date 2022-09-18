@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/lodge.dart';
-
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/models/lodge.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 
 class HeaderTile extends StatelessWidget {
-  const HeaderTile();
+  const HeaderTile({super.key});
 
   @override
   Widget build(BuildContext context) {

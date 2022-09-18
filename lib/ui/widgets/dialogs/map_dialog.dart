@@ -7,6 +7,7 @@ class MapDialog extends StatelessWidget {
   final Widget map;
 
   const MapDialog({
+    super.key,
     required this.map,
   });
 

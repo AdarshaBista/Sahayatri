@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'package:sahayatri/core/models/coord.dart';
+
 import 'package:sahayatri/ui/widgets/animators/map_animator.dart';
 
 class AnimatedLatLng extends StatefulWidget {
@@ -11,13 +12,14 @@ class AnimatedLatLng extends StatefulWidget {
   final Widget Function(LatLng) builder;
 
   const AnimatedLatLng({
+    super.key,
     required this.begin,
     required this.end,
     required this.builder,
   });
 
   @override
-  _AnimatedLatLngState createState() => _AnimatedLatLngState();
+  State<AnimatedLatLng> createState() => _AnimatedLatLngState();
 }
 
 class _AnimatedLatLngState extends State<AnimatedLatLng>

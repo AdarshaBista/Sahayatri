@@ -17,6 +17,7 @@ class LodgeCard extends StatelessWidget {
   final Lodge lodge;
 
   const LodgeCard({
+    super.key,
     required this.lodge,
   });
 

@@ -9,6 +9,7 @@ class CheckpointLodges extends StatelessWidget {
   final List<Lodge> lodges;
 
   const CheckpointLodges({
+    super.key,
     required this.lodges,
   });
 

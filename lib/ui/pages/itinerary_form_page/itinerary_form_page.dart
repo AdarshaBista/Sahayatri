@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/itinerary.dart';
-import 'package:sahayatri/core/extensions/dialog_extension.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
+
+import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
-import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
+import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
 import 'package:sahayatri/ui/widgets/buttons/mini_fab.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
-import 'package:sahayatri/ui/widgets/appbars/collapsible_appbar.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_form.dart';
 
 class ItineraryFormPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  ItineraryFormPage({super.key});
 
   @override
   Widget build(BuildContext context) {

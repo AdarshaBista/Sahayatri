@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/models/tracker_update.dart';
 
-import 'package:provider/provider.dart';
 import 'package:sahayatri/ui/widgets/map/markers/animated_latlng.dart';
 
 class UserLocationLayer extends StatelessWidget {
@@ -11,6 +12,7 @@ class UserLocationLayer extends StatelessWidget {
   final Widget Function(LatLng) builder;
 
   const UserLocationLayer({
+    super.key,
     required this.builder,
     this.repaintBoundary = false,
   });

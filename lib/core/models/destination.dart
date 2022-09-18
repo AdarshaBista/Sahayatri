@@ -121,40 +121,32 @@ class Destination {
   }
 
   factory Destination.fromMap(Map<String, dynamic> map) {
-    final places = !map.containsKey('places')
-        ? null
-        : List<Place>.from(map['places']?.map((x) => Place.fromMap(x)));
-
-    final updates = !map.containsKey('updates')
-        ? null
-        : List<DestinationUpdate>.from(
-            map['updates']?.map((x) => DestinationUpdate.fromMap(x)));
-
-    final reviewDetails = !map.containsKey('reviews')
-        ? const ReviewDetails()
-        : ReviewDetails.fromMap(map['reviews']);
-
-    final suggestedItineraries = !map.containsKey('itinenaries')
-        ? null
-        : List<Itinerary>.from(
-            map['itinenaries']?.map((x) => Itinerary.fromMap(x)));
-
     return Destination(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      permit: map['permit'] ?? '',
+      permit: map['permits'] ?? '',
       length: map['length'] ?? '',
-      rating: map['rating']?.toDouble() ?? 0.0,
+      rating: double.tryParse(map['rating']) ?? 0.0,
       description: map['description'] ?? '',
       maxAltitude: map['maxAltitude'] ?? '',
       estimatedDuration: map['estimatedDuration'] ?? '',
       route: ApiUtils.parseRoute(map['route'] as String),
       imageUrls: ApiUtils.parseCsv(map['imageUrls'] as String),
       bestMonths: ApiUtils.parseCsv(map['bestMonths'] as String),
-      places: places,
-      updates: updates,
-      reviewDetails: reviewDetails,
-      suggestedItineraries: suggestedItineraries,
+      places: map['places'] != null
+          ? List<Place>.from(map['places']?.map((x) => Place.fromMap(x)))
+          : null,
+      reviewDetails: map['reviews'] != null
+          ? ReviewDetails.fromMap(map['reviews'])
+          : const ReviewDetails(),
+      suggestedItineraries: map['itinenaries'] != null
+          ? List<Itinerary>.from(
+              map['itinenaries']?.map((x) => Itinerary.fromMap(x)))
+          : null,
+      updates: map['updates'] != null
+          ? List<DestinationUpdate>.from(
+              map['updates']?.map((x) => DestinationUpdate.fromMap(x)))
+          : null,
     );
   }
 

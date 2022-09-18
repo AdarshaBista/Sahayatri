@@ -16,6 +16,7 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
 
   const CustomButton({
+    super.key,
     required this.onTap,
     this.outline = false,
     this.centered = true,
@@ -28,7 +29,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveColor = color ?? context.c.primaryVariant;
+    final effectiveColor = color ?? context.c.primaryContainer;
     final splashColor =
         outline ? AppColors.primary : effectiveColor.withOpacity(0.4);
 

@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/place.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_list_sheet.dart';
 import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/custom_form_tile.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/place_list_sheet.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class PlacePicker extends StatefulWidget {
   final Place? initialPlace;
   final void Function(Place) onSelect;
 
   const PlacePicker({
+    super.key,
     required this.onSelect,
     required this.initialPlace,
   });
 
   @override
-  _PlacePickerState createState() => _PlacePickerState();
+  State<PlacePicker> createState() => _PlacePickerState();
 }
 
 class _PlacePickerState extends State<PlacePicker> {

@@ -13,6 +13,7 @@ class SquareButton extends StatelessWidget {
   final Color? backgroundColor;
 
   const SquareButton({
+    super.key,
     required this.icon,
     required this.label,
     this.onTap,

@@ -1,12 +1,12 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 
 import 'package:sahayatri/app/database/itinerary_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'user_itinerary_state.dart';
 

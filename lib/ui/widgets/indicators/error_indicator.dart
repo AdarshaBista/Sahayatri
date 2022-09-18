@@ -12,6 +12,7 @@ class ErrorIndicator extends StatelessWidget {
   final VoidCallback? onRetry;
 
   const ErrorIndicator({
+    super.key,
     this.imageUrl = Images.generalError,
     this.message = 'An error has occured!',
     this.onRetry,

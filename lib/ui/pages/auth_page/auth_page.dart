@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/constants/images.dart';
+import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 
+import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
+import 'package:sahayatri/ui/pages/auth_page/widgets/signup_form.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/image/adaptive_image.dart';
 import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
-import 'package:sahayatri/ui/pages/auth_page/widgets/login_form.dart';
-import 'package:sahayatri/ui/pages/auth_page/widgets/signup_form.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class AuthPage extends StatelessWidget {
   final bool isInitial;
 
   const AuthPage({
+    super.key,
     this.isInitial = true,
   });
 

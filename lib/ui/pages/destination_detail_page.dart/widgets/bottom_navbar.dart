@@ -7,6 +7,7 @@ class BottomNavbar extends StatelessWidget {
   final TabController tabController;
 
   const BottomNavbar({
+    super.key,
     required this.tabController,
   });
 

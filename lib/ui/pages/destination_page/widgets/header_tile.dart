@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
-
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
-import 'package:sahayatri/ui/widgets/buttons/vertical_button.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/download_button.dart';
+import 'package:sahayatri/ui/pages/weather_page/weather_page.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/buttons/vertical_button.dart';
+import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class HeaderTile extends StatelessWidget {
-  const HeaderTile();
+  const HeaderTile({super.key});
 
   @override
   Widget build(BuildContext context) {

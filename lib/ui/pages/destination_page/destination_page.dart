@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 import 'package:sahayatri/cubits/destination_review_cubit/destination_review_cubit.dart';
+import 'package:sahayatri/cubits/review_cubit/review_cubit.dart';
 
+import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/route_actions.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_list.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/review/review_list.dart';
-import 'package:sahayatri/ui/widgets/image/photo_gallery.dart';
-import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
-import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/appbars/collapsible_carousel.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/extra_card.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/open_button.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/header_tile.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/route_actions.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/destination_stats.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_list.dart';
+import 'package:sahayatri/ui/widgets/image/photo_gallery.dart';
+import 'package:sahayatri/ui/widgets/review/review_list.dart';
+import 'package:sahayatri/ui/widgets/views/collapsible_view.dart';
+import 'package:sahayatri/ui/widgets/views/nested_tab_view.dart';
+
+import 'package:sahayatri/locator.dart';
 
 class DestinationPage extends StatelessWidget {
-  const DestinationPage();
+  const DestinationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

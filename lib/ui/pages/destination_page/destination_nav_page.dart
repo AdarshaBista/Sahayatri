@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
 import 'package:sahayatri/app/routers/destination_router.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
-import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
 import 'package:sahayatri/cubits/download_cubit/download_cubit.dart';
+import 'package:sahayatri/cubits/places_cubit/places_cubit.dart';
+import 'package:sahayatri/cubits/user_cubit/user_cubit.dart';
 import 'package:sahayatri/cubits/user_itinerary_cubit/user_itinerary_cubit.dart';
 
+import 'package:sahayatri/locator.dart';
+
 class DestinationNavPage extends StatelessWidget {
-  const DestinationNavPage();
+  const DestinationNavPage({super.key});
 
   @override
   Widget build(BuildContext context) {

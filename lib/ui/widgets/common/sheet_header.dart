@@ -8,6 +8,7 @@ class SheetHeader extends StatelessWidget {
   final VoidCallback? onClose;
 
   const SheetHeader({
+    super.key,
     required this.title,
     this.onClose,
     this.showDivider = true,

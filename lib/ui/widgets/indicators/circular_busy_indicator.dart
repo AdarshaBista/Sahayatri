@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:loading_indicator/loading_indicator.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 
 class CircularBusyIndicator extends StatelessWidget {
   final Color color;
 
   const CircularBusyIndicator({
+    super.key,
     this.color = AppColors.primaryDark,
   });
 

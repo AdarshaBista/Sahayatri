@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 import 'package:sahayatri/ui/widgets/appbars/custom_flexible_space.dart';
+import 'package:sahayatri/ui/widgets/buttons/circular_button.dart';
 
 class CollapsibleAppbar extends StatelessWidget {
   final String title;
@@ -14,6 +14,7 @@ class CollapsibleAppbar extends StatelessWidget {
   final VoidCallback? onBack;
 
   const CollapsibleAppbar({
+    super.key,
     required this.title,
     this.onBack,
     this.offset,

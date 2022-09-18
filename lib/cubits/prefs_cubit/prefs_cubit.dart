@@ -1,12 +1,12 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/prefs.dart';
 import 'package:sahayatri/core/models/map_layers.dart';
+import 'package:sahayatri/core/models/prefs.dart';
 
 import 'package:sahayatri/app/database/prefs_dao.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'prefs_state.dart';
 

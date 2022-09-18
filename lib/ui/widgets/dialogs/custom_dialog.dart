@@ -9,6 +9,7 @@ class CustomDialog extends StatelessWidget {
   final Widget? content;
 
   const CustomDialog({
+    super.key,
     required this.child,
     this.padding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
     this.content,

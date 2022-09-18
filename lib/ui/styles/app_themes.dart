@@ -18,7 +18,6 @@ class AppThemes {
         errorColor: AppColors.secondary,
         indicatorColor: AppColors.primary,
         visualDensity: VisualDensity.standard,
-        primaryColorBrightness: Brightness.light,
       );
 
   static ThemeData get light => _base.copyWith(
@@ -72,10 +71,10 @@ class AppThemes {
         brightness: Brightness.light,
         primary: AppColors.primary,
         onPrimary: AppColors.dark,
-        primaryVariant: AppColors.primaryDark,
+        primaryContainer: AppColors.primaryDark,
         secondary: AppColors.secondary,
         onSecondary: AppColors.light,
-        secondaryVariant: AppColors.secondaryDark,
+        secondaryContainer: AppColors.secondaryDark,
         error: AppColors.secondary,
         onError: AppColors.light,
         surface: AppColors.lightAccent,
@@ -85,8 +84,8 @@ class AppThemes {
       );
 
   static ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
-        primaryVariant: AppColors.light,
-        secondaryVariant: AppColors.light,
+        primaryContainer: AppColors.light,
+        secondaryContainer: AppColors.light,
         brightness: Brightness.dark,
         surface: AppColors.darkAccent,
         onSurface: AppColors.lightAccent,

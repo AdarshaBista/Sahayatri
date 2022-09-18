@@ -13,7 +13,7 @@ class TagChip extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TagChipState createState() => _TagChipState();
+  State<TagChip> createState() => _TagChipState();
 }
 
 class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {

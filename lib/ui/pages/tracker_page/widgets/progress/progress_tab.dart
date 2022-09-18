@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/graphs/speed_graph.dart';
-import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/tracker_stats.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/graphs/elevation_graph.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/graphs/speed_graph.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/next_checkpoint/next_checkpoint_card.dart';
+import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/stats/tracker_stats.dart';
 
 class ProgressTab extends StatelessWidget {
-  const ProgressTab();
+  const ProgressTab({super.key});
 
   @override
   Widget build(BuildContext context) {

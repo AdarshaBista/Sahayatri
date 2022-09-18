@@ -12,6 +12,7 @@ class AuthFields extends StatelessWidget {
   final void Function(String) onPasswordChanged;
 
   const AuthFields({
+    super.key,
     required this.initialEmail,
     required this.onEmailChanged,
     required this.initialPassword,

@@ -10,6 +10,7 @@ class MessageIndicator extends StatelessWidget {
   final String imageUrl;
 
   const MessageIndicator({
+    super.key,
     required this.message,
     this.imageUrl = Images.alert,
   });

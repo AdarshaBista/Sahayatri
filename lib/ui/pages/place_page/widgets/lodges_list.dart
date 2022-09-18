@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/lodge.dart';
-
 import 'package:provider/provider.dart';
-import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 
+import 'package:sahayatri/core/models/lodge.dart';
+import 'package:sahayatri/core/models/place.dart';
+
+import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
 import 'package:sahayatri/ui/widgets/destination/lodge_card.dart';
 import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 
 class LodgesList extends StatelessWidget {
-  const LodgesList();
+  const LodgesList({super.key});
 
   @override
   Widget build(BuildContext context) {

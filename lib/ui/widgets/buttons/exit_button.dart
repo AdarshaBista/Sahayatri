@@ -10,6 +10,7 @@ class ExitButton extends StatelessWidget {
   final Color backgroundColor;
 
   const ExitButton({
+    super.key,
     this.size = 18.0,
     this.icon = AppIcons.close,
     this.color = AppColors.light,

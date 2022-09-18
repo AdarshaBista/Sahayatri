@@ -11,6 +11,7 @@ class Carousel extends StatelessWidget {
   final double? height;
 
   const Carousel({
+    super.key,
     required this.imageUrls,
     this.showPagination = true,
     this.width,

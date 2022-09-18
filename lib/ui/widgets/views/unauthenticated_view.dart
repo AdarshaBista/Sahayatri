@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
 import 'package:sahayatri/core/constants/routes.dart';
 import 'package:sahayatri/core/services/navigation_service.dart';
 
@@ -9,8 +7,10 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/indicators/unauthenticated_indicator.dart';
 
+import 'package:sahayatri/locator.dart';
+
 class UnauthenticatedView extends StatelessWidget {
-  const UnauthenticatedView();
+  const UnauthenticatedView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class UnauthenticatedView extends StatelessWidget {
         color: AppColors.primaryDark,
         backgroundColor: Colors.transparent,
         onTap: () {
-          locator<RootNavService>().pushNamed(Routes.authPageRoute, arguments: false);
+          locator<RootNavService>()
+              .pushNamed(Routes.authPageRoute, arguments: false);
         },
       ),
     ]);

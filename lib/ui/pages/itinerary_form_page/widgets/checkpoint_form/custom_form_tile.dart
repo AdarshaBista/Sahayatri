@@ -11,6 +11,7 @@ class CustomFormTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const CustomFormTile({
+    super.key,
     required this.icon,
     required this.onTap,
     required this.title,

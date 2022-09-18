@@ -1,17 +1,16 @@
 import 'package:dio/dio.dart';
 
-import 'package:sahayatri/core/models/user.dart';
-import 'package:sahayatri/core/models/place.dart';
-import 'package:sahayatri/core/models/coord.dart';
-import 'package:sahayatri/core/models/weather.dart';
-import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/itinerary.dart';
-import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/models/review_details.dart';
-import 'package:sahayatri/core/models/destination_update.dart';
-
-import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/coord.dart';
+import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/destination_update.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/place.dart';
+import 'package:sahayatri/core/models/review_details.dart';
+import 'package:sahayatri/core/models/user.dart';
+import 'package:sahayatri/core/models/weather.dart';
+import 'package:sahayatri/core/utils/api_utils.dart';
 import 'package:sahayatri/core/utils/config_reader.dart';
 
 class ApiService {
@@ -315,15 +314,15 @@ class ApiService {
 }
 
 extension on List<dynamic> {
-  List<T> tryMap<T>(void Function(dynamic) callback) {
-    final ret = <T>[];
+  List<T> tryMap<T>(T Function(dynamic) callback) {
+    final retList = <T>[];
     for (final item in this) {
       try {
-        callback(item);
+        retList.add(callback(item));
       } catch (e) {
         print(e.toString());
       }
     }
-    return ret;
+    return retList;
   }
 }

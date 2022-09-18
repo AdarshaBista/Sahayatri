@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
@@ -11,6 +12,7 @@ class StarRatingBar extends StatelessWidget {
   final Function(double)? onUpdate;
 
   const StarRatingBar({
+    super.key,
     required this.rating,
     this.size = 24.0,
     this.onUpdate,

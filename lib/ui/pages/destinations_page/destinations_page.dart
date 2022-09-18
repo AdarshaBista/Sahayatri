@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/constants/images.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
-import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
-import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
-import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
-import 'package:sahayatri/ui/widgets/destination/destinations_list.dart';
 import 'package:sahayatri/ui/pages/destinations_page/widgets/destinations_header.dart';
+import 'package:sahayatri/ui/widgets/destination/destinations_list.dart';
+import 'package:sahayatri/ui/widgets/indicators/busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 class DestinationsPage extends StatelessWidget {
-  const DestinationsPage();
+  const DestinationsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class DestinationsPage extends StatelessWidget {
             const DestinationsHeader(),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () => context.read<DestinationsCubit>().fetchDestinations(),
+                onRefresh: () =>
+                    context.read<DestinationsCubit>().fetchDestinations(),
                 child: ListView(
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
@@ -47,7 +49,8 @@ class DestinationsPage extends StatelessWidget {
           return ErrorIndicator(
             imageUrl: Images.destinationsError,
             message: state.message,
-            onRetry: () => context.read<DestinationsCubit>().fetchDestinations(),
+            onRetry: () =>
+                context.read<DestinationsCubit>().fetchDestinations(),
           );
         } else if (state is DestinationsLoading) {
           return const BusyIndicator(imageUrl: Images.destinationsLoading);

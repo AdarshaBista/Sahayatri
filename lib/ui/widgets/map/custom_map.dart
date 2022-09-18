@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/coord.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/utils/config_reader.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
-import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/map/route_layer.dart';
 import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
-import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
 import 'package:sahayatri/ui/widgets/map/menu/menu_button.dart';
+import 'package:sahayatri/ui/widgets/map/menu/menu_drawer.dart';
+import 'package:sahayatri/ui/widgets/map/route_layer.dart';
 
 class CustomMap extends StatefulWidget {
   final Coord center;
@@ -29,6 +29,7 @@ class CustomMap extends StatefulWidget {
   final void Function(MapPosition, bool)? onPositionChanged;
 
   const CustomMap({
+    super.key,
     required this.center,
     this.size,
     this.onTap,
@@ -43,7 +44,7 @@ class CustomMap extends StatefulWidget {
   });
 
   @override
-  _CustomMapState createState() => _CustomMapState();
+  State<CustomMap> createState() => _CustomMapState();
 }
 
 class _CustomMapState extends State<CustomMap> {
@@ -83,11 +84,6 @@ class _CustomMapState extends State<CustomMap> {
   Widget _buildMap() {
     return FlutterMap(
       mapController: mapController,
-      children: [
-        const _TileLayer(),
-        RouteLayer(mapController: mapController),
-        ...widget.children,
-      ],
       options: MapOptions(
         interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
         zoom: widget.initialZoom,
@@ -110,6 +106,11 @@ class _CustomMapState extends State<CustomMap> {
               lng: widget.center.lng + 0.3,
             ).toLatLng(),
       ),
+      children: [
+        const _TileLayer(),
+        RouteLayer(mapController: mapController),
+        ...widget.children,
+      ],
     );
   }
 }
@@ -130,7 +131,7 @@ class _TileLayer extends StatelessWidget {
             keepBuffer: 8,
             tileSize: 512,
             zoomOffset: -1,
-            tileFadeInDuration: 300,
+            tileFadeInDuration: const Duration(milliseconds: 300),
             overrideTilesWhenUrlChanges: true,
             urlTemplate:
                 'https://api.mapbox.com/styles/v1/{layerId}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',

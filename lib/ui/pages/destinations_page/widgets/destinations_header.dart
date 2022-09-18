@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/utils/debouncer.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destinations_cubit/destinations_cubit.dart';
 
 import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/common/search_box.dart';
 
 class DestinationsHeader extends StatelessWidget {
-  const DestinationsHeader();
+  const DestinationsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

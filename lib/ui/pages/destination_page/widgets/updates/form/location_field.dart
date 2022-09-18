@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/custom_tile.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/update_map_dialog.dart';
 
 class LocationField extends StatelessWidget {
-  const LocationField();
+  const LocationField({super.key});
 
   @override
   Widget build(BuildContext context) {

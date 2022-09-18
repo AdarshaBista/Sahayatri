@@ -10,6 +10,7 @@ class CheckpointImages extends StatelessWidget {
   final List<String> imageUrls;
 
   const CheckpointImages({
+    super.key,
     required this.imageUrls,
   });
 

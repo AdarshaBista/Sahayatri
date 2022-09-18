@@ -9,13 +9,14 @@ class CircularCheckbox extends StatefulWidget {
   final Color? color;
 
   const CircularCheckbox({
+    super.key,
     this.color,
     required this.value,
     required this.onSelect,
   });
 
   @override
-  _CircularCheckboxState createState() => _CircularCheckboxState();
+  State<CircularCheckbox> createState() => _CircularCheckboxState();
 }
 
 class _CircularCheckboxState extends State<CircularCheckbox> {

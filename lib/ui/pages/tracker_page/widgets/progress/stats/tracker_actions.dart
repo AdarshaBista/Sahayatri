@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/tracker_update.dart';
-import 'package:sahayatri/core/extensions/dialog_extension.dart';
-
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/tracker_update.dart';
+
 import 'package:sahayatri/cubits/tracker_cubit/tracker_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -12,7 +13,7 @@ import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/dialogs/confirm_dialog.dart';
 
 class TrackerActions extends StatelessWidget {
-  const TrackerActions();
+  const TrackerActions({super.key});
 
   @override
   Widget build(BuildContext context) {

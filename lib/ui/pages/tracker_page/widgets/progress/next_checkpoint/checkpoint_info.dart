@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
 
-import 'package:provider/provider.dart';
-
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 import 'package:sahayatri/ui/widgets/checkpoint/notify_contact_status.dart';
+import 'package:sahayatri/ui/widgets/common/custom_card.dart';
 
 class CheckpointInfo extends StatelessWidget {
-  const CheckpointInfo();
+  const CheckpointInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

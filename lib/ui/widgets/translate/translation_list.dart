@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sahayatri/core/constants/images.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
@@ -10,7 +11,7 @@ import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_bubble.dart';
 
 class TranslationList extends StatelessWidget {
-  const TranslationList();
+  const TranslationList({super.key});
 
   @override
   Widget build(BuildContext context) {

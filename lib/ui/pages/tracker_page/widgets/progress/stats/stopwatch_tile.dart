@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/utils/format_utils.dart';
-import 'package:sahayatri/core/services/tracker/tracker_service.dart';
 import 'package:sahayatri/core/services/tracker/stopwatch_service.dart';
+import 'package:sahayatri/core/services/tracker/tracker_service.dart';
+import 'package:sahayatri/core/utils/format_utils.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 
+import 'package:sahayatri/locator.dart';
+
 class StopwatchTile extends StatefulWidget {
-  const StopwatchTile();
+  const StopwatchTile({super.key});
 
   @override
-  _StopwatchTileState createState() => _StopwatchTileState();
+  State<StopwatchTile> createState() => _StopwatchTileState();
 }
 
 class _StopwatchTileState extends State<StopwatchTile> {

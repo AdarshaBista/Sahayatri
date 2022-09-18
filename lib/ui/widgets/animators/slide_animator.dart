@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/constants/configs.dart';
-
 import 'package:animator/animator.dart';
+
+import 'package:sahayatri/core/constants/configs.dart';
 
 class SlideAnimator extends StatelessWidget {
   final int duration;
@@ -10,6 +10,7 @@ class SlideAnimator extends StatelessWidget {
   final Widget child;
 
   const SlideAnimator({
+    super.key,
     required this.child,
     required this.begin,
     this.duration = UiConfig.animatorDuration,

@@ -10,6 +10,7 @@ class InfoCard extends StatelessWidget {
   final String subtitle;
 
   const InfoCard({
+    super.key,
     this.color = AppColors.primaryDark,
     required this.icon,
     required this.title,

@@ -54,7 +54,7 @@ class Review {
       id: map['id'] ?? '',
       text: map['text'] ?? '',
       user: User.fromMap(map['user']),
-      rating: map['rating']?.toDouble() ?? 0.0,
+      rating: double.tryParse(map['rating']) ?? 0.0,
       dateUpdated: DateTime.tryParse(map['dateupdated'] as String) ??
           DateTime.fromMillisecondsSinceEpoch(0),
     );

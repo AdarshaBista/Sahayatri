@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
+import 'package:sahayatri/ui/widgets/common/star_rating_bar.dart';
 
 class RatingChart extends StatelessWidget {
   final int total;
@@ -10,6 +10,7 @@ class RatingChart extends StatelessWidget {
   final Map<int, int> stars;
 
   const RatingChart({
+    super.key,
     required this.total,
     required this.stars,
     required this.average,

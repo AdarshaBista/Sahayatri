@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 import 'package:sahayatri/ui/widgets/common/icon_label.dart';
 import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
-import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class NestedTabView extends StatefulWidget {
   final bool keepAlive;
@@ -14,6 +14,7 @@ class NestedTabView extends StatefulWidget {
   final List<NestedTabData> tabs;
 
   const NestedTabView({
+    super.key,
     required this.tabs,
     required this.children,
     this.keepAlive = false,
@@ -23,7 +24,7 @@ class NestedTabView extends StatefulWidget {
   }) : assert(tabs.length == children.length);
 
   @override
-  _NestedTabViewState createState() => _NestedTabViewState();
+  State<NestedTabView> createState() => _NestedTabViewState();
 }
 
 class _NestedTabViewState extends State<NestedTabView> {
@@ -91,6 +92,7 @@ class NestedTab extends StatelessWidget {
   final bool showIndicator;
 
   const NestedTab({
+    super.key,
     required this.tab,
     required this.isSelected,
     required this.showIndicator,

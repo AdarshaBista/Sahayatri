@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
 import 'package:sahayatri/ui/pages/destination_page/widgets/best_months_chips.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/permit_card.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
 
 class ExtraCard extends StatelessWidget {
-  const ExtraCard();
+  const ExtraCard({super.key});
 
   @override
   Widget build(BuildContext context) {

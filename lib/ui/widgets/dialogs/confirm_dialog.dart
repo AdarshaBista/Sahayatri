@@ -13,6 +13,7 @@ class ConfirmDialog extends StatelessWidget {
   final VoidCallback onConfirm;
 
   const ConfirmDialog({
+    super.key,
     required this.message,
     required this.onConfirm,
     this.cancelText = 'NO',
@@ -57,7 +58,7 @@ class ConfirmDialog extends StatelessWidget {
     return CustomButton(
       icon: confirmIcon,
       label: confirmText,
-      color: context.c.secondaryVariant,
+      color: context.c.secondaryContainer,
       backgroundColor: AppColors.secondaryLight,
       onTap: () {
         Navigator.of(context).pop();

@@ -11,6 +11,7 @@ class CustomCard extends StatelessWidget {
   final Color? color;
 
   const CustomCard({
+    super.key,
     required this.child,
     this.color,
     this.borderRadius = 6.0,

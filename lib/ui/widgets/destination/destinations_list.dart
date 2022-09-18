@@ -4,8 +4,8 @@ import 'package:sahayatri/core/constants/images.dart';
 import 'package:sahayatri/core/models/destination.dart';
 
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 import 'package:sahayatri/ui/widgets/destination/destination_card.dart';
+import 'package:sahayatri/ui/widgets/indicators/empty_indicator.dart';
 
 class DestinationsList extends StatelessWidget {
   final bool deletable;
@@ -13,6 +13,7 @@ class DestinationsList extends StatelessWidget {
   final List<Destination> destinations;
 
   const DestinationsList({
+    super.key,
     this.deletable = false,
     required this.isSearching,
     required this.destinations,

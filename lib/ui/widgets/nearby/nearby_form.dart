@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
 import 'package:sahayatri/core/extensions/dialog_extension.dart';
 import 'package:sahayatri/core/extensions/flushbar_extension.dart';
 
-import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 import 'package:sahayatri/cubits/nearby_cubit/nearby_cubit.dart';
+import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/common/header.dart';
-import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
+import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/dialogs/message_dialog.dart';
 import 'package:sahayatri/ui/widgets/nearby/connection_info.dart';
 import 'package:sahayatri/ui/widgets/nearby/device_name_field.dart';
 
 class NearbyForm extends StatelessWidget {
-  const NearbyForm();
+  const NearbyForm({super.key});
 
   @override
   Widget build(BuildContext context) {

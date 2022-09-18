@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/route_extension.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
+
+import 'package:sahayatri/core/extensions/route_extension.dart';
+import 'package:sahayatri/core/models/destination.dart';
+
 import 'package:sahayatri/cubits/prefs_cubit/prefs_cubit.dart';
 
-import 'package:flutter_map/flutter_map.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
@@ -16,11 +17,12 @@ class RouteLayer extends StatefulWidget {
   final MapController mapController;
 
   const RouteLayer({
+    super.key,
     required this.mapController,
   });
 
   @override
-  _RouteLayerState createState() => _RouteLayerState();
+  State<RouteLayer> createState() => _RouteLayerState();
 }
 
 class _RouteLayerState extends State<RouteLayer> {

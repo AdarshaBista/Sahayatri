@@ -12,6 +12,7 @@ class TrackerGraph extends StatelessWidget {
   final List<double> yValues;
 
   const TrackerGraph({
+    super.key,
     required this.title,
     required this.color,
     required this.yValues,

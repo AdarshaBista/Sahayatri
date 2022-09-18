@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/checkpoint.dart';
-import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/checkpoint.dart';
 import 'package:sahayatri/core/utils/form_validators.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahayatri/cubits/itinerary_form_cubit/itinerary_form_cubit.dart';
 
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
+import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_timeline.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/buttons/custom_button.dart';
 import 'package:sahayatri/ui/widgets/forms/custom_form_field.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/checkpoint_form/checkpoint_form.dart';
-import 'package:sahayatri/ui/pages/itinerary_form_page/widgets/itinerary_form/itinerary_timeline.dart';
 
 class CheckpointList extends StatelessWidget {
   final List<Checkpoint> checkpoints;
 
   const CheckpointList({
+    super.key,
     required this.checkpoints,
   });
 

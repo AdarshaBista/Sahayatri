@@ -15,7 +15,7 @@ import 'package:sahayatri/ui/pages/profile_page/widgets/header/profile_header.da
 import 'package:sahayatri/ui/pages/profile_page/widgets/preferences/preferences_list.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage();
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ class SaveButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const SaveButton({
+    super.key,
     this.onPressed,
   });
 

@@ -25,71 +25,84 @@ import 'package:sahayatri/core/services/weather_service.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> registerGlobalServices() async {
-  locator
-    // Daos
-    ..registerLazySingleton<UserDao>(() => UserDao())
-    ..registerLazySingleton<WeatherDao>(() => WeatherDao())
+  try {
+    locator
+      // Daos
+      ..registerLazySingleton<UserDao>(() => UserDao())
+      ..registerLazySingleton<WeatherDao>(() => WeatherDao())
 
-    // Services
-    ..registerLazySingleton<ApiService>(() => ApiService())
-    ..registerLazySingleton<AuthService>(() => AuthService())
-    ..registerLazySingleton<RootNavService>(() => RootNavService())
-    ..registerLazySingleton<WeatherService>(() => WeatherService())
-    ..registerLazySingleton<DirectionsService>(() => DirectionsService())
-    ..registerLazySingleton<DestinationsService>(() => DestinationsService())
-    ..registerLazySingleton<DestinationNavService>(
-        () => DestinationNavService());
+      // Services
+      ..registerLazySingleton<ApiService>(() => ApiService())
+      ..registerLazySingleton<AuthService>(() => AuthService())
+      ..registerLazySingleton<RootNavService>(() => RootNavService())
+      ..registerLazySingleton<WeatherService>(() => WeatherService())
+      ..registerLazySingleton<DirectionsService>(() => DirectionsService())
+      ..registerLazySingleton<DestinationsService>(() => DestinationsService())
+      ..registerLazySingleton<DestinationNavService>(
+          () => DestinationNavService());
 
-  await locator.allReady();
+    await locator.allReady();
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
 Future<void> registerUserDependentServices(String userId) async {
-  locator
-    // Daos
-    ..registerLazySingleton<PrefsDao>(() => PrefsDao(userId))
-    ..registerLazySingleton<TrackerDao>(() => TrackerDao(userId))
-    ..registerLazySingleton<ItineraryDao>(() => ItineraryDao(userId))
-    ..registerLazySingleton<DestinationDao>(() => DestinationDao(userId))
+  try {
+    locator
+      // Daos
+      ..registerLazySingleton<PrefsDao>(() => PrefsDao(userId))
+      ..registerLazySingleton<TrackerDao>(() => TrackerDao(userId))
+      ..registerLazySingleton<ItineraryDao>(() => ItineraryDao(userId))
+      ..registerLazySingleton<DestinationDao>(() => DestinationDao(userId))
 
-    // Services
-    ..registerLazySingleton<TtsService>(() => TtsService())
-    ..registerLazySingleton<NearbyService>(() => NearbyService())
-    ..registerLazySingleton<TrackerService>(() => TrackerService())
-    ..registerLazySingleton<TranslateService>(() => TranslateService())
-    ..registerLazySingleton<StopwatchService>(() => StopwatchService())
-    ..registerLazySingleton<NotificationService>(() => NotificationService())
-    ..registerLazySingleton<OffRouteAlertService>(() => OffRouteAlertService())
-    ..registerLazySingleton<LocationService>(() => GpsLocationService())
-    ..registerLazySingleton<LocationService>(
-      () => MockLocationService(),
-      instanceName: 'mock',
-    );
+      // Services
+      ..registerLazySingleton<TtsService>(() => TtsService())
+      ..registerLazySingleton<NearbyService>(() => NearbyService())
+      ..registerLazySingleton<TrackerService>(() => TrackerService())
+      ..registerLazySingleton<TranslateService>(() => TranslateService())
+      ..registerLazySingleton<StopwatchService>(() => StopwatchService())
+      ..registerLazySingleton<NotificationService>(() => NotificationService())
+      ..registerLazySingleton<OffRouteAlertService>(
+          () => OffRouteAlertService())
+      ..registerLazySingleton<LocationService>(() => GpsLocationService())
+      ..registerLazySingleton<LocationService>(
+        () => MockLocationService(),
+        instanceName: 'mock',
+      );
 
-  await locator.allReady();
+    await locator.allReady();
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
 Future<void> unregisterUserDependentServices() async {
-  locator
-    // Daos
-    ..unregister<PrefsDao>()
-    ..unregister<TrackerDao>()
-    ..unregister<ItineraryDao>()
-    ..unregister<DestinationDao>()
+  try {
+    locator
+      // Daos
+      ..unregister<PrefsDao>()
+      ..unregister<TrackerDao>()
+      ..unregister<ItineraryDao>()
+      ..unregister<DestinationDao>()
 
-    // Services
-    ..unregister<TtsService>()
-    ..unregister<LocationService>()
-    ..unregister<LocationService>(instanceName: 'mock')
-    ..unregister<TranslateService>()
-    ..unregister<StopwatchService>()
-    ..unregister<NotificationService>()
-    ..unregister<OffRouteAlertService>()
-    ..unregister<NearbyService>(
-      disposingFunction: (service) async => service.stop(),
-    )
-    ..unregister<TrackerService>(
-      disposingFunction: (service) async => service.stop(),
-    );
+      // Services
+      ..unregister<TtsService>()
+      ..unregister<LocationService>()
+      ..unregister<LocationService>(instanceName: 'mock')
+      ..unregister<TranslateService>()
+      ..unregister<StopwatchService>()
+      ..unregister<NotificationService>()
+      ..unregister<OffRouteAlertService>()
+      ..unregister<NearbyService>(
+        disposingFunction: (service) async => service.stop(),
+      )
+      ..unregister<TrackerService>(
+        disposingFunction: (service) async => service.stop(),
+      );
 
-  await locator.allReady();
+    await locator.allReady();
+  } catch (e) {
+    print(e.toString());
+  }
 }

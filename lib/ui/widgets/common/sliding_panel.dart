@@ -19,6 +19,7 @@ class SlidingPanel extends StatelessWidget {
   final Widget Function(ScrollController)? panelBuilder;
 
   const SlidingPanel({
+    super.key,
     required this.body,
     required this.minHeight,
     this.borderRadius = 12.0,

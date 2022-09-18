@@ -6,7 +6,7 @@ import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/indicators/icon_indicator.dart';
 
 class UnauthenticatedIndicator extends StatelessWidget {
-  const UnauthenticatedIndicator();
+  const UnauthenticatedIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

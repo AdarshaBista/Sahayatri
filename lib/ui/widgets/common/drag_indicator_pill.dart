@@ -7,6 +7,7 @@ class DragIndicatorPill extends StatelessWidget {
   final Color? color;
 
   const DragIndicatorPill({
+    super.key,
     this.color,
   });
 

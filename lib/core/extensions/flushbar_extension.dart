@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:another_flushbar/flushbar.dart';
+
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
 
 enum FlushbarType { info, success, error }
+
 Flushbar? _flushbar;
 
 extension FlushbarExtension on BuildContext {
-  Future<void> openLoadingFlushBar(
+  Future<T> openLoadingFlushBar<T>(
     String message, {
     bool isInteractive = true,
-    required AsyncCallback callback,
+    required Future<T> Function() callback,
   }) async {
     _flushbar?.dismiss();
 
@@ -33,8 +34,10 @@ extension FlushbarExtension on BuildContext {
     );
 
     _flushbar?.show(this);
-    await callback.call();
+    final T result = await callback();
     _flushbar?.dismiss();
+
+    return result;
   }
 
   void openFlushBar(

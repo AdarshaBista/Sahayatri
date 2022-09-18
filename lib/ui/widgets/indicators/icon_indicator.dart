@@ -8,6 +8,7 @@ class IconIndicator extends StatelessWidget {
   final String imageUrl;
 
   const IconIndicator({
+    super.key,
     required this.title,
     required this.imageUrl,
     this.padding = 64.0,

@@ -11,6 +11,7 @@ class IconLabel extends StatelessWidget {
   final TextStyle? labelStyle;
 
   const IconLabel({
+    super.key,
     required this.icon,
     required this.label,
     this.labelStyle,

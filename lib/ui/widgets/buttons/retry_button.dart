@@ -7,6 +7,7 @@ class RetryButton extends StatelessWidget {
   final VoidCallback? onTap;
 
   const RetryButton({
+    super.key,
     this.onTap,
   });
 

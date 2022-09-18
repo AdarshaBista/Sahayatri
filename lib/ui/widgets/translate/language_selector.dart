@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/language.dart';
-import 'package:sahayatri/core/constants/languages.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/constants/languages.dart';
+import 'package:sahayatri/core/models/language.dart';
+
 import 'package:sahayatri/cubits/translate_cubit/translate_cubit.dart';
 
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/animators/scale_animator.dart';
 
 class LanguageSelector extends StatefulWidget {
-  const LanguageSelector();
+  const LanguageSelector({super.key});
 
   @override
-  _LanguageSelectorState createState() => _LanguageSelectorState();
+  State<LanguageSelector> createState() => _LanguageSelectorState();
 }
 
 class _LanguageSelectorState extends State<LanguageSelector> {

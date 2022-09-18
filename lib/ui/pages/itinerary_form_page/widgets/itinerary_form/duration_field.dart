@@ -13,6 +13,7 @@ class DurationField extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const DurationField({
+    super.key,
     required this.icon,
     required this.label,
     required this.onChanged,

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/styles/styles.dart';
-import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
-import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
-import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
-import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
-import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
 import 'package:sahayatri/ui/pages/tracker_page/widgets/progress/progress_tab.dart';
+import 'package:sahayatri/ui/styles/styles.dart';
+import 'package:sahayatri/ui/widgets/common/bottom_nav_bar.dart';
+import 'package:sahayatri/ui/widgets/common/elevated_card.dart';
+import 'package:sahayatri/ui/widgets/nearby/nearby_form.dart';
+import 'package:sahayatri/ui/widgets/translate/translate_form.dart';
+import 'package:sahayatri/ui/widgets/views/animated_tab_view.dart';
 
 class TrackerTabs extends StatefulWidget {
-  const TrackerTabs();
+  const TrackerTabs({super.key});
 
   @override
-  _TrackerTabsState createState() => _TrackerTabsState();
+  State<TrackerTabs> createState() => _TrackerTabsState();
 }
 
 class _TrackerTabsState extends State<TrackerTabs> {

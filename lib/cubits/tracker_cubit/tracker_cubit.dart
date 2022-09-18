@@ -1,19 +1,18 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
-import 'package:sahayatri/core/models/itinerary.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
+import 'package:sahayatri/core/models/itinerary.dart';
 import 'package:sahayatri/core/models/tracker_update.dart';
-
 import 'package:sahayatri/core/services/nearby/nearby_service.dart';
 import 'package:sahayatri/core/services/offroute_alert_service.dart';
 import 'package:sahayatri/core/services/tracker/tracker_service.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'tracker_state.dart';
 

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/utils/image_utils.dart';
-
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+
+import 'package:sahayatri/core/utils/image_utils.dart';
+
 import 'package:sahayatri/ui/widgets/buttons/exit_button.dart';
-import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
+import 'package:sahayatri/ui/widgets/indicators/error_indicator.dart';
 
 class PhotoViewPage extends StatelessWidget {
   final PhotoViewPageArgs args;
 
   const PhotoViewPage({
+    super.key,
     required this.args,
   });
 

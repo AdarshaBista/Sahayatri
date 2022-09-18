@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/core/models/destination.dart';
-import 'package:sahayatri/core/extensions/dialog_extension.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:sahayatri/core/extensions/dialog_extension.dart';
+import 'package:sahayatri/core/models/destination.dart';
+
 import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
 import 'package:sahayatri/cubits/destination_update_form_cubit/destination_update_form_cubit.dart';
 
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_field.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/location_field.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
+import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
 import 'package:sahayatri/ui/styles/styles.dart';
 import 'package:sahayatri/ui/widgets/common/sheet_header.dart';
 import 'package:sahayatri/ui/widgets/dialogs/unsaved_dialog.dart';
 import 'package:sahayatri/ui/widgets/indicators/circular_busy_indicator.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/tags_field.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/update_field.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/images_field.dart';
-import 'package:sahayatri/ui/pages/destination_page/widgets/updates/form/location_field.dart';
 
-class UpdateForm extends StatelessWidget {
+class UpdateForm extends StatefulWidget {
+  const UpdateForm({super.key});
+
+  @override
+  State<UpdateForm> createState() => _UpdateFormState();
+}
+
+class _UpdateFormState extends State<UpdateForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -97,7 +105,7 @@ class UpdateForm extends StatelessWidget {
 
             final success =
                 await context.read<DestinationUpdateFormCubit>().postUpdate();
-            if (success) Navigator.of(context).pop();
+            if (success && mounted) Navigator.of(context).pop();
           },
         );
       },

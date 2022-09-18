@@ -1,18 +1,17 @@
 import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:sahayatri/locator.dart';
-
-import 'package:bloc/bloc.dart';
-import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
-
-import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/app_error.dart';
+import 'package:sahayatri/core/models/coord.dart';
 import 'package:sahayatri/core/models/destination.dart';
 import 'package:sahayatri/core/models/destination_update.dart';
-
 import 'package:sahayatri/core/services/api_service.dart';
+
+import 'package:sahayatri/cubits/destination_update_cubit/destination_update_cubit.dart';
+
+import 'package:sahayatri/locator.dart';
 
 part 'destination_update_form_state.dart';
 

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/animators/fade_animator.dart';
 import 'package:sahayatri/ui/widgets/animators/slide_animator.dart';
-import 'package:sahayatri/ui/widgets/translate/translation_list.dart';
+import 'package:sahayatri/ui/widgets/common/header.dart';
 import 'package:sahayatri/ui/widgets/translate/language_selector.dart';
 import 'package:sahayatri/ui/widgets/translate/translate_text_field.dart';
+import 'package:sahayatri/ui/widgets/translate/translation_list.dart';
 
 class TranslateForm extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   const TranslateForm({
+    super.key,
     this.resizeToAvoidBottomInset = false,
   });
 
