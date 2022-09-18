@@ -5,7 +5,7 @@ class NotificationService {
 
   NotificationService() {
     const initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-    const initializationSettingsIOS = IOSInitializationSettings();
+    const initializationSettingsIOS = DarwinInitializationSettings();
     const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -28,7 +28,7 @@ class NotificationService {
       importance: Importance.max,
       visibility: NotificationVisibility.public,
     );
-    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
     final platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,

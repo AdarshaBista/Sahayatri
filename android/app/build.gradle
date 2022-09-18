@@ -44,6 +44,10 @@ android {
         versionName flutterVersionName
     }
 
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

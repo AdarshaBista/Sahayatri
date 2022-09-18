@@ -41,5 +41,7 @@ class ReviewDetailsAdapter extends TypeAdapter<ReviewDetails> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReviewDetailsAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is ReviewDetailsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
