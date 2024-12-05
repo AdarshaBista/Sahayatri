@@ -22,8 +22,8 @@ class DynamicTextMarker extends Marker {
           height: shrinkWhen ? 28.0 : 44.0,
           width: shrinkWhen ? 28.0 : 120.0,
           point: coord.toLatLng(),
-          anchorPos: AnchorPos.align(AnchorAlign.top),
-          builder: (_) => _DynamicTextMarkerWidget(
+          alignment: Alignment.topCenter,
+          child: _DynamicTextMarkerWidget(
             icon: icon,
             label: label,
             color: color,

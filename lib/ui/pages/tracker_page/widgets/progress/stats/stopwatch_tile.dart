@@ -56,7 +56,7 @@ class _StopwatchTileState extends State<StopwatchTile> {
           const SizedBox(height: 4.0),
           Text(
             FormatUtils.time(elapsed),
-            style: context.t.headline2,
+            style: context.t.displayMedium,
           ),
         ],
       ),

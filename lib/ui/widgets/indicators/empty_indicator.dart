@@ -32,7 +32,7 @@ class EmptyIndicator extends StatelessWidget {
             title: Text(
               message,
               textAlign: TextAlign.center,
-              style: context.t.headline5?.bold,
+              style: context.t.headlineSmall?.bold,
             ),
           ),
           if (onRetry != null) RetryButton(onTap: onRetry),

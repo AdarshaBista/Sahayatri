@@ -1,5 +1,4 @@
-/// Modified from https://gist.github.com/avioli/a0b800d6a5ed053871ab4eec8f57c2da
-
+// Modified from https://gist.github.com/avioli/a0b800d6a5ed053871ab4eec8f57c2da
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart' show MapController;
@@ -48,7 +47,7 @@ class MapAnimator {
   TickerFuture move(LatLng center, [double? zoom]) {
     return animate(() {
       this.center = center;
-      this.zoom = zoom ?? mapController.zoom;
+      this.zoom = zoom ?? mapController.camera.zoom;
     });
   }
 
@@ -89,7 +88,7 @@ class MapAnimator {
   }
 
   /// A convenience getter to get the map's center
-  LatLng get center => mapController.center;
+  LatLng get center => mapController.camera.center;
 
   /// Sets the map's center
   ///
@@ -107,7 +106,7 @@ class MapAnimator {
   }
 
   /// A convenience getter to get the map's zoom level
-  double get zoom => mapController.zoom;
+  double get zoom => mapController.camera.zoom;
 
   /// Sets the map's zoom level
   ///
@@ -143,8 +142,8 @@ class MapAnimator {
       return;
     }
     mapController.move(
-      _centerAnimation?.value ?? mapController.center,
-      _zoomAnimation?.value ?? mapController.zoom,
+      _centerAnimation?.value ?? mapController.camera.center,
+      _zoomAnimation?.value ?? mapController.camera.zoom,
     );
   }
 

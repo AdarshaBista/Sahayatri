@@ -29,8 +29,9 @@ class Header extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: padding),
         child: Text(
           title,
-          style:
-              context.t.headline2?.serif.withSize(fontSize).copyWith(fontWeight: FontWeight.normal),
+          style: context.t.displayMedium?.serif
+              .withSize(fontSize)
+              .copyWith(fontWeight: FontWeight.normal),
         ),
       ),
     );

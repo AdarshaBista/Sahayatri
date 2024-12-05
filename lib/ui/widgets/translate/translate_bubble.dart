@@ -61,7 +61,7 @@ class TranslateBubble extends StatelessWidget {
             ? AppTextStyles.headline5.light
             : isError
                 ? AppTextStyles.headline5.secondary
-                : context.t.headline5,
+                : context.t.headlineSmall,
       ),
     );
   }
@@ -76,7 +76,7 @@ class TranslateBubble extends StatelessWidget {
           iconSize: 16.0,
           icon: AppIcons.speaker,
           iconColor: context.c.onSurface,
-          labelStyle: context.t.headline6,
+          labelStyle: context.t.titleLarge,
           label: translation.language.title,
         ),
       ),

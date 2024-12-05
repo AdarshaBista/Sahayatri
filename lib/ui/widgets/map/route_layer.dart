@@ -33,11 +33,11 @@ class _RouteLayerState extends State<RouteLayer> {
   @override
   void initState() {
     super.initState();
-    zoom = widget.mapController.zoom;
+    zoom = widget.mapController.camera.zoom;
 
     mapEventSubscription = widget.mapController.mapEventStream.listen((event) {
-      if (event.zoom != zoom) {
-        zoom = event.zoom;
+      if (event.camera.zoom != zoom) {
+        zoom = event.camera.zoom;
         shouldSimplifyRoute = true;
       }
     });
@@ -69,16 +69,14 @@ class _RouteLayerState extends State<RouteLayer> {
         return Listener(
           onPointerUp: (_) => onPointerUp(),
           child: ScaleAnimator(
-            child: PolylineLayerWidget(
-              options: PolylineLayerOptions(
-                polylines: [
-                  Polyline(
-                    strokeWidth: 4.0,
-                    gradientColors: AppColors.routeGradient,
-                    points: destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
-                  ),
-                ],
-              ),
+            child: PolylineLayer(
+              polylines: [
+                Polyline(
+                  strokeWidth: 4.0,
+                  gradientColors: AppColors.routeGradient,
+                  points: destination.route.simplify(zoom).map((c) => c.toLatLng()).toList(),
+                ),
+              ],
             ),
           ),
         );

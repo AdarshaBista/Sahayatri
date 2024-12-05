@@ -21,7 +21,7 @@ class LocationErrorIndicator extends StatelessWidget {
       title: Text(
         message,
         textAlign: TextAlign.center,
-        style: context.t.headline5?.bold,
+        style: context.t.headlineSmall?.bold,
       ),
     );
   }

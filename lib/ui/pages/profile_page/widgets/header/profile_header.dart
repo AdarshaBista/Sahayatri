@@ -38,7 +38,7 @@ class ProfileHeader extends StatelessWidget {
           user.name.toUpperCase(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: context.t.headline4?.bold,
+          style: context.t.headlineMedium?.bold,
         ),
       ),
     );
@@ -72,7 +72,7 @@ class ProfileHeader extends StatelessWidget {
     return GradientContainer(
       gradientBegin: Alignment.topCenter,
       gradientEnd: Alignment.bottomCenter,
-      gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.background),
+      gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.surface),
     );
   }
 

@@ -28,7 +28,7 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
   double getTitleWidth() {
     final width = MediaQuery.of(context).size.width;
 
-    final textStyle = context.t.headline4;
+    final textStyle = context.t.headlineMedium;
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
     final fontSize = textStyle?.fontSize ?? 0.0 * textScaleFactor;
     final effectiveTextStyle = textStyle?.copyWith(fontSize: fontSize);
@@ -79,7 +79,7 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
           );
         }
 
-        final textStyle = context.t.headline4?.serif;
+        final textStyle = context.t.headlineMedium?.serif;
         Widget titleWidget = Text(
           widget.title,
           maxLines: 3,

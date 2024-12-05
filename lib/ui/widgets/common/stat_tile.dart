@@ -24,7 +24,7 @@ class StatTile extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         title: Text(
           label,
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         leading: Icon(
           icon,
@@ -33,7 +33,7 @@ class StatTile extends StatelessWidget {
         ),
         trailing: Text(
           stat,
-          style: context.t.headline4,
+          style: context.t.headlineMedium,
         ),
       ),
     );

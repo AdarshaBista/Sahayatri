@@ -70,7 +70,7 @@ class DestinationPage extends StatelessWidget {
         child: Text(
           destination.description,
           textAlign: TextAlign.left,
-          style: context.t.headline5?.serif,
+          style: context.t.headlineSmall?.serif,
         ),
       ),
     );

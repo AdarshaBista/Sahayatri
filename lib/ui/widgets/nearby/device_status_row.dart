@@ -20,7 +20,7 @@ class DeviceStatusRow extends StatelessWidget {
       icon: _getIcon(),
       label: _getStatusText(),
       iconColor: _getIconColor(),
-      labelStyle: context.t.headline6,
+      labelStyle: context.t.titleLarge,
     );
   }
 

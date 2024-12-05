@@ -70,12 +70,12 @@ class DistanceIndicator extends StatelessWidget {
       children: [
         Text(
           FormatUtils.distance(distance),
-          style: context.t.headline4?.bold.withColor(color),
+          style: context.t.headlineMedium?.bold.withColor(color),
         ),
         const SizedBox(height: 2.0),
         Text(
           label,
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
       ],
     );

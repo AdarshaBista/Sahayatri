@@ -63,14 +63,14 @@ class UpdateCard extends StatelessWidget {
               update.user!.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.t.headline5?.bold,
+              style: context.t.headlineSmall?.bold,
             ),
             const SizedBox(height: 2.0),
             Text(
               update.timeAgo,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.t.headline6,
+              style: context.t.titleLarge,
             ),
           ],
         ),
@@ -98,7 +98,7 @@ class UpdateCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Text(
         update.text,
-        style: context.t.headline5,
+        style: context.t.headlineSmall,
       ),
     );
   }
@@ -116,7 +116,7 @@ class UpdateCard extends StatelessWidget {
           icon: AppIcons.location,
           iconColor: AppColors.secondary,
           label: update.coords.length.toString(),
-          labelStyle: context.t.headline5?.bold.withColor(AppColors.secondary),
+          labelStyle: context.t.headlineSmall?.bold.withColor(AppColors.secondary),
         ),
       ),
     );

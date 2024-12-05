@@ -26,9 +26,9 @@ class DurationField extends StatelessWidget {
       icon: icon,
       label: label,
       initialValue: initialValue,
-      labelStyle: context.t.headline6,
+      labelStyle: context.t.titleLarge,
       onChanged: onChanged,
-      validator: FormValidators.duration('Please enter number of ${label.toLowerCase()}'),
+      validator: FormValidators.duration('Please enter number of ${label.toLowerCase()}').call,
       keyboardType: const TextInputType.numberWithOptions(),
       inputFormatters: [
         LengthLimitingTextInputFormatter(3),

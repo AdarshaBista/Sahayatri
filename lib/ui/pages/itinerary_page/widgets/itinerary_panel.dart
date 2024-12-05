@@ -106,7 +106,7 @@ class _CheckpointCard extends StatelessWidget {
     if (checkpoint.isTemplate) {
       return Text(
         'DAY ${checkpoint.day}',
-        style: context.t.headline5?.bold,
+        style: context.t.headlineSmall?.bold,
       );
     }
 
@@ -115,12 +115,12 @@ class _CheckpointCard extends StatelessWidget {
       children: [
         Text(
           checkpoint.date.toUpperCase(),
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 4.0),
         Text(
           checkpoint.time.toUpperCase(),
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
         ),
       ],
     );
@@ -135,7 +135,7 @@ class _CheckpointCard extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Text(
           text,
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
         ),
       ),
     );
@@ -154,7 +154,7 @@ class _CheckpointCard extends StatelessWidget {
         children: [
           Text(
             checkpoint.place.name.toUpperCase(),
-            style: context.t.headline6,
+            style: context.t.titleLarge,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 8.0),

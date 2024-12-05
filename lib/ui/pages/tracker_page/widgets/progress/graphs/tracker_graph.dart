@@ -36,7 +36,7 @@ class TrackerGraph extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             title,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
         ),
         const SizedBox(height: 16.0),

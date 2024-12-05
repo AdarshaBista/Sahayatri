@@ -51,7 +51,7 @@ class ReviewCard extends StatelessWidget {
             review.user.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
         ),
         const SizedBox(height: 2.0),
@@ -74,7 +74,7 @@ class ReviewCard extends StatelessWidget {
         const SizedBox(height: 4.0),
         Text(
           review.date,
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
         const SizedBox(height: 6.0),
       ],
@@ -107,7 +107,7 @@ class _ReviewTextState extends State<_ReviewText> {
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Text(
           widget.text,
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
           overflow: TextOverflow.ellipsis,
           maxLines: isExpanded ? 100 : 2,
         ),

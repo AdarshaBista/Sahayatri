@@ -77,10 +77,8 @@ class _MarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: coords.map((c) => _buildMarker(c)).toList(),
-      ),
+    return MarkerLayer(
+      markers: coords.map((c) => _buildMarker(c)).toList(),
     );
   }
 
@@ -91,16 +89,14 @@ class _MarkersLayer extends StatelessWidget {
       width: size,
       height: size,
       point: c.toLatLng(),
-      builder: (context) {
-        return GestureDetector(
-          onTap: () => onTap?.call(c),
-          child: const Icon(
-            AppIcons.updateMarker,
-            size: size,
-            color: AppColors.secondary,
-          ),
-        );
-      },
+      child: GestureDetector(
+        onTap: () => onTap?.call(c),
+        child: const Icon(
+          AppIcons.updateMarker,
+          size: size,
+          color: AppColors.secondary,
+        ),
+      ),
     );
   }
 }

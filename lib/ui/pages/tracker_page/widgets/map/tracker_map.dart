@@ -58,14 +58,14 @@ class _TrackerMapState extends State<TrackerMap> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  void onPositionChanged(MapPosition pos, bool hasGesture) {
+  void onPositionChanged(MapCamera pos, bool hasGesture) {
     if (hasGesture && isTracking) {
       setState(() {
         isTracking = false;
       });
     }
 
-    if (zoom != pos.zoom) zoom = pos.zoom ?? 18.0;
+    if (zoom != pos.zoom) zoom = pos.zoom;
   }
 
   @override
@@ -138,16 +138,14 @@ class _UserTrackLayer extends StatelessWidget {
         : AppColors.userTrackGradient;
 
     return UserLocationLayer(
-      builder: (point) => PolylineLayerWidget(
-        options: PolylineLayerOptions(
-          polylines: [
-            Polyline(
-              strokeWidth: 6.0,
-              gradientColors: trackGradientColors,
-              points: [...simplifiedPath, point],
-            ),
-          ],
-        ),
+      builder: (point) => PolylineLayer(
+        polylines: [
+          Polyline(
+            strokeWidth: 6.0,
+            gradientColors: trackGradientColors,
+            points: [...simplifiedPath, point],
+          ),
+        ],
       ),
     );
   }
@@ -161,16 +159,14 @@ class _UserAccuracyCircleLayer extends StatelessWidget {
     final currentLocation = context.watch<TrackerUpdate>().currentLocation;
 
     return UserLocationLayer(
-      builder: (point) => CircleLayerWidget(
-        options: CircleLayerOptions(
-          circles: [
-            AccuracyCircle(
-              point: point,
-              color: AppColors.primaryDark,
-              radius: currentLocation.accuracy,
-            ),
-          ],
-        ),
+      builder: (point) => CircleLayer(
+        circles: [
+          AccuracyCircle(
+            point: point,
+            color: AppColors.primaryDark,
+            radius: currentLocation.accuracy,
+          ),
+        ],
       ),
     );
   }
@@ -190,18 +186,16 @@ class _DevicesAccuracyCircleLayer extends StatelessWidget {
         return BlocBuilder<NearbyCubit, NearbyState>(
           builder: (context, state) {
             if (state is NearbyConnected) {
-              return CircleLayerWidget(
-                options: CircleLayerOptions(
-                  circles: state.trackingDevices
-                      .map(
-                        (d) => AccuracyCircle(
-                          color: Colors.blue,
-                          radius: d.userLocation!.accuracy,
-                          point: d.userLocation!.coord.toLatLng(),
-                        ),
-                      )
-                      .toList(),
-                ),
+              return CircleLayer(
+                circles: state.trackingDevices
+                    .map(
+                      (d) => AccuracyCircle(
+                        color: Colors.blue,
+                        radius: d.userLocation!.accuracy,
+                        point: d.userLocation!.coord.toLatLng(),
+                      ),
+                    )
+                    .toList(),
               );
             } else {
               return const SizedBox();
@@ -261,10 +255,8 @@ class _CheckpointsPlacesMarkersLayer extends StatelessWidget {
           ),
         ));
 
-        return MarkerLayerWidget(
-          options: MarkerLayerOptions(
-            markers: markers.reversed.toList(),
-          ),
+        return MarkerLayer(
+          markers: markers.reversed.toList(),
         );
       },
     );
@@ -278,10 +270,8 @@ class _UserMarkerLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return UserLocationLayer(
       repaintBoundary: true,
-      builder: (point) => MarkerLayerWidget(
-        options: MarkerLayerOptions(
-          markers: [UserMarker(point: point)],
-        ),
+      builder: (point) => MarkerLayer(
+        markers: [UserMarker(point: point)],
       ),
     );
   }
@@ -303,15 +293,13 @@ class _DevicesMarkersLayer extends StatelessWidget {
           builder: (context, state) {
             if (state is NearbyConnected) {
               return RepaintBoundary(
-                child: MarkerLayerWidget(
-                  options: MarkerLayerOptions(
-                    markers: state.trackingDevices
-                        .map((d) => DeviceMarker(
-                              device: d,
-                              shrinkWhen: zoom < MapConfig.markerZoomThreshold,
-                            ))
-                        .toList(),
-                  ),
+                child: MarkerLayer(
+                  markers: state.trackingDevices
+                      .map((d) => DeviceMarker(
+                            device: d,
+                            shrinkWhen: zoom < MapConfig.markerZoomThreshold,
+                          ))
+                      .toList(),
                 ),
               );
             } else {

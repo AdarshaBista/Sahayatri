@@ -59,7 +59,7 @@ class _TagChipState extends State<TagChip> with SingleTickerProviderStateMixin {
                 widget.label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.t.headline6,
+                style: context.t.titleLarge,
               ),
             ),
             if (widget.onDelete != null) ...[

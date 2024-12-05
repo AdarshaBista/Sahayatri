@@ -52,7 +52,7 @@ class DownloadDialog extends StatelessWidget {
           child: Text(
             message,
             textAlign: TextAlign.center,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
         ),
         const SizedBox(height: 24.0),
@@ -70,7 +70,7 @@ class DownloadDialog extends StatelessWidget {
           title: Text(
             'Download Complete!',
             textAlign: TextAlign.center,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
         ),
         CustomButton(

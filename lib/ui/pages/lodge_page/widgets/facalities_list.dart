@@ -19,7 +19,7 @@ class FacilitiesList extends StatelessWidget {
         children: [
           Text(
             'Facilities',
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
           const SizedBox(height: 8.0),
           _buildFacilities(context),

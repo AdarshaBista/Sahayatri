@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:device_preview/device_preview.dart';
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';

@@ -38,7 +38,7 @@ class ItineraryForm extends StatelessWidget {
       label: 'Name',
       initialValue: name,
       icon: AppIcons.mountain,
-      validator: FormValidators.requiredText('Please enter a name.'),
+      validator: FormValidators.requiredText('Please enter a name.').call,
       onChanged: (name) => context.read<ItineraryFormCubit>().changeName(name),
     );
   }
@@ -49,7 +49,7 @@ class ItineraryForm extends StatelessWidget {
       children: [
         Text(
           'Duration',
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 8.0),
         Row(

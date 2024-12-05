@@ -109,13 +109,13 @@ class ItineraryTimeline extends StatelessWidget {
         children: [
           Text(
             checkpoint.date,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
           if (!checkpoint.isTemplate) const SizedBox(height: 4.0),
           if (!checkpoint.isTemplate)
             Text(
               checkpoint.time,
-              style: context.t.headline6,
+              style: context.t.titleLarge,
             ),
         ],
       ),
@@ -147,12 +147,12 @@ class ItineraryTimeline extends StatelessWidget {
       children: [
         Text(
           checkpoint.place.name.toUpperCase(),
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 4.0),
         Text(
           checkpoint.description.isEmpty ? 'No description provided.' : checkpoint.description,
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
         const SizedBox(height: 4.0),
         NotifyContactStatus(isNotified: checkpoint.notifyContact),

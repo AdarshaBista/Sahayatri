@@ -26,7 +26,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
     return CustomPaint(
       painter: _CurvePainter(
         elevation: elevation,
-        color: context.c.background,
+        color: context.c.surface,
       ),
       child: _buildAppbar(context),
     );
@@ -51,7 +51,7 @@ class CurvedAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline4?.serif,
+            style: context.t.headlineMedium?.serif,
           ),
         ),
       ),

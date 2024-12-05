@@ -35,7 +35,7 @@ class RatingChart extends StatelessWidget {
       children: [
         Text(
           average.toStringAsFixed(1),
-          style: context.t.headline1,
+          style: context.t.displayLarge,
         ),
         StarRatingBar(
           size: 12.0,
@@ -44,7 +44,7 @@ class RatingChart extends StatelessWidget {
         const SizedBox(height: 6.0),
         Text(
           '$total reviews',
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
       ],
     );
@@ -69,7 +69,7 @@ class RatingChart extends StatelessWidget {
         children: [
           Text(
             index.toString(),
-            style: context.t.headline6?.bold,
+            style: context.t.titleLarge?.bold,
           ),
           const SizedBox(width: 12.0),
           Expanded(

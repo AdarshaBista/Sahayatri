@@ -56,7 +56,7 @@ class CustomTextField extends StatelessWidget {
   Widget _buildLabel(BuildContext context) {
     return Text(
       label,
-      style: labelStyle ?? context.t.headline5?.bold,
+      style: labelStyle ?? context.t.headlineSmall?.bold,
     );
   }
 
@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
         initialValue: initialValue,
         keyboardType: keyboardType,
         obscureText: obscureText,
-        style: context.t.headline5,
+        style: context.t.headlineSmall,
         inputFormatters: inputFormatters,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(

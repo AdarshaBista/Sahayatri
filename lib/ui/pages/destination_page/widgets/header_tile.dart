@@ -49,7 +49,7 @@ class HeaderTile extends StatelessWidget {
           padding: const EdgeInsets.only(left: 4.0),
           child: Text(
             destination.rating.toString(),
-            style: context.t.headline3?.bold,
+            style: context.t.displaySmall?.bold,
           ),
         ),
       ],

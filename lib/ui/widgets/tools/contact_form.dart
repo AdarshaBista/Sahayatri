@@ -45,7 +45,7 @@ class _ContactFormState extends State<ContactForm> {
               const SizedBox(height: 6.0),
               Text(
                 'A message will be automatically sent to this number once you reach a checkpoint.',
-                style: context.t.headline6,
+                style: context.t.titleLarge,
               ),
               const SizedBox(height: 12.0),
               Row(
@@ -104,7 +104,7 @@ class _ContactFormState extends State<ContactForm> {
         Text(
           'Message Preview',
           textAlign: TextAlign.left,
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 8.0),
         Container(

@@ -45,7 +45,7 @@ class UserItineraryCard extends StatelessWidget {
       children: [
         Text(
           'Create an itinerary to enable location tracking.',
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
         const SizedBox(height: 8.0),
         CustomButton(

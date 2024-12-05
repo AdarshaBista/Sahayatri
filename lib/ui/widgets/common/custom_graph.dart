@@ -66,7 +66,7 @@ class CustomGraph extends StatelessWidget {
         borderData: _buildBorderData(context),
         lineBarsData: [_buildLineData()],
       ),
-      swapAnimationDuration: Duration.zero,
+      duration: Duration.zero,
     );
   }
 
@@ -87,7 +87,7 @@ class CustomGraph extends StatelessWidget {
         tooltipRoundedRadius: 32.0,
         fitInsideVertically: true,
         fitInsideHorizontally: true,
-        tooltipBgColor: AppColors.dark,
+        getTooltipColor: (touchedSpot) => AppColors.dark,
       ),
       touchCallback: (_, response) {
         if (response == null || response.lineBarSpots == null) return;
@@ -116,14 +116,14 @@ class CustomGraph extends StatelessWidget {
           showTitles: showBottomLabels,
           reservedSize: 30.0,
           interval: hInterval,
-          getTitlesWidget: getBottomTitle == null
-              ? null
-              : (value, meta) {
-                  return Text(
-                    getBottomTitle!(value),
-                    style: context.t.headline6?.bold,
-                  );
-                },
+          getTitlesWidget: (value, meta) {
+            if (getBottomTitle == null) return const SizedBox();
+
+            return Text(
+              getBottomTitle!(value),
+              style: context.t.titleLarge?.bold,
+            );
+          },
         ),
       ),
       leftTitles: AxisTitles(
@@ -131,14 +131,14 @@ class CustomGraph extends StatelessWidget {
           showTitles: showLeftLabels,
           reservedSize: 30.0,
           interval: vInterval,
-          getTitlesWidget: getLeftTitle == null
-              ? null
-              : (value, meta) {
-                  return Text(
-                    getLeftTitle!(value),
-                    style: context.t.headline6?.bold,
-                  );
-                },
+          getTitlesWidget: (value, meta) {
+            if (getLeftTitle == null) return const SizedBox();
+
+            return Text(
+              getLeftTitle!(value),
+              style: context.t.titleLarge?.bold,
+            );
+          },
         ),
       ),
     );

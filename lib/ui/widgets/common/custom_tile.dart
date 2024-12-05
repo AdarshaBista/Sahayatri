@@ -39,7 +39,7 @@ class CustomTile extends StatelessWidget {
           gap: 16.0,
           iconSize: 20.0,
           iconColor: iconColor ?? context.c.onSurface,
-          labelStyle: textStyle ?? context.t.headline5,
+          labelStyle: textStyle ?? context.t.headlineSmall,
         ),
       ),
     );

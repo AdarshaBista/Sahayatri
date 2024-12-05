@@ -26,7 +26,7 @@ class CustomMap extends StatefulWidget {
   final Coord? nePanBoundary;
   final void Function(Coord)? onTap;
   final MapController? mapController;
-  final void Function(MapPosition, bool)? onPositionChanged;
+  final void Function(MapCamera, bool)? onPositionChanged;
 
   const CustomMap({
     super.key,
@@ -85,26 +85,28 @@ class _CustomMapState extends State<CustomMap> {
     return FlutterMap(
       mapController: mapController,
       options: MapOptions(
-        interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-        zoom: widget.initialZoom,
+        interactionOptions: InteractionOptions(
+          flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+        ),
+        initialZoom: widget.initialZoom,
+        initialCenter: widget.center.toLatLng(),
         minZoom: widget.minZoom,
         maxZoom: widget.maxZoom,
-        screenSize: widget.size,
-        center: widget.center.toLatLng(),
-        controller: mapController,
         onTap: (_, latLng) =>
             widget.onTap?.call(Coord(lat: latLng.latitude, lng: latLng.longitude)),
         onPositionChanged: widget.onPositionChanged,
-        swPanBoundary: widget.swPanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat - 0.3,
-              lng: widget.center.lng - 0.3,
-            ).toLatLng(),
-        nePanBoundary: widget.nePanBoundary?.toLatLng() ??
-            Coord(
-              lat: widget.center.lat + 0.3,
-              lng: widget.center.lng + 0.3,
-            ).toLatLng(),
+        cameraConstraint: CameraConstraint.contain(
+            bounds: LatLngBounds(
+                widget.swPanBoundary?.toLatLng() ??
+                    Coord(
+                      lat: widget.center.lat - 0.3,
+                      lng: widget.center.lng - 0.3,
+                    ).toLatLng(),
+                widget.nePanBoundary?.toLatLng() ??
+                    Coord(
+                      lat: widget.center.lat + 0.3,
+                      lng: widget.center.lng + 0.3,
+                    ).toLatLng())),
       ),
       children: [
         const _TileLayer(),
@@ -125,21 +127,19 @@ class _TileLayer extends StatelessWidget {
       builder: (context, state) {
         final layerId = state.prefs.mapStyle;
 
-        return TileLayerWidget(
-          options: TileLayerOptions(
-            backgroundColor: context.c.background,
-            keepBuffer: 8,
-            tileSize: 512,
-            zoomOffset: -1,
-            tileFadeInDuration: const Duration(milliseconds: 300),
-            overrideTilesWhenUrlChanges: true,
-            urlTemplate:
-                'https://api.mapbox.com/styles/v1/{layerId}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
-            additionalOptions: {
-              'layerId': layerId,
-              'accessToken': ConfigReader.mapBoxAccessToken,
-            },
+        return TileLayer(
+          tileDisplay: TileDisplay.fadeIn(
+            duration: const Duration(milliseconds: 300),
           ),
+          keepBuffer: 8,
+          tileSize: 512,
+          zoomOffset: -1,
+          urlTemplate:
+              'https://api.mapbox.com/styles/v1/{layerId}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
+          additionalOptions: {
+            'layerId': layerId,
+            'accessToken': ConfigReader.mapBoxAccessToken,
+          },
         );
       },
     );

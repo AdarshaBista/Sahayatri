@@ -23,7 +23,7 @@ class ContactList extends StatelessWidget {
         children: [
           Text(
             'Contact Numbers',
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
           const SizedBox(height: 8.0),
           ElevatedCard(
@@ -56,13 +56,13 @@ class ContactList extends StatelessWidget {
       ),
       title: Text(
         number,
-        style: context.t.headline5?.bold.serif,
+        style: context.t.headlineSmall?.bold.serif,
       ),
       trailing: GestureDetector(
         onTap: () => _launchPhone(context, number),
         child: Text(
           'Call',
-          style: context.t.headline5?.primary,
+          style: context.t.headlineSmall?.primary,
         ),
       ),
     );

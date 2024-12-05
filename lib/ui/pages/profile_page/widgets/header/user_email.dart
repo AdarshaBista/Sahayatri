@@ -28,7 +28,7 @@ class UserEmail extends StatelessWidget {
         ),
         child: Text(
           email,
-          style: context.t.headline6,
+          style: context.t.titleLarge,
         ),
       ),
     );

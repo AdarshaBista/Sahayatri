@@ -37,7 +37,7 @@ class ConfirmDialog extends StatelessWidget {
         children: [
           Text(
             message,
-            style: context.t.headline5,
+            style: context.t.headlineSmall,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16.0),

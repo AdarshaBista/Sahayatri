@@ -58,7 +58,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
-      style: context.t.headline5,
+      style: context.t.headlineSmall,
       controller: sourceController,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
