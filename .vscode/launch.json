@@ -2,16 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Windows",
-            "type": "dart",
-            "request": "launch",
-            "deviceId": "windows"
-        },
-        {
             "name": "Redmi Note 9 Pro Max",
             "type": "dart",
             "request": "launch",
             "deviceId": "c3bf6cab"
+        },
+        {
+            "name": "Emulator",
+            "type": "dart",
+            "request": "launch",
+            "deviceId": "emulator-5554"
         },
     ],
     "compounds": [
@@ -19,7 +19,7 @@
             "name": "All",
             "configurations": [
                 "Redmi Note 9 Pro Max",
-                "Windows"
+                "Emulator"
             ],
         }
     ]
