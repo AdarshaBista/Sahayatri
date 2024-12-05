@@ -25,17 +25,15 @@ class DeviceDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NearbyCubit, NearbyState>(
       builder: (context, state) {
-        final deviceReactive = (state as NearbyConnected)
-            .trackingDevices
-            .firstWhereOrNull((d) => d.id == deviceId);
+        final deviceReactive =
+            (state as NearbyConnected).trackingDevices.firstWhereOrNull((d) => d.id == deviceId);
 
         if (deviceReactive == null) return const SizedBox();
 
         return SlideAnimator(
           begin: const Offset(0.0, 0.5),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
             child: _buildBottomSheet(context, deviceReactive),
           ),
         );
@@ -80,7 +78,7 @@ class DeviceDetails extends StatelessWidget {
           child: Text(
             device.name.toUpperCase(),
             maxLines: 2,
-            style: context.t.headline2,
+            style: context.t.displayMedium,
             overflow: TextOverflow.ellipsis,
           ),
         ),

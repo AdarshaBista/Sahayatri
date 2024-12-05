@@ -78,7 +78,7 @@ class PlaceListSheet extends StatelessWidget {
         onSelect(place);
         Navigator.of(context).pop();
       },
-      title: Text(place.name, style: context.t.headline5),
+      title: Text(place.name, style: context.t.headlineSmall),
       leading: SizedBox(
         height: 50.0,
         width: 50.0,

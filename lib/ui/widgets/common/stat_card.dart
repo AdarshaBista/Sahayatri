@@ -31,7 +31,7 @@ class StatCard extends StatelessWidget {
             child: Text(
               label,
               textAlign: TextAlign.center,
-              style: context.t.headline6?.bold,
+              style: context.t.titleLarge?.bold,
             ),
           ),
           const SizedBox(height: 3.0),

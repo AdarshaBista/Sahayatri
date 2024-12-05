@@ -18,12 +18,12 @@ class PermitCard extends StatelessWidget {
       children: [
         Text(
           'Permits',
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 8.0),
         Text(
           destination.permit,
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
         ),
       ],
     );

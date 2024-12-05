@@ -85,7 +85,7 @@ class CheckpointDetails extends StatelessWidget {
           checkpoint.description.isEmpty ? 'No description provided.' : checkpoint.description,
           maxLines: 25,
           overflow: TextOverflow.ellipsis,
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
         ),
       ),
     );
@@ -146,12 +146,12 @@ class _CheckpointDateTime extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.t.headline6,
+                  style: context.t.titleLarge,
                 ),
                 const SizedBox(height: 4.0),
                 Text(
                   subtitle,
-                  style: context.t.headline5?.bold,
+                  style: context.t.headlineSmall?.bold,
                 ),
               ],
             ),

@@ -88,14 +88,14 @@ class ItineraryCard extends StatelessWidget {
         children: [
           Text(
             checkpointsLen == 1 ? '1 checkpoint' : '$checkpointsLen checkpoints',
-            style: context.t.headline6,
+            style: context.t.titleLarge,
           ),
           const SizedBox(height: 6.0),
           CheckpointImages(imageUrls: imageUrls),
           const SizedBox(height: 10.0),
           Text(
             '${itinerary.days} days / ${itinerary.nights} nights',
-            style: context.t.headline6?.bold,
+            style: context.t.titleLarge?.bold,
           ),
           const SizedBox(height: 6.0),
           _buildTitleRow(context),
@@ -111,7 +111,7 @@ class ItineraryCard extends StatelessWidget {
           itinerary.name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: context.t.headline4,
+          style: context.t.headlineMedium,
         ),
         const Spacer(),
         if (!itinerary.isTemplate)

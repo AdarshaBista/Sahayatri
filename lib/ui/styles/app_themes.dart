@@ -10,19 +10,18 @@ class AppThemes {
   AppThemes._();
 
   static ThemeData get _base => ThemeData(
+        useMaterial3: false,
         fontFamily: AppConfig.fontFamily,
         primaryColor: AppColors.primary,
         primaryColorDark: AppColors.primaryDark,
         primaryColorLight: AppColors.primaryLight,
         splashColor: AppColors.primary,
-        errorColor: AppColors.secondary,
         indicatorColor: AppColors.primary,
         visualDensity: VisualDensity.standard,
       );
 
   static ThemeData get light => _base.copyWith(
         brightness: Brightness.light,
-        backgroundColor: AppColors.light,
         scaffoldBackgroundColor: AppColors.light,
         cardColor: AppColors.light,
         dividerColor: AppColors.darkFaded,
@@ -45,7 +44,6 @@ class AppThemes {
 
   static ThemeData get dark => _base.copyWith(
         brightness: Brightness.dark,
-        backgroundColor: AppColors.dark,
         scaffoldBackgroundColor: AppColors.dark,
         cardColor: AppColors.darkSurface,
         dividerColor: AppColors.lightFaded,
@@ -77,38 +75,34 @@ class AppThemes {
         secondaryContainer: AppColors.secondaryDark,
         error: AppColors.secondary,
         onError: AppColors.light,
-        surface: AppColors.lightAccent,
-        onSurface: AppColors.darkAccent,
-        background: AppColors.light,
-        onBackground: AppColors.dark,
+        surface: AppColors.light,
+        onSurface: AppColors.dark,
       );
 
   static ColorScheme get _darkColorScheme => _lightColorScheme.copyWith(
         primaryContainer: AppColors.light,
         secondaryContainer: AppColors.light,
         brightness: Brightness.dark,
-        surface: AppColors.darkAccent,
-        onSurface: AppColors.lightAccent,
-        background: AppColors.dark,
-        onBackground: AppColors.light,
+        surface: AppColors.dark,
+        onSurface: AppColors.light,
       );
 
   static TextTheme get _lightTextTheme => TextTheme(
-        headline1: AppTextStyles.headline1.light,
-        headline2: AppTextStyles.headline2.light,
-        headline3: AppTextStyles.headline3.light,
-        headline4: AppTextStyles.headline4.light,
-        headline5: AppTextStyles.headline5.lightAccent,
-        headline6: AppTextStyles.headline6.lightFaded,
+        displayLarge: AppTextStyles.headline1.light,
+        displayMedium: AppTextStyles.headline2.light,
+        displaySmall: AppTextStyles.headline3.light,
+        headlineMedium: AppTextStyles.headline4.light,
+        headlineSmall: AppTextStyles.headline5.lightAccent,
+        titleLarge: AppTextStyles.headline6.lightFaded,
       );
 
   static TextTheme get _darkTextTheme => TextTheme(
-        headline1: AppTextStyles.headline1,
-        headline2: AppTextStyles.headline2,
-        headline3: AppTextStyles.headline3,
-        headline4: AppTextStyles.headline4,
-        headline5: AppTextStyles.headline5,
-        headline6: AppTextStyles.headline6,
+        displayLarge: AppTextStyles.headline1,
+        displayMedium: AppTextStyles.headline2,
+        displaySmall: AppTextStyles.headline3,
+        headlineMedium: AppTextStyles.headline4,
+        headlineSmall: AppTextStyles.headline5,
+        titleLarge: AppTextStyles.headline6,
       );
 
   static IconThemeData get _lightIconTheme => const IconThemeData(

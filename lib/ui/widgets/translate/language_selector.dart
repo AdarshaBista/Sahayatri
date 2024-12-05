@@ -70,7 +70,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
           onSelected: (value) => _changeLanguage(isTarget, value),
           child: Text(
             language.title.toUpperCase(),
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
             overflow: TextOverflow.ellipsis,
             textAlign: isTarget ? TextAlign.left : TextAlign.right,
           ),
@@ -80,7 +80,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                       value: l,
                       child: Text(
                         l.title,
-                        style: context.t.headline5?.bold,
+                        style: context.t.headlineSmall?.bold,
                       ),
                     ))
                 .toList();

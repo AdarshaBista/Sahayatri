@@ -99,7 +99,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
     final colorScheme = Theme.of(context).colorScheme;
     return Theme(
       data: Theme.of(context).copyWith(
-        textTheme: TextTheme(subtitle1: context.t.headline5),
+        textTheme: TextTheme(titleMedium: context.t.headlineSmall),
         colorScheme: colorScheme.copyWith(
           onPrimary: AppColors.light,
           primary: AppColors.primaryDark,

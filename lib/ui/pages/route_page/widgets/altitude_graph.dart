@@ -27,7 +27,7 @@ class AltitudeGraph extends StatelessWidget {
           Text(
             'ALTITUDE GRAPH',
             textAlign: TextAlign.center,
-            style: context.t.headline5?.bold,
+            style: context.t.headlineSmall?.bold,
           ),
           const SizedBox(height: 24.0),
           Flexible(

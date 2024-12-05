@@ -26,7 +26,7 @@ class ImagesField extends StatelessWidget {
           children: [
             Text(
               'Images',
-              style: context.t.headline5?.bold,
+              style: context.t.headlineSmall?.bold,
             ),
             const SizedBox(height: 4.0),
             Text(

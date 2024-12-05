@@ -10,12 +10,10 @@ class UserMarker extends Marker {
   }) : super(
           width: 24.0,
           height: 24.0,
-          builder: (_) {
-            return Image.asset(
-              Images.userMarker,
-              width: 24.0,
-              height: 24.0,
-            );
-          },
+          child: Image.asset(
+            Images.userMarker,
+            width: 24.0,
+            height: 24.0,
+          ),
         );
 }

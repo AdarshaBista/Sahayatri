@@ -126,7 +126,7 @@ class NestedTab extends StatelessWidget {
       icon: tab.icon,
       label: tab.label,
       iconColor: color,
-      labelStyle: context.t.headline5?.bold.withColor(color),
+      labelStyle: context.t.headlineSmall?.bold.withColor(color),
     );
   }
 }

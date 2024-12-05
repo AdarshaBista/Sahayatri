@@ -45,10 +45,8 @@ class _LodgeMarkersLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: lodges.map((l) => LodgeMarker(lodge: l)).toList(),
-      ),
+    return MarkerLayer(
+      markers: lodges.map((l) => LodgeMarker(lodge: l)).toList(),
     );
   }
 }

@@ -28,7 +28,7 @@ class SearchBox extends StatelessWidget {
             child: Center(
               child: TextField(
                 onChanged: onChanged,
-                style: context.t.headline5,
+                style: context.t.headlineSmall,
                 decoration: InputDecoration(
                   hintText: hintText,
                   fillColor: context.theme.cardColor,

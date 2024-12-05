@@ -17,25 +17,27 @@ class CheckpointDetailMarker extends Marker {
   }) : super(
           width: 200.0,
           height: 72.0,
-          anchorPos: AnchorPos.align(AnchorAlign.top),
+          alignment: Alignment.topCenter,
           point: checkpoint.place.coord.toLatLng(),
-          builder: (context) => ArrowMarkerWidget(
-            borderRadius: 50.0,
-            onTap: () {
-              CheckpointDetails(
-                showLodges: isTracking,
-                checkpoint: checkpoint,
-              ).openModalBottomSheet(context);
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (checkpoint.place.imageUrls.isNotEmpty)
-                  _PlaceImage(imageUrl: checkpoint.place.imageUrls.first),
-                Flexible(child: _CheckpointInfo(checkpoint: checkpoint)),
-              ],
-            ),
-          ),
+          child: Builder(builder: (context) {
+            return ArrowMarkerWidget(
+              borderRadius: 50.0,
+              onTap: () {
+                CheckpointDetails(
+                  showLodges: isTracking,
+                  checkpoint: checkpoint,
+                ).openModalBottomSheet(context);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (checkpoint.place.imageUrls.isNotEmpty)
+                    _PlaceImage(imageUrl: checkpoint.place.imageUrls.first),
+                  Flexible(child: _CheckpointInfo(checkpoint: checkpoint)),
+                ],
+              ),
+            );
+          }),
         );
 }
 
@@ -80,14 +82,14 @@ class _CheckpointInfo extends StatelessWidget {
             checkpoint.place.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline5,
+            style: context.t.headlineSmall,
           ),
           const SizedBox(height: 2.0),
           Text(
             '${checkpoint.date}, ${checkpoint.time}',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.t.headline6?.bold.withColor(AppColors.primaryDark),
+            style: context.t.titleLarge?.bold.withColor(AppColors.primaryDark),
           ),
         ],
       ),

@@ -36,7 +36,7 @@ class IconLabel extends StatelessWidget {
             label,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: labelStyle ?? context.t.headline5?.bold,
+            style: labelStyle ?? context.t.headlineSmall?.bold,
           ),
         ),
       ],

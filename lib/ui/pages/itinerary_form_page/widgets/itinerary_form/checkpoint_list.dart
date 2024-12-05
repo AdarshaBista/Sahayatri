@@ -27,11 +27,11 @@ class CheckpointList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Checkpoints', style: context.t.headline5?.bold),
+        Text('Checkpoints', style: context.t.headlineSmall?.bold),
         const SizedBox(height: 8.0),
         CustomFormField<List<Checkpoint>>(
           initialValue: checkpoints,
-          validator: FormValidators.checkpoints(),
+          validator: FormValidators.checkpoints().call,
           builder: (field) => _buildAddCheckpointButton(context),
         ),
         ItineraryTimeline(

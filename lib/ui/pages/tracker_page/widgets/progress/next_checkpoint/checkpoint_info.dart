@@ -41,14 +41,14 @@ class CheckpointInfo extends StatelessWidget {
       children: [
         Text(
           checkpoint.date,
-          style: context.t.headline5?.primaryDark.bold,
+          style: context.t.headlineSmall?.primaryDark.bold,
         ),
         const SizedBox(width: 8.0),
         const CircleAvatar(radius: 2.0),
         const SizedBox(width: 8.0),
         Text(
           checkpoint.time,
-          style: context.t.headline5?.primaryDark,
+          style: context.t.headlineSmall?.primaryDark,
         ),
       ],
     );
@@ -60,7 +60,7 @@ class CheckpointInfo extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Text(
           desc.isEmpty ? 'No description provided.' : desc,
-          style: context.t.headline5,
+          style: context.t.headlineSmall,
         ),
       ),
     );

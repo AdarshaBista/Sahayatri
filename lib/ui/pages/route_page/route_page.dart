@@ -97,19 +97,17 @@ class _AltitudeMarkerLayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final destination = context.watch<Destination>();
 
-    return MarkerLayerWidget(
-      options: MarkerLayerOptions(
-        markers: [
-          DynamicTextMarker(
-            shrinkWhen: false,
-            color: AppColors.light,
-            icon: AppIcons.mountain,
-            coord: destination.route[index],
-            backgroundColor: Colors.deepPurple,
-            label: '${destination.route[index].alt} m',
-          ),
-        ],
-      ),
+    return MarkerLayer(
+      markers: [
+        DynamicTextMarker(
+          shrinkWhen: false,
+          color: AppColors.light,
+          icon: AppIcons.mountain,
+          coord: destination.route[index],
+          backgroundColor: Colors.deepPurple,
+          label: '${destination.route[index].alt} m',
+        ),
+      ],
     );
   }
 }
@@ -132,15 +130,13 @@ class _PlaceMarkersLayer extends StatelessWidget {
         return BlocBuilder<PlacesCubit, PlacesState>(
           builder: (context, state) {
             if (state is PlacesLoaded) {
-              return MarkerLayerWidget(
-                options: MarkerLayerOptions(
-                    markers: destination.places!.reversed
-                        .map((p) => PlaceMarker(
-                              place: p,
-                              shrinkWhen: false,
-                            ))
-                        .toList()),
-              );
+              return MarkerLayer(
+                  markers: destination.places!.reversed
+                      .map((p) => PlaceMarker(
+                            place: p,
+                            shrinkWhen: false,
+                          ))
+                      .toList());
             }
             return const SizedBox();
           },

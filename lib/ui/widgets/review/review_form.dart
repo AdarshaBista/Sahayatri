@@ -66,7 +66,7 @@ class _ReviewFormState extends State<ReviewForm> {
       children: [
         Text(
           'Rating',
-          style: context.t.headline5?.bold,
+          style: context.t.headlineSmall?.bold,
         ),
         const SizedBox(height: 8.0),
         Row(
@@ -84,7 +84,7 @@ class _ReviewFormState extends State<ReviewForm> {
             const SizedBox(width: 12.0),
             Text(
               _rating.toStringAsFixed(1),
-              style: context.t.headline3,
+              style: context.t.displaySmall,
             ),
             const SizedBox(width: 12.0),
           ],
@@ -102,7 +102,7 @@ class _ReviewFormState extends State<ReviewForm> {
           label: 'Review',
           initialValue: _text,
           onChanged: (value) => setState(() => _text = value),
-          validator: FormValidators.requiredText(),
+          validator: FormValidators.requiredText().call,
           inputFormatters: [
             LengthLimitingTextInputFormatter(ApiConfig.maxTextLength),
           ],
@@ -112,7 +112,7 @@ class _ReviewFormState extends State<ReviewForm> {
           padding: const EdgeInsets.only(right: 4.0),
           child: Text(
             '${_text.length} / ${ApiConfig.maxTextLength}',
-            style: context.t.headline6,
+            style: context.t.titleLarge,
           ),
         ),
       ],

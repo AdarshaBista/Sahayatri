@@ -75,7 +75,7 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildPlaceField(Place? place, BuildContext context) {
     return CustomFormField<Place>(
       initialValue: place,
-      validator: FormValidators.nonNull('Please select a place.'),
+      validator: FormValidators.nonNull('Please select a place.').call,
       builder: (field) => PlacePicker(
         initialPlace: place,
         onSelect: (selectedPlace) {
@@ -89,7 +89,7 @@ class CheckpointForm extends StatelessWidget {
   Widget _buildDateTimeField(DateTime? dateTime, BuildContext context) {
     return CustomFormField<DateTime>(
       initialValue: dateTime,
-      validator: FormValidators.nonNull('Please select date and time.'),
+      validator: FormValidators.nonNull('Please select date and time.').call,
       builder: (field) => DateTimePicker(
         initialDateTime: dateTime,
         onSelect: (selectedDateTime) {
@@ -120,11 +120,11 @@ class CheckpointForm extends StatelessWidget {
       ),
       title: Text(
         'Notify Contact',
-        style: context.t.headline5?.bold,
+        style: context.t.headlineSmall?.bold,
       ),
       subtitle: Text(
         'Notify close contact via SMS when you reach this checkpoint.',
-        style: context.t.headline6,
+        style: context.t.titleLarge,
       ),
     );
   }

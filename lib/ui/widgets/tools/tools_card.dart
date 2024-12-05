@@ -41,13 +41,13 @@ class ToolsCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: context.t.headline5?.bold,
+                      style: context.t.headlineSmall?.bold,
                     ),
                     const SizedBox(height: 4.0),
                     Text(
                       subtitle,
                       maxLines: 2,
-                      style: context.t.headline6,
+                      style: context.t.titleLarge,
                     ),
                   ],
                 ),
