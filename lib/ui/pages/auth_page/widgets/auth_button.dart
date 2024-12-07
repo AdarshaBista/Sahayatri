@@ -55,7 +55,7 @@ class _AuthButtonState extends State<AuthButton> {
     if (!(widget.formKey.currentState?.validate() ?? false)) return;
 
     final success = await widget.onPressed();
-    if (!mounted) return;
+    if (!context.mounted) return;
 
     if (!success) {
       context.openFlushBar('An error has occured!', type: FlushbarType.error);

@@ -48,7 +48,7 @@ class _DeviceNameFieldState extends State<DeviceNameField> {
           icon: AppIcons.nearbyDevice,
           label: 'Device name',
           onChanged: (value) => deviceName = value,
-          validator: FormValidators.requiredText(),
+          validator: FormValidators.requiredText().call,
           initialValue: state.prefs.deviceName,
           inputFormatters: [
             LengthLimitingTextInputFormatter(16),

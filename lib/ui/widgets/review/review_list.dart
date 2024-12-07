@@ -120,7 +120,7 @@ class _ReviewListState extends State<ReviewList> {
   ) async {
     Navigator.of(context).pop();
     final success = await widget.reviewCubit.postReview(rating, text);
-    if (!mounted) return;
+    if (!context.mounted) return;
 
     if (success) {
       context.openFlushBar('Review posted', type: FlushbarType.success);

@@ -16,7 +16,7 @@ class TranslationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.c.background,
+      color: context.c.surface,
       child: BlocBuilder<TranslateCubit, TranslateState>(
         builder: (context, state) {
           if (state.translations.isEmpty) {

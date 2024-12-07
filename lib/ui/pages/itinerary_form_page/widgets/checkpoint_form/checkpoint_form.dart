@@ -37,6 +37,7 @@ class CheckpointForm extends StatelessWidget {
       create: (_) => CheckpointFormCubit(checkpoint: checkpoint),
       child: BlocBuilder<CheckpointFormCubit, CheckpointFormState>(
         builder: (context, state) {
+          // ignore: deprecated_member_use
           return WillPopScope(
             onWillPop: () => _handleBackButton(context),
             child: Form(
@@ -49,6 +50,7 @@ class CheckpointForm extends StatelessWidget {
                   SheetHeader(
                     onClose: () async {
                       if (await _handleBackButton(context)) {
+                        if (!context.mounted) return;
                         Navigator.of(context).pop();
                       }
                     },

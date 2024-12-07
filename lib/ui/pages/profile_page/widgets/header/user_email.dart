@@ -22,7 +22,7 @@ class UserEmail extends StatelessWidget {
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: context.c.onBackground,
+            color: context.c.onSurface,
             width: 0.5,
           ),
         ),

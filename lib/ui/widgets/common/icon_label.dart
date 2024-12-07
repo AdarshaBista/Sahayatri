@@ -28,7 +28,7 @@ class IconLabel extends StatelessWidget {
         Icon(
           icon,
           size: iconSize,
-          color: iconColor ?? context.c.onBackground,
+          color: iconColor ?? context.c.onSurface,
         ),
         SizedBox(width: gap),
         Flexible(

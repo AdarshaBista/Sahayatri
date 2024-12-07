@@ -49,7 +49,7 @@ class _NestedTabViewState extends State<NestedTabView> {
   Widget _buildTabBar(BuildContext context) {
     final height = widget.isTabFilled ? 38.0 : 32.0;
     final borderRadius = widget.isTabFilled ? 32.0 : 0.0;
-    final color = widget.isTabFilled ? context.c.background : Colors.transparent;
+    final color = widget.isTabFilled ? context.c.surface : Colors.transparent;
     final padding = widget.isTabFilled ? const EdgeInsets.all(4.0) : EdgeInsets.zero;
 
     return Container(
@@ -119,7 +119,7 @@ class NestedTab extends StatelessWidget {
   }
 
   Widget _buildTab(BuildContext context) {
-    final color = !showIndicator && isSelected ? AppColors.primaryDark : context.c.onBackground;
+    final color = !showIndicator && isSelected ? AppColors.primaryDark : context.c.onSurface;
 
     return IconLabel(
       iconSize: 18.0,

@@ -20,7 +20,7 @@ class DragIndicatorPill extends StatelessWidget {
         width: 32.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: color ?? context.c.onBackground.withOpacity(0.25),
+          color: color ?? context.c.onSurface.withOpacity(0.25),
         ),
       ),
     );

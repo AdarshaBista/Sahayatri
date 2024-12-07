@@ -73,6 +73,7 @@ class ContactList extends StatelessWidget {
     if (await canLaunchUrl(scheme)) {
       await launchUrl(scheme);
     } else {
+      if (!context.mounted) return;
       context.openFlushBar('Could not  open dialer!', type: FlushbarType.error);
     }
   }

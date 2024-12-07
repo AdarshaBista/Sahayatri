@@ -73,7 +73,7 @@ class _ContactFormState extends State<ContactForm> {
       return CustomTextField(
         label: 'Phone number',
         icon: AppIcons.phone,
-        validator: FormValidators.phoneNumber(),
+        validator: FormValidators.phoneNumber().call,
         onChanged: (value) => contact = value,
         initialValue: state.prefs.contact,
         keyboardType: const TextInputType.numberWithOptions(),

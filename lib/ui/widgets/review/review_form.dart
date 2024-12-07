@@ -32,6 +32,7 @@ class _ReviewFormState extends State<ReviewForm> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () => _handleBackButton(context),
       child: Form(
@@ -45,6 +46,7 @@ class _ReviewFormState extends State<ReviewForm> {
               title: 'Write a review',
               onClose: () async {
                 if (await _handleBackButton(context)) {
+                  if (!context.mounted) return;
                   Navigator.of(context).pop();
                 }
               },

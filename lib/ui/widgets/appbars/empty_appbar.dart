@@ -14,7 +14,7 @@ class EmptyAppbar extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.all(10.0),
         child: ExitButton(
           size: 20.0,
-          color: context.c.onBackground,
+          color: context.c.onSurface,
           icon: AppIcons.back,
           backgroundColor: Colors.transparent,
         ),

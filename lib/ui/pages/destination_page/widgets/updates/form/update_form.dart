@@ -35,6 +35,7 @@ class _UpdateFormState extends State<UpdateForm> {
         destinationUpdateCubit: context.read<DestinationUpdateCubit>(),
       ),
       child: Builder(
+        // ignore: deprecated_member_use
         builder: (context) => WillPopScope(
           onWillPop: () => _handleBackButton(context),
           child: Form(
@@ -69,6 +70,8 @@ class _UpdateFormState extends State<UpdateForm> {
       title: 'Post an update',
       onClose: () async {
         if (await _handleBackButton(context)) {
+          if (!context.mounted) return;
+
           Navigator.of(context).pop();
         }
       },
@@ -104,7 +107,7 @@ class _UpdateFormState extends State<UpdateForm> {
             if (!(_formKey.currentState?.validate() ?? false)) return;
 
             final success = await context.read<DestinationUpdateFormCubit>().postUpdate();
-            if (success && mounted) Navigator.of(context).pop();
+            if (success && context.mounted) Navigator.of(context).pop();
           },
         );
       },

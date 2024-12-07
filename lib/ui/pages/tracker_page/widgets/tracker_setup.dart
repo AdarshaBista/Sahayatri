@@ -31,7 +31,7 @@ class TrackerSetup extends StatelessWidget {
     return FloatingActionButton.extended(
       label: Text(
         'START',
-        style: AppTextStyles.headline5.bold.withColor(context.c.background),
+        style: AppTextStyles.headline5.bold.withColor(context.c.surface),
       ),
       onPressed: () {
         final destination = context.read<Destination>();

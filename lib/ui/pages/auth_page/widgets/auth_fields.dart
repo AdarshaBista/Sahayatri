@@ -28,7 +28,7 @@ class AuthFields extends StatelessWidget {
           initialValue: initialEmail,
           onChanged: onEmailChanged,
           icon: AppIcons.email,
-          validator: FormValidators.email(),
+          validator: FormValidators.email().call,
           keyboardType: TextInputType.emailAddress,
         ),
         const SizedBox(height: 20.0),
@@ -38,7 +38,7 @@ class AuthFields extends StatelessWidget {
           icon: AppIcons.password,
           initialValue: initialPassword,
           onChanged: onPasswordChanged,
-          validator: FormValidators.password(),
+          validator: FormValidators.password().call,
         ),
       ],
     );

@@ -28,7 +28,7 @@ class _LogoutButtonState extends State<LogoutButton> {
     return CircularButton(
       color: AppColors.secondary,
       icon: AppIcons.logout,
-      backgroundColor: context.c.background,
+      backgroundColor: context.c.surface,
       onTap: () => ConfirmDialog(
         message: 'Do you want to log out?',
         onConfirm: () => _logout(context),
@@ -42,7 +42,7 @@ class _LogoutButtonState extends State<LogoutButton> {
       isInteractive: false,
       callback: () async {
         final success = await context.read<UserCubit>().logout();
-        if (!success && mounted) {
+        if (!success && context.mounted) {
           context.openFlushBar('Could not logout!', type: FlushbarType.error);
           return;
         }

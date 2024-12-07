@@ -47,7 +47,7 @@ class PlaceActions extends StatelessWidget {
       label: 'Weather',
       outline: true,
       icon: AppIcons.weather,
-      color: context.c.onBackground,
+      color: context.c.onSurface,
       onTap: () => locator<DestinationNavService>().pushNamed(
         Routes.weatherPageRoute,
         arguments: WeatherPageArgs(

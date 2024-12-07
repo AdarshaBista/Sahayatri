@@ -92,7 +92,7 @@ class _TranslateTextFieldState extends State<TranslateTextField> {
         icon: Icon(
           AppIcons.send,
           size: 22.0,
-          color: context.c.background,
+          color: context.c.surface,
         ),
         onPressed: () {
           final source = sourceController.text.trim();

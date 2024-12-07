@@ -53,6 +53,7 @@ class DestinationNavPage extends StatelessWidget {
   }
 
   Widget _buildPage() {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         if (!locator<DestinationNavService>().canPop()) return true;

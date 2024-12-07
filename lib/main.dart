@@ -93,9 +93,13 @@ class App extends StatelessWidget {
     });
 
     registerUserDependentServices(user.id).then((_) {
+      if (!context.mounted) return;
+
       final prefsCubit = BlocProvider.of<PrefsCubit>(context);
       prefsCubit.init().then((_) {
         final prefs = prefsCubit.prefs;
+        if (!context.mounted) return;
+
         BlocProvider.of<ThemeCubit>(context).init(prefs.theme);
       });
     });
@@ -104,6 +108,7 @@ class App extends StatelessWidget {
   void onLogout(BuildContext context) {
     unregisterUserDependentServices().then((_) {
       locator<DestinationsService>().clearDownloaded();
+      if (!context.mounted) return;
 
       context.read<PrefsCubit>().reset();
       context.read<ThemeCubit>().changeTheme(ThemeMode.system);

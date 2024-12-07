@@ -27,7 +27,7 @@ class TrackerActions extends StatelessWidget {
             child: CustomButton(
               label: 'RESUME',
               icon: AppIcons.resumeTracker,
-              color: context.c.onBackground,
+              color: context.c.onSurface,
               backgroundColor: Colors.teal.withOpacity(0.3),
               onTap: () => context.read<TrackerCubit>().resumeTracking(),
             ),
@@ -37,7 +37,7 @@ class TrackerActions extends StatelessWidget {
             child: CustomButton(
               label: 'PAUSE',
               icon: AppIcons.pauseTracker,
-              color: context.c.onBackground,
+              color: context.c.onSurface,
               backgroundColor: Colors.lightBlue.withOpacity(0.3),
               onTap: () => context.read<TrackerCubit>().pauseTracking(),
             ),
@@ -47,7 +47,7 @@ class TrackerActions extends StatelessWidget {
           child: CustomButton(
             label: 'STOP',
             icon: AppIcons.stopTracker,
-            color: context.c.onBackground,
+            color: context.c.onSurface,
             backgroundColor: Colors.red.withOpacity(0.3),
             onTap: () => ConfirmDialog(
               message: 'Are you sure you want to stop the tracking process.',

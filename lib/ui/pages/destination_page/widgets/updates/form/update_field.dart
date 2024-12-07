@@ -25,7 +25,7 @@ class UpdateField extends StatelessWidget {
               isLarge: true,
               label: 'Write something',
               initialValue: state.text,
-              validator: FormValidators.requiredText(),
+              validator: FormValidators.requiredText().call,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(ApiConfig.maxTextLength),
               ],

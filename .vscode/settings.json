@@ -10,7 +10,7 @@
             100
         ],
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
+            "source.fixAll": "explicit"
         }
     },
     "dartimportsorter.sortOnSave": true,

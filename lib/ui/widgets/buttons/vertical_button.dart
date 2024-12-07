@@ -19,7 +19,7 @@ class VerticalButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveColor = color ?? context.c.onBackground;
+    final effectiveColor = color ?? context.c.onSurface;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,

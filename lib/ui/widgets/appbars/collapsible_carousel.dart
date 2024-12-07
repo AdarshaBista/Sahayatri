@@ -34,7 +34,7 @@ class CollapsibleCarousel extends StatelessWidget {
     final carousel = GradientContainer(
       gradientBegin: Alignment.topCenter,
       gradientEnd: Alignment.bottomCenter,
-      gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.background),
+      gradientColors: AppColors.getCollapsibleHeaderGradient(context.c.surface),
       child: Carousel(
         imageUrls: imageUrls,
         showPagination: false,

@@ -40,7 +40,7 @@ class _UserAvatarState extends State<UserAvatar> {
           child: CircleAvatar(
             radius: UserAvatar.radius,
             child: _buildImage(user),
-            backgroundColor: context.c.background,
+            backgroundColor: context.c.surface,
           ),
         ),
       ),
@@ -67,7 +67,7 @@ class _UserAvatarState extends State<UserAvatar> {
       'Updating avatar...',
       callback: () => context.read<UserCubit>().updateAvatar(source),
     );
-    if (!mounted) return;
+    if (!context.mounted) return;
 
     if (success) {
       context.openFlushBar(

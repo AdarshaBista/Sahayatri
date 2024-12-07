@@ -35,7 +35,7 @@ class _CircularCheckboxState extends State<CircularCheckbox> {
       size: 16.0,
       padding: 4.0,
       icon: isChecked ? AppIcons.confirm : AppIcons.close,
-      color: widget.color ?? context.c.onBackground,
+      color: widget.color ?? context.c.onSurface,
       backgroundColor: isChecked ? AppColors.primaryLight : AppColors.secondaryLight,
     );
   }
