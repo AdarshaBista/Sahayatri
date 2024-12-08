@@ -12,8 +12,7 @@ class ItineraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
-    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final textScaleFactor = MediaQuery.textScalerOf(context).scale(1);
     final scale = MathUtils.mapRange(textScaleFactor, 0.25, 3.0, 0.7, 1.1);
     final minHeight = 75.0 * scale;
 

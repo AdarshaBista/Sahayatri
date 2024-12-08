@@ -29,8 +29,7 @@ class _CustomFlexibleSpaceState extends State<CustomFlexibleSpace> {
     final width = MediaQuery.of(context).size.width;
 
     final textStyle = context.t.headlineMedium;
-    // ignore: deprecated_member_use
-    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final textScaleFactor = MediaQuery.textScalerOf(context).scale(1);
     final fontSize = textStyle?.fontSize ?? 0.0 * textScaleFactor;
     final effectiveTextStyle = textStyle?.copyWith(fontSize: fontSize);
 
