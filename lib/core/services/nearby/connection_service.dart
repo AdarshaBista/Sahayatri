@@ -1,4 +1,5 @@
 import 'package:nearby_connections/nearby_connections.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:sahayatri/core/constants/configs.dart';
 import 'package:sahayatri/core/models/app_error.dart';
@@ -21,10 +22,10 @@ class ConnectionService {
   /// Check location permissions on start.
   Future<void> checkLocationPermissions() async {
     try {
-      if (!await Nearby().checkLocationPermission()) {
-        Nearby().askLocationPermission();
+      if (!(await Permission.location.isGranted)) {
+        Permission.location.request();
       }
-      if (!await Nearby().checkLocationEnabled()) {
+      if (!(await Permission.location.serviceStatus.isEnabled)) {
         Nearby().enableLocationServices();
       }
     } catch (e) {

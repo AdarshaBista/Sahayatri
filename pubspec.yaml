@@ -20,6 +20,7 @@ dependencies:
   url_launcher: ^6.3.1
   path_provider: ^2.1.5
   image_picker: ^1.1.2
+  permission_handler: ^11.3.1
   device_preview_plus: ^2.1.5
   form_field_validator: ^1.1.0
 
